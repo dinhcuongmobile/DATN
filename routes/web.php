@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Client\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/',[HomeController::class,'home'])->name('trang-chu.home');
+
+// admin
 Route::prefix('admin')->group(function(){
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('admin.index');
 });
