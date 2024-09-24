@@ -149,23 +149,18 @@
                                             <div class="img-wrapper">
                                                 <div class="label-block"><img src="../assets/images/product/3.png"
                                                         alt="lable"><span>on <br>Sale!</span></div>
-                                                <div class="product-image"><a href="product.html"> <img
-                                                            class="bg-img"
-                                                            src="../assets/images/product/product-4/1.jpg"
-                                                            alt="product"></a></div>
-                                                <div class="cart-info-icon"> <a class="wishlist-icon"
-                                                        href="javascript:void(0)" tabindex="0"><i class="iconsax"
-                                                            data-icon="heart" aria-hidden="true"
-                                                            data-bs-toggle="tooltip"
-                                                            data-bs-title="Add to Wishlist"></i></a><a
-                                                        href="compare.html" tabindex="0"><i class="iconsax"
-                                                            data-icon="arrow-up-down" aria-hidden="true"
-                                                            data-bs-toggle="tooltip"
-                                                            data-bs-title="Compare"></i></a><a href="#"
-                                                        data-bs-toggle="modal" data-bs-target="#quick-view"
-                                                        tabindex="0"><i class="iconsax" data-icon="eye"
-                                                            aria-hidden="true" data-bs-toggle="tooltip"
-                                                            data-bs-title="Quick View"></i></a></div>
+                                                <div class="product-image"><a href="{{route('san-pham.chi-tiet-san-pham')}}">
+                                                    <img class="bg-img" src="../assets/images/product/product-4/1.jpg" alt="product"></a>
+                                                </div>
+                                                <div class="cart-info-icon">
+                                                    <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
+                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
+                                                        <a href="compare.html" tabindex="0">
+                                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
+                                                                <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                        </a>
+                                                </div>
                                             </div>
                                             <div class="product-detail">
                                                 <div class="add-button"><a href="#" data-bs-toggle="modal"

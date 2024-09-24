@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
@@ -62,7 +63,7 @@
                                     <li class="mobile-back text-end">Back<i class="fa-solid fa-angle-right ps-2"
                                             aria-hidden="true"></i></li>
                                     <li> <a class="nav-link" href="#">Home </a></li>
-                                    <li> <a class="nav-link" href="#">Shop</a></li>
+                                    <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm</a></li>
                                     <li> <a class="nav-link" href="#">Catalog </a></li>
                                     <li> <a class="nav-link" href="#">FashiOffers <p class="lable-nav">Hot</p></a></li>
                                     <li> <a class="nav-link" href="#">Page </a></li>
@@ -197,6 +198,8 @@
             </div>
         </section>
     </div>
+    {{-- end mobile --}}
+
     <header>
         <div class="top_header">
             <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW 26</span><a
@@ -207,23 +210,13 @@
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="index.html"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
                             <li><a href="wishlist.html"><i class="iconsax" data-icon="heart"></i>Yêu thích</a></li>
                             <li> <a href="dashboard.html"><i class="iconsax" data-icon="user-2"></i>Tài khoản</a></li>
                         </ul>
-                    </div>
-                    <div class="offcanvas offcanvas-start" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1"
-                        aria-labelledby="staticBackdropLabel">
-                        <div class="offcanvas-header">
-                            <h3 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h3><button class="btn-close"
-                                type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <div></div>I will not close if you click outside of me.
-                        </div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -237,97 +230,21 @@
                                 <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ <span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                 </li>
-                                <li> <a class="nav-link" href="#">Shop<span> <i
-                                                class="fa-solid fa-angle-down"></i></span></a>
-                                    <ul class="nav-submenu">
-                                        <li> <a href="collection-left-sidebar.html">Collection Left Sidebar</a></li>
-                                        <li> <a href="collection-no-sidebar.html">Collection No Sidebar</a></li>
-                                        <li> <a href="load-more.html">Load More<span
-                                                    class="badge-sm danger-color animated">Hot</span></a></li>
-                                    </ul>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu <span> <i
+                                    class="fa-solid fa-angle-down"></i></span></a>
                                 </li>
-                                <li> <a class="nav-link" href="#">Product <span> <i
-                                                class="fa-solid fa-angle-down"></i></span></a>
-                                    <div class="mega-menu p-0 overflow-hidden">
-                                        <div class="row">
-                                            <div class="col-xl-4">
-                                                <ul class="p-2">
-                                                    <li> <a href="product.html">Product</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li> <a class="nav-link" href="#">FashiOffers <span> <i
+                                <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
                                                 class="fa-solid fa-angle-down"></i></span>
-                                        <p class="lable-nav">Hot</p>
+                                                <p class="lable-nav" style="right: -7px">Hot</p>
                                     </a>
-                                    <div class="mega-menu p-0 overflow-hidden">
-                                        <div class="row gy-4 align-items-center">
-                                            <div class="col-xl-5">
-                                                <div class="mega-img">
-                                                    <div class="img-1"><img class="img-fluid"
-                                                            src="{{asset('assets/images/mega-menu/5.jpg')}}" alt=""></div>
-                                                    <div class="img-1"><img class="img-fluid"
-                                                            src="{{asset('assets/images/mega-menu/6.jpg')}}" alt=""></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-2 px-0">
-                                                <ul>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/email-template/welcome.html">Welcome
-                                                            Template<span
-                                                                class="badge-sm danger-color animated">Hot</span></a>
-                                                    </li>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/email-template/order-success.html">Order
-                                                            Success</a></li>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/email-template/reset-password.html">Reset
-                                                            Password</a></li>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/invoice/invoice-1.html">Invoice
-                                                            1</a></li>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/invoice/invoice-2.html">Invoice
-                                                            2</a></li>
-                                                    <li> <a
-                                                            href="https://themes.pixelstrap.net/katie/invoice/invoice-3.html">Invoice
-                                                            3</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-xl-5"><img class="img-fluid"
-                                                    src="{{asset('assets/images/mega-menu/1.png')}}" alt=""></div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li> <a class="nav-link" href="#">Page <span> <i
-                                                class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="search.html">Search</a></li>
-                                        <li> <a href="wishlist.html">Wishlist</a></li>
-                                        <li> <a href="faq.html">Faq</a></li>
-                                        <li> <a href="dashboard.html">My Dashboard <span
-                                                    class="badge-sm theme-default">new</span></a></li>
-                                        <li> <a href="order-success.html">Order Success</a></li>
-                                        <li> <a href="order-tracking.html">Order Tracking</a></li>
-                                        <li> <a href="maintenance.html">Maintenance<span
-                                                    class="badge-sm danger-color animated">Hot</span></a></li>
-                                        <li> <a href="check-out.html">Check Out</a></li>
-                                        <li> <a href="compare.html">Compare</a></li>
-                                        <li> <a href="about-us.html">About Us</a></li>
-                                        <li> <a href="look-book.html">Look Book <span
-                                                    class="badge-sm theme-default">new</span></a></li>
-                                        <li> <a href="404.html">404 </a></li>
-                                        <li> <a href="cart.html">cart </a></li>
-                                        <li> <a href="login.html"> Login <span
-                                                    class="badge-sm danger-color animated">Hot </span></a></li>
-                                        <li> <a href="forget-password.html"> Forgot Password </a></li>
-                                        <li> <a href="otp.html"> otp </a></li>
-                                        <li> <a href="sign-up.html"> Sign Up </a></li>
+                                        <li> <a href="{{route('san-pham.san-pham-danh-muc')}}">Over size
+                                                <span class="badge-sm danger-color animated">Hot</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="#">Blog<span> <i
+                                <li> <a class="nav-link" href="#">Tin tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
                                         <li> <a href="blog-left-sidebar.html">Blog Left Sidebar </a></li>
@@ -337,7 +254,7 @@
                                         <li> <a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="contact.html">Contact </a></li>
+                                <li> <a class="nav-link" href="contact.html">Liên hệ </a></li>
                             </ul>
                         </nav>
                         <div class="sub_header">
@@ -905,9 +822,6 @@
     </div>
     <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
             <div class="text">Dark</div>
-        </button><button class="btntheme rtlBtnEl" id="rtl-btn"><i class="fa-solid fa-repeat"></i>
-            <div class="rtl">Rtl</div>
-        </button>
     </div>
     <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
         aria-modal="true">
