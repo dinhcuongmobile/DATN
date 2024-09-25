@@ -227,11 +227,9 @@
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
                                 <li class="mobile-back" id="mobile-back">Thoát<i class="fa-solid fa-angle-right ps-2"
                                         aria-hidden="true"></i></li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ <span> <i
-                                                class="fa-solid fa-angle-down"></i></span></a>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang Chủ <span> </span></a>
                                 </li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu <span> <i
-                                    class="fa-solid fa-angle-down"></i></span></a>
+                                <li> <a class="nav-link" href="{{route('gioi-thieu.gioi-thieu')}}">Giới Thiệu <span> </span></a>
                                 </li>
                                 <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
                                                 class="fa-solid fa-angle-down"></i></span>
@@ -244,7 +242,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="#">Tin tức<span> <i
+                                <li> <a class="nav-link" href="#">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
                                         <li> <a href="blog-left-sidebar.html">Blog Left Sidebar </a></li>
@@ -254,7 +252,7 @@
                                         <li> <a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="contact.html">Liên hệ </a></li>
+                                <li> <a class="nav-link" href="contact.html">Liên Hệ </a></li>
                             </ul>
                         </nav>
                         <div class="sub_header">
@@ -269,8 +267,9 @@
                                 <li class="onhover-div"><a href="#"><i class="iconsax" data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
                                         <ul>
-                                            <li> <a href="login.html">Login </a></li>
-                                            <li> <a href="sign-up.html">Register</a></li>
+                                            <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                            <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
+                                            <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
                                         </ul>
                                     </div>
                                 </li>
