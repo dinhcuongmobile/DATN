@@ -36,6 +36,7 @@ Route::prefix('tin-tuc')->group(function(){
 Route::prefix('lien-he')->group(function(){
     Route::get('/',[LienHeController::class,'lienHe'])->name('lien-he.lien-he');
 });
+
 Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-thieu');
 
 
