@@ -60,15 +60,30 @@
                                     src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
                             <nav id="main-nav-1">
                                 <ul class="nav-menu sm-horizontal">
-                                    <li class="mobile-back text-end">Back<i class="fa-solid fa-angle-right ps-2"
-                                            aria-hidden="true"></i></li>
-                                    <li> <a class="nav-link" href="#">Home </a></li>
-                                    <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm</a></li>
-                                    <li> <a class="nav-link" href="#">Catalog </a></li>
-                                    <li> <a class="nav-link" href="#">FashiOffers <p class="lable-nav">Hot</p></a></li>
-                                    <li> <a class="nav-link" href="#">Page </a></li>
-                                    <li> <a class="nav-link" href="#">Features </a></li>
-                                    <li> <a class="nav-link" href="#">Contact </a></li>
+                                    <li class="mobile-back text-end">Thoát<i class="fa-solid fa-angle-right ps-2"
+                                    aria-hidden="true"></i></li>
+                                    <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a>
+                                    </li>
+                                    <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới thiệu</a>
+                                    </li>
+                                    <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
+                                                    class="fa-solid fa-angle-down"></i></span>
+                                                    <p class="lable-nav" style="right: -7px">Hot</p>
+                                        </a>
+                                        <ul class="nav-submenu">
+                                            <li> <a href="{{route('san-pham.san-pham-danh-muc')}}">Over size
+                                                    <span class="badge-sm danger-color animated">Hot</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
+                                                    class="fa-solid fa-angle-down"></i></span></a>
+                                        <ul class="nav-submenu">
+                                            <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tức danh muc</a></li>
+                                        </ul>
+                                    </li>
+                                    <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
                                 </ul>
                             </nav>
                             <div class="sub_header">
@@ -374,27 +389,6 @@
                 </div>
             </div>
         </section>
-        <div class="sub-footer">
-            <div class="custom-container container">
-                <div class="row">
-                    <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="footer-end">
-                            <h6>2024 Copyright By Themeforest Powered By Pixelstrap </h6>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="payment-card-bottom">
-                            <ul>
-                                <li> <img src="{{asset('assets/images/footer/discover.png')}}" alt=""></li>
-                                <li> <img src="{{asset('assets/images/footer/american.png')}}" alt=""></li>
-                                <li> <img src="{{asset('assets/images/footer/master.png')}}" alt=""></li>
-                                <li> <img src="{{asset('assets/images/footer/giro.png')}}" alt=""></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </footer>
     <div class="modal theme-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -542,7 +536,7 @@
     <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1"
         aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-            <h4 class="offcanvas-title" id="offcanvasRightLabel">Shopping Cart</h4><button class="btn-close"
+            <h4 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h4><button class="btn-close"
                 type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body theme-scrollbar">
@@ -630,8 +624,8 @@
                 <h6>Total :</h6>
                 <p>$ 49.59 USD</p>
             </div>
-            <div class="cart-button"> <a class="btn btn_outline" href="cart.html"> View Cart</a><a class="btn btn_black"
-                    href="check-out.html"> Checkout</a></div>
+            <div class="cart-button"> <a class="btn btn_outline" href="{{route('gio-hang.gio-hang')}}"> Xem giỏ hàng</a><a class="btn btn_black"
+                    href="check-out.html"> Thanh Toán</a></div>
         </div>
     </div>
     <div class="offcanvas offcanvas-top search-details" id="offcanvasTop" tabindex="-1"
@@ -817,7 +811,7 @@
     <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
             <div class="text">Dark</div>
     </div>
-    <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
+    {{-- <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
         aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
@@ -845,7 +839,8 @@
                 </div>
             </div>
         </div>
-    </div><!-- Bootstrap js-->
+    </div> --}}
+    <!-- Bootstrap js-->
     <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script><!-- iconsax js -->
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>

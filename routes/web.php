@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
@@ -25,6 +26,11 @@ Route::prefix('san-pham')->group(function(){
     Route::get('/',[SanPhamController::class,'sanPham'])->name('san-pham.san-pham');
     Route::get('san-pham-danh-muc',[SanPhamController::class,'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
     Route::get('chi-tiet-san-pham',[SanPhamController::class,'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+});
+
+Route::prefix('gio-hang')->group(function(){
+    Route::get('/',[GioHangController::class,'gioHang'])->name('gio-hang.gio-hang');
+    Route::get('chi-tiet-thanh-toan',[GioHangController::class,'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
 });
 
 Route::prefix('tin-tuc')->group(function(){
