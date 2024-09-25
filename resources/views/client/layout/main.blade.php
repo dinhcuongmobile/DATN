@@ -326,13 +326,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>About Us</h5>
+                                    <h5>Về Chúng Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="index.html">Home</a></li>
-                                        <li> <a class="nav" href="collection-left-sidebar.html">Shop</a></li>
-                                        <li> <a class="nav" href="about-us.html">About Us</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Blog</a></li>
-                                        <li> <a class="nav" href="contact.html">Contact</a></li>
+                                        <li> <a class="nav" href="index.html">Trang Chủ</a></li>
+                                        <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
+                                        <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
+                                        <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
