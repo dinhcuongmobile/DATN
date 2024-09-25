@@ -227,11 +227,9 @@
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
                                 <li class="mobile-back" id="mobile-back">Thoát<i class="fa-solid fa-angle-right ps-2"
                                         aria-hidden="true"></i></li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ <span> <i
-                                                class="fa-solid fa-angle-down"></i></span></a>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a>
                                 </li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu <span> <i
-                                    class="fa-solid fa-angle-down"></i></span></a>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu</a>
                                 </li>
                                 <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
                                                 class="fa-solid fa-angle-down"></i></span>
@@ -247,7 +245,7 @@
                                 <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tuc danh muc</a></li>
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tức danh muc</a></li>
                                     </ul>
                                 </li>
                                 <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
@@ -265,8 +263,8 @@
                                 <li class="onhover-div"><a href="#"><i class="iconsax" data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
                                         <ul>
-                                            <li> <a href="login.html">Login </a></li>
-                                            <li> <a href="sign-up.html">Register</a></li>
+                                            <li> <a href="login.html">Đăng nhập </a></li>
+                                            <li> <a href="sign-up.html">Đăng ký</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -274,7 +272,7 @@
                                         data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                                         aria-controls="offcanvasRight">
                                         <div class="shoping-prize"><i class="iconsax pe-2" data-icon="basket-2"> </i>0
-                                            items</div>
+                                            sản phẩm</div>
                                     </a></li>
                             </ul>
                         </div>

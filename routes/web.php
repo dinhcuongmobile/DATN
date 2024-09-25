@@ -21,13 +21,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class,'home'])->name('trang-chu.home');
 
 Route::prefix('san-pham')->group(function(){
-    Route::get('san-pham',[SanPhamController::class,'sanPham'])->name('san-pham.san-pham');
+    Route::get('/',[SanPhamController::class,'sanPham'])->name('san-pham.san-pham');
     Route::get('san-pham-danh-muc',[SanPhamController::class,'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
     Route::get('chi-tiet-san-pham',[SanPhamController::class,'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
-    Route::get('/tin-tuc',[TinTucController::class,'tinTuc'])->name('tin-tuc.tin-tuc');
+});
+
+Route::prefix('tin-tuc')->group(function(){
+    Route::get('/',[TinTucController::class,'tinTuc'])->name('tin-tuc.tin-tuc');
     Route::get('/chi-tiet-tin-tuc',[TinTucController::class,'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
     Route::get('/tin-tuc-danh-muc',[TinTucController::class,'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
-    Route::get('/lien-he',[LienHeController::class,'lienHe'])->name('lien-he.lien-he');
+});
+
+Route::prefix('lien-he')->group(function(){
+    Route::get('/',[LienHeController::class,'lienHe'])->name('lien-he.lien-he');
 });
 
 // admin
