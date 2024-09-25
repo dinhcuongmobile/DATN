@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
+use App\Http\Controllers\Client\TinTuc\TinTucController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,10 @@ Route::prefix('san-pham')->group(function(){
     Route::get('san-pham',[SanPhamController::class,'sanPham'])->name('san-pham.san-pham');
     Route::get('san-pham-danh-muc',[SanPhamController::class,'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
     Route::get('chi-tiet-san-pham',[SanPhamController::class,'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+    Route::get('/tin-tuc',[TinTucController::class,'tinTuc'])->name('tin-tuc.tin-tuc');
+    Route::get('/chi-tiet-tin-tuc',[TinTucController::class,'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
+    Route::get('/tin-tuc-danh-muc',[TinTucController::class,'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
+    Route::get('/lien-he',[LienHeController::class,'lienHe'])->name('lien-he.lien-he');
 });
 
 // admin
