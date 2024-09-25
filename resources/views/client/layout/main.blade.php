@@ -221,7 +221,7 @@
                 </div>
                 <div class="col-12">
                     <div class="main-menu"> <a class="brand-logo" href="{{route('trang-chu.home')}}"> <img class="img-fluid for-light"
-                                src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
+                                src="{{asset('assets/images/logo/logo1.png')}}" alt="logo"><img class="img-fluid for-dark"
                                 src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
                         <nav id="main-nav">
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
@@ -296,13 +296,13 @@
                                         src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="Footer Logo"></a></div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
-                                    <h6>1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United States</h6>
+                                    <h6>So 1 Trinh Van Bo</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="phone-calling"></i>
                                     <h6>+ 185659635</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="mail"></i>
-                                    <h6>contact@katie.com</h6>
+                                    <h6>contact@namastore.com</h6>
                                 </li>
                             </ul>
                         </div>
@@ -311,13 +311,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>About Us</h5>
+                                    <h5>Về Chúng Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="index.html">Home</a></li>
-                                        <li> <a class="nav" href="collection-left-sidebar.html">Shop</a></li>
-                                        <li> <a class="nav" href="about-us.html">About Us</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Blog</a></li>
-                                        <li> <a class="nav" href="contact.html">Contact</a></li>
+                                        <li> <a class="nav" href="index.html">Trang Chủ</a></li>
+                                        <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
+                                        <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
+                                        <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -378,9 +378,7 @@
             <div class="custom-container container">
                 <div class="row">
                     <div class="col-xl-6 col-md-6 col-sm-12">
-                        <div class="footer-end">
-                            <h6>2024 Copyright By Themeforest Powered By Pixelstrap </h6>
-                        </div>
+                        
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12">
                         <div class="payment-card-bottom">
