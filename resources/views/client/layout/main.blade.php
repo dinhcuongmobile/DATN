@@ -230,7 +230,7 @@
                                 <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ <span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                 </li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu <span> <i
+                                <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới thiệu <span> <i
                                     class="fa-solid fa-angle-down"></i></span></a>
                                 </li>
                                 <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
