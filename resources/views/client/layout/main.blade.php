@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="main-menu"> <a class="brand-logo" href="index.html"> <img class="img-fluid for-light"
+                    <div class="main-menu"> <a class="brand-logo" href="{{route('trang-chu.home')}}"> <img class="img-fluid for-light"
                                 src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
                                 src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
                         <nav id="main-nav">
@@ -244,17 +244,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="#">Tin tức<span> <i
+                                <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="blog-left-sidebar.html">Blog Left Sidebar </a></li>
-                                        <li> <a href="blog-right-sidebar.html">Blog Right Sidebar </a></li>
-                                        <li> <a href="blog-list.html">Blog List</a></li>
-                                        <li> <a href="blog-details.html">Blog Details</a></li>
-                                        <li> <a href="blog-no-sidebar.html">Blog No Sidebar</a></li>
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tuc danh muc</a></li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="contact.html">Liên hệ </a></li>
+                                <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
                             </ul>
                         </nav>
                         <div class="sub_header">
