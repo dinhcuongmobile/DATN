@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\HomeAdminController;
-use App\Http\Controllers\Client\HomeController;
-use App\Http\Controllers\Client\LienHe\LienHeController;
-use App\Http\Controllers\Client\SanPham\SanPhamController;
-use App\Http\Controllers\Client\TinTuc\TinTucController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Client\LienHe\LienHeController;
+use App\Http\Controllers\Client\TinTuc\TinTucController;
+use App\Http\Controllers\Client\SanPham\SanPhamController;
+use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::prefix('tin-tuc')->group(function(){
 Route::prefix('lien-he')->group(function(){
     Route::get('/',[LienHeController::class,'lienHe'])->name('lien-he.lien-he');
 });
+Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-thieu');
+
 
 // admin
 Route::prefix('admin')->group(function(){

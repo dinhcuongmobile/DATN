@@ -229,7 +229,8 @@
                                         aria-hidden="true"></i></li>
                                 <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a>
                                 </li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu</a>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Giới thiệu <span> <i
+                                    class="fa-solid fa-angle-down"></i></span></a>
                                 </li>
                                 <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
                                                 class="fa-solid fa-angle-down"></i></span>
