@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
-use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
+use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
+use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 
 /*
@@ -21,6 +22,13 @@ use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 */
 
 Route::get('/',[HomeController::class,'home'])->name('trang-chu.home');
+
+Route::prefix('tai-khoan')->group(function(){
+    Route::get('dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky');
+    Route::get('dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap');
+    Route::get('quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
+    Route::get('thong-tin-tai-khoan',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
+});
 
 Route::prefix('san-pham')->group(function(){
     Route::get('/',[SanPhamController::class,'sanPham'])->name('san-pham.san-pham');
