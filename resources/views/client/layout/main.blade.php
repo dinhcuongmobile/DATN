@@ -242,9 +242,9 @@
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
                                 <li class="mobile-back" id="mobile-back">Thoát<i class="fa-solid fa-angle-right ps-2"
                                         aria-hidden="true"></i></li>
-                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a>
+                                <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang Chủ</a>
                                 </li>
-                                <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới thiệu</a>
+                                <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới Thiệu</a>
                                 </li>
                                 <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
                                                 class="fa-solid fa-angle-down"></i></span>
@@ -277,9 +277,9 @@
                                             class="cart_qty_cls">2</span></a></li>
                                 <li class="onhover-div"><a href="#"><i class="iconsax" data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
-                                        <ul>
-                                            <li> <a href="login.html">Đăng nhập </a></li>
-                                            <li> <a href="sign-up.html">Đăng ký</a></li>
+                                        <ul><li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin </a></li>
+                                            <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
+                                            <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
                                         </ul>
                                     </div>
                                 </li>
