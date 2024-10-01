@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanComtroller;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
@@ -56,8 +57,11 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 
 
 // admin
-Route::prefix('admin')->group(function(){
-    Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('admin.index');
+Route::prefix('admin')->as('admin.')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
+    Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('index');
+    Route::prefix('vai-tro-tai-khoan')->as('vai-tro-tai-khoan.')->group(function() {
+        Route::get('/danh-sach', [AdminVaiTroTaiKhoanComtroller::class, 'danhSachVaiTroTaiKhoan'])->name('danh-sach');
+    });
 });
     //Danh Sách Danh Mục (admin)
 Route::prefix('admin/danh-muc')->name('admin.danhMuc.')->group(function() {

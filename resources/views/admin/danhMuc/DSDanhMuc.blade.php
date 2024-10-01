@@ -23,7 +23,6 @@
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        
                         <button onclick="return confirm('Bạn có chắc chắn muốn xóa không?')" type="submit"
                             class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
                      
