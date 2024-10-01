@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
+use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 
 /*
@@ -66,3 +67,21 @@ Route::prefix('/admin')->as('admin.')->group(function(){ // as('admin.') dùng �
         Route::post('/sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'suaVaiTroTaiKhoan'])->name('sua');
     });
 });
+    //Danh Sách Danh Mục (admin)
+Route::prefix('admin/danh-muc')->name('admin.danhMuc.')->group(function() {
+    Route::get('/', [DanhMucAdminController::class, 'index'])->name('DSDanhMuc');
+    Route::get('create', [DanhMucAdminController::class, 'create'])->name('create');
+    Route::post('store', [DanhMucAdminController::class, 'store'])->name('store');
+    Route::get('{danhMuc}/edit', [DanhMucAdminController::class, 'edit'])->name('edit');
+    Route::put('{danhMuc}', [DanhMucAdminController::class, 'update'])->name('update');
+    Route::delete('{danhMuc}', [DanhMucAdminController::class, 'destroy'])->name('destroy');
+    Route::post('bulk-destroy', [DanhMucAdminController::class, 'bulkDestroy'])->name('bulkDestroy');
+
+    //Danh Sách Danh Mục Đã Xóa (admin)
+    Route::get('trashed', [DanhMucAdminController::class, 'trashed'])->name('trashed');
+    Route::post('restore/{id}', [DanhMucAdminController::class, 'restore'])->name('restore');
+    Route::delete('force-delete/{id}', [DanhMucAdminController::class, 'forceDelete'])->name('forceDelete');
+});
+
+
+

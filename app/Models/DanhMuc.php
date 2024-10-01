@@ -13,6 +13,7 @@ class DanhMuc extends Model
     protected $table = 'danh_mucs';
 
     protected $fillable = [
+        'id',
         'hinh_anh',
         'ten_danh_muc',
     ];
@@ -25,5 +26,11 @@ class DanhMuc extends Model
     public function sanPhams()
     {
         return $this->hasMany(SanPham::class, 'danh_muc_id');
+    }
+    public static function search($query)
+    {
+        return self::when($query, function($queryBuilder) use ($query) {
+            return $queryBuilder->where('ten_danh_muc', 'LIKE', "%{$query}%");
+        })->get();
     }
 }
