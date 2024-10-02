@@ -13,7 +13,7 @@
             <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
             <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Khóa các tài khoản đã
                 chọn</button>
-            <a href="{{ route('admin.vai-tro-tai-khoan.trang-them') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
+            <a href="{{ route('vai-tro-tai-khoan.trang-them') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
             <div class="float-right">
                 <div class="input-group">
                     <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
@@ -51,14 +51,9 @@
                                         <button class="btn btn-sm" disabled>Không được chỉnh sửa</button>
                                     @else
                                         @if ($item->id == 2 || $item->id == 3)
-                                            <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
-                                                <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
-                                            </a> |
-                                            <a href="">
-                                                <button type="button" class="btn btn-secondary btn-sm" onclick="" disabled>Xoá</button>
-                                            </a>
+                                            <button class="btn btn-sm" disabled>Không được chỉnh sửa</button>
                                         @else
-                                            <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
+                                            <a href="{{ route('vai-tro-tai-khoan.trang-sua', $item->id) }}">
                                                 <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
                                             </a> |
                                             <a href="">
