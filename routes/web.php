@@ -3,13 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanComtroller;
+use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
-use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 
 /*
@@ -57,14 +56,14 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 
 
 // admin
-Route::prefix('/admin')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
-    Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('index');
+Route::prefix('/admin')->group(function(){
+    Route::get('/',[HomeAdminController::class,'homeAdmin'])->name('index');
     Route::prefix('/vai-tro-tai-khoan')->group(function() {
-        Route::get('/danh-sach', [AdminVaiTroTaiKhoanComtroller::class, 'danhSachVaiTroTaiKhoan'])->name('danh-sach');
-        Route::get('/trang-them', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangThemVaiTroTaiKhoan'])->name('trang-them');
-        Route::post('/them', [AdminVaiTroTaiKhoanComtroller::class, 'themVaiTroTaiKhoan'])->name('them');
-        Route::get('/trang-sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('trang-sua');
-        Route::post('/sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'suaVaiTroTaiKhoan'])->name('sua');
+        Route::get('/danh-sach', [AdminVaiTroTaiKhoanController::class, 'danhSachVaiTroTaiKhoan'])->name('danh-sach');
+        Route::get('/trang-them', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangThemVaiTroTaiKhoan'])->name('trang-them');
+        Route::post('/them', [AdminVaiTroTaiKhoanController::class, 'themVaiTroTaiKhoan'])->name('them');
+        Route::get('/trang-sua/{id}', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('trang-sua');
+        Route::post('/sua/{id}', [AdminVaiTroTaiKhoanController::class, 'suaVaiTroTaiKhoan'])->name('sua');
     });
 });
 
