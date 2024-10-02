@@ -57,30 +57,15 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 
 
 // admin
-Route::prefix('/admin')->as('admin.')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
+Route::prefix('/admin')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('index');
-    Route::prefix('/vai-tro-tai-khoan')->as('vai-tro-tai-khoan.')->group(function() {
+    Route::prefix('/vai-tro-tai-khoan')->group(function() {
         Route::get('/danh-sach', [AdminVaiTroTaiKhoanComtroller::class, 'danhSachVaiTroTaiKhoan'])->name('danh-sach');
         Route::get('/trang-them', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangThemVaiTroTaiKhoan'])->name('trang-them');
         Route::post('/them', [AdminVaiTroTaiKhoanComtroller::class, 'themVaiTroTaiKhoan'])->name('them');
         Route::get('/trang-sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('trang-sua');
         Route::post('/sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'suaVaiTroTaiKhoan'])->name('sua');
     });
-});
-    //Danh Sách Danh Mục (admin)
-Route::prefix('admin/danh-muc')->name('admin.danhMuc.')->group(function() {
-    Route::get('/', [DanhMucAdminController::class, 'index'])->name('DSDanhMuc');
-    Route::get('create', [DanhMucAdminController::class, 'create'])->name('create');
-    Route::post('store', [DanhMucAdminController::class, 'store'])->name('store');
-    Route::get('{danhMuc}/edit', [DanhMucAdminController::class, 'edit'])->name('edit');
-    Route::put('{danhMuc}', [DanhMucAdminController::class, 'update'])->name('update');
-    Route::delete('{danhMuc}', [DanhMucAdminController::class, 'destroy'])->name('destroy');
-    Route::post('bulk-destroy', [DanhMucAdminController::class, 'bulkDestroy'])->name('bulkDestroy');
-
-    //Danh Sách Danh Mục Đã Xóa (admin)
-    Route::get('trashed', [DanhMucAdminController::class, 'trashed'])->name('trashed');
-    Route::post('restore/{id}', [DanhMucAdminController::class, 'restore'])->name('restore');
-    Route::delete('force-delete/{id}', [DanhMucAdminController::class, 'forceDelete'])->name('forceDelete');
 });
 
 
