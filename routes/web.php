@@ -57,10 +57,14 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 
 
 // admin
-Route::prefix('admin')->as('admin.')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
+Route::prefix('/admin')->as('admin.')->group(function(){ // as('admin.') dùng để nối các tiếp các route vd muốn truy cập vài trang vai-tro-tai-khoan: admin.vai-tro-tai-khoan.danh-sach
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('index');
-    Route::prefix('vai-tro-tai-khoan')->as('vai-tro-tai-khoan.')->group(function() {
+    Route::prefix('/vai-tro-tai-khoan')->as('vai-tro-tai-khoan.')->group(function() {
         Route::get('/danh-sach', [AdminVaiTroTaiKhoanComtroller::class, 'danhSachVaiTroTaiKhoan'])->name('danh-sach');
+        Route::get('/trang-them', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangThemVaiTroTaiKhoan'])->name('trang-them');
+        Route::post('/them', [AdminVaiTroTaiKhoanComtroller::class, 'themVaiTroTaiKhoan'])->name('them');
+        Route::get('/trang-sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('trang-sua');
+        Route::post('/sua/{id}', [AdminVaiTroTaiKhoanComtroller::class, 'suaVaiTroTaiKhoan'])->name('sua');
     });
 });
     //Danh Sách Danh Mục (admin)

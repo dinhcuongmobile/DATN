@@ -1,20 +1,19 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
 <div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách vai trò tài khoản</h1>
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách vai trò tài khoản</h1>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <button type="button" class="btn btn-secondary btn-sm" onclick="">Chọn tất cả</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
             <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Khóa các tài khoản đã
                 chọn</button>
-            <a href=""><button type="button" class="btn btn-secondary btn-sm">Nhập
-                    thêm</button></a>
+            <a href="{{ route('admin.vai-tro-tai-khoan.trang-them') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
             <div class="float-right">
                 <div class="input-group">
                     <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
@@ -32,24 +31,34 @@
                     <thead class="thead-light">
                         <tr>
                             <th class="col-1 text-center align-middle"><input type="checkbox" name="select[]" value=""></th>
-                            <th>STT</th>
                             <th>ID</th>
                             <th>Vai trò của tài khoản</th>
                             <th class="col-1 text-center align-middle">Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($vai_tros as $index => $item)
+                        @foreach ($vai_tros as $item)
                             <tr>
                                 <td class="align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
-                                <td class="col-1 align-middle">{{ $index + 1 }}</td>
                                 <td class="col-1 align-middle">{{ $item->id }}</td>
                                 <td class="col-3 align-middle">{{ $item->vai_tro }}</td>
                                 <td class="col-1 text-center align-middle">
-                                    <a href=""><button type="button" class="btn btn-secondary btn-sm">Sửa</button></a> |
-                                    <a href="">
-                                        <button type="button" class="btn btn-secondary btn-sm" onclick="">Khóa</button>
-                                    </a>
+                                    @if ($item->id == 1) {{-- 1 là id vai trò admin, 2 là nhân viên, 3 là người dùng --}}
+                                        <p>Không được chỉnh sửa Admin</p>
+                                    @else
+                                        @if ($item->id == 2 || $item->id == 3)
+                                            <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
+                                                <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
+                                                <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
+                                            </a> |
+                                            <a href="">
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="">Xoá</button>
+                                            </a>
+                                        @endif
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
