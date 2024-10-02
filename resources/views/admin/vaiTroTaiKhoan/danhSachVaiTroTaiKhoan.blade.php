@@ -33,6 +33,8 @@
                             <th class="col-1 text-center align-middle"><input type="checkbox" name="select[]" value=""></th>
                             <th>ID</th>
                             <th>Vai trò của tài khoản</th>
+                            <th>Ngày tạo</th>
+                            <th>Ngày sửa</th>
                             <th class="col-1 text-center align-middle">Chức năng</th>
                         </tr>
                     </thead>
@@ -41,14 +43,19 @@
                             <tr>
                                 <td class="align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
                                 <td class="col-1 align-middle">{{ $item->id }}</td>
-                                <td class="col-3 align-middle">{{ $item->vai_tro }}</td>
-                                <td class="col-1 text-center align-middle">
+                                <td class="col-2 align-middle">{{ $item->vai_tro }}</td>
+                                <td class="col-2">{{ $item->created_at }}</td>
+                                <td class="col-2">{{ $item->updated_at }}</td>
+                                <td class="col-2 text-center align-middle">
                                     @if ($item->id == 1) {{-- 1 là id vai trò admin, 2 là nhân viên, 3 là người dùng --}}
-                                        <p>Không được chỉnh sửa Admin</p>
+                                        <button class="btn btn-sm" disabled>Không được chỉnh sửa</button>
                                     @else
                                         @if ($item->id == 2 || $item->id == 3)
                                             <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
                                                 <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
+                                            </a> |
+                                            <a href="">
+                                                <button type="button" class="btn btn-secondary btn-sm" onclick="" disabled>Xoá</button>
                                             </a>
                                         @else
                                             <a href="{{ route('admin.vai-tro-tai-khoan.trang-sua', $item->id) }}">
