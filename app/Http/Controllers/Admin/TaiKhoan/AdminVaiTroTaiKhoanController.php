@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 
-class AdminVaiTroTaiKhoanComtroller extends Controller
+class AdminVaiTroTaiKhoanController extends Controller
 {
     public function danhSachVaiTroTaiKhoan()
     {
