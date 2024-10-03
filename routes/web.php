@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
+use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
+use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
+use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +79,23 @@ Route::prefix('/admin')->group(function(){
         Route::get('/khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
         Route::get('/mo-khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
     });
+    Route::prefix('danh-muc')->group(function() {
+        //Danh sách danh mục
+        Route::get('danh-sach', [DanhMucAdminController::class, 'showDanhSach'])->name('danh-muc.danh-sach');
+        // Thêm danh mục
+        Route::get('them-danh-muc', [DanhMucAdminController::class, 'viewAdd'])->name('danh-muc.them-danh-muc');
+        Route::post('add', [DanhMucAdminController::class, 'add'])->name('danh-muc.add');
+        // Sửa danh mục
+        Route::get('sua-danh-muc/{id}', [DanhMucAdminController::class, 'viewUpdate'])->name('danh-muc.sua-danh-muc');
+        Route::put('update/{id}', [DanhMucAdminController::class, 'update'])->name('danh-muc.update');
+        // Xóa danh mục
+        Route::get('delete/{id}', [DanhMucAdminController::class, 'delete'])->name('danh-muc.delete');
+
+        //Danh sách danh mục đã xóa
+        Route::get('danh-sach-da-xoa', [DanhMucAdminController::class,'danhSachDaXoa'])->name('danh-muc.danh-sach-da-xoa');
+        Route::post('khoi-phuc/{id}', [DanhMucAdminController::class,'khoiPhuc'])->name('danh-muc.khoi-phuc');
+        Route::delete('xoa-vinh-vien/{id}', [DanhMucAdminController::class,'xoaVinhVien'])->name('danh-muc.xoa-vinh-vien');
+});
 });
 
 
