@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
+use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
@@ -10,9 +12,9 @@ use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
+use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,36 +75,34 @@ Route::prefix('admin')->group(function(){
         Route::get('trang-sua/{id}', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.trang-sua');
         Route::post('sua/{id}', [AdminVaiTroTaiKhoanController::class, 'suaVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.sua');
     });
+    Route::prefix('tin-tuc')->group(function(){
+        Route::get('danh-sach', [AdminTinTucController::class,'showDanhSach'])->name('tin-tuc.danh-sach');
 
-    Route::prefix('tai-khoan')->group(function() {
-        Route::get('danh-sach-quan-tri-vien', [AdminTaiKhoanController::class, 'danhSachQuanTriVien'])->name('tai-khoan.danh-sach-quan-tri-vien');
-        Route::get('danh-sach-nhan-vien', [AdminTaiKhoanController::class, 'danhSachNhanVien'])->name('tai-khoan.danh-sach-nhan-vien');
-        Route::get('danh-sach-nguoi-dung', [AdminTaiKhoanController::class, 'danhSachNguoiDung'])->name('tai-khoan.danh-sach-nguoi-dung');
-        Route::get('danh-sach-tai-khoan-bi-khoa', [AdminTaiKhoanController::class, 'danhSachTaiKhoanBiKhoa'])->name('tai-khoan.danh-sach-tai-khoan-bi-khoa');
-        Route::get('them-tai-khoan', [AdminTaiKhoanController::class, 'themTaiKhoan'])->name('tai-khoan.them-tai-khoan');
-        Route::post('them', [AdminTaiKhoanController::class, 'them'])->name('tai-khoan.them');
-        Route::get('sua-tai-khoan/{id}', [AdminTaiKhoanController::class, 'suaTaiKhoan'])->name('tai-khoan.sua-tai-khoan');
-        Route::put('sua/{id}', [AdminTaiKhoanController::class, 'sua'])->name('tai-khoan.sua');
-        Route::get('khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
-        Route::get('mo-khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+        //add
+        Route::get('them-tin-tuc', [AdminTinTucController::class,'viewAdd'])->name('tin-tuc.them-tin-tuc');
+        Route::post('add', [AdminTinTucController::class,'add'])->name('tin-tuc.add');
+
+        //update
+        Route::get('sua-tin-tuc/{id}', [AdminTinTucController::class,'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
+        Route::put('update/{id}', [AdminTinTucController::class,'update'])->name('tin-tuc.update');
+
+        //delete
+        Route::get('delete/{id}', [AdminTinTucController::class,'delete'])->name('tin-tuc.delete');
+        Route::post('xoa-nhieu', [AdminTinTucController::class,'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
     });
-    Route::prefix('danh-muc')->group(function() {
-        //Danh sách danh mục
-        Route::get('danh-sach', [DanhMucAdminController::class, 'showDanhSach'])->name('danh-muc.danh-sach');
-        // Thêm danh mục
-        Route::get('them-danh-muc', [DanhMucAdminController::class, 'viewAdd'])->name('danh-muc.them-danh-muc');
-        Route::post('add', [DanhMucAdminController::class, 'add'])->name('danh-muc.add');
-        // Sửa danh mục
-        Route::get('sua-danh-muc/{id}', [DanhMucAdminController::class, 'viewUpdate'])->name('danh-muc.sua-danh-muc');
-        Route::put('update/{id}', [DanhMucAdminController::class, 'update'])->name('danh-muc.update');
-        // Xóa danh mục
-        Route::get('delete/{id}', [DanhMucAdminController::class, 'delete'])->name('danh-muc.delete');
 
-        //Danh sách danh mục đã xóa
-        Route::get('danh-sach-da-xoa', [DanhMucAdminController::class,'danhSachDaXoa'])->name('danh-muc.danh-sach-da-xoa');
-        Route::post('khoi-phuc/{id}', [DanhMucAdminController::class,'khoiPhuc'])->name('danh-muc.khoi-phuc');
-        Route::delete('xoa-vinh-vien/{id}', [DanhMucAdminController::class,'xoaVinhVien'])->name('danh-muc.xoa-vinh-vien');
-});
+    Route::prefix('/tai-khoan')->group(function() {
+        Route::get('/danh-sach-quan-tri-vien', [AdminTaiKhoanController::class, 'danhSachQuanTriVien'])->name('tai-khoan.danh-sach-quan-tri-vien');
+        Route::get('/danh-sach-nhan-vien', [AdminTaiKhoanController::class, 'danhSachNhanVien'])->name('tai-khoan.danh-sach-nhan-vien');
+        Route::get('/danh-sach-nguoi-dung', [AdminTaiKhoanController::class, 'danhSachNguoiDung'])->name('tai-khoan.danh-sach-nguoi-dung');
+        Route::get('/danh-sach-tai-khoan-bi-khoa', [AdminTaiKhoanController::class, 'danhSachTaiKhoanBiKhoa'])->name('tai-khoan.danh-sach-tai-khoan-bi-khoa');
+        Route::get('/them-tai-khoan', [AdminTaiKhoanController::class, 'themTaiKhoan'])->name('tai-khoan.them-tai-khoan');
+        Route::post('/them', [AdminTaiKhoanController::class, 'them'])->name('tai-khoan.them');
+        Route::get('/sua-tai-khoan/{id}', [AdminTaiKhoanController::class, 'suaTaiKhoan'])->name('tai-khoan.sua-tai-khoan');
+        Route::put('/sua/{id}', [AdminTaiKhoanController::class, 'sua'])->name('tai-khoan.sua');
+        Route::get('/khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
+        Route::get('/mo-khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+    });
 });
 
 

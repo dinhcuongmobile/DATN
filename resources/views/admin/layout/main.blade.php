@@ -147,7 +147,7 @@
                 </a>
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Quản lý tin tức</a>
+                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach')}}">Quản lý tin tức</a>
                         <a class="collapse-item" href="#">Quản lý banner</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>
                     </div>
