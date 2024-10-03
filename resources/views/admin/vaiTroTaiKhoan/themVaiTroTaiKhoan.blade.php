@@ -8,7 +8,7 @@
         </div>
         <div class="card shadow mb-4">
             <div class="card-body">
-                <form action="{{ route('admin.vai-tro-tai-khoan.them') }}" method="post" class="form">
+                <form action="{{ route('vai-tro-tai-khoan.them') }}" method="post" class="form">
                     @csrf
                     <div class="mb-3">
                         <label for="" class="form-label">ID</label>
@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <button type="submit" name="submit" class="btn btn-success">Xác nhận</button>
-                        <a href="{{ route('admin.vai-tro-tai-khoan.danh-sach') }}"><button type="button" class="btn btn-success">Quay lại</button></a>
+                        <a href="{{ route('vai-tro-tai-khoan.danh-sach') }}"><button type="button" class="btn btn-success">Quay lại</button></a>
                     </div>
                 </form>
             </div>
