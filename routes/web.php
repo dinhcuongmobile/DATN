@@ -5,6 +5,7 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
+use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
@@ -78,6 +79,22 @@ Route::prefix('/admin')->group(function(){
         Route::get('/khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
         Route::get('/mo-khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
     });
+    Route::prefix('tin-tuc')->group(function(){
+        Route::get('danh-sach', [AdminTinTucController::class,'showDanhSach'])->name('tin-tuc.danh-sach');
+
+        //add
+        Route::get('them-tin-tuc', [AdminTinTucController::class,'viewAdd'])->name('tin-tuc.them-tin-tuc');
+        Route::post('add', [AdminTinTucController::class,'add'])->name('tin-tuc.add');
+
+        //update
+        Route::get('sua-tin-tuc/{id}', [AdminTinTucController::class,'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
+        Route::put('update/{id}', [AdminTinTucController::class,'update'])->name('tin-tuc.update');
+
+        //delete
+        Route::get('delete/{id}', [AdminTinTucController::class,'delete'])->name('tin-tuc.delete');
+        Route::post('xoa-nhieu', [AdminTinTucController::class,'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
+    });
+
 });
 
 

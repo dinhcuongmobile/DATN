@@ -311,13 +311,13 @@
                                         src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="Footer Logo"></a></div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
-                                    <h6>1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United States</h6>
+                                    <h6>1 Trinh Van Bo</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="phone-calling"></i>
                                     <h6>+ 185659635</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="mail"></i>
-                                    <h6>contact@katie.com</h6>
+                                    <h6>contact@namastore.com</h6>
                                 </li>
                             </ul>
                         </div>
