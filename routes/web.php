@@ -3,18 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
-<<<<<<< HEAD
-use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
-=======
->>>>>>> d7eee28732476c0e8a43c5c52902e26c6768408b
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
+use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
