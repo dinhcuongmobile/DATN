@@ -12,9 +12,7 @@
             <div class="card-header py-3">
                 <button type="button" class="btn btn-secondary btn-sm" onclick="">Chọn tất cả</button>
                 <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
-                <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Khóa các tài khoản đã
-                    chọn</button>
-                <a href=""><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
+                <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Mở khóa các tài khoản đã chọn</button>
                 <div class="float-right">
                     <div class="input-group">
                         <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
@@ -52,7 +50,10 @@
                                     <td class="col-3 align-middle">{{ $item->dia_chi }}</td>
                                     <td class="col-1">{{ $item->vaiTro->vai_tro }}</td>
                                     <td class="col-1 align-middle">
-                                        <a href=""><button type="button" class="btn btn-secondary btn-sm" onclick="">Mở khóa</button></a>
+                                        <a href="{{ route('tai-khoan.mo-khoa-tai-khoan', $item->id) }}">
+                                            <button type="button" class="btn btn-secondary btn-sm" 
+                                             onclick="return confirm('Xác nhận mở khóa tài khoản')">Mở khóa</button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

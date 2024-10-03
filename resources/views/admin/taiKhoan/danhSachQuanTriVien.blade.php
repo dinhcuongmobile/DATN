@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
                 <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Khóa các tài khoản đã
                     chọn</button>
-                <a href=""><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
+                <a href="{{ route('tai-khoan.them-tai-khoan') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                 <div class="float-right">
                     <div class="input-group">
                         <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
@@ -31,7 +31,7 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
-                                <th></th>
+                                <th class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></th>
                                 <th>MQTV</th>
                                 <th>Họ và Tên</th>
                                 <th>Email</th>
@@ -46,19 +46,25 @@
                                 @if ($item->vai_tro_id == 1)
                                      {{-- vai_tro_id = 1 là tài khoản quản trị viên, 2 là nhân viên, 3 là người dùng --}}
                                     <tr>
-                                        <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
-                                        <td class="col-1 align-middle">QTV-{{ $index + 1 }}</td>
+                                        @if ($item->id == 1)
+                                            <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value="" disabled></td>
+                                        @else
+                                            <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
+                                        @endif
+                                        <td class="col-1 align-middle">QTV-{{ $item->id }}</td>
                                         <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
                                         <td class="col-2 align-middle">{{ $item->email }}</td>
                                         <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
                                         <td class="col-3 align-middle">{{ $item->dia_chi }}</td>
                                         <td class="col-1">{{ $item->vaiTro->vai_tro }}</td>
                                         <td class="col-1 align-middle">
-                                            <a href=""><button
-                                                    type="button" class="btn btn-secondary btn-sm">Sửa</button></a> |
-                                            <a href=""><button
-                                                    type="button" class="btn btn-secondary btn-sm"
-                                                    onclick="">Khóa</button></a>
+                                            <a href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}">
+                                                <button type="button" class="btn btn-secondary btn-sm">Sửa</button>
+                                            </a> |
+                                            <a href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}">
+                                                <button type="button" class="btn btn-secondary btn-sm" 
+                                                    onclick="return confirm('Xác nhận khóa tài khoản')">Khóa</button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endif
