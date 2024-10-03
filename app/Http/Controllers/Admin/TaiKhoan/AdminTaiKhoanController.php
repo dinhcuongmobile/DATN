@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\TaiKhoan;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminTaiKhoanRequest;
 use App\Models\User;
 use App\Models\VaiTro;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreTaiKhoanRequest;
 
 class AdminTaiKhoanController extends Controller
 {
@@ -46,7 +46,7 @@ class AdminTaiKhoanController extends Controller
         return view('admin.taiKhoan.themTaiKhoan', compact('vaiTro'));
     }
 
-    public function them(AdminTaiKhoanRequest $request) //Validate ở trong AdminTaiKhoanRequest
+    public function them(StoreTaiKhoanRequest $request) //Validate ở trong AdminTaiKhoanRequest
     {
         if ($request->isMethod('POST')) {
             $params = $request->except('_token');
