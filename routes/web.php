@@ -65,6 +65,17 @@ Route::prefix('/admin')->group(function(){
         Route::get('/trang-sua/{id}', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('trang-sua');
         Route::post('/sua/{id}', [AdminVaiTroTaiKhoanController::class, 'suaVaiTroTaiKhoan'])->name('sua');
     });
+    Route::prefix('danh-muc')->group(function() {
+        Route::get('danh-sach', [DanhMucAdminController::class, 'showDanhSach'])->name('danh-muc.danh-sach');
+        // Thêm danh mục
+        Route::get('them-danh-muc', [DanhMucAdminController::class, 'viewAdd'])->name('danh-muc.them-danh-muc');
+        Route::post('add', [DanhMucAdminController::class, 'add'])->name('danh-muc.add');
+        // Sửa danh mục
+        Route::get('sua-danh-muc/{id}', [DanhMucAdminController::class, 'viewUpdate'])->name('danh-muc.sua-danh-muc');
+        Route::put('update/{id}', [DanhMucAdminController::class, 'update'])->name('danh-muc.update');
+        // Xóa danh mục
+        Route::get('delete/{id}', [DanhMucAdminController::class, 'delete'])->name('danh-muc.delete');
+});
 });
 
 
