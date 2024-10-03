@@ -15,11 +15,18 @@ class VaiTroSeeder extends Seeder
     public function run()
     {
         DB::table('vai_tros')->insert([
-            ['vai_tro' => 'Admin'],
-            ['vai_tro' => 'User'],
-            ['vai_tro' => 'Manager'],
-            ['vai_tro' => 'Editor'],
-            ['vai_tro' => 'Viewer'],
+            [
+                'id' => 1,
+                'vai_tro' => 'Quản trị viên'
+            ],
+            [
+                'id' => 2,
+                'vai_tro' => 'Nhân viên'
+            ],
+            [
+                'id' => 3,
+                'vai_tro' => 'Người dùng'
+            ],
         ]);
     }
 }
