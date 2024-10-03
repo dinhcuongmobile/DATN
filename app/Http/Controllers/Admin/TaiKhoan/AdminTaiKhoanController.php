@@ -3,63 +3,36 @@
 namespace App\Http\Controllers\Admin\TaiKhoan;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminTaiKhoanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function danhSachQuanTriVien() 
     {
-        //
+        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get(); // with('vaiTro) là eloquent bên Model User
+
+        return view('admin.taiKhoan.danhSachQuanTriVien', compact('taiKhoan'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function danhSachNhanVien() 
     {
-        //
+        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get();
+
+        return view('admin.taiKhoan.danhSachNhanVien', compact('taiKhoan'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function danhSachNguoiDung() 
     {
-        //
+        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get();
+
+        return view('admin.taiKhoan.danhSachNguoiDung', compact('taiKhoan'));   
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function danhSachTaiKhoanBiKhoa() 
     {
-        //
-    }
+        $taiKhoan = User::with('vaiTro')->where('trang_thai', 1)->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return view('admin.taiKhoan.danhSachTaiKhoanBiKhoa', compact('taiKhoan'));   
     }
 }

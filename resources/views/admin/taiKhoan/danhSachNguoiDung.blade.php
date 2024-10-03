@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản bị khoá</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách người dùng</h1>
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -32,7 +32,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>MQTV</th>
+                                <th>MND</th>
                                 <th>Họ và Tên</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
@@ -43,18 +43,24 @@
                         </thead>
                         <tbody>
                             @foreach ($taiKhoan as $index => $item)
-                                <tr>
-                                    <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
-                                    <td class="col-1 align-middle">QTV-{{ $index + 1 }}</td>
-                                    <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
-                                    <td class="col-2 align-middle">{{ $item->email }}</td>
-                                    <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                    <td class="col-3 align-middle">{{ $item->dia_chi }}</td>
-                                    <td class="col-1">{{ $item->vaiTro->vai_tro }}</td>
-                                    <td class="col-1 align-middle">
-                                        <a href=""><button type="button" class="btn btn-secondary btn-sm" onclick="">Mở khóa</button></a>
-                                    </td>
-                                </tr>
+                                @if ($item->vai_tro_id == 3)
+                                    <tr>
+                                        <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
+                                        <td class="col-1 align-middle">ND-{{ $index + 1 }}</td>
+                                        <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
+                                        <td class="col-2 align-middle">{{ $item->email }}</td>
+                                        <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
+                                        <td class="col-3 align-middle">{{ $item->dia_chi }}</td>
+                                        <td class="col-1">{{ $item->vaiTro->vai_tro }}</td>
+                                        <td class="col-1 align-middle">
+                                            <a href=""><button
+                                                    type="button" class="btn btn-secondary btn-sm">Sửa</button></a> |
+                                            <a href=""><button
+                                                    type="button" class="btn btn-secondary btn-sm"
+                                                    onclick="">Khóa</button></a>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
