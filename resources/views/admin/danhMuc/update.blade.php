@@ -8,19 +8,19 @@
     </div>
     <div class="card shadow mb-4">
         <div class="card-body">
-            <form action="{{ route('admin.danhMuc.update', $danhMuc->id) }}" method="post" class="form" enctype="multipart/form-data">
+            <form action="{{ route('danh-muc.update', $danhMuc->id) }}" method="post" class="form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="" class="form-label">Mã loại</label>
-                    <input type="text" name="" id="" class="form-control" value="NM-{{ $danhMuc->id }}" disabled>
+                    <label for="maLoai" class="form-label">Mã loại</label>
+                    <input type="text" name="maLoai" id="maLoai" class="form-control" value="NM-{{ $danhMuc->id }}" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Tải ảnh lên:</label>
-                    <input type="file" name="hinh_anh" id="" class="form-control-file border">
+                    <label for="hinhAnh" class="form-label">Tải ảnh lên:</label>
+                    <input type="file" name="hinh_anh" id="hinhAnh" class="form-control-file border">
                     @if ($danhMuc->hinh_anh)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $danhMuc->hinh_anh) }}" alt="{{ $danhMuc->ten_danh_muc }}" width="100">
+                            <img src="{{ Storage::url($danhMuc->hinh_anh) }}" alt="{{ $danhMuc->ten_danh_muc }}" width="100">
                         </div>
                     @endif
                 </div>
@@ -30,7 +30,7 @@
                 </div>
                 <div>
                     <button type="submit" name="submit" class="btn btn-success">Xác nhận</button>
-                    <a href="{{ route('admin.danhMuc.DSDanhMuc') }}"><button type="button" class="btn btn-secondar">Quay lại</button></a>
+                    <a href="{{ route('danh-muc.danh-sach') }}" class="btn btn-secondary">Quay lại</a>
                 </div>
             </form>
         </div>

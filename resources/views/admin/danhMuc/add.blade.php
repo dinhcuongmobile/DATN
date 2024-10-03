@@ -5,15 +5,16 @@
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <a href="{{ route('admin.danhMuc.create') }}"><h1 class="h3 mb-0 text-gray-800">Thêm mới danh mục</h1></a>
+    <h1 class="h3 mb-0 text-gray-800">Thêm mới danh mục</h1>
 </div>
+
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form action="{{ route('admin.danhMuc.store') }}" method="POST" class="form" enctype="multipart/form-data">
+        <form action="{{ route('danh-muc.add') }}" method="POST" class="form" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="" class="form-label">Mã loại</label>
-                <input type="text" name="" id="" class="form-control" value="NM-" disabled>
+                <label for="maLoai" class="form-label">Mã loại</label>
+                <input type="text" name="maLoai" id="maLoai" class="form-control" value="NM-" disabled>
             </div>
             <div class="mb-3">
                 <label for="hinh_anh" class="form-label">Tải ảnh lên:</label>
@@ -31,11 +32,12 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-success">Xác nhận</button>
-                <a href="{{ route('admin.danhMuc.DSDanhMuc') }}" class="btn btn-secondary">Quay lại</a>
+                <a href="{{ route('danh-muc.danh-sach') }}" class="btn btn-secondary">Quay lại</a>
             </div>
         </form>
     </div>
 </div>
+
 </div>
 <!-- /.container-fluid -->
 @endsection

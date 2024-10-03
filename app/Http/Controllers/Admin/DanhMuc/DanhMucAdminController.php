@@ -13,13 +13,13 @@ class DanhMucAdminController extends Controller
     public function showDanhSach()
     {
         $danhMucs = DanhMuc::all();
-        return view('admin.danhMuc.danhSach', compact('danhMucs'));
+        return view('admin.danhMuc.DSDanhMuc', compact('danhMucs'));
     }
 
     // Hiển thị trang thêm danh mục
     public function viewAdd()
     {
-        return view('admin.danhMuc.them');
+        return view('admin.danhMuc.add');
     }
 
     // Xử lý thêm danh mục
@@ -29,18 +29,14 @@ class DanhMucAdminController extends Controller
             'ten_danh_muc' => 'required|string|max:255',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Xác thực file ảnh
         ]);
-
         $hinhAnhPath = null;
-
         if ($request->hasFile('hinh_anh')) {
-            $hinhAnhPath = $request->file('hinh_anh')->store('danh_muc_images', 'public'); // Lưu ảnh vào thư mục 'public/storage/danh_muc_images'
+            $hinhAnhPath = $request->file('hinh_anh')->store('danh_muc_images', 'public');
         }
-
         DanhMuc::create([
             'ten_danh_muc' => $request->ten_danh_muc,
             'hinh_anh' => $hinhAnhPath,
         ]);
-
         return redirect()->route('danh-muc.danh-sach')->with('success', 'Thêm danh mục thành công!');
     }
 
@@ -48,7 +44,7 @@ class DanhMucAdminController extends Controller
     public function viewUpdate($id)
     {
         $danhMuc = DanhMuc::findOrFail($id);
-        return view('admin.danhMuc.sua', compact('danhMuc'));
+        return view('admin.danhMuc.update', compact('danhMuc'));
     }
 
     // Xử lý cập nhật danh mục
@@ -58,41 +54,53 @@ class DanhMucAdminController extends Controller
             'ten_danh_muc' => 'required|string|max:255',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Xác thực file ảnh
         ]);
-
         $danhMuc = DanhMuc::findOrFail($id);
-
         // Kiểm tra xem có file ảnh mới không
         if ($request->hasFile('hinh_anh')) {
             // Xóa ảnh cũ nếu có
             if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
                 Storage::disk('public')->delete($danhMuc->hinh_anh);
             }
-
             // Lưu ảnh mới
             $hinhAnhPath = $request->file('hinh_anh')->store('danh_muc_images', 'public');
             $danhMuc->hinh_anh = $hinhAnhPath;
         }
-
         $danhMuc->update([
             'ten_danh_muc' => $request->ten_danh_muc,
             'hinh_anh' => $danhMuc->hinh_anh,
         ]);
-
         return redirect()->route('danh-muc.danh-sach')->with('success', 'Sửa danh mục thành công!');
     }
-
     // Xóa danh mục
     public function delete($id)
     {
         $danhMuc = DanhMuc::findOrFail($id);
+        $danhMuc->delete();
+        return redirect()->route('danh-muc.danh-sach')->with('success', 'Xóa danh mục thành công!');
+    }
 
+    //Lấy tất cả danh mục đã xóa
+    public function danhSachDaXoa()
+    {
+        $trashedDanhMucs = DanhMuc::onlyTrashed()->get();
+        return view('admin.danhMuc.trashed', compact('trashedDanhMucs'));
+    }
+    // Khôi phục danh mục đã xóa
+    public function khoiPhuc($id)
+    {
+        $danhMuc = DanhMuc::onlyTrashed()->findOrFail($id);
+        $danhMuc->restore();
+        return redirect()->route('danh-muc.danh-sach-da-xoa')->with('success', 'Danh mục đã được khôi phục thành công.');
+    }
+    // Xóa vĩnh viễn danh mục
+    public function xoaVinhVien($id)
+    {
+        $danhMuc = DanhMuc::onlyTrashed()->findOrFail($id);
         // Xóa ảnh nếu có
-        if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
+            if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
             Storage::disk('public')->delete($danhMuc->hinh_anh);
         }
-
-        $danhMuc->delete();
-
-        return redirect()->route('danh-muc.danh-sach')->with('success', 'Xóa danh mục thành công!');
+        $danhMuc->forceDelete();
+        return redirect()->route('danh-muc.danh-sach-da-xoa')->with('success', 'Danh mục đã được xóa vĩnh viễn.');
     }
 }
