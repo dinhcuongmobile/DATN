@@ -45,4 +45,38 @@ class User extends Authenticatable
     {
         return $this->belongsTo(VaiTro::class, 'vai_tro_id');
     }
+
+    public function timKiemTaiKhoan($key)
+    {
+        $tiemKiem = User::where('ho_va_ten', 'LIKE', "%$key%")
+            ->orWhere('email', 'LIKE', "%$key%")
+            ->orWhere('so_dien_thoai', 'LIKE', "%$key%")
+            ->orDerByDesc('id')
+            ->get();
+
+        return $tiemKiem;
+    }
+
+    public function danhSachTaiKhoan()
+    {
+        $taiKhoan = User::query()->get();
+
+        return $taiKhoan;
+    }
+
+    public function themTaiKhoan($params)
+    {
+        $taiKhoan = User::query()->create($params);
+
+        return $taiKhoan;
+    }
+
+    public function suaTaiKhoan($params, $id)
+    {
+        $taiKhoan = User::query()->findOrFail($id);
+
+        $taiKhoan->update($params);
+
+        return $taiKhoan;
+    }
 }

@@ -40,10 +40,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($taiKhoan as $index => $item)
+                            @foreach ($taiKhoan as $item)
+                            @if ($item->trang_thai == 1)
                                 <tr>
                                     <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></td>
-                                    <td class="col-1 align-middle">QTV-{{ $index + 1 }}</td>
+                                    <td class="col-1 align-middle">QTV-{{ $item->id }}</td>
                                     <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
                                     <td class="col-2 align-middle">{{ $item->email }}</td>
                                     <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
@@ -52,10 +53,11 @@
                                     <td class="col-1 align-middle">
                                         <a href="{{ route('tai-khoan.mo-khoa-tai-khoan', $item->id) }}">
                                             <button type="button" class="btn btn-secondary btn-sm" 
-                                             onclick="return confirm('Xác nhận mở khóa tài khoản')">Mở khóa</button>
+                                            onclick="return confirm('Xác nhận mở khóa tài khoản')">Mở khóa</button>
                                         </a>
                                     </td>
                                 </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

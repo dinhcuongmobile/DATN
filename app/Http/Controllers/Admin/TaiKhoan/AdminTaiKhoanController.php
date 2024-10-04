@@ -6,127 +6,147 @@ use App\Models\User;
 use App\Models\VaiTro;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\TaiKhoan\AdminSuaTaiKhoanRequest;
+use App\Http\Requests\Admin\TaiKhoan\AdminThemTaiKhoanRequest;
 use Illuminate\Support\Facades\Session;
-use App\Http\Requests\StoreTaiKhoanRequest;
+
 
 class AdminTaiKhoanController extends Controller
 {
-    public function danhSachQuanTriVien()
-    {
-        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get(); // with('vaiTro) là eloquent bên Model User
+    protected $taiKhoan;
 
-        return view('admin.taiKhoan.danhSachQuanTriVien', compact('taiKhoan'));
+    protected $vaiTro;
+
+    protected $views;
+
+    public function __construct()
+    {
+        $this->taiKhoan = new User();
+
+        $this->vaiTro = new VaiTro();
+
+        $this->views = [];
     }
 
-    public function danhSachNhanVien()
+    public function danhSachQuanTriVien(Request $request)
     {
-        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get();
+        $key = $request->input('kyw');
 
-        return view('admin.taiKhoan.danhSachNhanVien', compact('taiKhoan'));
+        if ($key) {
+            $this->views['taiKhoan'] = $this->taiKhoan->timKiemTaiKhoan($key);
+        } else {
+            $this->views['taiKhoan'] = $this->taiKhoan->danhSachTaiKhoan();
+        }
+
+        return view('admin.taiKhoan.danhSachQuanTriVien', $this->views);
     }
 
-    public function danhSachNguoiDung()
+    public function danhSachNhanVien(Request $request)
     {
-        $taiKhoan = User::with('vaiTro')->where('trang_thai', 0)->get();
+        $key = $request->input('kyw');
 
-        return view('admin.taiKhoan.danhSachNguoiDung', compact('taiKhoan'));
+        if ($key) {
+            $this->views['taiKhoan'] = $this->taiKhoan->timKiemTaiKhoan($key);
+        } else {
+            $this->views['taiKhoan'] = $this->taiKhoan->danhSachTaiKhoan();
+        }
+
+        return view('admin.taiKhoan.danhSachNhanVien', $this->views);
     }
 
-    public function danhSachTaiKhoanBiKhoa()
+    public function danhSachNguoiDung(Request $request)
     {
-        $taiKhoan = User::with('vaiTro')->where('trang_thai', 1)->get();
+        $key = $request->input('kyw');
 
-        return view('admin.taiKhoan.danhSachTaiKhoanBiKhoa', compact('taiKhoan'));
+        if ($key) {
+            $this->views['taiKhoan'] = $this->taiKhoan->timKiemTaiKhoan($key);
+        } else {
+            $this->views['taiKhoan'] = $this->taiKhoan->danhSachTaiKhoan();
+        }
+
+        return view('admin.taiKhoan.danhSachNguoiDung', $this->views);
     }
 
-    public function themTaiKhoan()
+    public function danhSachTaiKhoanBiKhoa(Request $request)
     {
-        $vaiTro = VaiTro::all();
+        $key = $request->input('kyw');
+
+        if ($key) {
+            $this->views['taiKhoan'] = $this->taiKhoan->timKiemTaiKhoan($key);
+        } else {
+            $this->views['taiKhoan'] = $this->taiKhoan->danhSachTaiKhoan();
+        }
+
+        return view('admin.taiKhoan.danhSachTaiKhoanBiKhoa', $this->views);
+    }
+
+    public function formThemTaiKhoan()
+    {
+        $vaiTro = $this->vaiTro->all();
 
         return view('admin.taiKhoan.themTaiKhoan', compact('vaiTro'));
     }
 
-    public function them(StoreTaiKhoanRequest $request) //Validate ở trong AdminTaiKhoanRequest
+    public function them(AdminThemTaiKhoanRequest $request) //Validate ở trong AdminThemTaiKhoanRequest
     {
         if ($request->isMethod('POST')) {
             $params = $request->except('_token');
 
-            $taiKhoan = User::query()->create($params);
+            $taiKhoan = $this->taiKhoan->themTaiKhoan($params);
 
-            Session::flash('success', 'Thêm tài khoản thành công');
-
-            if ($taiKhoan->vai_tro_id == 1) {
-                return redirect('/admin/tai-khoan/danh-sach-quan-tri-vien');
-            } elseif ($taiKhoan->vai_tro_id == 2) {
-                return redirect('/admin/tai-khoan/danh-sach-nhan-vien');
+            if ($taiKhoan) {
+                Session::flash('success', 'Thêm tài khoản thành công');
+    
+                if ($taiKhoan->vai_tro_id == 1) {
+                    return redirect('/admin/tai-khoan/danh-sach-quan-tri-vien');
+                } elseif ($taiKhoan->vai_tro_id == 2) {
+                    return redirect('/admin/tai-khoan/danh-sach-nhan-vien');
+                } else {
+                    return redirect('/admin/tai-khoan/danh-sach-nguoi-dung');
+                }
             } else {
-                return redirect('/admin/tai-khoan/danh-sach-nguoi-dung');
+                Session::flash('error', 'Thêm tài khoản không thành công, vui lòng thử lại');
+
+                return back();
             }
+
         }
     }
 
-    public function suaTaiKhoan(string $id)
+    public function formSuaTaiKhoan(string $id)
     {
-        $taiKhoan = User::query()->findOrFail($id);
+        $taiKhoan = $this->taiKhoan->find($id);
 
-        $vaiTro = VaiTro::all();
+        $vaiTro = $this->vaiTro->all();
 
         return view('admin.taiKhoan.suaTaiKhoan', compact('taiKhoan', 'vaiTro'));
     }
 
-    public function sua(Request $request, string $id)
+    public function sua(AdminSuaTaiKhoanRequest $request, string $id)
     {
         if ($request->isMethod('PUT')) {
             $params = $request->except('_token', '_method');
 
-            $request->validate([
-                'ho_va_ten' => 'required|string|max:50',
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    'max:255',
-                    'unique:users,email,' .$id,
-                    'regex:/^[\w\.\-]+@[a-zA-Z\d\-]+\.[a-zA-Z]{2,}$/',
-                ],
-                'password' => 'required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/',
-                'vai_tro_id' => 'required|exists:vai_tros,id',
-                'so_dien_thoai' => 'required|regex:/^0\d{9}$/|unique:users,so_dien_thoai,' .$id,
-            ], [
-                'ho_va_ten.required' => 'Họ và tên không được trống',
-                'ho_va_ten.max' => 'Họ và tên không quá 50 ký tự',
+            $taiKhoan = $this->taiKhoan->find($id);
 
-                'email.required' => 'Email không được trống',
-                'email.regex' => 'Email không hợp lệ',
-                'email.max' => 'Email không quá 255 ký tự',
-                'email.unique' => 'Email đã tồn tại',
-                'email.email' => 'Email sai định dạng',
+            if ($taiKhoan) {
+                $this->taiKhoan->suaTaiKhoan($params, $id);
 
-                'password.required' => 'Mật khẩu không được trống',
-                'password.min' => 'Mật khẩu phải ít nhất 8 ký tự',
-                'password.regex' => 'Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một chữ số',
-
-                'vai_tro_id.required' => 'Vai trò không được trống',
-                'vai_tro_id.exists' => 'Vai trò không hợp lệ',
-
-                'so_dien_thoai.required' => 'Số điện thoại không được trống',
-                'so_dien_thoai.unique' => 'Số điện thoại đã tồn tại',
-                'so_dien_thoai.regex' => 'Số điện thoại phải là số và 10 chữ số  bắt đầu bằng số 0.',
-            ]);
-
-            $taiKhoan = User::query()->findOrFail($id);
-
-            $taiKhoan->update($params);
-
-            Session::flash('success', 'Sửa tài khoản thành công');
-
-            if ($taiKhoan->vai_tro_id == 1) {
-                return redirect('/admin/tai-khoan/danh-sach-quan-tri-vien');
-            } elseif ($taiKhoan->vai_tro_id == 2) {
-                return redirect('/admin/tai-khoan/danh-sach-nhan-vien');
+                Session::flash('success', 'Sửa tài khoản thành công');
+    
+                if ($taiKhoan->vai_tro_id == 1) {
+                    return redirect('/admin/tai-khoan/danh-sach-quan-tri-vien');
+                } elseif ($taiKhoan->vai_tro_id == 2) {
+                    return redirect('/admin/tai-khoan/danh-sach-nhan-vien');
+                } else {
+                    return redirect('/admin/tai-khoan/danh-sach-nguoi-dung');
+                }
             } else {
-                return redirect('/admin/tai-khoan/danh-sach-nguoi-dung');
+                Session::flash('error', 'Sửa tài khoản không thành công, vui lòng thử lại');
+
+                return back();
             }
+
         }
     }
 

@@ -8,22 +8,30 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if (session('error'))
+            <div class="alert alert-error">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <button type="button" class="btn btn-secondary btn-sm" onclick="">Chọn tất cả</button>
-                <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
-                <button type="submit" name="xoacacmucchon" class="btn btn-secondary btn-sm">Khóa các tài khoản đã
-                    chọn</button>
-                <a href="{{ route('tai-khoan.them-tai-khoan') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
+                <div class="float-left">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="">Chọn tất cả</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="">Bỏ chọn tất cả</button>
+                    <button type="submit" class="btn btn-secondary btn-sm">Khóa các tài khoản đã chọn</button>
+                    <a href="{{ route('tai-khoan.them-tai-khoan') }}"><button type="button" class="btn btn-secondary btn-sm">Nhập thêm</button></a>
+                </div>
                 <div class="float-right">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit" name="search">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                    <form action="{{ route('tai-khoan.danh-sach-quan-tri-vien') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="card-body">
@@ -31,7 +39,7 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
-                                <th class="col-1 align-middle text-center"><input type="checkbox" name="select[]" value=""></th>
+                                <th></th>
                                 <th>MQTV</th>
                                 <th>Họ và Tên</th>
                                 <th>Email</th>
@@ -42,8 +50,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($taiKhoan as $index => $item)
-                                @if ($item->vai_tro_id == 1)
+                            @foreach ($taiKhoan as $item)
+                                @if ($item->vai_tro_id == 1 && $item->trang_thai == 0)
                                      {{-- vai_tro_id = 1 là tài khoản quản trị viên, 2 là nhân viên, 3 là người dùng --}}
                                     <tr>
                                         @if ($item->id == 1)
