@@ -64,6 +64,24 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 Route::prefix('admin')->group(function(){
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('admin.index');
 
+    Route::prefix('danh-muc')->group(function(){
+        Route::get('danh-sach', [DanhMucAdminController::class,'showDanhSach'])->name('danh-muc.danh-sach');
+        //add
+        Route::get('them-danh-muc', [DanhMucAdminController::class,'viewAdd'])->name('danh-muc.them-danh-muc');
+        Route::post('add', [DanhMucAdminController::class,'add'])->name('danh-muc.add');
+
+        //update
+        Route::get('sua-danh-muc/{id}', [DanhMucAdminController::class,'viewUpdate'])->name('danh-muc.sua-danh-muc');
+        Route::put('update/{id}', [DanhMucAdminController::class,'update'])->name('danh-muc.update');
+
+        //delete
+        Route::get('delete/{id}', [DanhMucAdminController::class,'delete'])->name('danh-muc.delete');
+
+        Route::get('danh-sach-da-xoa', [DanhMucAdminController::class,'danhSachDaXoa'])->name('danh-muc.danh-sach-da-xoa');
+
+        // Route::post('xoa-nhieu', [DanhMucAdminController::class,'xoaNhieuDanhMuc'])->name('danh-muc.xoa-nhieu');
+    });
+
     Route::prefix('san-pham')->group(function(){
         Route::get('danh-sach',[SanPhamAdminController::class, 'danhSachSanPham'])->name('san-pham.danh-sach');
     });
