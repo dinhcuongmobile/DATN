@@ -3,6 +3,16 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách sản phẩm</h1>
+        @if (session('success'))
+            <div class="alert alert-success" id="error-alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger" id="error-alert">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">

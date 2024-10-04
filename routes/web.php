@@ -3,17 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminTaiKhoanController;
-use App\Http\Controllers\Admin\TaiKhoan\AdminVaiTroTaiKhoanController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
+use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
-use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
+use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
 
 
 /*
@@ -64,6 +63,26 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 Route::prefix('admin')->group(function(){
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('admin.index');
 
+    //tai khoan
+    Route::prefix('tai-khoan')->group(function(){
+        Route::get('danh-sach-QTV', [TaiKhoanAdminController::class,'showTaiKhoanQTV'])->name('tai-khoan.danh-sach-QTV');
+        Route::get('danh-sach-NV', [TaiKhoanAdminController::class,'showTaiKhoanNV'])->name('tai-khoan.danh-sach-NV');
+        Route::put('select-khoa-TK', [TaiKhoanAdminController::class,'selectKhoaTK'])->name('tai-khoan.select-khoa-TK');
+        Route::get('danh-sach-TV', [TaiKhoanAdminController::class,'showTaiKhoanTV'])->name('tai-khoan.danh-sach-TV');
+        Route::get('danh-sach-TKK', [TaiKhoanAdminController::class,'showTaiKhoanTKK'])->name('tai-khoan.danh-sach-TKK');
+
+        //add
+        Route::get('them-tai-khoan', [TaiKhoanAdminController::class,'viewAdd'])->name('tai-khoan.them-tai-khoan');
+        Route::post('add', [TaiKhoanAdminController::class,'add'])->name('tai-khoan.add');
+
+        //update
+        Route::get('sua-tai-khoan/{id}', [TaiKhoanAdminController::class,'viewUpdate'])->name('tai-khoan.sua-tai-khoan');
+        Route::put('update/{id}', [TaiKhoanAdminController::class,'update'])->name('tai-khoan.update');
+        Route::get('khoa-tai-khoan/{id}', [TaiKhoanAdminController::class,'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
+        Route::get('mo-khoa-tai-khoan/{id}', [TaiKhoanAdminController::class,'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+    });
+
+    //Danh Muc
     Route::prefix('danh-muc')->group(function(){
         Route::get('danh-sach', [DanhMucAdminController::class,'showDanhSach'])->name('danh-muc.danh-sach');
         //add
@@ -77,22 +96,22 @@ Route::prefix('admin')->group(function(){
         //delete
         Route::get('delete/{id}', [DanhMucAdminController::class,'delete'])->name('danh-muc.delete');
 
-        Route::get('danh-sach-da-xoa', [DanhMucAdminController::class,'danhSachDaXoa'])->name('danh-muc.danh-sach-da-xoa');
+        Route::post('xoa-nhieu', [DanhMucAdminController::class,'xoaNhieuDanhMuc'])->name('danh-muc.xoa-nhieu');
 
-        // Route::post('xoa-nhieu', [DanhMucAdminController::class,'xoaNhieuDanhMuc'])->name('danh-muc.xoa-nhieu');
+        Route::get('danh-sach-danh-muc-da-xoa', [DanhMucAdminController::class,'danhSachDanhMucDaXoa'])->name('danh-muc.danh-sach-danh-muc-da-xoa');
+
+        Route::get('xoa-danh-muc-vinh-vien/{id}', [DanhMucAdminController::class,'xoaDanhMucVinhVien'])->name('danh-muc.xoa-danh-muc-vinh-vien');
+
+        Route::post('xoa-nhieu-vinh-vien', [DanhMucAdminController::class,'xoaNhieuDanhMucVinhVien'])->name('danh-muc.xoa-nhieu-vinh-vien');
+
+        Route::get('khoi-phuc-danh-muc/{id}', [DanhMucAdminController::class,'khoiPhucDanhMuc'])->name('danh-muc.khoi-phuc-danh-muc');
+
     });
 
     Route::prefix('san-pham')->group(function(){
         Route::get('danh-sach',[SanPhamAdminController::class, 'danhSachSanPham'])->name('san-pham.danh-sach');
     });
 
-    Route::prefix('vai-tro-tai-khoan')->group(function() {
-        Route::get('danh-sach', [AdminVaiTroTaiKhoanController::class, 'danhSachVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.danh-sach');
-        Route::get('trang-them', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangThemVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.trang-them');
-        Route::post('them', [AdminVaiTroTaiKhoanController::class, 'themVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.them');
-        Route::get('trang-sua/{id}', [AdminVaiTroTaiKhoanController::class, 'hienThiTrangSuaVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.trang-sua');
-        Route::post('sua/{id}', [AdminVaiTroTaiKhoanController::class, 'suaVaiTroTaiKhoan'])->name('vai-tro-tai-khoan.sua');
-    });
     Route::prefix('tin-tuc')->group(function(){
         Route::get('danh-sach', [AdminTinTucController::class,'showDanhSach'])->name('tin-tuc.danh-sach');
 
@@ -109,18 +128,7 @@ Route::prefix('admin')->group(function(){
         Route::post('xoa-nhieu', [AdminTinTucController::class,'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
     });
 
-    Route::prefix('/tai-khoan')->group(function() {
-        Route::get('/danh-sach-quan-tri-vien', [AdminTaiKhoanController::class, 'danhSachQuanTriVien'])->name('tai-khoan.danh-sach-quan-tri-vien');
-        Route::get('/danh-sach-nhan-vien', [AdminTaiKhoanController::class, 'danhSachNhanVien'])->name('tai-khoan.danh-sach-nhan-vien');
-        Route::get('/danh-sach-nguoi-dung', [AdminTaiKhoanController::class, 'danhSachNguoiDung'])->name('tai-khoan.danh-sach-nguoi-dung');
-        Route::get('/danh-sach-tai-khoan-bi-khoa', [AdminTaiKhoanController::class, 'danhSachTaiKhoanBiKhoa'])->name('tai-khoan.danh-sach-tai-khoan-bi-khoa');
-        Route::get('/them-tai-khoan', [AdminTaiKhoanController::class, 'themTaiKhoan'])->name('tai-khoan.them-tai-khoan');
-        Route::post('/them', [AdminTaiKhoanController::class, 'them'])->name('tai-khoan.them');
-        Route::get('/sua-tai-khoan/{id}', [AdminTaiKhoanController::class, 'suaTaiKhoan'])->name('tai-khoan.sua-tai-khoan');
-        Route::put('/sua/{id}', [AdminTaiKhoanController::class, 'sua'])->name('tai-khoan.sua');
-        Route::get('/khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
-        Route::get('/mo-khoa-tai-khoan/{id}', [AdminTaiKhoanController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
-    });
+
 });
 
 

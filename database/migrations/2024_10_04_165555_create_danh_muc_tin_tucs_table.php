@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('vai_tros', function (Blueprint $table) {
-            $table->string('vai_tro')->unique()->change();
+        Schema::create('danh_muc_tin_tucs', function (Blueprint $table) {
+            $table->id();
+            $table->string('ten_danh_muc');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -21,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropColumns('vai_tro');
+        Schema::dropIfExists('danh_muc_tin_tucs');
     }
 };

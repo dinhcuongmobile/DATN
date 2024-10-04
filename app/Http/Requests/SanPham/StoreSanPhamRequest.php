@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SanPham;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaiKhoanRequest extends FormRequest
+class StoreSanPhamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

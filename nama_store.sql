@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 19, 2024 lúc 06:11 PM
+-- Thời gian đã tạo: Th10 04, 2024 lúc 12:06 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -92,6 +92,20 @@ CREATE TABLE `chi_tiet_don_hangs` (
 CREATE TABLE `danh_mucs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `hinh_anh` varchar(255) DEFAULT NULL,
+  `ten_danh_muc` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danh_muc_tin_tucs`
+--
+
+CREATE TABLE `danh_muc_tin_tucs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `ten_danh_muc` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -209,16 +223,17 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2024_09_19_222026_create_vai_tros_table', 1),
 (5, '2024_09_19_222448_create_danh_mucs_table', 1),
 (6, '2024_09_19_222532_create_san_phams_table', 1),
-(7, '2014_10_12_000000_create_users_table', 2),
-(8, '2024_09_19_222819_create_bien_thes_table', 3),
-(9, '2024_09_19_222904_create_anh_san_phams_table', 4),
-(10, '2024_09_19_222937_create_ma_khuyen_mais_table', 5),
-(11, '2024_09_19_223020_create_gio_hangs_table', 6),
-(12, '2024_09_19_223049_create_don_hangs_table', 7),
-(13, '2024_09_19_223122_create_chi_tiet_don_hangs_table', 8),
-(14, '2024_09_19_223205_create_binh_luans_table', 9),
-(15, '2024_09_19_223505_create_tin_tucs_table', 10),
-(16, '2024_09_19_223620_create_lien_hes_table', 11);
+(7, '2024_09_19_222819_create_bien_thes_table', 1),
+(8, '2024_09_19_222904_create_anh_san_phams_table', 1),
+(9, '2024_09_19_222937_create_ma_khuyen_mais_table', 1),
+(10, '2024_09_19_223620_create_lien_hes_table', 1),
+(11, '2024_10_04_165555_create_danh_muc_tin_tucs_table', 1),
+(12, '2024_09_19_223505_create_tin_tucs_table', 2),
+(13, '2014_10_12_000000_create_users_table', 3),
+(14, '2024_09_19_223205_create_binh_luans_table', 4),
+(15, '2024_09_19_223020_create_gio_hangs_table', 5),
+(16, '2024_09_19_223049_create_don_hangs_table', 6),
+(17, '2024_09_19_223122_create_chi_tiet_don_hangs_table', 6);
 
 -- --------------------------------------------------------
 
@@ -279,6 +294,7 @@ CREATE TABLE `san_phams` (
 
 CREATE TABLE `tin_tucs` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `danh_muc_id` bigint(20) UNSIGNED NOT NULL,
   `hinh_anh` varchar(255) DEFAULT NULL,
   `tieu_de` varchar(255) NOT NULL,
   `noi_dung` longtext NOT NULL,
@@ -306,9 +322,15 @@ CREATE TABLE `users` (
   `password_reset_token` varchar(255) DEFAULT NULL,
   `trang_thai` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `dia_chi`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$/C/ZOI5uOZ72io.XCQEIUeQnvz1iRFKVtBqP34ww8ieCt4apWmzT.', '0964426518', 'Hà Tây', 1, NULL, NULL, 0, '2024-10-04 10:05:21', '2024-10-04 10:06:16');
 
 -- --------------------------------------------------------
 
@@ -322,6 +344,15 @@ CREATE TABLE `vai_tros` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vai_tros`
+--
+
+INSERT INTO `vai_tros` (`id`, `vai_tro`, `created_at`, `updated_at`) VALUES
+(1, 'Quản trị viên', '2024-10-04 10:04:25', NULL),
+(2, 'Nhân viên', '2024-10-04 10:04:25', NULL),
+(3, 'Thành viên', '2024-10-04 10:04:52', NULL);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -361,6 +392,12 @@ ALTER TABLE `chi_tiet_don_hangs`
 -- Chỉ mục cho bảng `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `danh_muc_tin_tucs`
+--
+ALTER TABLE `danh_muc_tin_tucs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -429,7 +466,8 @@ ALTER TABLE `san_phams`
 -- Chỉ mục cho bảng `tin_tucs`
 --
 ALTER TABLE `tin_tucs`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tin_tucs_danh_muc_id_foreign` (`danh_muc_id`);
 
 --
 -- Chỉ mục cho bảng `users`
@@ -480,6 +518,12 @@ ALTER TABLE `danh_mucs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `danh_muc_tin_tucs`
+--
+ALTER TABLE `danh_muc_tin_tucs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
@@ -513,7 +557,7 @@ ALTER TABLE `ma_khuyen_mais`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -537,13 +581,13 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`
 --
 ALTER TABLE `vai_tros`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -599,6 +643,12 @@ ALTER TABLE `ma_khuyen_mais`
 --
 ALTER TABLE `san_phams`
   ADD CONSTRAINT `san_phams_danh_muc_id_foreign` FOREIGN KEY (`danh_muc_id`) REFERENCES `danh_mucs` (`id`);
+
+--
+-- Các ràng buộc cho bảng `tin_tucs`
+--
+ALTER TABLE `tin_tucs`
+  ADD CONSTRAINT `tin_tucs_danh_muc_id_foreign` FOREIGN KEY (`danh_muc_id`) REFERENCES `danh_muc_tin_tucs` (`id`);
 
 --
 -- Các ràng buộc cho bảng `users`

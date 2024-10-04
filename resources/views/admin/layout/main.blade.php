@@ -67,15 +67,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('vai-tro-tai-khoan.danh-sach') }}">Vai trò tài khoản</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-quan-tri-vien') }}">Danh sách quản trị viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-nhan-vien') }}">Danh sách nhân viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-nguoi-dung') }}">Danh sách người dùng</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-tai-khoan-bi-khoa') }}">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="#" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-QTV')}}">Danh sách quản trị viên</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-NV')}}">Danh sách nhân viên</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TV')}}">Danh sách người dùng</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TKK')}}">Tài khoản bị khóa</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.them-tai-khoan')}}" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span>
-                        </a>
+                            <span>Thêm mới</span></a>
                     </div>
                 </div>
             </li>
@@ -90,7 +88,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('danh-muc.danh-sach')}}">Danh sách danh mục</a>
-                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-da-xoa')}}">Danh sách đã xóa</a>
+                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-danh-muc-da-xoa')}}">Thùng rác</a>
                         <a class="collapse-item" href="" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
