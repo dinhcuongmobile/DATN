@@ -89,8 +89,8 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        {{-- <a class="collapse-item" href="{{route('danh-muc.danh-sach')}}">Danh sách danh mục</a>
-                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-da-xoa')}}">Danh sách đã xóa</a> --}}
+                        <a class="collapse-item" href="{{route('danh-muc.danh-sach')}}">Danh sách danh mục</a>
+                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-da-xoa')}}">Danh sách đã xóa</a>
                         <a class="collapse-item" href="" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
