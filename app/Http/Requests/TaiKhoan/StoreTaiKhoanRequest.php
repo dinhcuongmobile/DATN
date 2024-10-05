@@ -19,7 +19,6 @@ class StoreTaiKhoanRequest extends FormRequest
             'confirm_password' => 'same:password',
             'email' => 'required|email|unique:users,email',
             'so_dien_thoai' => 'nullable|numeric|regex:/^0[1-9][0-9]{8}$/',
-            'dia_chi' => 'nullable|string|max:255',
 
         ];
     }
@@ -37,7 +36,6 @@ class StoreTaiKhoanRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại!',
             'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
             'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
-            'dia_chi.max' => 'Địa chỉ quá dài!',
         ];
     }
 }

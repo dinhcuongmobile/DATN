@@ -34,14 +34,53 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <label for="" class="form-label">Địa chỉ</label>
-                    <input type="text" class="form-control" id="" name="dia_chi" placeholder="Nhập địa chỉ..." value="{{old('dia_chi',$tai_khoan->dia_chi)}}">
-                    @error('dia_chi')
+                    <label for="tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
+                    <select class="form-control" id="tinh_thanh_pho" name="tinh_thanh_pho">
+                        <option value="">--Chọn tỉnh thành phố--</option>
+                        @foreach ($tinh_thanh_pho as $item)
+                            <option {{$item->ten_tinh_thanh_pho===$tinh_thanh_pho_one?'selected':''}} value="{{$item->ma_tinh_thanh_pho}}">{{$item->ten_tinh_thanh_pho}}</option>
+                        @endforeach
+                    </select>
+                    @error('tinh_thanh_pho')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
-
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label for="quan_huyen">Chọn Quận/Huyện</label>
+                    <select class="form-control" id="quan_huyen" name="quan_huyen">
+                        <option value="">--Chọn quận huyện--</option>
+                        @foreach ($quan_huyen as $item)
+                            <option {{$item->ten_quan_huyen===$quan_huyen_one?'selected':''}} value="{{$item->ma_quan_huyen}}">{{$item->ten_quan_huyen}}</option>
+                        @endforeach
+                    </select>
+                    @error('quan_huyen')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3">
+                    <label for="phuong_xa">Chọn Phường/Xã/Thị trấn</label>
+                    <select class="form-control" id="phuong_xa" name="phuong_xa">
+                        <option value="">--Chọn phường xã--</option>
+                        @foreach ($phuong_xa as $item)
+                            <option {{$item->ten_phuong_xa===$phuong_xa_one?'selected':''}} value="{{$item->ma_phuong_xa}}">{{$item->ten_phuong_xa}}</option>
+                        @endforeach
+                    </select>
+                    @error('phuong_xa')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
+                    <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4" class="form-control form-control-sm">{{$dia_chi_chi_tiet}}</textarea>
+                    @error('dia_chi_chi_tiet')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="sel1">Vai Trò</label>
