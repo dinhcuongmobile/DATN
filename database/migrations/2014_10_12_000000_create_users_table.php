@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('password_reset_token')->nullable();
             $table->integer('trang_thai')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

@@ -33,7 +33,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.index') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink" style="color: #f1c40f;"></i>
                 </div>
@@ -45,7 +45,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-house-damage"></i>
                     <span>Home</span>
             </li>
@@ -63,14 +63,15 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Quản lý thành viên</span>
+                    <span>Quản lý tài khoản</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Danh sách quản trị viên</a>
-                        <a class="collapse-item" href="#">Danh sách người dùng</a>
-                        <a class="collapse-item" href="#">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="#" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-QTV')}}">Danh sách quản trị viên</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-NV')}}">Danh sách nhân viên</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TV')}}">Danh sách người dùng</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TKK')}}">Tài khoản bị khóa</a>
+                        <a class="collapse-item" href="{{route('tai-khoan.them-tai-khoan')}}" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -86,8 +87,9 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Danh sách danh mục</a>
-                        <a class="collapse-item" href="#" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{route('danh-muc.danh-sach')}}">Danh sách danh mục</a>
+                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-danh-muc-da-xoa')}}">Thùng rác</a>
+                        <a class="collapse-item" href="" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -143,7 +145,7 @@
                 </a>
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Quản lý tin tức</a>
+                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach')}}">Quản lý tin tức</a>
                         <a class="collapse-item" href="#">Quản lý banner</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>
                     </div>

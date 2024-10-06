@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DanhMuc extends Model
 {
@@ -13,6 +14,7 @@ class DanhMuc extends Model
     protected $table = 'danh_mucs';
 
     protected $fillable = [
+        'id',
         'hinh_anh',
         'ten_danh_muc',
     ];
@@ -21,9 +23,4 @@ class DanhMuc extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
-
-    public function sanPhams()
-    {
-        return $this->hasMany(SanPham::class, 'danh_muc_id');
-    }
 }

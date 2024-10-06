@@ -113,7 +113,7 @@
 <section class="section-t-space">
     <div class="custom-container container product-contain">
         <div class="title">
-            <h3>Fashikart specials </h3><svg>
+            <h3>Sản Phẩm Bán Chạy </h3><svg>
                 <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#main-line"></use>
             </svg>
         </div>
@@ -124,17 +124,17 @@
                         <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab"
                                 data-bs-target="#features-products" role="tab" aria-controls="features-products"
                                 aria-selected="true">
-                                <h6>Featured Products</h6>
+                                <h6>Sản Phẩm Bán Chạy</h6>
                             </a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab"
                                 data-bs-target="#latest-products" role="tab" aria-controls="latest-products"
                                 aria-selected="false">
-                                <h6>Latest Products</h6>
+                                <h6>Sản Phẩm Mới Nhất</h6>
                             </a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab"
                                 data-bs-target="#seller-products" role="tab" aria-controls="seller-products"
                                 aria-selected="false">
-                                <h6>Best Seller Products </h6>
+                                <h6>Sản Phẩm Bán Chạy Nhất </h6>
                             </a></li>
                     </ul>
                 </div>
@@ -1360,7 +1360,7 @@
 <section class="section-t-space">
     <div class="custom-container container product-contain">
         <div class="title">
-            <h3>Fashikart specials</h3><svg>
+            <h3>Sản Phẩm Khuyến Mãi</h3><svg>
                 <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#main-line"></use>
             </svg>
         </div>
