@@ -2,105 +2,155 @@
 
 namespace App\Http\Controllers\Admin\DanhMuc;
 
-use App\Http\Controllers\Controller;
 use App\Models\DanhMuc;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\DanhMuc\StoreDanhMucRequest;
+use App\Http\Requests\DanhMuc\UpdateDanhMucRequest;
 
 class DanhMucAdminController extends Controller
 {
-    // Hiển thị danh sách các danh mục
-    public function showDanhSach()
-    {
-        $danhMucs = DanhMuc::all();
-        return view('admin.danhMuc.DSDanhMuc', compact('danhMucs'));
+    protected $views;
+    public function __construct() {
+        $this->views=[];
     }
 
-    // Hiển thị trang thêm danh mục
-    public function viewAdd()
-    {
+    //SHOW
+    public function showDanhSach(Request $request){
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $this->views['DSDanhmuc'] = DanhMuc::orderBy('id', 'desc')->paginate(10);
+        }
+        return view('admin.danhMuc.DSDanhMuc',$this->views);
+    }
+
+    public function danhSachDanhMucDaXoa(Request $request){
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->orderBy('id', 'desc')->paginate(10);
+        }
+        return view('admin.danhMuc.danhSachDaXoa',$this->views);
+    }
+
+    //add
+    public function viewAdd(){
+        
         return view('admin.danhMuc.add');
     }
 
-    // Xử lý thêm danh mục
-    public function add(Request $request)
-    {
-        $request->validate([
-            'ten_danh_muc' => 'required|string|max:255',
-            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Xác thực file ảnh
-        ]);
-        $hinhAnhPath = null;
-        if ($request->hasFile('hinh_anh')) {
-            $hinhAnhPath = $request->file('hinh_anh')->store('danh_muc_images', 'public');
+    public function add(StoreDanhMucRequest $request){
+        if($request->hasFile('hinh_anh')){
+            $fileName=$request->file('hinh_anh')->store('uploads/danhMuc','public');
+        }else{
+            $fileName=null;
         }
-        DanhMuc::create([
+       $dataInsert=[
+            'hinh_anh' => $fileName,
             'ten_danh_muc' => $request->ten_danh_muc,
-            'hinh_anh' => $hinhAnhPath,
-        ]);
-        return redirect()->route('danh-muc.danh-sach')->with('success', 'Thêm danh mục thành công!');
+            'created_at' => now()
+       ];
+       $result= DanhMuc::create($dataInsert);
+       if($result){
+            return redirect()->route('danh-muc.danh-sach')->with('success', 'Bạn đã thêm thành công !');
+       }else{
+        return "<script>alert('Đã xảy ra lỗi !')</script>";
+       }
+    }
+    //update
+    public function viewUpdate(int $id){
+        $this->views['danh_muc']=DanhMuc::findOrFail($id);
+        return view('admin.danhMuc.update',$this->views);
     }
 
-    // Hiển thị trang sửa danh mục
-    public function viewUpdate($id)
-    {
-        $danhMuc = DanhMuc::findOrFail($id);
-        return view('admin.danhMuc.update', compact('danhMuc'));
-    }
+    public function update(UpdateDanhMucRequest $request, int $id){
+        $danh_muc=DanhMuc::findOrFail($id);
+        if($request->hasFile('hinh_anh')){
+            $fileName=$request->file('hinh_anh')->store('uploads/danhMuc','public');
 
-    // Xử lý cập nhật danh mục
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'ten_danh_muc' => 'required|string|max:255',
-            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Xác thực file ảnh
-        ]);
-        $danhMuc = DanhMuc::findOrFail($id);
-        // Kiểm tra xem có file ảnh mới không
-        if ($request->hasFile('hinh_anh')) {
-            // Xóa ảnh cũ nếu có
-            if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
-                Storage::disk('public')->delete($danhMuc->hinh_anh);
+            if ($danh_muc->hinh_anh) {
+                Storage::disk('public')->delete($danh_muc->hinh_anh);
             }
-            // Lưu ảnh mới
-            $hinhAnhPath = $request->file('hinh_anh')->store('danh_muc_images', 'public');
-            $danhMuc->hinh_anh = $hinhAnhPath;
+        }else{
+            $fileName=$danh_muc->hinh_anh;
         }
-        $danhMuc->update([
-            'ten_danh_muc' => $request->ten_danh_muc,
-            'hinh_anh' => $danhMuc->hinh_anh,
-        ]);
-        return redirect()->route('danh-muc.danh-sach')->with('success', 'Sửa danh mục thành công!');
-    }
-    // Xóa danh mục
-    public function delete($id)
-    {
-        $danhMuc = DanhMuc::findOrFail($id);
-        $danhMuc->delete();
-        return redirect()->route('danh-muc.danh-sach')->with('success', 'Xóa danh mục thành công!');
+        $dataUpdate=[
+            'hinh_anh' => $fileName,
+            'ten_danh_muc'=> $request->ten_danh_muc,
+            'updated_at' => now()
+        ];
+        $result=$danh_muc->update($dataUpdate);
+        if($result){
+            return redirect()->route('danh-muc.danh-sach')->with('success', 'Bạn đã sửa thành công!');
+        }else{
+            return "<script>alert('Đã xảy ra lỗi !')</script>";
+        }
     }
 
-    //Lấy tất cả danh mục đã xóa
-    public function danhSachDaXoa()
-    {
-        $trashedDanhMucs = DanhMuc::onlyTrashed()->get();
-        return view('admin.danhMuc.trashed', compact('trashedDanhMucs'));
-    }
-    // Khôi phục danh mục đã xóa
-    public function khoiPhuc($id)
-    {
-        $danhMuc = DanhMuc::onlyTrashed()->findOrFail($id);
-        $danhMuc->restore();
-        return redirect()->route('danh-muc.danh-sach-da-xoa')->with('success', 'Danh mục đã được khôi phục thành công.');
-    }
-    // Xóa vĩnh viễn danh mục
-    public function xoaVinhVien($id)
-    {
-        $danhMuc = DanhMuc::onlyTrashed()->findOrFail($id);
-        // Xóa ảnh nếu có
-            if ($danhMuc->hinh_anh && Storage::disk('public')->exists($danhMuc->hinh_anh)) {
-            Storage::disk('public')->delete($danhMuc->hinh_anh);
+    public function delete($id){
+        $danh_muc=DanhMuc::findOrFail($id);
+        if($danh_muc){
+            $danh_muc->delete();
+            return redirect()->route('danh-muc.danh-sach')->with('success', 'Một mục đã được chuyển vào thùng rác !');
         }
-        $danhMuc->forceDelete();
-        return redirect()->route('danh-muc.danh-sach-da-xoa')->with('success', 'Danh mục đã được xóa vĩnh viễn.');
     }
+
+    public function xoaNhieuDanhMuc(Request $request){
+        if($request->select){
+            foreach($request->select as $id){
+                $danh_muc=DanhMuc::find($id);
+                if($danh_muc){
+                    $danh_muc->delete();
+                }else{
+                    return redirect()->route('admin.index');
+                }
+            }
+            return redirect()->route('danh-muc.danh-sach')->with('success', 'Đã chuyển các mục vào thùng rác !');
+        }else{
+            return redirect()->route('danh-muc.danh-sach')->with('error', 'Vui lòng chọn mục muốn xóa !');
+        }
+    }
+
+    public function xoaNhieuDanhMucVinhVien(Request $request){
+        if($request->select){
+            foreach($request->select as $id){
+                $danh_muc=DanhMuc::onlyTrashed()->find($id);
+                if($danh_muc){
+                    $danh_muc->forceDelete();
+                }else{
+                    return redirect()->route('admin.index');
+                }
+            }
+            return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Đã xóa vĩnh viễn các mục đã chọn !');
+        }else{
+            return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('error', 'Vui lòng chọn mục muốn xóa !');
+        }
+
+    }
+
+    public function xoaDanhMucVinhVien(int $id){
+        $danh_muc=DanhMuc::onlyTrashed()->find($id);
+        if($danh_muc){
+            $danh_muc->forceDelete();
+        }else{
+            return redirect()->route('admin.index');
+        }
+        return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
+    }
+
+    public function khoiPhucDanhMuc(int $id){
+        $danh_muc=DanhMuc::onlyTrashed()->find($id);
+
+        if($danh_muc){
+            $danh_muc->restore();
+        }else{
+            return redirect()->route('admin.index');
+        }
+        return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Một mục đã được khôi phục !');
+    }
+
 }

@@ -10,7 +10,7 @@ class VaiTro extends Model
     use HasFactory;
 
     protected $table = 'vai_tros';
-    
+
     protected $fillable = [
         'vai_tro',
     ];
