@@ -32,10 +32,10 @@ class TaiKhoanAdminController extends Controller
                                             ->paginate(10);
         } else {
             $this->views['DSTKQTV'] = User::with('vaiTro')
-            ->where('vai_tro_id',1)
-            ->where('trang_thai',0)
-            ->orderBy('id', 'desc')
-            ->paginate(10);
+                                        ->where('vai_tro_id',1)
+                                        ->where('trang_thai',0)
+                                        ->orderBy('id', 'desc')
+                                        ->paginate(10);
         }
         return view('admin.taiKhoan.DSTKQTV', $this->views);
     }
@@ -101,15 +101,19 @@ class TaiKhoanAdminController extends Controller
     }
 
     public function add(StoreTaiKhoanRequest $request){
-        $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho','=',$request->tinh_thanh_pho)->first();
-        $quan_huyen=QuanHuyen::where('ma_quan_huyen','=',$request->quan_huyen)->first();
-        $phuong_xa=PhuongXa::where('ma_phuong_xa','=',$request->phuong_xa)->first();
-        $dia_chi = trim(implode(', ', array_filter([
-            $request->dia_chi_chi_tiet,
-            $phuong_xa->ten_phuong_xa,
-            $quan_huyen->ten_quan_huyen,
-            $tinh_thanh_pho->ten_tinh_thanh_pho
-        ])));
+        if($request->tinh_thanh_pho){
+            $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho','=',$request->tinh_thanh_pho)->first();
+            $quan_huyen=QuanHuyen::where('ma_quan_huyen','=',$request->quan_huyen)->first();
+            $phuong_xa=PhuongXa::where('ma_phuong_xa','=',$request->phuong_xa)->first();
+            $dia_chi = trim(implode(', ', array_filter([
+                $tinh_thanh_pho->ten_tinh_thanh_pho,
+                $quan_huyen->ten_quan_huyen,
+                $phuong_xa->ten_phuong_xa,
+                $request->dia_chi_chi_tiet,
+            ])));
+        }else{
+            $dia_chi=null;
+        }
         $dataInsert = [
             'ho_va_ten' => $request->ho_va_ten,
             'email' => $request->email,
@@ -161,27 +165,39 @@ class TaiKhoanAdminController extends Controller
             $load_one_quan_huyen= QuanHuyen::where('ten_quan_huyen','LIKE',"%$quan_huyen_one%")
                                             ->where('ma_tinh_thanh_pho',$load_one_tinh_thanh_pho->ma_tinh_thanh_pho)->first();
             $phuong_xas= PhuongXa::where('ma_quan_huyen',$load_one_quan_huyen->ma_quan_huyen)->get();
-            $this->views['dia_chi_chi_tiet'] = $dia_chi_chi_tiet;
-            $this->views['phuong_xa_one'] = $phuong_xa_one;
-            $this->views['quan_huyen_one'] = $quan_huyen_one;
-            $this->views['tinh_thanh_pho_one'] = $tinh_thanh_pho_one;
-            $this->views['quan_huyen']=$quan_huyens;
-            $this->views['phuong_xa']=$phuong_xas;
+        }else{
+            $dia_chi_chi_tiet="";
+            $phuong_xa_one="";
+            $quan_huyen_one="";
+            $tinh_thanh_pho_one="";
+            $quan_huyens=[];
+            $phuong_xas=[];
         }
+        $this->views['dia_chi_chi_tiet'] = $dia_chi_chi_tiet;
+        $this->views['phuong_xa_one'] = $phuong_xa_one;
+        $this->views['quan_huyen_one'] = $quan_huyen_one;
+        $this->views['tinh_thanh_pho_one'] = $tinh_thanh_pho_one;
+        $this->views['quan_huyen']=$quan_huyens;
+        $this->views['phuong_xa']=$phuong_xas;
         return view('admin.taiKhoan.update', $this->views);
     }
 
     public function update(UpdateTaiKhoanRequest $request, int $id){
         $user= User::find($id);
-        $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho',$request->tinh_thanh_pho)->first();
-        $quan_huyen=QuanHuyen::where('ma_quan_huyen',$request->quan_huyen)->first();
-        $phuong_xa=PhuongXa::where('ma_phuong_xa',$request->phuong_xa)->first();
-        $dia_chi = trim(implode(', ', array_filter([
-            $request->dia_chi_chi_tiet,
-            $phuong_xa->ten_phuong_xa,
-            $quan_huyen->ten_quan_huyen,
-            $tinh_thanh_pho->ten_tinh_thanh_pho
-        ])));
+        if($request->tinh_thanh_pho){
+            $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho',$request->tinh_thanh_pho)->first();
+            $quan_huyen=QuanHuyen::where('ma_quan_huyen',$request->quan_huyen)->first();
+            $phuong_xa=PhuongXa::where('ma_phuong_xa',$request->phuong_xa)->first();
+            $dia_chi = trim(implode(', ', array_filter([
+                $request->dia_chi_chi_tiet,
+                $phuong_xa->ten_phuong_xa,
+                $quan_huyen->ten_quan_huyen,
+                $tinh_thanh_pho->ten_tinh_thanh_pho
+            ])));
+        }else{
+            $dia_chi=null;
+        }
+
         $dataUpdate = [
             'ho_va_ten' => $request->ho_va_ten,
             'so_dien_thoai' => $request->so_dien_thoai,

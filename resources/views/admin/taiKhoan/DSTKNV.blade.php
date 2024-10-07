@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="{{ route('tai-khoan.danh-sach-TV') }}" method="GET">
+                    <form action="{{ route('tai-khoan.danh-sach-NV') }}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
