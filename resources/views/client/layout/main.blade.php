@@ -277,9 +277,17 @@
                                             class="cart_qty_cls">2</span></a></li>
                                 <li class="onhover-div"><a href="#"><i class="iconsax" data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
-                                        <ul><li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin </a></li>
-                                            <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
-                                            <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
+                                        <ul>
+                                            @if (Auth::check())
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
+                                                @if (Auth::user()->vai_tro_id == 1)
+                                                    <li> <a href="{{route('admin.index')}}">Quản trị viên</a></li>
+                                                @endif
+                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
+                                            @else
+                                                <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
+                                                <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </li>
