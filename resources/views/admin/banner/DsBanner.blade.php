@@ -37,7 +37,8 @@
                         <div class="alert alert-danger" id="alert-message">
                             {{ session('error') }}
                         </div>
-                    @else
+                    @endif
+                    @if (session('success'))
                         <div class="alert alert-success"id="alert-message">
                             {{ session('success') }}
                         </div>
@@ -66,20 +67,20 @@
 
                                     </td>
                                     <td class="col-2 align-middle">
-                                        DCM-{{ $item->title }}
+                                        DCM-{{ $item->ten_anh }}
 
                                     </td>
                                     <td class="col-2 align-middle">
                                         <img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height=60px>
                                     </td>
                                     <td class="col-2 align-middle">
-                                        {{ $item->status == 0 ? 'OFF' : 'ON' }}
+                                        {{ $item->trang_thai == 0 ? 'OFF' : 'ON' }}
                                     </td>
                                     <td class="col-2 align-middle">
-                                        {{ $item->start_date }}
+                                        {{ $item->ngay_bat_dau }}
                                     </td>
                                     <td class="col-2 align-middle">
-                                        {{ $item->end_date }}
+                                        {{ $item->ngay_ket_thuc }}
                                     </td>
                                     <td class="col-3 align-middle">
                                         <a href="{{ route('banner.updatebanner', $item->id) }}"
