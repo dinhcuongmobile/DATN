@@ -16,14 +16,16 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="float-right">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit" name="search">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                    <form action="{{ route('tai-khoan.danh-sach-TKK') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="card-body">

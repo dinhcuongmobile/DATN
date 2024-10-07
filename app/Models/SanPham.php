@@ -41,10 +41,5 @@ class SanPham extends Model
     {
         return $this->hasMany(AnhSanPham::class, 'san_pham_id');
     }
-
-    public function hinhAnhChinh()
-    {
-        return $this->hasOne(AnhSanPham::class, 'san_pham_id')->oldest();
-    }
 }
 

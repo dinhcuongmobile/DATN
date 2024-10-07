@@ -19,7 +19,9 @@ class StoreTaiKhoanRequest extends FormRequest
             'confirm_password' => 'same:password',
             'email' => 'required|email|unique:users,email',
             'so_dien_thoai' => 'nullable|numeric|regex:/^0[1-9][0-9]{8}$/',
-
+            'tinh_thanh_pho' => 'nullable',
+            'quan_huyen' => 'required_with:tinh_thanh_pho',
+            'phuong_xa'     => 'required_with:quan_huyen',
         ];
     }
 
@@ -36,6 +38,8 @@ class StoreTaiKhoanRequest extends FormRequest
             'email.unique' => 'Email đã tồn tại!',
             'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
             'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
+            'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện nếu như bạn đã chọn Tỉnh/Thành phố!',
+            'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã nếu như bạn đã chọn Tỉnh/Thành phố và Quận Huyện!',
         ];
     }
 }

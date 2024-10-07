@@ -111,6 +111,23 @@ Route::prefix('admin')->group(function(){
 
     Route::prefix('san-pham')->group(function(){
         Route::get('danh-sach',[SanPhamAdminController::class, 'danhSachSanPham'])->name('san-pham.danh-sach');
+        Route::get('danh-sach-anh-san-pham',[SanPhamAdminController::class, 'danhSachAnhSanPham'])->name('san-pham.danh-sach-anh-san-pham');
+        Route::get('danh-sach-bien-the-san-pham',[SanPhamAdminController::class, 'danhSachBienThe'])->name('san-pham.danh-sach-bien-the-san-pham');
+        Route::get('danh-sach-ma-khuyen-mai',[SanPhamAdminController::class, 'danhSachMaKhuyenMai'])->name('san-pham.danh-sach-ma-khuyen-mai');
+        Route::get('danh-sach-san-pham-da-xoa',[SanPhamAdminController::class, 'danhSachDaXoa'])->name('san-pham.danh-sach-san-pham-da-xoa');
+
+        //add
+        Route::get('show-them-san-pham',[SanPhamAdminController::class, 'showThemSanPham'])->name('san-pham.show-them-san-pham');
+        Route::post('them-san-pham',[SanPhamAdminController::class, 'themSanPham'])->name('san-pham.them-san-pham');
+
+        Route::get('show-them-anh-san-pham',[SanPhamAdminController::class, 'showThemAnhSanPham'])->name('san-pham.show-them-anh-san-pham');
+        Route::post('them-anh-san-pham',[SanPhamAdminController::class, 'themAnhSanPham'])->name('san-pham.them-anh-san-pham');
+
+        Route::get('show-them-bien-the-san-pham',[SanPhamAdminController::class, 'showThemBienThe'])->name('san-pham.show-them-bien-the-san-pham');
+        Route::post('them-bien-the-san-pham',[SanPhamAdminController::class, 'themBienThe'])->name('san-pham.them-bien-the-san-pham');
+
+        Route::get('show-them-ma-khuyen-mai',[SanPhamAdminController::class, 'showThemMaKhuyenMai'])->name('san-pham.show-them-ma-khuyen-mai');
+        Route::post('them-ma-khuyen-mai',[SanPhamAdminController::class, 'themMaKhuyenMai'])->name('san-pham.them-ma-khuyen-mai');
     });
 
     Route::prefix('tin-tuc')->group(function(){

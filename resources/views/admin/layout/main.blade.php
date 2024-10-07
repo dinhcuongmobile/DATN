@@ -15,6 +15,7 @@
     <link rel="icon" type="image/x-icon" href="{{asset('assets/images/icons/favicon.png')}} ">
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -105,8 +106,12 @@
                 </a>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="#" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach-anh-san-pham')}}">Quản lý hình ảnh</a>
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Quản lý biến thể</a>
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach-ma-khuyen-mai')}}">Quản lý khuyến mại</a>
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>
+                        <a class="collapse-item" href="{{route('san-pham.show-them-san-pham')}}" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -245,7 +250,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -254,6 +258,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('admin/js/sb-admin-2.min.js')}}"></script>
+    {{-- ckeditor --}}
     <script src="{{asset('admin/js/main.js')}}"></script>
     @yield('scripts')
 
@@ -263,7 +268,6 @@
     <!-- Page level custom scripts
     <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script> -->
-
 </body>
 
 </html>
