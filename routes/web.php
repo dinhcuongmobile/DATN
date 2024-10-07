@@ -29,11 +29,21 @@ use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
 
 Route::get('/',[HomeController::class,'home'])->name('trang-chu.home');
 
-Route::prefix('tai-khoan')->group(function(){
-    Route::get('dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky');
-    Route::get('dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap');
-    Route::get('quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
-    Route::get('thong-tin-tai-khoan',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
+Route::get('/404', [HomeController::class, 'error404'])->name('404');
+
+Route::prefix('/tai-khoan')->group(function(){
+    Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
+    Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
+    Route::get('/verify-email/{token}', [TaiKhoanController::class, 'verifyEmail'])->name('tai-khoan.verify-email');
+    Route::get('/gui-lai-email/{email}', [TaiKhoanController::class, 'guiLaiEmail'])->name('tai-khoan.gui-lai-email');
+
+    Route::get('/dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap')->middleware('checkUser');
+    Route::post('/dang-nhap',[TaiKhoanController::class,'dangNhap'])->name('tai-khoan.dang-nhap');
+
+    Route::get('/quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
+    Route::get('/thong-tin-tai-khoan',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
+
+    Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
 });
 
 Route::prefix('san-pham')->group(function(){
@@ -61,7 +71,7 @@ Route::get('gioi-thieu',[GioiThieuController::class,'gioiThieu'])->name('gioi-th
 
 
 // admin
-Route::prefix('admin')->group(function(){
+Route::middleware('adminAuth')->prefix('admin')->group(function(){
     Route::get('index',[HomeAdminController::class,'homeAdmin'])->name('admin.index');
 
     //tai khoan
