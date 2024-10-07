@@ -14,4 +14,9 @@ class HomeController extends Controller
     public function home(){
         return view('client.home');
     }
+
+    public function error404()
+    {
+        return view('auth.404');
+    }
 }

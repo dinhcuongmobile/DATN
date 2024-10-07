@@ -1,3 +1,60 @@
 .phantrang{
     float: right;
 }
+
+/* hover table san pham */
+#icon_sp{
+    font-size: 20px;
+    color:rgb(33, 143, 221);
+    cursor: pointer;
+}
+.text-center:hover .hidden-links{
+    display: block;
+}
+#table_sp{
+    position: relative;
+}
+.hidden-links{
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100px;
+    right: 0px;
+    top: 0px;
+}
+.btn-sp{
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+}
+.btn-sp:hover {
+    background-color: #f0f0f0;
+}
+
+/* td mau sac */
+.color-circle {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+/* bien the san pham  */
+.btn.active {
+    border: 2px solid #007bff; /* Hoặc màu bạn muốn */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hoặc hiệu ứng bạn muốn */
+}
+
+/* #style_quan_huyen{
+    display: none;
+}
+#style_phuong_xa{
+    display: none;
+}
+#style_dia_chi_chi_tiet{
+    display: none;
+} */

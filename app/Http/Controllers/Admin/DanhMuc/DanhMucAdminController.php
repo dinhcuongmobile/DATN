@@ -39,6 +39,7 @@ class DanhMucAdminController extends Controller
 
     //add
     public function viewAdd(){
+        
         return view('admin.danhMuc.add');
     }
 

@@ -43,7 +43,7 @@
                     @enderror
                 </div>
             </div>
-            <div class="row mb-3">
+            <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="" class="form-label">Số điện thoại</label>
                     <input type="text" class="form-control" id="" name="so_dien_thoai" placeholder="Nhập số điện thoại..." value="{{ old('so_dien_thoai') }}">
@@ -52,9 +52,14 @@
                     @enderror
                 </div>
                 <div class="col-md-6">
-                    <label for="" class="form-label">Địa chỉ</label>
-                    <input type="text" class="form-control" id="" name="dia_chi" placeholder="Nhập địa chỉ..." value="{{ old('dia_chi') }}">
-                    @error('dia_chi')
+                    <label for="tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
+                    <select class="form-control" id="tinh_thanh_pho" name="tinh_thanh_pho">
+                        <option value="">--Chọn tỉnh thành phố--</option>
+                        @foreach ($tinh_thanh_pho as $item)
+                            <option value="{{$item->ma_tinh_thanh_pho}}">{{$item->ten_tinh_thanh_pho}}</option>
+                        @endforeach
+                    </select>
+                    @error('tinh_thanh_pho')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
                 </div>
@@ -67,6 +72,34 @@
                             <option {{$item->id==old('vai_tro_id')?'selected':''}} value="{{$item->id}}">{{$item->vai_tro}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="col-md-3"  id="style_quan_huyen">
+                    <label for="quan_huyen">Chọn Quận/Huyện</label>
+                    <select class="form-control" id="quan_huyen" name="quan_huyen">
+                        <option value="">--Chọn quận huyện--</option>
+                    </select>
+                    @error('quan_huyen')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="col-md-3" id="style_phuong_xa">
+                    <label for="phuong_xa">Chọn Phường/Xã/Thị trấn</label>
+                    <select class="form-control" id="phuong_xa" name="phuong_xa">
+                        <option value="">--Chọn phường xã--</option>
+                    </select>
+                    @error('phuong_xa')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6"></div>
+                <div class="col-md-6" id="style_dia_chi_chi_tiet">
+                    <label>Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...) <span class="text-danger"></span></label>
+                    <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4" class="form-control form-control-sm"></textarea>
+                    @error('dia_chi_chi_tiet')
+                        <p class="text-danger mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
             <div>

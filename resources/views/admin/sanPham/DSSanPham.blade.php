@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="#" method="GET">
+                    <form action="{{route('san-pham.danh-sach')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
@@ -34,15 +34,15 @@
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
                         <button type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
-                        <a href="#"><button type="button"
+                        <a href="{{route('san-pham.show-them-san-pham')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="table_sp">
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
-                            <tr>
+                            <tr class="text-center">
                                 <th></th>
                                 <th>Mã loại</th>
                                 <th>Ảnh</th>
@@ -51,31 +51,38 @@
                                 <th>Số lượng</th>
                                 <th>Khuyến mãi</th>
                                 <th>Danh mục</th>
-                                <th>Trạng thái</th>
                                 <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="1"></td>
-                                <td class="col-1 align-middle text-center">DCM-1</td>
-                                <td class="col-1 align-middle"><img src="" alt="err" height="60px"></td>
-                                <td class="col-2 align-middle">1</td>
-                                <td class="col-2 align-middle">{{ number_format(1, 0, ',', '.') }} VND
-                                </td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="align-middle">1%</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="col-1 align-middle text-success">Còn hàng</td>
-                                <td class="col-2 align-middle"><a href="#" class="btn btn-secondary btn-sm">Sửa</a> |
-                                    <a href="#" class="btn btn-secondary btn-sm">Xóa</a>
-                                </td>
-                            </tr>
+                            @foreach ($san_phams as $item)
+                                <tr>
+                                    <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                    <td class="col-1 align-middle text-center">SP-{{$item->id}}</td>
+                                    <td class="col-1 align-middle"><a href=""><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></a></td>
+                                    <td class="col-2 align-middle">{{$item->ten_san_pham}}</td>
+                                    <td class="col-2 align-middle">{{ number_format($item->gia_san_pham, 0, ',', '.') }} VND</td>
+                                    <td class=" align-middle">{{$item->tong_so_luong}}</td>
+                                    <td class="align-middle">{{$item->khuyen_mai}}%</td>
+                                    <td class="col-1 align-middle">{{$item->danhMuc->ten_danh_muc}}</td>
+                                    <td class="text-center col-2 align-middle"><a href="#" class="btn btn-secondary btn-sm">Sửa</a> |
+                                        <a href="#" class="btn btn-secondary btn-sm">Xóa</a>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <i id="icon_sp" class="fa-solid fa-arrow-right"></i>
+                                        <div class="hidden-links">
+                                            <a href="#" class="btn-sp">Biến thể</a>
+                                            <a href="#" class="btn-sp">Mã giảm giá</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
-                    {{-- <div class="phantrang">
-                        {{ $DSSanPham->links() }}
-                    </div> --}}
+                    <div class="phantrang">
+                        {{ $san_phams->links() }}
+                    </div>
                 </div>
             </div>
         </div>
