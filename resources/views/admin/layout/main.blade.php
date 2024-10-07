@@ -12,15 +12,15 @@
     <title>Admin</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/images/icons/favicon.png')}} ">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/favicon.png') }} ">
     <!-- Custom fonts for this template-->
-    <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -67,11 +67,13 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-QTV')}}">Danh sách quản trị viên</a>
-                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-NV')}}">Danh sách nhân viên</a>
-                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TV')}}">Danh sách người dùng</a>
-                        <a class="collapse-item" href="{{route('tai-khoan.danh-sach-TKK')}}">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="{{route('tai-khoan.them-tai-khoan')}}" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
+                            viên</a>
+                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
+                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
+                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
+                        <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
+                            style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -87,8 +89,8 @@
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('danh-muc.danh-sach')}}">Danh sách danh mục</a>
-                        <a class="collapse-item" href="{{route('danh-muc.danh-sach-danh-muc-da-xoa')}}">Thùng rác</a>
+                        <a class="collapse-item" href="{{ route('danh-muc.danh-sach') }}">Danh sách danh mục</a>
+                        <a class="collapse-item" href="{{ route('danh-muc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
                         <a class="collapse-item" href="" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
@@ -113,6 +115,25 @@
                 </div>
             </li>
 
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanner"
+                    aria-expanded="true" aria-controls="collapseBanner">
+                    <i class="fa-regular fa-image"></i></i>
+                    <span>Quản lý Banner</span>
+                </a>
+                <div id="collapseBanner" class="collapse" aria-labelledby="headingFour"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Danh sách Banner</a>
+                        <a class="collapse-item" href="{{ route('banner.viewAdd') }}"
+                            style="background-color: #48dbfb;">
+                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                            <span>Thêm mới</span></a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
@@ -120,11 +141,12 @@
                     <i class="fas fa-fw fa-cart-arrow-down"></i>
                     <span>Quản lý đơn hàng</span>
                 </a>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">Danh sách đơn hàng</a>
                         <a class="collapse-item" href="#">Kiểm duyệt đơn hàng
-                            {{-- @if ($sub>0)
+                            {{-- @if ($sub > 0)
                                 <sup style="color: red"><i class="fas fa-fw fa-circle" style="color: red;"></i></sup>
                             @endif --}}
                         </a>
@@ -143,9 +165,10 @@
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent" data-parent="#accordionSidebar">
+                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach')}}">Quản lý tin tức</a>
+                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach') }}">Quản lý tin tức</a>
                         <a class="collapse-item" href="#">Quản lý banner</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>
                     </div>
@@ -188,7 +211,8 @@
                                     Settings
                                 </a> -->
                                 <!-- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="../controller/index.php" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="../controller/index.php" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Thoát
                                 </a>
@@ -246,23 +270,23 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="{{asset('admin/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+    <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset('admin/js/sb-admin-2.min.js')}}"></script>
-    <script src="{{asset('admin/js/main.js')}}"></script>
+    <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('admin/js/main.js') }}"></script>
     @yield('scripts')
 
     <!-- Page level plugins -->
-    <!-- <script src="{{asset('admin/vendor/chart.js/Chart.min.js')}}"></script> -->
+    <!-- <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script> -->
 
     <!-- Page level custom scripts
-    <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script> -->
+    <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
 
 </body>
 
