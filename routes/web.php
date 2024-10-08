@@ -42,6 +42,12 @@ Route::prefix('/tai-khoan')->group(function(){
     Route::post('/dang-nhap',[TaiKhoanController::class,'dangNhap'])->name('tai-khoan.dang-nhap');
 
     Route::get('/quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
+    Route::post('/quen-mat-khau/gui-otp',[TaiKhoanController::class,'guiOtp'])->name('tai-khoan.gui-otp');
+    Route::get('/show-form-otp', [TaiKhoanController::class, 'showFormOtp'])->name('tai-khoan.form-otp');
+    Route::post('/verify-otp', [TaiKhoanController::class, 'verifyOtp'])->name('tai-khoan.verify-otp');
+    Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
+    Route::post('/doi-lai-mat-khau', [TaiKhoanController::class, 'doiLaiMatKhau'])->name('tai-khoan.doi-lai-mat-khau');
+
     Route::get('/thong-tin-tai-khoan',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
 
     Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');

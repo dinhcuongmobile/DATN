@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Client\TaiKhoan;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaiKhoan\DangKyRequest;
 use App\Http\Requests\TaiKhoan\DangNhapRequest;
+use App\Mail\OtpDoiMatKhau;
 use App\Mail\UserRegistered;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -114,10 +117,126 @@ class TaiKhoanController extends Controller
         return redirect()->back()->with('error', 'Thông tin đăng nhập không chính xác');
     }
 
+    // Quên mật khẩu và đổi mật khẩu
+
     public function showQuenMatKhau()
     {
         return view('client.taiKhoan.quenMatKhau');
     }
+
+    public function guiOtp(Request $request)
+    {
+        $request->validate(
+            [
+                'email' => 'required|email|exists:users,email'
+            ],
+            [
+                'email.required' => 'Email không được bỏ trống !',
+                'email.email' => 'Email không hợp lệ !',
+                'email.exists' => 'Email không tồn tại !',
+            ]
+        );
+
+        $email = $request->email;
+        $otp = rand(1000, 9999); //Tạo otp ngẫu nhiên
+
+        // Lưu otp vào DB
+        DB::table('password_reset_tokens')->updateOrInsert(
+            [
+                'email' => $email
+            ],
+            [
+                'token' => $otp,
+                'created_at' => Carbon::now()
+            ]
+        );
+
+        //Gửi Otp qua mail
+        Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+
+        return redirect()->route('tai-khoan.form-otp')->with('email', $email);
+    }
+
+    public function showFormOtp()
+    {
+        return view('client.taiKhoan.otp');
+    }
+
+    public function verifyOtp(Request $request)
+    {
+        $request->validate(
+            [
+                'email' => 'required|email|exists:users,email',
+                'otp' => 'required'
+            ],
+            [
+                'email.required' => 'Email không được bỏ trống !',
+                'email.email' => 'Email không hợp lệ !',
+                'email.exists' => 'Email không tồn tại !',
+
+                'otp' => 'OTP không được bỏ trống !'
+            ]
+        );
+
+        $email = $request->email;
+        $otp = $request->otp;
+
+        // Kiểm tra OTP
+        $check = DB::table('password_reset_tokens')->where('email', $email)->first();
+
+        if (!$check || $check->token != $otp || Carbon::parse($check->created_at)->addMinutes(10)->isPast()) {
+            return redirect()->back()->withErrors(['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn']);
+        }
+
+        return redirect()->route('tai-khoan.dat-lai-mat-khau', ['email' => $email]);
+    }
+
+    public function showDatLaiMatKhau()
+    {
+        return view('client.taiKhoan.datLaiMatKhau');
+    }
+
+    public function doiLaiMatKhau(Request $request)
+    {
+        $request->validate(
+            [
+                'email' => 'required|email|exists:users,email',
+                'password' => 'required|string|min:6',
+                'confirm_password' => 'same:password',
+            ],
+            [
+                'email.required' => 'Vui lòng không bỏ trống email !',
+                'email.email' => 'Địa chỉ email không hợp lệ !',
+                'email.exists' => 'Email đã được sử dụng!',
+
+                'password.required' => 'Vui lòng nhập mật khẩu !',
+                'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự !',
+                'confirm_password.same' => 'Mật khẩu xác nhận không khớp !',    
+            ]
+        );
+
+        $check = DB::table('password_reset_tokens')
+            ->where([
+                'email' => $request->email,
+            ])
+            ->first();
+
+        if (!$check) {
+            return redirect()->back()->with('error', 'Email không hợp lệ !');
+        }
+
+        $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+
+        if ($user) {
+            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
+            return redirect()->route('tai-khoan.dang-nhap')->with('success', 'Bạn đã đổi mật khẩu thành công !');
+        }
+
+        return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
+
+    }
+
     public function showThongTinTaiKhoan()
     {
         return view('client.taiKhoan.thongTinTaiKhoan');
