@@ -109,7 +109,6 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-anh-san-pham')}}">Quản lý hình ảnh</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Quản lý biến thể</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-ma-khuyen-mai')}}">Quản lý khuyến mại</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>

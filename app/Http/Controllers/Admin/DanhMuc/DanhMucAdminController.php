@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\DanhMuc\StoreDanhMucRequest;
 use App\Http\Requests\DanhMuc\UpdateDanhMucRequest;
+use App\Models\SanPham;
 
 class DanhMucAdminController extends Controller
 {
@@ -39,7 +40,7 @@ class DanhMucAdminController extends Controller
 
     //add
     public function viewAdd(){
-        
+
         return view('admin.danhMuc.add');
     }
 
@@ -58,7 +59,7 @@ class DanhMucAdminController extends Controller
        if($result){
             return redirect()->route('danh-muc.danh-sach')->with('success', 'Bạn đã thêm thành công !');
        }else{
-        return "<script>alert('Đã xảy ra lỗi !')</script>";
+            return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
        }
     }
     //update
@@ -87,14 +88,15 @@ class DanhMucAdminController extends Controller
         if($result){
             return redirect()->route('danh-muc.danh-sach')->with('success', 'Bạn đã sửa thành công!');
         }else{
-            return "<script>alert('Đã xảy ra lỗi !')</script>";
+            return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
     }
 
     public function delete($id){
-        $danh_muc=DanhMuc::findOrFail($id);
+        $danh_muc=DanhMuc::find($id);
         if($danh_muc){
             $danh_muc->delete();
+            SanPham::where('danh_muc_id',$danh_muc->id)->delete();
             return redirect()->route('danh-muc.danh-sach')->with('success', 'Một mục đã được chuyển vào thùng rác !');
         }
     }
@@ -105,8 +107,9 @@ class DanhMucAdminController extends Controller
                 $danh_muc=DanhMuc::find($id);
                 if($danh_muc){
                     $danh_muc->delete();
+                    SanPham::where('danh_muc_id',$danh_muc->id)->delete();
                 }else{
-                    return redirect()->route('admin.index');
+                    return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }
             }
             return redirect()->route('danh-muc.danh-sach')->with('success', 'Đã chuyển các mục vào thùng rác !');
@@ -121,8 +124,12 @@ class DanhMucAdminController extends Controller
                 $danh_muc=DanhMuc::onlyTrashed()->find($id);
                 if($danh_muc){
                     $danh_muc->forceDelete();
+                    if($danh_muc->hinh_anh){
+                        Storage::disk('public')->delete($danh_muc->hinh_anh);
+                    }
+                    SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
                 }else{
-                    return redirect()->route('admin.index');
+                    return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }
             }
             return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Đã xóa vĩnh viễn các mục đã chọn !');
@@ -136,8 +143,12 @@ class DanhMucAdminController extends Controller
         $danh_muc=DanhMuc::onlyTrashed()->find($id);
         if($danh_muc){
             $danh_muc->forceDelete();
+            if($danh_muc->hinh_anh){
+                Storage::disk('public')->delete($danh_muc->hinh_anh);
+            }
+            SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
         }else{
-            return redirect()->route('admin.index');
+            return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
         return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
     }
@@ -148,7 +159,7 @@ class DanhMucAdminController extends Controller
         if($danh_muc){
             $danh_muc->restore();
         }else{
-            return redirect()->route('admin.index');
+            return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
         return redirect()->route('danh-muc.danh-sach-danh-muc-da-xoa')->with('success', 'Một mục đã được khôi phục !');
     }

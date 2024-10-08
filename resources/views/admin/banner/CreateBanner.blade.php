@@ -13,7 +13,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="image" class="form-label">Title :</label>
-                        <input type="text" name="title" class="form-control">
+                        <input type="text" name="ten_anh" class="form-control">
                         @error('title')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
@@ -27,21 +27,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="sel1">Status</label>
-                        <select class="form-control" id="sel1" name="status">
+                        <select class="form-control" id="sel1" name="trang_thai">
                             <option value="0">OFF</option>
                             <option value="1">ON</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Start_date</label>
-                        <input type="datetime-local" name="start_date" class="form-control-file border">
+                        <input type="datetime-local" name="ngay_bat_dau" class="form-control-file border">
                         @error('start_date')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">End_date</label>
-                        <input type="datetime-local" name="end_date" class="form-control-file border">
+                        <input type="datetime-local" name="ngay_ket_thuc" class="form-control-file border">
                         @error('end_date')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror

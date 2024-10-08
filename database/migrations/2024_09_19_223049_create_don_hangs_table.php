@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('don_hangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('ho_ten_nhan');
             $table->dateTime('ngay_dat_hang');
             $table->string('dia_chi_nhan');

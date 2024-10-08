@@ -27,13 +27,14 @@
                         </div>
                     </form>
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('san-pham.xoa-nhieu-bien-the-san-pham')}}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        <button type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        <button onclick="return confirm('Bạn chắc chắn muốn xóa các biến thể đã chọn?')"
+                                type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
                         <a href="{{route('san-pham.show-them-bien-the-san-pham')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
@@ -45,36 +46,47 @@
                             <tr class="text-center">
                                 <th></th>
                                 <th>Mã loại</th>
+                                <th>Hình ảnh</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Số lượng</th>
                                 <th>Kích cỡ</th>
                                 <th>Màu sắc</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($bien_thes as $item)
-                            <tr>
-                                <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
-                                <td class="col-1 align-middle text-center">SP-{{$item->san_pham_id}}</td>
-                                <td class="col-2 align-middle">{{$item->sanPham->ten_san_pham}}</td>
-                                <td class="col-1 align-middle">{{$item->so_luong}}</td>
-                                <td class="align-middle">{{$item->kich_co}}</td>
-                                <td class="col-3 text-center align-middle">
-                                    <div class="color-circle" style="background-color: {{$item->mau_sac}};"></div>
-                                </td>
-                                @if ($item->so_luong==0)
-                                    <td class="col-1 align-middle text-danger">Hết hàng</td>
-                                @else
-                                    <td class="col-1 align-middle text-success">Còn hàng</td>
-                                @endif
-                                <td class="text-center col-2 align-middle">
-                                    <a href="#" class="btn btn-secondary btn-sm">Sửa</a> |
-                                    <a href="#" class="btn btn-secondary btn-sm">Xóa</a>
-                                </td>
-                            </tr>
-                            @endforeach
+                            @if (count($bien_thes)>0)
+                                @foreach ($bien_thes as $item)
+                                <tr>
+                                    <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                    <td class="col-1 align-middle text-center">BT-{{$item->id}}</td>
+                                    <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
+                                    <td class="col-3 align-middle">{{$item->sanPham->ten_san_pham}}</td>
+                                    <td class="col-1 align-middle text-center">{{$item->so_luong}}</td>
+                                    <td class="col-1 align-middle text-center">{{$item->kich_co}}</td>
+                                    <td class="col-1 text-center align-middle">
+                                        <div class="color-circle" style="background-color: {{$item->ma_mau}};"></div>
+                                    </td>
+                                    @if ($item->so_luong==0)
+                                        <td class="col-1 align-middle text-danger text-center">Hết hàng</td>
+                                    @else
+                                        <td class="col-1 align-middle text-success text-center">Còn hàng</td>
+                                    @endif
+                                    <td class="text-center col-2 align-middle">
+                                        <a href="{{route('san-pham.show-sua-bien-the-san-pham',$item->id)}}" class="btn btn-secondary btn-sm">Sửa</a> |
+                                        <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
+                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-secondary btn-sm">Xóa</a>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="{{route('san-pham.san-pham-bien-the',$item->san_pham_id)}}" title="Đi đến sản phẩm"><i id="icon_sp" class="fa-solid fa-arrow-right"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            @else
+                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     <div class="phantrang">
