@@ -277,6 +277,7 @@ class SanPhamAdminController extends Controller
     public function xoaSanPham(int $id){
         $san_pham=SanPham::findOrFail($id);
         $san_pham->delete();
+        BienThe::where('san_pham_id',$san_pham->id)->delete();
         return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác !');
     }
 
@@ -285,6 +286,7 @@ class SanPhamAdminController extends Controller
             foreach($request->select as $id){
                 $san_pham=SanPham::findOrFail($id);
                 $san_pham->delete();
+                BienThe::where('san_pham_id',$san_pham->id)->delete();
             }
             return redirect()->back()->with('success', 'Đã chuyển các mục vào thùng rác !');
         }else{
