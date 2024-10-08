@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ten_anh')->nullable();
             $table->string('hinh_anh');
             $table->boolean('trang_thai')->default(1);
-            $table->dateTime('ngay_bat-dau')->nullable();
+            $table->dateTime('ngay_bat_dau')->nullable();
             $table->dateTime('ngay_ket_thuc')->nullable();
             $table->timestamps();
         });
