@@ -63,7 +63,7 @@
                                     <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
                                     <td class="col-1 align-middle text-center">BT-{{$item->id}}</td>
                                     <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
-                                    <td class="col-3 align-middle">{{$item->sanPham->ten_san_pham}}</td>
+                                    <td class="col-3 align-middle">{{$item->sanPham->khuyen_mai}}</td>
                                     <td class="col-1 align-middle text-center">{{$item->so_luong}}</td>
                                     <td class="col-1 align-middle text-center">{{$item->kich_co}}</td>
                                     <td class="col-1 text-center align-middle">
