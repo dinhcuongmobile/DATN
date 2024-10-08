@@ -57,8 +57,7 @@
                                         <td class="col-1 text-center"><input type="checkbox" name="select[]"
                                                 value="{{ $item->id }}"></td>
                                         <td class="col-2 align-middle">DM-{{ $item->id }}</td>
-                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
-                                            alt="err" height="60px"></td>
+                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px"></td>
                                         <td class="align-middle">{{ $item->ten_danh_muc }}</td>
                                         <td class="col-2 align-middle">
                                             <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
@@ -70,7 +69,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                                <td colspan="5" class="text-center">Chưa có dữ liệu.</td>
                             @endif
                         </tbody>
                     </table>
