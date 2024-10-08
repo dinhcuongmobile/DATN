@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tin_tucs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('danh_muc_id')->constrained('danh_muc_tin_tucs');
+            // $table->foreignId('danh_muc_id')->constrained('danh_muc_tin_tucs');
             $table->string('hinh_anh')->nullable();
             $table->string('tieu_de');
             $table->longText('noi_dung');
