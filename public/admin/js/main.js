@@ -1,3 +1,6 @@
+
+
+//checkbox select
 var checkboxs=document.querySelectorAll('input[type="checkbox"]');
 function chontatca(){
     checkboxs.forEach(function(checkbox){
@@ -9,6 +12,7 @@ function bochontatca(){
         checkbox.checked=false;
     })
 }
+
 
 // thong bao loi error
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -34,22 +38,12 @@ $('#tinh_thanh_pho').on('change', function () {
             url: '/dia-chi/quan-huyen/' + matp,
             type: 'GET',
             success: function (data) {
-                $('#style_quan_huyen').css('display', 'block');
-                $('#quan_huyen').empty();
-                $('#style_phuong_xa').css('display', 'block');
-                $('#phuong_xa').empty();
-                $('#style_dia_chi_chi_tiet').css('display', 'block');
+                $('#quan_huyen').html('<option value="">--Chọn quận huyện--</option>');
                 data.forEach(function (quanHuyen) {
                     $('#quan_huyen').append('<option value="' + quanHuyen.ma_quan_huyen + '">' + quanHuyen.ten_quan_huyen + '</option>');
                 });
             }
         });
-    }else{
-        $('#style_quan_huyen').css('display', 'none');
-        $('#quan_huyen').empty();
-        $('#style_phuong_xa').css('display', 'none');
-        $('#phuong_xa').empty();
-        $('#style_dia_chi_chi_tiet').css('display', 'none');
     }
 });
 
@@ -59,11 +53,32 @@ $('#quan_huyen').on('change', function () {
         url: '/dia-chi/phuong-xa/' + maqh,
         type: 'GET',
         success: function (data) {
+            $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
             data.forEach(function (phuongXa) {
                 $('#phuong_xa').append('<option value="' + phuongXa.ma_phuong_xa + '">' + phuongXa.ten_phuong_xa + '</option>');
             });
         }
     });
 });
+
+//bien the san pham
+document.querySelectorAll('.kich_co_btn').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.kich_co_btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('kich_co_hidden').value = this.value;
+    });
+});
+
+document.querySelectorAll('.mau_sac_btn').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.mau_sac_btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('ma_mau_hidden').value = this.dataset.color;
+        document.getElementById('ten_mau_hidden').value = this.value;
+    });
+});
+
+
 
 

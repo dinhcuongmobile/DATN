@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('san_pham_id')->constrained('san_phams');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
             $table->text('noi_dung');
             $table->timestamps();
         });

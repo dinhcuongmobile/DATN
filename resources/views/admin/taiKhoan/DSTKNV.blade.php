@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="{{ route('tai-khoan.danh-sach-TV') }}" method="GET">
+                    <form action="{{ route('tai-khoan.danh-sach-NV') }}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
@@ -55,25 +55,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($DSTKNV as $item)
-                                <tr>
-                                    <td class="align-middle text-center"><input type="checkbox" name="select[]"
-                                            value="{{ $item->id }}"></td>
-                                    <td class="align-middle text-center">{{ $item->id }}</td>
-                                    <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
-                                    <td class="col-1 align-middle">{{ $item->email }}</td>
-                                    <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                    <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
-                                    <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
-                                    <td class="col-2 align-middle text-center"><a
-                                        href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"><button
-                                        type="button" class="btn btn-secondary btn-sm">Sửa</button></a> |
-                                        <a onclick="return confirm('Bạn chắc chắn muốn khóa tài khoản này?')"
-                                            href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}"><button
-                                            type="button" class="btn btn-secondary btn-sm">Khóa</button></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @if (count($DSTKNV)>0)
+                                @foreach ($DSTKNV as $item)
+                                    <tr>
+                                        <td class="align-middle text-center"><input type="checkbox" name="select[]"
+                                                value="{{ $item->id }}"></td>
+                                        <td class="align-middle text-center">{{ $item->id }}</td>
+                                        <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
+                                        <td class="col-1 align-middle">{{ $item->email }}</td>
+                                        <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
+                                        <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
+                                        <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
+                                        <td class="col-2 align-middle text-center"><a
+                                            href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"><button
+                                            type="button" class="btn btn-secondary btn-sm">Sửa</button></a> |
+                                            <a onclick="return confirm('Bạn chắc chắn muốn khóa tài khoản này?')"
+                                                href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}"><button
+                                                type="button" class="btn btn-secondary btn-sm">Khóa</button></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     <div class="phantrang">

@@ -33,7 +33,7 @@
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        <button onclick="return confirm('Chuyển vào thùng rác?')" type="submit"
+                        <button onclick="return confirm('Chuyển các danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')" type="submit"
                             class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
                         <a href="{{ route('danh-muc.them-danh-muc') }}" class="btn btn-secondary btn-sm">Nhập thêm</a>
                     </div>
@@ -51,23 +51,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($DSDanhmuc as $item)
-                                <tr>
-                                    <td class="col-1 text-center"><input type="checkbox" name="select[]"
-                                            value="{{ $item->id }}"></td>
-                                    <td class="col-2 align-middle">NM-{{ $item->id }}</td>
-                                    <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
-                                        alt="err" height="60px"></td>
-                                    <td class="align-middle">{{ $item->ten_danh_muc }}</td>
-                                    <td class="col-2 align-middle">
-                                        <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">Sửa</a> |
-                                        <a onclick="return confirm('Chuyển vào thùng rác?')"
-                                            href="{{ route('danh-muc.delete', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">Xóa</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @if (count($DSDanhmuc)>0)
+                                @foreach ($DSDanhmuc as $item)
+                                    <tr>
+                                        <td class="col-1 text-center"><input type="checkbox" name="select[]"
+                                                value="{{ $item->id }}"></td>
+                                        <td class="col-2 align-middle">DM-{{ $item->id }}</td>
+                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px"></td>
+                                        <td class="align-middle">{{ $item->ten_danh_muc }}</td>
+                                        <td class="col-2 align-middle">
+                                            <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
+                                                class="btn btn-secondary btn-sm">Sửa</a> |
+                                            <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
+                                                href="{{ route('danh-muc.delete', $item->id) }}"
+                                                class="btn btn-secondary btn-sm">Xóa</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="5" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     <div class="phantrang">
