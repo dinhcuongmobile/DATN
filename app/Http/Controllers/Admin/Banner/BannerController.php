@@ -25,9 +25,9 @@ class BannerController extends Controller
         $bannersQuery = Banner::query();
         if ($keyword) {
             $search =
-                $this->views['DSBanner'] = Banner::where('title', 'like', '%' . $keyword . '%')
-                ->orWhere('status', 'like', '%' . $keyword . '%')
-                ->orWhere('title', 'like', '%' . $keyword . '%')
+                $this->views['DSBanner'] = Banner::where('ten_anh', 'like', '%' . $keyword . '%')
+                ->orWhere('trang_thai', 'like', '%' . $keyword . '%')
+                ->orWhere('ten_anh', 'like', '%' . $keyword . '%')
                 ->paginate(5);
         } else {
             $this->views['DSBanner'] = $bannersQuery->paginate(5);
@@ -42,11 +42,11 @@ class BannerController extends Controller
     public function storeAdd(Request $request)
     {
         $request->validate([
-            'title' => 'required | string | max:255',
+            'ten_anh' => 'required | string | max:255',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date'
+            'trang_thai' => 'required',
+            'ngay_bat_dau' => 'required|date',
+            'ngay_ket_thuc' => 'required|date|after:start_date'
         ]);
 
         if ($request->hasFile('hinh_anh')) {
@@ -56,11 +56,11 @@ class BannerController extends Controller
         }
 
         $data = [
-            'title' => $request->input('title'),
+            'ten_anh' => $request->input('ten_anh'),
             'hinh_anh' => $filesName,
-            'status' => $request->input('status'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date')
+            'trang_thai' => $request->input('trang_thai'),
+            'ngay_bat_dau' => $request->input('ngay_bat_dau'),
+            'ngay_ket_thuc' => $request->input('ngay_ket_thuc')
         ];
 
         $res = Banner::insert($data);
@@ -82,11 +82,11 @@ class BannerController extends Controller
         $old = Banner::where('id', $id)->first();
 
         $request->validate([
-            'title' => 'required | string | max:255',
+            'ten_anh' => 'required | string | max:255',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after:start_date'
+            'trang_thai' => 'required',
+            'ngay_bat_dau' => 'required|date',
+            'ngay_ket_thuc' => 'required|date|after:start_date'
         ]);
         if ($request->hasFile('hinh_anh')) {
 
@@ -100,18 +100,18 @@ class BannerController extends Controller
         }
 
         $data = [
-            'title' => $request->input('title'),
+            'ten_anh' => $request->input('ten_anh'),
             'hinh_anh' => $filesName,
-            'status' => $request->input('status'),
-            'start_date' => $request->input('start_date'),
-            'end_date' => $request->input('end_date')
+            'trang_thai' => $request->input('trang_thai'),
+            'ngay_bat_dau' => $request->input('ngay_bat_dau'),
+            'ngay_ket_thuc' => $request->input('ngay_ket_thuc')
         ];
 
         $res = Banner::where('id', $id)->update($data);
         if ($res) {
-            return redirect()->route('banner.dsBanner')->with('success', 'Thêm mới hình ảnh thành công');
+            return redirect()->route('banner.dsBanner')->with('success', 'Cập nhật hình ảnh thành công');
         } else {
-            return redirect()->route('banner.dsBanner')->with('error', 'Thêm mới hình ảnh không thành công');
+            return redirect()->route('banner.dsBanner')->with('error', 'Cập nhật hình ảnh không thành công');
         }
     }
 

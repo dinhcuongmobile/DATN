@@ -14,7 +14,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="image" class="form-label">Title :</label>
-                        <input type="text" name="title" class="form-control" value="{{ $old_banner->title }}">
+                        <input type="text" name="ten_anh" class="form-control" value="{{ $old_banner->ten_anh }}">
                         @error('title')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
@@ -31,23 +31,23 @@
                     </div>
                     <div class="mb-3">
                         <label for="sel1">Status</label>
-                        <select class="form-control" id="sel1" name="status">
-                            <option value="0" {{ $old_banner->status == 0 ? 'selected' : '' }}>OFF</option>
-                            <option value="1"{{ $old_banner->status == 1 ? 'selected' : '' }}>ON</option>
+                        <select class="form-control" id="sel1" name="trang_thai">
+                            <option value="0" {{ $old_banner->trang_thai == 0 ? 'selected' : '' }}>OFF</option>
+                            <option value="1"{{ $old_banner->trang_thai == 1 ? 'selected' : '' }}>ON</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Start_date</label>
-                        <input type="datetime-local" name="start_date" class="form-control-file border"
-                            value="{{ $old_banner->start_date }}">
+                        <input type="datetime-local" name="ngay_bat_dau" class="form-control-file border"
+                            value="{{ $old_banner->ngay_bat_dau }}">
                         @error('start_date')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">End_date</label>
-                        <input type="datetime-local" name="end_date" class="form-control-file border"
-                            value="{{ $old_banner->end_date }}">
+                        <input type="datetime-local" name="ngay_ket_thuc" class="form-control-file border"
+                            value="{{ $old_banner->ngay_ket_thuc }}">
                         @error('end_date')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror

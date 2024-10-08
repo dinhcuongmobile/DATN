@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('bien_thes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('san_pham_id')->constrained('san_phams');
+            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
+            $table->string('hinh_anh')->nullable();
             $table->string('kich_co');
-            $table->string('mau_sac');
+            $table->string('ten_mau');
+            $table->string('ma_mau');
             $table->integer('so_luong')->default(1);
             $table->timestamps();
         });

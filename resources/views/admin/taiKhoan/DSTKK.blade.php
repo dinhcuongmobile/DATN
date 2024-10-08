@@ -43,21 +43,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($DSTKK as $item)
-                            <tr>
-                                <td class="align-middle text-center">{{ $item->id }}</td>
-                                <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
-                                <td class="col-1 align-middle">{{ $item->email }}</td>
-                                <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
-                                <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
-                                <td class="col-2 align-middle text-center">
-                                    <a onclick="return confirm('Bạn chắc chắn muốn mở khóa tài khoản này?')"
-                                        href="{{ route('tai-khoan.mo-khoa-tai-khoan', $item->id) }}"><button
-                                        type="button" class="btn btn-success btn-sm">Mở khóa</button></a>
-                                </td>
-                            </tr>
-                        @endforeach
+                            @if (count($DSTKK)>0)
+                                @foreach($DSTKK as $item)
+                                    <tr>
+                                        <td class="align-middle text-center">{{ $item->id }}</td>
+                                        <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
+                                        <td class="col-1 align-middle">{{ $item->email }}</td>
+                                        <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
+                                        <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
+                                        <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
+                                        <td class="col-2 align-middle text-center">
+                                            <a onclick="return confirm('Bạn chắc chắn muốn mở khóa tài khoản này?')"
+                                                href="{{ route('tai-khoan.mo-khoa-tai-khoan', $item->id) }}"><button
+                                                type="button" class="btn btn-success btn-sm">Mở khóa</button></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     <div class="phantrang">

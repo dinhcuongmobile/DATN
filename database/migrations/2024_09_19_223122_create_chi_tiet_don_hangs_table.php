@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('don_hang_id')->constrained('don_hangs');
-            $table->foreignId('san_pham_id')->constrained('san_phams');
+            $table->foreignId('don_hang_id')->constrained('don_hangs')->onDelete('cascade');
+            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
             $table->integer('so_luong');
             $table->double('don_gia', 10, 2);
             $table->double('thanh_tien', 20, 2);

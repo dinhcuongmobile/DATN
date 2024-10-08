@@ -70,16 +70,15 @@ document.querySelectorAll('.kich_co_btn').forEach(button => {
     });
 });
 
-const colorButtons = document.querySelectorAll('.mau_sac_btn');
-const hiddenColorInput = document.getElementById('mau_sac_hidden');
-
-colorButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        hiddenColorInput.value = button.value; 
-        colorButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+document.querySelectorAll('.mau_sac_btn').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.mau_sac_btn').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById('ma_mau_hidden').value = this.dataset.color;
+        document.getElementById('ten_mau_hidden').value = this.value;
     });
 });
+
 
 
 
