@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 08, 2024 lúc 12:43 PM
+-- Thời gian đã tạo: Th10 08, 2024 lúc 12:47 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `banners` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `ten_anh` varchar(255) DEFAULT NULL,
   `hinh_anh` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `start_date` datetime DEFAULT NULL,
-  `end_date` datetime DEFAULT NULL,
+  `trang_thai` tinyint(1) NOT NULL DEFAULT 1,
+  `ngay_bat-dau` datetime DEFAULT NULL,
+  `ngay_ket_thuc` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -257,7 +257,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2024_10_06_224138_create_banners_table', 3),
 (18, '2024_10_07_230810_create_vn_tinh_thanh_phos_table', 3),
 (19, '2024_10_07_230821_create_vn_quan_huyens_table', 3),
-(20, '2024_10_07_230832_create_vn_phuong_xas_table', 3);
+(20, '2024_10_07_230832_create_vn_phuong_xas_table', 3),
+(21, '2024_10_08_174542_create_banners_table', 4);
 
 -- --------------------------------------------------------
 
@@ -12593,7 +12594,7 @@ ALTER TABLE `ma_khuyen_mais`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
