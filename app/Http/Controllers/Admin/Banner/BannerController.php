@@ -50,7 +50,7 @@ class BannerController extends Controller
         ]);
 
         if ($request->hasFile('hinh_anh')) {
-            $filesName = $request->file('hinh_anh')->store('uploads', 'public');
+            $filesName = $request->file('hinh_anh')->store('uploads/banners', 'public');
         } else {
             $filesName = null;
         }
@@ -94,7 +94,7 @@ class BannerController extends Controller
                 Storage::disk('public')->delete($old->hinh_anh);
             }
 
-            $filesName = $request->file('hinh_anh')->store('uploads', 'public');
+            $filesName = $request->file('hinh_anh')->store('uploads/banners', 'public');
         } else {
             $filesName = $old->hinh_anh;
         }
