@@ -13,8 +13,10 @@ class BienThe extends Model
 
     protected $fillable = [
         'san_pham_id',
+        'hinh_anh',
         'kich_co',
-        'mau_sac',
+        'ten_mau',
+        'ma_mau',
         'so_luong',
     ];
 
@@ -27,4 +29,5 @@ class BienThe extends Model
     {
         return $this->belongsTo(SanPham::class, 'san_pham_id');
     }
+
 }
