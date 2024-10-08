@@ -138,6 +138,7 @@ Route::prefix('admin')->group(function () {
 
         Route::get('show-them-ma-khuyen-mai',[SanPhamAdminController::class, 'showThemMaKhuyenMai'])->name('san-pham.show-them-ma-khuyen-mai');
         Route::post('them-ma-khuyen-mai',[SanPhamAdminController::class, 'themMaKhuyenMai'])->name('san-pham.them-ma-khuyen-mai');
+        
     });
 
     Route::prefix('tin-tuc')->group(function () {
