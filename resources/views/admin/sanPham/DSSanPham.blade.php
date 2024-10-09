@@ -77,7 +77,7 @@
                                             <i id="icon_sp" class="fa-solid fa-arrow-right"></i>
                                             <div class="hidden-links">
                                                 <a href="{{route('san-pham.bien-the-san-pham',$item->id)}}" class="btn-sp">Biến thể</a>
-                                                <a href="#" class="btn-sp">Mã giảm giá</a>
+                                                <a href="{{route('san-pham.khuyen-mai-san-pham',$item->id)}}" class="btn-sp">Mã giảm giá</a>
                                             </div>
                                         </td>
                                     </tr>

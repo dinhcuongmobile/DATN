@@ -26,7 +26,7 @@ class TaiKhoanController extends Controller
         $this->user = new User();
     }
 
-    // Đăng ký 
+    // Đăng ký
 
     public function showDangKy()
     {
@@ -211,7 +211,7 @@ class TaiKhoanController extends Controller
 
                 'password.required' => 'Vui lòng nhập mật khẩu !',
                 'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự !',
-                'confirm_password.same' => 'Mật khẩu xác nhận không khớp !',    
+                'confirm_password.same' => 'Mật khẩu xác nhận không khớp !',
             ]
         );
 

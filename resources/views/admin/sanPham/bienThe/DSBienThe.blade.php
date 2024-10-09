@@ -53,7 +53,6 @@
                                 <th>Màu sắc</th>
                                 <th>Trạng thái</th>
                                 <th>Action</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,7 +62,7 @@
                                     <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
                                     <td class="col-1 align-middle text-center">BT-{{$item->id}}</td>
                                     <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
-                                    <td class="col-3 align-middle">{{$item->sanPham->khuyen_mai}}</td>
+                                    <td class="col-4 align-middle"><a href="{{route('san-pham.san-pham-bien-the',$item->san_pham_id)}}">{{$item->sanPham->ten_san_pham}}</a></td>
                                     <td class="col-1 align-middle text-center">{{$item->so_luong}}</td>
                                     <td class="col-1 align-middle text-center">{{$item->kich_co}}</td>
                                     <td class="col-1 text-center align-middle">
@@ -78,9 +77,6 @@
                                         <a href="{{route('san-pham.show-sua-bien-the-san-pham',$item->id)}}" class="btn btn-secondary btn-sm">Sửa</a> |
                                         <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
                                             href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-secondary btn-sm">Xóa</a>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="{{route('san-pham.san-pham-bien-the',$item->san_pham_id)}}" title="Đi đến sản phẩm"><i id="icon_sp" class="fa-solid fa-arrow-right"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
