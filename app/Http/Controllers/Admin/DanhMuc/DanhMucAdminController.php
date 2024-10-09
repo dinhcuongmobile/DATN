@@ -38,6 +38,16 @@ class DanhMucAdminController extends Controller
         return view('admin.danhMuc.danhSachDaXoa',$this->views);
     }
 
+    public function danhMucSanPham(Request $request, int $id){
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+        } else {
+            $this->views['DSDanhmuc'] = DanhMuc::where('id',$id)->orderBy('id', 'desc')->paginate(10);
+        }
+        return view('admin.danhMuc.DSDanhMuc',$this->views);
+    }
+
     //add
     public function viewAdd(){
 

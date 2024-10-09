@@ -62,12 +62,12 @@
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
                                         <td class="col-1 align-middle text-center">SP-{{$item->id}}</td>
-                                        <td class="col-1 align-middle"><a href=""><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></a></td>
+                                        <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
                                         <td class="col-2 align-middle">{{$item->ten_san_pham}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->gia_san_pham, 0, ',', '.') }} VND</td>
                                         <td class=" align-middle">{{$item->tong_so_luong}}</td>
                                         <td class="align-middle">{{$item->khuyen_mai}}%</td>
-                                        <td class="col-1 align-middle">{{$item->danhMuc->ten_danh_muc}}</td>
+                                        <td class="col-1 align-middle"><a href="{{route('san-pham.danh-sach-danh-muc-san-pham',$item->danh_muc_id)}}">{{$item->danhMuc->ten_danh_muc}}</a></td>
                                         <td class="text-center col-2 align-middle">
                                             <a href="{{route('san-pham.show-sua-san-pham',$item->id)}}" class="btn btn-secondary btn-sm">Sửa</a> |
                                             <a   onclick="return confirm('Bạn chắc chắn muốn chuyển vào thùng rác?')"

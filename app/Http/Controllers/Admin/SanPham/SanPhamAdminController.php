@@ -125,6 +125,21 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
 
+    public function sanPhamDanhMuc(Request $request, int $id){
+        $query= SanPham::with('danhMuc')->where('danh_muc_id',$id);
+        $keyword = $request->input('kyw');
+
+        if ($keyword) {
+            $query->whereHas('sanPham', function($loc) use ($keyword) {
+                      $loc->where('ten_san_pham', 'LIKE', "%$keyword%");
+                  });
+        }
+
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+
+        return view('admin.sanPham.DSSanPham',$this->views);
+    }
+
     public function danhSachDaXoa(Request $request){
         $query = SanPham::with('danhMuc', 'bienThes')->onlyTrashed();
         $keyword = $request->input('kyw');
@@ -276,7 +291,7 @@ class SanPhamAdminController extends Controller
 
     //update
     public function suaSanPham(UpdateSanPhamRequest $request , int $id){
-        $san_pham=SanPham::findOrFail($id);
+        $san_pham=SanPham::find($id);
 
         if($request->ten_san_pham!=$san_pham->ten_san_pham ||
             $request->danh_muc_id!=$san_pham->danh_muc_id)
