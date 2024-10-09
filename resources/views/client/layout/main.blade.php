@@ -29,6 +29,7 @@
     <script defer src="{{asset('assets/css/style.js')}}"></script>
     <link href="{{asset('assets/css/landing_page.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body class="layout-4 skeleton_body">
@@ -849,6 +850,7 @@
         </div>
     </div> --}}
     <!-- Bootstrap js-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script><!-- iconsax js -->
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
@@ -864,6 +866,7 @@
     <script src="{{asset('assets/js/toastify.js')}}"></script>
     <script src="{{asset('assets/js/theme-setting.js')}}"></script><!-- Theme js-->
     <script src="{{asset('assets/js/script.js')}}"></script>
+    @yield('js')
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 

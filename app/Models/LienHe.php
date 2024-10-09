@@ -15,6 +15,7 @@ class LienHe extends Model
         'ho_va_ten',
         'email',
         'so_dien_thoai',
+        'tieu_de',
         'noi_dung',
         'trang_thai',
     ];
