@@ -17,7 +17,6 @@ class StoreSanPhamRequest extends FormRequest
             'ten_san_pham' => [
                 'required',
                 'max:255',
-                'unique:san_phams,ten_san_pham'
             ],
             'gia_san_pham' => [
                 'required',
@@ -48,7 +47,6 @@ class StoreSanPhamRequest extends FormRequest
         return [
             'ten_san_pham.required' => 'Vui lòng không bỏ trống tên sản phẩm!',
             'ten_san_pham.max' => 'Tên sản phẩm không được vượt quá 255 ký tự!',
-            'ten_san_pham.unique' => 'Tên sản phẩm đã tồn tại!',
             'gia_san_pham.required' => 'Vui lòng không bỏ trống giá sản phẩm!',
             'gia_san_pham.regex' => 'Giá sản phẩm phải là số và có tối đa hai chữ số sau dấu thập phân ( . )!',
             'gia_san_pham.min' => 'Giá sản phẩm không được nhỏ hơn 0!',

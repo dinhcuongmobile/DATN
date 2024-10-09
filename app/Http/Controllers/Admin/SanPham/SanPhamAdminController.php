@@ -10,9 +10,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SanPham\StoreBienTheRequest;
+use App\Http\Requests\SanPham\StoreKhuyenMaiRequest;
 use App\Http\Requests\SanPham\StoreSanPhamRequest;
 use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
+use App\Models\KhuyenMai;
 
 class SanPhamAdminController extends Controller
 {
@@ -93,7 +95,17 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.DSSanPham',$this->views);
     }
 
-    public function danhSachMaKhuyenMai(){
+    public function danhSachMaKhuyenMai(Request $request){
+        $query = KhuyenMai::with('sanPham');
+        $keyword = $request->input('kyw');
+
+        if ($keyword) {
+            $query->whereHas('sanPham', function($loc) use ($keyword) {
+                      $loc->where('ten_san_pham', 'LIKE', "%$keyword%");
+                  });
+        }
+
+        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
 
@@ -113,7 +125,8 @@ class SanPhamAdminController extends Controller
     }
 
     public function showThemMaKhuyenMai(){
-        return view('admin.sanPham.maKhuyenMai.themMaKhuyenMai');
+        $this->views['san_phams']=SanPham::all();
+        return view('admin.sanPham.maKhuyenMai.themMaKhuyenMai',$this->views);
     }
 
     //show update
@@ -135,6 +148,13 @@ class SanPhamAdminController extends Controller
 
     //add
     public function themSanPham(StoreSanPhamRequest $request){
+        $check_sp= SanPham::withTrashed()
+                            ->where('ten_san_pham',$request->ten_san_pham)
+                            ->where('danh_muc_id',$request->danh_muc_id)->first();
+        if($check_sp){
+            return redirect()->back()->with('error', 'Sản phẩm này đã tồn tại. Hãy xóa khỏi danh sách và thùng rác để thêm mới !');
+        }
+
         if($request->hasFile('hinh_anh')){
             $fileName= $request->file('hinh_anh')->store('uploads/sanPham','public');
         }else{
@@ -194,12 +214,34 @@ class SanPhamAdminController extends Controller
     }
 
 
-    public function themMaKhuyenMai(){
+    public function themMaKhuyenMai(StoreKhuyenMaiRequest $request){
+        $dataInsert= [
+            'ma_giam_gia' => $request->ma_giam_gia,
+            'so_tien_giam' => $request->so_tien_giam,
+            'ngay_bat_dau' => $request->ngay_bat_dau,
+            'ngay_ket_thuc' => $request->ngay_ket_thuc,
+            'gia_tri_toi_thieu' => $request->gia_tri_toi_thieu,
+            'san_pham_id' => $request->san_pham_id,
+            'created_at' => now()
+        ];
 
+        $result= KhuyenMai::create($dataInsert);
+        if($result){
+                return redirect()->route('san-pham.danh-sach-ma-khuyen-mai')->with('success', 'Bạn đã thêm thành công !');
+        }else{
+            return redirect()->route('san-pham.danh-sach-ma-khuyen-mai')->with('error', 'Có lỗi xảy ra. Vui lòng thao tác lại !');
+        }
     }
 
     //update
     public function suaSanPham(UpdateSanPhamRequest $request , int $id){
+        $check_sp= SanPham::withTrashed()
+                            ->where('ten_san_pham',$request->ten_san_pham)
+                            ->where('danh_muc_id',$request->danh_muc_id)->first();
+        if($check_sp){
+            return redirect()->back()->with('error', 'Sản phẩm này đã tồn tại. Hãy xóa khỏi danh sách và thùng rác để tiếp tục !');
+        }
+
         $san_pham=SanPham::findOrFail($id);
         if($request->hasFile('hinh_anh')){
             $fileName= $request->file('hinh_anh')->store('uploads/sanPham','public');
