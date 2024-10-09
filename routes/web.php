@@ -70,8 +70,9 @@ Route::prefix('tin-tuc')->group(function () {
     Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
 });
 
-Route::prefix('lien-he')->group(function () {
+Route::prefix('/lien-he')->group(function () {
     Route::get('/', [LienHeController::class, 'lienHe'])->name('lien-he.lien-he');
+    Route::post('/gui-lien-he', [LienHeController::class, 'guiLienHe'])->name('lien-he.gui-lien-he');
 });
 
 Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
