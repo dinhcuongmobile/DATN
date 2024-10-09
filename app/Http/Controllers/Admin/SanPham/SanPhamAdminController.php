@@ -125,7 +125,23 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
 
-    public function danhSachDaXoa(){
+    public function danhSachDaXoa(Request $request){
+        $query = SanPham::with('danhMuc', 'bienThes')->onlyTrashed();
+        $keyword = $request->input('kyw');
+
+        if ($keyword) {
+            $query->where('ten_san_pham', 'LIKE', "%$keyword%")
+                  ->orWhereHas('danhMuc', function($loc) use ($keyword) {
+                      $loc->where('ten_danh_muc', 'LIKE', "%$keyword%");
+                  });
+        }
+
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+
+        foreach ($this->views['san_phams'] as $san_pham) {
+            $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
+        }
+
         return view('admin.sanPham.DSSanPhamDaXoa',$this->views);
     }
 
@@ -382,6 +398,7 @@ class SanPhamAdminController extends Controller
         $san_pham=SanPham::findOrFail($id);
         $san_pham->delete();
         BienThe::where('san_pham_id',$san_pham->id)->delete();
+        KhuyenMai::where('san_pham_id',$san_pham->id)->delete();
         return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác !');
     }
 
@@ -391,6 +408,7 @@ class SanPhamAdminController extends Controller
                 $san_pham=SanPham::findOrFail($id);
                 $san_pham->delete();
                 BienThe::where('san_pham_id',$san_pham->id)->delete();
+                KhuyenMai::where('san_pham_id',$san_pham->id)->delete();
             }
             return redirect()->back()->with('success', 'Đã chuyển các mục vào thùng rác !');
         }else{
@@ -432,5 +450,49 @@ class SanPhamAdminController extends Controller
         }else{
             return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
         }
+    }
+
+    public function xoaNhieuSanPhamVinhVien(Request $request){
+        if($request->select){
+            foreach($request->select as $id){
+                $san_pham=SanPham::onlyTrashed()->find($id);
+                if($san_pham){
+                    $san_pham->forceDelete();
+                    if($san_pham->hinh_anh){
+                        Storage::disk('public')->delete($san_pham->hinh_anh);
+                    }
+                }else{
+                    return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+                }
+            }
+            return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Đã xóa vĩnh viễn các mục đã chọn !');
+        }else{
+            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
+        }
+
+    }
+
+    public function xoaSanPhamVinhVien(int $id){
+        $san_pham=SanPham::onlyTrashed()->find($id);
+        if($san_pham){
+            $san_pham->forceDelete();
+            if($san_pham->hinh_anh){
+                Storage::disk('public')->delete($san_pham->hinh_anh);
+            }
+        }else{
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+        }
+        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
+    }
+
+    public function khoiPhucSanPham(int $id){
+        $san_pham=SanPham::onlyTrashed()->find($id);
+
+        if($san_pham){
+            $san_pham->restore();
+        }else{
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+        }
+        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã được khôi phục !');
     }
 }

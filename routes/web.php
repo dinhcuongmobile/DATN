@@ -166,6 +166,11 @@ Route::prefix('admin')->group(function () {
         Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
         Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
 
+        Route::get('xoa-san-pham-vinh-vien/{id}', [SanPhamAdminController::class, 'xoaSanPhamVinhVien'])->name('san-pham.xoa-san-pham-vinh-vien');
+
+        Route::post('xoa-nhieu-san-pham-vinh-vien', [SanPhamAdminController::class, 'xoaNhieuSanPhamVinhVien'])->name('san-pham.xoa-nhieu-san-pham-vinh-vien');
+
+        Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
     });
 
     Route::prefix('tin-tuc')->group(function () {
