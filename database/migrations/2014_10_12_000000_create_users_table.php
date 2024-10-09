@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('so_dien_thoai', 10)->nullable();
             $table->string('dia_chi')->nullable();
-            $table->foreignId('vai_tro_id')->constrained('vai_tros');
+            // $table->foreignId('vai_tro_id')->constrained('vai_tros')
             $table->string('remember_token')->nullable();
             $table->string('password_reset_token')->nullable();
             $table->integer('trang_thai')->default(0);

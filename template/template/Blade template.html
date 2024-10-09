@@ -1,0 +1,24 @@
+<form action="{{ route('lien-he.store') }}" method="POST">
+    @csrf
+    <div>
+        <label for="ho_va_ten">Họ và tên:</label>
+        <input type="text" id="ho_va_ten" name="ho_va_ten" required>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+
+    <div>
+        <label for="so_dien_thoai">Số điện thoại:</label>
+        <input type="text" id="so_dien_thoai" name="so_dien_thoai" required>
+    </div>
+
+    <div>
+        <label for="noi_dung">Nội dung:</label>
+        <textarea id="noi_dung" name="noi_dung" required></textarea>
+    </div>
+
+    <button type="submit">Gửi</button>
+</form>

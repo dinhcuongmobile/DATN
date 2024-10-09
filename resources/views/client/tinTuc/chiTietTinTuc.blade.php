@@ -287,10 +287,7 @@
                                             <div class="icon"><i class="fa-brands fa-youtube"></i></div>
                                             <h6>Youtube</h6>
                                         </a></li>
-                                    <li> <a href="https://www.whatsapp.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-                                            <h6>Whatsapp</h6>
-                                        </a></li>
+                              
                                 </ul>
                             </div>
                         </div>

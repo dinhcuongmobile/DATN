@@ -11,6 +11,11 @@
         </div>
     </div>
 </section>
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 <section class="section-b-space pt-0">
     <div class="custom-container container">
         <div class="contact-main">
@@ -69,34 +74,56 @@
                         <h4>Lien he voi chung toi </h4>
                         <p>Neu ban so san pham tuyet voi hoac muon lam cong tac vien, hay lien he voi chung toi. </p>
                         <div class="contact-form">
-                            <div class="row gy-4">
+                            <form action="{{route('lien-he.store')}}" method="post" class="row gy-4">
+                                @csrf 
+                               
                                 <div class="col-12"> 
                                     <label class="form-label" for="inputEmail4">Ho va ten</label>
-                                    <input class="form-control" id="inputEmail4" type="text" name="text"
+                                    <input class="form-control" id="inputEmail4" type="text" name="ho_va_ten"
                                         placeholder="Nhap ho va ten">
+                            @error('ho_va_ten')
+                                <div class="">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" for="inputEmail5">Email</label>
                                     <input class="form-control" id="inputEmail5" type="email"
                                         name="email" placeholder="Nhap dia chi Email">
+                                        @error('email')
+                                <div class="">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" for="inputEmail6">So dien thoai</label>
-                                    <input class="form-control" id="inputEmail6" type="number"
-                                        name="number" placeholder="Nhap so dien thoai">
+                                    <input class="form-control" id="inputEmail6" type="text"
+                                        name="so_dien_thoai" placeholder="Nhap so dien thoai">
+                                        @error('so_dien_thoai')
+                                <div class="">
+                                    {{ $message }}
                                 </div>
-                                <div class="col-12"> <label class="form-label"
+                            @enderror
+                                </div>
+                                <!-- <div class="col-12"> <label class="form-label"
                                         for="inputEmail7">Tieu de</label><input class="form-control"
                                         id="inputEmail7" type="text" name="text" placeholder="Nhap tieu de">
-                                </div>
+                                </div> -->
                                 <div class="col-12"> 
                                     <label class="form-label">Noi dung</label>
                                     <textarea
-                                        class="form-control" id="message" rows="6"
+                                        class="form-control" id="message" rows="6" name="noi_dung"
                                         placeholder="Nhap noi dung"></textarea>
+                                        @error('noi_dung')
+                                <div class="">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                                 </div>
                                 <div class="col-12"> <button class="btn btn_black rounded sm" type="submit"> Gui </button></div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
