@@ -157,7 +157,7 @@
                                             </ul>
                                             <div class="sidebar-title">
                                                 <div class="loader-line"></div>
-                                                <h5>Chi tiết đăng nhập</h5>
+                                                <h5>Chi Tiết Đăng Nhập</h5>
                                             </div>
                                             <ul class="profile-information mb-0">
                                                 <li>
