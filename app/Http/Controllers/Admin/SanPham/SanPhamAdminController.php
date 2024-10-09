@@ -13,6 +13,7 @@ use App\Http\Requests\SanPham\StoreBienTheRequest;
 use App\Http\Requests\SanPham\StoreKhuyenMaiRequest;
 use App\Http\Requests\SanPham\StoreSanPhamRequest;
 use App\Http\Requests\SanPham\UpdateBienTheRequest;
+use App\Http\Requests\SanPham\UpdateKhuyenMaiRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
 use App\Models\KhuyenMai;
 
@@ -75,8 +76,8 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.bienThe.DSBienThe',$this->views);
     }
 
-    public function loadOneSanPhamBienThe(Request $request, int $id){
-        $query = SanPham::with('danhMuc', 'bienThes')->where('id',$id);
+    public function loadOneSanPham(Request $request, int $id){
+        $query = SanPham::with('danhMuc')->where('id',$id);
         $keyword = $request->input('kyw');
 
         if ($keyword) {
@@ -106,6 +107,21 @@ class SanPhamAdminController extends Controller
         }
 
         $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10);
+        return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
+    }
+
+    public function loadKhuyenMaiOneSanPham(Request $request, int $id){
+        $query= KhuyenMai::with('sanPham')->where('san_pham_id',$id);
+        $keyword = $request->input('kyw');
+
+        if ($keyword) {
+            $query->whereHas('sanPham', function($loc) use ($keyword) {
+                      $loc->where('ten_san_pham', 'LIKE', "%$keyword%");
+                  });
+        }
+
+        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
 
@@ -142,9 +158,11 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.bienThe.capNhatBienThe',$this->views);
     }
 
-    // public function showThemMaKhuyenMai(){
-    //     return view('admin.sanPham.maKhuyenMai.themMaKhuyenMai');
-    // }
+    public function showSuaMaKhuyenMai(int $id){
+        $this->views['khuyen_mai']=KhuyenMai::findOrFail($id);
+        $this->views['san_phams']=SanPham::all();
+        return view('admin.sanPham.maKhuyenMai.capNhatMaKhuyenMai',$this->views);
+    }
 
     //add
     public function themSanPham(StoreSanPhamRequest $request){
@@ -215,6 +233,13 @@ class SanPhamAdminController extends Controller
 
 
     public function themMaKhuyenMai(StoreKhuyenMaiRequest $request){
+        $khuyen_mai = KhuyenMai::where('ma_giam_gia', $request->ma_giam_gia)
+                       ->where('san_pham_id', $request->san_pham_id)
+                       ->first();
+
+        if ($khuyen_mai) {
+            return redirect()->back()->with(['error' => 'Mã khuyến mại này đã được tạo từ trước !']);
+        }
         $dataInsert= [
             'ma_giam_gia' => $request->ma_giam_gia,
             'so_tien_giam' => $request->so_tien_giam,
@@ -235,14 +260,19 @@ class SanPhamAdminController extends Controller
 
     //update
     public function suaSanPham(UpdateSanPhamRequest $request , int $id){
-        $check_sp= SanPham::withTrashed()
+        $san_pham=SanPham::findOrFail($id);
+
+        if($request->ten_san_pham!=$san_pham->ten_san_pham ||
+            $request->danh_muc_id!=$san_pham->danh_muc_id)
+        {
+            $check_sp= SanPham::withTrashed()
                             ->where('ten_san_pham',$request->ten_san_pham)
                             ->where('danh_muc_id',$request->danh_muc_id)->first();
-        if($check_sp){
-            return redirect()->back()->with('error', 'Sản phẩm này đã tồn tại. Hãy xóa khỏi danh sách và thùng rác để tiếp tục !');
+            if($check_sp){
+                return redirect()->back()->with('error', 'Sản phẩm này đã tồn tại. Hãy xóa khỏi danh sách và thùng rác để tiếp tục !');
+            }
         }
 
-        $san_pham=SanPham::findOrFail($id);
         if($request->hasFile('hinh_anh')){
             $fileName= $request->file('hinh_anh')->store('uploads/sanPham','public');
             if($san_pham->hinh_anh){
@@ -315,6 +345,38 @@ class SanPhamAdminController extends Controller
         }
     }
 
+    public function suaMaKhuyenMai(UpdateKhuyenMaiRequest $request , int $id){
+        $khuyen_mai=KhuyenMai::find($id);
+
+        if($request->ma_giam_gia!=$khuyen_mai->ma_giam_gia ||
+            $request->san_pham_id!=$khuyen_mai->san_pham_id)
+        {
+            $khuyen_mai = KhuyenMai::where('ma_giam_gia', $request->ma_giam_gia)
+                                ->where('san_pham_id', $request->san_pham_id)
+                                ->first();
+            if ($khuyen_mai) {
+            return redirect()->back()->with(['error' => 'Mã khuyến mại này đã được tạo từ trước !']);
+            }
+        }
+
+        $dataUpdate= [
+            'ma_giam_gia' => $request->ma_giam_gia,
+            'so_tien_giam' => $request->so_tien_giam,
+            'ngay_bat_dau' => $request->ngay_bat_dau,
+            'ngay_ket_thuc' => $request->ngay_ket_thuc,
+            'gia_tri_toi_thieu' => $request->gia_tri_toi_thieu,
+            'san_pham_id' => $request->san_pham_id,
+            'updated_at' => now()
+        ];
+
+        $result= $khuyen_mai->update($dataUpdate);
+        if($result){
+                return redirect()->route('san-pham.danh-sach-ma-khuyen-mai')->with('success', 'Bạn đã sửa thành công !');
+        }else{
+            return redirect()->route('san-pham.danh-sach-ma-khuyen-mai')->with('error', 'Có lỗi xảy ra. Vui lòng thao tác lại !');
+        }
+    }
+
     //delete
     public function xoaSanPham(int $id){
         $san_pham=SanPham::findOrFail($id);
@@ -349,6 +411,24 @@ class SanPhamAdminController extends Controller
                 $bien_the->delete();
             }
             return redirect()->back()->with('success', 'Đã xóa các biến thể được chọn !');
+        }else{
+            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
+        }
+    }
+
+    public function xoaKhuyenMai(int $id){
+        $khuyen_mai=KhuyenMai::findOrFail($id);
+        $khuyen_mai->delete();
+        return redirect()->back()->with('success', 'Đã xóa thành công mã khuyến mại !');
+    }
+
+    public function xoaNhieuKhuyenMai(Request $request){
+        if($request->select){
+            foreach($request->select as $id){
+                $khuyen_mai=KhuyenMai::findOrFail($id);
+                $khuyen_mai->delete();
+            }
+            return redirect()->back()->with('success', 'Đã xóa các mã khuyến mại được chọn !');
         }else{
             return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
         }
