@@ -38,9 +38,8 @@
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input class="form-control" id="floatingInputValue1" type="email"
+                                        <input class="form-control" id="floatingInputValue1" type="hidden"
                                             placeholder="name@example.com" value="{{ request()->email }}" name="email">
-                                        <label for="floatingInputValue1">Email</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
