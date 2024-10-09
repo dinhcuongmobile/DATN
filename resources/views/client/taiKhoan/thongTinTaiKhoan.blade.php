@@ -41,33 +41,31 @@
                         aria-orientation="vertical">
                         <li><button class="nav-link active" id="dashboard-tab" data-bs-toggle="pill"
                                 data-bs-target="#dashboard" role="tab" aria-controls="dashboard"
-                                aria-selected="true"><i class="iconsax" data-icon="home-1"></i> Dashboard</button>
+                                aria-selected="true"><i class="iconsax" data-icon="home-1"></i> Tổng Quan</button>
                         </li>
                         <li><button class="nav-link" id="notifications-tab" data-bs-toggle="pill"
                                 data-bs-target="#notifications" role="tab" aria-controls="notifications"
-                                aria-selected="false"><i class="iconsax" data-icon="lamp-2"></i>Notifications
+                                aria-selected="false"><i class="iconsax" data-icon="lamp-2"></i>Thông Báo
                             </button></li>
                         <li><button class="nav-link" id="order-tab" data-bs-toggle="pill" data-bs-target="#order"
                                 role="tab" aria-controls="order" aria-selected="false"><i class="iconsax"
-                                    data-icon="receipt-square"></i> Order</button></li>
+                                    data-icon="receipt-square"></i> Đơn Hàng</button></li>
                         <li><button class="nav-link" id="wishlist-tab" data-bs-toggle="pill"
                                 data-bs-target="#wishlist" role="tab" aria-controls="wishlist"
-                                aria-selected="false"> <i class="iconsax" data-icon="heart"></i>Wishlist </button>
+                                aria-selected="false"> <i class="iconsax" data-icon="heart"></i>Yêu Thích </button>
                         </li>
                         <li><button class="nav-link" id="saved-card-tab" data-bs-toggle="pill"
                                 data-bs-target="#saved-card" role="tab" aria-controls="saved-card"
-                                aria-selected="false"> <i class="iconsax" data-icon="bank-card"></i>Saved
-                                Card</button></li>
+                                aria-selected="false"> <i class="iconsax" data-icon="bank-card"></i>Thẻ Ngân Hàng</button></li>
                         <li><button class="nav-link" id="address-tab" data-bs-toggle="pill"
                                 data-bs-target="#address" role="tab" aria-controls="address"
-                                aria-selected="false"><i class="iconsax" data-icon="cue-cards"></i>Address</button>
+                                aria-selected="false"><i class="iconsax" data-icon="cue-cards"></i>Địa Chỉ</button>
                         </li>
                         <li><button class="nav-link" id="privacy-tab" data-bs-toggle="pill"
                                 data-bs-target="#privacy" role="tab" aria-controls="privacy" aria-selected="false">
-                                <i class="iconsax" data-icon="security-user"></i>Privacy</button></li>
+                                <i class="iconsax" data-icon="security-user"></i>Bảo Mật</button></li>
                     </ul>
-                    <div class="logout-button"> <a class="btn btn_black sm" data-bs-toggle="modal"
-                            data-bs-target="#Confirmation-modal" title="Quick View" tabindex="0"><i
+                    <div class="logout-button"> <a href="{{ route('tai-khoan.dang-xuat') }}" class="btn btn_black sm" title="Quick View" tabindex="0"><i
                                 class="iconsax me-1" data-icon="logout-1"></i> Logout </a></div>
                 </div>
             </div>
@@ -80,16 +78,18 @@
                                 <div class="dashboard-items"> </div>
                                 <div class="sidebar-title">
                                     <div class="loader-line"></div>
-                                    <h4>My Dashboard</h4>
+                                    <h4></h4>
                                 </div>
                                 <div class="dashboard-user-name">
-                                    <h6>Hello, <b>John Doe</b></h6>
-                                    <p>My dashboard provides a comprehensive overview of key metrics and data
-                                        relevant to your operations. It offers real-time insights into performance,
-                                        including sales figures, website traffic, customer engagement, and more.
-                                        With customizable widgets and intuitive visualizations, it facilitates quick
-                                        decision-making and allows you to track progress towards your goals
-                                        effectively.</p>
+                                    <h6>Chào, <b>{{ $thongTinTK->ho_va_ten }}</b></h6>
+                                    <p>Trang tổng quan của tôi cung cấp cái nhìn tổng quan toàn diện về 
+                                        các số liệu và dữ liệu chính liên quan đến hoạt động của bạn. Nó 
+                                        cung cấp thông tin chi tiết theo thời gian thực về hiệu suất, bao
+                                        gồm số liệu bán hàng, lưu lượng truy cập trang web, mức độ tương
+                                        tác của khách hàng, v.v. Với các tiện ích có thể tùy chỉnh và hình
+                                        ảnh trực quan, nó tạo điều kiện cho việc ra quyết định nhanh chóng
+                                        và cho phép bạn theo dõi tiến trình hướng tới mục tiêu của mình một
+                                        cách hiệu quả.</p>
                                 </div>
                                 <div class="total-box">
                                     <div class="row gy-4">
@@ -101,7 +101,7 @@
                                                         src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/wallet.svg"
                                                         alt=""></div>
                                                 <div class="totle-detail">
-                                                    <h6>Balance</h6>
+                                                    <h6>Số Dư Ví</h6>
                                                     <h4>$ 84.40 </h4>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@
                                                         src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/coin.svg"
                                                         alt=""></div>
                                                 <div class="totle-detail">
-                                                    <h6>Total Points</h6>
+                                                    <h6>Tổng Xu</h6>
                                                     <h4>500</h4>
                                                 </div>
                                             </div>
@@ -127,7 +127,7 @@
                                                         src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/order.svg"
                                                         alt=""></div>
                                                 <div class="totle-detail">
-                                                    <h6>Total Orders</h6>
+                                                    <h6>Đơn Hàng</h6>
                                                     <h4>12</h4>
                                                 </div>
                                             </div>
@@ -139,39 +139,38 @@
                                         <div class="col-xl-7">
                                             <div class="sidebar-title">
                                                 <div class="loader-line"></div>
-                                                <h5>Profile Information</h5>
+                                                <h5>Thông Tin Tài Khoản</h5>
                                             </div>
                                             <ul class="profile-information">
                                                 <li>
-                                                    <h6>Name :</h6>
-                                                    <p>John Doe</p>
+                                                    <h6>Họ&Tên :</h6>
+                                                    <p>{{ $thongTinTK->ho_va_ten }}</p>
                                                 </li>
                                                 <li>
-                                                    <h6>Phone:</h6>
-                                                    <p>+1 5551855359</p>
+                                                    <h6>Số Điện Thoại:</h6>
+                                                    <p>{{ $thongTinTK->so_dien_thoai }}</p>
                                                 </li>
                                                 <li>
-                                                    <h6>Address:</h6>
-                                                    <p>26, Starts Hollow Colony Denver, Colorado, United States
-                                                        80014</p>
+                                                    <h6>Địa Chỉ:</h6>
+                                                    <p>{{ $thongTinTK->dia_chi }}</p>
                                                 </li>
                                             </ul>
                                             <div class="sidebar-title">
                                                 <div class="loader-line"></div>
-                                                <h5>Login Details</h5>
+                                                <h5>Chi tiết đăng nhập</h5>
                                             </div>
                                             <ul class="profile-information mb-0">
                                                 <li>
                                                     <h6>Email :</h6>
-                                                    <p>john.customer@example.com<span data-bs-toggle="modal"
-                                                            data-bs-target="#edit-email" title="Quick View"
-                                                            tabindex="0">Edit</span></p>
+                                                    <p>{{ $thongTinTK->email }} <a href=""><span data-bs-toggle="modal"
+                                                        data-bs-target="#edit-email" title="Quick View"
+                                                        tabindex="0">Edit</span></a></p>
                                                 </li>
                                                 <li>
                                                     <h6>Password :</h6>
-                                                    <p>●●●●●●<span data-bs-toggle="modal"
-                                                            data-bs-target="#edit-password" title="Quick View"
-                                                            tabindex="0">Edit</span></p>
+                                                    <p>●●●●●● <a href=""><span data-bs-toggle="modal"
+                                                        data-bs-target="#edit-password" title="Quick View"
+                                                        tabindex="0">Edit</span></a></p>
                                                 </li>
                                             </ul>
                                         </div>
