@@ -31,9 +31,9 @@
                             <div class="profile-image"> <img class="img-fluid" src="../assets/images/user/12.jpg"
                                     alt=""></div>
                             <div class="profile-name">
-                                <h4>John Doe</h4>
-                                <h6>john.customer@example.com</h6><span data-bs-toggle="modal"
-                                    data-bs-target="#edit-box" title="Quick View" tabindex="0">Edit Profile</span>
+                                <h4>{{ $thongTinTK->ho_va_ten }}</h4>
+                                <h6>{{ $thongTinTK->email }}</h6><span data-bs-toggle="modal"
+                                    data-bs-target="#edit-box" title="Quick View" tabindex="0">Chỉnh sửa thông tin</span>
                             </div>
                         </div>
                     </div>
