@@ -104,6 +104,7 @@ Route::prefix('admin')->group(function () {
     //Danh Muc
     Route::prefix('danh-muc')->group(function () {
         Route::get('danh-sach', [DanhMucAdminController::class, 'showDanhSach'])->name('danh-muc.danh-sach');
+        Route::get('danh-sach-danh-muc-san-pham/{id}',[DanhMucAdminController::class, 'danhMucSanPham'])->name('san-pham.danh-sach-danh-muc-san-pham');
         //add
         Route::get('them-danh-muc', [DanhMucAdminController::class, 'viewAdd'])->name('danh-muc.them-danh-muc');
         Route::post('add', [DanhMucAdminController::class, 'add'])->name('danh-muc.add');
@@ -128,11 +129,14 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('san-pham')->group(function(){
         Route::get('danh-sach',[SanPhamAdminController::class, 'danhSachSanPham'])->name('san-pham.danh-sach');
-        Route::get('san-pham-bien-the/{san_pham_id}',[SanPhamAdminController::class, 'loadOneSanPhamBienThe'])->name('san-pham.san-pham-bien-the');
+        Route::get('san-pham-bien-the/{san_pham_id}',[SanPhamAdminController::class, 'loadOneSanPham'])->name('san-pham.san-pham-bien-the');
         Route::get('danh-sach-bien-the-san-pham',[SanPhamAdminController::class, 'danhSachBienThe'])->name('san-pham.danh-sach-bien-the-san-pham');
         Route::get('bien-the-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadBienTheOneSanPham'])->name('san-pham.bien-the-san-pham');
         Route::get('danh-sach-ma-khuyen-mai',[SanPhamAdminController::class, 'danhSachMaKhuyenMai'])->name('san-pham.danh-sach-ma-khuyen-mai');
+        Route::get('khuyen-mai-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadKhuyenMaiOneSanPham'])->name('san-pham.khuyen-mai-san-pham');
+        Route::get('san-pham-ma-khuyen-mai/{san_pham_id}',[SanPhamAdminController::class, 'loadOneSanPham'])->name('san-pham.san-pham-ma-khuyen-mai');
         Route::get('danh-sach-san-pham-da-xoa',[SanPhamAdminController::class, 'danhSachDaXoa'])->name('san-pham.danh-sach-san-pham-da-xoa');
+        Route::get('danh-sach-san-pham-danh-muc/{danh_muc_id}',[SanPhamAdminController::class, 'sanPhamDanhMuc'])->name('san-pham.danh-sach-san-pham-danh-muc');
 
         //add
         Route::get('show-them-san-pham',[SanPhamAdminController::class, 'showThemSanPham'])->name('san-pham.show-them-san-pham');
@@ -151,6 +155,9 @@ Route::prefix('admin')->group(function () {
         Route::get('show-sua-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'showSuaBienThe'])->name('san-pham.show-sua-bien-the-san-pham');
         Route::put('sua-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'suaBienThe'])->name('san-pham.sua-bien-the-san-pham');
 
+        Route::get('show-sua-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'ShowSuaMaKhuyenMai'])->name('san-pham.show-sua-ma-khuyen-mai');
+        Route::put('sua-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'suaMaKhuyenMai'])->name('san-pham.sua-ma-khuyen-mai');
+
         //delete
         Route::get('xoa-san-pham/{id}',[SanPhamAdminController::class, 'xoaSanPham'])->name('san-pham.xoa-san-pham');
         Route::post('xoa-nhieu-san-pham',[SanPhamAdminController::class, 'xoaNhieuSanPham'])->name('san-pham.xoa-nhieu-san-pham');
@@ -158,6 +165,14 @@ Route::prefix('admin')->group(function () {
         Route::get('xoa-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'xoaBienThe'])->name('san-pham.xoa-bien-the-san-pham');
         Route::post('xoa-nhieu-bien-the-san-pham',[SanPhamAdminController::class, 'xoaNhieuBienThe'])->name('san-pham.xoa-nhieu-bien-the-san-pham');
 
+        Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
+        Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
+
+        Route::get('xoa-san-pham-vinh-vien/{id}', [SanPhamAdminController::class, 'xoaSanPhamVinhVien'])->name('san-pham.xoa-san-pham-vinh-vien');
+
+        Route::post('xoa-nhieu-san-pham-vinh-vien', [SanPhamAdminController::class, 'xoaNhieuSanPhamVinhVien'])->name('san-pham.xoa-nhieu-san-pham-vinh-vien');
+
+        Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
     });
 
     Route::prefix('tin-tuc')->group(function () {

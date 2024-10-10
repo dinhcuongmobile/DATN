@@ -27,13 +27,14 @@
                         </div>
                     </form>
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('san-pham.xoa-nhieu-ma-khuyen-mai')}}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        <button type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        <button onclick="return confirm('Bạn chắc chắn muốn xóa các mã khuyến mại này?')"
+                        type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
                         <a href="{{route('san-pham.show-them-ma-khuyen-mai')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
@@ -58,15 +59,16 @@
                                 @foreach ($ma_khuyen_mais as $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
-                                        <td class="col-2 align-middle">{{$item->sanPham->ten_san_pham}}</td>
-                                        <td class="col-1 align-middle">{{$item->ma_giam_gia}}</td>
+                                        <td class="col-2 align-middle"><a href="{{route('san-pham.san-pham-ma-khuyen-mai',$item->san_pham_id)}}">{{$item->sanPham->ten_san_pham}}</a></td>
+                                        <td class="col-1 align-middle text-danger">{{$item->ma_giam_gia}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->so_tien_giam, 0, ',', '.') }} VND</td>
                                         <td class="align-middle">{{$item->ngay_bat_dau}}</td>
                                         <td class="align-middle">{{$item->ngay_ket_thuc}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }} VND</td>
                                         <td class="text-center col-2 align-middle">
-                                            <a href="#" class="btn btn-secondary btn-sm">Sửa</a> |
-                                            <a href="#" class="btn btn-secondary btn-sm">Xóa</a>
+                                            <a href="{{route('san-pham.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-secondary btn-sm">Sửa</a> |
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa mã khuyến mại này?')"
+                                            href="{{route('san-pham.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-secondary btn-sm">Xóa</a>
                                         </td>
                                     </tr>
                                 @endforeach
