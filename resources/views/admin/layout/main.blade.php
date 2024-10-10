@@ -119,26 +119,6 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBanner"
-                    aria-expanded="true" aria-controls="collapseBanner">
-                    <i class="fa-regular fa-image"></i></i>
-                    <span>Quản lý Banner</span>
-                </a>
-                <div id="collapseBanner" class="collapse" aria-labelledby="headingFour"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Danh sách Banner</a>
-                        <a class="collapse-item" href="{{ route('banner.viewAdd') }}"
-                            style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseFive">
@@ -173,7 +153,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('tin-tuc.danh-sach') }}">Quản lý tin tức</a>
-                        <a class="collapse-item" href="#">Quản lý banner</a>
+                        <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>
                     </div>
                 </div>
