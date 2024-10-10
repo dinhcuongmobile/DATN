@@ -48,7 +48,7 @@ Route::prefix('/tai-khoan')->group(function(){
     Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
     Route::post('/doi-lai-mat-khau', [TaiKhoanController::class, 'doiLaiMatKhau'])->name('tai-khoan.doi-lai-mat-khau');
 
-    Route::get('/thong-tin-tai-khoan',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
+    Route::get('/thong-tin-tai-khoan/{id}',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
 
     Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
 });

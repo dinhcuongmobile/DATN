@@ -237,9 +237,10 @@ class TaiKhoanController extends Controller
 
     }
 
-    public function showThongTinTaiKhoan()
+    public function showThongTinTaiKhoan($id)
     {
-        return view('client.taiKhoan.thongTinTaiKhoan');
+        $thongTinTK = User::where('id',$id)->first();
+        return view('client.taiKhoan.thongTinTaiKhoan',compact('thongTinTK'));
     }
 
     public function dangXuat()

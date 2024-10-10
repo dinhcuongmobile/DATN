@@ -280,7 +280,7 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan',Auth::user()->id)}}">Thông tin</a></li>
                                                 @if (Auth::user()->vai_tro_id == 1)
                                                     <li> <a href="{{route('admin.index')}}">Quản trị viên</a></li>
                                                 @endif
