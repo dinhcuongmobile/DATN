@@ -281,9 +281,6 @@
                                         <ul>
                                             @if (Auth::check())
                                                 <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan',Auth::user()->id)}}">Thông tin</a></li>
-                                                @if (Auth::user()->vai_tro_id == 1)
-                                                    <li> <a href="{{route('admin.index')}}">Quản trị viên</a></li>
-                                                @endif
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>

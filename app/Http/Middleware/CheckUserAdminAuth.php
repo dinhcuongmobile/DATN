@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminAuth
+class CheckUserAdminAuth
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,12 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 2) {
-                return $next($request);
+        if (Auth::user()) {
+            if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 1) {
+                return redirect()->route('admin.index');
             }
         }
 
-        return redirect()->route('auth.dang-nhap-admin');
+        return $next($request);
     }
 }

@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
-
+use App\Http\Controllers\Auth\Admin\AuthAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +31,13 @@ use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
 Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
 
 Route::get('/404', [HomeController::class, 'error404'])->name('404');
+
+Route::prefix('/auth-admin')->group(function(){
+    Route::get('/dang-nhap-admin', [AuthAdminController::class, 'showDangNhapAdmin'])->name('auth.dang-nhap-admin')->middleware('checkUserAdmin');
+    Route::post('/dang-nhap-admin', [AuthAdminController::class, 'dangNhapAdmin'])->name('auth.dang-nhap-admin');
+
+    Route::get('/dang-xuat-admin', [AuthAdminController::class, 'dangXuatAdmin'])->name('auth.dang-xuat-admin');
+});
 
 Route::prefix('/tai-khoan')->group(function(){
     Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
@@ -79,7 +86,7 @@ Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-
 
 
 // admin
-Route::prefix('admin')->group(function () {
+Route::middleware('adminAuth')->prefix('admin')->group(function () {
     Route::get('index', [HomeAdminController::class, 'homeAdmin'])->name('admin.index');
 
     //tai khoan
