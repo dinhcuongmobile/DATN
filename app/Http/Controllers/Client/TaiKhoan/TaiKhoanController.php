@@ -8,9 +8,11 @@ use App\Http\Requests\TaiKhoan\DangNhapRequest;
 use App\Mail\OtpDoiMatKhau;
 use App\Mail\UserRegistered;
 use App\Models\User;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -154,7 +156,41 @@ class TaiKhoanController extends Controller
         //Gửi Otp qua mail
         Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
 
-        return redirect()->route('tai-khoan.form-otp')->with('email', $email);
+        $emailEncrypted = Crypt::encryptString($email);
+
+        return redirect()->route('tai-khoan.form-otp', ['v' => $emailEncrypted]); // v là tên tự đặt để mã hóa email trên url
+    }
+
+    public function guiLaiOtp(Request $request)
+    {
+        try {
+            // Giải mã email từ URL
+            $email = Crypt::decryptString($request->email);
+
+
+
+            // Tạo OTP mới
+            $otp = rand(1000, 9999);
+
+            // Lưu OTP vào DB
+            DB::table('password_reset_tokens')->updateOrInsert(
+                [
+                    'email' => $email
+                ],
+                [
+                    'token' => $otp,
+                    'created_at' => Carbon::now()
+                ]
+            );
+
+            // Gửi OTP qua email
+            Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+
+            return redirect()->back()->with('success', 'OTP đã được gửi lại thành công!');
+        } catch (DecryptException $e) {
+            // Bắt lỗi nếu email không thể giải mã
+            return redirect()->back()->with('error', 'Liên kết không hợp lệ hoặc đã hết hạn!');
+        }
     }
 
     public function showFormOtp()
@@ -166,19 +202,21 @@ class TaiKhoanController extends Controller
     {
         $request->validate(
             [
-                'email' => 'required|email|exists:users,email',
+                'email' => 'required',
                 'otp' => 'required'
             ],
             [
-                'email.required' => 'Email không được bỏ trống !',
-                'email.email' => 'Email không hợp lệ !',
-                'email.exists' => 'Email không tồn tại !',
-
+                'email.required' => 'Email không hợp lệ !',
                 'otp' => 'OTP không được bỏ trống !'
             ]
         );
 
-        $email = $request->email;
+        try {
+            $email = Crypt::decryptString($request->email);
+        } catch (DecryptException $e) {
+            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+        }
+
         $otp = $request->otp;
 
         // Kiểm tra OTP
@@ -188,7 +226,11 @@ class TaiKhoanController extends Controller
             return redirect()->back()->withErrors(['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn']);
         }
 
-        return redirect()->route('tai-khoan.dat-lai-mat-khau', ['email' => $email]);
+        DB::table('password_reset_tokens')->where('email', $email)->update(['is_verified' => true]); //Check xác nhận OTP
+
+        $emailEncrypted = Crypt::encryptString($email);
+
+        return redirect()->route('tai-khoan.dat-lai-mat-khau', ['v' => $emailEncrypted])->with('success', 'Xác nhận OTP thành công'); // v là tên tự đặt để mã hóa email trên url
     }
 
     public function showDatLaiMatKhau()
@@ -196,18 +238,16 @@ class TaiKhoanController extends Controller
         return view('client.taiKhoan.datLaiMatKhau');
     }
 
-    public function doiLaiMatKhau(Request $request)
+    public function datLaiMatKhau(Request $request)
     {
         $request->validate(
             [
-                'email' => 'required|email|exists:users,email',
+                'email' => 'required',
                 'password' => 'required|string|min:6',
                 'confirm_password' => 'same:password',
             ],
             [
-                'email.required' => 'Vui lòng không bỏ trống email !',
-                'email.email' => 'Địa chỉ email không hợp lệ !',
-                'email.exists' => 'Email đã được sử dụng!',
+                'email.required' => 'Email không hợp lệ !',
 
                 'password.required' => 'Vui lòng nhập mật khẩu !',
                 'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự !',
@@ -215,32 +255,37 @@ class TaiKhoanController extends Controller
             ]
         );
 
+        try {
+            $email = Crypt::decryptString($request->email);
+        } catch (DecryptException $e) {
+            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+        }
+
         $check = DB::table('password_reset_tokens')
             ->where([
-                'email' => $request->email,
+                'email' => $email,
             ])
             ->first();
 
-        if (!$check) {
-            return redirect()->back()->with('error', 'Email không hợp lệ !');
+        if (!$check || !$check->is_verified) {
+            return redirect()->back()->with('error', 'Email hoặc OTP không hợp lệ !');
         }
 
-        $user = User::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+        $user = User::where('email', $email)->update(['password' => Hash::make($request->password)]);
 
         if ($user) {
-            DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+            DB::table('password_reset_tokens')->where('email', $email)->delete();
 
             return redirect()->route('tai-khoan.dang-nhap')->with('success', 'Bạn đã đổi mật khẩu thành công !');
         }
 
         return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
-
     }
 
     public function showThongTinTaiKhoan($id)
     {
-        $thongTinTK = User::where('id',$id)->first();
-        return view('client.taiKhoan.thongTinTaiKhoan',compact('thongTinTK'));
+        $thongTinTK = User::where('id', $id)->first();
+        return view('client.taiKhoan.thongTinTaiKhoan', compact('thongTinTK'));
     }
 
     public function dangXuat()
