@@ -6,12 +6,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Katie">
-    <meta name="keywords" content="Katie">
+    <meta name="description" content="Namad">
+    <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>Katie - Online Fashion Store </title><!-- Favicon icon-->
+    <title>Namad Store </title><!-- Favicon icon-->
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon"><!-- Google Font Outfit-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
@@ -237,7 +237,7 @@
                 </div>
                 <div class="col-12">
                     <div class="main-menu"> <a class="brand-logo" href="{{route('trang-chu.home')}}"> <img class="img-fluid for-light"
-                                src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
+                                src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"><img class="img-fluid for-dark"
                                 src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
                         <nav id="main-nav">
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
@@ -314,7 +314,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-content">
                             <div class="footer-logo"><a href="index.html"> <img class="img-fluid"
-                                        src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="Footer Logo"></a></div>
+                                        src="{{asset('assets/images/logo/logo-4.png')}}" alt="Footer Logo"></a></div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
                                     <h6>1 Trinh Van Bo</h6>
@@ -323,7 +323,7 @@
                                     <h6>+ 185659635</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="mail"></i>
-                                    <h6>contact@namastore.com</h6>
+                                    <h6>namadstore@gmail.com</h6>
                                 </li>
                             </ul>
                         </div>
@@ -348,7 +348,7 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>New Categories</h5>
+                                    <h5>Danh Mục</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="product-bundle.html">Latest Shoes</a></li>
                                         <li> <a class="nav" href="variant-radio.html">Branded Jeans</a></li>
@@ -364,7 +364,7 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Get Help</h5>
+                                    <h5>Hỗ Trợ Về</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="order-success.html">Your Orders</a></li>
                                         <li> <a class="nav" href="dashboard.html">Your Account</a></li>
@@ -380,7 +380,7 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>My Account</h5>
+                                    <h5>Tài Khoản</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="dashboard.html">My Account</a></li>
                                         <li> <a class="nav" href="login.html">Login/Register</a></li>
