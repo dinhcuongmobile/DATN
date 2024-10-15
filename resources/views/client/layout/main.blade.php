@@ -258,13 +258,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
+                                <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tức danh muc</a></li>
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Áo Sơ Mi</a></li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
+                                <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên Hệ </a></li>
                             </ul>
                         </nav>
                         <div class="sub_header">
