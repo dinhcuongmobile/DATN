@@ -36,6 +36,14 @@ Route::prefix('/auth-admin')->group(function(){
     Route::get('/dang-nhap-admin', [AuthAdminController::class, 'showDangNhapAdmin'])->name('auth.dang-nhap-admin')->middleware('checkUserAdmin');
     Route::post('/dang-nhap-admin', [AuthAdminController::class, 'dangNhapAdmin'])->name('auth.dang-nhap-admin');
 
+    Route::get('/quen-mat-khau-admin', [AuthAdminController::class, 'showQuenMatKhau'])->name('auth.quen-mat-khau-admin');
+    Route::post('/gui-otp-admin', [AuthAdminController::class, 'guiOtp'])->name('auth.gui-otp-admin');
+    Route::post('/gui-lai-otp-admin', [AuthAdminController::class, 'guiLaiOtp'])->name('auth.gui-lai-otp-admin');
+    Route::get('/form-otp-admin', [AuthAdminController::class, 'showFormOtp'])->name('auth.form-otp-admin');
+    Route::post('/verify-otp-admin', [AuthAdminController::class, 'verifyOtp'])->name('auth.verify-otp-admin');
+    Route::get('/dat-lai-mat-khau-admin', [AuthAdminController::class, 'showDatLaiMatKhau'])->name('auth.dat-lai-mat-khau-admin');
+    Route::post('/dat-lai-mat-khau-admin', [AuthAdminController::class, 'datLaiMatKhau'])->name('auth.dat-lai-mat-khau-admin');
+
     Route::get('/dang-xuat-admin', [AuthAdminController::class, 'dangXuatAdmin'])->name('auth.dang-xuat-admin');
 });
 
