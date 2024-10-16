@@ -16,10 +16,12 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->vai_tro_id == 1) {
-            return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 2) {
+                return $next($request);
+            }
         }
 
-        return redirect()->route('404');
+        return redirect()->route('auth.dang-nhap-admin');
     }
 }

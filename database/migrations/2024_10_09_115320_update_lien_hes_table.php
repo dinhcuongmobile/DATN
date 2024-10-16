@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('anh_san_phams', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('san_pham_id')->constrained('san_phams');
-            $table->string('hinh_anh');
-            $table->timestamps();
+        Schema::table('lien_hes', function (Blueprint $table) {
+            $table->string('tieu_de')->after('so_dien_thoai');
         });
     }
 
@@ -24,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('anh_san_phams');
+        Schema::dropColumns('tieu_de');
     }
 };

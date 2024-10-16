@@ -10,6 +10,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "ckeditor5": "^43.2.0"
+        "ckeditor5": "^43.2.0",
+        "jquery": "^3.7.1"
     }
 }

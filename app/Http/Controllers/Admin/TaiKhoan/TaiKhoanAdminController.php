@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Admin\TaiKhoan;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\TaiKhoan\StoreTaiKhoanRequest;
-use App\Http\Requests\TaiKhoan\UpdateTaiKhoanRequest;
+use App\Models\VaiTro;
 use App\Models\PhuongXa;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
-use App\Models\VaiTro;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\TaiKhoan\StoreTaiKhoanRequest;
 
 class TaiKhoanAdminController extends Controller
 {
@@ -23,73 +23,76 @@ class TaiKhoanAdminController extends Controller
 
     //SHOW
     public function showTaiKhoanQTV(Request $request){
+        $query = User::with('vaiTro')
+                     ->where('id', '!=', Auth::user()->id)
+                     ->where('vai_tro_id', 1)
+                     ->where('trang_thai', 0);
+
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSTKQTV'] = User::where('ho_va_ten', 'LIKE', "%$keyword%")
-                                            ->orWhere('email', 'LIKE', "%$keyword%")
-                                            ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%")
-                                            ->orderBy('id', 'desc')
-                                            ->paginate(10);
-        } else {
-            $this->views['DSTKQTV'] = User::with('vaiTro')
-                                        ->where('vai_tro_id',1)
-                                        ->where('trang_thai',0)
-                                        ->orderBy('id', 'desc')
-                                        ->paginate(10);
+            $query->where(function($q) use ($keyword) {
+                $q->where('ho_va_ten', 'LIKE', "%$keyword%")
+                  ->orWhere('email', 'LIKE', "%$keyword%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%");
+            });
         }
+
+        $this->views['DSTKQTV'] = $query->orderBy('id', 'desc')->paginate(10);
+
         return view('admin.taiKhoan.DSTKQTV', $this->views);
     }
 
     public function showTaiKhoanNV(Request $request){
+        $query = User::with('vaiTro')
+                     ->where('id', '!=', Auth::user()->id)
+                     ->where('vai_tro_id', 2)
+                     ->where('trang_thai', 0);
+
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSTKNV'] = User::where('ho_va_ten', 'LIKE', "%$keyword%")
-                                            ->orWhere('email', 'LIKE', "%$keyword%")
-                                            ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%")
-                                            ->orderBy('id', 'desc')
-                                            ->paginate(10);
-        } else {
-            $this->views['DSTKNV'] = User::with('vaiTro')
-                                    ->where('vai_tro_id',2)
-                                    ->where('trang_thai',0)
-                                    ->orderBy('id', 'desc')
-                                    ->paginate(10);
+            $query->where(function($q) use ($keyword) {
+                $q->where('ho_va_ten', 'LIKE', "%$keyword%")
+                  ->orWhere('email', 'LIKE', "%$keyword%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%");
+            });
         }
+
+        $this->views['DSTKNV'] = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.taiKhoan.DSTKNV', $this->views);
     }
 
     public function showTaiKhoanTV(Request $request){
+        $query = User::with('vaiTro')
+                     ->where('id', '!=', Auth::user()->id)
+                     ->where('vai_tro_id', 3)
+                     ->where('trang_thai', 0);
+
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSTKTV'] = User::where('ho_va_ten', 'LIKE', "%$keyword%")
-                                            ->orWhere('email', 'LIKE', "%$keyword%")
-                                            ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%")
-                                            ->orderBy('id', 'desc')
-                                            ->paginate(10);
-        } else {
-            $this->views['DSTKTV'] = User::with('vaiTro')
-                                    ->where('vai_tro_id',3)
-                                    ->where('trang_thai',0)
-                                    ->orderBy('id', 'desc')
-                                    ->paginate(10);
+            $query->where(function($q) use ($keyword) {
+                $q->where('ho_va_ten', 'LIKE', "%$keyword%")
+                  ->orWhere('email', 'LIKE', "%$keyword%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%");
+            });
         }
+
+        $this->views['DSTKTV'] = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.taiKhoan.DSTKTV', $this->views);
     }
 
     public function showTaiKhoanTKK(Request $request){
+        $query = User::with('vaiTro')->where('trang_thai', 1);
+
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSTKK'] = User::where('ho_va_ten', 'LIKE', "%$keyword%")
-                                            ->orWhere('email', 'LIKE', "%$keyword%")
-                                            ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%")
-                                            ->orderBy('id', 'desc')
-                                            ->paginate(10);
-        } else {
-            $this->views['DSTKK'] = User::with('vaiTro')
-                                    ->where('trang_thai',1)
-                                    ->orderBy('id', 'desc')
-                                    ->paginate(10);
+            $query->where(function($q) use ($keyword) {
+                $q->where('ho_va_ten', 'LIKE', "%$keyword%")
+                  ->orWhere('email', 'LIKE', "%$keyword%")
+                  ->orWhere('so_dien_thoai', 'LIKE', "%$keyword%");
+            });
         }
+
+        $this->views['DSTKK'] = $query->orderBy('id', 'desc')->paginate(10);
         return view('admin.taiKhoan.DSTKK', $this->views);
     }
 
@@ -106,11 +109,11 @@ class TaiKhoanAdminController extends Controller
             $quan_huyen=QuanHuyen::where('ma_quan_huyen','=',$request->quan_huyen)->first();
             $phuong_xa=PhuongXa::where('ma_phuong_xa','=',$request->phuong_xa)->first();
             $dia_chi = trim(implode(', ', array_filter([
-                $tinh_thanh_pho->ten_tinh_thanh_pho,
-                $quan_huyen->ten_quan_huyen,
-                $phuong_xa->ten_phuong_xa,
                 $request->dia_chi_chi_tiet,
-            ])));
+                $phuong_xa->ten_phuong_xa,
+                $quan_huyen->ten_quan_huyen,
+                $tinh_thanh_pho->ten_tinh_thanh_pho,
+             ])));
         }else{
             $dia_chi=null;
         }
@@ -141,78 +144,22 @@ class TaiKhoanAdminController extends Controller
 
     //update
     public function viewUpdate(int $id){
-        $tai_khoan=User::findOrFail($id);
-        $this->views['tai_khoan'] = $tai_khoan;
-        $this->views['vai_tro']= VaiTro::orderBy('id', 'desc')->get();
-        $this->views['tinh_thanh_pho']= TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
+        $this->views['tai_khoan']=User::findOrFail($id);
+        $this->views['vai_tro']= VaiTro::all();
 
-        if($tai_khoan->dia_chi){
-            $dia_chi_full = explode(', ', $tai_khoan->dia_chi);
-            if(count($dia_chi_full)==4){
-                $dia_chi_chi_tiet=$dia_chi_full[0];
-                $phuong_xa_one=$dia_chi_full[1];
-                $quan_huyen_one=$dia_chi_full[2];
-                $tinh_thanh_pho_one=$dia_chi_full[3];
-            }else{
-                $dia_chi_chi_tiet="";
-                $phuong_xa_one=$dia_chi_full[0];
-                $quan_huyen_one=$dia_chi_full[1];
-                $tinh_thanh_pho_one=$dia_chi_full[2];
-            }
-
-            $load_one_tinh_thanh_pho=TinhThanhPho::Where('ten_tinh_thanh_pho','LIKE',"%$tinh_thanh_pho_one%")->first();
-            $quan_huyens= QuanHuyen::where('ma_tinh_thanh_pho',$load_one_tinh_thanh_pho->ma_tinh_thanh_pho)->orderBy('ma_quan_huyen','ASC')->get();
-            $load_one_quan_huyen= QuanHuyen::where('ten_quan_huyen','LIKE',"%$quan_huyen_one%")
-                                            ->where('ma_tinh_thanh_pho',$load_one_tinh_thanh_pho->ma_tinh_thanh_pho)->first();
-            $phuong_xas= PhuongXa::where('ma_quan_huyen',$load_one_quan_huyen->ma_quan_huyen)->get();
-        }else{
-            $dia_chi_chi_tiet="";
-            $phuong_xa_one="";
-            $quan_huyen_one="";
-            $tinh_thanh_pho_one="";
-            $quan_huyens=[];
-            $phuong_xas=[];
-        }
-        $this->views['dia_chi_chi_tiet'] = $dia_chi_chi_tiet;
-        $this->views['phuong_xa_one'] = $phuong_xa_one;
-        $this->views['quan_huyen_one'] = $quan_huyen_one;
-        $this->views['tinh_thanh_pho_one'] = $tinh_thanh_pho_one;
-        $this->views['quan_huyen']=$quan_huyens;
-        $this->views['phuong_xa']=$phuong_xas;
         return view('admin.taiKhoan.update', $this->views);
     }
 
-    public function update(UpdateTaiKhoanRequest $request, int $id){
+    public function update(Request $request, int $id){
         $user= User::find($id);
-        if($request->tinh_thanh_pho){
-            $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho',$request->tinh_thanh_pho)->first();
-            $quan_huyen=QuanHuyen::where('ma_quan_huyen',$request->quan_huyen)->first();
-            $phuong_xa=PhuongXa::where('ma_phuong_xa',$request->phuong_xa)->first();
-            $dia_chi = trim(implode(', ', array_filter([
-                $request->dia_chi_chi_tiet,
-                $phuong_xa->ten_phuong_xa,
-                $quan_huyen->ten_quan_huyen,
-                $tinh_thanh_pho->ten_tinh_thanh_pho
-            ])));
-        }else{
-            $dia_chi=null;
-        }
-
-        $dataUpdate = [
-            'ho_va_ten' => $request->ho_va_ten,
-            'so_dien_thoai' => $request->so_dien_thoai,
-            'dia_chi' => $dia_chi,
-            'vai_tro_id' => $request->vai_tro_id,
-            'updated_at' => now()
-        ];
         if ($user) {
-            $user->update($dataUpdate);
+            $user->update(['vai_tro_id'=>$request->vai_tro_id]);
             if($request->vai_tro_id==1){
-                return redirect()->route('tai-khoan.danh-sach-QTV')->with('success', 'Bạn đã sửa tài khoản thành công !');
+                return redirect()->route('tai-khoan.danh-sach-QTV')->with('success', 'Bạn đã cập nhật vai trò thành công !');
             }elseif($request->vai_tro_id==2){
-                return redirect()->route('tai-khoan.danh-sach-NV')->with('success', 'Bạn đã sửa tài khoản thành công !');
+                return redirect()->route('tai-khoan.danh-sach-NV')->with('success', 'Bạn đã cập nhật vai trò thành công !');
             }else{
-                return redirect()->route('tai-khoan.danh-sach-TV')->with('success', 'Bạn đã sửa tài khoản thành công !');
+                return redirect()->route('tai-khoan.danh-sach-TV')->with('success', 'Bạn đã cập nhật vai trò thành công !');
             }
         } else {
             return redirect()->back()

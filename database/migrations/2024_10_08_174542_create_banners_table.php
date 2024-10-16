@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
+            $table->string('ten_anh')->nullable();
             $table->string('hinh_anh');
-            $table->boolean('status')->default(1);
-            $table->dateTime('start_date')->nullable();
-            $table->dateTime('end_date')->nullable();
+            $table->boolean('trang_thai')->default(1);
+            $table->dateTime('ngay_bat_dau')->nullable();
+            $table->dateTime('ngay_ket_thuc')->nullable();
             $table->timestamps();
         });
     }

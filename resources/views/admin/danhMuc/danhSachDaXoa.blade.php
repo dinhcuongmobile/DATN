@@ -50,24 +50,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($DSDanhmuc as $item)
-                                <tr>
-                                    <td class="col-1 text-center"><input type="checkbox" name="select[]"
-                                            value="{{ $item->id }}"></td>
-                                    <td class="col-2 align-middle">DM-{{ $item->id }}</td>
-                                    <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
-                                        alt="err" height="60px"></td>
-                                    <td class="align-middle">{{ $item->ten_danh_muc }}</td>
-                                    <td class="col-3 align-middle">
-                                        <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"
-                                            href="{{route('danh-muc.khoi-phuc-danh-muc',$item->id)}}"
-                                            class="btn btn-success btn-sm">Khôi phục</a> |
-                                        <a onclick="return confirm('Bạn chắc chắn muốn xóa không?')"
-                                            href="{{route('danh-muc.xoa-danh-muc-vinh-vien',$item->id)}}"
-                                            class="btn btn-danger btn-sm">Xóa vĩnh viễn</a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                            @if (count($DSDanhmuc)>0)
+                                @foreach ($DSDanhmuc as $item)
+                                    <tr>
+                                        <td class="col-1 text-center"><input type="checkbox" name="select[]"
+                                                value="{{ $item->id }}"></td>
+                                        <td class="col-2 align-middle">DM-{{ $item->id }}</td>
+                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
+                                            alt="err" height="60px"></td>
+                                        <td class="align-middle">{{ $item->ten_danh_muc }}</td>
+                                        <td class="col-3 align-middle">
+                                            <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"
+                                                href="{{route('danh-muc.khoi-phuc-danh-muc',$item->id)}}"
+                                                class="btn btn-success btn-sm">Khôi phục</a> |
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa không?')"
+                                                href="{{route('danh-muc.xoa-danh-muc-vinh-vien',$item->id)}}"
+                                                class="btn btn-danger btn-sm">Xóa vĩnh viễn</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     <div class="phantrang">

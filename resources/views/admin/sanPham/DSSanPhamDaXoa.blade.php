@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="#" method="GET">
+                    <form action="{{route('san-pham.danh-sach-san-pham-da-xoa')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
@@ -27,7 +27,7 @@
                         </div>
                     </form>
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('san-pham.xoa-nhieu-san-pham-vinh-vien')}}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
@@ -54,24 +54,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="1"></td>
-                                <td class="col-1 align-middle text-center">DCM-1</td>
-                                <td class="col-1 align-middle"><img src="" alt="err" height="60px"></td>
-                                <td class="col-2 align-middle">1</td>
-                                <td class="col-2 align-middle">{{ number_format(1, 0, ',', '.') }} VND</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="align-middle">1%</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="col-3 align-middle text-center">
-                                    <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"
-                                        href="#"
-                                        class="btn btn-success btn-sm">Khôi phục</a> |
-                                    <a onclick="return confirm('Bạn chắc chắn muốn xóa không?')"
-                                        href="#"
-                                        class="btn btn-danger btn-sm">Xóa vĩnh viễn</a>
-                                </td>
-                            </tr>
+                            @if (count($san_phams)>0)
+                                @foreach ($san_phams as $item)
+                                    <tr>
+                                        <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                        <td class="col-1 align-middle text-center">SP-{{$item->id}}</td>
+                                        <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
+                                        <td class="col-2 align-middle">{{$item->ten_san_pham}}</td>
+                                        <td class="col-2 align-middle">{{ number_format($item->gia_san_pham, 0, ',', '.') }} VND</td>
+                                        <td class="col-1 align-middle">{{$item->tong_so_luong}}</td>
+                                        <td class="align-middle">{{$item->khuyen_mai}}%</td>
+                                        <td class="col-1 align-middle">{{$item->danhMuc->ten_danh_muc}}</td>
+                                        <td class="col-3 align-middle text-center">
+                                            <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"
+                                                href="{{route('san-pham.khoi-phuc-san-pham',$item->id)}}"
+                                                class="btn btn-success btn-sm">Khôi phục</a> |
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa vĩnh viễn không?')"
+                                                href="{{route('san-pham.xoa-san-pham-vinh-vien',$item->id)}}"
+                                                class="btn btn-danger btn-sm">Xóa vĩnh viễn</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                            <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     {{-- <div class="phantrang">
