@@ -1752,9 +1752,9 @@
                         <div>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="https://www.instagram.com/" target="_blank">Go To Instagram</a><a
+                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Go To Instagram</a><a
                                     class="btn btn_underline link-strong link-strong-hovered"
-                                    href="https://www.instagram.com/" target="_blank">Go To Instagram</a></div>
+                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Go To Instagram</a></div>
                         </div>
                     </div>
                 </div>
