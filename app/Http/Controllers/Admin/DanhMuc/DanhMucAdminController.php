@@ -133,11 +133,11 @@ class DanhMucAdminController extends Controller
             foreach($request->select as $id){
                 $danh_muc=DanhMuc::onlyTrashed()->find($id);
                 if($danh_muc){
+                    SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
                     $danh_muc->forceDelete();
                     if($danh_muc->hinh_anh){
                         Storage::disk('public')->delete($danh_muc->hinh_anh);
                     }
-                    SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
                 }else{
                     return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }
@@ -152,11 +152,12 @@ class DanhMucAdminController extends Controller
     public function xoaDanhMucVinhVien(int $id){
         $danh_muc=DanhMuc::onlyTrashed()->find($id);
         if($danh_muc){
+            SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
             $danh_muc->forceDelete();
             if($danh_muc->hinh_anh){
                 Storage::disk('public')->delete($danh_muc->hinh_anh);
             }
-            SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
+            
         }else{
             return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
