@@ -9,7 +9,7 @@ use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
-use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
+use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
@@ -192,19 +192,19 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
     });
 
     Route::prefix('tin-tuc')->group(function () {
-        Route::get('danh-sach', [AdminTinTucController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
+        Route::get('danh-sach', [TinTucAdminController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
 
         //add
-        Route::get('them-tin-tuc', [AdminTinTucController::class, 'viewAdd'])->name('tin-tuc.them-tin-tuc');
-        Route::post('add', [AdminTinTucController::class, 'add'])->name('tin-tuc.add');
+        Route::get('them-tin-tuc', [TinTucAdminController::class, 'viewAdd'])->name('tin-tuc.them-tin-tuc');
+        Route::post('add', [TinTucAdminController::class, 'add'])->name('tin-tuc.add');
 
         //update
-        Route::get('sua-tin-tuc/{id}', [AdminTinTucController::class, 'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
-        Route::put('update/{id}', [AdminTinTucController::class, 'update'])->name('tin-tuc.update');
+        Route::get('sua-tin-tuc/{id}', [TinTucAdminController::class, 'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
+        Route::put('update/{id}', [TinTucAdminController::class, 'update'])->name('tin-tuc.update');
 
         //delete
-        Route::get('delete/{id}', [AdminTinTucController::class, 'delete'])->name('tin-tuc.delete');
-        Route::post('xoa-nhieu', [AdminTinTucController::class, 'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
+        Route::get('delete/{id}', [TinTucAdminController::class, 'delete'])->name('tin-tuc.delete');
+        Route::post('xoa-nhieu', [TinTucAdminController::class, 'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
     });
 
     // Banner
