@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 08, 2024 lúc 12:47 PM
+-- Thời gian đã tạo: Th10 15, 2024 lúc 04:27 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -55,14 +55,6 @@ CREATE TABLE `bien_thes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `bien_thes`
---
-
-INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, `ma_mau`, `so_luong`, `created_at`, `updated_at`) VALUES
-(3, 1, 'uploads/sanPham/lg3qjcbCWTdn8JfuqXIRjZbdnJgYZCRFvZIHAr8M.jpg', 'X', 'Đen', '#000000', 9, '2024-10-08 10:03:14', '2024-10-08 10:03:14'),
-(4, 1, 'uploads/sanPham/3Y1WyRCtS8UryKAILCl1qDzRuO37JPrgOmHH2s8j.jpg', 'L', 'Trắng', '#FFFFFF', 96, '2024-10-08 10:03:23', '2024-10-08 10:03:23');
 
 -- --------------------------------------------------------
 
@@ -116,8 +108,7 @@ CREATE TABLE `danh_mucs` (
 --
 
 INSERT INTO `danh_mucs` (`id`, `hinh_anh`, `ten_danh_muc`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'uploads/danhMuc/sCRx2l7yUccsFCMvDuWwqyEQ4iD06HgqrznvJqzO.jpg', 'Oppo', '2024-10-08 05:08:41', '2024-10-08 05:08:41', NULL),
-(2, 'uploads/danhMuc/gBOuRHUr8JsVx6Wcao3EHJ0v4KoU58qCEha6ywWz.jpg', 'Xiaomi', '2024-10-08 05:08:49', '2024-10-08 05:08:49', NULL);
+(4, 'uploads/danhMuc/Hq2i2Mwe6cSLhnnVaz33EIsxgfpbAUeNeZmhNehd.jpg', 'Oppo', '2024-10-14 13:20:36', '2024-10-14 13:20:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -197,11 +188,19 @@ CREATE TABLE `lien_hes` (
   `ho_va_ten` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `so_dien_thoai` varchar(10) NOT NULL,
+  `tieu_de` varchar(255) NOT NULL,
   `noi_dung` text NOT NULL,
   `trang_thai` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `lien_hes`
+--
+
+INSERT INTO `lien_hes` (`id`, `ho_va_ten`, `email`, `so_dien_thoai`, `tieu_de`, `noi_dung`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(1, 'nguyễn đình cường', 'cuongndph38237@gmail.com', '0964426518', 'cccc', 'cccc', 0, '2024-10-14 14:10:06', '2024-10-14 14:10:06');
 
 -- --------------------------------------------------------
 
@@ -258,7 +257,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2024_10_07_230810_create_vn_tinh_thanh_phos_table', 3),
 (19, '2024_10_07_230821_create_vn_quan_huyens_table', 3),
 (20, '2024_10_07_230832_create_vn_phuong_xas_table', 3),
-(21, '2024_10_08_174542_create_banners_table', 4);
+(21, '2024_10_08_174542_create_banners_table', 4),
+(22, '2024_10_09_115320_update_lien_hes_table', 5),
+(23, '2024_10_15_091402_update_password_reset_tokens_table', 6);
 
 -- --------------------------------------------------------
 
@@ -269,6 +270,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `password_reset_tokens` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
+  `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -316,8 +318,7 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_san_pham`, `khuyen_mai`, `mo_ta`, `luot_xem`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'uploads/sanPham/atMepSy4DOHAb9sAcW6lR3AdUcBsknMxY3CoNRQ2.jpg', 'iPhone 15 Pro Max 256GB | Chính hãng VN/A', 100000.00, 0, '<p>lll</p>', 0, '2024-10-08 05:09:03', '2024-10-08 05:09:03', NULL),
-(2, 2, 'uploads/sanPham/YklsZ4BXY2NHZGBXDsIWdN3tQBi4r2YimcmAY4w4.jpg', 'aaaa', 33390000.00, 0, '<p>mmmm</p>', 0, '2024-10-08 05:09:19', '2024-10-08 05:09:27', NULL);
+(6, 4, 'uploads/sanPham/8dJB04VyO5L3KNhyEAFlaBOBFOSehqG4UaIRq9Xi.jpg', 'iPhone 15 Pro Max 256GB | Chính hãng VN/A', 33390000.00, 0, '<p>kkk</p>', 0, '2024-10-14 13:21:07', '2024-10-14 13:21:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,6 +359,14 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `dia_chi`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$.fqq77z1ALy2uqrAPtQMqegnqoA0RmRWLV8iyj7LpiIo6IUP8xv5m', '0964426518', 'Thành phố Hà Nội, Huyện Chương Mỹ, Xã Phú Nghĩa, Phú Hữu 2', 1, NULL, NULL, 0, '2024-10-08 12:25:25', '2024-10-09 01:41:36'),
+(6, 'Tống Hoàng Bách', 'cuongndph38237@fpt.edu.vn', '2024-10-15 14:22:03', NULL, '$2y$10$GUVI6AmnkcO0mcIburj.KupcC7D8mzEmG6ltEWPyYIuRT8cohKonO', NULL, NULL, 3, NULL, NULL, 0, '2024-10-15 14:21:30', '2024-10-15 14:22:03');
+
 -- --------------------------------------------------------
 
 --
@@ -370,6 +379,15 @@ CREATE TABLE `vai_tros` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vai_tros`
+--
+
+INSERT INTO `vai_tros` (`id`, `vai_tro`, `created_at`, `updated_at`) VALUES
+(1, 'Quản trị viên', '2024-10-08 12:24:22', NULL),
+(2, 'Nhân viên', '2024-10-08 12:24:22', NULL),
+(3, 'Thành viên', '2024-10-08 12:24:44', NULL);
 
 -- --------------------------------------------------------
 
@@ -12534,7 +12552,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT cho bảng `bien_thes`
 --
 ALTER TABLE `bien_thes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `binh_luans`
@@ -12552,7 +12570,7 @@ ALTER TABLE `chi_tiet_don_hangs`
 -- AUTO_INCREMENT cho bảng `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_tin_tucs`
@@ -12582,19 +12600,19 @@ ALTER TABLE `gio_hangs`
 -- AUTO_INCREMENT cho bảng `lien_hes`
 --
 ALTER TABLE `lien_hes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -12606,7 +12624,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `san_phams`
 --
 ALTER TABLE `san_phams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `tin_tucs`
@@ -12618,13 +12636,13 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`
 --
 ALTER TABLE `vai_tros`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
