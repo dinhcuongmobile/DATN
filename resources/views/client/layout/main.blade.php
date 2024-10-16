@@ -9,11 +9,11 @@
     <meta name="description" content="Namad">
     <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>Namad Store </title><!-- Favicon icon-->
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon"><!-- Google Font Outfit-->
+    <link rel="icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <title>Namad Store </title><!-- icon_web icon-->
+    <link rel="icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon"><!-- Google Font Outfit-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
@@ -57,8 +57,8 @@
                     </div>
                     <div class="col-12">
                         <div class="main-menu"> <a class="brand-logo" href="#"> <img class="img-fluid for-light"
-                                    src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
-                                    src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
+                                    src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"><img class="img-fluid for-dark"
+                                    src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"></a>
                             <nav id="main-nav-1">
                                 <ul class="nav-menu sm-horizontal">
                                     <li class="mobile-back text-end">Thoát<i class="fa-solid fa-angle-right ps-2"
@@ -314,7 +314,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-content">
                             <div class="footer-logo"><a href="index.html"> <img class="img-fluid"
-                                        src="{{asset('assets/images/logo/logo-4.png')}}" alt="Footer Logo"></a></div>
+                                        src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Footer Logo"></a></div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
                                     <h6>1 Trinh Van Bo</h6>
