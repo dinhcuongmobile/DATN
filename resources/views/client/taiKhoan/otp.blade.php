@@ -20,48 +20,61 @@
                             alt="">
                     </div>
                 </div>
-                @if (session('error'))
-                    <div class="alert alert-danger" id="error-alert">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                @if (session('success'))
-                    <div class="alert alert-success" id="success-alert">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @error('email')
-                    <div class="alert alert-danger" id="danger-alert">
-                        {{ $message }}
-                    </div>
-                @enderror
                 <div class="col-xxl-4 col-lg-6 mx-auto">
                     <div class="log-in-box">
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach (session('error') as $key => $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="log-in-title">
                             <h4>Vui lòng nhập OTP để xác minh tài khoản của bạn</h4>
                         </div>
                         <div class="login-box">
-                            <form action="{{ route('tai-khoan.verify-otp') }}" method="POST" class="row g-3">
+                            <form id="loginForm" action="{{ route('tai-khoan.verify-otp') }}" method="post"
+                                class="row g-3">
                                 @csrf
                                 <div class="col-12">
-                                    <div class="otp-input">
-                                        <input type="hidden" name="email" value="{{ request('v') }}">
-                                        {{-- v là email đã được mã hóa bên controller --}}
-                                        <input class="form-control text-center" id="" type="number"
-                                            placeholder="0" name="otp">
-                                        {{-- <input class="form-control text-center" id="four2" type="number"
-                                            placeholder="0" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)">
-                                        <input class="form-control text-center" id="four3" type="number"
-                                            placeholder="0" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)">
-                                        <input class="form-control text-center" id="four4" type="number"
-                                            placeholder="0" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)"> --}}
+                                    <input type="hidden" name="email" value="{{ request('v') }}">
+                                    {{-- v là email đã được mã hóa bên controller --}}
+                                    <div id="otp-container" class="otp-input">
+                                        <input class="form-control text-center" id="otp1" type="number" maxlength="1"
+                                            oninput="moveToNext(this, 'otp2')" onkeydown="moveToPrev(event, this, 'otp1')"
+                                            placeholder="0" />
+                                        <input class="form-control text-center" id="otp2" type="number" maxlength="1"
+                                            oninput="moveToNext(this, 'otp3')" onkeydown="moveToPrev(event, this, 'otp1')"
+                                            placeholder="0" />
+                                        <input class="form-control text-center" id="otp3" type="number" maxlength="1"
+                                            oninput="moveToNext(this, 'otp4')" onkeydown="moveToPrev(event, this, 'otp2')"
+                                            placeholder="0" />
+                                        <input class="form-control text-center" id="otp4" type="number" maxlength="1"
+                                            oninput="lastInput(this)" onkeydown="moveToPrev(event, this, 'otp3')"
+                                            placeholder="0" />
                                     </div>
-                                    @error('otp')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <input type="hidden" id="hidden-otp" name="otp" />
+                                    <p class="Err text-danger otp-error mt-3">
+                                        @error('otp')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                    <p class="Err text-danger email-error mt-3">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn login btn_black sm">Xác nhận</button>
+                                    <button type="submit" class="btn login btn_black sm" onsubmit="ajaxAuth()">Xác
+                                        nhận</button>
                                 </div>
                             </form>
                             <div class="other-log-in"></div>
@@ -88,3 +101,56 @@
         </div>
     </section>
 @endsection
+
+{{-- @section('js')
+    <script>
+        function moveToNext(current, nextFieldId) {
+            current.value = current.value.replace(/[^0-9]/g, ''); // Chỉ cho phép số
+
+            if (current.value.length > 1) {
+                current.value = current.value.charAt(0); // Giữ lại ký tự đầu tiên nếu nhập nhiều hơn
+            }
+
+            if (current.value.length === 1) {
+                document.getElementById(nextFieldId).focus();
+            }
+            combineOtp();
+        }
+
+        function moveToPrev(event, current, prevFieldId) {
+            if (event.key === "Backspace" && current.value.length === 0) {
+                document.getElementById(prevFieldId).focus();
+            }
+            combineOtp();
+        }
+
+        function lastInput(current) {
+            current.value = current.value.replace(/[^0-9]/g, ''); // Chỉ cho phép số
+
+            if (current.value.length > 1) {
+                current.value = current.value.charAt(0); // Giữ lại ký tự đầu tiên nếu nhập nhiều hơn
+            }
+            combineOtp();
+        }
+
+        function combineOtp() {
+            let otp = '';
+            for (let i = 1; i <= 4; i++) {
+                otp += document.getElementById('otp' + i).value;
+            }
+            document.getElementById('hidden-otp').value = otp;
+        }
+
+        document.getElementById('otp-container').addEventListener('paste', function(event) {
+            const pasteData = event.clipboardData.getData('text');
+            if (pasteData.length === 4 && /^\d{4}$/.test(pasteData)) {
+                for (let i = 0; i < 4; i++) {
+                    document.getElementById('otp' + (i + 1)).value = pasteData[i];
+                }
+                combineOtp();
+                document.getElementById('otp4').focus();
+            }
+            event.preventDefault();
+        });
+    </script>
+@endsection --}}

@@ -13,22 +13,25 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Đặt lại mật khẩu</h1>
                             </div>
-                            @if (session('error'))
-                                <div class="alert alert-danger" id="error-alert">
-                                    {{ session('error') }}
+                            @if (session('success'))
+                                <div class="alert alert-success" id="error-alert">
+                                    {{ session('success') }}
                                 </div>
                             @endif
-                            @error('email')
-                                <div class="alert alert-danger" id="error-alert">
-                                    {{ $message }}
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    @foreach (session('error') as $key => $message)
+                                        {{ $message }}
+                                    @endforeach
                                 </div>
-                            @enderror
-                            <form action="{{ route('auth.dat-lai-mat-khau-admin') }}" method="POST" class="user">
+                            @endif
+                            <form id="loginForm" action="{{ route('auth.dat-lai-mat-khau-admin') }}" method="POST"
+                                class="user">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input class="form-control" type="hidden" value="{{ request('v') }}" 
+                                            <input class="form-control" type="hidden" value="{{ request('v') }}"
                                                 name="email">
                                             {{-- v là mã hóa email bên controller --}}
                                         </div>
@@ -37,21 +40,31 @@
                                         <input type="password"
                                             class="form-control form-control-user @error('password') is-invalid @enderror"
                                             id="exampleInputPassword" placeholder="Nhập mật khẩu mới..." name="password">
-                                        @error('password')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger password-error">
+                                            @error('password')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
                                     <div class="col-sm-12 mt-3 mb-sm-0">
                                         <input type="password"
                                             class="form-control form-control-user @error('confirm_password') is-invalid @enderror"
                                             id="exampleRepeatPassword" placeholder="Nhập lại mật khẩu mới..."
                                             name="confirm_password">
-                                        @error('confirm_password')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger confirm_password-error">
+                                            @error('confirm_password')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
+                                    <p class="Err text-danger email-error">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Xác nhận</button>
+                                <button type="submit" class="btn btn-primary btn-user btn-block" onsubmit="ajaxAuth()">Xác
+                                    nhận</button>
                             </form>
                             <hr>
                             <div class="text-center">

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AuthAdminController extends Controller
 {
@@ -29,26 +30,52 @@ class AuthAdminController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::user()->trang_thai == 0) {
                 if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 2) {
-                    return redirect()->route('admin.index');
+                    // return redirect()->route('admin.index');
+                    return response()->json([
+                        'success' => true,
+                        'redirect_url' => route('admin.index'),
+                    ]);
                 }
 
                 Auth::logout();
-                 
-                return redirect()->back()->with('error', 'Tài khoản này không đủ quyền truy cập !');
 
+                // return redirect()->back()->with('error', 'Tài khoản này không đủ quyền truy cập !');
+                Session::flash('error', 'Tài khoản này không đủ quyền truy cập !');
+
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => url()->previous(),
+                ]);
             } elseif (Auth::user()->trang_thai == 2) {
                 Auth::logout();
 
-                return redirect()->back()->with('error', 'Tài khoản này chưa được xác thực !');
+                // return redirect()->back()->with('error', 'Tài khoản này chưa được xác thực !');
+                Session::flash('error', 'Tài khoản này không đủ quyền truy cập !');
 
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => url()->previous(),
+                ]);
             } else {
                 Auth::logout();
 
-                return redirect()->back()->with('error', 'Tài khoản này đã bị khóa !');
+                // return redirect()->back()->with('error', 'Tài khoản này đã bị khóa !');
+                Session::flash('error', 'Tài khoản này đã bị khóa !');
+
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => url()->previous(),
+                ]);
             }
         }
 
-        return redirect()->back()->with('error', 'Thông tin tài khoản không chính xác !');
+        // return redirect()->back()->with('error', 'Thông tin tài khoản không chính xác !');
+        Session::flash('error', 'Thông tin tài khoản không chính xác !');
+
+        return response()->json([
+            'success' => true,
+            'redirect_url' => url()->previous(),
+        ]);
     }
 
     // Quên mật khẩu
@@ -76,7 +103,7 @@ class AuthAdminController extends Controller
         if ($user && ($user->vai_tro_id == 1 || $user->vai_tro_id == 2)) {
             $email = $request->email;
             $otp = rand(1000, 9999); //Tạo otp ngẫu nhiên
-    
+
             // Lưu otp vào DB
             DB::table('password_reset_tokens')->updateOrInsert(
                 [
@@ -87,17 +114,27 @@ class AuthAdminController extends Controller
                     'created_at' => Carbon::now()
                 ]
             );
-    
+
             //Gửi Otp qua mail
             Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
 
             $emailEncrypted = Crypt::encryptString($email);
-    
-            return redirect()->route('auth.form-otp-admin', ['v' => $emailEncrypted]); //v là tên tự đặt để mã hóa email trên url
+
+            // return redirect()->route('auth.form-otp-admin', ['v' => $emailEncrypted]); //v là tên tự đặt để mã hóa email trên url
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('auth.form-otp-admin', ['v' => $emailEncrypted]), // v là tên tự đặt để mã hóa email trên url
+            ]);
         }
 
-        return redirect()->back()->with('error', 'Tài khoản với địa chỉ Email này không đủ quyền truy cập !');
+        // return redirect()->back()->with('error', 'Tài khoản với địa chỉ Email này không đủ quyền truy cập !');
+        Session::flash('error', 'Tài khoản với địa chỉ Email này không đủ quyền truy cập !');
 
+        return response()->json([
+            'success' => true,
+            'redirect_url' => url()->previous(),
+        ]);
+        
     }
 
     public function guiLaiOtp(Request $request)
@@ -105,14 +142,14 @@ class AuthAdminController extends Controller
         try {
             // Giải mã email từ URL
             $email = Crypt::decryptString($request->email);
-    
+
             // Kiểm tra người dùng có tồn tại và có vai trò hợp lệ
             $user = DB::table('users')->where('email', $email)->first();
-    
+
             if ($user && ($user->vai_tro_id == 1 || $user->vai_tro_id == 2)) {
                 // Tạo OTP mới
                 $otp = rand(1000, 9999);
-    
+
                 // Lưu OTP vào DB
                 DB::table('password_reset_tokens')->updateOrInsert(
                     [
@@ -123,17 +160,21 @@ class AuthAdminController extends Controller
                         'created_at' => Carbon::now()
                     ]
                 );
-    
+
                 // Gửi OTP qua email
                 Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
-    
+
                 return redirect()->back()->with('success', 'OTP đã được gửi lại thành công!');
             }
-    
-            return redirect()->back()->with('error', 'Tài khoản với địa chỉ Email này không đủ quyền truy cập !');
+
+            Session::flash('error', ['error' => 'Mã OTP không hợp lệ hoặc đã hết hạn !']);
+
+            return redirect()->back();
         } catch (DecryptException $e) {
             // Bắt lỗi nếu email không thể giải mã
-            return redirect()->back()->with('error', 'Liên kết không hợp lệ hoặc đã hết hạn!');
+            Session::flash('error', ['error' => 'Liên kết không hợp lệ hoặc đã hết hạn!']);
+
+            return redirect()->back();
         }
     }
 
@@ -162,7 +203,13 @@ class AuthAdminController extends Controller
         try {
             $email = Crypt::decryptString($request->email);
         } catch (DecryptException $e) {
-            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            // return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            Session::flash('error', ['email' => 'Email không hợp lệ!']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(),
+            ]);
         }
 
         $otp = $request->otp;
@@ -171,14 +218,27 @@ class AuthAdminController extends Controller
         $check = DB::table('password_reset_tokens')->where('email', $email)->first();
 
         if (!$check || $check->token != $otp || Carbon::parse($check->created_at)->addMinutes(5)->isPast()) { // OTP sẽ không dùng được sau 5 phút
-            return redirect()->back()->withErrors(['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn']);
+            // return redirect()->back()->withErrors(['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn']);
+            Session::flash('error', ['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn !']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(),
+            ]);
         }
 
         DB::table('password_reset_tokens')->where('email', $email)->update(['is_verified' => true]); //Check xác nhận OTP
 
         $emailEncrypted = Crypt::encryptString($email);
 
-        return redirect()->route('auth.dat-lai-mat-khau-admin', ['v' => $emailEncrypted]); //v là tên tự đặt để mã hóa email trên url
+        // return redirect()->route('auth.dat-lai-mat-khau-admin', ['v' => $emailEncrypted]); //v là tên tự đặt để mã hóa email trên url
+        Session::flash('success', 'Xác nhận OTP thành công !');
+
+        // v là tên tự đặt để mã hóa email trên url
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('auth.dat-lai-mat-khau-admin', ['v' => $emailEncrypted]), //v là tên tự đặt để mã hóa email trên url
+        ]);
     }
 
     public function showDatLaiMatKhau()
@@ -206,7 +266,13 @@ class AuthAdminController extends Controller
         try {
             $email = Crypt::decryptString($request->email);
         } catch (DecryptException $e) {
-            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            // return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            Session::flash('error', ['email' => 'Email không hợp lệ!']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
         }
 
         $check = DB::table('password_reset_tokens')
@@ -216,7 +282,13 @@ class AuthAdminController extends Controller
             ->first();
 
         if (!$check || !$check->is_verified) { //Nếu đã xác nhận OTP thì cho qua
-            return redirect()->back()->with('error', 'Email hoặc OTP không hợp lệ !');
+            // return redirect()->back()->with('error', 'Email hoặc OTP không hợp lệ !');
+            Session::flash('error', ['error' => 'Email hoặc OTP không hợp lệ !']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
         }
 
         $user = User::where('email', $email)->update(['password' => Hash::make($request->password)]);
@@ -224,11 +296,22 @@ class AuthAdminController extends Controller
         if ($user) {
             DB::table('password_reset_tokens')->where('email', $email)->delete();
 
-            return redirect()->route('auth.dang-nhap-admin')->with('success', 'Bạn đã đặt lại mật khẩu thành công !');
+            // return redirect()->route('auth.dang-nhap-admin')->with('success', 'Bạn đã đặt lại mật khẩu thành công !');
+            Session::flash('success', 'Bạn đã đổi mật khẩu thành công !');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('auth.dang-nhap-admin'),
+            ]);
         }
 
-        return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
+        // return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
+        Session::flash('error', ['error' => 'Đã có lỗi xảy ra ! Vui lòng thử lại !']);
 
+        return response()->json([
+            'success' => true,
+            'redirect_url' => url()->previous(), // giống redirect()->back()
+        ]);
     }
 
 
