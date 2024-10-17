@@ -28,10 +28,9 @@
                 <label for="" class="form-label">Kích cỡ</label>
                 <div class="">
                     <input type="hidden" id="kich_co_hidden" name="kich_co" value="{{$bien_the->kich_co}}">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn {{$bien_the->kich_co==='X'?'active':''}}" value="X">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn {{$bien_the->kich_co==='L'?'active':''}}" value="L">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn {{$bien_the->kich_co==='XL'?'active':''}}" value="XL">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn {{$bien_the->kich_co==='XXL'?'active':''}}" value="XXL">
+                    @foreach ($kich_cos as $item)
+                        <input type="button" class="btn btn-outline-primary kich_co_btn {{$bien_the->kich_co===$item->kich_co?'active':''}}" value="{{$item->kich_co}}">
+                    @endforeach
                 </div>
                 @error('kich_co')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -42,15 +41,9 @@
                 <div class="">
                     <input type="hidden" id="ten_mau_hidden" name="ten_mau" value="{{$bien_the->ten_mau}}">
                     <input type="hidden" id="ma_mau_hidden" name="ma_mau" value="{{$bien_the->ma_mau}}">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Đen'?'active':''}}" style="background-color: #000000; color: #fff;" data-color="#000000" value="Đen">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Trắng'?'active':''}}" style="background-color: #FFFFFF; color: #000;" data-color="#FFFFFF" value="Trắng">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Be'?'active':''}}" style="background-color: #F5F5DC; color: #000;" data-color="#F5F5DC" value="Be">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Xanh Trời'?'active':''}}" style="background-color: #00BFFF; color: #fff;" data-color="#00BFFF" value="Xanh Trời">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Xanh'?'active':''}}" style="background-color: #008000; color: #fff;" data-color="#008000" value="Xanh">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Xanh Than'?'active':''}}" style="background-color: #003366; color: #fff;" data-color="#003366" value="Xanh Than">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Nâu'?'active':''}}" style="background-color: #8B4513; color: #fff;" data-color="#8B4513" value="Nâu">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Xám'?'active':''}}" style="background-color: #808080; color: #fff;" data-color="#808080" value="Xám">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ten_mau==='Tím'?'active':''}}" style="background-color: #800080; color: #fff;" data-color="#800080" value="Tím">
+                    @foreach ($mau_sacs as $item)
+                        <input type="button" class="btn btn-outline-primary mau_sac_btn {{$bien_the->ma_mau===$item->ma_mau?'active':''}}" style="background-color: {{$item->ma_mau}}; color: #fff;" data-color="{{$item->ma_mau}}" value="{{$item->ten_mau}}">
+                    @endforeach
                 </div>
                 @error('ten_mau')
                     <p class="text-danger mt-1">{{$message}}</p>

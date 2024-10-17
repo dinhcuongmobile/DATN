@@ -209,7 +209,9 @@ class SanPhamAdminController extends Controller
 
     public function showSuaBienThe(int $id){
         $this->views['bien_the']=BienThe::findOrFail($id);
-        $this->views['san_phams']=SanPham::all();
+        $this->views['san_phams']=SanPham::orderBy('id','desc')->get();
+        $this->views['mau_sacs']=MauSac::all();
+        $this->views['kich_cos']=KichCo::all();
         return view('admin.sanPham.bienThe.capNhatBienThe',$this->views);
     }
 
