@@ -56,7 +56,7 @@
                                     <tr>
                                         <td class="col-1 text-center"><input type="checkbox" name="select[]"
                                                 value="{{ $item->id }}"></td>
-                                        <td class="col-2 align-middle">DM-{{ $item->id }}</td>
+                                        <td class="col-2 align-middle">NM-{{ $item->id }}</td>
                                         <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px"></td>
                                         <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>
                                         <td class="col-2 align-middle">
