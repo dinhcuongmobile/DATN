@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 15, 2024 lúc 04:27 PM
+-- Thời gian đã tạo: Th10 17, 2024 lúc 09:15 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -55,6 +55,13 @@ CREATE TABLE `bien_thes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `bien_thes`
+--
+
+INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, `ma_mau`, `so_luong`, `created_at`, `updated_at`) VALUES
+(8, 6, 'uploads/sanPham/b5yevDH3HHm4Y1N4lP9AUWsnSOUMODwj9L5fLreR.jpg', 'X', 'Đen', '#000000', 9, '2024-10-16 09:10:59', '2024-10-16 09:10:59');
 
 -- --------------------------------------------------------
 
@@ -180,6 +187,19 @@ CREATE TABLE `gio_hangs` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `kich_cos`
+--
+
+CREATE TABLE `kich_cos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kich_co` varchar(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lien_hes`
 --
 
@@ -201,6 +221,20 @@ CREATE TABLE `lien_hes` (
 
 INSERT INTO `lien_hes` (`id`, `ho_va_ten`, `email`, `so_dien_thoai`, `tieu_de`, `noi_dung`, `trang_thai`, `created_at`, `updated_at`) VALUES
 (1, 'nguyễn đình cường', 'cuongndph38237@gmail.com', '0964426518', 'cccc', 'cccc', 0, '2024-10-14 14:10:06', '2024-10-14 14:10:06');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `mau_sacs`
+--
+
+CREATE TABLE `mau_sacs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ten_mau` varchar(30) NOT NULL,
+  `ma_mau` varchar(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -259,7 +293,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2024_10_07_230832_create_vn_phuong_xas_table', 3),
 (21, '2024_10_08_174542_create_banners_table', 4),
 (22, '2024_10_09_115320_update_lien_hes_table', 5),
-(23, '2024_10_15_091402_update_password_reset_tokens_table', 6);
+(23, '2024_10_15_091402_update_password_reset_tokens_table', 6),
+(24, '2024_10_16_160558_create_mau_sacs_table', 7),
+(25, '2024_10_16_160725_create_kich_cos_table', 7);
 
 -- --------------------------------------------------------
 
@@ -12458,9 +12494,21 @@ ALTER TABLE `gio_hangs`
   ADD KEY `gio_hangs_san_pham_id_foreign` (`san_pham_id`);
 
 --
+-- Chỉ mục cho bảng `kich_cos`
+--
+ALTER TABLE `kich_cos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `lien_hes`
 --
 ALTER TABLE `lien_hes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `mau_sacs`
+--
+ALTER TABLE `mau_sacs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -12552,7 +12600,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT cho bảng `bien_thes`
 --
 ALTER TABLE `bien_thes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `binh_luans`
@@ -12597,10 +12645,22 @@ ALTER TABLE `gio_hangs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `kich_cos`
+--
+ALTER TABLE `kich_cos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `lien_hes`
 --
 ALTER TABLE `lien_hes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `mau_sacs`
+--
+ALTER TABLE `mau_sacs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
@@ -12612,7 +12672,7 @@ ALTER TABLE `ma_khuyen_mais`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
