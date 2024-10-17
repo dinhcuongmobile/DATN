@@ -73,7 +73,7 @@
                 <label for="sel1">Sản phẩm</label>
                 <select class="form-control" id="sel1" name="san_pham_id">
                     @foreach ($san_phams as $item)
-                        <option {{old('san_pham_id')==$item->id?'selected':''}} value="{{$item->id}}">SP-{{$item->id}} | {{$item->ten_san_pham}}</option>
+                        <option {{old('san_pham_id')==$item->id?'selected':''}} value="{{$item->id}}">NM-{{$item->id}} | {{$item->ten_san_pham}}</option>
                     @endforeach
                 </select>
             </div>
