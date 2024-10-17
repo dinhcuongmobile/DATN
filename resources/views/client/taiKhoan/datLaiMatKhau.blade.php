@@ -29,17 +29,17 @@
                             </div>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger" id="error-alert">
-                                {{ session('error') }}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach (session('error') as $key => $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
-                        @error('email')
-                            <div class="alert alert-danger" id="danger-alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
                         <div class="login-box">
-                            <form action="{{ route('tai-khoan.dat-lai-mat-khau') }}" method="POST" class="row g-3">
+                            <form id="loginForm" action="{{ route('tai-khoan.dat-lai-mat-khau') }}" method="POST"
+                                class="row g-3">
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -55,9 +55,11 @@
                                             name="password">
                                         <label for="floatingInputValue2">Mật Khẩu</label>
                                     </div>
-                                    @error('password')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger password-error">
+                                        @error('password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -66,12 +68,20 @@
                                             value="" name="confirm_password">
                                         <label for="floatingInputValue2">Nhập lại mật Khẩu</label>
                                     </div>
-                                    @error('confirm_password')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger confirm_password-error">
+                                        @error('confirm_password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
+                                <p class="Err text-danger email-error">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
                                 <div class="col-12">
-                                    <button class="btn login btn_black sm" type="submit">Xác nhận</button>
+                                    <button class="btn login btn_black sm" type="submit" onsubmit="ajaxAuth()">Xác
+                                        nhận</button>
                                 </div>
                             </form>
                         </div>

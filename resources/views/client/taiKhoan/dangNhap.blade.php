@@ -28,7 +28,7 @@
                             <p>Nếu bạn đã có tài khoản</p>
                         </div>
                         @if (session('success'))
-                            <div class="alert alert-success" id="error-alert">
+                            <div class="alert alert-success" id="success-alert">
                                 {{ session('success') }}
                             </div>
                         @endif
@@ -36,14 +36,16 @@
                             <div class="alert alert-danger" id="error-alert">
                                 {{ session('error') }}
                                 @if (session('error') === 'Tài khoản của bạn chưa được xác thực !')
-                                    <a href="{{ route('tai-khoan.gui-lai-email', old('email')) }}"
-                                        style="color: #229ec7; margin-left: 10px; text-decoration: underline;">Gửi lại email
+                                    <a href="{{ session('resend_verification_url') }}"
+                                        style="color: #229ec7; margin-left: 10px; text-decoration: underline;">Gửi
+                                        lại
+                                        email
                                         xác thực.</a>
                                 @endif
                             </div>
                         @endif
                         <div class="login-box">
-                            <form action="{{ route('tai-khoan.dang-nhap') }}" method="POST" class="row g-3">
+                            <form id="loginForm" action="{{ route('tai-khoan.dang-nhap') }}" method="POST" class="row g-3">
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -52,9 +54,11 @@
                                             value="{{ old('email') }}" name="email">
                                         <label for="floatingInputValue">Email</label>
                                     </div>
-                                    @error('email')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger email-error">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -63,9 +67,11 @@
                                             value="" name="password">
                                         <label for="floatingInputValue1">Mật Khẩu</label>
                                     </div>
-                                    @error('password')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger password-error">
+                                        @error('password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="forgot-box">
@@ -79,7 +85,7 @@
                                 </div>
                                 <div class="col-12">
                                     <button class="btn login btn_black sm" type="submit" data-bs-dismiss="modal"
-                                        aria-label="Close">Đăng Nhập</button>
+                                        aria-label="Close" onsubmit="ajaxAuth()">Đăng Nhập</button>
                                 </div>
                             </form>
                         </div>

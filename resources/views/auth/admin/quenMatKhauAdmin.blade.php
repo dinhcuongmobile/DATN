@@ -26,7 +26,7 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('auth.gui-otp-admin') }}" method="POST" class="user">
+                                    <form id="loginForm" action="{{ route('auth.gui-otp-admin') }}" method="POST" class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email"
@@ -35,10 +35,12 @@
                                                 placeholder="Nhập địa chỉ Email..." name="email"
                                                 value="{{ old('email') }}">
                                         </div>
-                                        @error('email')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Xác nhận</button>
+                                        <p class="Err text-danger email-error">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" onsubmit="ajaxAuth()">Xác nhận</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

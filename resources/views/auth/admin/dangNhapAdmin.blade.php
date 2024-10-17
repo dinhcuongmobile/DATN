@@ -28,7 +28,8 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('auth.dang-nhap-admin') }}" method="POST" class="user">
+                                    <form id="loginForm" action="{{ route('auth.dang-nhap-admin') }}" method="POST"
+                                        class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input
@@ -36,25 +37,29 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Nhập email..." name="email" value="{{ old('email') }}">
                                         </div>
-                                        @error('email')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger email-error">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                         <div class="form-group">
                                             <input type="password"
                                                 class="form-control form-control-user @error('password') is-invalid @enderror"
                                                 id="exampleInputPassword" placeholder="Mật khẩu" name="password">
                                         </div>
-                                        @error('password')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger password-error">
+                                            @error('password')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Ghi nhớ</label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Đăng
-                                            nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"
+                                            onsubmit="ajaxAuth()">Đăng nhập</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

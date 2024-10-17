@@ -52,9 +52,20 @@ class TaiKhoanController extends Controller
         if ($user) {
             Mail::to($user->email)->send(new UserRegistered($user));
 
-            return redirect()->route('tai-khoan.dang-nhap')->with('success', 'Bạn đã đăng kí tài khoản thành công ! Vui lòng kiểm tra Email để xác nhận');
+            Session::flash('success', 'Bạn đã đăng kí tài khoản thành công ! Vui lòng kiểm tra Email để xác nhận !');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('tai-khoan.dang-nhap'),
+            ]);
         } else {
-            return redirect()->back()->with('error', 'Không thể đăng ký tài khoản. Vui lòng thử lại.');
+
+            Session::flash('error', 'Không thể đăng ký tài khoản. Vui lòng thử lại.');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('tai-khoan.dang-nhap'),
+            ]);
         }
     }
 
@@ -104,19 +115,39 @@ class TaiKhoanController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::user()->trang_thai == 0) {
-                return redirect()->route('trang-chu.home');
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => route('trang-chu.home'),
+                ]);
             } elseif (Auth::user()->trang_thai == 2) {
                 Auth::logout();
 
-                return redirect()->back()->with('error', 'Tài khoản của bạn chưa được xác thực !')->withInput();
+                Session::flash('error', 'Tài khoản của bạn chưa được xác thực !');
+                Session::flash('_old_input', $request->only('email')); // Flash lại dữ liệu email
+                Session::flash('resend_verification_url', route('tai-khoan.gui-lai-email', ['email' => $request->input('email')]));
+
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => route('tai-khoan.dang-nhap'),
+                ]);
             } else {
                 Auth::logout();
 
-                return redirect()->back()->with('error', 'Tài khoản của bạn đã bị khóa ! Xin vui lòng đăng nhập bằng tài khoản khác.');
+                Session::flash('error', 'Tài khoản của bạn đã bị khóa ! Xin vui lòng đăng nhập bằng tài khoản khác.');
+
+                return response()->json([
+                    'success' => true,
+                    'redirect_url' => route('tai-khoan.dang-nhap'),
+                ]);
             }
         }
 
-        return redirect()->back()->with('error', 'Thông tin đăng nhập không chính xác');
+        Session::flash('error', 'Thông tin đăng nhập không chính xác');
+
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('tai-khoan.dang-nhap'),
+        ]);
     }
 
     // Quên mật khẩu và đổi mật khẩu
@@ -158,7 +189,10 @@ class TaiKhoanController extends Controller
 
         $emailEncrypted = Crypt::encryptString($email);
 
-        return redirect()->route('tai-khoan.form-otp', ['v' => $emailEncrypted]); // v là tên tự đặt để mã hóa email trên url
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('tai-khoan.form-otp', ['v' => $emailEncrypted]), // v là tên tự đặt để mã hóa email trên url
+        ]);
     }
 
     public function guiLaiOtp(Request $request)
@@ -207,14 +241,19 @@ class TaiKhoanController extends Controller
             ],
             [
                 'email.required' => 'Email không hợp lệ !',
-                'otp' => 'OTP không được bỏ trống !'
+                'otp.required' => 'OTP không được bỏ trống !'
             ]
         );
 
         try {
             $email = Crypt::decryptString($request->email);
         } catch (DecryptException $e) {
-            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            Session::flash('error', ['email' => 'Email không hợp lệ!']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(),
+            ]);
         }
 
         $otp = $request->otp;
@@ -223,14 +262,25 @@ class TaiKhoanController extends Controller
         $check = DB::table('password_reset_tokens')->where('email', $email)->first();
 
         if (!$check || $check->token != $otp || Carbon::parse($check->created_at)->addMinutes(10)->isPast()) {
-            return redirect()->back()->withErrors(['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn']);
+            Session::flash('error', ['otp' => 'Mã OTP không hợp lệ hoặc đã hết hạn !']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
         }
 
         DB::table('password_reset_tokens')->where('email', $email)->update(['is_verified' => true]); //Check xác nhận OTP
 
         $emailEncrypted = Crypt::encryptString($email);
 
-        return redirect()->route('tai-khoan.dat-lai-mat-khau', ['v' => $emailEncrypted])->with('success', 'Xác nhận OTP thành công'); // v là tên tự đặt để mã hóa email trên url
+        Session::flash('success', 'Xác nhận OTP thành công !');
+
+        // v là tên tự đặt để mã hóa email trên url
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('tai-khoan.dat-lai-mat-khau', ['v' => $emailEncrypted]),
+        ]);
     }
 
     public function showDatLaiMatKhau()
@@ -258,7 +308,12 @@ class TaiKhoanController extends Controller
         try {
             $email = Crypt::decryptString($request->email);
         } catch (DecryptException $e) {
-            return redirect()->back()->withErrors(['email' => 'Email không hợp lệ!']);
+            Session::flash('error', ['email' => 'Email không hợp lệ!']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
         }
 
         $check = DB::table('password_reset_tokens')
@@ -268,7 +323,12 @@ class TaiKhoanController extends Controller
             ->first();
 
         if (!$check || !$check->is_verified) {
-            return redirect()->back()->with('error', 'Email hoặc OTP không hợp lệ !');
+            Session::flash('error', ['error' => 'Email hoặc OTP không hợp lệ !']);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
         }
 
         $user = User::where('email', $email)->update(['password' => Hash::make($request->password)]);
@@ -276,10 +336,21 @@ class TaiKhoanController extends Controller
         if ($user) {
             DB::table('password_reset_tokens')->where('email', $email)->delete();
 
-            return redirect()->route('tai-khoan.dang-nhap')->with('success', 'Bạn đã đổi mật khẩu thành công !');
+            Session::flash('success', 'Bạn đã đổi mật khẩu thành công !');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('tai-khoan.dang-nhap'),
+            ]);
         }
 
-        return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
+        // return redirect()->back()->with('error', 'Đã có lỗi xảy ra ! Vui lòng thử lại');
+        Session::flash('error', ['error' => 'Đã có lỗi xảy ra ! Vui lòng thử lại !']);
+
+        return response()->json([
+            'success' => true,
+            'redirect_url' => url()->previous(), // giống redirect()->back()
+        ]);
     }
 
     public function showThongTinTaiKhoan($id)

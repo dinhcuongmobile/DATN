@@ -25,20 +25,22 @@
                             <p></p>
                         </div>
                         <div class="login-box">
-                            <form action="{{ route('tai-khoan.gui-otp') }}" method="POST" class="row g-3">
+                            <form id="loginForm" action="{{ route('tai-khoan.gui-otp') }}" method="POST" class="row g-3">
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <input class="form-control @error('email') is-invalid @enderror" id="floatingInputValue" type="email"
                                             placeholder="name@example.com" value="" name="email">
                                         <label for="floatingInputValue">Email</label>
-                                        @error('email')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger email-error">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn login btn_black sm">Gửi OTP</button>
+                                    <button type="submit" class="btn login btn_black sm" onsubmit="ajaxAuth()">Gửi OTP</button>
                                 </div>
                             </form>
                         </div>

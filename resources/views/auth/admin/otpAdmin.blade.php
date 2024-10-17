@@ -21,9 +21,16 @@
                                             nhập xuống bên dưới để xác nhận!
                                         </p>
                                     </div>
-                                    @if (session('error'))
+                                    {{-- @if (session('error'))
                                         <div class="alert alert-danger" id="error-alert">
                                             {{ session('error') }}
+                                        </div>
+                                    @endif --}}
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            @foreach (session('error') as $key => $message)
+                                                {{ $message }}
+                                            @endforeach
                                         </div>
                                     @endif
                                     @if (session('success'))
@@ -31,27 +38,30 @@
                                             {{ session('success') }}
                                         </div>
                                     @endif
-                                    @error('email')
-                                        <div class="alert alert-danger" id="error-alert">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                    <form action="{{ route('auth.verify-otp-admin') }}" method="POST" class="user">
+                                    <form id="loginForm" action="{{ route('auth.verify-otp-admin') }}" method="POST"
+                                        class="user">
                                         @csrf
+                                        <input type="hidden" name="email" value="{{ request('v') }}">
+                                        {{-- v là mã hóa email bên controller --}}
                                         <div class="form-group">
                                             <input type="text"
                                                 class="form-control form-control-user text-center @error('otp') is-invalid @enderror"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Nhập OTP..." name="otp">
-
-                                            <input type="hidden" name="email" value="{{ request('v') }}">
-                                            {{-- v là mã hóa email bên controller --}}
+                                                placeholder="Nhập OTP..." name="otp" maxlength="4">
                                         </div>
-                                        @error('otp')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger otp-error mt-3">
+                                            @error('otp')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
+                                        <p class="Err text-danger email-error mt-3">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                         <hr>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Xác nhận</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"
+                                            onsubmit="ajaxAuth()">Xác nhận</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

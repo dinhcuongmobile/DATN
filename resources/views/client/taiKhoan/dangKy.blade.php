@@ -38,7 +38,7 @@
                             </div>
                         @endif
                         <div class="login-box">
-                            <form action="{{ route('tai-khoan.dang-ky') }}" method="POST" class="row g-3">
+                            <form id="loginForm" action="{{ route('tai-khoan.dang-ky') }}" method="POST" class="row g-3">
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -46,9 +46,11 @@
                                             placeholder="Full Name" value="{{ old('ho_va_ten') }}" name="ho_va_ten">
                                         <label for="floatingInputValue">Họ Và Tên</label>
                                     </div>
-                                    @error('ho_va_ten')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger ho_va_ten-error">
+                                        @error('ho_va_ten')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -56,9 +58,11 @@
                                             placeholder="name@example.com" value="{{ old('email') }}" name="email">
                                         <label for="floatingInputValue1">Email</label>
                                     </div>
-                                    @error('email')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger email-error">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -66,9 +70,11 @@
                                             placeholder="Password" value="" name="password">
                                         <label for="floatingInputValue2">Mật Khẩu</label>
                                     </div>
-                                    @error('password')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger password-error">
+                                        @error('password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
@@ -76,12 +82,14 @@
                                             placeholder="Confirm password" value="" name="confirm_password">
                                         <label for="floatingInputValue2">Nhập lại mật Khẩu</label>
                                     </div>
-                                    @error('confirm_password')
-                                        <p class="Err text-danger">{{ $message }}</p>
-                                    @enderror
+                                    <p class="Err text-danger confirm_password-error">
+                                        @error('confirm_password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn login btn_black sm" type="submit">Đăng Ký</button>
+                                    <button class="btn login btn_black sm" type="submit" onsubmit="ajaxAuth()">Đăng Ký</button>
                                 </div>
                             </form>
                         </div>
