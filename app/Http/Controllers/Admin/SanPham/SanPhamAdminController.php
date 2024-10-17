@@ -16,6 +16,8 @@ use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateKhuyenMaiRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
 use App\Models\KhuyenMai;
+use App\Models\KichCo;
+use App\Models\MauSac;
 
 class SanPhamAdminController extends Controller
 {
@@ -59,6 +61,18 @@ class SanPhamAdminController extends Controller
         $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.sanPham.bienThe.DSBienThe',$this->views);
+    }
+
+    public function danhSachSize(){
+        $this->views['kich_cos'] = KichCo::orderBy('id', 'desc')->paginate(10);
+
+        return view('admin.sanPham.kichCo.DSKichCo',$this->views);
+    }
+
+    public function danhSachMauSac(){
+        $this->views['mau_sacs'] = MauSac::orderBy('id', 'desc')->paginate(10);
+
+        return view('admin.sanPham.mauSac.DSMauSac',$this->views);
     }
 
     public function loadBienTheOneSanPham(Request $request, int $id){
@@ -167,8 +181,18 @@ class SanPhamAdminController extends Controller
     }
 
     public function showThemBienThe(){
-        $this->views['san_phams']=SanPham::all();
+        $this->views['san_phams']=SanPham::orderBy('id','desc')->get();
+        $this->views['mau_sacs']=MauSac::all();
+        $this->views['kich_cos']=KichCo::all();
         return view('admin.sanPham.bienThe.themBienThe',$this->views);
+    }
+
+    public function showThemSize(){
+        return view('admin.sanPham.kichCo.themKichCo');
+    }
+
+    public function showThemMauSac(){
+        return view('admin.sanPham.mauSac.themMauSac');
     }
 
     public function showThemMaKhuyenMai(){
@@ -185,7 +209,9 @@ class SanPhamAdminController extends Controller
 
     public function showSuaBienThe(int $id){
         $this->views['bien_the']=BienThe::findOrFail($id);
-        $this->views['san_phams']=SanPham::all();
+        $this->views['san_phams']=SanPham::orderBy('id','desc')->get();
+        $this->views['mau_sacs']=MauSac::all();
+        $this->views['kich_cos']=KichCo::all();
         return view('admin.sanPham.bienThe.capNhatBienThe',$this->views);
     }
 
@@ -262,6 +288,55 @@ class SanPhamAdminController extends Controller
         }
     }
 
+    public function themSize(Request $request){
+        $request->validate(
+            [
+                'kich_co' => [
+                    'required',
+                    'in:XS,S,M,L,XL,XXL,XXXL',
+                    'unique:kich_cos,kich_co'
+                ],
+            ],
+            [
+                'kich_co.required' => 'Vui lòng nhập kích cỡ!',
+                'kich_co.in' => 'Kích cỡ phải là một trong các giá trị: XS, S, M, L, XL, XXL, XXXL.',
+                'kich_co.unique' => 'Kích cỡ này đã tồn tại.',
+            ]
+        );
+
+        $result=KichCo::create(['kich_co'=>$request->kich_co]);
+        if($result){
+            return redirect()->route('san-pham.quan-ly-size')->with('success', 'Bạn đã thêm thành công !');
+        }else{
+            return redirect()->route('san-pham.quan-ly-size')->with('error', 'Có lỗi xảy ra. Vui lòng thao tác lại !');
+        }
+
+    }
+
+    public function themMauSac(Request $request){
+        $request->validate(
+            [
+                'ten_mau' => 'required|max:255',
+                'ma_mau' => [
+                    'required',
+                    'regex:/^#[0-9A-Fa-f]{6}$/',
+                    'unique:mau_sacs,ma_mau',
+                ],
+            ],
+            [
+                'ma_mau.required' => 'Vui lòng nhập mã màu.',
+                'ma_mau.regex' => 'Mã màu không hợp lệ. Mã màu hợp lệ phải có dạng #FFFFFF.',
+                'ma_mau.unique' => 'Mã màu này đã tồn tại trong hệ thống.',
+            ]
+        );
+
+        $result=MauSac::create(['ten_mau'=>$request->ten_mau, 'ma_mau' => $request->ma_mau]);
+        if($result){
+            return redirect()->route('san-pham.quan-ly-mau-sac')->with('success', 'Bạn đã thêm thành công !');
+        }else{
+            return redirect()->route('san-pham.quan-ly-mau-sac')->with('error', 'Có lỗi xảy ra. Vui lòng thao tác lại !');
+        }
+    }
 
     public function themMaKhuyenMai(StoreKhuyenMaiRequest $request){
         $khuyen_mai = KhuyenMai::where('ma_giam_gia', $request->ma_giam_gia)
@@ -435,6 +510,22 @@ class SanPhamAdminController extends Controller
         $bien_the=BienThe::findOrFail($id);
         $bien_the->delete();
         return redirect()->back()->with('success', 'Đã xóa thành công biến thể !');
+    }
+
+    public function xoaSize(int $id){
+        $kich_co=KichCo::findOrFail($id);
+        if($kich_co){
+            $kich_co->delete();
+        }
+        return redirect()->back()->with('success', 'Đã xóa thành công Size !');
+    }
+
+    public function xoaMauSac(int $id){
+        $mau_sac=MauSac::findOrFail($id);
+        if($mau_sac){
+            $mau_sac->delete();
+        }
+        return redirect()->back()->with('success', 'Đã xóa thành công màu sắc !');
     }
 
     public function xoaNhieuBienThe(Request $request){

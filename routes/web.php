@@ -9,7 +9,7 @@ use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
-use App\Http\Controllers\Admin\TinTuc\AdminTinTucController;
+use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
@@ -147,6 +147,8 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         Route::get('danh-sach',[SanPhamAdminController::class, 'danhSachSanPham'])->name('san-pham.danh-sach');
         Route::get('san-pham-bien-the/{san_pham_id}',[SanPhamAdminController::class, 'loadOneSanPham'])->name('san-pham.san-pham-bien-the');
         Route::get('danh-sach-bien-the-san-pham',[SanPhamAdminController::class, 'danhSachBienThe'])->name('san-pham.danh-sach-bien-the-san-pham');
+        Route::get('quan-ly-size',[SanPhamAdminController::class, 'danhSachSize'])->name('san-pham.quan-ly-size');
+        Route::get('quan-ly-mau-sac',[SanPhamAdminController::class, 'danhSachMauSac'])->name('san-pham.quan-ly-mau-sac');
         Route::get('bien-the-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadBienTheOneSanPham'])->name('san-pham.bien-the-san-pham');
         Route::get('danh-sach-ma-khuyen-mai',[SanPhamAdminController::class, 'danhSachMaKhuyenMai'])->name('san-pham.danh-sach-ma-khuyen-mai');
         Route::get('khuyen-mai-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadKhuyenMaiOneSanPham'])->name('san-pham.khuyen-mai-san-pham');
@@ -157,6 +159,12 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         //add
         Route::get('show-them-san-pham',[SanPhamAdminController::class, 'showThemSanPham'])->name('san-pham.show-them-san-pham');
         Route::post('them-san-pham',[SanPhamAdminController::class, 'themSanPham'])->name('san-pham.them-san-pham');
+
+        Route::get('show-them-size',[SanPhamAdminController::class, 'showThemSize'])->name('san-pham.show-them-size');
+        Route::post('them-size',[SanPhamAdminController::class, 'themSize'])->name('san-pham.them-size');
+
+        Route::get('show-them-mau-sac',[SanPhamAdminController::class, 'showThemMauSac'])->name('san-pham.show-them-mau-sac');
+        Route::post('them-mau-sac',[SanPhamAdminController::class, 'themMauSac'])->name('san-pham.them-mau-sac');
 
         Route::get('show-them-bien-the-san-pham',[SanPhamAdminController::class, 'showThemBienThe'])->name('san-pham.show-them-bien-the-san-pham');
         Route::post('them-bien-the-san-pham',[SanPhamAdminController::class, 'themBienThe'])->name('san-pham.them-bien-the-san-pham');
@@ -181,6 +189,10 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         Route::get('xoa-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'xoaBienThe'])->name('san-pham.xoa-bien-the-san-pham');
         Route::post('xoa-nhieu-bien-the-san-pham',[SanPhamAdminController::class, 'xoaNhieuBienThe'])->name('san-pham.xoa-nhieu-bien-the-san-pham');
 
+        Route::get('xoa-size/{id}',[SanPhamAdminController::class, 'xoaSize'])->name('san-pham.xoa-size');
+
+        Route::get('xoa-mau-sac/{id}',[SanPhamAdminController::class, 'xoaMauSac'])->name('san-pham.xoa-mau-sac');
+        
         Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
         Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
 
@@ -192,19 +204,19 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
     });
 
     Route::prefix('tin-tuc')->group(function () {
-        Route::get('danh-sach', [AdminTinTucController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
+        Route::get('danh-sach', [TinTucAdminController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
 
         //add
-        Route::get('them-tin-tuc', [AdminTinTucController::class, 'viewAdd'])->name('tin-tuc.them-tin-tuc');
-        Route::post('add', [AdminTinTucController::class, 'add'])->name('tin-tuc.add');
+        Route::get('them-tin-tuc', [TinTucAdminController::class, 'viewAdd'])->name('tin-tuc.them-tin-tuc');
+        Route::post('add', [TinTucAdminController::class, 'add'])->name('tin-tuc.add');
 
         //update
-        Route::get('sua-tin-tuc/{id}', [AdminTinTucController::class, 'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
-        Route::put('update/{id}', [AdminTinTucController::class, 'update'])->name('tin-tuc.update');
+        Route::get('sua-tin-tuc/{id}', [TinTucAdminController::class, 'viewUpdate'])->name('tin-tuc.sua-tin-tuc');
+        Route::put('update/{id}', [TinTucAdminController::class, 'update'])->name('tin-tuc.update');
 
         //delete
-        Route::get('delete/{id}', [AdminTinTucController::class, 'delete'])->name('tin-tuc.delete');
-        Route::post('xoa-nhieu', [AdminTinTucController::class, 'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
+        Route::get('delete/{id}', [TinTucAdminController::class, 'delete'])->name('tin-tuc.delete');
+        Route::post('xoa-nhieu', [TinTucAdminController::class, 'xoaNhieuTinTuc'])->name('tin-tuc.xoa-nhieu');
     });
 
     // Banner
