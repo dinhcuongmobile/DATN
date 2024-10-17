@@ -54,9 +54,9 @@
                                     <td class="col-3 align-middle">{!! Str::limit(strip_tags($item->noi_dung), 100, '...') !!}</td>
                                     <td class="col-2 align-middle">{{ $item->created_at }}</td>
                                     <td class="col-2 align-middle"><a href="{{ route('tin-tuc.sua-tin-tuc', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">Sửa</a> |
+                                            class="btn btn-warning btn-sm">Sửa</a> |
                                         <a href="{{ route('tin-tuc.delete', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">Xóa</a>
+                                            class="btn btn-danger btn-sm">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach

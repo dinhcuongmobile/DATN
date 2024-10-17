@@ -109,12 +109,11 @@
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Quản lý biến thể</a>
+                        <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Danh sách biến thể</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-ma-khuyen-mai')}}">Quản lý khuyến mại</a>
+                        <a class="collapse-item" href="{{route('san-pham.quan-ly-size')}}">Quản lý size</a>
+                        <a class="collapse-item" href="{{route('san-pham.quan-ly-mau-sac')}}">Quản lý màu sắc</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>
-                        <a class="collapse-item" href="{{route('san-pham.show-them-san-pham')}}" style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
                     </div>
                 </div>
             </li>
