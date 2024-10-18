@@ -12,7 +12,7 @@
     <title>Admin</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icons/favicon.png') }} ">
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/images/icon_web.png')}} ">
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">

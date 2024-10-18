@@ -22,7 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-
+    @yield('css')
 </head>
 
 <body class="bg-gradient-primary">
