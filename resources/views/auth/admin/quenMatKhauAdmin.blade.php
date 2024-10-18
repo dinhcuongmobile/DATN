@@ -13,7 +13,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-password-image">
-                                <img src="{{asset('assets/images/blog/layout-2.jpg')}}" alt="Err" width="380" height="420">
+                                <img src="{{asset('assets/images/blog/3.jpg')}}" alt="Err" width="440" height="400">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
