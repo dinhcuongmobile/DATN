@@ -66,9 +66,9 @@
                                         <td class="align-middle">{{$item->ngay_ket_thuc}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }} VND</td>
                                         <td class="text-center col-2 align-middle">
-                                            <a href="{{route('san-pham.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-secondary btn-sm">Sửa</a> |
+                                            <a href="{{route('san-pham.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-warning btn-sm">Sửa</a> |
                                             <a onclick="return confirm('Bạn chắc chắn muốn xóa mã khuyến mại này?')"
-                                            href="{{route('san-pham.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-secondary btn-sm">Xóa</a>
+                                            href="{{route('san-pham.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-danger btn-sm">Xóa</a>
                                         </td>
                                     </tr>
                                 @endforeach
