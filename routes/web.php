@@ -72,7 +72,7 @@ Route::prefix('/tai-khoan')->group(function(){
 Route::prefix('san-pham')->group(function () {
     Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
     Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
-    Route::get('chi-tiet-san-pham', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+    Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
 });
 
 Route::prefix('gio-hang')->group(function () {
@@ -192,7 +192,7 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         Route::get('xoa-size/{id}',[SanPhamAdminController::class, 'xoaSize'])->name('san-pham.xoa-size');
 
         Route::get('xoa-mau-sac/{id}',[SanPhamAdminController::class, 'xoaMauSac'])->name('san-pham.xoa-mau-sac');
-        
+
         Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
         Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
 

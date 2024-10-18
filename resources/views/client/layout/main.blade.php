@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/toastify.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <script defer src="{{asset('assets/css/landing_page.js')}}"></script>
     <script defer src="{{asset('assets/css/style.js')}}"></script>
     <link href="{{asset('assets/css/landing_page.css')}}" rel="stylesheet">
@@ -396,6 +397,7 @@
             </div>
         </section>
     </footer>
+    {{-- xem nhanh san pham quick view --}}
     <div class="modal theme-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -469,6 +471,8 @@
             </div>
         </div>
     </div>
+
+    {{-- cửa sổ nhỏ thêm thành công sản phẩm vào giỏ hàng --}}
     <div class="modal theme-modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
