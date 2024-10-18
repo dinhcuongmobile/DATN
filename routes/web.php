@@ -93,6 +93,11 @@ Route::prefix('/lien-he')->group(function () {
 
 Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
 
+// dia chỉ
+Route::prefix('dia-chi')->group(function () {
+    Route::get('quan-huyen/{matp}', [LocationController::class, 'showQuanHuyen'])->name('dia-chi.quan-huyen');
+    Route::get('phuong-xa/{maqh}', [LocationController::class, 'showPhuongXa'])->name('dia-chi.phuong-xa');
+});
 
 // admin
 Route::middleware('adminAuth')->prefix('admin')->group(function () {
@@ -232,10 +237,4 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         Route::get('xoa-banner/{id}', [BannerController::class, 'Delete'])->name('banner.delete');
         Route::post('xoa-nhieu-banner', [BannerController::class, 'deleteAll'])->name('banner.deleteAll');
     });
-});
-
-// dia chỉ
-Route::prefix('dia-chi')->group(function () {
-    Route::get('quan-huyen/{matp}', [LocationController::class, 'showQuanHuyen'])->name('dia-chi.quan-huyen');
-    Route::get('phuong-xa/{maqh}', [LocationController::class, 'showPhuongXa'])->name('dia-chi.phuong-xa');
 });
