@@ -183,7 +183,9 @@
                                                 @endphp
                                                 <p>
                                                     {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
-                                                    <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @if ($item->khuyen_mai>0)
+                                                        <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>
@@ -209,12 +211,14 @@
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                                        <a href="compare.html" tabindex="0">
-                                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
-                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
-                                                                <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
-                                                        </a>
+                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                                    </a>
+                                                    <a href="compare.html" tabindex="0">
+                                                        <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i>
+                                                    </a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
+                                                        <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-detail">
@@ -247,7 +251,9 @@
                                                 @endphp
                                                 <p>
                                                     {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
-                                                    <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @if ($item->khuyen_mai>0)
+                                                        <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>
@@ -311,7 +317,9 @@
                                                 @endphp
                                                 <p>
                                                     {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
-                                                    <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @if ($item->khuyen_mai>0)
+                                                        <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>

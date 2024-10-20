@@ -95,6 +95,7 @@ Route::prefix('/auth-admin')->group(function(){
     Route::get('/dang-xuat-admin', [AuthAdminController::class, 'dangXuatAdmin'])->name('auth.dang-xuat-admin');
 });
 
+
 // admin
 Route::middleware('adminAuth')->prefix('admin')->group(function () {
     Route::get('index', [HomeAdminController::class, 'homeAdmin'])->name('admin.index');
