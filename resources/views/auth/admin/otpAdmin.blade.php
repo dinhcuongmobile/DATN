@@ -67,6 +67,7 @@
                                         @csrf
                                         <input type="hidden" name="email" value="{{ request('v') }}">
                                         {{-- v là mã hóa email bên controller --}}
+
                                         <div class="form-group d-flex justify-content-between">
                                             <input type="password" class="otp-input form-control text-center @error('otp') is-invalid @enderror" maxlength="1" id="otp1" name="otp[]" autofocus placeholder="0">
                                             <input type="password" class="otp-input form-control text-center @error('otp') is-invalid @enderror" maxlength="1" id="otp2" name="otp[]" placeholder="0">
@@ -80,6 +81,7 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Nhập OTP..." name="otp" maxlength="4">
                                         </div> --}}
+
                                         <p class="Err text-danger otp-error mt-3">
                                             @error('otp')
                                                 {{ $message }}

@@ -12,6 +12,7 @@ use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -115,6 +116,13 @@ class TaiKhoanController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::user()->trang_thai == 0) {
+                // Kiểm tra nếu "Ghi nhớ" được chọn
+                if ($request->has('remember')) {
+                    Cookie::queue('remember_cookie', $request->email, 43200); // Lưu cookie trong 30 ngày
+                } else {
+                    Cookie::queue(Cookie::forget('remember_cookie'));
+                }
+
                 return response()->json([
                     'success' => true,
                     'redirect_url' => route('trang-chu.home'),
@@ -361,6 +369,9 @@ class TaiKhoanController extends Controller
 
     public function dangXuat()
     {
+        // Xóa cookie remember_cookie
+        Cookie::queue(Cookie::forget('remember_cookie'));
+
         Auth::logout();
 
         return redirect()->route('tai-khoan.dang-nhap');
