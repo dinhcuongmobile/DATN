@@ -77,7 +77,7 @@
                                     <div class="forgot-box">
                                         <div>
                                             <input class="custom-checkbox me-2" id="category1" type="checkbox"
-                                                name="text">
+                                                name="remember">
                                             <label for="category1">Ghi nhớ</label>
                                         </div>
                                         <a href="{{ route('tai-khoan.quen-mat-khau') }}">Quên Mật Khẩu?</a>
@@ -113,4 +113,25 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script>
+        // Lưu thông tin đăng nhập vào cookie
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lấy giá trị từ cookie
+            var email = getCookie('remember_cookie');
+            if (email) {
+                document.querySelector('input[name="email"]').value = email;
+                document.querySelector('input[name="remember"]').checked = true;
+            }
+        });
+
+        // Hàm lấy giá trị cookie
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+    </script>
 @endsection

@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'checkUser' => \App\Http\Middleware\CheckUserAuth::class,
         'checkUserAdmin' => \App\Http\Middleware\CheckUserAdminAuth::class,
+        'autoDangNhap' => \App\Http\Middleware\AutoDangNhap::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

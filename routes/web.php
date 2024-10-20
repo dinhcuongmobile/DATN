@@ -28,10 +28,58 @@ use App\Http\Controllers\Auth\Admin\AuthAdminController;
 |
 */
 
-Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
+// Client
+Route::middleware('autoDangNhap')->prefix('/')->group(function(){
+    Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
+    Route::get('/404', [HomeController::class, 'error404'])->name('404');
+    Route::prefix('/tai-khoan')->group(function(){
+        Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
+        Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
+        Route::get('/verify-email/{token}', [TaiKhoanController::class, 'verifyEmail'])->name('tai-khoan.verify-email');
+        Route::get('/gui-lai-email/{email}', [TaiKhoanController::class, 'guiLaiEmail'])->name('tai-khoan.gui-lai-email');
+    
+        Route::get('/dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap')->middleware('checkUser');
+        Route::post('/dang-nhap',[TaiKhoanController::class,'dangNhap'])->name('tai-khoan.dang-nhap');
+    
+        Route::get('/quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
+        Route::post('/quen-mat-khau/gui-otp',[TaiKhoanController::class,'guiOtp'])->name('tai-khoan.gui-otp');
+        Route::post('/quen-mat-khau/gui-lai-otp',[TaiKhoanController::class,'guiLaiOtp'])->name('tai-khoan.gui-lai-otp');
+        Route::get('/show-form-otp', [TaiKhoanController::class, 'showFormOtp'])->name('tai-khoan.form-otp');
+        Route::post('/verify-otp', [TaiKhoanController::class, 'verifyOtp'])->name('tai-khoan.verify-otp');
+        Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
+        Route::post('/dat-lai-mat-khau', [TaiKhoanController::class, 'datLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
+    
+        Route::get('/thong-tin-tai-khoan/{id}',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
+    
+        Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
+    });
+    
+    Route::prefix('san-pham')->group(function () {
+        Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
+        Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
+        Route::get('chi-tiet-san-pham', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+    });
+    
+    Route::prefix('gio-hang')->group(function () {
+        Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
+        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
+    });
+    
+    Route::prefix('tin-tuc')->group(function () {
+        Route::get('/', [TinTucController::class, 'tinTuc'])->name('tin-tuc.tin-tuc');
+        Route::get('/chi-tiet-tin-tuc', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
+        Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
+    });
+    
+    Route::prefix('/lien-he')->group(function () {
+        Route::get('/', [LienHeController::class, 'lienHe'])->name('lien-he.lien-he');
+        Route::post('/gui-lien-he', [LienHeController::class, 'guiLienHe'])->name('lien-he.gui-lien-he');
+    });
+    
+    Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
+});
 
-Route::get('/404', [HomeController::class, 'error404'])->name('404');
-
+// Đăng nhập admin
 Route::prefix('/auth-admin')->group(function(){
     Route::get('/dang-nhap-admin', [AuthAdminController::class, 'showDangNhapAdmin'])->name('auth.dang-nhap-admin')->middleware('checkUserAdmin');
     Route::post('/dang-nhap-admin', [AuthAdminController::class, 'dangNhapAdmin'])->name('auth.dang-nhap-admin');
@@ -46,53 +94,6 @@ Route::prefix('/auth-admin')->group(function(){
 
     Route::get('/dang-xuat-admin', [AuthAdminController::class, 'dangXuatAdmin'])->name('auth.dang-xuat-admin');
 });
-
-Route::prefix('/tai-khoan')->group(function(){
-    Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
-    Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
-    Route::get('/verify-email/{token}', [TaiKhoanController::class, 'verifyEmail'])->name('tai-khoan.verify-email');
-    Route::get('/gui-lai-email/{email}', [TaiKhoanController::class, 'guiLaiEmail'])->name('tai-khoan.gui-lai-email');
-
-    Route::get('/dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap')->middleware('checkUser');
-    Route::post('/dang-nhap',[TaiKhoanController::class,'dangNhap'])->name('tai-khoan.dang-nhap');
-
-    Route::get('/quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
-    Route::post('/quen-mat-khau/gui-otp',[TaiKhoanController::class,'guiOtp'])->name('tai-khoan.gui-otp');
-    Route::post('/quen-mat-khau/gui-lai-otp',[TaiKhoanController::class,'guiLaiOtp'])->name('tai-khoan.gui-lai-otp');
-    Route::get('/show-form-otp', [TaiKhoanController::class, 'showFormOtp'])->name('tai-khoan.form-otp');
-    Route::post('/verify-otp', [TaiKhoanController::class, 'verifyOtp'])->name('tai-khoan.verify-otp');
-    Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
-    Route::post('/dat-lai-mat-khau', [TaiKhoanController::class, 'datLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
-
-    Route::get('/thong-tin-tai-khoan/{id}',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
-
-    Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
-});
-
-Route::prefix('san-pham')->group(function () {
-    Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
-    Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
-    Route::get('chi-tiet-san-pham', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
-});
-
-Route::prefix('gio-hang')->group(function () {
-    Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
-    Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
-});
-
-Route::prefix('tin-tuc')->group(function () {
-    Route::get('/', [TinTucController::class, 'tinTuc'])->name('tin-tuc.tin-tuc');
-    Route::get('/chi-tiet-tin-tuc', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
-    Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
-});
-
-Route::prefix('/lien-he')->group(function () {
-    Route::get('/', [LienHeController::class, 'lienHe'])->name('lien-he.lien-he');
-    Route::post('/gui-lien-he', [LienHeController::class, 'guiLienHe'])->name('lien-he.gui-lien-he');
-});
-
-Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
-
 
 // admin
 Route::middleware('adminAuth')->prefix('admin')->group(function () {
