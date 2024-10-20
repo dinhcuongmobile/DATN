@@ -22,6 +22,7 @@ class User extends Authenticatable
         'so_dien_thoai',
         'dia_chi',
         'vai_tro_id',
+        'remember_token',
         'email_verified_at',
         'email_verification_token',
         'password_reset_token',
@@ -44,5 +45,25 @@ class User extends Authenticatable
     public function vaiTro()
     {
         return $this->belongsTo(VaiTro::class, 'vai_tro_id');
+    }
+
+    public function danhGias()
+    {
+        return $this->hasMany(DanhGia::class, 'user_id');
+    }
+
+    public function binhLuans()
+    {
+        return $this->hasMany(BinhLuan::class, 'user_id');
+    }
+
+    public function donHangs()
+    {
+        return $this->hasMany(DonHang::class, 'user_id');
+    }
+
+    public function gioHangs()
+    {
+        return $this->hasMany(GioHang::class, 'user_id');
     }
 }

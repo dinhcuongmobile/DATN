@@ -32,7 +32,7 @@
             </div>
             <div>
                 <button type="submit" name="submit" class="btn btn-success">Xác nhận</button>
-                <a href="{{route('san-pham.quan-ly-size')}}"><button type="button" class="btn btn-success">Quay lại</button></a>
+                <a href="{{route('san-pham.quan-ly-size')}}"><button type="button" class="btn btn-secondary">Quay lại</button></a>
             </div>
         </form>
     </div>

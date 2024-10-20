@@ -88,9 +88,9 @@ tapTopElement.addEventListener('click', function () {
         smHorizontal.classList.remove('open');
     });
 
- 
+
 /*============================
-        07.cart js 
+        07.cart js
 ============================*/
 
 function initializeCounter(counterId, totalId, addBtnId, removeBtnId) {
@@ -149,13 +149,13 @@ initializeCounter("quantity3", "total3", "btn-add3", "btn-remove3");
 
 
 /*============================
-           05.Tost js 
+           05.Tost js
    ============================*/
 
 document.querySelectorAll(".wishlist-icon").forEach(function (element) {
     element.addEventListener("click", function () {
         Toastify({
-            text: "Success! Item Successfully added in wishlist.!!",
+            text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
             duration: 2500,
             close: true,
         }).showToast();
@@ -178,7 +178,7 @@ for (var i = 0; i < footerButton.length; ++i) {
 
 
 /*====================
-       title change 
+       title change
    =======================*/
 var title = document.title;
 
@@ -191,7 +191,7 @@ window.addEventListener('blur', function () {
 });
 
 /*====================
-   other js 
+   other js
 =======================*/
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -235,7 +235,7 @@ colorItems.forEach(function (item) {
 
 
 /*====================
-       offcanvas cart 
+       offcanvas cart
    =======================*/
 document.addEventListener('DOMContentLoaded', function () {
     var deleteIcons = document.querySelectorAll('.delete-icon');
@@ -261,19 +261,19 @@ wishlistProduct.forEach(el => {
     });
 });
 
-  
+
 
 /*====================
-      Header responsive 
+      Header responsive
    =======================*/
 
 document.addEventListener('DOMContentLoaded', () => {
     function handleNavClick(event) {
       const clickedElement = event.target.closest('li');
-  
+
       if (clickedElement && !clickedElement.classList.contains('mobile-back')) {
         const isActive = clickedElement.classList.contains('show');
-  
+
         // Remove 'show' class from all <li> elements
         document.querySelectorAll('#sm-horizontal li').forEach(li => {
           li.classList.remove('show');
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.querySelector('.nav-submenu').classList.remove('show');
           }
         });
-  
+
         // If the clicked element didn't have the 'show' class, add it
         if (!isActive) {
           clickedElement.classList.add('show');
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  
+
     function handleResize() {
       if (window.innerWidth <= 1200) {
         document.getElementById('sm-horizontal').addEventListener('click', handleNavClick);
@@ -324,10 +324,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     }
-  
+
     // Initial check
     handleResize();
-  
+
     // Attach resize event listener
     window.addEventListener('resize', handleResize);
   });

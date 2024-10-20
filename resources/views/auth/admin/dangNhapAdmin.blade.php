@@ -12,11 +12,13 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                <img src="{{asset('assets/images/Bìa Sơ Mi Bò Xanh.webp')}}" alt="Err" width="450" height="450">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Namad Store</h1>
+                                        <img src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Err" width="280" height="90">
                                     </div>
                                     @if (session('success'))
                                         <div class="alert alert-success" id="success-alert">
@@ -59,11 +61,11 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block"
-                                            onsubmit="ajaxAuth()">Đăng nhập</button>
+                                            onsubmit="ajaxAuth()">Đăng Nhập</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('auth.quen-mat-khau-admin') }}">Quên mật khẩu</a>
+                                        <a class="small" href="{{ route('auth.quen-mat-khau-admin') }}">Quên Mật Khẩu?</a>
                                     </div>
                                 </div>
                             </div>
