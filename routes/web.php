@@ -193,7 +193,7 @@ Route::middleware('adminAuth')->prefix('admin')->group(function () {
         Route::get('xoa-size/{id}',[SanPhamAdminController::class, 'xoaSize'])->name('san-pham.xoa-size');
 
         Route::get('xoa-mau-sac/{id}',[SanPhamAdminController::class, 'xoaMauSac'])->name('san-pham.xoa-mau-sac');
-        
+
         Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
         Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
 

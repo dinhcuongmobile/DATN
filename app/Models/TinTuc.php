@@ -12,11 +12,20 @@ class TinTuc extends Model
 
     protected $table = 'tin_tucs';
     protected $fillable = [
+        'danh_muc_id',
         'hinh_anh',
         'tieu_de',
         'noi_dung',
     ];
-    public $timestamps = false;
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
+    public function danhMucTinTuc()
+    {
+        return $this->belongsTo(DanhMucTinTuc::class, 'danh_muc_id');
+    }
 
     public function loadAllTinTuc(){
         $query=DB::table('tin_tucs')

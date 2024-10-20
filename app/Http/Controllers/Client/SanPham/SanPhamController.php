@@ -11,7 +11,7 @@ class SanPhamController extends Controller
 
     }
 
-    public function chiTietSanPham(){
+    public function chiTietSanPham(int $id){
         return view('client.sanPham.chiTietSanPham');
     }
 
