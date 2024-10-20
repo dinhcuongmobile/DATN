@@ -81,7 +81,7 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
 
 // Đăng nhập admin
 Route::prefix('/auth-admin')->group(function(){
-    Route::get('/dang-nhap-admin', [AuthAdminController::class, 'showDangNhapAdmin'])->name('auth.dang-nhap-admin')->middleware('checkUserAdmin');
+    Route::get('/dang-nhap-admin', [AuthAdminController::class, 'showDangNhapAdmin'])->name('auth.dang-nhap-admin')->middleware('checkUserAdmin:admin');
     Route::post('/dang-nhap-admin', [AuthAdminController::class, 'dangNhapAdmin'])->name('auth.dang-nhap-admin');
 
     Route::get('/quen-mat-khau-admin', [AuthAdminController::class, 'showQuenMatKhau'])->name('auth.quen-mat-khau-admin');
@@ -96,7 +96,7 @@ Route::prefix('/auth-admin')->group(function(){
 });
 
 // admin
-Route::middleware('adminAuth')->prefix('admin')->group(function () {
+Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
     Route::get('index', [HomeAdminController::class, 'homeAdmin'])->name('admin.index');
 
     //tai khoan

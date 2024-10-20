@@ -27,9 +27,9 @@ class AuthAdminController extends Controller
 
     public function dangNhapAdmin(DangNhapRequest $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (Auth::user()->trang_thai == 0) {
-                if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 2) {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::guard('admin')->user()->trang_thai == 0) {
+                if (Auth::guard('admin')->user()->vai_tro_id == 1 || Auth::guard('admin')->user()->vai_tro_id == 2) {
                     // return redirect()->route('admin.index');
                     return response()->json([
                         'success' => true,
@@ -37,7 +37,7 @@ class AuthAdminController extends Controller
                     ]);
                 }
 
-                Auth::logout();
+                Auth::guard('admin')->logout();
 
                 // return redirect()->back()->with('error', 'Tài khoản này không đủ quyền truy cập !');
                 Session::flash('error', 'Tài khoản này không đủ quyền truy cập !');
@@ -46,8 +46,8 @@ class AuthAdminController extends Controller
                     'success' => true,
                     'redirect_url' => url()->previous(),
                 ]);
-            } elseif (Auth::user()->trang_thai == 2) {
-                Auth::logout();
+            } elseif (Auth::guard('admin')->user()->trang_thai == 2) {
+                Auth::guard('admin')->logout();
 
                 // return redirect()->back()->with('error', 'Tài khoản này chưa được xác thực !');
                 Session::flash('error', 'Tài khoản này không đủ quyền truy cập !');
@@ -57,7 +57,7 @@ class AuthAdminController extends Controller
                     'redirect_url' => url()->previous(),
                 ]);
             } else {
-                Auth::logout();
+                Auth::guard('admin')->logout();
 
                 // return redirect()->back()->with('error', 'Tài khoản này đã bị khóa !');
                 Session::flash('error', 'Tài khoản này đã bị khóa !');
@@ -317,7 +317,7 @@ class AuthAdminController extends Controller
 
     public function dangXuatAdmin()
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         return redirect()->route('auth.dang-nhap-admin');
     }
