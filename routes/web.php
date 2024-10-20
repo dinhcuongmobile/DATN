@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
+use App\Http\Controllers\Admin\LienHe\LienHeController as LienHeLienHeController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
@@ -233,6 +234,10 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         // Xóa
         Route::get('xoa-banner/{id}', [BannerController::class, 'Delete'])->name('banner.delete');
         Route::post('xoa-nhieu-banner', [BannerController::class, 'deleteAll'])->name('banner.deleteAll');
+    });
+
+    Route::prefix('lienHe')->group(function (){
+        Route::get('danh-sach',[LienHeLienHeController::class,'dsLienHe'])->name('lienhe.dsLienHe');
     });
 });
 
