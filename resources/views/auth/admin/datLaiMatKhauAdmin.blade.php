@@ -7,11 +7,13 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image">
+                        <img src="{{asset('assets/images/blog/layout-2.jpg')}}" alt="Err" width="380" height="420">
+                    </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Đặt lại mật khẩu</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Đặt Lại Mật Khẩu</h1>
                             </div>
                             @if (session('success'))
                                 <div class="alert alert-success" id="error-alert">
@@ -64,11 +66,11 @@
                                     </p>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block" onsubmit="ajaxAuth()">Xác
-                                    nhận</button>
+                                    Nhận</button>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="{{ route('auth.dang-nhap-admin') }}">Quay lại đăng nhập</a>
+                                <a class="small" href="{{ route('auth.dang-nhap-admin') }}">Quay Lại Đăng Nhập</a>
                             </div>
                         </div>
                     </div>
