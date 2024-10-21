@@ -48,7 +48,7 @@
                     <div class="col-12 p-0">
                         <div class="mobile-fix-option">
                             <ul>
-                                <li> <a href="#"><i class="iconsax" data-icon="home-1"></i>Home</a></li>
+                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Search</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Cart</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="heart"></i>My Wish</a></li>

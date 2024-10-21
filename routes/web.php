@@ -59,6 +59,7 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
         Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
         Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+        Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
     });
 
     Route::prefix('gio-hang')->group(function () {
