@@ -5,7 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Collection Slider</h4>
+                    <h4>Bộ Sưu Tập</h4>
                 </div>
             </div>
         </div>
@@ -68,11 +68,10 @@
                         <h5>Back </h5><i class="back-button fa-solid fa-xmark"></i>
                     </div>
                     <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="search-box"><input type="search" name="text" placeholder="Search here..."><i
+                        <div class="search-box"><input type="search" name="text" placeholder="Tìm kiếm..."><i
                                 class="iconsax" data-icon="search-normal-2"></i></div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Applied
-                                        Filters</span><span>view all</span></button></h2>
+                            <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Bộ lọc</span><span>Xem tất cả</span></button></h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapse">
                                 <div class="accordion-body">
                                     <ul class="tags">
@@ -87,53 +86,48 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseEight"><span>Collections</span></button>
+                                    data-bs-target="#panelsStayOpen-collapseEight"><span>Bộ Sưu Tập</span></button>
                             </h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseEight">
                                 <div class="accordion-body">
                                     <ul class="collection-list">
                                         <li> <input class="custom-checkbox" id="category10" type="checkbox"
-                                                name="text"><label for="category10">All products</label></li>
+                                                name="text"><label for="category10">Tất cả sản phẩm</label></li>
                                         <li> <input class="custom-checkbox" id="category11" type="checkbox"
-                                                name="text"><label for="category11">Best sellers</label></li>
+                                                name="text"><label for="category11">Sản phẩm bán chạy nhất</label></li>
                                         <li> <input class="custom-checkbox" id="category12" type="checkbox"
-                                                name="text"><label for="category12">New arrivals</label></li>
+                                                name="text"><label for="category12">Hàng mới về</label></li>
                                         <li> <input class="custom-checkbox" id="category13" type="checkbox"
-                                                name="text"><label for="category13">Accessories</label></li>
+                                                name="text"><label for="category13">Phụ kiện </label></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseTwo"><span>Categories</span></button>
+                                    data-bs-target="#panelsStayOpen-collapseTwo"><span>Giỏ hàng</span></button>
                             </h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseTwo">
                                 <div class="accordion-body">
                                     <ul class="catagories-side theme-scrollbar">
                                         <li> <input class="custom-checkbox" id="category1" type="checkbox"
-                                                name="text"><label for="category1">Fashion (30)</label></li>
+                                                name="text"><label for="category1">Thời trang (30)</label></li>
                                         <li> <input class="custom-checkbox" id="category2" type="checkbox"
-                                                name="text"><label for="category2">Trends</label></li>
+                                                name="text"><label for="category2">Xu hướng</label></li>
                                         <li> <input class="custom-checkbox" id="category3" type="checkbox"
-                                                name="text"><label for="category3">Women’s Shirts</label></li>
+                                                name="text"><label for="category3">Áo sơ mi nữ</label></li>
                                         <li> <input class="custom-checkbox" id="category4" type="checkbox"
-                                                name="text"><label for="category4">Top T-shirt</label></li>
+                                                name="text"><label for="category4"></label></li>
                                         <li> <input class="custom-checkbox" id="category5" type="checkbox"
                                                 name="text"><label for="category5">Denim (8)</label></li>
-                                        <li> <input class="custom-checkbox" id="category6" type="checkbox"
-                                                name="text"><label for="category6">Grains & Beans (8)</label></li>
-                                        <li> <input class="custom-checkbox" id="category7" type="checkbox"
-                                                name="text"><label for="category7">Cosmopolis</label></li>
-                                        <li> <input class="custom-checkbox" id="category8" type="checkbox"
-                                                name="text"><label for="category8">Metropolis</label></li>
+                                       
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseFour"><span>Filter</span></button></h2>
+                                    data-bs-target="#panelsStayOpen-collapseFour"><span>Bộ lọc</span></button></h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseFour">
                                 <div class="accordion-body">
                                     <div class="range-slider"><input class="range-slider-input" type="range" min="0"
@@ -146,7 +140,7 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne"><span>Color</span></button></h2>
+                                    data-bs-target="#panelsStayOpen-collapseOne"><span>Màu sắc</span></button></h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseOne">
                                 <div class="accordion-body">
                                     <div class="color-box">
@@ -165,42 +159,41 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseSix"><span>Availability</span></button>
+                                    data-bs-target="#panelsStayOpen-collapseSix"><span>Hàng sẵn </span></button>
                             </h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseSix">
                                 <div class="accordion-body">
                                     <ul class="catagories-side">
                                         <li> <input class="custom-radio" id="category9" type="radio"
-                                                checked="checked" name="radio"><label for="category9">In
-                                                Stock(3)</label></li>
+                                                checked="checked" name="radio"><label for="category9">Có sẵn trong kho(3)</label></li>
                                         <li> <input class="custom-radio" id="category14" type="radio"
-                                                name="radio"><label for="category14">Out Of Stock(1)</label></li>
+                                                name="radio"><label for="category14">Hàng đặt(1)</label></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
-                            <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Shipping
-                                        & Delivery</span><span></span></button></h2>
+                            <h2 class="accordion-header tags-header"><button class="accordion-button"><span>vận chuyển
+                                        & Giao hàng</span><span></span></button></h2>
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseSeven">
                                 <div class="accordion-body">
                                     <ul class="widget-card">
                                         <li><i class="iconsax" data-icon="truck-fast"></i>
                                             <div>
-                                                <h6>Free Shipping</h6>
+                                                <h6>Miễn phí vận chuyển</h6>
                                                 <p>Free shipping for all US order</p>
                                             </div>
                                         </li>
                                         <li><i class="iconsax" data-icon="headphones"></i>
                                             <div>
-                                                <h6>Support 24/7</h6>
-                                                <p>Free shipping for all US order</p>
+                                                <h6>Hỗ trợ 24/7</h6>
+                                                <p>Miễn phí vận chuyện cho tất cả đơn hàng nước ngoài</p>
                                             </div>
                                         </li>
                                         <li><i class="iconsax" data-icon="exchange"></i>
                                             <div>
-                                                <h6>30 Days Return</h6>
-                                                <p>Free shipping for all US order</p>
+                                                <h6>Trong khoảng 30 ngày</h6>
+                                                <p>Miễn phí vận chuyện cho tất cả đơn hàng nước ngoài</p>
                                             </div>
                                         </li>
                                     </ul>
@@ -214,7 +207,7 @@
                 <div class="sticky">
                     <div class="top-filter-menu">
                         <div> <a class="filter-button btn">
-                                <h6> <i class="iconsax" data-icon="filter"></i>Filter Menu </h6>
+                                <h6> <i class="iconsax" data-icon="filter"></i>Danh sách bộ lọc </h6>
                             </a>
                             <div class="category-dropdown"><label for="cars">Sort By :</label><select
                                     class="form-select" id="cars" name="carlist">
@@ -255,7 +248,7 @@
                             <div>
                                 <div class="product-box-3">
                                     <div class="img-wrapper">
-                                        <div class="label-block"><span class="lable-1">NEW</span><a
+                                        <div class="label-block"><span class="lable-1">Mới</span><a
                                                 class="label-2 wishlist-icon" href="javascript:void(0)"
                                                 tabindex="0"><i class="iconsax" data-icon="heart" aria-hidden="true"
                                                     data-bs-toggle="tooltip"
@@ -281,25 +274,25 @@
                                                 <li>
                                                     <div class="timer">
                                                         <div class="days"></div>
-                                                    </div><span class="title">Days</span>
+                                                    </div><span class="title">Ngày</span>
                                                 </li>
                                                 <li class="dot"> <span>:</span></li>
                                                 <li>
                                                     <div class="timer">
                                                         <div class="hours"></div>
-                                                    </div><span class="title">Hours</span>
+                                                    </div><span class="title">Giờ</span>
                                                 </li>
                                                 <li class="dot"> <span>:</span></li>
                                                 <li>
                                                     <div class="timer">
                                                         <div class="minutes"></div>
-                                                    </div><span class="title">Min</span>
+                                                    </div><span class="title">Phút</span>
                                                 </li>
                                                 <li class="dot"> <span>:</span></li>
                                                 <li>
                                                     <div class="timer">
                                                         <div class="seconds"></div>
-                                                    </div><span class="title">Sec</span>
+                                                    </div><span class="title">Giây</span>
                                                 </li>
                                             </ul>
                                         </div>
