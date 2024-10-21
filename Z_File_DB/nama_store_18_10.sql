@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 15, 2024 lúc 04:27 PM
+-- Thời gian đã tạo: Th10 18, 2024 lúc 03:06 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -56,6 +56,101 @@ CREATE TABLE `bien_thes` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `bien_thes`
+--
+
+INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, `ma_mau`, `so_luong`, `created_at`, `updated_at`) VALUES
+(8, 7, 'uploads/sanPham/Nunm2vjiPTw7LF2NKSH1zS6gj2o6SvaYKEm9oJki.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:03:23', '2024-10-16 08:03:23'),
+(9, 8, 'uploads/sanPham/0ibBfNsQGY3it5vAPdK5pTZiUbU5Qx1bRNekwCAL.webp', 'M', 'Đen', '#000000', 350, '2024-10-16 08:14:48', '2024-10-16 08:14:58'),
+(10, 8, 'uploads/sanPham/jNfOEA4DPljchdkDdnJNw1k45x9Hmr7h8VC7QmCo.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:15:22', '2024-10-16 08:15:22'),
+(11, 8, 'uploads/sanPham/n4z0Pz9JxvCq8HQPZFbafWK1X7oqZqJJ2LPGQpGn.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:15:40', '2024-10-16 08:15:40'),
+(12, 8, 'uploads/sanPham/rQXt2OPeWjYPevuLOtQRdxukPSjMjyFxT9QHAtDV.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:15:56', '2024-10-16 08:15:56'),
+(13, 8, 'uploads/sanPham/3tsIypXvaryMePDqnfWX0PmHVKD5jVuWLB7ZKx87.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:01', '2024-10-16 08:17:01'),
+(14, 8, 'uploads/sanPham/xu93BsT4qtPDNFfWJsAqI1EZTMsno1udTHwUDlBh.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:13', '2024-10-16 08:17:13'),
+(15, 8, 'uploads/sanPham/zCHJKPABZYmiffCfG3BfVYmwmW9oHNMPpCBFE9OC.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:37', '2024-10-16 08:17:37'),
+(16, 8, 'uploads/sanPham/aFQp6fK6zaA8keQl3UfTh5GfV8nplwZoDy4jAKpP.webp', 'XXL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:46', '2024-10-16 08:17:46'),
+(17, 8, 'uploads/sanPham/LzxP5dVnVq8kgC3ihGNx6qWAsaJ02V9E67yAUri0.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:28', '2024-10-16 08:18:28'),
+(18, 8, 'uploads/sanPham/g0wIXM5Td8hRDJtEk3LRLKnegyjEaCxMwydutXQf.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:40', '2024-10-16 08:18:40'),
+(19, 8, 'uploads/sanPham/j0IglOuzIJvtxQa0ORmwPuzGFmVN0nnDiVmIep3F.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:53', '2024-10-16 08:18:53'),
+(20, 8, 'uploads/sanPham/ssgna2Q5XC6V2wrreT90MTg36YRdhoM8bmgxPdDg.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:19:15', '2024-10-16 08:19:15'),
+(21, 8, 'uploads/sanPham/ETAbCNONxsaAMdb0ptybHKA6DWvagW9QzseUSXyj.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:21:50', '2024-10-16 08:21:50'),
+(22, 8, 'uploads/sanPham/eErdZZ9kG06cRbIUoCOzxWFpr5F0y7OjcmslIWj3.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:01', '2024-10-16 08:22:01'),
+(23, 8, 'uploads/sanPham/bTRdfRR9b5y92bJj7m2qdAmjsp9wZCY0AlQHdPTm.webp', 'XL', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:13', '2024-10-16 08:22:13'),
+(24, 8, 'uploads/sanPham/4QSVzu6sZxFnlWuUOJ7ts7NRDBupUlEYOdCpBM3A.webp', 'XXL', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:35', '2024-10-16 08:22:35'),
+(25, 9, 'uploads/sanPham/TqsgSVFlIBN3KAqBYWVfEC6T1zjzt3ynUPA0EcDw.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:27:49', '2024-10-16 08:27:49'),
+(26, 9, 'uploads/sanPham/SX9AkdSwG1mJCMrKUj4CRJ3z0bvpm4VXTu5L7tWB.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:04', '2024-10-16 08:28:04'),
+(27, 9, 'uploads/sanPham/up4ySWaAgvtKqHWQ1akJINQubLShyttmpvG8if6F.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:29', '2024-10-16 08:28:29'),
+(28, 9, 'uploads/sanPham/dVR1uJTsncpbUq014IAkkXGeoey2YWKiVvVEBs9U.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:44', '2024-10-16 08:28:44'),
+(29, 10, 'uploads/sanPham/pzRMsKeDpbt68iW4xWvZTTEIvW9gnygwatiKEYCL.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:31:48', '2024-10-16 08:31:48'),
+(30, 10, 'uploads/sanPham/Ase4vPpZJmmHRDNNFQC24fzFrey2efoWxp8hkjAB.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:09', '2024-10-16 08:32:09'),
+(31, 10, 'uploads/sanPham/rp9BPAwzh38SkbmPuEdSrXHLHMzzIe9Raw3R6Ynn.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:20', '2024-10-16 08:32:20'),
+(32, 10, 'uploads/sanPham/wv8IwG1FRCylm7pig2MK4hVIiEkjN16iiFNQSiCS.webp', 'XXL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:32', '2024-10-16 08:32:32'),
+(33, 10, 'uploads/sanPham/7ibTJq6Z7afQkrjQgtz5KZkb5KDP4Q8QOcOxqXzx.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:06', '2024-10-16 08:33:06'),
+(34, 10, 'uploads/sanPham/n8UaeG7PYQDvxnrj9PFpYUKZNMgWwoboo6W8xSJZ.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:19', '2024-10-16 08:33:19'),
+(35, 10, 'uploads/sanPham/cXxoubh8QkAmcnoJYE4rhzLJYhbxkOa7SxeTJKzQ.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:31', '2024-10-16 08:33:31'),
+(36, 10, 'uploads/sanPham/bJuFBkyAdYzyvzswo2xyWB34rOfvJ0xBQ0zLe5Bj.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:43', '2024-10-16 08:33:43'),
+(37, 10, 'uploads/sanPham/EG6r8GGex7w1wWMv8ZX0kep172VquPhxmT4XDXWT.webp', 'M', 'Đen', '#000000', 400, '2024-10-16 08:34:33', '2024-10-16 08:34:33'),
+(38, 10, 'uploads/sanPham/BsNYAY7WyafeB4CXoQXk9Z6PHPJ5d6buVwnQBCcc.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:34:45', '2024-10-16 08:34:45'),
+(39, 10, 'uploads/sanPham/bedyk7cdvjVawsXAQ9bnb0suJD9jWLeGFobVrT4D.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:35:02', '2024-10-16 08:35:02'),
+(40, 10, 'uploads/sanPham/n74x7pg0HpeT98TfOGzajFTZR4ALsfNQQBFqp6Rt.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:35:14', '2024-10-16 08:35:14'),
+(41, 10, 'uploads/sanPham/0hNJWf5GZRb2qr40EZUxKFfWuCnjU0nt9A0gcyvw.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:35:53', '2024-10-16 08:35:53'),
+(42, 10, 'uploads/sanPham/HAbLfzR0s9hZq6OlQr3WV0LZfb4uEFim0CCm0cRO.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:09', '2024-10-16 08:36:09'),
+(43, 10, 'uploads/sanPham/UNhUxNAsSuaFpPX0lmK4BBCaZzZmZkeCMle1TUm2.webp', 'XL', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:20', '2024-10-16 08:36:20'),
+(44, 10, 'uploads/sanPham/lgVu0WH59E69R3tvjwWzcp2JDWqj0L6zMf7asdo9.webp', 'XXL', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:33', '2024-10-16 08:36:33'),
+(45, 11, 'uploads/sanPham/UYnAlLSGsLe0B68Du8gP2to3EGXeRRsChQD0KWgj.webp', 'M', 'Đen', '#000000', 400, '2024-10-16 08:41:07', '2024-10-16 08:41:07'),
+(46, 11, 'uploads/sanPham/Tsxbbw86pGnqueUwRwtNSG7gS3smlBuCpFrkdBD3.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:41:19', '2024-10-16 08:41:19'),
+(47, 11, 'uploads/sanPham/XVU1DY0msBzPYLLbWjxqXjosj8kTnTIpM63jL06Q.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:41:34', '2024-10-16 08:41:34'),
+(48, 11, 'uploads/sanPham/AgXpzyDUfgrSk9wOGJFWsioT7KtE2lWhlYq8BpBZ.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:41:46', '2024-10-16 08:41:46'),
+(49, 11, 'uploads/sanPham/vbxObYmDLfPjQbD4cLCAaTGtLdFERLxew0Z9uUBG.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:42:36', '2024-10-16 08:42:36'),
+(50, 11, 'uploads/sanPham/obFxA1ixBett26mT5iWPvJytGT6VcyIVtJJVUkCp.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:42:49', '2024-10-16 08:42:49'),
+(51, 11, 'uploads/sanPham/iM3t3Ch5eTqfMil6wnhpvV7oFSidp1zRL33eLEIV.webp', 'XL', 'Xanh Than', '#003366', 400, '2024-10-16 08:43:00', '2024-10-16 08:43:00'),
+(52, 11, 'uploads/sanPham/cxDjwXoCNnNqnkCPkAWXIPsBKzJ0xCW4zKsULLK0.webp', 'XXL', 'Xanh Than', '#003366', 400, '2024-10-16 08:43:10', '2024-10-16 08:43:10'),
+(53, 12, 'uploads/sanPham/hTsDSaXNkO1AoXsT2eNZ3hUNSwat8E7CsU8u29EC.webp', 'M', 'Đen', '#000000', 400, '2024-10-16 08:46:18', '2024-10-16 08:46:18'),
+(54, 12, 'uploads/sanPham/m8g1oNRuNhlDJBWF6AIz25hIkUsJwzggcomLrgqn.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:46:31', '2024-10-16 08:46:31'),
+(55, 12, 'uploads/sanPham/4JRXN6R80pzmMPaYGLlW9IJCQWJSuLABXxcC1IoA.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:46:42', '2024-10-16 08:46:42'),
+(56, 12, 'uploads/sanPham/t6aihFtXr7d2Cqhqc8tz5ouSh22ZgheFFivNEzn1.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:46:53', '2024-10-16 08:46:53'),
+(57, 12, 'uploads/sanPham/A3h9BXVLyHA6iDtymUkZLMIK3PHSSvrpd3iJxNcF.webp', 'M', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:15', '2024-10-16 08:47:15'),
+(58, 12, 'uploads/sanPham/QS0ZUEkZoaNDf1vhAwRlh0uB2kCNMIULmJY1aO2E.webp', 'L', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:27', '2024-10-16 08:47:27'),
+(59, 12, 'uploads/sanPham/IKMeL1zd8J15GllscDWThFotxNCBmd1fUHBoTP9h.webp', 'XL', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:38', '2024-10-16 08:47:38'),
+(60, 12, 'uploads/sanPham/A1SnDcCaMMhMSgbuACqhNiAK8FL3Z4RVRO43wWL5.webp', 'XXL', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:48', '2024-10-16 08:47:48'),
+(61, 12, 'uploads/sanPham/H4up3gwssdKfKMnaEwTbj75ZcTYmNDvyryEsFESo.webp', 'M', 'Xám', '#808080', 400, '2024-10-16 08:48:28', '2024-10-16 08:48:28'),
+(62, 12, 'uploads/sanPham/MicErds8vIMsx3W2AbWmLuC4zApwip32mra94e7p.webp', 'L', 'Xám', '#808080', 400, '2024-10-16 08:48:38', '2024-10-16 08:48:38'),
+(63, 12, 'uploads/sanPham/Wfpat3ytgM9lCK5nipDFRriJwdy9rTSDJE0EmCfg.webp', 'XL', 'Xám', '#808080', 400, '2024-10-16 08:48:48', '2024-10-16 08:48:48'),
+(64, 12, 'uploads/sanPham/8VCSOo0C4tLU8FQQBVGWdlXe9QuCI10aTq00MkLa.webp', 'XXL', 'Xám', '#808080', 400, '2024-10-16 08:48:58', '2024-10-16 08:48:58'),
+(65, 13, 'uploads/sanPham/ND2zzVdAO3duHyzRr19oDwOKacScQTilLsT9Xh4B.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:23', '2024-10-16 08:51:23'),
+(66, 13, 'uploads/sanPham/9wANlIcBqGbx5s4LzSjQldw07Kz5NTm0lrK95HTf.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:38', '2024-10-16 08:51:38'),
+(67, 13, 'uploads/sanPham/Bfhfhzh7OpbLJHE3b8XxZMUyKoyfeiS78HnTsYhe.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:53', '2024-10-16 08:51:53'),
+(68, 13, 'uploads/sanPham/mSnqLyUM7rNIx98LOhkx7AjGyDgQdA7GuxWO2WmT.webp', 'XXL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:52:07', '2024-10-16 08:52:07'),
+(69, 13, 'uploads/sanPham/pbrL5eUPd3EVbCzhWTPwFMxaokP1fuD6MrNnyeRm.webp', 'M', 'Đen', '#000000', 400, '2024-10-16 08:52:48', '2024-10-16 08:52:48'),
+(70, 13, 'uploads/sanPham/BoUyqevSxBp7VqOnhwT9vrPZCH5Puxe2BYRX7IeE.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:53:02', '2024-10-16 08:53:02'),
+(71, 13, 'uploads/sanPham/8OshmR4ZqChqWGy8CRhRWh5AsWYJ1kqieGkwm7FJ.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:53:17', '2024-10-16 08:53:17'),
+(72, 13, 'uploads/sanPham/ZYYYUA2MVRkvHuFyl83EkaYyP7eKczuB521hG8Dy.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:53:27', '2024-10-16 08:53:27'),
+(73, 13, 'uploads/sanPham/49n1xwK1YdwbNduieVnpmuASBlUMo79FrZXAyX4a.webp', 'M', 'Be', '#F5F5DC', 400, '2024-10-16 08:54:40', '2024-10-16 08:54:40'),
+(74, 13, 'uploads/sanPham/pL4AAYaxpl8FSr3CWPPJzmrWpCVjePj6200GwtiS.webp', 'L', 'Be', '#F5F5DC', 400, '2024-10-16 08:54:55', '2024-10-16 08:54:55'),
+(75, 13, 'uploads/sanPham/0K6UeOYvAc5q5Z9crzfha9nwmTehFlb2yqNRr72I.webp', 'XL', 'Be', '#F5F5DC', 400, '2024-10-16 08:55:07', '2024-10-16 08:55:07'),
+(76, 13, 'uploads/sanPham/YTOfBePSU7pil15hm9GVVKmTKcAj80KV7YwPr2Dp.webp', 'XXL', 'Be', '#F5F5DC', 400, '2024-10-16 08:55:17', '2024-10-16 08:55:17'),
+(77, 13, 'uploads/sanPham/Iq6639MQm9VFAwGIk70Sy4hk56AIZtGslwxkeiDI.webp', 'M', 'Nâu', '#8B4513', 400, '2024-10-16 08:55:40', '2024-10-16 08:55:40'),
+(78, 13, 'uploads/sanPham/3luVE7Tv3a5RtcITWqth4rrPzW6FNMPr8FJO7j3Z.webp', 'L', 'Nâu', '#8B4513', 400, '2024-10-16 08:55:50', '2024-10-16 08:55:50'),
+(79, 13, 'uploads/sanPham/6AcG01s1kCyCdNRPXH3JI7V9TGPsN7CkQlr0bi08.webp', 'XL', 'Nâu', '#8B4513', 400, '2024-10-16 08:56:01', '2024-10-16 08:56:01'),
+(80, 13, 'uploads/sanPham/ut8B3SF5TYqdvnoFQWlcfGlPLwCHdOZSfHtyBOvi.webp', 'XXL', 'Nâu', '#8B4513', 400, '2024-10-16 08:56:13', '2024-10-16 08:56:13'),
+(81, 14, 'uploads/sanPham/LfEmJXuW1zYQFPqnii0DH29rQEVB7VOTdwZZ7c56.webp', 'M', 'Nâu', '#8B4513', 400, '2024-10-17 00:17:52', '2024-10-17 00:17:52'),
+(82, 14, 'uploads/sanPham/VMd8mtsv8lD0mY1DRHz6g7QKO4F5IrHmRdxD11jm.webp', 'L', 'Nâu', '#8B4513', 400, '2024-10-17 00:18:07', '2024-10-17 00:18:07'),
+(83, 14, 'uploads/sanPham/VweVOd7yCgFCRcmgGPc3jIvXzv1cyHGRXRJYmAln.webp', 'XL', 'Nâu', '#8B4513', 400, '2024-10-17 00:18:18', '2024-10-17 00:18:18'),
+(84, 14, 'uploads/sanPham/yZjbrbJco4TE4PJdVz3Kg1hmofQQjNLvMXDqoWYb.webp', 'XXL', 'Nâu', '#8B4513', 400, '2024-10-17 00:18:33', '2024-10-17 00:18:33'),
+(85, 14, 'uploads/sanPham/YNEjOTajByP07PbrvHhmK5wdp0Nkx2GhdY0IBoA5.webp', 'M', 'Đen', '#000000', 400, '2024-10-17 00:19:11', '2024-10-17 00:19:11'),
+(86, 14, 'uploads/sanPham/Ls9ckkh76piQ3LTHkhao4eKVKD0b4MEPtesi2yZx.webp', 'L', 'Đen', '#000000', 400, '2024-10-17 00:19:24', '2024-10-17 00:19:24'),
+(87, 14, 'uploads/sanPham/qwK3r8YOwSTiOjNiFhtwODA2AjsygzAIAc5LQ0GB.webp', 'XL', 'Đen', '#000000', 400, '2024-10-17 00:19:35', '2024-10-17 00:19:35'),
+(88, 14, 'uploads/sanPham/yxGasaMghQjKEDbF10qtPsD7eqXg5QGCp1ilqoax.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-17 00:19:46', '2024-10-17 00:19:46'),
+(89, 15, 'uploads/sanPham/Bg24TdpUWQZu8lv9lLvp4j6449mrasBf7uTZqYKo.webp', 'L', 'Đen', '#000000', 2998, '2024-10-17 00:21:58', '2024-10-17 00:24:12'),
+(90, 15, 'uploads/sanPham/sr8q8h43dDo4zjixu89W1ROGtr2V0SwDvs0Mw1Ih.webp', 'XL', 'Đen', '#000000', 2998, '2024-10-17 00:22:12', '2024-10-17 00:23:46'),
+(91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 2997, '2024-10-17 00:28:15', '2024-10-17 00:28:15'),
+(92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2997, '2024-10-17 00:28:45', '2024-10-17 00:28:45'),
+(93, 17, 'uploads/sanPham/h0pKJmbuA0Ro8YITIRYHnOB5OdDsyVrGe2tP8Z1G.webp', 'L', 'Đen', '#000000', 999, '2024-10-17 00:32:15', '2024-10-17 00:32:15'),
+(94, 17, 'uploads/sanPham/tGxFHsSyPDelh0nwYHCqDXeF4dJeV8uP9Qa7Yel1.webp', 'XL', 'Đen', '#000000', 999, '2024-10-17 00:32:36', '2024-10-17 00:32:36'),
+(95, 17, 'uploads/sanPham/v1fDjelaMl5qW3YXcrWOSB0Q6U1LxSr95cRvK111.webp', 'L', 'Nâu', '#8B4513', 999, '2024-10-17 00:33:09', '2024-10-17 00:33:09'),
+(96, 17, 'uploads/sanPham/f0sXYtNlF4JbZCV55WRuZ9bMTZUz41zLOqxPPVL4.webp', 'XL', 'Nâu', '#8B4513', 999, '2024-10-17 00:33:20', '2024-10-17 00:33:20');
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +186,30 @@ CREATE TABLE `chi_tiet_don_hangs` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `danh_gias`
+--
+
+CREATE TABLE `danh_gias` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `san_pham_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `noi_dung` text DEFAULT NULL,
+  `so_sao` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `danh_gias`
+--
+
+INSERT INTO `danh_gias` (`id`, `san_pham_id`, `user_id`, `noi_dung`, `so_sao`, `created_at`, `updated_at`) VALUES
+(1, 7, 1, NULL, 5, '2024-10-18 12:36:33', NULL),
+(2, 16, 1, NULL, 4, '2024-10-18 12:36:33', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `danh_mucs`
 --
 
@@ -108,7 +227,9 @@ CREATE TABLE `danh_mucs` (
 --
 
 INSERT INTO `danh_mucs` (`id`, `hinh_anh`, `ten_danh_muc`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'uploads/danhMuc/Hq2i2Mwe6cSLhnnVaz33EIsxgfpbAUeNeZmhNehd.jpg', 'Oppo', '2024-10-14 13:20:36', '2024-10-14 13:20:36', NULL);
+(5, 'uploads/danhMuc/LD8Tb76zCJ6WOvrMslgrCD8nevRCOGW8d52FexLt.webp', 'Áo Sơ Mi Dài Tay', '2024-10-16 07:56:25', '2024-10-16 08:26:48', NULL),
+(6, 'uploads/danhMuc/y6brYokMWru0IhtsLBuWuI2pNe9e929pnXi8Ahdn.webp', 'Áo Sơ Mi Ngắn Tay', '2024-10-16 08:38:10', '2024-10-16 08:38:10', NULL),
+(7, 'uploads/danhMuc/vsYUmAIgLXMKdzJFYIe9NvxUMPJmtnqstcq1GBPM.webp', 'Áo Phông', '2024-10-16 08:58:30', '2024-10-17 00:35:18', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,6 +301,30 @@ CREATE TABLE `gio_hangs` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `kich_cos`
+--
+
+CREATE TABLE `kich_cos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kich_co` varchar(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `kich_cos`
+--
+
+INSERT INTO `kich_cos` (`id`, `kich_co`, `created_at`, `updated_at`) VALUES
+(2, 'S', '2024-10-17 08:02:43', '2024-10-17 08:02:43'),
+(3, 'M', '2024-10-17 08:02:49', '2024-10-17 08:02:49'),
+(4, 'L', '2024-10-17 08:02:56', '2024-10-17 08:02:56'),
+(5, 'XL', '2024-10-17 08:03:13', '2024-10-17 08:03:13'),
+(7, 'XXL', '2024-10-17 08:07:29', '2024-10-17 08:07:29');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `lien_hes`
 --
 
@@ -201,6 +346,35 @@ CREATE TABLE `lien_hes` (
 
 INSERT INTO `lien_hes` (`id`, `ho_va_ten`, `email`, `so_dien_thoai`, `tieu_de`, `noi_dung`, `trang_thai`, `created_at`, `updated_at`) VALUES
 (1, 'nguyễn đình cường', 'cuongndph38237@gmail.com', '0964426518', 'cccc', 'cccc', 0, '2024-10-14 14:10:06', '2024-10-14 14:10:06');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `mau_sacs`
+--
+
+CREATE TABLE `mau_sacs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ten_mau` varchar(30) NOT NULL,
+  `ma_mau` varchar(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `mau_sacs`
+--
+
+INSERT INTO `mau_sacs` (`id`, `ten_mau`, `ma_mau`, `created_at`, `updated_at`) VALUES
+(3, 'Đen', '#000000', '2024-10-17 08:34:26', '2024-10-17 08:34:26'),
+(4, 'Trắng', '#FFFFFF', '2024-10-17 08:34:48', '2024-10-17 08:34:48'),
+(5, 'Be', '#F5F5DC', '2024-10-17 08:35:00', '2024-10-17 08:35:00'),
+(6, 'Xanh Trời', '#00BFFF', '2024-10-17 08:35:13', '2024-10-17 08:35:13'),
+(7, 'Xanh', '#008000', '2024-10-17 08:35:24', '2024-10-17 08:35:24'),
+(8, 'Xanh Than', '#003366', '2024-10-17 08:35:36', '2024-10-17 08:35:36'),
+(9, 'Nâu', '#8B4513', '2024-10-17 08:35:48', '2024-10-17 08:35:48'),
+(10, 'Xám', '#808080', '2024-10-17 08:35:58', '2024-10-17 08:35:58'),
+(11, 'Tím', '#800080', '2024-10-17 08:36:08', '2024-10-17 08:36:08');
 
 -- --------------------------------------------------------
 
@@ -259,7 +433,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2024_10_07_230832_create_vn_phuong_xas_table', 3),
 (21, '2024_10_08_174542_create_banners_table', 4),
 (22, '2024_10_09_115320_update_lien_hes_table', 5),
-(23, '2024_10_15_091402_update_password_reset_tokens_table', 6);
+(23, '2024_10_15_091402_update_password_reset_tokens_table', 6),
+(24, '2024_10_16_160558_create_mau_sacs_table', 7),
+(25, '2024_10_16_160725_create_kich_cos_table', 7),
+(26, '2024_10_18_102412_add_da_ban_san_phams_table', 8),
+(27, '2024_10_18_184918_create_danh_gias_table', 9);
 
 -- --------------------------------------------------------
 
@@ -308,6 +486,7 @@ CREATE TABLE `san_phams` (
   `khuyen_mai` int(11) NOT NULL DEFAULT 0,
   `mo_ta` longtext NOT NULL,
   `luot_xem` int(11) NOT NULL DEFAULT 0,
+  `da_ban` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -317,8 +496,18 @@ CREATE TABLE `san_phams` (
 -- Đang đổ dữ liệu cho bảng `san_phams`
 --
 
-INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_san_pham`, `khuyen_mai`, `mo_ta`, `luot_xem`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(6, 4, 'uploads/sanPham/8dJB04VyO5L3KNhyEAFlaBOBFOSehqG4UaIRq9Xi.jpg', 'iPhone 15 Pro Max 256GB | Chính hãng VN/A', 33390000.00, 0, '<p>kkk</p>', 0, '2024-10-14 13:21:07', '2024-10-14 13:21:07', NULL);
+INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_san_pham`, `khuyen_mai`, `mo_ta`, `luot_xem`, `da_ban`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(7, 5, 'uploads/sanPham/oxGYQk7Qzb4ybY6bNjpRRz0VjkpIKlZJCX696l6W.webp', 'Áo Sơ Mi Denim Dài Tay Chất Jean Lụa', 240000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:00:47', '2024-10-16 08:24:25', NULL),
+(8, 5, 'uploads/sanPham/paBzgx6idf6og7kdC4WXosT8DUhttIq7FTuBFmIJ.webp', 'Áo Sơ Mi Dài Tay Cổ Tàu', 199000.00, 0, '<p>Thông tin sản phẩm áo sơ mi nam dài tay cổ tàu Namad: - Sản phẩm: áo sơ mi nam cổ bẻ dài tay vải OXFORD cao cấp, phom dáng thoải mái thấm hút cực tốt - Chất liệu áo sơ mi: chất vải OXFORD ít nhăn. Đặc điểm: - Áo sơ mi nam là sự kết hợp hoàn hảo giữa áo thun và áo polo, là món đồ không thể thiếu trong tủ đồ của các chàng trai. - Thiết kế kiểu dáng cơ bản với cổ bẻ lịch lãm, sang trọng. - Sơ mi được thiết kế phong cách trơn mặc hằng ngày. - Chất vải Oxford dệt thoáng khí lớn thấm hút mồ hôi, co giãn tốt. - Áo sơ mi nam có thể phối với nhiều trang phục khác như áo vest, quần jean, quần short, quần Tây đen,... - Sơ mi dài tay phù hợp mặc đi làm, đi chơi, dã ngoại, du lịch,... Hướng dẫn bảo quản sơ mi nam cổ bẻ đúng cách: - Nên giặt bằng tay lần đầu để sơ mi có độ bền cao. - Khi giặt thì giặt với các sản phẩm cùng màu để giữ độ bền màu tốt nhất. - Giặt áo với nhiệt độ tối đa 30 độ C. - Sấy ở nhiệt độ thường. - Là ủi ở nhiệt độ thấp. * Quyền lợi và điều kiện đổi trả: - Chính sách đổi trả hàng miễn phí khi sản phẩm kém chất lượng, không giống hình, nhầm size, số lượng mà quý khách đã đặt. - Sản phẩm chỉ được đổi/ trả khi còn nguyên tem mác. - Sản phẩm bị lỗi khi vận chuyển. * Namad cam kết: - Sản phẩm áo sơ mi giống như mô tả và hình ảnh. - Tư vấn hỗ trợ khách hàng nhiệt tình, chu đáo. - Thời gian chuẩn bị hàng tối ưu nhất. - Đổi trả hàng theo đúng quy định của Shopee. - Bảo hành 1 đổi 1 nếu như sản phẩm lỗi sản xuất từ phía shop. #ao #so #mi #dai #tay #nam #nu #thun #cotton #tron #co #be #hanquoc #thoitrangnam #akuba #box #dep #taydai #sominam #aotrang #trang #somitrang #somitron #aosomi #aosominam #cong #so #congso</p>', 0, 0, '2024-10-16 08:12:48', '2024-10-16 08:12:48', NULL),
+(9, 5, 'uploads/sanPham/JqL2rtS5JzSrjjAxvEJ6c23L23jle0ZpESw5RL8d.webp', 'Áo Sơ Mi Bò Dài Tay Denim', 259000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:26:27', '2024-10-16 08:26:27', NULL),
+(10, 5, 'uploads/sanPham/SonAbJp3dhJQYUMDwIKm0WjEnmaLH0kYc97yCGg7.webp', 'Áo Sơ Mi Trơn Dài Tay Cổ Đức', 199000.00, 0, '<p>ÁO SƠ MI DÀI TAY OXFORD ÁO SƠ MI NAM NỮ --------------------------------------- THÔNG TIN SẢN PHẨM - Áo sơ mi dài tay oxford dày dặn sờ êm tay, có thể giặt máy thoải mãi - Áo sơ mi phối túi mang phong cách trẻ trung, sang trọng, mạnh mẽ và cá tính - Áo sơ mi dễ dàng phối cùng quần jean, kaki, hay đi cùng 1 đôi giày tây, giày sneaker đều tạo ấn tượng vô cùng - Đường may sắc sảo, đẹp mắt, tỉ mỉ trong từng chi tiết -------------------------------------- CHÍNH SÁCH: Cam kết chất lượng và mẫu mã sản phẩm giống với hình ảnh. Hoàn tiền nếu sản phẩm không giống với mô tả.</p>', 0, 0, '2024-10-16 08:31:01', '2024-10-16 08:31:01', NULL),
+(11, 6, 'uploads/sanPham/UtCfRPw8K6nXrP8qv8FFBqVKL3FxEHeeJ6Z8KoeZ.webp', 'Áo Sơ Mi Bò Cộc Tay Denim', 199000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:40:05', '2024-10-16 08:40:05', NULL),
+(12, 6, 'uploads/sanPham/Vq2sZuvjB4N9gSF2uPMALP8kcrB6F1Tw4PJnfido.webp', 'Áo Sơ Mi Cộc Tay Túi Hộp', 199000.00, 0, '<p>Áo Sơ Mi Nam cộc tay chất liệu thô cotton thiết kế túi hộp lạ mắt THÔNG TIN SẢN PHẨM Áo Sơ Mi cộc tay Namad - Chất liệu: Vải thô hàn - Màu Sắc: Trắng, nâu, xám - Size: M L XL XXL Ưu điểm: - Chất liệu vải thô hàn thoáng mát và co giãn tốt, những sản phẩm bằng vải thô hàn thông thường giữ form dáng rất là tốt khi sử dụng xong, chỉ cần chúng ta xử lý nhẹ qua là treo áo lên thì form áo sẽ không bao giờ mất - Thiết kế cách điệu, basic, trẻ trung, phong cách hàn quốc - Dễ dàng phối đồ, khoác ngoài mà không gây bí bách, nóng nực - Sản phẩm có độ hoàn thiện cao, đường kim mũi chỉ khâu máy chắc chắn, tỉ mỉ. NAMAD CAM KẾT: 1. Hình ảnh sản phẩm là ảnh thật do shop tự chụp 2. Hàng chính hãng 100%, áo được kiểm tra kỹ, cẩn thận và tư vấn nhiệt tình 3. Chính sách đổi trả lên đến 5 ngày 4. Hàng có sẵn, giao hàng ngay khi nhận được đơn 5. Hoàn tiền nếu sản phẩm không giống với mô tả QUY ĐỊNH BẢO HÀNH ĐỔI TRẢ 1. Điều kiện áp dụng (trong vòng 5 ngày kể từ khi nhận sản phẩm) - Hàng hoá vẫn còn mới, chưa qua sử dụng - Hàng hoá bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất ( Chương trình không áp dụng đối với các sản phẩm quà tặng) 2. Trường hợp được chấp nhận: - Hàng không đúng size, kiểu dáng như quý khách đặt hàng - Không đủ số lượng, không đủ bộ như trong đơn hàng 3. Trường hợp không đủ điều kiện áp dụng chính sách: - Quá 5 ngày kể từ khi Quý khách nhận hàng - Gửi lại hàng không đúng mẫu mã, không phải sản phẩm của Shop. - Không thích, không hợp, đặt nhầm mã, nhầm màu,... Do màn hình và điều kiện ánh sáng khác nhau, màu sắc thực tế của sản phẩm có thể chênh lệch khoảng 3-5%. CHÚC QUÝ KHÁCH CÓ TRẢI NGHIỆM ƯNG Ý KHI MUA SP BÊN MÌNH!</p>', 0, 0, '2024-10-16 08:45:09', '2024-10-16 08:45:09', NULL),
+(13, 6, 'uploads/sanPham/GS6wvUb9xGaY6qSiguDHTWxNmKmXF1OVLLqgtk1r.webp', 'Áo Sơ Mi Đũi Gân Nam Ngắn Tay', 199000.00, 0, '<p>ÁO SƠ MI NAM CỔ VEST NAMAD CHẤT ĐŨI GÂN THOÁNG MÁT, PHONG CÁCH TRẺ TRUNG NAMAD là thương hiệu chuyên bán buôn, bán sỉ, các mặt hàng thời trang áo phông từ lâu. Trong 5 năm làm nghề, chúng tôi luôn đem đến cho quý khách hàng những mẫu mới nhất, chất lượng nhất đến với Quý khách hàng 🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo sơ mi ngắn tay - Thương hiệu: NAMAD - Màu sắc: Đen , trắng, be, nâu rêu - Size: M / L / XL/ XXL - Kiểu dáng: xuông - Chất liệu: đũi gân. ✅ ĐẶC ĐIỂM: - Chất vải 100% dệt tự nhiên an toàn với da. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-16 08:50:51', '2024-10-16 08:50:51', NULL),
+(14, 7, 'uploads/sanPham/LgVjNJuNWmHTgl1jDdccpG8S6wAVJogrS4mZ6B8c.webp', 'Áo Phông UANCAR', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - Màu sắc: Đen , nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 0, 0, '2024-10-17 00:17:31', '2024-10-17 00:17:31', NULL),
+(15, 7, 'uploads/sanPham/pQhuW0Wf6CyDEnc53zNTp9YKmvFKkzj2Feyc5fTK.webp', 'Áo Phông Don\'t Care', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo thun nam rộng tay lỡ - Thương hiệu: NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 0, 0, '2024-10-17 00:21:30', '2024-10-17 00:21:30', NULL),
+(16, 7, 'uploads/sanPham/Hpx1kR8A4I1ZJ8CJ43zaAjSQHs6EJn9cKNhYrGoI.webp', 'Áo Phông Young Rich', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Phông Unisex - Thương hiệu:NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,.... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-17 00:27:20', '2024-10-17 00:27:20', NULL),
+(17, 7, 'uploads/sanPham/iUcdm273OgyXGnA6AmjaiX5cSizX6EcSqskbr7Dv.webp', 'Áo Phông DualMatch', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - - Màu sắc: Đen, nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-17 00:31:15', '2024-10-17 00:31:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -12424,6 +12613,14 @@ ALTER TABLE `chi_tiet_don_hangs`
   ADD KEY `chi_tiet_don_hangs_san_pham_id_foreign` (`san_pham_id`);
 
 --
+-- Chỉ mục cho bảng `danh_gias`
+--
+ALTER TABLE `danh_gias`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `danh_gias_san_pham_id_foreign` (`san_pham_id`),
+  ADD KEY `danh_gias_user_id_foreign` (`user_id`);
+
+--
 -- Chỉ mục cho bảng `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
@@ -12458,9 +12655,21 @@ ALTER TABLE `gio_hangs`
   ADD KEY `gio_hangs_san_pham_id_foreign` (`san_pham_id`);
 
 --
+-- Chỉ mục cho bảng `kich_cos`
+--
+ALTER TABLE `kich_cos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `lien_hes`
 --
 ALTER TABLE `lien_hes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `mau_sacs`
+--
+ALTER TABLE `mau_sacs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -12552,7 +12761,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT cho bảng `bien_thes`
 --
 ALTER TABLE `bien_thes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT cho bảng `binh_luans`
@@ -12567,10 +12776,16 @@ ALTER TABLE `chi_tiet_don_hangs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `danh_gias`
+--
+ALTER TABLE `danh_gias`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `danh_mucs`
 --
 ALTER TABLE `danh_mucs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_muc_tin_tucs`
@@ -12597,10 +12812,22 @@ ALTER TABLE `gio_hangs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `kich_cos`
+--
+ALTER TABLE `kich_cos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT cho bảng `lien_hes`
 --
 ALTER TABLE `lien_hes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT cho bảng `mau_sacs`
+--
+ALTER TABLE `mau_sacs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
@@ -12612,7 +12839,7 @@ ALTER TABLE `ma_khuyen_mais`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -12624,7 +12851,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `san_phams`
 --
 ALTER TABLE `san_phams`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `tin_tucs`
@@ -12667,6 +12894,13 @@ ALTER TABLE `binh_luans`
 ALTER TABLE `chi_tiet_don_hangs`
   ADD CONSTRAINT `chi_tiet_don_hangs_don_hang_id_foreign` FOREIGN KEY (`don_hang_id`) REFERENCES `don_hangs` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `chi_tiet_don_hangs_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `danh_gias`
+--
+ALTER TABLE `danh_gias`
+  ADD CONSTRAINT `danh_gias_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `danh_gias_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `don_hangs`

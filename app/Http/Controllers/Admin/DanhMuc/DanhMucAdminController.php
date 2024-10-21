@@ -105,8 +105,17 @@ class DanhMucAdminController extends Controller
     public function delete($id){
         $danh_muc=DanhMuc::find($id);
         if($danh_muc){
+            $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
+            if($san_phams->isNotEmpty()){
+                foreach ($san_phams as $item) {
+                    if($item->hinh_anh){
+                        Storage::disk('public')->delete($item->hinh_anh);
+                    }
+                    $item->forceDelete();
+                }
+            }
             $danh_muc->delete();
-            SanPham::where('danh_muc_id',$danh_muc->id)->delete();
+
             return redirect()->route('danh-muc.danh-sach')->with('success', 'Một mục đã được chuyển vào thùng rác !');
         }
     }
@@ -116,8 +125,16 @@ class DanhMucAdminController extends Controller
             foreach($request->select as $id){
                 $danh_muc=DanhMuc::find($id);
                 if($danh_muc){
+                    $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
+                    if($san_phams->isNotEmpty()){
+                        foreach ($san_phams as $item) {
+                            if($item->hinh_anh){
+                                Storage::disk('public')->delete($item->hinh_anh);
+                            }
+                            $item->forceDelete();
+                        }
+                    }
                     $danh_muc->delete();
-                    SanPham::where('danh_muc_id',$danh_muc->id)->delete();
                 }else{
                     return redirect()->route('danh-muc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }
@@ -137,7 +154,6 @@ class DanhMucAdminController extends Controller
                     if($danh_muc->hinh_anh){
                         Storage::disk('public')->delete($danh_muc->hinh_anh);
                     }
-                    SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
                 }else{
                     return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }
@@ -156,7 +172,7 @@ class DanhMucAdminController extends Controller
             if($danh_muc->hinh_anh){
                 Storage::disk('public')->delete($danh_muc->hinh_anh);
             }
-            SanPham::onlyTrashed()->where('danh_muc_id',$danh_muc->id)->forceDelete();
+
         }else{
             return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }

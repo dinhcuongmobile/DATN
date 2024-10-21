@@ -12,13 +12,14 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-password-image">
+                                <img src="{{asset('assets/images/blog/3.jpg')}}" alt="Err" width="440" height="400">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Quên mật khẩu</h1>
-                                        <p class="mb-4">Chúng tôi hiểu, mọi chuyện đều có thể xảy ra. Chỉ cần nhập địa chỉ
-                                            email của bạn bên dưới và chúng tôi sẽ gửi cho bạn mã OTP để đặt lại mật khẩu!
+                                        <h1 class="h4 text-gray-900 mb-2">Quên Mật Khẩu</h1>
+                                        <p class="mb-4">Hãy Nhập Email Để Chúng Tôi Gửi Mã Xác Nhận
                                         </p>
                                     </div>
                                     @if (session('error'))
@@ -26,7 +27,7 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('auth.gui-otp-admin') }}" method="POST" class="user">
+                                    <form id="loginForm" action="{{ route('auth.gui-otp-admin') }}" method="POST" class="user">
                                         @csrf
                                         <div class="form-group">
                                             <input type="email"
@@ -35,14 +36,16 @@
                                                 placeholder="Nhập địa chỉ Email..." name="email"
                                                 value="{{ old('email') }}">
                                         </div>
-                                        @error('email')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Xác nhận</button>
+                                        <p class="Err text-danger email-error">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block" onsubmit="ajaxAuth()">Xác Nhận</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('auth.dang-nhap-admin') }}">Quay lại đăng nhập</a>
+                                        <a class="small" href="{{ route('auth.dang-nhap-admin') }}">Quay Lại Đăng Nhập</a>
                                     </div>
                                 </div>
                             </div>

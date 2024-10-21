@@ -22,7 +22,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-
+    @yield('css')
 </head>
 
 <body class="bg-gradient-primary">
@@ -31,6 +31,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -39,6 +40,8 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
+    <script src="{{asset('assets/js/otp.js')}}"></script>
+    <script src="{{asset('assets/js/ajax.js')}}"></script>
     @yield('scripts')
 
     <!-- Page level plugins -->

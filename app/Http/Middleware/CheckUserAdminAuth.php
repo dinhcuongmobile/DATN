@@ -16,8 +16,8 @@ class CheckUserAdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()) {
-            if (Auth::user()->vai_tro_id == 1 || Auth::user()->vai_tro_id == 1) {
+        if (Auth::guard('admin')->user()) {
+            if (Auth::guard('admin')->user()->vai_tro_id == 1 || Auth::guard('admin')->user()->vai_tro_id == 1) {
                 return redirect()->route('admin.index');
             }
         }

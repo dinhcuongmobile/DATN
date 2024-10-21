@@ -57,7 +57,7 @@
                         <li><button class="nav-link" id="saved-card-tab" data-bs-toggle="pill"
                                 data-bs-target="#saved-card" role="tab" aria-controls="saved-card"
                                 aria-selected="false"> <i class="iconsax" data-icon="bank-card"></i>Thẻ Ngân Hàng</button></li>
-                        <li><button class="nav-link" id="address-tab" data-bs-toggle="pill"
+                        <li><button class="nav-link" id="address-tab" data-bs- toggle="pill"
                                 data-bs-target="#address" role="tab" aria-controls="address"
                                 aria-selected="false"><i class="iconsax" data-icon="cue-cards"></i>Địa Chỉ</button>
                         </li>

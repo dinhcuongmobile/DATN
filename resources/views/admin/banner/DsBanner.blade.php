@@ -48,11 +48,11 @@
                             <tr>
                                 <th></th>
                                 <th>STT</th>
-                                <th>Title Banner</th>
-                                <th>Image</th>
-                                <th>Status</th>
-                                <th>Start date</th>
-                                <th>End date</th>
+                                <th>Tên Ảnh</th>
+                                <th>Ảnh</th>
+                                <th>Trạng Thái</th>
+                                <th>Ngày Bắt Đầu</th>
+                                <th>Ngày Kết Thúc</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

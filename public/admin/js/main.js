@@ -79,6 +79,21 @@ document.querySelectorAll('.mau_sac_btn').forEach(button => {
     });
 });
 
-
-
-
+// check ma mau them mau sac
+const maMauInput = document.getElementById('maMauInput');
+const colorDiv = document.getElementById('colorDiv');
+const hienThiMauSac= document.querySelector('.hienThiMauSac');
+if(maMauInput && colorDiv){
+    maMauInput.addEventListener('input', function() {
+        const colorValue = maMauInput.value;
+        // Kiểm tra xem mã màu có hợp lệ (mã hex với định dạng #FFFFFF) hay không
+        const isValidHex = /^#[0-9A-Fa-f]{6}$/i.test(colorValue);
+        if (isValidHex) {
+            colorDiv.style.backgroundColor = colorValue;
+            hienThiMauSac.style.display= 'block';
+        } else {
+            colorDiv.style.backgroundColor = ''; // Đặt lại nếu không hợp lệ
+            hienThiMauSac.style.display= 'none';
+        }
+    });
+}

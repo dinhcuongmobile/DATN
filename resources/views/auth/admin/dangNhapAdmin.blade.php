@@ -12,11 +12,13 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                <img src="{{asset('assets/images/Bìa Sơ Mi Bò Xanh.webp')}}" alt="Err" width="450" height="450">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Namad Store</h1>
+                                        <img src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Err" width="280" height="90">
                                     </div>
                                     @if (session('success'))
                                         <div class="alert alert-success" id="success-alert">
@@ -28,7 +30,8 @@
                                             {{ session('error') }}
                                         </div>
                                     @endif
-                                    <form action="{{ route('auth.dang-nhap-admin') }}" method="POST" class="user">
+                                    <form id="loginForm" action="{{ route('auth.dang-nhap-admin') }}" method="POST"
+                                        class="user mt-3">
                                         @csrf
                                         <div class="form-group">
                                             <input
@@ -36,29 +39,33 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Nhập email..." name="email" value="{{ old('email') }}">
                                         </div>
-                                        @error('email')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger email-error">
+                                            @error('email')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                         <div class="form-group">
                                             <input type="password"
                                                 class="form-control form-control-user @error('password') is-invalid @enderror"
                                                 id="exampleInputPassword" placeholder="Mật khẩu" name="password">
                                         </div>
-                                        @error('password')
-                                            <p class="Err text-danger">{{ $message }}</p>
-                                        @enderror
+                                        <p class="Err text-danger password-error">
+                                            @error('password')
+                                                {{ $message }}
+                                            @enderror
+                                        </p>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Ghi nhớ</label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">Đăng
-                                            nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"
+                                            onsubmit="ajaxAuth()">Đăng Nhập</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('auth.quen-mat-khau-admin') }}">Quên mật khẩu</a>
+                                        <a class="small" href="{{ route('auth.quen-mat-khau-admin') }}">Quên Mật Khẩu?</a>
                                     </div>
                                 </div>
                             </div>
