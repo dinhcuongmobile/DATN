@@ -22,7 +22,7 @@ class AutoDangNhap
             $email = Cookie::get('remember_cookie');
 
             // Thực hiện tự động đăng nhập nếu tìm thấy email trong cookie
-            $user = User::where('email', $email)->first();
+            $user = User::where('email', $email)->where('trang_thai', 0)->first();
             if ($user) {
                 Auth::login($user, true); // true để ghi nhớ đăng nhập
             }

@@ -31,7 +31,7 @@
                                         </div>
                                     @endif
                                     <form id="loginForm" action="{{ route('auth.dang-nhap-admin') }}" method="POST"
-                                        class="user">
+                                        class="user mt-3">
                                         @csrf
                                         <div class="form-group">
                                             <input
