@@ -13,12 +13,12 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                                <img src="{{asset('assets/images/Bìa Sơ Mi Bò Xanh.webp')}}" alt="Err" width="450" height="450">
+                                <img src="{{asset('assets/images/Bìa Sơ Mi Bò Xanh.webp')}}" alt="Err" width="450" height="470">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <img src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Err" width="280" height="90">
+                                        <img src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Err" width="280" height="70">
                                     </div>
                                     @if (session('success'))
                                         <div class="alert alert-success" id="error-alert">
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Ghi nhớ</label>
+                                                <label class="custom-control-label" for="customCheck">Ghi Nhớ</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block"
