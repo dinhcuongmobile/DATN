@@ -29,7 +29,7 @@
                             </div>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error-alert">
                                 <ul>
                                     @foreach (session('error') as $key => $message)
                                         <li>{{ $message }}</li>
