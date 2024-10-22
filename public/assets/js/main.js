@@ -83,7 +83,7 @@ $('#tinh_thanh_pho').on('change', function () {
             }
         });
     } else {
-        // Nếu bỏ chọn tỉnh, reset quận huyện và phường xã  
+        // Nếu bỏ chọn tỉnh, reset quận huyện và phường xã
         $('#quan_huyen').html('<option value="">--Chọn quận huyện--</option>');
         $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
     }
@@ -107,3 +107,11 @@ $('#quan_huyen').on('change', function () {
         $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
     }
 });
+
+//sorf by
+
+
+
+
+
+
