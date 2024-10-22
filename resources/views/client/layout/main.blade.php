@@ -18,9 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawavesome/css/all.min.css')}}">
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/toastify.css')}}">
@@ -48,7 +47,7 @@
                     <div class="col-12 p-0">
                         <div class="mobile-fix-option">
                             <ul>
-                                <li> <a href="#"><i class="iconsax" data-icon="home-1"></i>Home</a></li>
+                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Search</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Cart</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="heart"></i>My Wish</a></li>
@@ -219,7 +218,7 @@
 
     <header>
         <div class="top_header">
-            <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW 26</span><a
+            <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
                     href="collection-left-sidebar.html"> MUA NGAY</a></p>
         </div>
         <div class="custom-container container header-1">
@@ -227,7 +226,7 @@
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
@@ -281,7 +280,7 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan',Auth::user()->id)}}">Thông tin</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
@@ -500,11 +499,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="product-upsell">
-                                    <h5>Products Loved by Our Customers</h5><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/{{asset('assets/svg/icon-sprite.svg#main-line')}}">
-                                        </use>
-                                    </svg>
+                                    <h5>Products Loved by Our Customers</h5>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
@@ -873,6 +868,7 @@
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>
     <script src="{{asset('assets/js/cursor.js')}}"> </script>
+    <script src="{{asset('assets/js/filter-range-slider.js')}}"> </script>
     <script src="{{asset('assets/js/swiper-slider/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/swiper-slider/swiper-custom.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>

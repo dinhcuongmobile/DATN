@@ -1,5 +1,6 @@
 @extends('client.layout.main')
 @section('container')
+{{-- banner --}}
 <section class="section-space home-section-4">
     <div class="custom-container container">
         <div class="row">
@@ -9,9 +10,7 @@
                     <h2>New Style For</h2>
                     <h1>Spring & Summer</h1>
                     <h6>Amet minim mollit non deserunt dolor do amet sint. </h6><a class="btn btn_outline"
-                        href="collection-left-sidebar.html">Shop Now<svg>
-                            <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow"></use>
-                        </svg></a>
+                        href="collection-left-sidebar.html">Shop Now</a>
                 </div>
                 <div class="product-1">
                     <div class="product"> <img class="img-fluid" src="../assets/images/layout-4/p-1.jpg" alt="">
@@ -49,6 +48,8 @@
         </div>
     </div>
 </section>
+
+{{-- danh muc --}}
 <section class="section-t-space">
     <div class="container-fluid fashion-images">
         <div class="swiper fashion-images-slide">
@@ -97,6 +98,8 @@
         </div>
     </div>
 </section>
+
+{{-- container --}}
 <section class="section-t-space">
     <div class="custom-container container product-contain">
         <div class="title mb-5">
@@ -352,16 +355,8 @@
                             <h4>About Online Fashion Purchases</h4>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="collection-left-sidebar.html">Shop Collection<svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                        </use>
-                                    </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="collection-left-sidebar.html">Shop Collection<svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                        </use>
-                                    </svg></a></div>
+                                    href="collection-left-sidebar.html">Shop Collection</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="collection-left-sidebar.html">Shop Collection</a></div>
                         </div><a href="collection-left-sidebar.html"> <img class="bg-img"
                                 src="../assets/images/layout-4/main-category/2.jpg" alt=""></a>
                     </div>
@@ -380,16 +375,9 @@
                         <h3>Make You Look Comfortable and Luxurious</h3><span> </span>
                         <div class="link-hover-anim underline"><a
                                 class="btn btn_underline link-strong link-strong-unhovered"
-                                href="collection-left-sidebar.html">Shop Collection<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                href="collection-left-sidebar.html">Shop Collection<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a></div>
+                                href="collection-left-sidebar.html">Shop Collection</a>
+                                <a class="btn btn_underline link-strong link-strong-hovered"
+                                href="collection-left-sidebar.html">Shop Collection</a></div>
                     </div>
                 </div>
             </div>
@@ -473,9 +461,7 @@
 <section class="section-t-space">
     <div class="custom-container container">
         <div class="title">
-            <h3>Latest Blog</h3><svg>
-                <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#main-line"></use>
-            </svg>
+            <h3>Latest Blog</h3>
         </div>
         <div class="swiper blog-slide">
             <div class="swiper-wrapper">
@@ -489,77 +475,54 @@
                             </a>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                    More<svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                        </use>
-                                    </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More<svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                        </use>
-                                    </svg></a></div>
+                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide blog-main">
-                    <div class="blog-box ratio_55"><a class="blog-img" href="blog-details.html"><img class="bg-img"
-                                src="../assets/images/blog/layout-4/2.jpg" alt=""></a></div>
-                    <div class="blog-txt">
-                        <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                            <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                        </a>
-                        <div class="link-hover-anim underline"><a
-                                class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a><a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a></div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
+                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a></div>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide blog-main">
-                    <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img class="bg-img"
-                                src="../assets/images/blog/layout-4/3.jpg" alt=""></a></div>
-                    <div class="blog-txt">
-                        <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                            <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                        </a>
-                        <div class="link-hover-anim underline"><a
-                                class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a><a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a></div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
+                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a></div>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide blog-main">
-                    <div class="blog-box ratio_55"><a class="blog-img" href="blog-details.html"><img class="bg-img"
-                                src="../assets/images/blog/layout-4/4.jpg" alt=""></a></div>
-                    <div class="blog-txt">
-                        <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                            <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                        </a>
-                        <div class="link-hover-anim underline"><a
-                                class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a><a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                More<svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                    </use>
-                                </svg></a></div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
+                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -574,24 +537,13 @@
                     <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/17.jpg"
                             alt="">
                         <div class="insta-txt">
-                            <div><svg class="insta-icon">
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#instagram">
-                                    </use>
-                                </svg>
+                            <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a></div>
+                                        href="product.html">Discover</a>
+                                        <a class="btn btn_underline link-strong link-strong-hovered"
+                                        href="product.html">Discover</a></div>
                             </div>
                         </div>
                     </div>
@@ -602,24 +554,13 @@
                     <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/18.jpg"
                             alt="">
                         <div class="insta-txt">
-                            <div><svg class="insta-icon">
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#instagram">
-                                    </use>
-                                </svg>
+                            <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a></div>
+                                        href="product.html">Discover</a>
+                                        <a class="btn btn_underline link-strong link-strong-hovered"
+                                        href="product.html">Discover</a></div>
                             </div>
                         </div>
                     </div>
@@ -629,11 +570,7 @@
                 <div class="instagram-txt-box">
                     <div>
                         <div>
-                            <div class="instashop-icon"><svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#instagram">
-                                    </use>
-                                </svg>
+                            <div class="instashop-icon">
                                 <h3>Instashop</h3>
                             </div><span> </span>
                             <p>A conscious collection made entirely from food crop waste, recycled cotton, other
@@ -654,24 +591,13 @@
                     <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/19.jpg"
                             alt="">
                         <div class="insta-txt">
-                            <div><svg class="insta-icon">
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#instagram">
-                                    </use>
-                                </svg>
+                            <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a></div>
+                                        href="product.html">Discover</a>
+                                        <a class="btn btn_underline link-strong link-strong-hovered"
+                                        href="product.html">Discover</a></div>
                             </div>
                         </div>
                     </div>
@@ -682,24 +608,13 @@
                     <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/20.jpg"
                             alt="">
                         <div class="insta-txt">
-                            <div><svg class="insta-icon">
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#instagram">
-                                    </use>
-                                </svg>
+                            <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a><a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover<svg>
-                                            <use
-                                                href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                            </use>
-                                        </svg></a></div>
+                                        href="product.html">Discover</a>
+                                        <a class="btn btn_underline link-strong link-strong-hovered"
+                                        href="product.html">Discover</a></div>
                             </div>
                         </div>
                     </div>

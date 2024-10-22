@@ -361,12 +361,6 @@ class TaiKhoanController extends Controller
         ]);
     }
 
-    public function showThongTinTaiKhoan($id)
-    {
-        $thongTinTK = User::where('id', $id)->first();
-        return view('client.taiKhoan.thongTinTaiKhoan', compact('thongTinTK'));
-    }
-
     public function dangXuat()
     {
         // Xóa cookie remember_cookie

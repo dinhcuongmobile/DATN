@@ -35,14 +35,18 @@ function combineOtp() {
     document.getElementById('hidden-otp').value = otp;
 }
 
-document.getElementById('otp-container').addEventListener('paste', function(event) {
-    const pasteData = event.clipboardData.getData('text');
-    if (pasteData.length === 4 && /^\d{4}$/.test(pasteData)) {
-        for (let i = 0; i < 4; i++) {
-            document.getElementById('otp' + (i + 1)).value = pasteData[i];
+const otpContainer=document.getElementById('otp-container');
+if(otpContainer){
+    otpContainer.addEventListener('paste', function(event) {
+        const pasteData = event.clipboardData.getData('text');
+        if (pasteData.length === 4 && /^\d{4}$/.test(pasteData)) {
+            for (let i = 0; i < 4; i++) {
+                document.getElementById('otp' + (i + 1)).value = pasteData[i];
+            }
+            combineOtp();
+            document.getElementById('otp4').focus();
         }
-        combineOtp();
-        document.getElementById('otp4').focus();
-    }
-    event.preventDefault();
-});
+        event.preventDefault();
+    });
+}
+
