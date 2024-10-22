@@ -56,6 +56,9 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
         Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
             ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
+
+        Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
+            ->name('tai-khoan.doi-mat-khau')->middleware('auth');
     
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });

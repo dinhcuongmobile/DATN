@@ -28,12 +28,12 @@
                             <p>Nếu bạn đã có tài khoản</p>
                         </div>
                         @if (session('success'))
-                            <div class="alert alert-success" id="success-alert">
+                            <div class="alert alert-success" id="error-alert">
                                 {{ session('success') }}
                             </div>
                         @endif
                         @if (session('error'))
-                            <div class="alert alert-danger" id="error-alert">
+                            <div class="alert alert-danger">
                                 {{ session('error') }}
                                 @if (session('error') === 'Tài khoản của bạn chưa được xác thực !')
                                     <a href="{{ session('resend_verification_url') }}"

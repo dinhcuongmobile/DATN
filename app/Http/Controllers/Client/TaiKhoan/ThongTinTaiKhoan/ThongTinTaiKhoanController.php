@@ -10,7 +10,9 @@ use App\Models\TinhThanhPho;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -107,6 +109,70 @@ class ThongTinTaiKhoanController extends Controller
             return response()->json([
                 'success' => true,
                 'redirect_url' => url()->previous(),
+            ]);
+        }
+    }
+
+    public function doiMatKhau(Request $request)
+    {
+        $user = Auth::user();
+
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'current_password' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        // $attribute: tên của trường (trong trường hợp này là 'current_password')
+                        // $value: giá trị mà người dùng đã nhập (mật khẩu hiện tại)
+                        // $fail: closure để thông báo lỗi nếu mật khẩu không đúng
+                        if (!Hash::check($value, Auth::user()->password)) {
+                            $fail('Mật khẩu hiện tại không đúng !');
+                        }
+                    }
+                    // Kiểm tra mật khẩu cũ
+                ],
+                'new_password' => 'required|string|min:6',
+                'confirm_password' => 'same:new_password',
+            ],
+            [
+                'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại !',
+                'new_password.required' => 'Vui lòng nhập mật khẩu mới !',
+                'new_password.min' => 'Mật khẩu mới phải có ít nhất 6 ký tự !',
+                'confirm_password.same' => 'Mật khẩu xác nhận không khớp !',
+            ]
+        );
+
+        // Check validate
+        if ($validate->fails()) {
+            return response()->json(['errors' => $validate->errors()], 422);
+        }
+
+        // if (!Hash::check($request->current_password, Auth::user()->password)) {
+        //     Session::flash('error', ['current_password' => 'Mật khẩu hiện tại không đúng !']);
+
+        //     return response()->json([
+        //         'success' => true,
+        //         'redirect_url' => url()->previous(), // giống redirect()->back()
+        //     ]);
+        // }
+
+        if ($user instanceof User) {
+            // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
+            $user->update(['password' => Hash::make($request->new_password)]);
+
+            Session::flash('success', 'Bạn đã đổi mật khẩu thành công !');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
+            ]);
+        } else {
+            Session::flash('error', 'Đã có lỗi xảy ra. Vui lòng thử lại !');
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(), // giống redirect()->back()
             ]);
         }
     }

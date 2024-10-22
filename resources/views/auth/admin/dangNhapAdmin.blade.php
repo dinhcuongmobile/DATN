@@ -21,12 +21,12 @@
                                         <img src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Err" width="280" height="70">
                                     </div>
                                     @if (session('success'))
-                                        <div class="alert alert-success" id="success-alert">
+                                        <div class="alert alert-success" id="error-alert">
                                             {{ session('success') }}
                                         </div>
                                     @endif
                                     @if (session('error'))
-                                        <div class="alert alert-danger" id="error-danger">
+                                        <div class="alert alert-danger" id="error-alert">
                                             {{ session('error') }}
                                         </div>
                                     @endif

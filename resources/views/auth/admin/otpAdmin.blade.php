@@ -58,14 +58,14 @@
                                         </div>
                                     @endif --}}
                                     @if (session('error'))
-                                        <div class="alert alert-danger">
+                                        <div class="alert alert-danger" id="error-alert">
                                             @foreach (session('error') as $key => $message)
                                                 {{ $message }}
                                             @endforeach
                                         </div>
                                     @endif
                                     @if (session('success'))
-                                        <div class="alert alert-success" id="success-alert">
+                                        <div class="alert alert-success" id="error-alert">
                                             {{ session('success') }}
                                         </div>
                                     @endif

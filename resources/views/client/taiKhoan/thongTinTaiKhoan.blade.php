@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-12">
                     @if (session('success'))
-                        <div class="alert alert-success" id="success-alert">
+                        <div class="alert alert-success" id="error-alert">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -1336,8 +1336,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-0">
-                        <form id="loginForm"
-                            action="{{ route('tai-khoan.cap-nhat-thong-tin-tai-khoan') }}"
+                        <form id="loginForm" action="{{ route('tai-khoan.cap-nhat-thong-tin-tai-khoan') }}"
                             method="POST">
                             @csrf
                             @method('put')
@@ -1430,7 +1429,7 @@
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit" type="submit" onsubmit="ajaxAuth()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxAuth()">Xác nhận</button>
                             </div>
                         </form>
                     </div>
@@ -1440,8 +1439,7 @@
         {{-- 
             Đổi mật khẩu
         --}}
-        <div class="reviews-modal modal theme-modal fade" id="edit-password" tabindex="-1" role="dialog"
-            aria-modal="true">
+        <div class="reviews-modal modal theme-modal fade" id="edit-password" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1449,31 +1447,46 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-0">
-                        <form action="" method="post">
+                        <form id="resetPasswordForm" action="{{ route('tai-khoan.doi-mat-khau') }}" method="post">
+                            @csrf
                             <div class="row g-3">
                                 <div class="col-12">
                                     <div class="from-group">
-                                        <label class="form-label">Nhập mật khẩu cũ</label>
-                                        <input class="form-control" type="password" name="review[author]"
-                                            placeholder="Nhập mật khẩu cũ...">
+                                        <label class="form-label">Nhập mật khẩu hiện tại</label>
+                                        <input class="form-control" type="password" name="current_password"
+                                            placeholder="Nhập mật khẩu hiện tại...">
                                     </div>
+                                    <p class="Err text-danger current_password-error">
+                                        @error('current_password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="from-group">
                                         <label class="form-label">Nhập mật khẩu mới</label>
-                                        <input class="form-control" type="password" name="review[author]"
+                                        <input class="form-control" type="password" name="new_password"
                                             placeholder="Nhập mật khẩu mới...">
                                     </div>
+                                    <p class="Err text-danger new_password-error">
+                                        @error('new_password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
                                 <div class="col-12">
                                     <div class="from-group">
                                         <label class="form-label">Nhập lại mật khẩu mới</label>
-                                        <input class="form-control" type="password" name="review[author]"
+                                        <input class="form-control" type="password" name="confirm_password"
                                             placeholder="Nhập lại mật khẩu mới...">
                                     </div>
+                                    <p class="Err text-danger confirm_password-error">
+                                        @error('confirm_password')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
                                 </div>
-                                <button class="btn btn-submit" type="submit" data-bs-dismiss="modal"
-                                    aria-label="Close">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxResetPassword()">Xác nhận</button>
                             </div>
                         </form>
                     </div>
