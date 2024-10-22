@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     init_iconsax();
   });
-  
+
   function init_iconsax() {
     document.querySelectorAll(".iconsax").forEach((iconsax) => {
       var TuT = iconsax.getAttribute("data-icon").toLowerCase().trim();
-  
+
       fetch("https://glenthemes.github.io/iconsax/icons/" + TuT + ".svg")
         .then((n_n) => {
           return n_n.text();

@@ -1,11 +1,12 @@
 // Khai báo biến để lưu kích cỡ và màu sắc đã chọn
 let selectedSize = null;
 let selectedColor = null;
-const san_pham_id = document.getElementById('soLuongTon').getAttribute('data-id');
+const soLuongTon = document.getElementById('soLuongTon');
 
 // Hàm để cập nhật số lượng tồn kho bằng AJAX
 function updateQuantity() {
     if (selectedSize && selectedColor) {
+        let san_pham_id= soLuongTon.getAttribute('data-id');
         // Gửi yêu cầu AJAX đến máy chủ để lấy số lượng tồn kho
         $.ajax({
             url: '/san-pham/so-luong-ton-kho',  // Đường dẫn đến route xử lý trên server

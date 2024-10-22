@@ -52,13 +52,8 @@ themeBtnParent?.addEventListener("click", function (e) {
     }
 });
 
-// Rtl 
-rtlBtn.id = localStorage.getItem("rtlBtnId") ? localStorage.getItem("rtlBtnId") : "rtl-btn";
-rtlBtn.querySelector(".rtl").textContent = localStorage.getItem("textContentRtl") ? localStorage.getItem("textContentRtl") : "Rtl";
-html.setAttribute("dir", localStorage.getItem("dir"));
-rtlLink.href = localStorage.getItem('rtlcss') ? localStorage.getItem('rtlcss') : '../assets/css/vendors/bootstrap.css';
 
-// Dark 
+// Dark
 darkBtn.id = localStorage.getItem("darkId") ? localStorage.getItem("darkId") : "dark-btn";
 darkBtn.innerHTML = localStorage.getItem("textContentDark") ? localStorage.getItem("textContentDark") : `<i class="fa-regular fa-moon"></i> <div class="dark">Dark</div>`;
 if (localStorage.getItem("body") === "dark") {

@@ -9,10 +9,7 @@
                 <div class="col-12">
                     <h2>Page Not Found</h2>
                     <p>The page you are looking for doesn't exist or an other error occurred. Go back, or head over to
-                        choose a new direction. </p><a class="btn btn_black rounded" href="{{ route('trang-chu.home') }}">Quay lại trang chủ
-                        <svg>
-                            <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow"></use>
-                        </svg></a>
+                        choose a new direction. </p><a class="btn btn_black rounded" href="{{ route('trang-chu.home') }}">Quay lại trang chủ</a>
                 </div>
             </div>
         </div>

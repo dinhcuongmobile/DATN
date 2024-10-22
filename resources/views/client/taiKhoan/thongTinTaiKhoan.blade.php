@@ -25,6 +25,37 @@
                             {{ session('error') }}
                         </div>
                     @endif
+                   </div>
+                    <ul class="nav flex-column nav-pills dashboard-tab" id="v-pills-tab" role="tablist"
+                        aria-orientation="vertical">
+                        <li><button class="nav-link active" id="dashboard-tab" data-bs-toggle="pill"
+                                data-bs-target="#dashboard" role="tab" aria-controls="dashboard"
+                                aria-selected="true"><i class="iconsax" data-icon="home-1"></i> Tổng Quan</button>
+                        </li>
+                        <li><button class="nav-link" id="notifications-tab" data-bs-toggle="pill"
+                                data-bs-target="#notifications" role="tab" aria-controls="notifications"
+                                aria-selected="false"><i class="iconsax" data-icon="lamp-2"></i>Thông Báo
+                            </button></li>
+                        <li><button class="nav-link" id="order-tab" data-bs-toggle="pill" data-bs-target="#order"
+                                role="tab" aria-controls="order" aria-selected="false"><i class="iconsax"
+                                    data-icon="receipt-square"></i> Đơn Hàng</button></li>
+                        <li><button class="nav-link" id="wishlist-tab" data-bs-toggle="pill"
+                                data-bs-target="#wishlist" role="tab" aria-controls="wishlist"
+                                aria-selected="false"> <i class="iconsax" data-icon="heart"></i>Yêu Thích </button>
+                        </li>
+                        <li><button class="nav-link" id="saved-card-tab" data-bs-toggle="pill"
+                                data-bs-target="#saved-card" role="tab" aria-controls="saved-card"
+                                aria-selected="false"> <i class="iconsax" data-icon="bank-card"></i>Thẻ Ngân Hàng</button></li>
+                        <li><button class="nav-link" id="address-tab" data-bs- toggle="pill"
+                                data-bs-target="#address" role="tab" aria-controls="address"
+                                aria-selected="false"><i class="iconsax" data-icon="cue-cards"></i>Địa Chỉ</button>
+                        </li>
+                        <li><button class="nav-link" id="privacy-tab" data-bs-toggle="pill"
+                                data-bs-target="#privacy" role="tab" aria-controls="privacy" aria-selected="false">
+                                <i class="iconsax" data-icon="security-user"></i>Bảo Mật</button></li>
+                    </ul>
+                    <div class="logout-button"> <a href="{{ route('tai-khoan.dang-xuat') }}" class="btn btn_black sm" title="Quick View" tabindex="0"><i
+                                class="iconsax me-1" data-icon="logout-1"></i> Logout </a></div>
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="left-dashboard-show">

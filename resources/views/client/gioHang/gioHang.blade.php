@@ -172,10 +172,7 @@
                             <h6>For a trendy and modern twist, especially during transitional seasons.</h6>
                             <p> <img class="me-2" src="../assets/images/gif/discount.gif" alt="">You will get 10%
                                 OFF on each product</p>
-                        </div><a class="btn btn_outline sm rounded" href="product.html">View All<svg>
-                                <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                </use>
-                            </svg></a>
+                        </div><a class="btn btn_outline sm rounded" href="product.html">View All</a>
                     </div>
                     <div class="swiper cart-slider-box">
                         <div class="swiper-wrapper">
