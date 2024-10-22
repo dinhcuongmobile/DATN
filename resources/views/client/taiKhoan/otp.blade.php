@@ -23,7 +23,7 @@
                 <div class="col-xxl-4 col-lg-6 mx-auto">
                     <div class="log-in-box">
                         @if (session('error'))
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger" id="error-alert">
                                 <ul>
                                     @foreach (session('error') as $key => $message)
                                         <li>{{ $message }}</li>
@@ -32,7 +32,7 @@
                             </div>
                         @endif
                         @if (session('success'))
-                            <div class="alert alert-success">
+                            <div class="alert alert-success" id="error-alert">
                                 {{ session('success') }}
                             </div>
                         @endif

@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\Admin\Banner\BannerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Location\LocationController;
+use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
+use App\Http\Controllers\Admin\LienHe\LienHeAdminController;
 use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
+
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
-use App\Http\Controllers\Admin\LienHe\LienHeController as LienHeLienHeController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
-use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -56,6 +57,9 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
             ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
 
+        Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
+            ->name('tai-khoan.doi-mat-khau')->middleware('auth');
+            
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
 
@@ -245,7 +249,9 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
     });
 
     Route::prefix('lienHe')->group(function (){
-        Route::get('danh-sach',[LienHeLienHeController::class,'dsLienHe'])->name('lienhe.dsLienHe');
+        Route::get('danh-sach',[LienHeAdminController::class,'dsLienHe'])->name('lienhe.dsLienHe');
+        Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
+        Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
     });
 });
 

@@ -107,11 +107,3 @@ $('#quan_huyen').on('change', function () {
         $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
     }
 });
-
-//sorf by
-
-
-
-
-
-

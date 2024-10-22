@@ -820,12 +820,12 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4>Size Chart</h4>
+                    <h4>Bảng Kích Thước</h4>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pt-0">
                     <a href="#">
-                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.jpg') }}" alt="Size Chart">
+                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.png') }}" alt="Size Chart">
                     </a>
                 </div>
             </div>
