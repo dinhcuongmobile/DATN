@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
 use App\Http\Controllers\Auth\Admin\AuthAdminController;
+use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +50,12 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::post('/verify-otp', [TaiKhoanController::class, 'verifyOtp'])->name('tai-khoan.verify-otp');
         Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
         Route::post('/dat-lai-mat-khau', [TaiKhoanController::class, 'datLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
-
-        Route::get('/thong-tin-tai-khoan/{id}',[TaiKhoanController::class,'showThongTinTaiKhoan'])->name('tai-khoan.thong-tin-tai-khoan');
-
+    
+        Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
+            ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
+        Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
+            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
+    
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
 

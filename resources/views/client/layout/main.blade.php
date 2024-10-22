@@ -280,7 +280,7 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan',Auth::user()->id)}}">Thông tin</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
