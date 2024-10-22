@@ -868,6 +868,7 @@
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>
     <script src="{{asset('assets/js/cursor.js')}}"> </script>
+    <script src="{{asset('assets/js/filter-range-slider.js')}}"> </script>
     <script src="{{asset('assets/js/swiper-slider/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/swiper-slider/swiper-custom.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>
