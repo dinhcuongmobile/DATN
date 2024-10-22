@@ -12,6 +12,7 @@ use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
+use App\Http\Controllers\Admin\LienHe\LienHeController as LienHeLienHeController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
@@ -38,10 +39,10 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
         Route::get('/verify-email/{token}', [TaiKhoanController::class, 'verifyEmail'])->name('tai-khoan.verify-email');
         Route::get('/gui-lai-email/{email}', [TaiKhoanController::class, 'guiLaiEmail'])->name('tai-khoan.gui-lai-email');
-    
+
         Route::get('/dang-nhap',[TaiKhoanController::class,'showDangNhap'])->name('tai-khoan.dang-nhap')->middleware('checkUser');
         Route::post('/dang-nhap',[TaiKhoanController::class,'dangNhap'])->name('tai-khoan.dang-nhap');
-    
+
         Route::get('/quen-mat-khau',[TaiKhoanController::class,'showQuenMatKhau'])->name('tai-khoan.quen-mat-khau');
         Route::post('/quen-mat-khau/gui-otp',[TaiKhoanController::class,'guiOtp'])->name('tai-khoan.gui-otp');
         Route::post('/quen-mat-khau/gui-lai-otp',[TaiKhoanController::class,'guiLaiOtp'])->name('tai-khoan.gui-lai-otp');
@@ -57,29 +58,30 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
     
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
-    
+
     Route::prefix('san-pham')->group(function () {
         Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
         Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
-        Route::get('chi-tiet-san-pham', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+        Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
+        Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
     });
-    
+
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
         Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
     });
-    
+
     Route::prefix('tin-tuc')->group(function () {
         Route::get('/', [TinTucController::class, 'tinTuc'])->name('tin-tuc.tin-tuc');
         Route::get('/chi-tiet-tin-tuc', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
         Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
     });
-    
+
     Route::prefix('/lien-he')->group(function () {
         Route::get('/', [LienHeController::class, 'lienHe'])->name('lien-he.lien-he');
         Route::post('/gui-lien-he', [LienHeController::class, 'guiLienHe'])->name('lien-he.gui-lien-he');
     });
-    
+
     Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
 });
 
@@ -237,6 +239,10 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         // Xóa
         Route::get('xoa-banner/{id}', [BannerController::class, 'Delete'])->name('banner.delete');
         Route::post('xoa-nhieu-banner', [BannerController::class, 'deleteAll'])->name('banner.deleteAll');
+    });
+
+    Route::prefix('lienHe')->group(function (){
+        Route::get('danh-sach',[LienHeLienHeController::class,'dsLienHe'])->name('lienhe.dsLienHe');
     });
 });
 
