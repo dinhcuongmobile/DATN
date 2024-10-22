@@ -27,10 +27,7 @@
                         <h2>New Collection Summer Sale</h2>
                         <h4>Best Offer</h4>
                         <p>An evening dress that reveals a woman's ankles while walking is the most disgusting thing
-                            I have ever seen.</p><a class="btn btn_black" href="#">Subscribe<svg>
-                                <use href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#arrow">
-                                </use>
-                            </svg></a>
+                            I have ever seen.</p><a class="btn btn_black" href="#">Subscribe</a>
                     </div>
                 </div>
             </div>
@@ -48,26 +45,10 @@
                             </select></div>
                     </div>
                     <ul class="filter-option-grid">
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="2"><svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-2">
-                                    </use>
-                                </svg></button></li>
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="3"><svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-3">
-                                    </use>
-                                </svg></button></li>
-                        <li class="nav-item d-none d-lg-flex"> <button class="nav-link active" data-grid="4"><svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-4">
-                                    </use>
-                                </svg></button></li>
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="list"><svg>
-                                    <use
-                                        href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-list">
-                                    </use>
-                                </svg></button></li>
+                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="2"></button></li>
+                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="3"></button></li>
+                        <li class="nav-item d-none d-lg-flex"> <button class="nav-link active" data-grid="4"></button></li>
+                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="list"></button></li>
                     </ul>
                 </div>
                 <div class="product-tab-content ratio1_3">

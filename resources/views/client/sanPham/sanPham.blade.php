@@ -120,7 +120,7 @@
                                                 name="text"><label for="category4"></label></li>
                                         <li> <input class="custom-checkbox" id="category5" type="checkbox"
                                                 name="text"><label for="category5">Denim (8)</label></li>
-                                       
+
                                     </ul>
                                 </div>
                             </div>
@@ -220,27 +220,10 @@
                                 </select></div>
                         </div>
                         <ul class="filter-option-grid">
-                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="2"><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-2">
-                                        </use>
-                                    </svg></button></li>
-                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="3"><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-3">
-                                        </use>
-                                    </svg></button></li>
-                            <li class="nav-item d-none d-lg-flex"> <button class="nav-link active"
-                                    data-grid="4"><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-4">
-                                        </use>
-                                    </svg></button></li>
-                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="list"><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/assets/svg/icon-sprite.svg#grid-list">
-                                        </use>
-                                    </svg></button></li>
+                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="2"></button></li>
+                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="3"></button></li>
+                            <li class="nav-item d-none d-lg-flex"> <button class="nav-link active" data-grid="4"></button></li>
+                            <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="list"></button></li>
                         </ul>
                     </div>
                     <div class="product-tab-content ratio1_3">
