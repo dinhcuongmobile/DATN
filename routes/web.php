@@ -244,8 +244,11 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
     Route::prefix('lienHe')->group(function (){
         Route::get('danh-sach',[LienHeAdminController::class,'dsLienHe'])->name('lienhe.dsLienHe');
+        Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lienhe.phanHoi');
         Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
         Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
+        
+
     });
 });
 
