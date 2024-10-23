@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
+use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -215,7 +216,29 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
         Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
     });
+    Route::prefix('danh-muc-tin-tuc')->group(function () {
+        Route::get('danh-sach-danh-muc', [DanhMucTinTucAdminController::class, 'showDanhSach'])->name('danh-muc-tin-tuc.danh-sach');
 
+        //add
+        Route::get('them-danh-muc-tin-tuc', [DanhMucTinTucAdminController::class, 'viewAdd'])->name('danh-muc-tin-tuc.them-danh-muc-tin-tuc');
+        Route::post('add', [DanhMucTinTucAdminController::class, 'add'])->name('danh-muc-tin-tuc.add');
+
+        //update
+        Route::get('danh-muc-tin-tuc/{id}', [DanhMucTinTucAdminController::class, 'viewUpdate'])->name('danh-muc-tin-tuc.danh-muc');
+        Route::put('update/{id}', [DanhMucTinTucAdminController::class, 'update'])->name('danh-muc-tin-tuc.update');
+
+        //delete
+        Route::get('delete/{id}', [DanhMucTinTucAdminController::class, 'delete'])->name('danh-muc-tin-tuc.delete');
+        Route::post('xoa-nhieu', [DanhMucTinTucAdminController::class, 'xoaNhieuTinTuc'])->name('danh-muc-tin-tuc.xoa-nhieu');
+
+        Route::get('danh-sach-danh-muc-tin-tuc-da-xoa', [DanhMucTinTucAdminController::class, 'danhSachDanhMucDaXoa'])->name('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa');
+
+        Route::get('xoa-danh-muc-vinh-vien/{id}', [DanhMucTinTucAdminController::class, 'xoaDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-danh-muc-vinh-vien');
+
+        Route::post('xoa-nhieu-vinh-vien', [DanhMucTinTucAdminController::class, 'xoaNhieuDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-nhieu-vinh-vien');
+
+        Route::get('khoi-phuc-danh-muc/{id}', [DanhMucTinTucAdminController::class, 'khoiPhucDanhMuc'])->name('danh-muc-tin-tuc.khoi-phuc-danh-muc');
+    });
     Route::prefix('tin-tuc')->group(function () {
         Route::get('danh-sach', [TinTucAdminController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
 
