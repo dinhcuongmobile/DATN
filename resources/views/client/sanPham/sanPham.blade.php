@@ -90,25 +90,6 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseEight"><span>Bộ Sưu Tập</span></button>
-                            </h2>
-                            <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseEight">
-                                <div class="accordion-body">
-                                    <ul class="collection-list">
-                                        <li> <input class="custom-checkbox" id="category10" type="checkbox"
-                                                name="text"><label for="category10">Tất cả sản phẩm</label></li>
-                                        <li> <input class="custom-checkbox" id="category11" type="checkbox"
-                                                name="text"><label for="category11">Sản phẩm bán chạy nhất</label></li>
-                                        <li> <input class="custom-checkbox" id="category12" type="checkbox"
-                                                name="text"><label for="category12">Hàng mới về</label></li>
-                                        <li> <input class="custom-checkbox" id="category13" type="checkbox"
-                                                name="text"><label for="category13">Sản phẩm đang sale </label></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
                                     data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button></h2>
                             <div class="accordion-collapse collapse show mb-3" id="panelsStayOpen-collapseFour">
                                 <div class="accordion-body">
