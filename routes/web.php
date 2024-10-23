@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
+use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
@@ -33,7 +34,7 @@ use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanContro
 */
 
 // Client
-Route::middleware('autoDangNhap')->prefix('/')->group(function(){
+Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
     Route::prefix('/tai-khoan')->group(function(){
@@ -129,6 +130,14 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('update/{id}', [TaiKhoanAdminController::class, 'update'])->name('tai-khoan.update');
         Route::get('khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
         Route::get('mo-khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+
+        // Thông tin tài khoản
+        Route::get('/thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'showThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.thong-tin-tai-khoan-admin');
+        Route::put('/cap-nhat-thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'updateThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan-admin');
+        Route::post('/doi-mat-khau-admin', [ThongTinTaiKhoanAdminController::class, 'doiMatKhauAdmin'])
+            ->name('tai-khoan.doi-mat-khau-admin');
     });
 
     //Danh Muc
