@@ -28,7 +28,7 @@ class SanPhamController extends Controller
     }
 
     public function sanPham(){
-        $this->views['san_phams']=SanPham::with('danhMuc','bienThes','danhGias')->paginate(8);
+        $this->views['san_phams']=SanPham::with('danhMuc','bienThes','danhGias')->orderBy('id','desc')->paginate(8);
         $this->views['danh_mucs']=DanhMuc::all();
         $this->views['count_sp_danh_muc'] = SanPham::groupBy('danh_muc_id')
                                                     ->selectRaw('danh_muc_id, COUNT(*) as count')
@@ -56,5 +56,6 @@ class SanPhamController extends Controller
             return response()->json(['quantity' => 0]);
         }
     }
+
 
 }

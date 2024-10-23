@@ -1,5 +1,34 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
+<style>
+    .contact-table {
+        border: 1px solid #e3e6f0;
+        width: 100%;
+    }
+    
+    .contact-table th,
+    .contact-table td {
+        border: 1px solid #e3e6f0;
+        padding: 12px;
+    }
+    
+    .contact-table th {
+        background-color: #f8f9fc;
+        width: 200px;
+        font-weight: bold;
+    }
+    
+    .contact-card {
+        border: 1px solid #e3e6f0;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .contact-card .card-body {
+        padding: 0;
+    }
+</style>
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800 mb-5">Danh Sách Đã Phản Hồi</h1>
@@ -37,36 +66,66 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <table class="table table-bordered" width="100%" cellspacing="0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th>STT</th>
-                                <th>Họ & Tên</th>
-                                <th>Email</th>
-                                <th>Số Điện Thoại</th>
-                                <th>Nội Dung Câu Hỏi</th>
-                                <th>Trạng Thái</th>
-                                <th>Ngày Phản Hồi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dSLienHe as $index => $item)
-                                @if($item->trang_thai == 0) <!-- Chỉ hiển thị đã phản hồi -->
-                                <tr>
-                                    <td class="align-middle text-center">{{ $index + 1 }}</td>
-                                    <td class="col-1 align-middle">{{ $item->ho_va_ten }}</td>
-                                    <td class="col-1 align-middle">{{ $item->email }}</td>
-                                    <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                    <td class="col-2 align-middle">{{ $item->noi_dung }}</td>
-                                    <td class="col-2 align-middle">
-                                        <span class="text-success">Đã Phản Hồi</span>
-                                    </td>
-                                    <td class="col-2 align-middle">{{ $item->updated_at }}</td>
-                                </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                    @foreach ($dSLienHe as $index => $item)
+                        <div class="contact-card">
+                            <div class="card-body">
+                                <table class="contact-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>STT</th>
+                                            <td>{{ $index + 1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Họ & Tên</th>
+                                            <td>{{ $item->ho_va_ten }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{ $item->email }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số Điện Thoại</th>
+                                            <td>{{ $item->so_dien_thoai }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tiêu Đề</th>
+                                            <td>{{ $item->tieu_de }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nội Dung Câu Hỏi</th>
+                                            <td>{{ $item->noi_dung }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trạng Thái</th>
+                                            <td>
+                                                <span class="{{ $item->trang_thai == 0 ? 'text-danger' : 'text-success' }}">
+                                                    {{ $item->trang_thai == 0 ? 'Chưa Phản Hồi' : 'Đã Phản Hồi' }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngày Gửi</th>
+                                            <td>{{ $item->created_at }}</td>
+                                        </tr>
+                                        @if($item->trang_thai == 0)
+                                            <tr>
+                                               <th>Action</th>
+                                                <td>
+                                                    <form action="{{ route('lienhe.phanHoi', $item->id) }}" method="POST" style="display: inline;" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc đã phản hồi liên hệ này?')">
+                                                            Phản Hồi
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endforeach
                     <div class="phantrang">
                         {{ $dSLienHe->links() }}
                     </div>

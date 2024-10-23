@@ -92,7 +92,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('danh-muc.danh-sach') }}">Danh sách danh mục</a>
                         <a class="collapse-item" href="{{ route('danh-muc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
-                        <a class="collapse-item" href="" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{route('danh-muc.them-danh-muc')}}" style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -138,7 +138,22 @@
                     </div>
                 </div>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="true" aria-controls="collapseSix">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Quản lý DM tin tức</span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach') }}">Danh sách DM tin tức</a>
+                        <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
+                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.them-danh-muc-tin-tuc')}}" style="background-color: #48dbfb;">
+                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                            <span>Thêm mới</span></a>
+                    </div>
+                </div>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 

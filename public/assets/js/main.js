@@ -108,7 +108,6 @@ $('#quan_huyen').on('change', function () {
     }
 });
 
-//sorf by
 
 
 // thong bao loi error
