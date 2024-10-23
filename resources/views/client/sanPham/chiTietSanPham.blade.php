@@ -390,10 +390,10 @@
                                                 class="iconsax" data-icon="heart" aria-hidden="true"
                                                 data-bs-toggle="tooltip" data-bs-title="Thêm vào yêu thích"></i></a></div>
                                     <div class="product-image style-border">
-                                        <a class="pro-first" href="product.html">
+                                        <a class="pro-first" href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
                                             <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="Sản phẩm">
                                         </a>
-                                        <a class="pro-sec" href="product.html">
+                                        <a class="pro-sec" href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
                                             <img class="bg-img" src="{{Storage::url($item->bienThes->first()->hinh_anh)}}" alt="Sản phẩm">
                                         </a>
                                     </div>
@@ -445,7 +445,7 @@
                                             }
                                         @endphp
                                         <li>({{$danh_gia}})</li>
-                                    </ul><a href="product.html">
+                                    </ul><a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
                                         <h6>{{$item->ten_san_pham}}</h6>
                                     </a>
                                     @php

@@ -6724,7 +6724,7 @@ footer .footer-1 .social-icon>li:hover a i {
   color: rgba(var(--light-color), 1);
   font-size: 16px;
   font-weight: 400;
-  padding: 6px 10px
+  padding: 6px 38px 6px 10px
 }
 
 .category-dropdown select:focus-visible {

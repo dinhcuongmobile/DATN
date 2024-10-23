@@ -21,7 +21,7 @@
                                 </div>
                             @endif
                             @if (session('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger" id="error-alert">
                                     @foreach (session('error') as $key => $message)
                                         {{ $message }}
                                     @endforeach

@@ -109,7 +109,7 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseFour"><span>Filter</span></button></h2>
+                                    data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button></h2>
                             <div class="accordion-collapse collapse show mb-3" id="panelsStayOpen-collapseFour">
                                 <div class="accordion-body">
                                     <div class="range-slider">
@@ -129,11 +129,9 @@
                             <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseTwo">
                                 <div class="accordion-body">
                                     <ul class="catagories-side theme-scrollbar styleSPDanhMuc">
-                                        <li> <a href="#">Thời trang (30)</a></li>
-                                        <li> <a href="#">Thời trang (30)</a></li>
-                                        <li> <a href="#">Thời trang (30)</a></li>
-                                        <li> <a href="#">Thời trang (30)</a></li>
-
+                                        @foreach ($danh_mucs as $item)
+                                            <li> <a href="#">{{$item->ten_danh_muc}} ({{ $count_sp_danh_muc[$item->id] ?? 0 }})</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -167,30 +165,36 @@
                         <div> <a class="filter-button btn">
                                 <h6> <i class="iconsax" data-icon="filter"></i>Danh sách bộ lọc </h6>
                             </a>
-                            <div class="category-dropdown"><label for="cars">Sắp xếp theo :</label><select
-                                    class="form-select" id="cars" name="carlist">
-                                    <option value="">Bán chạy nhất</option>
-                                    <option value="">Theo thứ tự, A-Z</option>
-                                    <option value="">Giá cao - thấp</option>
-                                    <option value="">Giảm giá % từ cao - thấp</option>
-                                </select></div>
+                            <div class="category-dropdown"><label for="cars">Sắp xếp theo :</label>
+                                <select class="form-select" id="cars" name="carlist">
+                                    <option value="">Mặc định</option>
+                                    <option value="best-selling">Bán chạy nhất</option>
+                                    <option value="a-z">Theo thứ tự, A-Z</option>
+                                    <option value="price-high-low">Giá cao - thấp</option>
+                                    <option value="discount-high-low">Giảm giá % từ cao - thấp</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="product-tab-content ratio1_3">
                         <div class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
+                            @foreach ($san_phams as $item)
                             <div>
                                 <div class="product-box-3">
                                     <div class="img-wrapper">
-                                        <div class="label-block"><span class="lable-1">Mới</span>
+                                        <div class="label-block">
                                             <a class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0">
                                                 <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
                                             </a>
                                         </div>
-                                        <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                    class="bg-img" src="../assets/images/product/product-3/2.jpg"
-                                                    alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                    class="bg-img" src="../assets/images/product/product-3/19.jpg"
-                                                    alt="product"></a></div>
+                                        <div class="product-image style-border">
+                                            <a class="pro-first" href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
+                                                <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="Sản phẩm">
+                                            </a>
+                                            <a class="pro-sec" href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
+                                                <img class="bg-img" src="{{Storage::url($item->bienThes->first()->hinh_anh)}}" alt="Sản phẩm">
+                                            </a>
+                                        </div>
                                         <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#addtocart" tabindex="0"><i class="iconsax"
                                                     data-icon="basket-2" aria-hidden="true" data-bs-toggle="tooltip"
@@ -205,37 +209,71 @@
                                     </div>
                                     <div class="product-detail">
                                         <ul class="rating">
-                                            <li><i class="fa-solid fa-star"></i></li>
-                                            <li><i class="fa-solid fa-star"></i></li>
-                                            <li><i class="fa-solid fa-star"></i></li>
-                                            <li><i class="fa-solid fa-star"></i></li>
-                                            <li><i class="fa-regular fa-star"></i></li>
-                                            <li>4.3</li>
-                                        </ul><a href="product.html">
-                                            <h6>Wide Linen-Blend Trousers</h6>
+                                            <li>
+                                                @php
+                                                    $avg_rating = $item->danhGias->avg('so_sao');
+                                                @endphp
+
+                                                @php
+                                                    // Tính số sao đầy, sao nửa và sao rỗng
+                                                    $full_stars = floor($avg_rating); // Số sao đầy
+                                                    $half_star = ($avg_rating - $full_stars) >= 0.5 ? 1 : 0; // Sao nửa
+                                                    $empty_stars = 5 - ($full_stars + $half_star); // Sao rỗng
+                                                @endphp
+
+                                                {{-- Hiển thị sao đầy --}}
+                                                @for ($i = 0; $i < $full_stars; $i++)
+                                                    <i class="fa-solid fa-star"></i>
+                                                @endfor
+
+                                                {{-- Hiển thị sao nửa nếu có --}}
+                                                @if ($half_star)
+                                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                                @endif
+
+                                                {{-- Hiển thị sao rỗng --}}
+                                                @for ($i = 0; $i < $empty_stars; $i++)
+                                                    <i class="fa-regular fa-star"></i>
+                                                @endfor
+                                            </li>
+
+                                            {{-- Hiển thị số điểm đánh giá --}}
+                                            @php
+                                                if($avg_rating>0){
+                                                    $danh_gia=number_format($avg_rating, 1);
+                                                }else{
+                                                    $danh_gia="Chưa có đánh giá";
+                                                }
+                                            @endphp
+                                            <li>({{$danh_gia}})</li>
+                                        </ul><a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
+                                            <h6>{{$item->ten_san_pham}}</h6>
                                         </a>
-                                        <p class="list-per">I was the first person to have a punk rock hairstyle. It
-                                            is not easy to dress well. I have my permanent muses and my muses of the
-                                            moment. We live in an era of globalization and the era of the woman.
-                                            Never in the history of the world have women been more in control of
-                                            their destiny. You have a more interesting life if you wear impressive
-                                            clothes.</p>
-                                        <p>$100.00 <del>$18.00 </del></p>
-                                        <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                        </div>
+                                        @php
+                                            $gia_khuyen_mai = $item->gia_san_pham - ($item->gia_san_pham * $item->khuyen_mai / 100);
+                                        @endphp
+                                        <p>
+                                            {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
+                                            @if ($item->khuyen_mai>0)
+                                                <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                            @endif
+                                        </p>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="pagination-wrap">
                         <ul class="pagination">
-                            <li> <a class="prev" href="#"><i class="iconsax" data-icon="chevron-left"></i></a></li>
+                            {{$san_phams->links()}}
+                            {{-- <li> <a class="prev" href="#"><i class="iconsax" data-icon="chevron-left"></i></a></li>
                             <li> <a href="#">1</a></li>
                             <li> <a class="active" href="#">2</a></li>
                             <li> <a href="#">3 </a></li>
                             <li> <a class="next" href="#"> <i class="iconsax" data-icon="chevron-right"></i></a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -243,4 +281,5 @@
         </div>
     </div>
 </section>
+
 @endsection

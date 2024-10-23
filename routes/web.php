@@ -52,12 +52,15 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::post('/verify-otp', [TaiKhoanController::class, 'verifyOtp'])->name('tai-khoan.verify-otp');
         Route::get('/dat-lai-mat-khau', [TaiKhoanController::class, 'showDatLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
         Route::post('/dat-lai-mat-khau', [TaiKhoanController::class, 'datLaiMatKhau'])->name('tai-khoan.dat-lai-mat-khau');
-    
+
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
         Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
             ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
-    
+
+        Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
+            ->name('tai-khoan.doi-mat-khau')->middleware('auth');
+
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
 
@@ -66,6 +69,7 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
         Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
         Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
         Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
+
     });
 
     Route::prefix('gio-hang')->group(function () {
@@ -270,7 +274,7 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lienhe.phanHoi');
         Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
         Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
-        
+
 
     });
 });

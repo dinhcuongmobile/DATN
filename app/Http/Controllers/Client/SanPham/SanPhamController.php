@@ -8,6 +8,8 @@ use App\Models\BienThe;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DanhGia;
+use App\Models\DanhMuc;
 
 class SanPhamController extends Controller
 {
@@ -26,15 +28,19 @@ class SanPhamController extends Controller
     }
 
     public function sanPham(){
-        return view('client.sanPham.sanPham');
+        $this->views['san_phams']=SanPham::with('danhMuc','bienThes','danhGias')->orderBy('id','desc')->paginate(8);
+        $this->views['danh_mucs']=DanhMuc::all();
+        $this->views['count_sp_danh_muc'] = SanPham::groupBy('danh_muc_id')
+                                                    ->selectRaw('danh_muc_id, COUNT(*) as count')
+                                                    ->pluck('count', 'danh_muc_id');
+        return view('client.sanPham.sanPham',$this->views);
     }
 
     public function sanPhamDanhMuc(){
         return view('client.sanPham.sanPhamDanhMuc');
     }
 
-    public function soLuongTonKho(Request $request)
-    {
+    public function soLuongTonKho(Request $request){
         $kich_co = $request->input('kich_co');
         $mau_sac = $request->input('mau_sac');
         $san_pham_id = $request->input('san_pham_id');
@@ -50,5 +56,6 @@ class SanPhamController extends Controller
             return response()->json(['quantity' => 0]);
         }
     }
+
 
 }
