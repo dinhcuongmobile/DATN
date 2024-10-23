@@ -83,7 +83,7 @@ $('#tinh_thanh_pho').on('change', function () {
             }
         });
     } else {
-        // Nếu bỏ chọn tỉnh, reset quận huyện và phường xã  
+        // Nếu bỏ chọn tỉnh, reset quận huyện và phường xã
         $('#quan_huyen').html('<option value="">--Chọn quận huyện--</option>');
         $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
     }
@@ -108,6 +108,9 @@ $('#quan_huyen').on('change', function () {
     }
 });
 
+//sorf by
+
+
 // thong bao loi error
 document.addEventListener('DOMContentLoaded', (event) => {
     const errorAlert = document.getElementById('error-alert');
@@ -122,3 +125,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 // end thong bao loi error
+

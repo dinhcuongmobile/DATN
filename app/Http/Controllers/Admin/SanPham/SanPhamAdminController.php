@@ -151,6 +151,10 @@ class SanPhamAdminController extends Controller
 
         $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
 
+        foreach ($this->views['san_phams'] as $san_pham) {
+            $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
+        }
+
         return view('admin.sanPham.DSSanPham',$this->views);
     }
 
