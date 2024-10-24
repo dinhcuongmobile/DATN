@@ -217,8 +217,8 @@
 
     <header>
         <div class="top_header">
-            <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
-                    href="collection-left-sidebar.html"> MUA NGAY</a></p>
+            <p> Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
+                    href="{{route("san-pham.san-pham")}}"> MUA NGAY</a></p>
         </div>
         <div class="custom-container container header-1">
             <div class="row">
@@ -279,8 +279,8 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
-                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
                                                 <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>

@@ -65,7 +65,7 @@
                                         <td class="col-1 align-middle">{{ $item->email }}</td>
                                         <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
                                         <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
-                                        <td>{{ $item->vaiTro->vai_tro }}</td>
+                                        <td class="col-1 align-middle"> {{ $item->vaiTro->vai_tro }}</td>
                                         <td class="col-2 align-middle text-center"><a
                                                 href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"><button
                                                 type="button" class="btn btn-warning btn-sm">Sửa</button></a> |
