@@ -310,10 +310,10 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <!-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a> -->
+                                <a class="dropdown-item" href="{{ route('tai-khoan.thong-tin-tai-khoan-admin') }}">
+                                    <i class="fas fa-fw fa-user mr-2 text-gray-400"></i>
+                                    Tài khoản
+                                </a>
                                 <!-- <div class="dropdown-divider"></div> -->
                                 <a class="dropdown-item" href="../controller/index.php" data-toggle="modal"
                                     data-target="#logoutModal">
@@ -374,6 +374,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -381,6 +382,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{asset('assets/js/ajax.js')}}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
     @yield('scripts')
 
