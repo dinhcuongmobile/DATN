@@ -35,3 +35,37 @@
     color: rgba(var(--theme-default), 1);
     letter-spacing: 1.1px;
 }
+
+/* gio hang */
+.shopping-details .no-data{
+    padding: 0px 10px 10px 20px;
+    margin-bottom: 150px;
+
+}
+.shopping-details .no-data h4{
+    font-size: 20px;
+
+}
+.shopping-details .no-data p{
+    font-size: 15px;
+
+}
+.shopping-details .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+}
+.cart-table .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+    display: block;
+}
+.cart-table .thayDoi{
+    color: rgba(var(--theme-default), 1);
+    cursor: pointer;
+}
+.cart-table .thayDoi:hover{
+    text-decoration: underline;
+}
+

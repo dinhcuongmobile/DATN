@@ -8980,8 +8980,8 @@ footer .footer-1 .social-icon>li:hover a i {
   white-space: nowrap
 }
 
-.cart-box>div {
-  width: calc(100% - 110px)
+.cart-box a {
+    margin-right: 10px;
 }
 
 .cart-progress {

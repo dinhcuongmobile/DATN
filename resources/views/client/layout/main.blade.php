@@ -538,33 +538,49 @@
             </div>
         </div>
     </div>
-    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1"
-        aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h4><button class="btn-close"
                 type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body theme-scrollbar">
             <ul class="offcanvas-cart">
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/1.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity-previous">2</div>
-                                    <div id="quantity-current">3</div>
-                                    <div id="quantity-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add">+</button>
+                @foreach ($gio_hangs as $item)
+                    <li>
+                        <a class="style-border" href="{{route('san-pham.chi-tiet-san-pham',$item->san_pham_id)}}"> <img src="{{Storage::url($item->sanPham->hinh_anh)}}" alt="Sản Phẩm"></a>
+                        <div>
+                            <h6 class="mb-0">{{$item->sanPham->ten_san_pham}}</h6>
+                            <p>
+                                <del>$40</del>
+                                <span class="btn-cart">
+                                    $<span class="btn-cart__total"
+                                        id="total">105
+                                    </span>
+                                </span>
+                            </p>
+                            <div class="btn-containter">
+                                <div class="quantity">
+                                    <button class="minus" type="button">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                        <input type="number" value="1" min="1" disabled>
+                                    <button class="plus" type="button">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
+                        </div><i class="iconsax delete-icon" data-icon="trash"></i>
+                    </li>
+                @endforeach
             </ul>
         </div>
+        @if (count($gio_hangs)==0)
+            <div class="no-data" id="data-show" style="display: block">
+                <img src="../assets/images/cart/1.gif" alt="">
+                <h4>Bạn không có sản phẩm nào trong giỏ hàng!</h4>
+                <p>Hôm nay là ngày tuyệt vời để mua những thứ bạn đã giữ! hoặc <a href="{{route('san-pham.san-pham')}}">Tiếp tục mua</a></p>
+            </div>
+        @endif
         <div class="offcanvas-footer">
             <div class="price-box">
                 <h6>Total :</h6>
