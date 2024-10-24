@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
+use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
+use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -32,7 +34,7 @@ use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanContro
 */
 
 // Client
-Route::middleware('autoDangNhap')->prefix('/')->group(function(){
+Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
     Route::prefix('/tai-khoan')->group(function(){
@@ -128,6 +130,14 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('update/{id}', [TaiKhoanAdminController::class, 'update'])->name('tai-khoan.update');
         Route::get('khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
         Route::get('mo-khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+
+        // Thông tin tài khoản
+        Route::get('/thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'showThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.thong-tin-tai-khoan-admin');
+        Route::put('/cap-nhat-thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'updateThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan-admin');
+        Route::post('/doi-mat-khau-admin', [ThongTinTaiKhoanAdminController::class, 'doiMatKhauAdmin'])
+            ->name('tai-khoan.doi-mat-khau-admin');
     });
 
     //Danh Muc
@@ -215,7 +225,29 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
         Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
     });
+    Route::prefix('danh-muc-tin-tuc')->group(function () {
+        Route::get('danh-sach-danh-muc', [DanhMucTinTucAdminController::class, 'showDanhSach'])->name('danh-muc-tin-tuc.danh-sach');
 
+        //add
+        Route::get('them-danh-muc-tin-tuc', [DanhMucTinTucAdminController::class, 'viewAdd'])->name('danh-muc-tin-tuc.them-danh-muc-tin-tuc');
+        Route::post('add', [DanhMucTinTucAdminController::class, 'add'])->name('danh-muc-tin-tuc.add');
+
+        //update
+        Route::get('danh-muc-tin-tuc/{id}', [DanhMucTinTucAdminController::class, 'viewUpdate'])->name('danh-muc-tin-tuc.danh-muc');
+        Route::put('update/{id}', [DanhMucTinTucAdminController::class, 'update'])->name('danh-muc-tin-tuc.update');
+
+        //delete
+        Route::get('delete/{id}', [DanhMucTinTucAdminController::class, 'delete'])->name('danh-muc-tin-tuc.delete');
+        Route::post('xoa-nhieu', [DanhMucTinTucAdminController::class, 'xoaNhieuTinTuc'])->name('danh-muc-tin-tuc.xoa-nhieu');
+
+        Route::get('danh-sach-danh-muc-tin-tuc-da-xoa', [DanhMucTinTucAdminController::class, 'danhSachDanhMucDaXoa'])->name('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa');
+
+        Route::get('xoa-danh-muc-vinh-vien/{id}', [DanhMucTinTucAdminController::class, 'xoaDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-danh-muc-vinh-vien');
+
+        Route::post('xoa-nhieu-vinh-vien', [DanhMucTinTucAdminController::class, 'xoaNhieuDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-nhieu-vinh-vien');
+
+        Route::get('khoi-phuc-danh-muc/{id}', [DanhMucTinTucAdminController::class, 'khoiPhucDanhMuc'])->name('danh-muc-tin-tuc.khoi-phuc-danh-muc');
+    });
     Route::prefix('tin-tuc')->group(function () {
         Route::get('danh-sach', [TinTucAdminController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
 

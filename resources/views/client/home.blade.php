@@ -157,9 +157,6 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -225,9 +222,6 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -291,9 +285,6 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -416,9 +407,6 @@
                         </div>
                     </div>
                     <div class="product-detail">
-                        <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                data-bs-target="#addtocart" title="add product"
-                                tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                         <div class="color-box">
                             <ul class="color-variant">
                                 {{-- bien the mau sac --}}
