@@ -367,11 +367,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Hỗ Trợ Về</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="order-success.html">Your Orders</a></li>
-                                        <li> <a class="nav" href="dashboard.html">Your Account</a></li>
-                                        <li> <a class="nav" href="order-tracking.html">Track Orders</a></li>
-                                        <li> <a class="nav" href="wishlist.html">Your Wishlist</a></li>
-                                        <li> <a class="nav" href="faq.html">Shopping FAQs</a></li>
+                                        <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
+                                        <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
+                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -383,11 +383,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Tài Khoản</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="dashboard.html">My Account</a></li>
-                                        <li> <a class="nav" href="login.html">Login/Register</a></li>
-                                        <li> <a class="nav" href="cart.html">Cart</a></li>
-                                        <li> <a class="nav" href="order-success.html">Order History</a></li>
-                                        <li> <a class="nav" href="faq.html">Shopping FAQs</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
+                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng kí</a></li>
+                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
+                                        <li> <a class="nav" href="order-success.html">Lịch sử mua hàng</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -462,8 +462,8 @@
                                             min="1" max="20"><button class="plus" type="button"><i
                                                 class="fa-solid fa-plus"></i></button></div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Add to cart</a><a
-                                        class="btn btn-solid" href="product.html">View detail</a></div>
+                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏi hàng</a><a
+                                        class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
                             </div>
                         </div>
                     </div>
@@ -489,8 +489,8 @@
                                                         sleeves</span><span> successfully added to your Cart</span></h6>
                                             </a>
                                             <div class="buttons"><a class="view-cart btn btn-solid"
-                                                    href="cart.html">Your cart</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html">Check out</a><a class="continue btn btn-solid"
+                                                    href="cart.html">Giỏ hàng của bạn</a><a class="checkout btn btn-solid"
+                                                    href="check-out.html"></a><a class="continue btn btn-solid"
                                                     href="index.html">Continue shopping</a></div>
                                             <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
                                                     src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
