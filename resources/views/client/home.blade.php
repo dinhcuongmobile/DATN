@@ -341,13 +341,13 @@
                     </div>
                     <div class="col-md-7 ratio_landscape">
                         <div class="style-content">
-                            <h6>Wear Your Style</h6>
-                            <h2>Create New Version Of Yourself</h2>
-                            <h4>About Online Fashion Purchases</h4>
+                            <h6>Mặc theo phong cách của bạn</h6>
+                            <h2>Tạo phiên bản mới của chính bạn</h2>
+                            <h4>Mua hàng trực tuyến</h4>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="collection-left-sidebar.html">Shop Collection</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="collection-left-sidebar.html">Shop Collection</a></div>
+                                    href="collection-left-sidebar.html">Bộ sưu tập</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="collection-left-sidebar.html">Bộ sưu tập</a></div>
                         </div><a href="collection-left-sidebar.html"> <img class="bg-img"
                                 src="../assets/images/layout-4/main-category/2.jpg" alt=""></a>
                     </div>
@@ -356,19 +356,19 @@
             <div class="col-3 d-none d-xl-block">
                 <div class="best-seller-box">
                     <div class="offer-banner"><a href="collection-left-sidebar.html">
-                            <h2>Extra 15% OFF</h2><span> </span>
-                            <p>Designer Brand Season off In-store & Online for a limited Time</p>
+                            <h2>Giảm thêm 15%</h2><span> </span>
+                            <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.</p>
                             <div class="btn">
                                 <h6>Use Code: <span>KHUTRD***</span></h6>
                             </div>
                         </a></div>
                     <div class="best-seller-content">
-                        <h3>Make You Look Comfortable and Luxurious</h3><span> </span>
+                        <h3>Làm bạn thoải mái và sang trọng</h3><span> </span>
                         <div class="link-hover-anim underline"><a
                                 class="btn btn_underline link-strong link-strong-unhovered"
-                                href="collection-left-sidebar.html">Shop Collection</a>
+                                href="collection-left-sidebar.html">Bộ sưu tập</a>
                                 <a class="btn btn_underline link-strong link-strong-hovered"
-                                href="collection-left-sidebar.html">Shop Collection</a></div>
+                                href="collection-left-sidebar.html">Bộ sưu tập</a></div>
                     </div>
                 </div>
             </div>
@@ -462,9 +462,9 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc thêm
+                                    </a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Đọc thêm</a></div>
                         </div>
                     </div>
                 </div>
@@ -477,9 +477,9 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc
+                                    thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Đọc thêm</a></div>
                         </div>
                     </div>
                 </div>
@@ -492,9 +492,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
+
+                                Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Đọc thêm</a></div>
                         </div>
                     </div>
                 </div>
@@ -507,9 +508,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                    More</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
+
+                                    Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Đọc thêm</a></div>
                         </div>
                     </div>
                 </div>
@@ -529,9 +531,9 @@
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover</a>
+                                        href="product.html">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover</a></div>
+                                        href="product.html">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -546,9 +548,9 @@
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover</a>
+                                        href="product.html">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover</a></div>
+                                        href="product.html">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -561,15 +563,14 @@
                             <div class="instashop-icon">
                                 <h3>Instashop</h3>
                             </div><span> </span>
-                            <p>A conscious collection made entirely from food crop waste, recycled cotton, other
-                                more sustainable materials.</p>
+                            <p>Nếu bạn có bất kỳ thắc mắc nào hoặc muốn tìm hiểu thêm về các sản phẩm và dịch vụ của chúng tôi, đừng ngần ngại liên hệ qua Instagram. Theo dõi chúng tôi tại @namadstore để cập nhật những xu hướng thời trang mới nhất và nhắn tin trực tiếp để được hỗ trợ nhanh chóng!.</p>
                         </div>
                         <div>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Go To Instagram</a><a
+                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Instagram</a><a
                                     class="btn btn_underline link-strong link-strong-hovered"
-                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Go To Instagram</a></div>
+                                    href="https://www.instagram.com/namad.store.official/" target="_blank">Instagram</a></div>
                         </div>
                     </div>
                 </div>
@@ -583,9 +584,9 @@
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover</a>
+                                        href="product.html">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover</a></div>
+                                        href="product.html">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -600,9 +601,9 @@
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Discover</a>
+                                        href="product.html">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Discover</a></div>
+                                        href="product.html">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
