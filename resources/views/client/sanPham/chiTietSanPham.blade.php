@@ -189,6 +189,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- binh luan --}}
                         <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel"
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">

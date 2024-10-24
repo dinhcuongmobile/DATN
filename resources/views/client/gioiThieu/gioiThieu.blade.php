@@ -23,7 +23,7 @@
             <div class="col-lg-6 order-1 order-lg-1 ratio_55">
                 <div class="about-img"> <img class="bg-img img-fluid" src="../assets/images/about/7.jpg" alt="">
                     <div class="about-tag"> <a href="collection-left-sidebar.html">
-                            <h5>Phụ Nữ</h5><i class="fa-solid fa-arrow-right"></i>
+                            <h5>Giới thiệu</h5><i class="fa-solid fa-arrow-right"></i>
                         </a></div>
                 </div>
             </div>
@@ -31,20 +31,20 @@
                 <div class="about-content">
                     <div class="sidebar-title">
                         <div class="loader-line"></div>
-                        <h3>Đây là xu hướng thời trang mới nhất.</h3>
+                        <h3>Đôi nét về Namad Store</h3>
                     </div>
-                    <p>Với sự gia tăng nhận thức về các vấn đề môi trường, thời trang bền vững đang trở nên phổ biến. Phụ nữ đang ủng hộ việc sử dụng các chất liệu thân thiện với môi trường, tái chế và ủng hộ các thương hiệu có chuỗi cung ứng minh bạch. Kỹ thuật layering không chỉ giúp giữ ấm mà còn tạo chiều sâu và phong cách cho trang phục. Những chiếc cardigan nhẹ, áo khoác duster và khăn quàng cổ là các món đồ cần thiết, dễ dàng chuyển từ ngày sang đêm.</p>
-                    <ul>
+                    <p>Namad Store là một website thương mại điện tử chuyên cung cấp các sản phẩm thời trang dành riêng cho nam giới, đặc biệt là các dòng áo phong cách hiện đại và thời thượng. Với mục tiêu mang đến cho khách hàng những sản phẩm chất lượng cao và trải nghiệm mua sắm tiện lợi, Namad Store không chỉ chú trọng vào sự đa dạng của các sản phẩm, mà còn tập trung vào việc xây dựng một nền tảng trực tuyến thân thiện và dễ sử dụng.</p>
+                        <ul>
                         <li><i class="iconsax" data-icon="cloud"></i>
                             <div>
-                                <h6>Vải Mềm Mại</h6>
-                                <p>Nhận vận chuyển miễn phí trên mỗi đơn hàng. Không thích sản phẩm? Trả lại mà không cần lo lắng.</p>
+                                <h6>Chất liệu</h6>
+                                <p>Mỗi sản phẩm đều được mô tả chi tiết, từ chất liệu, kiểu dáng cho đến kích thước, giúp khách hàng có thể dễ dàng tìm thấy sản phẩm phù hợp với phong cách và nhu cầu của mình.</p>
                             </div>
                         </li>
                         <li><i class="iconsax" data-icon="clock"></i>
                             <div>
-                                <h6>Thoải Mái Cả Ngày</h6>
-                                <p>Chúng tôi tin rằng việc mặc quần áo nên là phần dễ dàng nhất trong ngày của bạn.</p>
+                                <h6>Thiết kế theo trend</h6>
+                                <p>Giúp mọi người bắt kịp xu hướng</p>
                             </div>
                         </li>
                     </ul>
@@ -56,7 +56,8 @@
                         <div class="loader-line"></div>
                         <h3>Thành Thạo Thời Trang Nam</h3>
                     </div>
-                    <p>Bắt đầu với các món đồ cơ bản như quần jean vừa vặn, áo sơ mi trắng cổ điển và áo khoác đa năng. Những món đồ này tạo nên nền tảng cho tủ quần áo của bạn, cho phép bạn kết hợp linh hoạt nhiều phong cách. Dù là bộ vest hay áo sơ mi đơn giản, việc may đo chính xác có thể nâng tầm phong cách của bạn. Đầu tư vào việc chỉnh sửa để đảm bảo quần áo vừa vặn hoàn hảo, tăng cường dáng vóc và sự tự tin.</p>
+                    <p>Namad Store không chỉ là nơi để mua sắm thời trang nam giới mà còn là nền tảng giao lưu và chia sẻ xu hướng phong cách. Chúng tôi luôn cập nhật những bộ sưu tập mới và hợp thời để giúp khách hàng thể hiện cá tính và phong cách riêng của mình. Với phương châm "Chất lượng - Phong cách - Tiện lợi", Namad Store cam kết mang đến cho khách hàng những sản phẩm tốt nhất cùng với dịch vụ chăm sóc khách hàng chuyên nghiệp và tận tâm.</p>
+                        
                     <ul>
                         <li><i class="iconsax" data-icon="cloud"></i>
                             <div>
@@ -77,7 +78,7 @@
                 <div class="about-img about-img-1"> <img class="bg-img img-fluid" src="../assets/images/about/8.jpg"
                         alt="">
                     <div class="about-tag"> <a href="collection-left-sidebar.html">
-                            <h5>Nam</h5><i class="fa-solid fa-arrow-right"></i>
+                            <h5>Chất lượng</h5><i class="fa-solid fa-arrow-right"></i>
                         </a></div>
                 </div>
             </div>
@@ -90,19 +91,19 @@
             <div class="col-12">
                 <div class="title-1">
                     <p>Sự Xuất Sắc Của Chúng Tôi<span></span></p>
-                    <h3>Sự Ưu Việt Là Ưu Tiên Hàng Đầu Của Chúng Tôi.</h3>
+                    <h3>"Sự hài lòng của bạn là chất lượng của chúng tôi!</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="about-icon"> <i class="iconsax" data-icon="blur"></i>
-                    <h5>Chất Liệu Tuyệt Hảo</h5>
-                    <p>Đồ thể thao của chúng tôi được thiết kế chính xác để mang lại sự thoải mái và bền bỉ, sử dụng các loại vải chất lượng trong quy trình sản xuất chuyên nghiệp.</p>
+                    <h5>Chất Liệu </h5>
+                    <p>Sản phẩm của chúng tôi được thiết kế chính xác để mang lại sự thoải mái và bền bỉ, sử dụng các loại vải chất lượng trong quy trình sản xuất chuyên nghiệp.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="about-icon"> <i class="iconsax" data-icon="diamonds"></i>
                     <h5>Phong Cách Đơn Giản</h5>
-                    <p>Sự tinh tế đơn giản. Đồ thể thao của chúng tôi thể hiện phong cách tự nhiên, truyền tải thông điệp tinh tế, thể hiện tinh hoa của thiết kế tối giản.</p>
+                    <p>Sự tinh tế đơn giản.Sản phẩm của chúng tôi thể hiện phong cách tự nhiên, truyền tải thông điệp tinh tế, thể hiện tinh hoa của thiết kế tối giản.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -120,12 +121,12 @@
             <div class="col-12">
                 <div class="title-1 mb-0">
                     <p>Phong Cách Thời Trang Của Chúng Tôi<span></span></p>
-                    <h3>Lời Chào Từ Kỷ Nguyên Thời Trang Mới</h3>
+                    <h3>Sản phẩm hot trend dẫn đầu xu hướng</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="fashion-box-1">
-                    <p>Những lớp trang phục dễ dàng kết hợp tạo nên phong cách tinh tế. Từ chiếc áo cardigan mỏng, đến áo khoác duster và khăn choàng cổ, bạn sẽ luôn nổi bật dù ngày hay đêm. </p>
+                    <p>Những lớp trang phục dễ dàng kết hợp tạo nên phong cách tinh tế. Từ chiếc áo sơ mi đến những chiếc áo phông bạn sẽ luôn nổi bật dù ngày hay đêm. </p>
                     <a href="product.html">Khám Phá Ngay <i class="fa-solid fa-arrow-right-long"></i></a><img
                         class="img-fluid" src="../assets/images/about/fashion-1.jpg" alt="">
                 </div>
@@ -137,7 +138,7 @@
                 <div class="fashion-box-1 fashion-item"> <img class="img-fluid"
                         src="../assets/images/about/fashion-2.jpg" alt=""><a href="product.html">Khám Phá Ngay
                         <i class="fa-solid fa-arrow-right-long"></i></a>
-                    <p>Những lớp trang phục dễ dàng kết hợp tạo nên phong cách tinh tế. Từ chiếc áo cardigan mỏng, đến áo khoác duster và khăn choàng cổ, bạn sẽ luôn nổi bật dù ngày hay đêm.</p>
+                    <p>Namad Store không chỉ là nơi để mua sắm thời trang nam giới mà còn là nền tảng giao lưu và chia sẻ xu hướng phong cách. Chúng tôi luôn cập nhật những bộ sưu tập mới và hợp thời để giúp khách hàng thể hiện cá tính và phong cách riêng của mình. Với phương châm "Chất lượng - Phong cách - Tiện lợi", Namad Store cam kết mang đến cho khách hàng những sản phẩm tốt nhất cùng với dịch vụ chăm sóc khách hàng chuyên nghiệp và tận tâm.</p>
                 </div>
             </div>
         </div>

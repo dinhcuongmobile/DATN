@@ -48,7 +48,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-house-damage"></i>
-                    <span>Home</span>
+                    <span>Trang Chủ</span>
             </li>
 
             <!-- Divider -->
@@ -142,15 +142,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                     aria-expanded="true" aria-controls="collapseSix">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Quản lý DM tin tức</span>
+                    <span>Quản lý tin tức</span>
                 </a>
                 <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach') }}">Danh sách DM tin tức</a>
-                        <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
-                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.them-danh-muc-tin-tuc')}}" style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
+                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.danh-sach')}}">Danh mục tin tức</a>
+                        <a class="collapse-item" href="{{route('tin-tuc.danh-sach')}}">Danh sách tin tức</a>
                     </div>
                 </div>
             </li>
@@ -166,7 +163,6 @@
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach') }}">Quản lý tin tức</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lienhe.dsLienHe') }}">Quản lý liên hệ</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>

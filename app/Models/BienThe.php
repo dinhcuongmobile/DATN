@@ -30,4 +30,9 @@ class BienThe extends Model
         return $this->belongsTo(SanPham::class, 'san_pham_id');
     }
 
+    public function gioHangs()
+    {
+        return $this->hasMany(GioHang::class, 'bien_the_id');
+    }
+
 }

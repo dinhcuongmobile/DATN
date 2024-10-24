@@ -18,8 +18,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawavesome/css/all.min.css')}}">
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/toastify.css')}}">
@@ -35,8 +36,7 @@
 <body class="layout-4 skeleton_body">
     <div class="tap-top">
         <div><i class="fa-solid fa-angle-up"></i></div>
-    </div><span class="cursor"><span class="cursor-move-inner"><span class="cursor-inner"></span></span><span
-            class="cursor-move-outer"><span class="cursor-outer"></span></span></span>
+</div>
     <div class="skeleton_loader">
         <header>
             <div class="top_header">
@@ -218,15 +218,15 @@
 
     <header>
         <div class="top_header">
-            <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
-                    href="collection-left-sidebar.html"> MUA NGAY</a></p>
+            <p> Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
+                    href="{{route("san-pham.san-pham")}}"> MUA NGAY</a></p>
         </div>
         <div class="custom-container container header-1">
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
@@ -280,8 +280,8 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
-                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
                                                 <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
@@ -366,11 +366,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Hỗ Trợ Về</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="order-success.html">Your Orders</a></li>
-                                        <li> <a class="nav" href="dashboard.html">Your Account</a></li>
-                                        <li> <a class="nav" href="order-tracking.html">Track Orders</a></li>
-                                        <li> <a class="nav" href="wishlist.html">Your Wishlist</a></li>
-                                        <li> <a class="nav" href="faq.html">Shopping FAQs</a></li>
+                                        <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
+                                        <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
+                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -382,11 +382,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Tài Khoản</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="dashboard.html">My Account</a></li>
-                                        <li> <a class="nav" href="login.html">Login/Register</a></li>
-                                        <li> <a class="nav" href="cart.html">Cart</a></li>
-                                        <li> <a class="nav" href="order-success.html">Order History</a></li>
-                                        <li> <a class="nav" href="faq.html">Shopping FAQs</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
+                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng kí</a></li>
+                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
+                                        <li> <a class="nav" href="order-success.html">Lịch sử mua hàng</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -461,8 +461,8 @@
                                             min="1" max="20"><button class="plus" type="button"><i
                                                 class="fa-solid fa-plus"></i></button></div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Add to cart</a><a
-                                        class="btn btn-solid" href="product.html">View detail</a></div>
+                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏi hàng</a><a
+                                        class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
                             </div>
                         </div>
                     </div>
@@ -488,8 +488,8 @@
                                                         sleeves</span><span> successfully added to your Cart</span></h6>
                                             </a>
                                             <div class="buttons"><a class="view-cart btn btn-solid"
-                                                    href="cart.html">Your cart</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html">Check out</a><a class="continue btn btn-solid"
+                                                    href="cart.html">Giỏ hàng của bạn</a><a class="checkout btn btn-solid"
+                                                    href="check-out.html"></a><a class="continue btn btn-solid"
                                                     href="index.html">Continue shopping</a></div>
                                             <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
                                                     src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
@@ -499,7 +499,11 @@
                             </div>
                             <div class="col-12">
                                 <div class="product-upsell">
-                                    <h5>Products Loved by Our Customers</h5>
+                                    <h5>Products Loved by Our Customers</h5><svg>
+                                        <use
+                                            href="https://themes.pixelstrap.net/katie/{{asset('assets/svg/icon-sprite.svg#main-line')}}">
+                                        </use>
+                                    </svg>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
@@ -538,33 +542,49 @@
             </div>
         </div>
     </div>
-    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1"
-        aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h4><button class="btn-close"
                 type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body theme-scrollbar">
             <ul class="offcanvas-cart">
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/1.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity-previous">2</div>
-                                    <div id="quantity-current">3</div>
-                                    <div id="quantity-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add">+</button>
+                @foreach ($gio_hangs as $item)
+                    <li>
+                        <a class="style-border" href="{{route('san-pham.chi-tiet-san-pham',$item->san_pham_id)}}"> <img src="{{Storage::url($item->sanPham->hinh_anh)}}" alt="Sản Phẩm"></a>
+                        <div>
+                            <h6 class="mb-0">{{$item->sanPham->ten_san_pham}}</h6>
+                            <p>
+                                <del>$40</del>
+                                <span class="btn-cart">
+                                    $<span class="btn-cart__total"
+                                        id="total">105
+                                    </span>
+                                </span>
+                            </p>
+                            <div class="btn-containter">
+                                <div class="quantity">
+                                    <button class="minus" type="button">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                        <input type="number" value="1" min="1" disabled>
+                                    <button class="plus" type="button">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
+                        </div><i class="iconsax delete-icon" data-icon="trash"></i>
+                    </li>
+                @endforeach
             </ul>
         </div>
+        @if (count($gio_hangs)==0)
+            <div class="no-data" id="data-show" style="display: block">
+                <img src="../assets/images/cart/1.gif" alt="">
+                <h4>Bạn không có sản phẩm nào trong giỏ hàng!</h4>
+                <p>Hôm nay là ngày tuyệt vời để mua những thứ bạn đã giữ! hoặc <a href="{{route('san-pham.san-pham')}}">Tiếp tục mua</a></p>
+            </div>
+        @endif
         <div class="offcanvas-footer">
             <div class="price-box">
                 <h6>Total :</h6>
@@ -761,12 +781,12 @@
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4>Bảng Kích Thước</h4>
+                    <h4>Size Chart</h4>
                     <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body pt-0">
                     <a href="#">
-                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.png') }}" alt="Size Chart">
+                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.jpg') }}" alt="Size Chart">
                     </a>
                 </div>
             </div>
@@ -809,7 +829,6 @@
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>
     <script src="{{asset('assets/js/cursor.js')}}"> </script>
-    <script src="{{asset('assets/js/filter-range-slider.js')}}"> </script>
     <script src="{{asset('assets/js/swiper-slider/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/swiper-slider/swiper-custom.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>
