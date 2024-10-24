@@ -61,10 +61,20 @@
                                         <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>
                                         <td class="col-2 align-middle">
                                             <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
-                                                class="btn btn-warning btn-sm">Sửa</a> |
+                                                class="btn btn-warning btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-edit"></i>
+                                            </span>
+                                            <span class="text">Sửa</span>
+                                            </a> |
                                             <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
                                                 href="{{ route('danh-muc.delete', $item->id) }}"
-                                                class="btn btn-danger btn-sm">Xóa</a>
+                                                class="btn btn-danger btn-icon-split">
+                                            <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa</span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

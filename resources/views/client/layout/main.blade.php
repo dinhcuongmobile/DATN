@@ -35,8 +35,7 @@
 <body class="layout-4 skeleton_body">
     <div class="tap-top">
         <div><i class="fa-solid fa-angle-up"></i></div>
-    </div><span class="cursor"><span class="cursor-move-inner"><span class="cursor-inner"></span></span><span
-            class="cursor-move-outer"><span class="cursor-outer"></span></span></span>
+</div>
     <div class="skeleton_loader">
         <header>
             <div class="top_header">
