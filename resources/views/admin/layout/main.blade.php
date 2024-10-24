@@ -48,7 +48,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-house-damage"></i>
-                    <span>Home</span>
+                    <span>Trang Chủ</span>
             </li>
 
             <!-- Divider -->
