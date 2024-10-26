@@ -146,7 +146,7 @@
                                 <li>
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>SL kho: </h6>
-                                        <p id="soLuongTon"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')}}</p>
+                                        <p id="soLuongTon"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'hết hàng'}}</p>
                                     </div>
                                 </li>
                                 <li>
