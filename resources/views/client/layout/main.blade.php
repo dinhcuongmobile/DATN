@@ -18,8 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
@@ -226,7 +225,7 @@
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
@@ -461,7 +460,7 @@
                                             min="1" max="20"><button class="plus" type="button"><i
                                                 class="fa-solid fa-plus"></i></button></div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏi hàng</a><a
+                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏ hàng</a><a
                                         class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
                             </div>
                         </div>
@@ -484,26 +483,21 @@
                                     <div class="d-flex"><a href="#"><img class="img-fluid blur-up lazyload pro-img"
                                                 src="{{asset('assets/images/modal/0.jpg')}}" alt=""></a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
-                                                <h6><i class="fa-solid fa-check"> </i>Item <span>men full
-                                                        sleeves</span><span> successfully added to your Cart</span></h6>
+                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span>áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
                                             </a>
-                                            <div class="buttons"><a class="view-cart btn btn-solid"
-                                                    href="cart.html">Giỏ hàng của bạn</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html"></a><a class="continue btn btn-solid"
-                                                    href="index.html">Continue shopping</a></div>
-                                            <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
-                                                    src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
+                                            <div class="buttons">
+                                                <a class="view-cart btn btn-solid"
+                                                    href="{{route('gio-hang.gio-hang')}}">Giỏ hàng của bạn</a>
+                                                <a class="continue btn btn-solid"
+                                                    href="{{route('san-pham.san-pham')}}">Tiếp tục mua hàng</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="product-upsell">
-                                    <h5>Products Loved by Our Customers</h5><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/{{asset('assets/svg/icon-sprite.svg#main-line')}}">
-                                        </use>
-                                    </svg>
+                                    <h5>Sản phẩm được khách hàng yêu thích</h5>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
@@ -786,7 +780,7 @@
                 </div>
                 <div class="modal-body pt-0">
                     <a href="#">
-                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.jpg') }}" alt="Size Chart">
+                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.png') }}" alt="Size Chart">
                     </a>
                 </div>
             </div>

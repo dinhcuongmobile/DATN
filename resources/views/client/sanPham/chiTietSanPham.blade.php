@@ -120,16 +120,17 @@
                             </div>
                         </div>
                         <div class="quantity-box d-flex align-items-center gap-3">
-                            <div class="quantity"><button class="minus" type="button"><i
-                                        class="fa-solid fa-minus"></i></button><input type="number" value="1"
-                                    min="1" max="20"><button class="plus" type="button"><i
-                                        class="fa-solid fa-plus"></i></button></div>
-                            <div class="d-flex align-items-center gap-3 w-100"> <a class="btn btn_black sm" href="#"
-                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                    aria-controls="offcanvasRight">Thêm giỏ hàng</a><a class="btn btn_outline sm"
-                                    href="#">Mua ngay</a></div>
+                            <div class="quantity">
+                                <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
+                                <input type="number" value="1" min="1" readonly>
+                                <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 w-100">
+                                <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
+                                    data-bs-toggle="modal" data-bs-target="#addtocart">Thêm giỏ hàng</a>
+                                <a class="btn btn_outline sm" href="#">Mua ngay</a></div>
                         </div>
-                        <div class="buy-box">
+                        <div class="buy-box border-buttom">
                             <ul>
                                 <li> <a href="wishlist.html"> <i class="fa-regular fa-heart me-2"></i>Thêm vào yêu thích</a></li>
                             </ul>
