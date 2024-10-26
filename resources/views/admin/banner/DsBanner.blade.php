@@ -33,11 +33,6 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    @if (session('error'))
-                        <div class="alert alert-danger" id="alert-message">
-                            {{ session('error') }}
-                        </div>
-                    @endif
                     @if (session('success'))
                         <div class="alert alert-success"id="alert-message">
                             {{ session('success') }}
@@ -71,7 +66,8 @@
 
                                     </td>
                                     <td class="col-2 align-middle">
-                                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height=60px>
+                                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px">
+
                                     </td>
                                     <td class="col-2 align-middle">
                                         {{ $item->trang_thai == 0 ? 'OFF' : 'ON' }}
