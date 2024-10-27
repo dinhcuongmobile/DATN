@@ -23,7 +23,7 @@ class UpdateTinTucRequest extends FormRequest
                 'unique:tin_tucs,tieu_de,'.$id
             ],
             'hinh_anh' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,webp',
                 'max:2048'

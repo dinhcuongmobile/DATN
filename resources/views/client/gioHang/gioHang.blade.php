@@ -126,12 +126,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if (count($gio_hangs)==0)
-                        <div class="no-data" id="data-show" style="display: block"><img src="../assets/images/cart/1.gif" alt="">
-                            <h4>Bạn không có sản phẩm nào trong giỏ hàng!</h4>
-                            <p>Hôm nay là ngày tuyệt vời để mua những thứ bạn đã giữ! hoặc <a href="{{route('san-pham.san-pham')}}">Tiếp tục mua</a></p>
-                        </div>
-                    @endif
+                    <div class="no-data" id="data-show" style="display: {{count($gio_hangs)==0?'block':'none'}}"><img src="../assets/images/cart/1.gif" alt="">
+                        <h4>Bạn không có sản phẩm nào trong giỏ hàng!</h4>
+                        <p>Hôm nay là ngày tuyệt vời để mua những thứ bạn đã giữ! hoặc <a href="{{route('san-pham.san-pham')}}">Tiếp tục mua</a></p>
+                    </div>
                 </div>
             </div>
             <div class="col-xxl-3 col-xl-4">

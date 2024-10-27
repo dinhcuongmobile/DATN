@@ -7,6 +7,11 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Thêm banner mới</h1>
         </div>
+        @if (session('error'))
+            <div class="alert alert-danger" id="alert-message">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="card shadow mb-4">
             <div class="card-body">
                 <form action="{{ route('banner.storeBanner') }}" method="post" enctype="multipart/form-data" class="form">
@@ -14,7 +19,7 @@
                     <div class="mb-3">
                         <label for="image" class="form-label">Title :</label>
                         <input type="text" name="ten_anh" class="form-control">
-                        @error('title')
+                        @error('ten_anh')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
                     </div>
@@ -35,14 +40,14 @@
                     <div class="mb-3">
                         <label for="image" class="form-label">Start_date</label>
                         <input type="datetime-local" name="ngay_bat_dau" class="form-control-file border">
-                        @error('start_date')
+                        @error('ngay_bat_dau')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">End_date</label>
                         <input type="datetime-local" name="ngay_ket_thuc" class="form-control-file border">
-                        @error('end_date')
+                        @error('ngay_ket_thuc')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror
                     </div>
@@ -57,5 +62,15 @@
 
 
     </div>
+
     <!-- /.container-fluid -->
+    <script>
+        // Đoạn mã này sẽ ẩn thông báo sau 5 giây
+        setTimeout(function() {
+            var alert = document.getElementById('alert-message');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }, 5000); // 5000 ms = 5 giây
+    </script>
 @endsection

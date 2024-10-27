@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
+
 class BannerController extends Controller
 {
 
@@ -41,33 +42,38 @@ class BannerController extends Controller
     }
     public function storeAdd(Request $request)
     {
+        $oldBanner = Banner::all();
         $request->validate([
-            'ten_anh' => 'required | string | max:255',
+            'ten_anh' => 'required | string | min:6 | max:255 ',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'trang_thai' => 'required',
             'ngay_bat_dau' => 'required|date',
-            'ngay_ket_thuc' => 'required|date|after:start_date'
+            'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau'
         ]);
-
+       
         if ($request->hasFile('hinh_anh')) {
             $filesName = $request->file('hinh_anh')->store('uploads/banners', 'public');
         } else {
             $filesName = null;
         }
-
-        $data = [
-            'ten_anh' => $request->input('ten_anh'),
-            'hinh_anh' => $filesName,
-            'trang_thai' => $request->input('trang_thai'),
-            'ngay_bat_dau' => $request->input('ngay_bat_dau'),
-            'ngay_ket_thuc' => $request->input('ngay_ket_thuc')
-        ];
+        $titleBanner = $oldBanner->firstWhere('ten_anh', $request->input('ten_anh'));
+        if ($titleBanner) {
+            return redirect()->route('banner.viewAdd')->with('error', 'Tên hình ảnh đã tồn tại');
+        } else {
+            $data = [
+                'ten_anh' => $request->input('ten_anh'),
+                'hinh_anh' => $filesName,
+                'trang_thai' => $request->input('trang_thai'),
+                'ngay_bat_dau' => $request->input('ngay_bat_dau'),
+                'ngay_ket_thuc' => $request->input('ngay_ket_thuc')
+            ];
+        }
 
         $res = Banner::insert($data);
         if ($res) {
-            return Redirect::route('banner.dsBanner')->with('success', 'Thêm mới hình ảnh thành công');
+            return redirect()->route('banner.dsBanner')->with('success', 'Thêm mới hình ảnh thành công');
         } else {
-            return redirect()->route('banner.dsBanner')->with('error', 'Thêm mới hình ảnh không thành công');
+            return redirect()->route('banner.viewAdd')->with('error', 'Thêm mới hình ảnh không thành công');
         }
     }
 
@@ -82,11 +88,11 @@ class BannerController extends Controller
         $old = Banner::where('id', $id)->first();
 
         $request->validate([
-            'ten_anh' => 'required | string | max:255',
+            'ten_anh' => 'required | string | min:6 | max:255 ',
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'trang_thai' => 'required',
             'ngay_bat_dau' => 'required|date',
-            'ngay_ket_thuc' => 'required|date|after:start_date'
+            'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau'
         ]);
         if ($request->hasFile('hinh_anh')) {
 

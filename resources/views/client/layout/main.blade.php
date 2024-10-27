@@ -18,8 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
@@ -226,7 +225,7 @@
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
@@ -337,7 +336,7 @@
                                         <li> <a class="nav" href="index.html">Trang Chủ</a></li>
                                         <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
                                         <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tứcg</a></li>
                                         <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
@@ -348,13 +347,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Danh Mục</h5>
+                                    <h5>Danh mục mới</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="product-bundle.html">Latest Shoes</a></li>
-                                        <li> <a class="nav" href="variant-radio.html">Branded Jeans</a></li>
-                                        <li> <a class="nav" href="product.html">New Jackets</a></li>
-                                        <li> <a class="nav" href="variant-images.html">Colorful Hoodies</a></li>
-                                        <li> <a class="nav" href="variant-dropdown.html">Best Perfume</a></li>
+                                        <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
+                                        <li> <a class="nav" href="variant-radio.html">Quần Jeans hiệu</a></li>
+                                        <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
+                                        <li> <a class="nav" href="variant-images.html">Áo Hoodie Nhiều Màu Sắc</a></li>
+                                        <li> <a class="nav" href="variant-dropdown.html">Nước hoa tốt nhất</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -369,8 +368,8 @@
                                         <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
-                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn của bạn</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -380,13 +379,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Tài Khoản</h5>
+                                    <h5>Tài khoản của tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
-                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng kí</a></li>
-                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
-                                        <li> <a class="nav" href="order-success.html">Lịch sử mua hàng</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của tôi</a></li>
+                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng ký</a></li>
+                                        <li> <a class="nav" href="cart.html">Xe đẩy</a></li>
+                                        <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -461,7 +460,7 @@
                                             min="1" max="20"><button class="plus" type="button"><i
                                                 class="fa-solid fa-plus"></i></button></div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏi hàng</a><a
+                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏ hàng</a><a
                                         class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
                             </div>
                         </div>
@@ -484,26 +483,21 @@
                                     <div class="d-flex"><a href="#"><img class="img-fluid blur-up lazyload pro-img"
                                                 src="{{asset('assets/images/modal/0.jpg')}}" alt=""></a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
-                                                <h6><i class="fa-solid fa-check"> </i>Item <span>men full
-                                                        sleeves</span><span> successfully added to your Cart</span></h6>
+                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span>áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
                                             </a>
-                                            <div class="buttons"><a class="view-cart btn btn-solid"
-                                                    href="cart.html">Giỏ hàng của bạn</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html"></a><a class="continue btn btn-solid"
-                                                    href="index.html">Continue shopping</a></div>
-                                            <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
-                                                    src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
+                                            <div class="buttons">
+                                                <a class="view-cart btn btn-solid"
+                                                    href="{{route('gio-hang.gio-hang')}}">Giỏ hàng của bạn</a>
+                                                <a class="continue btn btn-solid"
+                                                    href="{{route('san-pham.san-pham')}}">Tiếp tục mua hàng</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="product-upsell">
-                                    <h5>Products Loved by Our Customers</h5><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/{{asset('assets/svg/icon-sprite.svg#main-line')}}">
-                                        </use>
-                                    </svg>
+                                    <h5>Sản phẩm được khách hàng yêu thích</h5>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
@@ -786,7 +780,7 @@
                 </div>
                 <div class="modal-body pt-0">
                     <a href="#">
-                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.jpg') }}" alt="Size Chart">
+                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.png') }}" alt="Size Chart">
                     </a>
                 </div>
             </div>
