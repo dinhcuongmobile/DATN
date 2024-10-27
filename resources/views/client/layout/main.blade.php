@@ -336,7 +336,7 @@
                                         <li> <a class="nav" href="index.html">Trang Chủ</a></li>
                                         <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
                                         <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tứcg</a></li>
                                         <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
@@ -347,13 +347,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Danh Mục</h5>
+                                    <h5>Danh mục mới</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="product-bundle.html">Latest Shoes</a></li>
-                                        <li> <a class="nav" href="variant-radio.html">Branded Jeans</a></li>
-                                        <li> <a class="nav" href="product.html">New Jackets</a></li>
-                                        <li> <a class="nav" href="variant-images.html">Colorful Hoodies</a></li>
-                                        <li> <a class="nav" href="variant-dropdown.html">Best Perfume</a></li>
+                                        <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
+                                        <li> <a class="nav" href="variant-radio.html">Quần Jeans hiệu</a></li>
+                                        <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
+                                        <li> <a class="nav" href="variant-images.html">Áo Hoodie Nhiều Màu Sắc</a></li>
+                                        <li> <a class="nav" href="variant-dropdown.html">Nước hoa tốt nhất</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -368,8 +368,8 @@
                                         <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
-                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn của bạn</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -379,13 +379,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Tài Khoản</h5>
+                                    <h5>Tài khoản của tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
-                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng kí</a></li>
-                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
-                                        <li> <a class="nav" href="order-success.html">Lịch sử mua hàng</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="dashboard.html">Tài khoản của tôi</a></li>
+                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng ký</a></li>
+                                        <li> <a class="nav" href="cart.html">Xe đẩy</a></li>
+                                        <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
                                     </ul>
                                 </div>
                             </div>
