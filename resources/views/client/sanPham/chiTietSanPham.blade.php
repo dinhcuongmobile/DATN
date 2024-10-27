@@ -96,6 +96,7 @@
                                 <h5>Kích cỡ:</h5>
                                 <div class="size-box">
                                     <ul class="selected" id="selectSize">
+                                        <input type="hidden" id="size" value="">
                                         @foreach ($kich_cos as $item)
                                             @php
                                                 // Kiểm tra nếu có biến thể với kích cỡ này
@@ -113,12 +114,14 @@
                             <h5>Màu sắc:</h5>
                             <div class="color-box">
                                 <ul id="selectMauSac">
+                                    <input type="hidden" id="mauSac" value="">
                                     @foreach ($san_pham->bienThes->unique('ma_mau') as $item)
                                         <li data-color="{{$item->ma_mau}}" style="background-color: {{$item->ma_mau}}; border: 1px solid #0000003b;"></li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
+                        <p class="text-danger" id="errSelect">Vui lòng chọn size và màu sắc để thêm vào giỏ hàng !</p>
                         <div class="quantity-box d-flex align-items-center gap-3">
                             <div class="quantity">
                                 <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
@@ -127,9 +130,11 @@
                             </div>
                             <div class="d-flex align-items-center gap-3 w-100">
                                 <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
-                                    data-bs-toggle="modal" data-bs-target="#addtocart">Thêm giỏ hàng</a>
-                                <a class="btn btn_outline sm" href="#">Mua ngay</a></div>
+                                    onclick="themGioHang({{$san_pham->id}},{{$gia_khuyen_mai}})">Thêm giỏ hàng</a>
+                                <a class="btn btn_outline sm" href="#">Mua ngay</a>
+                            </div>
                         </div>
+
                         <div class="buy-box border-buttom">
                             <ul>
                                 <li> <a href="wishlist.html"> <i class="fa-regular fa-heart me-2"></i>Thêm vào yêu thích</a></li>

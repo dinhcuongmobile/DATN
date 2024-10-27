@@ -30,4 +30,12 @@ class GioHangController extends Controller
     public function chiTietThanhToan(){
         return view('client.gioHang.chiTietThanhToan');
     }
+
+    public function themGioHang(Request $request){
+        if(!Auth::check()){
+            return response()->json(['loginFalse' => false]);
+        }else{
+            
+        }
+    }
 }

@@ -39,7 +39,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         foreach ($this->views['san_phams'] as $san_pham) {
             $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
@@ -48,20 +48,27 @@ class SanPhamAdminController extends Controller
         return view('admin.sanPham.DSSanPham', $this->views);
     }
 
-    public function danhSachBienThe(Request $request){
+    public function danhSachBienThe(Request $request)
+    {
         $query = BienThe::with('sanPham');
         $keyword = $request->input('kyw');
 
         if ($keyword) {
-            $query->whereHas('sanPham', function($loc) use ($keyword) {
-                      $loc->where('ten_san_pham', 'LIKE', "%$keyword%");
-                  });
+            $query->where(function ($subQuery) use ($keyword) {
+                $subQuery->where('so_luong', (int)$keyword)
+                        ->orWhere('kich_co', $keyword)
+                        ->orWhere('ten_mau', $keyword)
+                        ->orWhereHas('sanPham', function ($productQuery) use ($keyword) {
+                            $productQuery->where('ten_san_pham', 'LIKE', "%$keyword%");
+                        });
+            });
         }
 
-        $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
-        return view('admin.sanPham.bienThe.DSBienThe',$this->views);
+        return view('admin.sanPham.bienThe.DSBienThe', $this->views);
     }
+
 
     public function danhSachSize(){
         $this->views['kich_cos'] = KichCo::orderBy('id', 'desc')->paginate(10);
@@ -85,7 +92,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         return view('admin.sanPham.bienThe.DSBienThe',$this->views);
     }
@@ -101,7 +108,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         foreach ($this->views['san_phams'] as $san_pham) {
             $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
@@ -120,7 +127,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
 
@@ -134,7 +141,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['ma_khuyen_mais'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         return view('admin.sanPham.maKhuyenMai.DSMaKhuyenMai',$this->views);
     }
@@ -149,7 +156,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         foreach ($this->views['san_phams'] as $san_pham) {
             $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
@@ -169,7 +176,7 @@ class SanPhamAdminController extends Controller
                   });
         }
 
-        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10);
+        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         foreach ($this->views['san_phams'] as $san_pham) {
             $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');

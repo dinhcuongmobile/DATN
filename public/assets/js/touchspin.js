@@ -1,4 +1,8 @@
-// Tìm tất cả các phần tử trong class quantity
+
+let selectedSize= null;
+let selectedColor=null;
+let ipSize= document.getElementById('size');
+let ipMauSac= document.getElementById('mauSac');
 const plusMinus = document.querySelectorAll('.quantity');
 
 // Đặt sự kiện `click` chỉ một lần cho tất cả nút `plus` và `minus`
@@ -53,8 +57,8 @@ function updateQuantity() {
                     inputEl.setAttribute('data-max', soLuongTon);
 
                     // Bật hoặc tắt nút theo điều kiện
-                    addButton.disabled = inputEl.value >= soLuongTon;
-                    subButton.disabled = inputEl.value <= 1;
+                    addButton.disabled = false;
+                    subButton.disabled = false;
                 });
             },
             error: function() {
@@ -68,6 +72,7 @@ function updateQuantity() {
 document.querySelectorAll('#selectSize li').forEach(function(sizeElement) {
     sizeElement.addEventListener('click', function() {
         selectedSize = this.getAttribute('data-size');
+        ipSize.value = selectedSize;
 
         document.querySelectorAll('#selectSize li').forEach(function(el) {
             el.classList.remove('active');
@@ -75,6 +80,7 @@ document.querySelectorAll('#selectSize li').forEach(function(sizeElement) {
 
         this.classList.add('active');
         updateQuantity();
+        selectBienThe();
     });
 });
 
@@ -82,6 +88,7 @@ document.querySelectorAll('#selectSize li').forEach(function(sizeElement) {
 document.querySelectorAll('#selectMauSac li').forEach(function(colorElement) {
     colorElement.addEventListener('click', function() {
         selectedColor = this.getAttribute('data-color');
+        ipMauSac.value = selectedColor;
 
         document.querySelectorAll('#selectMauSac li').forEach(function(el) {
             el.classList.remove('activ');
@@ -89,5 +96,51 @@ document.querySelectorAll('#selectMauSac li').forEach(function(colorElement) {
 
         this.classList.add('activ');
         updateQuantity();
+        selectBienThe();
     });
+});
+
+function selectBienThe(){
+    if(selectedSize && selectedColor){
+        document.querySelector('#errSelect').style.display='none';
+        document.querySelector('#themGioHang').setAttribute('data-bs-target', '#addtocart');
+        document.querySelector('#themGioHang').setAttribute('data-bs-toggle', 'modal');
+    }
+}
+// them gio hang
+document.addEventListener('DOMContentLoaded', () => {
+    let btnThemGioHang= document.querySelector('#themGioHang');
+    if(btnThemGioHang){
+        btnThemGioHang.addEventListener('click',function(){
+            $.ajax({
+                type: 'get',
+                url: '/gio-hang/them-gio-hang/',
+                success: function(response) {
+                    if (response.loginFalse!=false) {
+                        if (selectedSize && selectedColor) {
+
+                            
+                        } else {
+                            document.querySelector('#errSelect').style.display = 'block';
+                        }
+                    } else {
+                        window.location.href = '/tai-khoan/dang-nhap';
+                    }
+
+                },
+                error: function(error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+            // if(selectedSize && selectedColor){
+
+
+            // }else{
+            //     document.querySelector('#errSelect').style.display='block';
+            // }
+
+        });
+    }
+
 });

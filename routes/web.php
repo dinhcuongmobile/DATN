@@ -77,6 +77,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
         Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
+        Route::get('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
     });
 
     Route::prefix('tin-tuc')->group(function () {
