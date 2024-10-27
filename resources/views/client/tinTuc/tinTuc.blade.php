@@ -5,7 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Blog Left Sidebar</h4>
+                    <h4>Blog</h4>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                                 <div class="blog-img"> <img class="img-fluid bg-img"
                                         src="../assets/images/blog/blog-page/2.jpg" alt=""></div>
                             </div>
-                            <div class="blog-content"><span class="blog-date">May 9, 2018 Stylish</span><a
+                            <div class="blog-content"><span class="blog-date">May 9, 2018 </span><a
                                     href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
                                     <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
                                 </a>
@@ -199,6 +199,69 @@
                                 <div class="share-box">
                                     <div class="d-flex align-items-center gap-2"><img class="img-fluid"
                                             src="../assets/images/user/10.jpg" alt="">
+                                        <h6>by John wiki on</h6>
+                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="blog-main-box">
+                            <div>
+                                <div class="blog-img"> <img class="img-fluid bg-img"
+                                        src="../assets/images/blog/blog-page/1.jpg" alt=""></div>
+                            </div>
+                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
+                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
+                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
+                                </a>
+                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
+                                    Aenean sollicitudin, lom quis bibenm auctor</p>
+                                <div class="share-box">
+                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
+                                            src="../assets/images/user/1.jpg" alt="">
+                                        <h6>by John wiki on</h6>
+                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="blog-main-box">
+                            <div>
+                                <div class="blog-img"> <img class="img-fluid bg-img"
+                                        src="../assets/images/blog/blog-page/2.jpg" alt=""></div>
+                            </div>
+                            <div class="blog-content"><span class="blog-date">May 9, 2018 </span><a
+                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
+                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
+                                </a>
+                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
+                                    Aenean sollicitudin, lom quis bibenm auctor</p>
+                                <div class="share-box">
+                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
+                                            src="../assets/images/user/2.jpg" alt="">
+                                        <h6>by John wiki on</h6>
+                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="blog-main-box">
+                            <div>
+                                <div class="blog-img"> <img class="img-fluid bg-img"
+                                        src="../assets/images/blog/blog-page/3.jpg" alt=""></div>
+                            </div>
+                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
+                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
+                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
+                                </a>
+                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
+                                    Aenean sollicitudin, lom quis bibenm auctor</p>
+                                <div class="share-box">
+                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
+                                            src="../assets/images/user/3.jpg" alt="">
                                         <h6>by John wiki on</h6>
                                     </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
                                 </div>

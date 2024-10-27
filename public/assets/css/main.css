@@ -1,0 +1,71 @@
+.style-border{
+    border: 1px solid #0000002b;
+}
+
+.product-box:hover .style-border{
+    border: 2px solid rgba(var(--theme-default));
+}
+
+#selectMauSac .activ {
+    width: 37px;
+    height: 37px;
+    box-shadow: 0 0 10px rgba(0, 123, 255);
+}
+
+#enterLoc{
+    background-color: #dc9260;
+    color: #ffffff;
+    transition: ease-in-out 1.5;
+}
+
+#enterLoc:hover{
+    background-color: #cd773d;
+}
+
+.styleSPDanhMuc li a{
+    text-decoration: none;
+    color: rgba(var(--light-color), 1);
+    font-size: 16px;
+    margin-bottom: 0;
+    transition: all .4s ease-in-out;
+    width: calc(100% - 28px);
+}
+
+.styleSPDanhMuc li:hover a{
+    color: rgba(var(--theme-default), 1);
+    letter-spacing: 1.1px;
+}
+
+/* gio hang */
+.shopping-details .no-data{
+    padding: 0px 10px 10px 20px;
+    margin-bottom: 150px;
+
+}
+.shopping-details .no-data h4{
+    font-size: 20px;
+
+}
+.shopping-details .no-data p{
+    font-size: 15px;
+
+}
+.shopping-details .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+}
+.cart-table .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+    display: block;
+}
+.cart-table .thayDoi{
+    color: rgba(var(--theme-default), 1);
+    cursor: pointer;
+}
+.cart-table .thayDoi:hover{
+    text-decoration: underline;
+}
+

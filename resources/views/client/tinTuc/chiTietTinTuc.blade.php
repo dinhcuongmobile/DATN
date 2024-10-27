@@ -41,6 +41,21 @@
                                     to dress up to the nines. Winter lets us layer our clothes, giving us endless
                                     styling options with varied colors, styles, textures, fabrics, prints, and
                                     more.</span>
+                                    <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
+                                    Aenean sollicitudin, lom quis bibenm auctor, nisi elit consequat ipsum, nec
+                                    sagittis sem nibh id elit. Duis sed odio sit amet nibh vuutate cursus a sit amet
+                                    maorbi We were making our way to the Rila Mountains, where we were visiting the
+                                    Rila Monastery where we enjoyed scrambled eggs, toast, mekitsi, local jam and
+                                    peppermint tea.</p><span>We wandered the site with busloads of other tourists,
+                                    yet strangely the place did not seem crowded. I’m not sure if it was the sheer
+                                    size of the place, or whether the masses congregated in one area and didn’t
+                                    venture far from the main church, but I didn’t feel overwhelmed by tourists in
+                                    the monastery.</span><span class="mb-0">Even though winter is coming to an end,
+                                    it's never too late to jump on the winter wear fashion bandwagon. Winter is many
+                                    people’s favorite season, especially fashionistas, who see it as an opportunity
+                                    to dress up to the nines. Winter lets us layer our clothes, giving us endless
+                                    styling options with varied colors, styles, textures, fabrics, prints, and
+                                    more.</span>
                                 <div class="quote-title">
                                     <h6><i class="fa-solid fa-quote-left"></i><span>Fashion you can buy, but style
                                             you possess. The key to style is learning who you are, which takes
@@ -287,10 +302,7 @@
                                             <div class="icon"><i class="fa-brands fa-youtube"></i></div>
                                             <h6>Youtube</h6>
                                         </a></li>
-                                    <li> <a href="https://www.whatsapp.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-                                            <h6>Whatsapp</h6>
-                                        </a></li>
+                              
                                 </ul>
                             </div>
                         </div>
@@ -304,4 +316,5 @@
         </div>
     </div>
 </section>
+
 @endsection

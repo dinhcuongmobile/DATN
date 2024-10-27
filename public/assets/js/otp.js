@@ -1,29 +1,52 @@
-function getCodeBoxElement(index) {
-    return document.getElementById('four' + index);
+function moveToNext(current, nextFieldId) {
+    current.value = current.value.replace(/[^0-9]/g, ''); // Chỉ cho phép số
+
+    if (current.value.length > 1) {
+        current.value = current.value.charAt(0); // Giữ lại ký tự đầu tiên nếu nhập nhiều hơn
+    }
+
+    if (current.value.length === 1) {
+        document.getElementById(nextFieldId).focus();
+    }
+    combineOtp();
 }
 
-function onKeyUpEvent(index, event) {
-    const eventCode = event.which || event.keyCode;
-    if (getCodeBoxElement(index).value.length === 1) {
-        if (index !== 4) {
-            getCodeBoxElement(index + 1).focus();
-        } else {
-            getCodeBoxElement(index).blur();
-            // Submit code
-            console.log('submit code');
-        }
+function moveToPrev(event, current, prevFieldId) {
+    if (event.key === "Backspace" && current.value.length === 0) {
+        document.getElementById(prevFieldId).focus();
     }
-    if (eventCode === 4 && index !== 1) {
-        getCodeBoxElement(index - 1).focus();
-    }
+    combineOtp();
 }
 
-function onFocusEvent(index) {
-    for (item = 1; item < index; item++) {
-        const currentElement = getCodeBoxElement(item);
-        if (!currentElement.value) {
-            currentElement.focus();
-            break;
-        }
+function lastInput(current) {
+    current.value = current.value.replace(/[^0-9]/g, ''); // Chỉ cho phép số
+
+    if (current.value.length > 1) {
+        current.value = current.value.charAt(0); // Giữ lại ký tự đầu tiên nếu nhập nhiều hơn
     }
+    combineOtp();
 }
+
+function combineOtp() {
+    let otp = '';
+    for (let i = 1; i <= 4; i++) {
+        otp += document.getElementById('otp' + i).value;
+    }
+    document.getElementById('hidden-otp').value = otp;
+}
+
+const otpContainer=document.getElementById('otp-container');
+if(otpContainer){
+    otpContainer.addEventListener('paste', function(event) {
+        const pasteData = event.clipboardData.getData('text');
+        if (pasteData.length === 4 && /^\d{4}$/.test(pasteData)) {
+            for (let i = 0; i < 4; i++) {
+                document.getElementById('otp' + (i + 1)).value = pasteData[i];
+            }
+            combineOtp();
+            document.getElementById('otp4').focus();
+        }
+        event.preventDefault();
+    });
+}
+

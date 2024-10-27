@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TinTuc;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -23,7 +23,7 @@ class UpdateTinTucRequest extends FormRequest
                 'unique:tin_tucs,tieu_de,'.$id
             ],
             'hinh_anh' => [
-                'required',
+                'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,webp',
                 'max:2048'

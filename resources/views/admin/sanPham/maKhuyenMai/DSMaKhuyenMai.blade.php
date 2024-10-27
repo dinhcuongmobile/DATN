@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="#" method="GET">
+                    <form action="{{route('san-pham.danh-sach-ma-khuyen-mai')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
@@ -27,14 +27,15 @@
                         </div>
                     </form>
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('san-pham.xoa-nhieu-ma-khuyen-mai')}}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        <button type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
-                        <a href="#"><button type="button"
+                        <button onclick="return confirm('Bạn chắc chắn muốn xóa các mã khuyến mại này?')"
+                        type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        <a href="{{route('san-pham.show-them-ma-khuyen-mai')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
             </div>
@@ -44,7 +45,6 @@
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th></th>
-                                <th>#</th>
                                 <th>Tên sản phẩm</th>
                                 <th>Mã giảm giá</th>
                                 <th>Số tiền giảm</th>
@@ -55,20 +55,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="1"></td>
-                                <td class="col-1 align-middle text-center">DCM-1</td>
-                                <td class="col-2 align-middle">1</td>
-                                <td class="col-2 align-middle">9</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="align-middle">1%</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="col-1 align-middle">1</td>
-                                <td class="text-center col-2 align-middle">
-                                    <a href="#" class="btn btn-secondary btn-sm">Sửa</a> |
-                                    <a href="#" class="btn btn-secondary btn-sm">Xóa</a>
-                                </td>
-                            </tr>
+                            @if (count($ma_khuyen_mais)>0)
+                                @foreach ($ma_khuyen_mais as $item)
+                                    <tr>
+                                        <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                        <td class="col-2 align-middle"><a href="{{route('san-pham.san-pham-ma-khuyen-mai',$item->san_pham_id)}}">{{$item->sanPham->ten_san_pham}}</a></td>
+                                        <td class="col-1 align-middle text-danger">{{$item->ma_giam_gia}}</td>
+                                        <td class="col-2 align-middle">{{ number_format($item->so_tien_giam, 0, ',', '.') }} VND</td>
+                                        <td class="align-middle">{{$item->ngay_bat_dau}}</td>
+                                        <td class="align-middle">{{$item->ngay_ket_thuc}}</td>
+                                        <td class="col-2 align-middle">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }} VND</td>
+                                        <td class="text-center col-2 align-middle">
+                                            <a href="{{route('san-pham.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-warning btn-sm">Sửa</a> |
+                                            <a onclick="return confirm('Bạn chắc chắn muốn xóa mã khuyến mại này?')"
+                                            href="{{route('san-pham.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-danger btn-sm">Xóa</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <td colspan="10" class="text-center">Chưa có dữ liệu.</td>
+                            @endif
                         </tbody>
                     </table>
                     {{-- <div class="phantrang">

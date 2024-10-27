@@ -6,36 +6,36 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Katie">
-    <meta name="keywords" content="Katie">
+    <meta name="description" content="Namad">
+    <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <title>Katie - Online Fashion Store </title><!-- Favicon icon-->
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon"><!-- Google Font Outfit-->
+    <link rel="icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <title>Namad Store </title><!-- icon_web icon-->
+    <link rel="icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon"><!-- Google Font Outfit-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
     <!-- Font Awesome-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/fontawesome.css')}}"><!-- Iconsax icon-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"><!-- Iconsax icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/iconsax.css')}}"><!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" id="rtl-link" href="{{asset('assets/css/vendors/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/swiper-slider/swiper-bundle.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/toastify.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <script defer src="{{asset('assets/css/landing_page.js')}}"></script>
     <script defer src="{{asset('assets/css/style.js')}}"></script>
     <link href="{{asset('assets/css/landing_page.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body class="layout-4 skeleton_body">
     <div class="tap-top">
         <div><i class="fa-solid fa-angle-up"></i></div>
-    </div><span class="cursor"><span class="cursor-move-inner"><span class="cursor-inner"></span></span><span
-            class="cursor-move-outer"><span class="cursor-outer"></span></span></span>
+</div>
     <div class="skeleton_loader">
         <header>
             <div class="top_header">
@@ -46,7 +46,7 @@
                     <div class="col-12 p-0">
                         <div class="mobile-fix-option">
                             <ul>
-                                <li> <a href="#"><i class="iconsax" data-icon="home-1"></i>Home</a></li>
+                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Search</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Cart</a></li>
                                 <li><a href="#"><i class="iconsax" data-icon="heart"></i>My Wish</a></li>
@@ -56,8 +56,8 @@
                     </div>
                     <div class="col-12">
                         <div class="main-menu"> <a class="brand-logo" href="#"> <img class="img-fluid for-light"
-                                    src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
-                                    src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
+                                    src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"><img class="img-fluid for-dark"
+                                    src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"></a>
                             <nav id="main-nav-1">
                                 <ul class="nav-menu sm-horizontal">
                                     <li class="mobile-back text-end">Thoát<i class="fa-solid fa-angle-right ps-2"
@@ -217,15 +217,15 @@
 
     <header>
         <div class="top_header">
-            <p>Mã giảm giá miễn phí: Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW 26</span><a
-                    href="collection-left-sidebar.html"> MUA NGAY</a></p>
+            <p> Giảm giá cực mạnh cho những sản phẩm mới ra mắt <span>NEW</span><a
+                    href="{{route("san-pham.san-pham")}}"> MUA NGAY</a></p>
         </div>
         <div class="custom-container container header-1">
             <div class="row">
                 <div class="col-12 p-0">
                     <div class="mobile-fix-option">
                         <ul>
-                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-4"></i>Trang chủ</a></li>
+                            <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a></li>
                             <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
@@ -236,7 +236,7 @@
                 </div>
                 <div class="col-12">
                     <div class="main-menu"> <a class="brand-logo" href="{{route('trang-chu.home')}}"> <img class="img-fluid for-light"
-                                src="{{asset('assets/images/logo/logo-4.png')}}" alt="logo"><img class="img-fluid for-dark"
+                                src="{{asset('assets/images/logo/logo_namad.png')}}" alt="logo"><img class="img-fluid for-dark"
                                 src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="logo"></a>
                         <nav id="main-nav">
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
@@ -257,13 +257,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
+                                <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tức danh muc</a></li>
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Áo Sơ Mi</a></li>
                                     </ul>
                                 </li>
-                                <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
+                                <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên Hệ </a></li>
                             </ul>
                         </nav>
                         <div class="sub_header">
@@ -279,11 +279,8 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông tin</a></li>
-                                                @if (Auth::user()->vai_tro_id == 1)
-                                                    <li> <a href="{{route('admin.index')}}">Quản trị viên</a></li>
-                                                @endif
-                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng xuất</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                                <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
                                                 <li> <a href="{{route('tai-khoan.dang-ky')}}">Đăng Ký</a></li>
@@ -316,7 +313,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-content">
                             <div class="footer-logo"><a href="index.html"> <img class="img-fluid"
-                                        src="{{asset('assets/images/logo/logo-white-4.png')}}" alt="Footer Logo"></a></div>
+                                        src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Footer Logo"></a></div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
                                     <h6>1 Trinh Van Bo</h6>
@@ -325,7 +322,7 @@
                                     <h6>+ 185659635</h6>
                                 </li>
                                 <li> <i class="iconsax" data-icon="mail"></i>
-                                    <h6>contact@namastore.com</h6>
+                                    <h6>namadstore@gmail.com</h6>
                                 </li>
                             </ul>
                         </div>
@@ -366,7 +363,7 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Nhận trợ giúp</h5>
+                                    <h5>Hỗ Trợ Về</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
@@ -398,6 +395,7 @@
             </div>
         </section>
     </footer>
+    {{-- xem nhanh san pham quick view --}}
     <div class="modal theme-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -462,8 +460,8 @@
                                             min="1" max="20"><button class="plus" type="button"><i
                                                 class="fa-solid fa-plus"></i></button></div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Add to cart</a><a
-                                        class="btn btn-solid" href="product.html">View detail</a></div>
+                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏ hàng</a><a
+                                        class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
                             </div>
                         </div>
                     </div>
@@ -471,6 +469,8 @@
             </div>
         </div>
     </div>
+
+    {{-- cửa sổ nhỏ thêm thành công sản phẩm vào giỏ hàng --}}
     <div class="modal theme-modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -483,26 +483,21 @@
                                     <div class="d-flex"><a href="#"><img class="img-fluid blur-up lazyload pro-img"
                                                 src="{{asset('assets/images/modal/0.jpg')}}" alt=""></a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
-                                                <h6><i class="fa-solid fa-check"> </i>Item <span>men full
-                                                        sleeves</span><span> successfully added to your Cart</span></h6>
+                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span>áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
                                             </a>
-                                            <div class="buttons"><a class="view-cart btn btn-solid"
-                                                    href="cart.html">Your cart</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html">Check out</a><a class="continue btn btn-solid"
-                                                    href="index.html">Continue shopping</a></div>
-                                            <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
-                                                    src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
+                                            <div class="buttons">
+                                                <a class="view-cart btn btn-solid"
+                                                    href="{{route('gio-hang.gio-hang')}}">Giỏ hàng của bạn</a>
+                                                <a class="continue btn btn-solid"
+                                                    href="{{route('san-pham.san-pham')}}">Tiếp tục mua hàng</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="product-upsell">
-                                    <h5>Products Loved by Our Customers</h5><svg>
-                                        <use
-                                            href="https://themes.pixelstrap.net/katie/{{asset('assets/svg/icon-sprite.svg#main-line')}}">
-                                        </use>
-                                    </svg>
+                                    <h5>Sản phẩm được khách hàng yêu thích</h5>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-12">
@@ -541,99 +536,56 @@
             </div>
         </div>
     </div>
-    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1"
-        aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end shopping-details" id="offcanvasRight" tabindex="-1" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="offcanvasRightLabel">Giỏ hàng</h4><button class="btn-close"
                 type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body theme-scrollbar">
             <ul class="offcanvas-cart">
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/1.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity-previous">2</div>
-                                    <div id="quantity-current">3</div>
-                                    <div id="quantity-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add">+</button>
+                @foreach ($gio_hangs as $item)
+                    <li>
+                        <a class="style-border" href="{{route('san-pham.chi-tiet-san-pham',$item->san_pham_id)}}"> <img src="{{Storage::url($item->sanPham->hinh_anh)}}" alt="Sản Phẩm"></a>
+                        <div>
+                            <h6 class="mb-0">{{$item->sanPham->ten_san_pham}}</h6>
+                            <p>
+                                <del>$40</del>
+                                <span class="btn-cart">
+                                    $<span class="btn-cart__total"
+                                        id="total">105
+                                    </span>
+                                </span>
+                            </p>
+                            <div class="btn-containter">
+                                <div class="quantity">
+                                    <button class="minus" type="button">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </button>
+                                        <input type="number" value="1" min="1" disabled>
+                                    <button class="plus" type="button">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/2.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total1">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove1">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity1-previous">2</div>
-                                    <div id="quantity1-current">3</div>
-                                    <div id="quantity1-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add1">+</button>
-                            </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/3.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total2">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove2">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity2-previous">2</div>
-                                    <div id="quantity2-current">3</div>
-                                    <div id="quantity2-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add2">+</button>
-                            </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
-                <li> <a href="#"> <img src="{{asset('assets/images/cart/4.jpg')}}" alt=""></a>
-                    <div>
-                        <h6 class="mb-0">Shirts Men's Clothing</h6>
-                        <p>$35<del>$40</del><span class="btn-cart">$<span class="btn-cart__total"
-                                    id="total3">105</span></span></p>
-                        <div class="btn-containter">
-                            <div class="btn-control"><button class="btn-control__remove"
-                                    id="btn-remove3">&minus;</button>
-                                <div class="btn-control__quantity">
-                                    <div id="quantity3-previous">2</div>
-                                    <div id="quantity3-current">3</div>
-                                    <div id="quantity3-next">4</div>
-                                </div><button class="btn-control__add" id="btn-add3">+</button>
-                            </div>
-                        </div>
-                    </div><i class="iconsax delete-icon" data-icon="trash"></i>
-                </li>
+                        </div><i class="iconsax delete-icon" data-icon="trash"></i>
+                    </li>
+                @endforeach
             </ul>
         </div>
-        <div class="offcanvas-footer">
-            <p>Spend <span>$ 14.81 </span>more and enjoy <span>FREE SHIPPING!</span></p>
-            <div class="footer-range-slider">
-                <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="46"
-                    aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated theme-default"
-                        style="width: 46%"></div>
-                </div>
+        @if (count($gio_hangs)==0)
+            <div class="no-data" id="data-show" style="display: block">
+                <img src="../assets/images/cart/1.gif" alt="">
+                <h4>Bạn không có sản phẩm nào trong giỏ hàng!</h4>
+                <p>Hôm nay là ngày tuyệt vời để mua những thứ bạn đã giữ! hoặc <a href="{{route('san-pham.san-pham')}}">Tiếp tục mua</a></p>
             </div>
+        @endif
+        <div class="offcanvas-footer">
             <div class="price-box">
                 <h6>Total :</h6>
                 <p>$ 49.59 USD</p>
             </div>
             <div class="cart-button"> <a class="btn btn_outline" href="{{route('gio-hang.gio-hang')}}"> Xem giỏ hàng</a><a class="btn btn_black"
-                    href="check-out.html"> Thanh Toán</a></div>
+                    href="{{route('gio-hang.chi-tiet-thanh-toan')}}"> Thanh Toán</a></div>
         </div>
     </div>
     <div class="offcanvas offcanvas-top search-details" id="offcanvasTop" tabindex="-1"
@@ -819,6 +771,21 @@
     <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
             <div class="text">Dark</div>
     </div>
+    <div class="modal theme-modal fade" id="size-chart" tabindex="-1" role="dialog" aria-modal="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Size Chart</h4>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <a href="#">
+                        <img class="img-fluid" src="{{ asset('assets/images/size-chart/size-chart.png') }}" alt="Size Chart">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
         aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -849,6 +816,8 @@
         </div>
     </div> --}}
     <!-- Bootstrap js-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script><!-- iconsax js -->
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
@@ -864,6 +833,10 @@
     <script src="{{asset('assets/js/toastify.js')}}"></script>
     <script src="{{asset('assets/js/theme-setting.js')}}"></script><!-- Theme js-->
     <script src="{{asset('assets/js/script.js')}}"></script>
+    <script src="{{asset('assets/js/otp.js')}}"></script>
+    <script src="{{asset('assets/js/ajax.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
+    @yield('js')
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 

@@ -20,6 +20,7 @@ class SanPham extends Model
         'khuyen_mai',
         'mo_ta',
         'luot_xem',
+        'da_ban',
     ];
 
     protected $casts = [
@@ -35,6 +36,26 @@ class SanPham extends Model
     public function bienThes()
     {
         return $this->hasMany(BienThe::class, 'san_pham_id');
+    }
+
+    public function khuyenMais()
+    {
+        return $this->hasMany(KhuyenMai::class, 'san_pham_id');
+    }
+
+    public function danhGias()
+    {
+        return $this->hasMany(DanhGia::class, 'san_pham_id');
+    }
+
+    public function chiTietDonHangs()
+    {
+        return $this->hasMany(ChiTietDonHang::class, 'san_pham_id');
+    }
+
+    public function gioHangs()
+    {
+        return $this->hasMany(GioHang::class, 'san_pham_id');
     }
 
 }

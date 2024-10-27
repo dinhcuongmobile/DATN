@@ -88,74 +88,15 @@ tapTopElement.addEventListener('click', function () {
         smHorizontal.classList.remove('open');
     });
 
- 
-/*============================
-        07.cart js 
-============================*/
-
-function initializeCounter(counterId, totalId, addBtnId, removeBtnId) {
-    const quantityPrevious = document.querySelector(`#${counterId}-previous`);
-    const quantityCurrent = document.querySelector(`#${counterId}-current`);
-    const quantityNext = document.querySelector(`#${counterId}-next`);
-
-    const total = document.querySelector(`#${totalId}`);
-
-    const addBtn = document.querySelector(`#${addBtnId}`);
-    const removeBtn = document.querySelector(`#${removeBtnId}`);
-
-    quantityPrevious.innerHTML = 0;
-    quantityCurrent.innerHTML = 1;
-    quantityNext.innerHTML = 2;
-    total.innerHTML = 35;
-
-    addBtn.addEventListener("click", () => {
-        total.innerHTML = parseInt(total.innerHTML) + 35;
-        quantityCurrent.classList.add("added");
-        quantityNext.classList.add("added");
-
-        setTimeout(() => {
-            quantityPrevious.innerHTML = parseInt(quantityPrevious.innerHTML) + 1;
-            quantityCurrent.innerHTML = parseInt(quantityCurrent.innerHTML) + 1;
-            quantityNext.innerHTML = parseInt(quantityNext.innerHTML) + 1;
-            quantityCurrent.classList.remove("added");
-            quantityNext.classList.remove("added");
-        }, 500);
-    });
-
-    removeBtn.addEventListener("click", () => {
-        if (parseInt(quantityCurrent.innerHTML) <= 0) {
-            return null;
-        }
-
-        total.innerHTML = parseInt(total.innerHTML) - 35;
-        quantityCurrent.classList.add("removed");
-        quantityPrevious.classList.add("removed");
-
-        setTimeout(() => {
-            quantityPrevious.innerHTML = parseInt(quantityPrevious.innerHTML) - 1;
-            quantityCurrent.innerHTML = parseInt(quantityCurrent.innerHTML) - 1;
-            quantityNext.innerHTML = parseInt(quantityNext.innerHTML) - 1;
-            quantityCurrent.classList.remove("removed");
-            quantityPrevious.classList.remove("removed");
-        }, 500);
-    });
-}
-
-// Example usage:
-initializeCounter("quantity", "total", "btn-add", "btn-remove");
-initializeCounter("quantity1", "total1", "btn-add1", "btn-remove1");
-initializeCounter("quantity2", "total2", "btn-add2", "btn-remove2");
-initializeCounter("quantity3", "total3", "btn-add3", "btn-remove3");
-
 
 /*============================
-           05.Tost js 
+           05.Tost js
    ============================*/
 
 document.querySelectorAll(".wishlist-icon").forEach(function (element) {
     element.addEventListener("click", function () {
         Toastify({
-            text: "Success! Item Successfully added in wishlist.!!",
+            text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
             duration: 2500,
             close: true,
         }).showToast();
@@ -178,7 +119,7 @@ for (var i = 0; i < footerButton.length; ++i) {
 
 
 /*====================
-       title change 
+       title change
    =======================*/
 var title = document.title;
 
@@ -190,52 +131,10 @@ window.addEventListener('blur', function () {
     document.title = "🎉 Come Back...";
 });
 
-/*====================
-   other js 
-=======================*/
-
-document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOM fully loaded and parsed");
-
-    var sizeItems = document.querySelectorAll('.size-box ul li');
-    console.log("sizeItems:", sizeItems);
-
-    sizeItems.forEach(function (item) {
-        item.addEventListener('click', function (e) {
-            console.log("Clicked on size item:", this);
-
-            sizeItems.forEach(function (sizeItem) {
-                sizeItem.classList.remove('active');
-            });
-
-            var selectSize = document.getElementById('selectSize');
-            console.log("selectSize:", selectSize);
-
-            if (selectSize) {
-                selectSize.classList.remove('cartMove');
-            } else {
-                console.log("Element with id 'selectSize' not found.");
-            }
-
-            this.classList.add('active');
-            this.parentNode.classList.add('selected');
-        });
-    });
-});
-
-var colorItems = document.querySelectorAll('.color-variant li');
-colorItems.forEach(function (item) {
-    item.addEventListener('click', function (e) {
-        colorItems.forEach(function (colorItem) {
-            colorItem.classList.remove('active');
-        });
-        this.classList.add('active');
-    });
-});
 
 
 /*====================
-       offcanvas cart 
+       offcanvas cart
    =======================*/
 document.addEventListener('DOMContentLoaded', function () {
     var deleteIcons = document.querySelectorAll('.delete-icon');
@@ -261,19 +160,19 @@ wishlistProduct.forEach(el => {
     });
 });
 
-  
+
 
 /*====================
-      Header responsive 
+      Header responsive
    =======================*/
 
 document.addEventListener('DOMContentLoaded', () => {
     function handleNavClick(event) {
       const clickedElement = event.target.closest('li');
-  
+
       if (clickedElement && !clickedElement.classList.contains('mobile-back')) {
         const isActive = clickedElement.classList.contains('show');
-  
+
         // Remove 'show' class from all <li> elements
         document.querySelectorAll('#sm-horizontal li').forEach(li => {
           li.classList.remove('show');
@@ -287,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.querySelector('.nav-submenu').classList.remove('show');
           }
         });
-  
+
         // If the clicked element didn't have the 'show' class, add it
         if (!isActive) {
           clickedElement.classList.add('show');
@@ -303,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
-  
+
     function handleResize() {
       if (window.innerWidth <= 1200) {
         document.getElementById('sm-horizontal').addEventListener('click', handleNavClick);
@@ -324,10 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     }
-  
+
     // Initial check
     handleResize();
-  
+
     // Attach resize event listener
     window.addEventListener('resize', handleResize);
   });

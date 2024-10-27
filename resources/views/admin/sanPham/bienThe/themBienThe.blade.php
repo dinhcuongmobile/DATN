@@ -27,10 +27,9 @@
                 <label for="" class="form-label">Kích cỡ</label>
                 <div class="">
                     <input type="hidden" id="kich_co_hidden" name="kich_co" value="">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn" value="X">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn" value="L">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn" value="XL">
-                    <input type="button" class="btn btn-outline-primary kich_co_btn" value="XXL">
+                    @foreach ($kich_cos as $item)
+                        <input type="button" class="btn btn-outline-primary kich_co_btn" value="{{$item->kich_co}}">
+                    @endforeach
                 </div>
                 @error('kich_co')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -41,15 +40,9 @@
                 <div class="">
                     <input type="hidden" id="ten_mau_hidden" name="ten_mau" value="">
                     <input type="hidden" id="ma_mau_hidden" name="ma_mau" value="">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #000000; color: #fff;" data-color="#000000" value="Đen">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #FFFFFF; color: #000;" data-color="#FFFFFF" value="Trắng">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #F5F5DC; color: #000;" data-color="#F5F5DC" value="Be">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #00BFFF; color: #fff;" data-color="#00BFFF" value="Xanh Trời">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #008000; color: #fff;" data-color="#008000" value="Xanh">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #003366; color: #fff;" data-color="#003366" value="Xanh Than">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #8B4513; color: #fff;" data-color="#8B4513" value="Nâu">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #808080; color: #fff;" data-color="#808080" value="Xám">
-                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: #800080; color: #fff;" data-color="#800080" value="Tím">
+                    @foreach ($mau_sacs as $item)
+                    <input type="button" class="btn btn-outline-primary mau_sac_btn" style="background-color: {{$item->ma_mau}}; color:#fff;" data-color="{{$item->ma_mau}}" value="{{$item->ten_mau}}">
+                    @endforeach
                 </div>
                 @error('ten_mau')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -73,13 +66,13 @@
                 <label for="sel1">Sản phẩm</label>
                 <select class="form-control" id="sel1" name="san_pham_id">
                     @foreach ($san_phams as $item)
-                        <option {{old('san_pham_id')==$item->id?'selected':''}} value="{{$item->id}}">SP-{{$item->id}} | {{$item->ten_san_pham}}</option>
+                        <option {{old('san_pham_id')==$item->id?'selected':''}} value="{{$item->id}}">NM-{{$item->id}} | {{$item->ten_san_pham}}</option>
                     @endforeach
                 </select>
             </div>
             <div>
                 <button type="submit" name="submit" class="btn btn-success">Xác nhận</button>
-                <a href="{{route('san-pham.danh-sach-bien-the-san-pham')}}"><button type="button" class="btn btn-success">Quay lại</button></a>
+                <a href="{{route('san-pham.danh-sach-bien-the-san-pham')}}"><button type="button" class="btn btn-secondary">Quay lại</button></a>
             </div>
         </form>
     </div>
