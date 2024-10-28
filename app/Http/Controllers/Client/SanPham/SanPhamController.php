@@ -29,13 +29,50 @@ class SanPhamController extends Controller
         return view('client.sanPham.chiTietSanPham', $this->views);
     }
 
-    public function sanPham()
+    public function sanPham(Request $request)
     {
-        $this->views['san_phams'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
+        // Lọc sản phẩm dựa trên các tham số được gửi lên
+        $sanPhams = SanPham::query(); // Product là model của sản phẩm, thay thế nếu cần
+
+        // Xử lý lọc theo điều kiện sắp xếp
+        if ($request->has('orderby')) {
+            switch ($request->orderby) {
+                case 'best-selling':
+                    // Sắp xếp theo bán chạy nhất (ví dụ như theo số lượng bán)
+                    $sanPhams->orderBy('da_ban', 'desc');
+                    break;
+                case 'a-z':
+                    // Sắp xếp theo tên sản phẩm, A-Z
+                    $sanPhams->orderBy('ten_san_pham', 'asc');
+                    break;
+                case 'price-high-low':
+                    // Sắp xếp theo giá từ cao đến thấp
+                    $sanPhams->orderBy('gia_san_pham', 'desc');
+                    break;
+                case 'discount-high-low':
+                    // Sắp xếp theo mức giảm giá % từ cao đến thấp
+                    $sanPhams->orderBy('khuyen_mai', 'desc');
+                    break;
+                default:
+                    // Mặc định sắp xếp
+                    $sanPhams->orderBy('id', 'desc');
+                    break;
+            }
+        }
+
+        $this->views['san_phams'] = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
         $this->views['danh_mucs'] = DanhMuc::all();
-        $this->views['count_sp_danh_muc'] = SanPham::groupBy('danh_muc_id')
+        $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
             ->selectRaw('danh_muc_id, COUNT(*) as count')
             ->pluck('count', 'danh_muc_id');
+
+        // Kiểm tra nếu yêu cầu AJAX
+        if ($request->ajax()) {
+            $html = view('client.sanPham.filterSanPham', $this->views)->render();
+            
+            return response()->json(['html' => $html]);
+        }
+
         return view('client.sanPham.sanPham', $this->views);
     }
 
@@ -62,44 +99,4 @@ class SanPhamController extends Controller
         }
     }
 
-    public function filterSanPham(Request $request)
-    {
-        // Lọc sản phẩm dựa trên các tham số được gửi lên
-        $sanPhams = SanPham::query(); // Product là model của sản phẩm, thay thế nếu cần
-
-        // Xử lý lọc theo điều kiện sắp xếp
-        if ($request->has('orderby')) {
-            switch ($request->orderby) {
-                case 'best-selling':
-                    // Sắp xếp theo bán chạy nhất (ví dụ như theo số lượng bán)
-                    $sanPhams->orderBy('da_ban', 'desc');
-                    break;
-                case 'a-z':
-                    // Sắp xếp theo tên sản phẩm, A-Z
-                    $sanPhams->orderBy('ten_san_pham', 'asc');
-                    break;
-                case 'price-high-low':
-                    // Sắp xếp theo giá từ cao đến thấp
-                    $sanPhams->orderBy('gia_san_pham', 'desc');
-                    break;
-                case 'discount-high-low':
-                    // Sắp xếp theo mức giảm giá % từ cao đến thấp
-                    $sanPhams->orderBy('khuyen_mai', 'desc');
-                    break;
-                default:
-                    // Mặc định sắp xếp
-                    $sanPhams->orderBy('id', 'asc');
-                    break;
-            }
-        }
-
-        $this->views['san-phams'] = $sanPhams->get();
-        $this->views['san_phams'] = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->paginate(8);
-        $this->views['danh_mucs'] = DanhMuc::all();
-        $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
-            ->selectRaw('danh_muc_id, COUNT(*) as count')
-            ->pluck('count', 'danh_muc_id');
-
-        return view('client.sanPham.sanPham', $this->views);
-    }
 }

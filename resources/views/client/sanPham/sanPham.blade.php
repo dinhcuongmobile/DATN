@@ -115,7 +115,8 @@
                                         <ul class="catagories-side theme-scrollbar styleSPDanhMuc">
                                             @foreach ($danh_mucs as $item)
                                                 <li> <a href="#">{{ $item->ten_danh_muc }}
-                                                        ({{ $count_sp_danh_muc[$item->id] ?? 0 }})</a></li>
+                                                        ({{ $count_sp_danh_muc[$item->id] ?? 0 }})
+                                                    </a></li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -150,57 +151,103 @@
                             <div> <a class="filter-button btn">
                                     <h6> <i class="iconsax" data-icon="filter"></i>Danh sách bộ lọc </h6>
                                 </a>
-                                <form id="formFilter" action="{{ route('san-pham.filter') }}" method="get">
+                                <form id="formFilter" action="{{ route('san-pham.san-pham') }}" method="get">
                                     <div class="category-dropdown">
                                         <label for="orderby">Sắp xếp theo :</label>
                                         <select class="form-select" id="orderby" name="orderby">
-                                            <option value="">Mặc định</option>
-                                            <option value="best-selling">Bán chạy nhất</option>
-                                            <option value="a-z">Theo thứ tự, A-Z</option>
-                                            <option value="price-high-low">Giá cao - thấp</option>
-                                            <option value="discount-high-low">Giảm giá % từ cao - thấp</option>
+                                            <option value="" {{ request('orderby') == '' ? 'selected' : '' }}>Mặc
+                                                định</option>
+                                            <option value="best-selling"
+                                                {{ request('orderby') == 'best-selling' ? 'selected' : '' }}>Bán chạy nhất
+                                            </option>
+                                            <option value="a-z" {{ request('orderby') == 'a-z' ? 'selected' : '' }}>Theo
+                                                thứ tự, A-Z</option>
+                                            <option value="price-high-low"
+                                                {{ request('orderby') == 'price-high-low' ? 'selected' : '' }}>Giá cao -
+                                                thấp</option>
+                                            <option value="discount-high-low"
+                                                {{ request('orderby') == 'discount-high-low' ? 'selected' : '' }}>Giảm giá %
+                                                từ cao - thấp</option>
                                         </select>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="product-tab-content ratio1_3">
-                            <div id="productList" class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
+                            <div id="productList"
+                                class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
                                 @foreach ($san_phams as $item)
                                     <div>
                                         <div class="product-box-3">
                                             <div class="img-wrapper">
                                                 <div class="label-block">
-                                                    <a class="label-2 wishlist-icon" href="javascript:void(0)"
-                                                        tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                                    <a class="label-2 wishlist-icon" href="#" tabindex="0">
+                                                        <i class="iconsax" data-icon="heart" title="Wishlist">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M12 21.6516C11.69 21.6516 11.39 21.6116 11.14 21.5216C7.32 20.2116 1.25
+                                                                                            15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
+                                                                                            12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
+                                                                                            15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
+                                                                                            6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
+                                                                                            19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
+                                                                                            12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
+                                                                    fill="#292D32">
+                                                                </path>
+                                                            </svg>
+                                                        </i>
                                                     </a>
                                                 </div>
                                                 <div class="product-image style-border">
-                                                    <a class="pro-first"
-                                                        href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
+                                                    <a class="pro-first bg-size"
+                                                        href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
+                                                        style="
+                                                        background-image: url({{ Storage::url($item->hinh_anh) }});
+                                                        background-size:cover;
+                                                        background-position: center;
+                                                        background-repeat: no-repeat;
+                                                        display: block;
+                                                        ">
                                                         <img class="bg-img" src="{{ Storage::url($item->hinh_anh) }}"
-                                                            alt="Sản phẩm">
+                                                            alt="Sản phẩm" style="display: none;">
                                                     </a>
-                                                    <a class="pro-sec"
-                                                        href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
+                                                    <a class="pro-sec bg-size"
+                                                        href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
+                                                        style="
+                                                        background-image: url({{ Storage::url($item->bienThes->first()->hinh_anh) }});
+                                                        background-size:cover;
+                                                        background-position: center;
+                                                        background-repeat: no-repeat;
+                                                        display: block;
+                                                        ">
                                                         <img class="bg-img"
                                                             src="{{ Storage::url($item->bienThes->first()->hinh_anh) }}"
-                                                            alt="Sản phẩm">
+                                                            alt="Sản phẩm" style="display: none;">
                                                     </a>
                                                 </div>
-                                                <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" tabindex="0"><i class="iconsax"
-                                                            data-icon="basket-2" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-title="Add to card">
-                                                        </i></a><a href="compare.html" tabindex="0"><i class="iconsax"
-                                                            data-icon="arrow-up-down" aria-hidden="true"
-                                                            data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a
-                                                        href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view" tabindex="0"><i class="iconsax"
-                                                            data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip"
-                                                            data-bs-title="Quick View"></i></a>
+                                                <div class="cart-info-icon">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
+                                                        tabindex="0">
+                                                        <i class="iconsax" data-icon="eye" title="Quick view">
+                                                            <svg width="24" height="24" viewBox="0 0 24 24"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004
+                                                                                            12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
+                                                                                            15.58 10.02 15.58 12Z"
+                                                                    stroke="#292D32" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                </path>
+                                                                <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81
+                                                                                            21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
+                                                                                            5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
+                                                                                            8.46997 20.27 12 20.27Z"
+                                                                    stroke="#292D32" stroke-width="1.5"
+                                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                                </path>
+                                                            </svg>
+                                                        </i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-detail">
@@ -265,13 +312,24 @@
                         </div>
                         <div class="pagination-wrap">
                             <ul class="pagination">
-                                {{ $san_phams->links() }}
-                                {{-- <li> <a class="prev" href="#"><i class="iconsax" data-icon="chevron-left"></i></a></li>
-                            <li> <a href="#">1</a></li>
-                            <li> <a class="active" href="#">2</a></li>
-                            <li> <a href="#">3 </a></li>
-                            <li> <a class="next" href="#"> <i class="iconsax" data-icon="chevron-right"></i></a>
-                            </li> --}}
+                                {{-- {{ $san_phams->links() }} --}}
+                                <li class="{{ $san_phams->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="prev" href="{{ $san_phams->previousPageUrl() ?? '#' }}">
+                                        <i class="iconsax" data-icon="chevron-left"></i>
+                                    </a>
+                                </li>
+                                {{-- Hiển thị các số trang --}}
+                                @foreach ($san_phams->getUrlRange(1, $san_phams->lastPage()) as $page => $url)
+                                    <li>
+                                        <a href="{{ $url }}"
+                                            class="{{ $page == $san_phams->currentPage() ? 'active' : '' }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="{{ $san_phams->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="next" href="{{ $san_phams->nextPageUrl() ?? '#' }}">
+                                        <i class="iconsax" data-icon="chevron-right"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -283,10 +341,93 @@
 
 @section('js')
     <script>
-        $(function (){
-            $('#orderby').change(function (){
-                $('#formFilter').submit();
-            })
-        })
+        $(document).ready(function() {
+            $('#orderby').change(function() {
+                var formData = $('#formFilter').serialize(); // Lấy dữ liệu từ form
+                var currentUrl = window.location.href;
+                var pageParam = '';
+
+                // Kiểm tra nếu URL hiện tại có chứa tham số page
+                if (currentUrl.includes('page=')) {
+                    var page = currentUrl.split('page=')[1].split('&')[0];
+                    if (page !== '1') { // Nếu không phải trang 1, thêm tham số page vào URL
+                        pageParam = '&page=' + page;
+                    }
+                }
+
+                var newUrl = $('#formFilter').attr('action') + '?' + formData + pageParam; // URL mới
+
+                // Kiểm tra nếu giá trị là Mặc định thì không thêm tham số `orderby` vào URL
+                if ($('#orderby').val() === '') {
+                    newUrl = '{{ route('san-pham.san-pham') }}' + (pageParam ? '?' + pageParam.substring(
+                        1) : '');
+                }
+
+                window.history.pushState(null, '', newUrl); // Cập nhật URL
+
+                $.ajax({
+                    url: "{{ route('san-pham.san-pham') }}",
+                    type: 'GET',
+                    data: formData + pageParam,
+                    success: function(response) {
+                        $('#productList').html(response.html); // Cập nhật danh sách sản phẩm
+                    },
+                    error: function(xhr) {
+                        console.log('Có lỗi xảy ra:', xhr.responseText);
+                    }
+                });
+            });
+
+            // Xử lý sự kiện khi nhấp vào phân trang
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault(); // Ngăn chặn hành động mặc định
+
+                var page = $(this).attr('href').split('page=')[1]; // Lấy số trang từ URL
+                var formData = $('#formFilter').serialize(); // Lấy dữ liệu từ form
+                var newUrl = "{{ route('san-pham.san-pham') }}";
+
+                // Kiểm tra nếu trang không phải là trang 1, thêm tham số page vào URL
+                if (page && page !== '1') {
+                    newUrl += '?page=' + page;
+                }
+
+                // Kiểm tra nếu đã chọn giá trị trong select khác mặc định, thêm tham số `orderby`
+                if ($('#orderby').val() !== '') {
+                    newUrl += (newUrl.includes('?') ? '&' : '?') + formData;
+                }
+
+                // Gửi AJAX request với số trang và dữ liệu form
+                $.ajax({
+                    url: newUrl,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#productList').html(response.html); // Cập nhật danh sách sản phẩm
+                        // Cập nhật URL
+                        window.history.pushState(null, '', newUrl);
+                    },
+                    error: function(xhr) {
+                        console.log('Có lỗi xảy ra:', xhr.responseText);
+                    }
+                });
+            });
+        });
+        
+
+        window.addEventListener('popstate', function() {
+            // Gửi lại yêu cầu AJAX với URL hiện tại
+            $.ajax({
+                url: window.location.href,
+                type: 'GET',
+                success: function(response) {
+                    $('#productList').html(response.html); // Cập nhật lại danh sách sản phẩm
+                    // Đảm bảo rằng dropdown giữ giá trị đã chọn
+                    var selectedValue = new URLSearchParams(window.location.search).get('orderby');
+                    $('#orderby').val(selectedValue); // Cập nhật giá trị cho dropdown
+                },
+                error: function(xhr) {
+                    console.log('Có lỗi xảy ra:', xhr.responseText);
+                }
+            });
+        });
     </script>
 @endsection
