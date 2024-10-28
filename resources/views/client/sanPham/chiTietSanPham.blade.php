@@ -41,7 +41,7 @@
             <div class="col-lg-6">
                 <div class="product-detail-box">
                     <div class="product-option">
-                        <h3>{{$san_pham->ten_san_pham}}</h3>
+                        <h3 id="tenSanPhamChiTiet">{{$san_pham->ten_san_pham}}</h3>
                         @php
                             $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai / 100);
                         @endphp
@@ -121,7 +121,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <p class="text-danger" id="errSelect">Vui lòng chọn size và màu sắc để thêm vào giỏ hàng !</p>
+                        <p class="text-danger" id="errSelect">Vui lòng chọn phân loại hàng !</p>
                         <div class="quantity-box d-flex align-items-center gap-3">
                             <div class="quantity">
                                 <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>

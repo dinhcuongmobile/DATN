@@ -15,14 +15,19 @@
     <div class="custom-container container">
         <div class="row g-4">
             <div class="col-12">
-                <div class="cart-countdown"><img src="../assets/images/gif/fire-2.gif" alt="">
+                <div class="cart-countdown"><img src="{{asset('assets/images/gif/fire-2.gif')}}" alt="">
                     <h6>Xin hãy nhanh chân! Có người đã đặt hàng một trong những mặt hàng bạn có trong giỏ hàng.</h6>
                 </div>
             </div>
             <div class="col-xxl-9 col-xl-8">
                 <div class="cart-table">
                     <div class="table-title">
-                        <h5>Giỏ hàng<span id="cartTitle">({{count($gio_hangs)}})</span></h5><button id="clearAllButton">Xóa tất cả</button>
+                        <h5>Giỏ hàng</h5>
+                        <p>
+                            <input type="checkbox" name="selectAll[]" value="">
+                            <button id="selectAll">Chọn tất cả ({{count($gio_hangs)}})</button>
+                            <button id="clearAllButton">Xóa</button>
+                        </p>
                     </div>
                     <div class="table-responsive theme-scrollbar">
                         <table class="table" id="cart-table">

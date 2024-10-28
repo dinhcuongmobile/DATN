@@ -483,7 +483,7 @@
                                     <div class="d-flex"><a href="#"><img class="img-fluid blur-up lazyload pro-img"
                                                 src="{{asset('assets/images/modal/0.jpg')}}" alt=""></a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
-                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span>áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
+                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span id="nameProductSuccess">áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
                                             </a>
                                             <div class="buttons">
                                                 <a class="view-cart btn btn-solid"
@@ -819,7 +819,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
-    <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script><!-- iconsax js -->
+    <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>
     <script src="{{asset('assets/js/cursor.js')}}"> </script>
@@ -828,7 +828,8 @@
     <script src="{{asset('assets/js/countdown.js')}}"></script>
     <script src="{{asset('assets/js/newsletter.js')}}"></script>
     <script src="{{asset('assets/js/skeleton-loader.js')}}"></script><!-- touchspin-->
-    <script src="{{asset('assets/js/touchspin.js')}}"></script><!-- cookie js-->
+    <script src="{{asset('assets/js/touchspin.js')}}"></script>
+    <script src="{{asset('assets/js/cart.js')}}"></script>
     <script src="{{asset('assets/js/cookie.js')}}"></script><!-- tost js -->
     <script src="{{asset('assets/js/toastify.js')}}"></script>
     <script src="{{asset('assets/js/theme-setting.js')}}"></script><!-- Theme js-->

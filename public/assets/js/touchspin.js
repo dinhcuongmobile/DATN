@@ -5,7 +5,7 @@ var ipSize= document.getElementById('size');
 var ipMauSac= document.getElementById('mauSac');
 const plusMinus = document.querySelectorAll('.quantity');
 
-// Đặt sự kiện `click` chỉ một lần cho tất cả nút `plus` và `minus`
+// Đặt sự kiện `click` chỉ một lần cho tất cả nút `plus` và `minus` (số lượng)
 plusMinus.forEach((element) => {
     const addButton = element.querySelector('.plus');
     const subButton = element.querySelector('.minus');
@@ -32,6 +32,7 @@ plusMinus.forEach((element) => {
 // Hàm để cập nhật số lượng tồn kho bằng AJAX
 function updateQuantity() {
     if (selectedSize && selectedColor) {
+        document.querySelector('#errSelect').style.display='none';
         let san_pham_id = document.getElementById('soLuongTon').getAttribute('data-id');
 
         // Gửi yêu cầu AJAX đến máy chủ để lấy số lượng tồn kho
@@ -74,42 +75,45 @@ function updateQuantity() {
 // Bắt sự kiện click cho các kích cỡ
 document.querySelectorAll('#selectSize li').forEach(function(sizeElement) {
     sizeElement.addEventListener('click', function() {
-        selectedSize = this.getAttribute('data-size');
-        ipSize.value = selectedSize;
+        if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            selectedSize = null;
+            ipSize.value = "";
+        } else {
+            selectedSize = this.getAttribute('data-size');
+            ipSize.value = selectedSize;
 
-        document.querySelectorAll('#selectSize li').forEach(function(el) {
-            el.classList.remove('active');
-        });
+            document.querySelectorAll('#selectSize li').forEach(function(el) {
+                el.classList.remove('active');
+            });
 
-        this.classList.add('active');
+            this.classList.add('active');
+        }
         updateQuantity();
-        selectBienThe();
     });
 });
 
 // Bắt sự kiện click cho các màu sắc
 document.querySelectorAll('#selectMauSac li').forEach(function(colorElement) {
     colorElement.addEventListener('click', function() {
-        selectedColor = this.getAttribute('data-color');
-        ipMauSac.value = selectedColor;
+        if (this.classList.contains('activ')) {
+            this.classList.remove('activ');
+            selectedColor = null;
+            ipMauSac.value = "";
+        } else {
+            selectedColor = this.getAttribute('data-color');
+            ipMauSac.value = selectedColor;
 
-        document.querySelectorAll('#selectMauSac li').forEach(function(el) {
-            el.classList.remove('activ');
-        });
+            document.querySelectorAll('#selectMauSac li').forEach(function(el) {
+                el.classList.remove('activ');
+            });
 
-        this.classList.add('activ');
+            this.classList.add('activ');
+        }
         updateQuantity();
-        selectBienThe();
     });
 });
 
-function selectBienThe(){
-    if(selectedSize && selectedColor){
-        document.querySelector('#errSelect').style.display='none';
-        document.querySelector('#themGioHang').setAttribute('data-bs-target', '#addtocart');
-        document.querySelector('#themGioHang').setAttribute('data-bs-toggle', 'modal');
-    }
-}
 // them gio hang
 document.addEventListener('DOMContentLoaded', () => {
     let btnThemGioHang= document.querySelector('#themGioHang');
@@ -133,8 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         ma_mau: maMau
                     },
                     success: function(response) {
-                        if (response.loginFalse==false) {
+                        if (response.login==false) {
                             window.location.href = '/tai-khoan/dang-nhap';
+                        }else{
+                            $('#addtocart').modal('show');
+                            var popupAddToCart = document.querySelector('#addtocart');
+                            var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
+                            document.querySelector('#addtocart #nameProductSuccess').innerHTML= tenSanPham.innerHTML;
                         }
                     },
                     error: function(error) {

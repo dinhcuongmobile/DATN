@@ -15,30 +15,32 @@ class GioHangController extends Controller
 {
     protected $views;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->views = [];
     }
 
-    public function gioHang()
-    {
+    public function gioHang(){
         if (Auth::check()) {
-            $this->views['gio_hangs'] = GioHang::with('user', 'sanPham', 'bienThe')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
+            $this->views['gio_hangs'] = GioHang::with('user', 'sanPham', 'bienThe')
+                                                ->where('user_id', Auth::user()->id)
+                                                ->whereHas('bienThe', function($query) {
+                                                    $query->where('so_luong', '>', 0);
+                                                })
+                                                ->orderBy('id', 'desc')
+                                                ->get();
         } else {
             $this->views['gio_hangs'] = [];
         }
         return view('client.gioHang.gioHang', $this->views);
     }
 
-    public function chiTietThanhToan()
-    {
+    public function chiTietThanhToan(){
         return view('client.gioHang.chiTietThanhToan');
     }
 
-    public function themGioHang(Request $request)
-    {
+    public function themGioHang(Request $request){
         if (!Auth::check()) {
-            return response()->json(['loginFalse' => false]);
+            return response()->json(['login' => false]);
         } else {
             $user_id = Auth::user()->id;
             $gia_khuyen_mai = $request->input('gia_khuyen_mai');
@@ -65,6 +67,15 @@ class GioHangController extends Controller
                 ];
                 $result = $gio_hang->update($data);
             }
+
+            if($result){
+                return response()->json(['login' => true]);
+            }
         }
+    }
+
+    public function xoaTatCa(Request $request){
+        
+        return response()->json(['success' => true]);
     }
 }

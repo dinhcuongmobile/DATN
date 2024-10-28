@@ -75,3 +75,13 @@
     display: none;
 }
 
+#nameProductSuccess{
+    font-weight: 500;
+    color: #000;
+}
+
+.table-title #selectAll{
+    text-decoration: none;
+    color: #000;
+}
+
