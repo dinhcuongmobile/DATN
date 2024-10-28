@@ -45,7 +45,7 @@
                         @php
                             $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai / 100);
                         @endphp
-                        <p>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
+                        <p id="giaKhuyenMai" data-giaKM="{{$gia_khuyen_mai}}">{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
                             @if ($san_pham->khuyen_mai>0)
                                 <del>{{ number_format($san_pham->gia_san_pham, 0, ',', '.') }}đ</del>
                                 <span class="offer-btn">{{$san_pham->khuyen_mai}}% off</span>
@@ -125,12 +125,13 @@
                         <div class="quantity-box d-flex align-items-center gap-3">
                             <div class="quantity">
                                 <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
+                                <input type="hidden" id="soLuong" value="1">
                                 <input type="number" value="1" min="1" readonly>
                                 <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
                             </div>
                             <div class="d-flex align-items-center gap-3 w-100">
                                 <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
-                                    onclick="themGioHang({{$san_pham->id}},{{$gia_khuyen_mai}})">Thêm giỏ hàng</a>
+                                    data-id="{{$san_pham->id}}">Thêm giỏ hàng</a>
                                 <a class="btn btn_outline sm" href="#">Mua ngay</a>
                             </div>
                         </div>

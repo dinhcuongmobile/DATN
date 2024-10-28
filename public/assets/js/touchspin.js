@@ -1,8 +1,8 @@
 
 let selectedSize= null;
 let selectedColor=null;
-let ipSize= document.getElementById('size');
-let ipMauSac= document.getElementById('mauSac');
+var ipSize= document.getElementById('size');
+var ipMauSac= document.getElementById('mauSac');
 const plusMinus = document.querySelectorAll('.quantity');
 
 // Đặt sự kiện `click` chỉ một lần cho tất cả nút `plus` và `minus`
@@ -10,11 +10,13 @@ plusMinus.forEach((element) => {
     const addButton = element.querySelector('.plus');
     const subButton = element.querySelector('.minus');
     const inputEl = element.querySelector("input[type='number']");
+    const ipHidden= element.querySelector('#soLuong');
 
     // Sự kiện cho nút tăng số lượng
     addButton.addEventListener('click', function () {
         if (inputEl.value < parseInt(inputEl.getAttribute('data-max'))) {
             inputEl.value = Number(inputEl.value) + 1;
+            ipHidden.value= inputEl.value;
         }
     });
 
@@ -22,6 +24,7 @@ plusMinus.forEach((element) => {
     subButton.addEventListener('click', function () {
         if (inputEl.value > 1) {
             inputEl.value = Number(inputEl.value) - 1;
+            ipHidden.value= inputEl.value;
         }
     });
 });
@@ -112,34 +115,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let btnThemGioHang= document.querySelector('#themGioHang');
     if(btnThemGioHang){
         btnThemGioHang.addEventListener('click',function(){
-            $.ajax({
-                type: 'get',
-                url: '/gio-hang/them-gio-hang/',
-                success: function(response) {
-                    if (response.loginFalse!=false) {
-                        if (selectedSize && selectedColor) {
+            if (selectedSize && selectedColor) {
+                let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                let soLuong = document.getElementById('soLuong').value;
+                let giaKhuyenMai= document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
+                let kichCo = ipSize.value;
+                let maMau = ipMauSac.value;
 
-                            
-                        } else {
-                            document.querySelector('#errSelect').style.display = 'block';
+                $.ajax({
+                    type: 'get',
+                    url: '/gio-hang/them-gio-hang/',
+                    data: {
+                        san_pham_id: sanPhamID,
+                        gia_khuyen_mai: Number(giaKhuyenMai),
+                        so_luong: Number(soLuong),
+                        kich_co: kichCo,
+                        ma_mau: maMau
+                    },
+                    success: function(response) {
+                        if (response.loginFalse==false) {
+                            window.location.href = '/tai-khoan/dang-nhap';
                         }
-                    } else {
-                        window.location.href = '/tai-khoan/dang-nhap';
+                    },
+                    error: function(error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
                     }
-
-                },
-                error: function(error) {
-                    console.error('Lỗi: ', error);
-                    alert('Có lỗi xảy ra');
-                }
-            });
-            // if(selectedSize && selectedColor){
-
-
-            // }else{
-            //     document.querySelector('#errSelect').style.display='block';
-            // }
-
+                });
+            }else{
+                document.querySelector('#errSelect').style.display = 'block';
+            }
         });
     }
 
