@@ -82,7 +82,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     Route::prefix('tin-tuc')->group(function () {
         Route::get('/', [TinTucController::class, 'tinTuc'])->name('tin-tuc.tin-tuc');
-        Route::get('/chi-tiet-tin-tuc', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
+        Route::get('/chi-tiet-tin-tuc/{id}', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
         Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
     });
 

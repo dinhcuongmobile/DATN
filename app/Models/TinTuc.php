@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\DanhMucTinTuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
