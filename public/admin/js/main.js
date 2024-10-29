@@ -107,3 +107,24 @@ if(maMauInput && colorDiv){
         }
     });
 }
+
+//ck editor
+document.addEventListener('DOMContentLoaded',() => {
+    ckEditor();
+});
+function ckEditor(){
+    var moTa= document.querySelector('#mo_ta');
+    var noiDung= document.querySelector('#noi_dung');
+    if(moTa){
+        ClassicEditor.create(moTa).catch(error => {
+            console.error(error);
+        });
+    }
+    if(noiDung){
+        ClassicEditor.create(noiDung).catch(error => {
+            console.error(error);
+        });
+    }
+
+}
+

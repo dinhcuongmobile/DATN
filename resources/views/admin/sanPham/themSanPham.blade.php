@@ -73,14 +73,6 @@
         </form>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-    .create(document.querySelector('#mo_ta'))
-    .catch(error => {
-        console.error(error);
-    });
-</script>
 
 </div>
 <!-- /.container-fluid -->
