@@ -154,6 +154,43 @@
         </div>
     </div>
 </section>
+{{-- popup thông báo --}}
+<div id="thayDoiBienThe">
+    <div id="bodyThayDoi">
+        <div>
+            <h5>Kích cỡ:</h5>
+            <div class="size-box">
+                <ul class="selected" id="selectSize">
+                    <input type="hidden" id="size" value="">
+                    <li class="">
+                        <a href="javascript:void(0);">M</a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0);">L</a>
+                    </li>
+                    <li class="">
+                        <a href="javascript:void(0);">XL</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <h5>Màu sắc:</h5>
+            <div class="color-box">
+                <ul id="selectMauSac">
+                    <input type="hidden" id="mauSac" value="">
+                        <li style="background-color: #000; border: 1px solid #0000003b;" title=""></li>
+                        <li style="background-color: #fff; border: 1px solid #0000003b;" title=""></li>
+                </ul>
+            </div>
+        </div>
+        <div id="btn">
+            <button class="btn btn-light">Trở lại</button>
+            <button class="btn btn-danger">Xác nhận</button>
+        </div>
+    </div>
+</div>
+{{-- end popup thông báo --}}
 @endsection
 @section('js')
 <script src="{{asset('assets/js/cart.js')}}"></script>

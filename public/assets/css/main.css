@@ -99,9 +99,9 @@
 }
 
 /* popup */
-.message-container {
-    /* width: 400px; 
-    height: 200px; */
+#thongbaothemgiohang {
+    width: 400px;
+    height: 200px;
     display: none;
     position: fixed;
     top: 50%;
@@ -111,14 +111,95 @@
     padding: 20px;
     z-index: 9999;
     border-radius: 5px;
-  }
-  #cart-message {
-    padding: 70px 20px;
-    text-align: center;
-    font-weight: bold;
-    color: rgb(136, 255, 106,0.86);
-  }
-  #cart-message img{
-    height: 60px;
-  }
+}
+#thongbaothemgiohang #cart-message {
+padding: 70px 20px;
+text-align: center;
+font-weight: bold;
+color: rgb(136, 255, 106,0.86);
+font-size: 18px;
+font-family: Outfit, sans-serif;
+}
+
+/* popup thay doi bien the  */
+#thayDoiBienThe {
+    position: absolute;
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-radius: 0.125rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: none;
+    z-index: 100; /* Đảm bảo popup nằm trên các phần tử khác */
+    font-family: Outfit, sans-serif;
+}
+
+#bodyThayDoi {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.size-box,
+.color-box {
+    margin-bottom: 15px;
+}
+
+h5 {
+    margin-bottom: 10px;
+}
+
+.size-box ul,
+.color-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.size-box li,
+.color-box li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.size-box a,
+.color-box li {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.size-box a:hover,
+.color-box li:hover {
+    background-color: #f0f0f0;
+}
+
+#thayDoiBienThe #btn{
+    padding-left: 185px;
+}
+
+/* end popup thay doi bien the  */
+
+/* popup */
+#thongBao .modal-content {
+    width: 510px;
+    height: 200px;
+}
+#thongBao .modal-body .row{
+    margin-top: 20px;
+}
+#thongBao .titleThongBao {
+    font-size: 20px;
+    font-family: Outfit, sans-serif;
+}
+#thongBao .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#thongBao .btnDongY {
+    margin-top: 60px;
+    padding-left: 360px;
+}
 
