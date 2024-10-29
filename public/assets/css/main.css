@@ -98,3 +98,27 @@
     font-size: 1rem;
 }
 
+/* popup */
+.message-container {
+    /* width: 400px; 
+    height: 200px; */
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 20px;
+    z-index: 9999;
+    border-radius: 5px;
+  }
+  #cart-message {
+    padding: 70px 20px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(136, 255, 106,0.86);
+  }
+  #cart-message img{
+    height: 60px;
+  }
+

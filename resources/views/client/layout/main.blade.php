@@ -302,6 +302,11 @@
         </div>
     </header>
     {{-- end header --}}
+    {{-- popup thông báo --}}
+    <div class="message-container" id="thongbaothemgiohang">
+        <div id="cart-message"></div>
+    </div>
+    {{-- end popup thông báo --}}
 
     @yield('container')
 

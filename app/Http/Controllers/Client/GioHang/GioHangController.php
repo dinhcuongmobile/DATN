@@ -105,4 +105,27 @@ class GioHangController extends Controller
 
         return response()->json(['success' => true, 'gio_hang'=>$gio_hang]);
     }
+
+    public function soLuongMua(Request $request){
+        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->find($request->input('gio_hang_id'));
+
+        $so_luong = $request->input('so_luong');
+        $thanh_tien = $request->input('thanh_tien');
+        $data = [
+            'so_luong' => $so_luong,
+            'thanh_tien' => $thanh_tien
+        ];
+        $gio_hang->update($data);
+
+        $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->whereHas('bienThe', function($query) {
+                                $query->where('so_luong', '>', 0);
+                            })
+                            ->orderBy('id', 'desc')
+                            ->get();
+        return response()->json(['gio_hangs'=>$gio_hangs]);
+    }
 }

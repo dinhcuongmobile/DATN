@@ -48,6 +48,12 @@
                                     $tiet_kiem=0;
                                 @endphp
                                 @foreach ($gio_hangs as $item)
+                                    @php
+                                        $gia_khuyen_mai = $item->sanPham->gia_san_pham - ($item->sanPham->gia_san_pham * $item->sanPham->khuyen_mai / 100);
+                                        $thanh_tien= $gia_khuyen_mai*$item->so_luong;
+                                        $tong_tien += $gia_khuyen_mai*$item->so_luong;
+                                        $tiet_kiem+= (($item->sanPham->gia_san_pham*$item->so_luong)-($gia_khuyen_mai*$item->so_luong));
+                                    @endphp
                                     <tr>
                                         <td><input type="checkbox" data-id="{{$item->id}}"></td>
                                         <td>
@@ -64,35 +70,24 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        @php
-                                            $gia_khuyen_mai = $item->sanPham->gia_san_pham - ($item->sanPham->gia_san_pham * $item->sanPham->khuyen_mai / 100);
-                                        @endphp
                                         <td>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ</td>
                                         <td>
                                             <div class="quantity">
                                                 <button class="minus" type="button">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
-                                                    <input type="hidden" id="soLuong" value="1">
-                                                    <input type="number" data-max="{{$item->bienThe->so_luong}}" value="{{$item->so_luong}}" min="1" readonly>
+                                                <input type="hidden" data-thanhTien="{{$thanh_tien}}" data-giaKM="{{$gia_khuyen_mai}}" data-id="{{$item->id}}" class="soLuong" value="1">
+                                                <input type="number" data-max="{{$item->bienThe->so_luong}}" value="{{$item->so_luong}}" min="1" readonly>
                                                 <button class="plus" type="button">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
                                             </div>
                                         </td>
-                                        @php
-                                            $thanh_tien= $gia_khuyen_mai*$item->so_luong;
-                                        @endphp
-                                        <td>{{ number_format($thanh_tien, 0, ',', '.') }}đ</td>
+                                        <td class="tdThanhTien">{{ number_format($thanh_tien, 0, ',', '.') }}đ</td>
                                         <td>
                                             <a data-id="{{$item->id}}" class="deleteButton" href="javascript:void(0)"> <i class="iconsax" data-icon="trash"></i></a>
                                         </td>
                                     </tr>
-                                    @php
-                                        $tong_tien += $gia_khuyen_mai*$item->so_luong;
-                                        $tiet_kiem+= (($item->sanPham->gia_san_pham*$item->so_luong)-($gia_khuyen_mai*$item->so_luong));
-                                    @endphp
-
                                     {{-- thay doi bien the --}}
                                     {{-- <div class="chonBienTheMoi">
                                         <form action="" method="post">
