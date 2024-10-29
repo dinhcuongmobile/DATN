@@ -59,7 +59,7 @@
                                         <td class="align-middle">{{ $item->ten_danh_muc }}</td>
                                         <td class="col-2 align-middle">
                                             <a href="{{ route('danh-muc-tin-tuc.danh-muc', $item->id) }}"
-                                                class="btn btn-warning btn-icon-split">
+                                                class="btn btn-warning btn-icon-split btn-sm">
                                             
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
@@ -68,7 +68,7 @@
                                             </a> |
                                             <a  onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
                                                 href="{{ route('danh-muc-tin-tuc.delete', $item->id) }}"
-                                                class="btn btn-danger btn-icon-split">
+                                                class="btn btn-danger btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                             </span>
