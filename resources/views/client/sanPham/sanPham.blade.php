@@ -1,4 +1,19 @@
 @extends('client.layout.main')
+
+@section('css')
+    <style>
+        .page-link {
+            color: black
+        }
+
+        .page-link.active,
+        .active>.page-link {
+            background-color: #cd773d;
+            border-color: #cd773d;
+        }
+    </style>
+@endsection
+
 @section('container')
     <section class="section-b-space pt-0">
         <div class="heading-banner">
@@ -187,12 +202,12 @@
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M12 21.6516C11.69 21.6516 11.39 21.6116 11.14 21.5216C7.32 20.2116 1.25
-                                                                                            15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
-                                                                                            12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
-                                                                                            15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
-                                                                                            6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
-                                                                                            19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
-                                                                                            12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
+                                                                                                                                                15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
+                                                                                                                                                12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
+                                                                                                                                                15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
+                                                                                                                                                6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
+                                                                                                                                                19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
+                                                                                                                                                12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
                                                                     fill="#292D32">
                                                                 </path>
                                                             </svg>
@@ -232,16 +247,18 @@
                                                         <i class="iconsax" data-icon="eye" title="Quick view">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004
-                                                                                            12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
-                                                                                            15.58 10.02 15.58 12Z"
+                                                                <path
+                                                                    d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004
+                                                                                                                                                12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
+                                                                                                                                                15.58 10.02 15.58 12Z"
                                                                     stroke="#292D32" stroke-width="1.5"
                                                                     stroke-linecap="round" stroke-linejoin="round">
                                                                 </path>
-                                                                <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81
-                                                                                            21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
-                                                                                            5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
-                                                                                            8.46997 20.27 12 20.27Z"
+                                                                <path
+                                                                    d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81
+                                                                                                                                                21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
+                                                                                                                                                5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
+                                                                                                                                                8.46997 20.27 12 20.27Z"
                                                                     stroke="#292D32" stroke-width="1.5"
                                                                     stroke-linecap="round" stroke-linejoin="round">
                                                                 </path>
@@ -312,21 +329,22 @@
                         </div>
                         <div class="pagination-wrap">
                             <ul class="pagination">
-                                {{-- {{ $san_phams->links() }} --}}
-                                <li class="{{ $san_phams->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="prev" href="{{ $san_phams->previousPageUrl() ?? '#' }}">
+                                {{-- Nút Previous --}}
+                                <li>
+                                    <a class="prev" data-url="{{ $san_phams->previousPageUrl() ?? '#' }}">
                                         <i class="iconsax" data-icon="chevron-left"></i>
                                     </a>
                                 </li>
                                 {{-- Hiển thị các số trang --}}
                                 @foreach ($san_phams->getUrlRange(1, $san_phams->lastPage()) as $page => $url)
-                                    <li>
-                                        <a href="{{ $url }}"
-                                            class="{{ $page == $san_phams->currentPage() ? 'active' : '' }}">{{ $page }}</a>
+                                    <li class="{{ $page == $san_phams->currentPage() ? 'active' : '' }}">
+                                        <a href="{{ $url }}" class="page-link"
+                                            data-url="{{ $url }}">{{ $page }}</a>
                                     </li>
                                 @endforeach
-                                <li class="{{ $san_phams->hasMorePages() ? '' : 'disabled' }}">
-                                    <a class="next" href="{{ $san_phams->nextPageUrl() ?? '#' }}">
+                                {{-- Nút Next --}}
+                                <li>
+                                    <a class="next" data-url="{{ $san_phams->nextPageUrl() ?? '#' }}">
                                         <i class="iconsax" data-icon="chevron-right"></i>
                                     </a>
                                 </li>
@@ -382,28 +400,58 @@
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault(); // Ngăn chặn hành động mặc định
 
-                var page = $(this).attr('href').split('page=')[1]; // Lấy số trang từ URL
+                var url = $(this).data('url'); // Lấy URL từ data-url
+                if (!url || $(this).parent().hasClass('disabled')) return;
+                // Nếu không có URL hoặc là nút disabled, thoát khỏi hàm
+
                 var formData = $('#formFilter').serialize(); // Lấy dữ liệu từ form
-                var newUrl = "{{ route('san-pham.san-pham') }}";
 
-                // Kiểm tra nếu trang không phải là trang 1, thêm tham số page vào URL
-                if (page && page !== '1') {
-                    newUrl += '?page=' + page;
+                // Kiểm tra nếu có tham số `orderby`, thêm vào URL
+                if (formData) {
+                    var orderbyValue = $('#orderby').val(); // Lấy giá trị orderby
+                    var defaultOrderbyValue = ''; // Thay thế bằng giá trị mặc định của bạn
+
+                    // Chỉ thêm orderby nếu nó không phải là giá trị mặc định
+                    if (orderbyValue && orderbyValue !== defaultOrderbyValue) {
+                        var separator = url.includes('?') ? '&' : '?';
+                        url += separator + formData; // Thêm dữ liệu vào URL
+                    }
                 }
 
-                // Kiểm tra nếu đã chọn giá trị trong select khác mặc định, thêm tham số `orderby`
-                if ($('#orderby').val() !== '') {
-                    newUrl += (newUrl.includes('?') ? '&' : '?') + formData;
-                }
-
-                // Gửi AJAX request với số trang và dữ liệu form
+                // Gửi AJAX request với URL mới
                 $.ajax({
-                    url: newUrl,
+                    url: url,
                     type: 'GET',
                     success: function(response) {
                         $('#productList').html(response.html); // Cập nhật danh sách sản phẩm
+
                         // Cập nhật URL
-                        window.history.pushState(null, '', newUrl);
+                        window.history.pushState(null, '', url);
+
+                        // Cập nhật trạng thái cho các nút số trang
+                        $('.pagination li').removeClass(
+                            'active'); // Xóa lớp active khỏi tất cả các nút số trang
+                        var currentPage = new URL(url).searchParams.get('page') || 1;
+                        // Lấy số trang hiện tại từ URL
+                        $('.pagination a[data-url*="page=' + currentPage + '"]').closest('li')
+                            .addClass('active');
+                        // Thêm lớp active vào nút hiện tại
+
+                        // Cập nhật các nút Next và Previous
+                        $('.prev').data('url', response.prevUrl);
+                        // Cập nhật URL cho nút Previous
+                        $('.next').data('url', response.nextUrl);
+                        // Cập nhật URL cho nút Next
+
+                        // Cập nhật href cho các nút
+                        $('.prev a').attr('href', response.prevUrl);
+                        $('.next a').attr('href', response.nextUrl);
+
+                        // Cập nhật các nút số trang
+                        $('.pagination .page-link').each(function() {
+                            var pageUrl = $(this).data('url');
+                            $(this).attr('href', pageUrl);
+                        });
                     },
                     error: function(xhr) {
                         console.log('Có lỗi xảy ra:', xhr.responseText);
@@ -411,7 +459,7 @@
                 });
             });
         });
-        
+
 
         window.addEventListener('popstate', function() {
             // Gửi lại yêu cầu AJAX với URL hiện tại
@@ -423,6 +471,14 @@
                     // Đảm bảo rằng dropdown giữ giá trị đã chọn
                     var selectedValue = new URLSearchParams(window.location.search).get('orderby');
                     $('#orderby').val(selectedValue); // Cập nhật giá trị cho dropdown
+
+                    // Cập nhật trạng thái cho các nút số trang
+                    var currentPage = new URL(window.location.href).searchParams.get('page') ||
+                    1; // Lấy số trang hiện tại
+                    $('.pagination li').removeClass(
+                    'active'); // Xóa lớp active khỏi tất cả các nút số trang
+                    $('.pagination a[data-url*="page=' + currentPage + '"]').closest('li').addClass(
+                        'active'); // Thêm lớp active vào nút hiện tại
                 },
                 error: function(xhr) {
                     console.log('Có lỗi xảy ra:', xhr.responseText);
