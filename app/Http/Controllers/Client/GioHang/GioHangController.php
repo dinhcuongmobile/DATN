@@ -75,7 +75,34 @@ class GioHangController extends Controller
     }
 
     public function xoaTatCa(Request $request){
-        
-        return response()->json(['success' => true]);
+        $gio_hang_id =  $request->input('gio_hang_id');
+        foreach ($gio_hang_id as $item) {
+            GioHang::where('id',$item)->delete();
+        }
+
+        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->whereHas('bienThe', function($query) {
+                                $query->where('so_luong', '>', 0);
+                            })
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+        return response()->json(['success' => true, 'gio_hang'=>$gio_hang]);
+    }
+
+    public function xoaSanPhamGiohang(Request $request){
+        $gio_hang_id =  $request->input('gio_hang_id');
+        GioHang::where('id',$gio_hang_id)->delete();
+
+        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->whereHas('bienThe', function($query) {
+                                $query->where('so_luong', '>', 0);
+                            })
+                            ->orderBy('id', 'desc')
+                            ->get();
+
+        return response()->json(['success' => true, 'gio_hang'=>$gio_hang]);
     }
 }

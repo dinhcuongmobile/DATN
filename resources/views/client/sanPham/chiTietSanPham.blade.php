@@ -116,7 +116,7 @@
                                 <ul id="selectMauSac">
                                     <input type="hidden" id="mauSac" value="">
                                     @foreach ($san_pham->bienThes->unique('ma_mau') as $item)
-                                        <li data-color="{{$item->ma_mau}}" style="background-color: {{$item->ma_mau}}; border: 1px solid #0000003b;"></li>
+                                        <li data-color="{{$item->ma_mau}}" style="background-color: {{$item->ma_mau}}; border: 1px solid #0000003b;" title="{{ $item->ten_mau }}"></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -152,7 +152,7 @@
                                 <li>
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>SL kho: </h6>
-                                        <p id="soLuongTon"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'hết hàng'}}</p>
+                                        <p id="soLuongTon" data-quantityOld="{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}</p>
                                     </div>
                                 </li>
                                 <li>

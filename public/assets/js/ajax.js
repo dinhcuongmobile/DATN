@@ -1,5 +1,8 @@
 // Ajax đăng nhập, đăng kí, quên mật khẩu
-
+document.addEventListener('DOMContentLoaded', () => {
+    ajaxAuth();
+    ajaxResetPassword();
+});
 function ajaxAuth(){
     $(document).ready(function() {
         $('#loginForm').on('submit', function(e) {
@@ -25,7 +28,7 @@ function ajaxAuth(){
                     // Nếu có lỗi xác thực, lấy lỗi từ phản hồi JSON
                     if (xhr.status === 422) {
                         let errors = xhr.responseJSON.errors;
-                        
+
                         for (let key in errors) {
                             $('.' + key + '-error').text(errors[key][0]);
                         }
@@ -35,7 +38,6 @@ function ajaxAuth(){
         });
     });
 }
-ajaxAuth();
 
 // -----------------------------------------------------------------------------
 
@@ -64,7 +66,7 @@ function ajaxResetPassword(){
                     // Nếu có lỗi xác thực, lấy lỗi từ phản hồi JSON
                     if (xhr.status === 422) {
                         let errors = xhr.responseJSON.errors;
-                        
+
                         for (let key in errors) {
                             $('.' + key + '-error').text(errors[key][0]);
                         }
@@ -74,4 +76,4 @@ function ajaxResetPassword(){
         });
     });
 }
-ajaxResetPassword();
+

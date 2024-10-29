@@ -84,4 +84,17 @@
     text-decoration: none;
     color: #000;
 }
+.table-title #selectAll span{
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+.cart-table #data-show{
+    text-align: center;
+}
+
+.cart-items .cart-body h6 span{
+    color: #000;
+    font-size: 1rem;
+}
 

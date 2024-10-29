@@ -15,17 +15,18 @@
     <div class="custom-container container">
         <div class="row g-4">
             <div class="col-12">
-                <div class="cart-countdown"><img src="{{asset('assets/images/gif/fire-2.gif')}}" alt="">
+                <div class="cart-countdown" style="display: none;">
+                    <img src="{{asset('assets/images/gif/fire-2.gif')}}" alt="">
                     <h6>Xin hãy nhanh chân! Có người đã đặt hàng một trong những mặt hàng bạn có trong giỏ hàng.</h6>
                 </div>
             </div>
             <div class="col-xxl-9 col-xl-8">
                 <div class="cart-table">
                     <div class="table-title">
-                        <h5>Giỏ hàng</h5>
-                        <p>
+                        <h5></h5>
+                        <p style="display: none;">
                             <input type="checkbox" name="selectAll[]" value="">
-                            <button id="selectAll">Chọn tất cả ({{count($gio_hangs)}})</button>
+                            <button id="selectAll">Chọn tất cả (<span>{{count($gio_hangs)}}</span>)</button>
                             <button id="clearAllButton">Xóa</button>
                         </p>
                     </div>
@@ -48,7 +49,7 @@
                                 @endphp
                                 @foreach ($gio_hangs as $item)
                                     <tr>
-                                        <td><input type="checkbox" name="select[]" value="{{$item->id}}"></td>
+                                        <td><input type="checkbox" data-id="{{$item->id}}"></td>
                                         <td>
                                             <div class="cart-box">
                                                 <a class="style-border" href="{{route('san-pham.chi-tiet-san-pham',$item->san_pham_id)}}">
@@ -72,7 +73,8 @@
                                                 <button class="minus" type="button">
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
-                                                    <input type="number" value="{{$item->so_luong}}" min="1" disabled>
+                                                    <input type="hidden" id="soLuong" value="1">
+                                                    <input type="number" data-max="{{$item->bienThe->so_luong}}" value="{{$item->so_luong}}" min="1" readonly>
                                                 <button class="plus" type="button">
                                                     <i class="fa-solid fa-plus"></i>
                                                 </button>
@@ -82,8 +84,9 @@
                                             $thanh_tien= $gia_khuyen_mai*$item->so_luong;
                                         @endphp
                                         <td>{{ number_format($thanh_tien, 0, ',', '.') }}đ</td>
-                                        <td><a class="deleteButton" href="javascript:void(0)"><i class="iconsax"
-                                                    data-icon="trash"></i></a></td>
+                                        <td>
+                                            <a data-id="{{$item->id}}" class="deleteButton" href="javascript:void(0)"> <i class="iconsax" data-icon="trash"></i></a>
+                                        </td>
                                     </tr>
                                     @php
                                         $tong_tien += $gia_khuyen_mai*$item->so_luong;
@@ -140,13 +143,13 @@
             <div class="col-xxl-3 col-xl-4">
                 <div class="cart-items">
                     <div class="cart-body">
-                        <h6>Chi tiết đơn hàng ({{count($gio_hangs)}} sản phẩm) </h6>
+                        <h6>Chi tiết đơn hàng (<span>{{count($gio_hangs)}}</span> sản phẩm) </h6>
                         <ul>
                             <li>
-                                <p>Tổng thanh toán </p><span>{{ number_format($tong_tien, 0, ',', '.') }}đ </span>
+                                <p>Tổng thanh toán </p><span data-tongTien="{{$tong_tien}}" id="tongTienGioHang">{{ number_format($tong_tien, 0, ',', '.') }}đ </span>
                             </li>
                             <li>
-                                <p>Tiết kiệm được </p><span class="theme-color">{{ number_format($tiet_kiem, 0, ',', '.') }}đ </span>
+                                <p>Tiết kiệm được </p><span id="tietKiemGioHang" class="theme-color">{{ number_format($tiet_kiem, 0, ',', '.') }}đ </span>
                             </li>
                         </ul>
                     </div>
