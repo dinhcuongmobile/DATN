@@ -74,9 +74,17 @@
                                         <td class="col-1 align-middle text-success text-center">Còn hàng</td>
                                     @endif
                                     <td class="text-center col-2 align-middle">
-                                        <a href="{{route('san-pham.show-sua-bien-the-san-pham',$item->id)}}" class="btn btn-warning btn-sm">Sửa</a> |
+                                        <a href="{{route('san-pham.show-sua-bien-the-san-pham',$item->id)}}" class="btn btn-warning btn-sm">
+                                        <span class="icon text-white-50">
+                                                    <i class="fas fa-edit"></i>
+                                            </span> <span class="text">Sửa</span>
+                                        </a> |
                                         <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
-                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">Xóa</a>
+                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">  
+                                                    <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa</span></a>
                                     </td>
                                 </tr>
                                 @endforeach
