@@ -477,3 +477,6 @@
     </div>
 </section>
 @endsection
+@section('js')
+<script src="{{asset('assets/js/touchspin.js')}}"></script>
+@endsection
