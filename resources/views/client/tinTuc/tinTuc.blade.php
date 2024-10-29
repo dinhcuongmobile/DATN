@@ -81,15 +81,21 @@
                                     <div class="loader-line"></div>
                                     <h5> Bài Viết Gần Đây</h5>
                                 </div>
+                                @foreach ($tin_tuc_gan_day as $item)
                                 <ul class="top-post">
-                                    <li> <img class="img-fluid" src="../assets/images/other-img/blog-1.jpg" alt="">
-                                        <div> <a href="blog-details.html">
-                                                <h6>Study 2020: Fake Engagement is Only Half the Problem</h6>
+                                    <li> 
+                                        <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
+                                             <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="Post">
+                                        </a>
+                                        <div> 
+                                            <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
+                                                <h6>{{$item->tieu_de}}</h6>
                                             </a>
-                                            <p>September 28, 2021</p>
+                                            <p>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</p>
                                         </div>
                                     </li>
                                 </ul>
+                                @endforeach
                             </div>
                         </div>
                         
