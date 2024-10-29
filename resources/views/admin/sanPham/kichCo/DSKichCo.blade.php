@@ -36,7 +36,12 @@
                                     <td class="col-8 align-middle text-center">{{$item->kich_co}}</td>
                                     <td class="text-center col-2 align-middle">
                                         <a  onclick="return confirm('Bạn chắc chắn muốn xóa size này?')"
-                                            href="{{route('san-pham.xoa-size',$item->id)}}" class="btn btn-danger btn-sm">Xóa</a>
+                                            href="{{route('san-pham.xoa-size',$item->id)}}" class="btn btn-danger btn-sm">
+                                            <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa</span></a>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
