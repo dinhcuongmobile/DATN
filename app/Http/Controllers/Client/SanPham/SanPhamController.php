@@ -69,8 +69,12 @@ class SanPhamController extends Controller
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {
             $html = view('client.sanPham.filterSanPham', $this->views)->render();
-            
-            return response()->json(['html' => $html]);
+
+            return response()->json([
+                'html' => $html,
+                'prevUrl' => $this->views['san_phams']->previousPageUrl(),
+                'nextUrl' => $this->views['san_phams']->nextPageUrl(),
+            ]);
         }
 
         return view('client.sanPham.sanPham', $this->views);
@@ -98,5 +102,4 @@ class SanPhamController extends Controller
             return response()->json(['quantity' => 0]);
         }
     }
-
 }
