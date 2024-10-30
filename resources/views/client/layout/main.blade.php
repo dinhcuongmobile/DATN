@@ -303,7 +303,7 @@
     </header>
     {{-- end header --}}
     {{-- popup thông báo --}}
-    <div class="message-container" id="thongbaothemgiohang">
+    <div id="thongbaothemgiohang">
         <div id="cart-message"></div>
     </div>
     {{-- end popup thông báo --}}
@@ -791,6 +791,24 @@
             </div>
         </div>
     </div>
+    {{-- popup thông báo tự làm  --}}
+    <div class="modal theme-modal fade" id="thongBao" tabindex="-1" role="dialog" aria-modal="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row align-items-center">
+                        <div class="thongBaoXoa">
+                            <div class="titleThongBao">Bạn có muốn xóa các sản phẩm đã chọn không ?</div>
+                            <div class="btnDongY"><button class="btn btn-danger">Đồng ý</button></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
         aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

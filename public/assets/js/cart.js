@@ -34,18 +34,32 @@ ipSelectAll.addEventListener('click', () => {
     toggleSelectAll(ipSelectAll.checked);
 });
 
+// Kiểm tra trạng thái của tất cả các checkbox và cập nhật checkbox tổng
+ipSelect.forEach(function (checkbox) {
+    checkbox.addEventListener('change', () => {
+        // Kiểm tra nếu tất cả checkbox sản phẩm đều đã chọn
+        const allChecked = Array.from(ipSelect).every(checkbox => checkbox.checked);
+        ipSelectAll.checked = allChecked; // Cập nhật trạng thái checkbox tổng
+    });
+});
+
 // xóa tất cả các item trong giỏ hàng
 clearAllButton.addEventListener('click', function () {
     // Kiểm tra xem có checkbox nào được chọn hay không
     const checkedCheckboxes = Array.from(ipSelect).filter(checkbox => checkbox.checked);
 
     if (checkedCheckboxes.length === 0) {
-        alert("Không có sản phẩm nào được chọn để xóa.");
+        document.querySelector('#thongbaothemgiohang').style.display='block';
+        document.querySelector('#thongbaothemgiohang #cart-message').textContent= "Không có sản phẩm nào được chọn !";
+        setTimeout(() => {
+            document.querySelector('#thongbaothemgiohang').style.display = 'none';
+        }, 1200);
         return; // Dừng hành động nếu không có checkbox nào được chọn
     }
 
-    if (confirm("Bạn có chắc muốn xóa tất cả những sản phẩm đã được chọn?")) {
-        // Gửi yêu cầu AJAX đến server
+    $('#thongBao').modal('show');
+
+    document.querySelector('#thongBao .btnDongY').addEventListener('click',function(){
         $.ajax({
             url: '/gio-hang/xoa-tat-ca',
             method: 'get',
@@ -95,7 +109,9 @@ clearAllButton.addEventListener('click', function () {
                 alert("Có lỗi xảy ra. Vui lòng thử lại.");
             }
         });
-    }
+
+        $('#thongBao').modal('hide');
+    });
 });
 
 deleteButton.forEach(function (btnDel) {
@@ -196,11 +212,11 @@ plusMinus.forEach((element) => {
             });
         }
         if (inputEl.value == parseInt(inputEl.getAttribute('data-max'))) {
-            document.querySelector('.message-container').style.display='block';
-            document.querySelector('.message-container').textContent= "Số lượng trong kho không đủ !";
+            document.querySelector('#thongbaothemgiohang').style.display='block';
+            document.querySelector('#thongbaothemgiohang #cart-message').textContent= "Số lượng trong kho không đủ !";
             setTimeout(() => {
-                document.querySelector('.message-container').style.display = 'none';
-            }, 1000);
+                document.querySelector('#thongbaothemgiohang').style.display = 'none';
+            }, 1200);
             addButton.disabled = true;
         }
     });
@@ -250,6 +266,29 @@ plusMinus.forEach((element) => {
     });
 });
 //end cap nhat so luong gio hang
+
+document.querySelectorAll('.thayDoi').forEach(btn => {
+    btn.addEventListener('click', function(event) {
+        const popup = document.getElementById('thayDoiBienThe');
+
+        // Tính vị trí cho popup dựa vào nút "Thay đổi"
+        const rect = event.target.getBoundingClientRect();
+        popup.style.top = `${rect.bottom + window.scrollY}px`;
+        popup.style.left = `${rect.left + window.scrollX}px`;
+
+        // Hiển thị popup
+        popup.style.display = 'block';
+    });
+});
+
+// Đóng popup khi click bên ngoài
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('thayDoiBienThe');
+    if (!popup.contains(event.target) && !event.target.classList.contains('thayDoi')) {
+        popup.style.display = 'none';
+    }
+});
+
 
 
 

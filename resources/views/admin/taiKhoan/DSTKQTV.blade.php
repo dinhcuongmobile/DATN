@@ -67,8 +67,12 @@
                                         <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
                                         <td class="col-1 align-middle"> {{ $item->vaiTro->vai_tro }}</td>
                                         <td class="col-2 align-middle text-center"><a
-                                                href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"><button
-                                                type="button" class="btn btn-warning btn-sm">Sửa</button></a> |
+                                                href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}">
+                                                <button
+                                                type="button" class="btn btn-warning btn-sm">
+                                                Sửa</button>
+                                            
+                                            </a> |
                                             <a onclick="return confirm('Bạn chắc chắn muốn khóa tài khoản này?')"
                                                 href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}"><button
                                                 type="button" class="btn btn-danger btn-sm">Khóa</button></a>
