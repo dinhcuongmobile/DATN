@@ -31,6 +31,12 @@ class SanPhamController extends Controller
 
     public function sanPham(Request $request)
     {
+        // Lấy giá tối đa của sản phẩm từ cơ sở dữ liệu
+        $maxPrice = SanPham::max('gia_san_pham'); // Lấy giá cao nhất của sản phẩm
+
+        // Giá tối thiểu mặc định
+        $minPrice = 0;
+
         // Lọc sản phẩm dựa trên các tham số được gửi lên
         $sanPhams = SanPham::query(); // Product là model của sản phẩm, thay thế nếu cần
 
@@ -59,6 +65,21 @@ class SanPhamController extends Controller
                     break;
             }
         }
+
+
+        // Thêm điều kiện lọc theo giá
+        if ($request->has('minPrice')) {
+            $sanPhams->where('gia_san_pham', '>=', $request->minPrice);
+        }
+
+        if ($request->has('maxPrice')) {
+            $sanPhams->where('gia_san_pham', '<=', $request->maxPrice);
+        }
+        
+
+        // Truyền minPrice và maxPrice vào view
+        $this->views['minPrice'] = $minPrice;
+        $this->views['maxPrice'] = $maxPrice;
 
         $this->views['san_phams'] = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
         $this->views['danh_mucs'] = DanhMuc::all();
