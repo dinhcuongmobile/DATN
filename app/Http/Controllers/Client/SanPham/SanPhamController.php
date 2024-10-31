@@ -23,7 +23,8 @@ class SanPhamController extends Controller
     {
         $this->views['san_pham'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
-            ->where('danh_muc_id', $this->views['san_pham']->danh_muc_id)->take(8)->get();
+                                                    ->where('danh_muc_id', $this->views['san_pham']->danh_muc_id)
+                                                    ->take(8)->get();
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
         return view('client.sanPham.chiTietSanPham', $this->views);
@@ -75,7 +76,7 @@ class SanPhamController extends Controller
         if ($request->has('maxPrice')) {
             $sanPhams->where('gia_san_pham', '<=', $request->maxPrice);
         }
-        
+
 
         // Truyền minPrice và maxPrice vào view
         $this->views['minPrice'] = $minPrice;

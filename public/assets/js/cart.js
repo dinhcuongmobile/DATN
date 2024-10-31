@@ -267,27 +267,167 @@ plusMinus.forEach((element) => {
 });
 //end cap nhat so luong gio hang
 
+//thay doi bien the gio hang
 document.querySelectorAll('.thayDoi').forEach(btn => {
     btn.addEventListener('click', function(event) {
-        const popup = document.getElementById('thayDoiBienThe');
+        // Lấy popup tương ứng với sản phẩm hiện tại
+        const parentRow = btn.closest('tr');
+        const popup = parentRow.querySelector('.thayDoiBienThe');
 
-        // Tính vị trí cho popup dựa vào nút "Thay đổi"
-        const rect = event.target.getBoundingClientRect();
-        popup.style.top = `${rect.bottom + window.scrollY}px`;
-        popup.style.left = `${rect.left + window.scrollX}px`;
+        // Kiểm tra nếu popup đang hiển thị thì ẩn nó đi, nếu không thì hiển thị
+        const isPopupVisible = popup.style.display === 'block';
 
-        // Hiển thị popup
-        popup.style.display = 'block';
+        // Ẩn tất cả popup khác trước khi hiển thị popup của sản phẩm được nhấn
+        document.querySelectorAll('.thayDoiBienThe').forEach(p => p.style.display = 'none');
+
+        // Cập nhật vị trí của popup ngay bên dưới nút "Thay đổi"
+        if (!isPopupVisible) {
+            const rect = event.target.getBoundingClientRect();
+            popup.style.top = `${rect.bottom + window.scrollY}px`;
+            popup.style.left = `${rect.left + window.scrollX}px`;
+
+            // Hiển thị popup của sản phẩm hiện tại
+            popup.style.display = 'block';
+        }
     });
 });
 
 // Đóng popup khi click bên ngoài
 document.addEventListener('click', function(event) {
-    const popup = document.getElementById('thayDoiBienThe');
-    if (!popup.contains(event.target) && !event.target.classList.contains('thayDoi')) {
-        popup.style.display = 'none';
+    const isClickInsidePopup = event.target.closest('.thayDoiBienThe');
+    const isClickOnButton = event.target.classList.contains('thayDoi');
+
+    // Nếu không click vào popup hoặc nút "Thay đổi" thì ẩn tất cả popup
+    if (!isClickInsidePopup && !isClickOnButton) {
+        document.querySelectorAll('.thayDoiBienThe').forEach(p => p.style.display = 'none');
     }
 });
+
+let selectedSize = null;
+let selectedColor = null;
+
+// Xử lý kiểm tra các size và màu đã được chọn sẵn (nếu có)
+document.querySelectorAll('.sizeBox .thayDoiSize li.active').forEach(el => {
+    selectedSize = el.getAttribute('data-size');
+});
+
+document.querySelectorAll('.colorBox .thayDoiMauSac li.active').forEach(el => {
+    selectedColor = el.getAttribute('data-color');
+});
+
+// Xử lý chọn size
+document.querySelectorAll('.sizeBox .thayDoiSize li').forEach(function (sizeElement) {
+    sizeElement.addEventListener('click', function () {
+        let gioHangId = this.closest('tr').querySelector('input[type="checkbox"]').getAttribute('data-id');
+
+        // Nếu size đã được chọn thì disable màu sắc
+        if (!this.classList.contains('active')) {
+            // Gửi yêu cầu AJAX để lấy các màu sắc không khả dụng cho kích cỡ này
+            $.ajax({
+                url: '/gio-hang/check-bien-the-size',
+                method: 'get',
+                data: {
+                    gio_hang_id: gioHangId,
+                    kich_co: this.getAttribute('data-size') // Gửi kích cỡ đang chọn
+                },
+                success: function (response) {
+                    // Disable các màu sắc không khả dụng
+                    document.querySelectorAll('.colorBox .thayDoiMauSac li').forEach(function (colorElement) {
+                        if (response.disabledColors.includes(colorElement.getAttribute('data-color'))) {
+                            colorElement.classList.add('disable');
+                        } else {
+                            colorElement.classList.remove('disable');
+                        }
+                    });
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                }
+            });
+        }
+
+        // Cập nhật trạng thái lựa chọn size
+        this.closest('.sizeBox').querySelectorAll('li').forEach(el => el.classList.remove('active'));
+        this.classList.toggle('active');
+    });
+});
+
+// Xử lý chọn màu sắc
+document.querySelectorAll('.colorBox .thayDoiMauSac li').forEach(function (colorElement) {
+    colorElement.addEventListener('click', function () {
+        let gioHangId = this.closest('tr').querySelector('input[type="checkbox"]').getAttribute('data-id');
+
+        // Nếu màu sắc đã được chọn thì disable kích cỡ
+        if (!this.classList.contains('active')) {
+            // Gửi yêu cầu AJAX để lấy các kích cỡ không khả dụng cho màu sắc này
+            $.ajax({
+                url: '/gio-hang/check-bien-the-color',
+                method: 'get',
+                data: {
+                    gio_hang_id: gioHangId,
+                    ma_mau: this.getAttribute('data-color') // Gửi màu sắc đang chọn
+                },
+                success: function (response) {
+                    // Disable các kích cỡ không khả dụng
+                    document.querySelectorAll('.sizeBox .thayDoiSize li').forEach(function (sizeElement) {
+                        if (response.disabledSizes.includes(sizeElement.getAttribute('data-size'))) {
+                            sizeElement.classList.add('disable');
+                        } else {
+                            sizeElement.classList.remove('disable');
+                        }
+                    });
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                }
+            });
+        }
+
+        // Cập nhật trạng thái lựa chọn màu sắc
+        this.closest('.colorBox').querySelectorAll('li').forEach(el => el.classList.remove('active'));
+        this.classList.toggle('active');
+    });
+});
+
+
+// Xử lý nút xác nhận
+document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-danger').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        if (selectedSize && selectedColor) {
+            let tr=btn.closest('tr');
+            let gioHangId = tr.querySelector('input[type="checkbox"]').getAttribute('data-id');
+            let maMau = tr.querySelector('.colorBox li.active').getAttribute('data-color');
+            let kichCo = tr.querySelector('.sizeBox li.active').getAttribute('data-size');
+
+
+            $.ajax({
+                url: '/gio-hang/thay-doi-bien-the',
+                method: 'get',
+                data: {
+                    gio_hang_id: gioHangId,
+                    kich_co: kichCo,
+                    ma_mau: maMau
+                },
+                success: function (response) {
+                    tr.querySelector('.phanLoaiHang').textContent= `${response.bien_the.kich_co}, ${response.bien_the.ten_mau}`;
+
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                }
+            });
+        }
+    });
+});
+
+document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-light').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const parentRow = this.closest('tr');
+        const popup = parentRow.querySelector('.thayDoiBienThe');
+        popup.style.display = 'none';
+    });
+});
+
 
 
 
