@@ -131,7 +131,7 @@ font-family: Outfit, sans-serif;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     display: none;
-    z-index: 100; /* Đảm bảo popup nằm trên các phần tử khác */
+    z-index: 100;
     font-family: Outfit, sans-serif;
 }
 
@@ -149,20 +149,20 @@ h5 {
     margin-bottom: 10px;
 }
 
-.size-box ul,
-.color-box ul {
+.sizeBox ul,
+.colorBox ul {
     list-style-type: none;
     padding: 0;
 }
 
-.size-box li,
-.color-box li {
+.sizeBox li,
+.colorBox li {
     display: inline-block;
     margin-right: 10px;
 }
 
-.size-box a,
-.color-box li {
+.sizeBox a,
+.colorBox li {
     cursor: pointer;
     padding: 10px 15px;
     border: 1px solid #ccc;
@@ -170,8 +170,8 @@ h5 {
     transition: background-color 0.3s;
 }
 
-.size-box a:hover,
-.color-box li:hover {
+.sizeBox a:hover,
+.colorBox li:hover {
     background-color: #f0f0f0;
 }
 
