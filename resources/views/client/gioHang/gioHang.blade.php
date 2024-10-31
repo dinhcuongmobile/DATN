@@ -159,7 +159,7 @@
     <div id="bodyThayDoi">
         <div>
             <h5>Kích cỡ:</h5>
-            <div class="size-box">
+            <div class="sizeBox">
                 <ul class="selected" id="selectSize">
                     <input type="hidden" id="size" value="">
                     <li class="">
@@ -176,7 +176,7 @@
         </div>
         <div>
             <h5>Màu sắc:</h5>
-            <div class="color-box">
+            <div class="colorBox">
                 <ul id="selectMauSac">
                     <input type="hidden" id="mauSac" value="">
                         <li style="background-color: #000; border: 1px solid #0000003b;" title=""></li>
