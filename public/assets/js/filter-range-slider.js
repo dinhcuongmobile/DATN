@@ -89,6 +89,7 @@ document.getElementById("enterLoc").addEventListener("click", function (e) {
   .then(data => {
       // Xử lý dữ liệu trả về, ví dụ: hiển thị danh sách sản phẩm
       const productList = document.querySelector("#productList");
+      loadFilteredPage(url);
       productList.innerHTML = data.html; // HTML của danh sách sản phẩm trên trang
       window.history.pushState({}, '', url); // Cập nhật URL mà không tải lại trang
   })

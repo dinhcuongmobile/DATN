@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="home-content">
-                    <p>Create Your Style<span></span></p>
-                    <h2>New Style For</h2>
-                    <h1>Spring & Summer</h1>
-                    <h6>Amet minim mollit non deserunt dolor do amet sint. </h6><a class="btn btn_outline"
-                        href="collection-left-sidebar.html">Shop Now</a>
+                    <p>Nâng tầm phong cách phái mạnh - Tự tin, lịch lãm mỗi ngày!<span></span></p>
+                    <h2></h2>
+                    <h1>Mùa Thu & Mùa Hè</h1>
+                    <h6>Diện mạo hoàn hảo cho phái mạnh - Phong cách không thể bỏ qua! </h6><a class="btn btn_outline"
+                        href="{{route('san-pham.san-pham')}}">Khám Phá Ngay</a>
                 </div>
                 <div class="product-1">
                     <div class="product"> <img class="img-fluid" src="../assets/images/layout-4/p-1.jpg" alt="">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="home-images">
-                    <div class="main-images"></div><img class="img-fluid" src="../assets/images/layout-4/1.png"
+                    <div class="main-images"></div><img class="img-fluid" src="../assets/images/layout-4/bner.png"
                         alt="">
                 </div>
                 <div class="shape-images"> <img class="img-1 img-fluid" src="../assets/images/layout-4/s-1.png"
