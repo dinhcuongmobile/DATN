@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="">Nội dung</label>
-                        <textarea class="form-control" rows="10" id="" name="noi_dung" placeholder="Nhập nội dung...">{{ old('noi_dung', $tin_tuc->noi_dung) }}</textarea>
+                        <textarea class="form-control" rows="10" id="noi_dung" name="noi_dung" placeholder="Nhập nội dung...">{{ old('noi_dung', $tin_tuc->noi_dung) }}</textarea>
                         @error('noi_dung')
                             <p class="Err mt-1">{{ $message }}</p>
                         @enderror

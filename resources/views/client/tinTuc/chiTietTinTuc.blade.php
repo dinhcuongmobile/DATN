@@ -29,7 +29,7 @@
                                     <h4>{{$tin_tuc->tieu_de}}</h4>
                                 </a>
                                 <p>
-                                    {{$tin_tuc->noi_dung}}
+                                    {!!$tin_tuc->noi_dung !!}
                                 </p>
                             </div>
                         </div>

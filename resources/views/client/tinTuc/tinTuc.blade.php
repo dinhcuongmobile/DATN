@@ -31,7 +31,7 @@
                                 <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
                                     <h4>{{$item->tieu_de}}</h4>
                                 </a>
-                                <p>{{$item->noi_dung}}</p>
+                                <p>{!! Str::limit(strip_tags($item->noi_dung), 150, '...') !!}</p>
                                 <div class="share-box">
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>by John wiki on</h6>
