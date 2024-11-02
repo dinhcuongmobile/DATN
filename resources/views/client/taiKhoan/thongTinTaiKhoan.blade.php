@@ -43,7 +43,10 @@
                                 </div>
                                 <div class="profile-name">
                                     <h4>{{ Auth::user()->ho_va_ten }}</h4>
-                                    <h6>{{ Auth::user()->email }}</h6>
+                                    @php
+                                        $email = Auth::user()->email;
+                                    @endphp
+                                    <h6>{{ substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@')) }}</h6>
                                     <span data-bs-toggle="modal" data-bs-target="#edit-box" title="Quick View"
                                         tabindex="0">Chỉnh sửa thông tin</span>
                                 </div>
@@ -96,9 +99,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- 
-                    Nội dung
-                --}}
+                {{--Nội dung--}}
                 <div class="col-xl-9 col-lg-8">
                     <div class="tab-content" id="v-pills-tabContent">
                         {{-- Thông tin tài khoản --}}
@@ -189,7 +190,18 @@
                                                     </li>
                                                     <li>
                                                         <h6>Địa Chỉ:</h6>
-                                                        <p>{{ Auth::user()->dia_chi }}</p>
+                                                        <p>
+                                                            @if ($dia_chi)
+                                                                @if ($dia_chi->dia_chi_chi_tiet)
+                                                                    {{ $dia_chi->dia_chi_chi_tiet }},
+                                                                @endif
+                                                                {{ $dia_chi->phuongXa?->ten_phuong_xa }},
+                                                                {{ $dia_chi->quanHuyen?->ten_quan_huyen }},
+                                                                {{ $dia_chi->tinhThanhPho?->ten_tinh_thanh_pho }}
+                                                            @else
+                                                                Chưa có địa chỉ.
+                                                            @endif
+                                                        </p>
                                                     </li>
                                                 </ul>
                                                 <div class="sidebar-title">
@@ -199,7 +211,10 @@
                                                 <ul class="profile-information mb-0">
                                                     <li>
                                                         <h6>Email :</h6>
-                                                        <p>{{ Auth::user()->email }}</p>
+                                                        @php
+                                                            $email = Auth::user()->email;
+                                                        @endphp
+                                                        <p>{{ substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@')) }}</p>
                                                     </li>
                                                     <li>
                                                         <h6>Password :</h6>
@@ -1121,112 +1136,51 @@
                                 <div class="address-tab">
                                     <div class="sidebar-title">
                                         <div class="loader-line"></div>
-                                        <h4>My Address Details</h4>
+                                        <h4>Địa chỉ của tôi</h4>
                                     </div>
                                     <div class="row gy-3">
-                                        <div class="col-xxl-4 col-md-6">
-                                            <div class="address-option"><label for="address-billing-0"> <span
-                                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                                class="custom-radio" id="address-billing-0"
-                                                                type="radio" checked="checked"
-                                                                name="radio"></span><span class="address-detail"><span
-                                                                class="address"> <span class="address-title">New Home
-                                                                </span></span><span class="address"> <span
-                                                                    class="address-home"> <span class="address-tag">
-                                                                        Address:</span>26, Starts
-                                                                    Hollow Colony, Denver, Colorado, United
-                                                                    States</span></span><span class="address"> <span
-                                                                    class="address-home"> <span class="address-tag">Pin
-                                                                        Code:</span>80014</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Phone :</span>+1
-                                                                    5551855359</span></span></span></span><span
-                                                        class="buttons"> <a class="btn btn_black sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                            title="Quick View" tabindex="0">Edit </a><a
-                                                            class="btn btn_outline sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                            title="Quick View" tabindex="0">Delete </a></span></label>
+                                        @foreach ($dia_chis as $item)
+                                            <div class="col-xxl-4 col-md-6">
+                                                <div class="address-option">
+                                                    <label for="address-billing-0">
+                                                        <span class="delivery-address-box">
+                                                            <span class="form-check">
+                                                                <input class="custom-radio" id="address-billing-0"
+                                                                    type="radio" checked="checked" name="radio">
+                                                            </span>
+                                                            <span class="address-detail">
+                                                                <span class="address">
+                                                                    <span class="address-title">New Home</span>
+                                                                </span>
+                                                                <span class="address">
+                                                                    <span class="address-home">
+                                                                        <span class="address-tag">Address:</span>26, Starts
+                                                                        Hollow Colony, Denver</span>
+                                                                </span>
+                                                                <span class="address">
+                                                                    <span class="address-home">
+                                                                        <span class="address-tag">Phone :</span>+1 5551855359
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                        </span>
+                                                        <span class="buttons">
+                                                            <a class="btn btn_black sm" href="#"
+                                                                data-bs-toggle="modal" data-bs-target="#edit-box"
+                                                                title="Quick View" tabindex="0">Edit
+                                                            </a>
+                                                            <a class="btn btn_outline sm" href="#"
+                                                                data-bs-toggle="modal" data-bs-target="#bank-card-modal"
+                                                                title="Quick View" tabindex="0">Delete
+                                                            </a>
+                                                        </span>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xxl-4 col-md-6">
-                                            <div class="address-option"><label for="address-billing-3"> <span
-                                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                                class="custom-radio" id="address-billing-3"
-                                                                type="radio" name="radio"></span><span
-                                                            class="address-detail"><span class="address"> <span
-                                                                    class="address-title">IT
-                                                                    Office</span></span><span class="address"> <span
-                                                                    class="address-home"> <span class="address-tag">
-                                                                        Address:</span>55B, Claire Cav Street, San Jose,
-                                                                    California, United States</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Pin
-                                                                        Code:</span>94088</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Phone :</span>+1
-                                                                    5551855359</span></span></span></span><span
-                                                        class="buttons"> <a class="btn btn_black sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                            title="Quick View" tabindex="0">Edit </a><a
-                                                            class="btn btn_outline sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                            title="Quick View" tabindex="0">Delete</a></span></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-4 col-md-6">
-                                            <div class="address-option"><label for="address-billing-2"> <span
-                                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                                class="custom-radio" id="address-billing-2"
-                                                                type="radio" name="radio"></span><span
-                                                            class="address-detail"><span class="address"> <span
-                                                                    class="address-title">IT
-                                                                    Office</span></span><span class="address"> <span
-                                                                    class="address-home"> <span class="address-tag">
-                                                                        Address:</span>55B, Claire Cav Street, San Jose,
-                                                                    California, United States</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Pin
-                                                                        Code:</span>94088</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Phone :</span>+1
-                                                                    5551855359</span></span></span></span><span
-                                                        class="buttons"> <a class="btn btn_black sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                            title="Quick View" tabindex="0">Edit </a><a
-                                                            class="btn btn_outline sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                            title="Quick View" tabindex="0">Delete</a></span></label>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxl-4 col-md-6">
-                                            <div class="address-option"><label for="address-billing-2"> <span
-                                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                                class="custom-radio" id="address-billing-2"
-                                                                type="radio" name="radio"></span><span
-                                                            class="address-detail"><span class="address"> <span
-                                                                    class="address-title">IT
-                                                                    Office</span></span><span class="address"> <span
-                                                                    class="address-home"> <span class="address-tag">
-                                                                        Address:</span>55B, Claire Cav Street, San Jose,
-                                                                    California, United States</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Pin
-                                                                        Code:</span>94088</span></span><span
-                                                                class="address"> <span class="address-home"> <span
-                                                                        class="address-tag">Phone :</span>+1
-                                                                    5551855359</span></span></span></span><span
-                                                        class="buttons"> <a class="btn btn_black sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                            title="Quick View" tabindex="0">Edit </a><a
-                                                            class="btn btn_outline sm" href="#"
-                                                            data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                            title="Quick View" tabindex="0">Delete</a></span></label>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div><button class="btn add-address" data-bs-toggle="modal"
-                                        data-bs-target="#add-address" title="Quick View" tabindex="0">+ Add
-                                        Address</button>
+                                        data-bs-target="#add-address" title="Quick View" tabindex="0">+ Thêm địa chỉ
+                                        mới</button>
                                 </div>
                             </div>
                         </div>
@@ -1247,8 +1201,8 @@
                                             </div><span class="short-title">access</span>
                                             <ul class="privacy-items">
                                                 <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="lock-2"></i></div>
+                                                    <div class="privacy-icon"> <i class="iconsax" data-icon="lock-2"></i>
+                                                    </div>
                                                     <div class="privacy-contant">
                                                         <h6>Private</h6>
                                                         <p>Only users you choose can access</p>
@@ -1325,9 +1279,7 @@
                 </div>
             </div>
         </div>
-        {{-- 
-            Chỉnh sửa thông tin tài khoản
-        --}}
+        {{-- Chỉnh sửa thông tin tài khoản --}}
         <div class="reviews-modal modal theme-modal fade" id="edit-box" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -1374,7 +1326,7 @@
                                         <option value="">--Chọn tỉnh thành phố--</option>
                                         @foreach ($tinh_thanh_pho as $item)
                                             <option
-                                                {{ $item->ten_tinh_thanh_pho === $tinh_thanh_pho_one ? 'selected' : '' }}
+                                                {{ $dia_chi ? ($item->ma_tinh_thanh_pho === $dia_chi->tinhThanhPho->ma_tinh_thanh_pho ? 'selected' : '') : '' }}
                                                 value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}
                                             </option>
                                         @endforeach
@@ -1391,7 +1343,8 @@
                                         id="quan_huyen" name="quan_huyen">
                                         <option value="">--Chọn quận huyện--</option>
                                         @foreach ($quan_huyen as $item)
-                                            <option {{ $item->ten_quan_huyen === $quan_huyen_one ? 'selected' : '' }}
+                                            <option
+                                                {{ $dia_chi ? ($item->ma_quan_huyen === $dia_chi->quanHuyen->ma_quan_huyen ? 'selected' : '') : '' }}
                                                 value="{{ $item->ma_quan_huyen }}">{{ $item->ten_quan_huyen }}
                                             </option>
                                         @endforeach
@@ -1408,7 +1361,8 @@
                                         name="phuong_xa">
                                         <option value="">--Chọn phường xã--</option>
                                         @foreach ($phuong_xa as $item)
-                                            <option {{ $item->ten_phuong_xa === $phuong_xa_one ? 'selected' : '' }}
+                                            <option
+                                                {{ $dia_chi ? ($item->ma_phuong_xa === $dia_chi->phuongXa->ma_phuong_xa ? 'selected' : '') : '' }}
                                                 value="{{ $item->ma_phuong_xa }}">{{ $item->ten_phuong_xa }}
                                             </option>
                                         @endforeach
@@ -1422,23 +1376,21 @@
                                 <div class="col-12">
                                     <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
                                     <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4"
-                                        class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror">{{ $dia_chi_chi_tiet }}</textarea>
+                                        class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror">{{ $dia_chi ? $dia_chi->dia_chi_chi_tiet : '' }}</textarea>
                                     <p class="Err text-danger dia_chi_chi_tiet-error">
                                         @error('dia_chi_chi_tiet')
                                             {{ $message }}
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxAuth()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onclick="ajaxAuth()">Xác nhận</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- 
-            Đổi mật khẩu
-        --}}
+        {{-- Đổi mật khẩu--}}
         <div class="reviews-modal modal theme-modal fade" id="edit-password" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -1486,12 +1438,110 @@
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxResetPassword()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxResetPassword()">Xác
+                                    nhận</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{-- CHƯA XONG --}}
+        {{-- Nhập địa chỉ mới --}}
+        {{-- <div class="reviews-modal modal theme-modal fade" id="add-address" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Địa chỉ mới</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-0">
+                        <form id="themDiaChiMoi" action="{{ route('tai-khoan.them-dia-chi-moi') }}"
+                            method="POST">
+                            @csrf
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="from-group">
+                                        <label class="form-label">Họ và tên</label>
+                                        <input class="form-control @error('ho_va_ten_nhan') is-invalid @enderror"
+                                            type="text" name="ho_va_ten_nhan" placeholder="Nhập họ và tên..."
+                                            value="">
+                                    </div>
+                                    <p class="Err text-danger ho_va_ten-error">
+                                        @error('ho_va_ten_nhan')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <div class="from-group">
+                                        <label class="form-label">Số điện thoại</label>
+                                        <input class="form-control @error('so_dien_thoai_nhan') is-invalid @enderror"
+                                            type="text" name="so_dien_thoai_nhan" placeholder="Nhập số điện thoại."
+                                            value="">
+                                    </div>
+                                    <p class="Err text-danger so_dien_thoai-error">
+                                        @error('so_dien_thoai_nhan')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label" for="them_tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
+                                    <select class="form-select @error('them_tinh_thanh_pho') is-invalid @enderror"
+                                        id="them_tinh_thanh_pho" name="tinh_thanh_pho">
+                                        <option value="">--Chọn tỉnh thành phố--</option>
+                                        @foreach ($tinh_thanh_pho as $item)
+                                            <option value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="Err text-danger tinh_thanh_pho-error">
+                                        @error('tinh_thanh_pho')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="them_quan_huyen">Chọn Quận/Huyện</label>
+                                    <select class="form-select @error('quan_huyen') is-invalid @enderror"
+                                        id="them_quan_huyen" name="quan_huyen">
+                                        <option value="">--Chọn quận huyện--</option>
+                                    </select>
+                                    <p class="Err text-danger quan_huyen-error">
+                                        @error('quan_huyen')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label" for="them_phuong_xa">Chọn Phường/Xã/Thị trấn</label>
+                                    <select class="form-select @error('phuong_xa') is-invalid @enderror" id="them_phuong_xa"
+                                        name="phuong_xa">
+                                        <option value="">--Chọn phường xã--</option>
+                                    </select>
+                                    <p class="Err text-danger phuong_xa-error">
+                                        @error('phuong_xa')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
+                                    <textarea name="dia_chi_chi_tiet" id="them_dia_chi_chi_tiet" cols="5" rows="4"
+                                        class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror"></textarea>
+                                    <p class="Err text-danger dia_chi_chi_tiet-error">
+                                        @error('dia_chi_chi_tiet')
+                                            {{ $message }}
+                                        @enderror
+                                    </p>
+                                </div>
+                                <button class="btn btn-submit mt-3" type="submit" onclick="ajaxThemDiaChi()">Xác nhận</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     </section>
 @endsection

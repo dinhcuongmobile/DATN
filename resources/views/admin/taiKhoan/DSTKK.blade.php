@@ -37,7 +37,6 @@
                                 <th>Họ và Tên</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Địa chỉ</th>
                                 <th>Vai trò</th>
                                 <th>Action</th>
                             </tr>
@@ -50,7 +49,6 @@
                                         <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
                                         <td class="col-1 align-middle">{{ $item->email }}</td>
                                         <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                        <td class="col-2 align-middle">{{ $item->dia_chi }}</td>
                                         <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
                                         <td class="col-2 align-middle text-center">
                                             <a onclick="return confirm('Bạn chắc chắn muốn mở khóa tài khoản này?')"
