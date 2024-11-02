@@ -549,33 +549,10 @@
                 aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
         <div class="offcanvas-body theme-scrollbar">
             <div class="container">
-                <h3>What are you trying to find?</h3>
-                <div class="search-box"> <input type="search" name="text" placeholder="I'm looking for…"><i
+                <h3>Tìm Kiếm</h3>
+                <div class="search-box"> <input type="search" name="text" placeholder="..."><i
                         class="iconsax" data-icon="search-normal-2"></i></div>
-                <h4>Popular Searches</h4>
-                <ul class="rapid-search">
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax" data-icon="search-normal-2"></i>Jeans
-                            Women</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>Blazer Women</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax" data-icon="search-normal-2"></i>Jeans
-                            Men</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>Blazer Men</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>T-Shirts Men</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax" data-icon="search-normal-2"></i>Shoes
-                            Men</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>T-Shirts Women</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>Bags</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>Sneakers Women</a></li>
-                    <li> <a href="collection-left-sidebar.html"><i class="iconsax"
-                                data-icon="search-normal-2"></i>Dresses</a></li>
-                </ul>
-                <h4>You Might Like</h4>
+                <h4>Có Thể Bạn Sẽ Thích</h4>
                 <div class="row gy-4 ratio_square-2 preemptive-search">
                     <div class="col-xl-2 col-sm-4 col-6">
                         <div class="product-box-6">

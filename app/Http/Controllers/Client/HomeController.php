@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\TinTuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     protected $views;
+    protected $tin_tucs;
     public function __construct() {
         $this->views=[];
+        $this->tin_tucs=new TinTuc();
     }
 
     public function home(){
@@ -22,6 +25,7 @@ class HomeController extends Controller
         $this->views['san_pham_moi_nhat']=$san_pham_moi_nhat;
         $this->views['san_pham_ban_chay']=$san_pham_ban_chay;
         $this->views['san_pham_khuyen_mai']=$san_pham_khuyen_mai;
+        $this->views['tin_tucs']=$this->tin_tucs->loadAllTinTuc();
         return view('client.home',$this->views);
     }
 

@@ -25,7 +25,11 @@
             @csrf
             <div class="mb-3">
                 <label for="" class="form-label">Mã giảm giá</label>
-                <input type="text" class="form-control" name="ma_giam_gia" placeholder="VD: ABCXYZ123..." value="{{old('ma_giam_gia')}}">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="ma_giam_gia" id="maGiamGia" placeholder="VD: ABCXYZ123..." value="{{old('ma_giam_gia')}}">
+                    ||
+                    <button type="button" class="btn btn-primary" onclick="generateCode()">Tạo Mã Tự Động</button>
+                </div>
                 @error('ma_giam_gia')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
@@ -77,4 +81,14 @@
 
 </div>
 <!-- /.container-fluid -->
+<script>
+    function generateCode() {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let code = '';
+        for (let i = 0; i < 10; i++) {
+            code += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        document.getElementById('maGiamGia').value = code;
+    }
+</script>
 @endsection
