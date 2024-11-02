@@ -148,12 +148,11 @@
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                                        <a href="compare.html" tabindex="0">
-                                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
-                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
-                                                                <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
-                                                        </a>
+                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                                    </a>
+                                                    <a class="quickViewClick" data-id="{{$item->id}}" href="javascript:void(0)" tabindex="0">
+                                                        <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-detail">

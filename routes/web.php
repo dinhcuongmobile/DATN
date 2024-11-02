@@ -36,6 +36,9 @@ use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanContro
 // Client
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
+    Route::prefix('home')->group(function(){
+        Route::get('quick-view', [HomeController::class, 'quickView']);
+    });
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
     Route::prefix('/tai-khoan')->group(function(){
         Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');

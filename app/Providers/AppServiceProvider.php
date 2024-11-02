@@ -26,14 +26,18 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         View::composer('client.layout.main', function ($view) {
-            if(Auth::check()){
-                $gio_hangs = GioHang::with('user','sanPham','bienThe')->where('user_id',Auth::user()->id)->orderBy('id','desc')->get();
-                $view->with('gio_hangs', $gio_hangs);
-            }else{
-                $gio_hangs = [];
-                $view->with('gio_hangs', $gio_hangs);
+            $gio_hangs = [];
+            $count_gio_hang = 0;
+
+            if (Auth::check()) {
+                $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
+                    ->where('user_id', Auth::id())
+                    ->orderBy('id', 'desc')
+                    ->get();
+                $count_gio_hang = $gio_hangs->count();
             }
 
+            $view->with(compact('gio_hangs', 'count_gio_hang'));
         });
     }
 }

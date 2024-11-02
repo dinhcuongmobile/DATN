@@ -20,6 +20,11 @@ class GioHangController extends Controller
     }
 
     public function gioHang(){
+        $this->views['gio_hangs'] = [];
+        $this->views['kich_cos'] = KichCo::all();
+        $this->views['mau_sacs'] = MauSac::all();
+        $this->views['san_pham_moi_nhat']= SanPham::with('bienThes','danhGias')->orderBy('id','desc')->take(8)->get();
+        
         if (Auth::check()) {
             $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
                                 ->where('user_id', Auth::user()->id)
@@ -34,12 +39,6 @@ class GioHangController extends Controller
             }
 
             $this->views['gio_hangs'] = $gioHangs;
-            $this->views['kich_cos'] = KichCo::all();
-            $this->views['mau_sacs'] = MauSac::all();
-        } else {
-            $this->views['gio_hangs'] = [];
-            $this->views['kich_cos'] = [];
-            $this->views['mau_sacs'] = [];
         }
         return view('client.gioHang.gioHang', $this->views);
     }

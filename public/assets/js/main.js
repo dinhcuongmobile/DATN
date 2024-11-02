@@ -57,3 +57,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 // end thong bao loi error
 
+document.querySelectorAll('.quickViewClick').forEach((el) => {
+    el.addEventListener('click',function(){
+        $('#quick-view').modal('show');
+        let sanPhamID = el.getAttribute('data-id');
+
+        $.ajax({
+            type: 'GET',
+            url: '/home/quick-view/',
+            data: {
+                san_pham_id: sanPhamID
+            },
+            success: function (response) {
+                let quickView = document.getElementById('quick-view');
+
+
+            },
+            error: function (error) {
+                console.error('Lỗi: ', error);
+                alert('Có lỗi xảy ra');
+            }
+        });
+
+    });
+});
+
