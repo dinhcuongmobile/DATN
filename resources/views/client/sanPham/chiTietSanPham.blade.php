@@ -20,7 +20,8 @@
                         <div class="swiper product-slider product-slider-img">
                             <div class="swiper-wrapper">
                                 @foreach ($san_pham->bienThes->unique('ma_mau') as $item)
-                                    <div class="swiper-slide"> <img src="{{Storage::url($item->hinh_anh)}}" alt="">
+                                    <div class="swiper-slide">
+                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="">
                                     </div>
                                 @endforeach
                             </div>
@@ -130,7 +131,8 @@
                                 <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
                             </div>
                             <div class="d-flex align-items-center gap-3 w-100">
-                                <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
+                                    <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
+                                    <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
                                     data-id="{{$san_pham->id}}">Thêm giỏ hàng</a>
                                 <a class="btn btn_outline sm" href="#">Mua ngay</a>
                             </div>

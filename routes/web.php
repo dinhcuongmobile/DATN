@@ -73,7 +73,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     Route::prefix('san-pham')->group(function () {
         Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
-        Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
+        Route::get('san-pham-danh-muc/{danh_muc_id}', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
         Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
         Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
 
@@ -82,7 +82,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
         Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
-        Route::get('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
+        Route::post('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
         Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
         Route::get('xoa-san-pham-gio-hang', [GioHangController::class, 'xoaSanPhamGioHang']);
         Route::get('so-luong-mua', [GioHangController::class, 'soLuongMua']);

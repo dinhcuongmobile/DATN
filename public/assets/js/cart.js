@@ -14,6 +14,8 @@ function kiemTraGioHang() {
     if (document.querySelectorAll('#cart-table tbody tr').length > 0) {
         document.querySelector('.cart-table .table-title p').style.display = 'block';
         document.querySelector('.col-12 .cart-countdown').style.display = 'flex';
+        document.querySelector('.gioHangFull').setAttribute('class','col-xxl-9 col-xl-8 gioHangFull');
+        document.querySelector('.gioHangTiepTuc').style.display= 'block';
     }
 }
 // Hàm chọn hoặc bỏ chọn tất cả checkbox
@@ -86,6 +88,8 @@ clearAllButton.addEventListener('click', function () {
                         document.querySelector('.cart-table .table-title p').style.display = 'none';
                         document.querySelector('.cart-countdown').style.display = 'none';
                         document.querySelector('.cart-table #data-show').style.display = 'block';
+                        document.querySelector('.gioHangFull').setAttribute('class','col-xxl-12 col-xl-12 gioHangFull');
+                        document.querySelector('.gioHangTiepTuc').style.display= 'none';
                     }
                     countSanPham.textContent = countTr;
 
@@ -136,6 +140,8 @@ deleteButton.forEach(function (btnDel) {
                         document.querySelector('.cart-table .table-title p').style.display = 'none';
                         document.querySelector('.cart-countdown').style.display = 'none';
                         document.querySelector('.cart-table #data-show').style.display = 'block';
+                        document.querySelector('.gioHangFull').setAttribute('class','col-xxl-12 col-xl-12 gioHangFull');
+                        document.querySelector('.gioHangTiepTuc').style.display= 'none';
                     }
                     countSanPham.textContent = countTr;
                     // tinh lai tong tien
@@ -401,7 +407,6 @@ document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-danger').forEach(fun
             let maMau = tr.querySelector('.colorBox li.active').getAttribute('data-color');
             let kichCo = tr.querySelector('.sizeBox li.active').getAttribute('data-size');
 
-
             $.ajax({
                 url: '/gio-hang/thay-doi-bien-the',
                 method: 'get',
@@ -412,7 +417,8 @@ document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-danger').forEach(fun
                 },
                 success: function (response) {
                     tr.querySelector('.phanLoaiHang').textContent= `${response.bien_the.kich_co}, ${response.bien_the.ten_mau}`;
-
+                    const popup = tr.querySelector('.thayDoiBienThe');
+                    popup.style.display = 'none';
                 },
                 error: function () {
                     alert("Có lỗi xảy ra. Vui lòng thử lại.");

@@ -24,7 +24,7 @@ class GioHangController extends Controller
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
         $this->views['san_pham_moi_nhat']= SanPham::with('bienThes','danhGias')->orderBy('id','desc')->take(8)->get();
-        
+
         if (Auth::check()) {
             $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
                                 ->where('user_id', Auth::user()->id)
@@ -76,9 +76,14 @@ class GioHangController extends Controller
                 ];
                 $result = $gio_hang->update($data);
             }
-
+            $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
+                    ->where('user_id', Auth::id())
+                    ->orderBy('id', 'desc')
+                    ->get();
+            $san_pham= SanPham::find($san_pham_id);
+            $count_gio_hang = $gio_hangs->count();
             if($result){
-                return response()->json(['login' => true]);
+                return response()->json(['login' => true, 'count_gio_hang' => $count_gio_hang, 'san_pham' => $san_pham]);
             }
         }
     }

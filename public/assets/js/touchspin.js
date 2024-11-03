@@ -125,9 +125,11 @@ document.querySelectorAll('#selectMauSac li').forEach(function (colorElement) {
 // Thêm vào giỏ hàng
 document.addEventListener('DOMContentLoaded', () => {
     let btnThemGioHang = document.querySelector('#themGioHang');
+
     if (btnThemGioHang) {
         btnThemGioHang.addEventListener('click', function () {
             if (selectedSize && selectedColor) {
+                var token= document.querySelector(".tokenThemGioHang").value;
                 let sanPhamID = btnThemGioHang.getAttribute('data-id');
                 let soLuong = document.getElementById('soLuong').value;
                 let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
@@ -135,9 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let maMau = ipMauSac.value;
 
                 $.ajax({
-                    type: 'GET',
+                    type: 'POST',
                     url: '/gio-hang/them-gio-hang/',
                     data: {
+                        _token: token,
                         san_pham_id: sanPhamID,
                         gia_khuyen_mai: Number(giaKhuyenMai),
                         so_luong: Number(soLuong),
@@ -151,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             $('#addtocart').modal('show');
                             var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
                             document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
+                            document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                            document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
                         }
                     },
                     error: function (error) {
