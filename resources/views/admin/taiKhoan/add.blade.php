@@ -98,7 +98,7 @@
                     <label>Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...) <span class="text-danger"></span></label>
                     <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4" class="form-control form-control-sm"></textarea>
                     @error('dia_chi_chi_tiet')
-                        <p class="text-danger mt-1">{{ $message }}</p>
+                        <p class="text-danger mt-1">{{ $message }}</p> 
                     @enderror
                 </div>
             </div>

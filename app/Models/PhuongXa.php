@@ -10,6 +10,7 @@ class PhuongXa extends Model
     use HasFactory;
 
     protected $table = 'vn_phuong_xas';
+    protected $primaryKey = 'ma_phuong_xa';
 
     protected $fillable = [
         'ma_phuong_xa',
@@ -19,6 +20,10 @@ class PhuongXa extends Model
     ];
 
     public function quanHuyen() {
-        return $this->belongsTo(QuanHuyen::class);
+        return $this->belongsTo(QuanHuyen::class, 'ma_quan_huyen');
+    }
+
+    public function diaChi() {
+        return $this->hasMany(DiaChi::class, 'ma_phuong_xa');
     }
 }

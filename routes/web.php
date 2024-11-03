@@ -37,6 +37,9 @@ use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanContro
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
+    Route::prefix('home')->group(function(){
+        Route::get('quick-view', [HomeController::class, 'quickView']);
+    });
     Route::prefix('/tai-khoan')->group(function(){
         Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
         Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
@@ -61,6 +64,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
         Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
             ->name('tai-khoan.doi-mat-khau')->middleware('auth');
+
+        Route::post('/them-dia-chi-moi', [ThongTinTaiKhoanController::class, 'themDiaChiMoi'])
+        ->name('tai-khoan.them-dia-chi-moi')->middleware('auth');
 
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });

@@ -84,10 +84,12 @@
                                                                         // Kiểm tra nếu kích cỡ này có trong các biến thể
                                                                         $kichCoTonTai = $sanPham->bienThes->contains('kich_co', $itemKichCo->kich_co);
                                                                     @endphp
-                                                                    <li class="{{ !$kichCoTonTai ? 'disabled' : '' }} {{$item->bienThe->kich_co===$itemKichCo->kich_co?'active':''}}"
-                                                                        data-size="{{ $itemKichCo->kich_co }}">
-                                                                        <a href="javascript:void(0);">{{ $itemKichCo->kich_co }}</a>
-                                                                    </li>
+                                                                    @if ($kichCoTonTai)
+                                                                        <li class="{{$item->bienThe->kich_co===$itemKichCo->kich_co?'active':''}}"
+                                                                            data-size="{{ $itemKichCo->kich_co }}">
+                                                                            <a href="javascript:void(0);">{{ $itemKichCo->kich_co }}</a>
+                                                                        </li>
+                                                                    @endif
                                                                 @endforeach
                                                             </ul>
                                                         </div>
@@ -151,6 +153,41 @@
                         </ul>
                     </div>
                     <a class="btn btn_black w-100 rounded sm" href="check-out.html">Tiếp tục</a>
+                </div>
+            </div>
+            <div class="col-12 mt-5">
+                <div class="cart-slider">
+                    <div class="d-flex align-items-start justify-content-between">
+                        <div>
+                            <h6>Để có sự thay đổi hợp thời trang và hiện đại, đặc biệt là trong mùa giao mùa.</h6>
+                            <p> <img class="me-2" src="../assets/images/gif/fire-2.gif" alt="">Bạn có thể xem các sản phẩm mới ra mắt dưới đây</p>
+                        </div><a class="btn btn_outline sm rounded" href="{{route('san-pham.san-pham')}}">Xem tất cả</a>
+                    </div>
+                    <div class="swiper cart-slider-box">
+                        <div class="swiper-wrapper">
+                            @foreach ($san_pham_moi_nhat as $item)
+                                <div class="swiper-slide">
+                                    <div class="cart-box"> <a href="product.html"> <img
+                                                src="../assets/images/user/4.jpg" alt=""></a>
+                                        <div> <a href="product.html">
+                                                <h5>Polo-neck Body Dress</h5>
+                                            </a>
+                                            <h6>Sold By: <span>Brown Shop</span></h6>
+                                            <div class="category-dropdown"><select class="form-select" name="carlist">
+                                                    <option value="">Best color</option>
+                                                    <option value="">White</option>
+                                                    <option value="">Black</option>
+                                                    <option value="">Green</option>
+                                                </select></div>
+                                            <p>$19.90 <span> <del>$14.90 </del></span></p><a class="btn"
+                                                href="#">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

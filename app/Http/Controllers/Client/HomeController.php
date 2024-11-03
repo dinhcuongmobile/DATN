@@ -29,6 +29,12 @@ class HomeController extends Controller
         return view('client.home',$this->views);
     }
 
+    public function quickView(Request $request){
+        $san_pham = SanPham::with('bienThes','danhGias')->find($request->input('san_pham_id'));
+
+        return response()->json(['san_pham'=>$san_pham]);
+    }
+
     public function error404()
     {
         return view('auth.404');
