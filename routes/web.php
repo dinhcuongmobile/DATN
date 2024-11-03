@@ -80,6 +80,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
         Route::get('xoa-san-pham-gio-hang', [GioHangController::class, 'xoaSanPhamGioHang']);
         Route::get('so-luong-mua', [GioHangController::class, 'soLuongMua']);
+        Route::get('thay-doi-bien-the', [GioHangController::class, 'thayDoiBienThe']);
+        Route::get('check-bien-the-size', [GioHangController::class, 'checkBienTheSize']);
+        Route::get('check-bien-the-color', [GioHangController::class, 'checkBienTheColor']);
     });
 
     Route::prefix('tin-tuc')->group(function () {

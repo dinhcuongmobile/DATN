@@ -23,7 +23,8 @@ class SanPhamController extends Controller
     {
         $this->views['san_pham'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
-            ->where('danh_muc_id', $this->views['san_pham']->danh_muc_id)->take(8)->get();
+                                                    ->where('danh_muc_id', $this->views['san_pham']->danh_muc_id)
+                                                    ->take(8)->get();
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
         return view('client.sanPham.chiTietSanPham', $this->views);
@@ -38,7 +39,7 @@ class SanPhamController extends Controller
         $minPrice = 0;
 
         // Lọc sản phẩm dựa trên các tham số được gửi lên
-        $sanPhams = SanPham::query(); // Product là model của sản phẩm, thay thế nếu cần
+        $sanPhams = SanPham::query();
 
         // Xử lý lọc theo điều kiện sắp xếp
         if ($request->has('orderby')) {
@@ -75,11 +76,25 @@ class SanPhamController extends Controller
         if ($request->has('maxPrice')) {
             $sanPhams->where('gia_san_pham', '<=', $request->maxPrice);
         }
-        
+
 
         // Truyền minPrice và maxPrice vào view
         $this->views['minPrice'] = $minPrice;
         $this->views['maxPrice'] = $maxPrice;
+
+        // Lấy tất cả sản phẩm
+        $allSanPham = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->get();
+
+        // Lấy số trang có sản phẩm
+        $pages = [];
+        $checkPages = ceil($allSanPham->count() / 8); // Tính số trang dựa trên số sản phẩm
+
+        for ($i = 1; $i <= $checkPages; $i++) {
+            // Kiểm tra xem trang này có sản phẩm không
+            if ($allSanPham->forPage($i, 8)->isNotEmpty()) {
+                $pages[] = $i; // Thêm trang có sản phẩm vào danh sách
+            }
+        }
 
         $this->views['san_phams'] = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
         $this->views['danh_mucs'] = DanhMuc::all();
@@ -95,6 +110,7 @@ class SanPhamController extends Controller
                 'html' => $html,
                 'prevUrl' => $this->views['san_phams']->previousPageUrl(),
                 'nextUrl' => $this->views['san_phams']->nextPageUrl(),
+                'pages' => $pages,
             ]);
         }
 

@@ -69,6 +69,10 @@
     text-decoration: underline;
 }
 
+.cart-table .cart-box div{
+    text-align: left;
+}
+
 #errSelect{
     font-size: 16px;
     margin-bottom: 30px;
@@ -122,7 +126,7 @@ font-family: Outfit, sans-serif;
 }
 
 /* popup thay doi bien the  */
-#thayDoiBienThe {
+.thayDoiBienThe {
     position: absolute;
     width: 400px;
     background-color: #fff;
@@ -133,50 +137,70 @@ font-family: Outfit, sans-serif;
     display: none;
     z-index: 100;
     font-family: Outfit, sans-serif;
+    text-align: left;
 }
 
-#bodyThayDoi {
+.thayDoiBienThe .bodyThayDoi {
     max-height: 300px;
     overflow-y: auto;
 }
 
-.size-box,
-.color-box {
+.thayDoiBienThe .bodyThayDoi .sizeBox,
+.thayDoiBienThe .bodyThayDoi .colorBox {
     margin-bottom: 15px;
 }
 
-h5 {
+.thayDoiBienThe h5 {
     margin-bottom: 10px;
 }
 
-.sizeBox ul,
-.colorBox ul {
+.thayDoiBienThe .bodyThayDoi .sizeBox ul,
+.thayDoiBienThe .bodyThayDoi .colorBox ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sizeBox li,
-.colorBox li {
+.thayDoiBienThe .bodyThayDoi .sizeBox li,
+.thayDoiBienThe .bodyThayDoi .colorBox li {
     display: inline-block;
     margin-right: 10px;
 }
 
-.sizeBox a,
-.colorBox li {
+.thayDoiBienThe .bodyThayDoi .sizeBox a,
+.thayDoiBienThe .bodyThayDoi .colorBox li {
     cursor: pointer;
     padding: 10px 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-.sizeBox a:hover,
-.colorBox li:hover {
-    background-color: #f0f0f0;
+.thayDoiBienThe .bodyThayDoi .colorBox li{
+    padding: 16px 22px;
 }
 
-#thayDoiBienThe #btn{
+.thayDoiBienThe .btnThayDoi{
     padding-left: 185px;
+}
+
+.thayDoiBienThe .thayDoiSize .active{
+    background-color: rgba(var(--theme-default));
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.thayDoiBienThe .bodyThayDoi .colorBox .active{
+    padding: 19px 24px;
+    box-shadow: 0 0 10px rgba(var(--theme-default));
+}
+
+.thayDoiBienThe .thayDoiSize .disabled{
+    overflow: unset;
+}
+
+.thayDoiBienThe .disable {
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 /* end popup thay doi bien the  */

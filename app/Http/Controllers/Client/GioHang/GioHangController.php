@@ -21,15 +21,25 @@ class GioHangController extends Controller
 
     public function gioHang(){
         if (Auth::check()) {
-            $this->views['gio_hangs'] = GioHang::with('user', 'sanPham', 'bienThe')
-                                                ->where('user_id', Auth::user()->id)
-                                                ->whereHas('bienThe', function($query) {
-                                                    $query->where('so_luong', '>', 0);
-                                                })
-                                                ->orderBy('id', 'desc')
-                                                ->get();
+            $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
+                                ->where('user_id', Auth::user()->id)
+                                ->whereHas('bienThe', function($query) {
+                                    $query->where('so_luong', '>', 0);
+                                })
+                                ->orderBy('id', 'desc')
+                                ->get();
+
+            foreach ($gioHangs as $item) {
+                $item->sanPham->load('danhMuc', 'bienThes', 'danhGias');
+            }
+
+            $this->views['gio_hangs'] = $gioHangs;
+            $this->views['kich_cos'] = KichCo::all();
+            $this->views['mau_sacs'] = MauSac::all();
         } else {
             $this->views['gio_hangs'] = [];
+            $this->views['kich_cos'] = [];
+            $this->views['mau_sacs'] = [];
         }
         return view('client.gioHang.gioHang', $this->views);
     }
@@ -127,5 +137,60 @@ class GioHangController extends Controller
                             ->orderBy('id', 'desc')
                             ->get();
         return response()->json(['gio_hangs'=>$gio_hangs]);
+    }
+
+    public function checkBienTheSize(Request $request){
+        $gio_hang = GioHang::with('bienThe')->find($request->input('gio_hang_id'));
+        $disabledColors = [];
+
+        if ($gio_hang) {
+            $bienTheProducts = GioHang::with('bienThe')
+                ->where('san_pham_id', $gio_hang->san_pham_id)
+                ->where('id', '!=', $gio_hang->id)
+                ->get();
+
+            foreach ($bienTheProducts as $item) {
+                if ($item->bienThe && $item->bienThe->kich_co == $request->input('kich_co')) {
+                    $disabledColors[] = $item->bienThe->ma_mau;
+                }
+            }
+        }
+
+        return response()->json(['disabledColors' => array_unique($disabledColors)]);
+    }
+
+    public function checkBienTheColor(Request $request){
+        $gio_hang = GioHang::with('bienThe')->find($request->input('gio_hang_id'));
+        $disabledSizes = [];
+
+        if ($gio_hang) {
+            $bienTheProducts = GioHang::with('bienThe')
+                ->where('san_pham_id', $gio_hang->san_pham_id)
+                ->where('id', '!=', $gio_hang->id)
+                ->get();
+
+            foreach ($bienTheProducts as $item) {
+                if ($item->bienThe && $item->bienThe->ma_mau == $request->input('ma_mau')) {
+                    $disabledSizes[] = $item->bienThe->kich_co;
+                }
+            }
+        }
+
+        return response()->json(['disabledSizes' => array_unique($disabledSizes)]);
+    }
+
+
+    public function thayDoiBienThe(Request $request){
+        $gio_hang= GioHang::with('user', 'sanPham', 'bienThe')->find($request->input('gio_hang_id'));
+
+        $bien_the = BienThe::where('san_pham_id',$gio_hang->san_pham_id)
+                            ->where('kich_co',$request->input('kich_co'))
+                            ->where('ma_mau',$request->input('ma_mau'))->first();
+
+        if ($bien_the) {
+            $gio_hang->update(['bien_the_id'=>$bien_the->id]);
+        }
+
+        return response()->json(['gio_hang'=>$gio_hang,'bien_the'=>$bien_the]);
     }
 }
