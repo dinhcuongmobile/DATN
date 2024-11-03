@@ -5,7 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Blog Details</h4>
+                    <h4>Chi Tiết Tin Tức</h4>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="blog-content"><span class="blog-date">{{ \Carbon\Carbon::parse($tin_tuc->created_at)->format('d-m-Y')}} </span><a
-                                    href="blog-details.html">
+                                    href="{{route('tin-tuc.chi-tiet-tin-tuc', $tin_tuc->id)}}">
                                     <h4>{{$tin_tuc->tieu_de}}</h4>
                                 </a>
                                 <p>

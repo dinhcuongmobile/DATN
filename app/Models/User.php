@@ -20,7 +20,6 @@ class User extends Authenticatable
         'email',
         'password',
         'so_dien_thoai',
-        'dia_chi',
         'vai_tro_id',
         'remember_token',
         'email_verified_at',
@@ -65,5 +64,10 @@ class User extends Authenticatable
     public function gioHangs()
     {
         return $this->hasMany(GioHang::class, 'user_id');
+    }
+
+    public function diaChis()
+    {
+        return $this->hasMany(DiaChi::class, 'user_id');
     }
 }

@@ -148,12 +148,11 @@
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                                        <a href="compare.html" tabindex="0">
-                                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
-                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
-                                                                <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
-                                                        </a>
+                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                                    </a>
+                                                    <a class="quickViewClick" data-id="{{$item->id}}" href="javascript:void(0)" tabindex="0">
+                                                        <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-detail">
@@ -449,7 +448,7 @@
 <section class="section-t-space">
     <div class="custom-container container">
         <div class="title">
-            <h3>Latest Blog</h3>
+            <h3>Tin tức</h3>
         </div>
         <div class="swiper blog-slide">
             <div class="swiper-wrapper">
@@ -462,9 +461,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc thêm
-                                    </a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -477,9 +477,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc
-                                    thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -492,10 +493,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
-
-                                Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -508,10 +509,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
-
-                                    Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>

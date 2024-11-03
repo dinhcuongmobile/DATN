@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
+use App\Models\User;
+use App\Models\DiaChi;
 use App\Models\PhuongXa;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TaiKhoan\StoreDiaChiRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -26,41 +28,23 @@ class ThongTinTaiKhoanController extends Controller
     public function showThongTinTaiKhoan()
     {
         $tai_khoan = Auth::user();
+        $this->views['dia_chi'] = DiaChi::where('user_id',$tai_khoan->id)->orderBy('trang_thai','ASC')->first();
+
+        if($this->views['dia_chi']){
+            $this->views['quan_huyen'] = QuanHuyen::where('ma_tinh_thanh_pho',$this->views['dia_chi']->tinhThanhPho->ma_tinh_thanh_pho)
+                                                    ->orderBy('ma_quan_huyen', 'ASC')->get();
+            $this->views['phuong_xa'] = PhuongXa::where('ma_quan_huyen',$this->views['dia_chi']->quanHuyen->ma_quan_huyen)
+                                                ->orderBy('ma_phuong_xa', 'ASC')->get();
+        }else{
+            $this->views['quan_huyen']=[];
+            $this->views['phuong_xa']=[];
+        }
+
+        // tap dia chi
+        $this->views['dia_chis'] = DiaChi::where('user_id',$tai_khoan->id)->get();
+
         $this->views['tai_khoan'] = $tai_khoan;
         $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
-
-        if ($tai_khoan->dia_chi) {
-            $dia_chi_full = explode(', ', $tai_khoan->dia_chi);
-            if (count($dia_chi_full) == 4) {
-                $dia_chi_chi_tiet = $dia_chi_full[0];
-                $phuong_xa_one = $dia_chi_full[1];
-                $quan_huyen_one = $dia_chi_full[2];
-                $tinh_thanh_pho_one = $dia_chi_full[3];
-            } else {
-                $dia_chi_chi_tiet = "";
-                $phuong_xa_one = $dia_chi_full[0];
-                $quan_huyen_one = $dia_chi_full[1];
-                $tinh_thanh_pho_one = $dia_chi_full[2];
-            }
-            $load_one_tinh_thanh_pho = TinhThanhPho::Where('ten_tinh_thanh_pho', 'LIKE', "%$tinh_thanh_pho_one%")->first();
-            $quan_huyens = QuanHuyen::where('ma_tinh_thanh_pho', $load_one_tinh_thanh_pho->ma_tinh_thanh_pho)->orderBy('ma_quan_huyen', 'ASC')->get();
-            $load_one_quan_huyen = QuanHuyen::where('ten_quan_huyen', 'LIKE', "%$quan_huyen_one%")
-                ->where('ma_tinh_thanh_pho', $load_one_tinh_thanh_pho->ma_tinh_thanh_pho)->first();
-            $phuong_xas = PhuongXa::where('ma_quan_huyen', $load_one_quan_huyen->ma_quan_huyen)->get();
-        } else {
-            $dia_chi_chi_tiet = "";
-            $phuong_xa_one = "";
-            $quan_huyen_one = "";
-            $tinh_thanh_pho_one = "";
-            $quan_huyens = [];
-            $phuong_xas = [];
-        }
-        $this->views['dia_chi_chi_tiet'] = $dia_chi_chi_tiet;
-        $this->views['phuong_xa_one'] = $phuong_xa_one;
-        $this->views['quan_huyen_one'] = $quan_huyen_one;
-        $this->views['tinh_thanh_pho_one'] = $tinh_thanh_pho_one;
-        $this->views['quan_huyen'] = $quan_huyens;
-        $this->views['phuong_xa'] = $phuong_xas;
 
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
@@ -68,32 +52,31 @@ class ThongTinTaiKhoanController extends Controller
     public function updateThongTinTaiKhoan(UpdateThongTinTaiKhoanRequest $request)
     {
         $user = Auth::user();
-
-        if ($request->tinh_thanh_pho) {
-            $tinh_thanh_pho = TinhThanhPho::where('ma_tinh_thanh_pho', $request->tinh_thanh_pho)->first();
-            $quan_huyen = QuanHuyen::where('ma_quan_huyen', $request->quan_huyen)->first();
-            $phuong_xa = PhuongXa::where('ma_phuong_xa', $request->phuong_xa)->first();
-            $dia_chi = trim(implode(', ', array_filter([
-                $request->dia_chi_chi_tiet,
-                $phuong_xa->ten_phuong_xa,
-                $quan_huyen->ten_quan_huyen,
-                $tinh_thanh_pho->ten_tinh_thanh_pho
-            ])));
-        } else {
-            $dia_chi = null;
-        }
-
+        $dia_chi = DiaChi::where('user_id',$user->id)->orderBy('trang_thai','ASC')->first();
         $dataUpdate = [
             'ho_va_ten' => $request->ho_va_ten,
             'so_dien_thoai' => $request->so_dien_thoai,
-            'dia_chi' => $dia_chi,
             'updated_at' => now()
         ];
 
+        $dataUpdateDiaChi = [
+            'user_id' => Auth::user()->id,
+            'ho_va_ten_nhan' => $request->ho_va_ten,
+            'so_dien_thoai_nhan' => $request->so_dien_thoai,
+            'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
+            'ma_quan_huyen' => $request->quan_huyen,
+            'ma_phuong_xa' => $request->phuong_xa,
+            'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
+            'trang_thai' => 1,
+        ];
         if ($user instanceof User) {
             // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
             $user->update($dataUpdate);
-
+            if($dia_chi){
+                $dia_chi->update($dataUpdateDiaChi);
+            }else{
+                DiaChi::create($dataUpdateDiaChi);
+            }
             Session::flash('success', 'Cập nhật thông tin tài khoản thành công.');
 
             // return redirect()->back()
@@ -176,4 +159,60 @@ class ThongTinTaiKhoanController extends Controller
             ]);
         }
     }
+
+    //CHUA XONG
+    
+    // public function themDiaChiMoi(Request $request)
+    // {
+    //     $request->validate([
+    //         'ho_va_ten' => 'required|string|max:255',
+    //         'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
+    //         'tinh_thanh_pho' => 'required',
+    //         'quan_huyen' => 'required_with:tinh_thanh_pho',
+    //         'phuong_xa'     => 'required_with:quan_huyen',
+    //     ],
+    //     [
+    //         'ho_va_ten.required' => 'Vui lòng không bỏ trống Họ và Tên!',
+    //         'ho_va_ten.max' => 'Họ và tên quá dài!',
+    //         'so_dien_thoai.required' => 'Vui lòng không bỏ trống Số điện thoại!',
+    //         'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
+    //         'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
+    //         'tinh_thanh_pho.required' => 'Vui lòng chọn Tỉnh/Thành Phố!',
+    //         'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện!',
+    //         'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
+    //     ]);
+    //     $user = Auth::user();
+
+    //     $dataInsert = [
+    //         'user_id' => $user->id,
+    //         'ho_va_ten_nhan' => $request->ho_va_ten,
+    //         'so_dien_thoai_nhan' => $request->so_dien_thoai,
+    //         'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
+    //         'ma_quan_huyen' => $request->quan_huyen,
+    //         'ma_phuong_xa' => $request->phuong_xa,
+    //         'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
+    //         'trang_thai' => 1,
+    //     ];
+    //     if ($user instanceof User) {
+    //         // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
+    //         DiaChi::create($dataInsert);
+
+    //         Session::flash('success', 'Cập nhật thông tin tài khoản thành công.');
+
+    //         // return redirect()->back()
+    //         //     ->with('success', 'Cập nhật thông tin tài khoản thành công.');
+    //         return response()->json([
+    //             'success' => true,
+    //             'redirect_url' => url()->previous(),
+    //         ]);
+    //     } else {
+    //         Session::flash('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
+    //         // return redirect()->back()
+    //         //     ->with('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
+    //         return response()->json([
+    //             'success' => true,
+    //             'redirect_url' => url()->previous(),
+    //         ]);
+    //     }
+    // }
 }

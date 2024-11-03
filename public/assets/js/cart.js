@@ -335,6 +335,7 @@ document.querySelectorAll('.sizeBox .thayDoiSize li').forEach(function (sizeElem
                     document.querySelectorAll('.colorBox .thayDoiMauSac li').forEach(function (colorElement) {
                         if (response.disabledColors.includes(colorElement.getAttribute('data-color'))) {
                             colorElement.classList.add('disable');
+                            colorElement.classList.remove('active');
                         } else {
                             colorElement.classList.remove('disable');
                         }
@@ -348,7 +349,7 @@ document.querySelectorAll('.sizeBox .thayDoiSize li').forEach(function (sizeElem
 
         // Cập nhật trạng thái lựa chọn size
         this.closest('.sizeBox').querySelectorAll('li').forEach(el => el.classList.remove('active'));
-        this.classList.toggle('active');
+        this.classList.add('active');
     });
 });
 
@@ -372,6 +373,7 @@ document.querySelectorAll('.colorBox .thayDoiMauSac li').forEach(function (color
                     document.querySelectorAll('.sizeBox .thayDoiSize li').forEach(function (sizeElement) {
                         if (response.disabledSizes.includes(sizeElement.getAttribute('data-size'))) {
                             sizeElement.classList.add('disable');
+                            sizeElement.classList.remove('active');
                         } else {
                             sizeElement.classList.remove('disable');
                         }
@@ -385,7 +387,7 @@ document.querySelectorAll('.colorBox .thayDoiMauSac li').forEach(function (color
 
         // Cập nhật trạng thái lựa chọn màu sắc
         this.closest('.colorBox').querySelectorAll('li').forEach(el => el.classList.remove('active'));
-        this.classList.toggle('active');
+        this.classList.add('active');
     });
 });
 

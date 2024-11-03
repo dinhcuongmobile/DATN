@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\TaiKhoan\StoreTaiKhoanRequest;
+use App\Models\DiaChi;
 
 class TaiKhoanAdminController extends Controller
 {
@@ -23,7 +24,7 @@ class TaiKhoanAdminController extends Controller
 
     //SHOW
     public function showTaiKhoanQTV(Request $request){
-        $query = User::with('vaiTro')
+        $query = User::with('vaiTro', 'diaChis')
                      ->where('id', '!=', Auth::user()->id)
                      ->where('vai_tro_id', 1)
                      ->where('trang_thai', 0);
@@ -43,7 +44,7 @@ class TaiKhoanAdminController extends Controller
     }
 
     public function showTaiKhoanNV(Request $request){
-        $query = User::with('vaiTro')
+        $query = User::with('vaiTro','diaChis')
                      ->where('id', '!=', Auth::user()->id)
                      ->where('vai_tro_id', 2)
                      ->where('trang_thai', 0);
@@ -62,7 +63,7 @@ class TaiKhoanAdminController extends Controller
     }
 
     public function showTaiKhoanTV(Request $request){
-        $query = User::with('vaiTro')
+        $query = User::with('vaiTro', 'diaChis')
                      ->where('id', '!=', Auth::user()->id)
                      ->where('vai_tro_id', 3)
                      ->where('trang_thai', 0);
@@ -81,7 +82,7 @@ class TaiKhoanAdminController extends Controller
     }
 
     public function showTaiKhoanTKK(Request $request){
-        $query = User::with('vaiTro')->where('trang_thai', 1);
+        $query = User::with('vaiTro','diaChis')->where('trang_thai', 1);
 
         $keyword = $request->input('kyw');
         if ($keyword) {
@@ -104,30 +105,37 @@ class TaiKhoanAdminController extends Controller
     }
 
     public function add(StoreTaiKhoanRequest $request){
-        if($request->tinh_thanh_pho){
-            $tinh_thanh_pho=TinhThanhPho::where('ma_tinh_thanh_pho','=',$request->tinh_thanh_pho)->first();
-            $quan_huyen=QuanHuyen::where('ma_quan_huyen','=',$request->quan_huyen)->first();
-            $phuong_xa=PhuongXa::where('ma_phuong_xa','=',$request->phuong_xa)->first();
-            $dia_chi = trim(implode(', ', array_filter([
-                $request->dia_chi_chi_tiet,
-                $phuong_xa->ten_phuong_xa,
-                $quan_huyen->ten_quan_huyen,
-                $tinh_thanh_pho->ten_tinh_thanh_pho,
-             ])));
-        }else{
-            $dia_chi=null;
-        }
         $dataInsert = [
             'ho_va_ten' => $request->ho_va_ten,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'so_dien_thoai' => $request->so_dien_thoai,
-            'dia_chi' => $dia_chi,
             'vai_tro_id' => $request->vai_tro_id,
             'trang_thai' => 0,
             'created_at' => now()
         ];
         $result = User::create($dataInsert);
+
+        if($request->tinh_thanh_pho){
+
+            if($result){
+                $user = User::orderBy('id','desc')->first();
+                $dataInsertDiaChi = [
+                    'user_id' => $user->id,
+                    'ho_va_ten_nhan' => $request->ho_va_ten,
+                    'so_dien_thoai_nhan' => $request->so_dien_thoai,
+                    'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
+                    'ma_quan_huyen' => $request->quan_huyen,
+                    'ma_phuong_xa' => $request->phuong_xa,
+                    'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
+                    'trang_thai' => 1,
+                    'created_at' => now()
+                ];
+
+                DiaChi::create($dataInsertDiaChi);
+            }
+        }
+
         if($result){
             if($request->vai_tro_id==1){
                 return redirect()->route('tai-khoan.danh-sach-QTV')->with('success', 'Bạn đã thêm tài khoản thành công !');
@@ -137,8 +145,7 @@ class TaiKhoanAdminController extends Controller
                 return redirect()->route('tai-khoan.danh-sach-TV')->with('success', 'Bạn đã thêm tài khoản thành công !');
             }
         } else {
-            return redirect()->back()
-                             ->with('error', 'Không thể thêm tài khoản. Vui lòng thử lại.');
+            return redirect()->back()->with('error', 'Không thể thêm tài khoản. Vui lòng thử lại.');
         }
     }
 
