@@ -448,32 +448,75 @@
 <section class="section-t-space">
     <div class="custom-container container">
         <div class="title">
-            <h3>Tin Tức</h3>
+            <h3>Tin tức</h3>
         </div>
         <div class="swiper blog-slide">
-            @foreach ($tin_tucs as $item)
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="blog-main">
-                        <div class="blog-box ratio3_2">
-                            <a class="blog-img" href="{{route("tin-tuc.chi-tiet-tin-tuc", $item->id)}}">
-                                <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="post">
-                            </a>
-                                </div>
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
                         <div class="blog-txt">
-                            <p>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}} </p>
-                            <a href="{{route('tin-tuc.chi-tiet-tin-tuc', $item->id)}}">
-                                <h5>{{$item->tieu_de}}</h5>
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="{{route("tin-tuc.chi-tiet-tin-tuc", $item->id)}}">Đọc thêm
-                                    </a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="{{route("tin-tuc.chi-tiet-tin-tuc", $item->id)}}">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
-                </div> 
+                </div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="blog-main">
+                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
+                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
+                        <div class="blog-txt">
+                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
+                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                            </a>
+                            <div class="link-hover-anim underline"><a
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            @endforeach
         </div>
     </div>
 </section>

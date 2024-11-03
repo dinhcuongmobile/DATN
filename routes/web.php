@@ -66,7 +66,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
             ->name('tai-khoan.doi-mat-khau')->middleware('auth');
 
         Route::post('/them-dia-chi-moi', [ThongTinTaiKhoanController::class, 'themDiaChiMoi'])
-        ->name('tai-khoan.them-dia-chi-moi')->middleware('auth');
+                ->name('tai-khoan.them-dia-chi-moi')->middleware('auth');
 
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
