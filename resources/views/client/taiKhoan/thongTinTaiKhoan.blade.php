@@ -1150,28 +1150,33 @@
                                                             </span>
                                                             <span class="address-detail">
                                                                 <span class="address">
-                                                                    <span class="address-title">New Home</span>
+                                                                    <span class="address-title">{{ $item->ho_va_ten_nhan }}</span>
                                                                 </span>
                                                                 <span class="address">
                                                                     <span class="address-home">
-                                                                        <span class="address-tag">Address:</span>26, Starts
-                                                                        Hollow Colony, Denver</span>
-                                                                </span>
-                                                                <span class="address">
-                                                                    <span class="address-home">
-                                                                        <span class="address-tag">Phone :</span>+1 5551855359
+                                                                        <span class="address-tag">Địa chỉ :</span>
+                                                                        @if ($item->dia_chi_chi_tiet)
+                                                                            {{ $item->dia_chi_chi_tiet }},
+                                                                        @endif
+                                                                        {{ $item->phuongXa?->ten_phuong_xa }},
+                                                                        {{ $item->quanHuyen?->ten_quan_huyen }},
+                                                                        {{ $item->tinhThanhPho?->ten_tinh_thanh_pho }}
                                                                     </span>
+                                                                </span>
+                                                                <span class="address">
+                                                                    <span class="address-home">
+                                                                        <span class="address-tag">Số điện thoại :</span>{{ $item->so_dien_thoai_nhan }}</span>
                                                                 </span>
                                                             </span>
                                                         </span>
                                                         <span class="buttons">
                                                             <a class="btn btn_black sm" href="#"
                                                                 data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                                title="Quick View" tabindex="0">Edit
+                                                                title="Quick View" tabindex="0">Sửa
                                                             </a>
                                                             <a class="btn btn_outline sm" href="#"
                                                                 data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                                title="Quick View" tabindex="0">Delete
+                                                                title="Quick View" tabindex="0">Xóa
                                                             </a>
                                                         </span>
                                                     </label>
@@ -1449,7 +1454,7 @@
 
         {{-- CHƯA XONG --}}
         {{-- Nhập địa chỉ mới --}}
-        {{-- <div class="reviews-modal modal theme-modal fade" id="add-address" tabindex="-1" role="dialog">
+        <div class="reviews-modal modal theme-modal fade" id="add-address" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1465,11 +1470,11 @@
                                     <div class="from-group">
                                         <label class="form-label">Họ và tên</label>
                                         <input class="form-control @error('ho_va_ten_nhan') is-invalid @enderror"
-                                            type="text" name="ho_va_ten_nhan" placeholder="Nhập họ và tên..."
+                                            type="text" name="ho_va_ten" placeholder="Nhập họ và tên..."
                                             value="">
                                     </div>
-                                    <p class="Err text-danger ho_va_ten-error">
-                                        @error('ho_va_ten_nhan')
+                                    <p class="Err text-danger ho_va_ten-error-dia-chi">
+                                        @error('ho_va_ten')
                                             {{ $message }}
                                         @enderror
                                     </p>
@@ -1478,11 +1483,11 @@
                                     <div class="from-group">
                                         <label class="form-label">Số điện thoại</label>
                                         <input class="form-control @error('so_dien_thoai_nhan') is-invalid @enderror"
-                                            type="text" name="so_dien_thoai_nhan" placeholder="Nhập số điện thoại."
+                                            type="text" name="so_dien_thoai" placeholder="Nhập số điện thoại."
                                             value="">
                                     </div>
-                                    <p class="Err text-danger so_dien_thoai-error">
-                                        @error('so_dien_thoai_nhan')
+                                    <p class="Err text-danger so_dien_thoai-error-dia-chi">
+                                        @error('so_dien_thoai')
                                             {{ $message }}
                                         @enderror
                                     </p>
@@ -1496,7 +1501,7 @@
                                             <option value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}</option>
                                         @endforeach
                                     </select>
-                                    <p class="Err text-danger tinh_thanh_pho-error">
+                                    <p class="Err text-danger tinh_thanh_pho-error-dia-chi">
                                         @error('tinh_thanh_pho')
                                             {{ $message }}
                                         @enderror
@@ -1508,7 +1513,7 @@
                                         id="them_quan_huyen" name="quan_huyen">
                                         <option value="">--Chọn quận huyện--</option>
                                     </select>
-                                    <p class="Err text-danger quan_huyen-error">
+                                    <p class="Err text-danger quan_huyen-error-dia-chi">
                                         @error('quan_huyen')
                                             {{ $message }}
                                         @enderror
@@ -1520,7 +1525,7 @@
                                         name="phuong_xa">
                                         <option value="">--Chọn phường xã--</option>
                                     </select>
-                                    <p class="Err text-danger phuong_xa-error">
+                                    <p class="Err text-danger phuong_xa-error-dia-chi">
                                         @error('phuong_xa')
                                             {{ $message }}
                                         @enderror
@@ -1530,18 +1535,18 @@
                                     <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
                                     <textarea name="dia_chi_chi_tiet" id="them_dia_chi_chi_tiet" cols="5" rows="4"
                                         class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror"></textarea>
-                                    <p class="Err text-danger dia_chi_chi_tiet-error">
+                                    <p class="Err text-danger dia_chi_chi_tiet-error-dia-chi">
                                         @error('dia_chi_chi_tiet')
                                             {{ $message }}
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit" onclick="ajaxThemDiaChi()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
     </section>
 @endsection
