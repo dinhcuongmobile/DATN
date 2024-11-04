@@ -56,7 +56,7 @@
                                         $tiet_kiem += (($sanPham->gia_san_pham * $item->so_luong) - $thanh_tien);
                                     @endphp
                                     <tr>
-                                        <td><input type="checkbox" data-id="{{ $item->id }}"></td>
+                                        <td><input type="checkbox" name="select[]" data-id="{{ $item->id }}" value="{{ $item->id }}"></td>
                                         <td>
                                             <div class="cart-box">
                                                 <a class="style-border" href="{{ route('san-pham.chi-tiet-san-pham', $sanPham->id) }}">
@@ -152,10 +152,11 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="btn btn_black w-100 rounded sm" href="{{route('gio-hang.chi-tiet-thanh-toan')}}">Tiếp tục</a>
+                    <input type="hidden" class="tokenTiepTuc" name="_token" value="{{ csrf_token() }}" />
+                    <button class="btn btn_black w-100 rounded sm" id="tiepTucDatHangBtn">Tiếp tục</button>
                 </div>
             </div>
-            <div class="col-12 mt-5">
+            <div class="col-12" style="margin-top: 100px">
                 <div class="cart-slider">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>

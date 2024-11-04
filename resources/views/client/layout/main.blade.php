@@ -305,8 +305,12 @@
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-content">
-                            <div class="footer-logo"><a href="index.html"> <img class="img-fluid"
-                                        src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Footer Logo"></a></div>
+                            <div class="footer-logo">
+                                <a href="index.html"> 
+                                    <img class="img-fluid"
+                                        src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Footer Logo">
+                                </a>
+                            </div>
                             <ul>
                                 <li> <i class="iconsax" data-icon="location"></i>
                                     <h6>1 Trinh Van Bo</h6>

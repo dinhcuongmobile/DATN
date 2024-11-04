@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
+use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -90,6 +91,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('thay-doi-bien-the', [GioHangController::class, 'thayDoiBienThe']);
         Route::get('check-bien-the-size', [GioHangController::class, 'checkBienTheSize']);
         Route::get('check-bien-the-color', [GioHangController::class, 'checkBienTheColor']);
+        Route::post('tiep-tuc-dat-hang', [GioHangController::class, 'tiepTucDatHang']);
     });
 
     Route::prefix('tin-tuc')->group(function () {
@@ -243,6 +245,22 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
     });
 
+    Route::prefix('phi-ship')->group(function () {
+        Route::get('danh-sach', [PhiShipAdminController::class, 'showDanhSach'])->name('phi-ship.danh-sach');
+        //add
+        Route::get('them-phi-ship', [PhiShipAdminController::class, 'viewAdd'])->name('phi-ship.them-phi-ship');
+        Route::post('add', [PhiShipAdminController::class, 'add'])->name('phi-ship.add');
+
+        //update
+        Route::get('sua-phi-ship/{id}', [PhiShipAdminController::class, 'viewUpdate'])->name('phi-ship.sua-phi-ship');
+        Route::put('update/{id}', [PhiShipAdminController::class, 'update'])->name('phi-ship.update');
+
+        //delete
+        Route::get('delete/{id}', [PhiShipAdminController::class, 'delete'])->name('phi-ship.delete');
+
+        Route::post('xoa-nhieu', [PhiShipAdminController::class, 'xoaNhieuPhiShip'])->name('phi-ship.xoa-nhieu');
+    });
+
     Route::prefix('danh-muc-tin-tuc')->group(function () {
         Route::get('danh-sach-danh-muc', [DanhMucTinTucAdminController::class, 'showDanhSach'])->name('danh-muc-tin-tuc.danh-sach');
 
@@ -301,8 +319,6 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lienhe.phanHoi');
         Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
         Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
-
-
     });
 });
 
