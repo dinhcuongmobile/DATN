@@ -383,7 +383,7 @@
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của tôi</a></li>
                                         <li> <a class="nav" href="login.html">Đăng nhập/Đăng ký</a></li>
-                                        <li> <a class="nav" href="cart.html">Xe đẩy</a></li>
+                                        <li> <a class="nav" href="cart.html">Giỏ Hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
                                         <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
                                     </ul>
