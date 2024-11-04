@@ -25,4 +25,8 @@ class TinhThanhPho extends Model
     public function diaChi() {
         return $this->hasMany(DiaChi::class, 'ma_tinh_thanh_pho');
     }
+
+    public function phiShip() {
+        return $this->hasMany(PhiShip::class, 'ma_tinh_thanh_pho');
+    }
 }

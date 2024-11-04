@@ -9,6 +9,7 @@ use App\Models\SanPham;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BienThe;
+use App\Models\DiaChi;
 use Illuminate\Support\Facades\Auth;
 
 class GioHangController extends Controller
@@ -24,7 +25,7 @@ class GioHangController extends Controller
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
         $this->views['san_pham_moi_nhat']= SanPham::with('bienThes','danhGias')->orderBy('id','desc')->take(8)->get();
-        
+
         if (Auth::check()) {
             $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
                                 ->where('user_id', Auth::user()->id)
@@ -44,7 +45,37 @@ class GioHangController extends Controller
     }
 
     public function chiTietThanhToan(){
-        return view('client.gioHang.chiTietThanhToan');
+        if(empty(session()->get('gio_hangs', []))){
+            return redirect()->route('gio-hang.gio-hang');
+        }
+        $this->views['dia_chis']= DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')
+                                        ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
+        $this->views['gio_hangs'] = session()->get('gio_hangs', []);
+        $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
+
+        return view('client.gioHang.chiTietThanhToan',$this->views);
+    }
+
+    public function tiepTucDatHang(Request $request){
+
+        $gio_hang_ids = $request->input('select', []);
+
+        if (empty($gio_hang_ids)) {
+            return response()->json(['success' => false]);
+        }
+
+        // Lấy thông tin chi tiết của các sản phẩm được chọn từ cơ sở dữ liệu
+        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id',Auth::user()->id)
+                            ->whereIn('gio_hangs.id',$gio_hang_ids)
+                            ->get();
+
+        // Lưu thông tin vào session
+        session()->put('gio_hangs', $gio_hang);
+
+        // Trả về đường dẫn để chuyển hướng
+        return response()->json(['success' => true, 'redirect' => route('gio-hang.chi-tiet-thanh-toan')]);
+
     }
 
     public function themGioHang(Request $request){
@@ -76,9 +107,14 @@ class GioHangController extends Controller
                 ];
                 $result = $gio_hang->update($data);
             }
-
+            $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
+                    ->where('user_id', Auth::id())
+                    ->orderBy('id', 'desc')
+                    ->get();
+            $san_pham= SanPham::find($san_pham_id);
+            $count_gio_hang = $gio_hangs->count();
             if($result){
-                return response()->json(['login' => true]);
+                return response()->json(['login' => true, 'count_gio_hang' => $count_gio_hang, 'san_pham' => $san_pham]);
             }
         }
     }

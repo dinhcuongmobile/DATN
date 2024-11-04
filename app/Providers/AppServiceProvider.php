@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\DanhMuc;
 use App\Models\GioHang;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('client.layout.main', function ($view) {
             $gio_hangs = [];
             $count_gio_hang = 0;
+            $danh_mucs = DanhMuc::all();
 
             if (Auth::check()) {
                 $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
@@ -37,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
                 $count_gio_hang = $gio_hangs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang'));
+            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs'));
         });
     }
 }

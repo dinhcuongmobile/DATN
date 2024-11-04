@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách khuyến mại sản phẩm</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách mã giảm giá vận chuyển</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -16,7 +16,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">
-                    <form action="{{route('san-pham.danh-sach-ma-khuyen-mai')}}" method="GET">
+                    <form action="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen')}}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="kyw" placeholder="Tìm kiếm...">
                             <div class="input-group-append">
@@ -27,7 +27,7 @@
                         </div>
                     </form>
                 </div>
-                <form action="{{route('san-pham.xoa-nhieu-ma-khuyen-mai')}}" method="post">
+                <form action="{{route('khuyen-mai.xoa-nhieu-ma-khuyen-mai')}}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
@@ -35,7 +35,7 @@
                             cả</button>
                         <button onclick="return confirm('Bạn chắc chắn muốn xóa các mã khuyến mại này?')"
                         type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
-                        <a href="{{route('san-pham.show-them-ma-khuyen-mai')}}"><button type="button"
+                        <a href="{{route('khuyen-mai.show-them-ma-khuyen-mai')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
             </div>
@@ -45,12 +45,12 @@
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th></th>
-                                <th>Tên sản phẩm</th>
                                 <th>Mã giảm giá</th>
                                 <th>Số tiền giảm</th>
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
                                 <th>Giá trị tối thiểu</th>
+                                <th>trạng thái</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -59,21 +59,33 @@
                                 @foreach ($ma_khuyen_mais as $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
-                                        <td class="col-2 align-middle"><a href="{{route('san-pham.san-pham-ma-khuyen-mai',$item->san_pham_id)}}">{{$item->sanPham->ten_san_pham}}</a></td>
                                         <td class="col-1 align-middle text-danger">{{$item->ma_giam_gia}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->so_tien_giam, 0, ',', '.') }} VND</td>
                                         <td class="align-middle">{{$item->ngay_bat_dau}}</td>
                                         <td class="align-middle">{{$item->ngay_ket_thuc}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }} VND</td>
+                                        @php
+                                            $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
+                                            $ngayHienTai = now();
+                                            $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                        @endphp
+
+                                        @if ($gioConLai > 0 && $gioConLai <= 24)
+                                            <td class="col-1 align-middle text-warning">Sắp kết thúc (còn {{ $gioConLai }} giờ)</td>
+                                        @elseif ($gioConLai > 24)
+                                            <td class="col-1 align-middle text-success">Đang diễn ra</td>
+                                        @else
+                                            <td class="col-1 align-middle text-muted">Đã hết hạn</td>
+                                        @endif
                                         <td class="text-center col-2 align-middle">
-                                            <a href="{{route('san-pham.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-warning btn-sm">
+                                            <a href="{{route('khuyen-mai.show-sua-ma-khuyen-mai',$item->id)}}" class="btn btn-warning btn-sm">
 
                                             <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                             </span> <span class="text">Sửa</span>
                                             </a> |
                                             <a onclick="return confirm('Bạn chắc chắn muốn xóa mã khuyến mại này?')"
-                                            href="{{route('san-pham.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-danger btn-sm"><span class="icon text-white-50">
+                                            href="{{route('khuyen-mai.xoa-ma-khuyen-mai',$item->id)}}" class="btn btn-danger btn-sm"><span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                             </span>
                                             <span class="text">Xóa</span></a></a>

@@ -62,27 +62,10 @@
                                 <ul class="nav-menu sm-horizontal">
                                     <li class="mobile-back text-end">Thoát<i class="fa-solid fa-angle-right ps-2"
                                     aria-hidden="true"></i></li>
-                                    <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a>
-                                    </li>
-                                    <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới thiệu</a>
-                                    </li>
-                                    <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span> <i
-                                                    class="fa-solid fa-angle-down"></i></span>
-                                                    <p class="lable-nav" style="right: -7px">Hot</p>
-                                        </a>
-                                        <ul class="nav-submenu">
-                                            <li> <a href="{{route('san-pham.san-pham-danh-muc')}}">Over size
-                                                    <span class="badge-sm danger-color animated">Hot</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span> <i
-                                                    class="fa-solid fa-angle-down"></i></span></a>
-                                        <ul class="nav-submenu">
-                                            <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Tin tức danh muc</a></li>
-                                        </ul>
-                                    </li>
+                                    <li> <a class="nav-link" href="{{route('trang-chu.home')}}">Trang chủ</a></li>
+                                    <li> <a class="nav-link" href="{{route('gioi-thieu')}}">Giới thiệu</a></li>
+                                    <li> <a class="nav-link" href="{{route('san-pham.san-pham')}}">Sản Phẩm<span></span></a></li>
+                                    <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin tức<span></span></a></li>
                                     <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên hệ </a></li>
                                 </ul>
                             </nav>
@@ -251,10 +234,13 @@
                                                 <p class="lable-nav" style="right: -7px">Hot</p>
                                     </a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{route('san-pham.san-pham-danh-muc')}}">Over size
-                                                <span class="badge-sm danger-color animated">Hot</span>
-                                            </a>
-                                        </li>
+                                        @foreach ($danh_mucs as $item)
+                                            <li>
+                                                <a href="{{route('san-pham.san-pham-danh-muc',$item->id)}}">{{$item->ten_danh_muc}}
+                                                    <span class="badge-sm danger-color animated">Hot</span>
+                                                </a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
@@ -290,9 +276,9 @@
                                 </li>
                                 <li class="onhover-div shopping-cart">
                                     <a class="p-0" href="{{route('gio-hang.gio-hang')}}">
-                                        <div class="shoping-prize">
+                                        <div class="shoping-prize countGioHangMenu">
                                             <i class="iconsax pe-2" data-icon="basket-2"></i>
-                                            {{$count_gio_hang}} sản phẩm
+                                            <span style="border: none; margin: 0px; padding: 0px;">{{$count_gio_hang}}</span> sản phẩm
                                         </div>
                                     </a>
                                 </li>
@@ -487,8 +473,10 @@
                             <div class="col-12 px-0">
                                 <div class="modal-bg addtocart"><button class="btn-close" type="button"
                                         data-bs-dismiss="modal" aria-label="Close"></button>
-                                    <div class="d-flex"><a href="#"><img class="img-fluid blur-up lazyload pro-img"
-                                                src="{{asset('assets/images/modal/0.jpg')}}" alt=""></a>
+                                    <div class="d-flex">
+                                        <a class="imgAddtocartSuccess" href="javascript:void(0)">
+                                            <img class="img-fluid blur-up lazyload pro-img" src="{{asset('assets/images/modal/0.jpg')}}" alt="">
+                                        </a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
                                                 <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span id="nameProductSuccess">áo tay dài nam</span><span> đã được thêm vào Giỏ hàng của bạn thành công</span></h6>
                                             </a>

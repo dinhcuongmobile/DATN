@@ -162,57 +162,57 @@ class ThongTinTaiKhoanController extends Controller
 
     //CHUA XONG
     
-    // public function themDiaChiMoi(Request $request)
-    // {
-    //     $request->validate([
-    //         'ho_va_ten' => 'required|string|max:255',
-    //         'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
-    //         'tinh_thanh_pho' => 'required',
-    //         'quan_huyen' => 'required_with:tinh_thanh_pho',
-    //         'phuong_xa'     => 'required_with:quan_huyen',
-    //     ],
-    //     [
-    //         'ho_va_ten.required' => 'Vui lòng không bỏ trống Họ và Tên!',
-    //         'ho_va_ten.max' => 'Họ và tên quá dài!',
-    //         'so_dien_thoai.required' => 'Vui lòng không bỏ trống Số điện thoại!',
-    //         'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
-    //         'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
-    //         'tinh_thanh_pho.required' => 'Vui lòng chọn Tỉnh/Thành Phố!',
-    //         'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện!',
-    //         'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
-    //     ]);
-    //     $user = Auth::user();
+    public function addDiaChi(Request $request)
+    {
+        $request->validate([
+            'ho_va_ten' => 'required|string|max:255',
+            'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
+            'tinh_thanh_pho' => 'required',
+            'quan_huyen' => 'required_with:tinh_thanh_pho',
+            'phuong_xa'     => 'required_with:quan_huyen',
+        ],
+        [
+            'ho_va_ten.required' => 'Vui lòng không bỏ trống Họ và Tên!',
+            'ho_va_ten.max' => 'Họ và tên quá dài!',
+            'so_dien_thoai.required' => 'Vui lòng không bỏ trống Số điện thoại!',
+            'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
+            'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
+            'tinh_thanh_pho.required' => 'Vui lòng chọn Tỉnh/Thành Phố!',
+            'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện!',
+            'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
+        ]);
+        $user = Auth::user();
 
-    //     $dataInsert = [
-    //         'user_id' => $user->id,
-    //         'ho_va_ten_nhan' => $request->ho_va_ten,
-    //         'so_dien_thoai_nhan' => $request->so_dien_thoai,
-    //         'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
-    //         'ma_quan_huyen' => $request->quan_huyen,
-    //         'ma_phuong_xa' => $request->phuong_xa,
-    //         'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
-    //         'trang_thai' => 1,
-    //     ];
-    //     if ($user instanceof User) {
-    //         // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
-    //         DiaChi::create($dataInsert);
+        $dataInsert = [
+            'user_id' => $user->id,
+            'ho_va_ten_nhan' => $request->ho_va_ten,
+            'so_dien_thoai_nhan' => $request->so_dien_thoai,
+            'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
+            'ma_quan_huyen' => $request->quan_huyen,
+            'ma_phuong_xa' => $request->phuong_xa,
+            'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
+            'trang_thai' => 1,
+        ];
+        if ($user instanceof User) {
+            // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
+            DiaChi::create($dataInsert);
 
-    //         Session::flash('success', 'Cập nhật thông tin tài khoản thành công.');
+            Session::flash('success', 'Cập nhật thông tin tài khoản thành công.');
 
-    //         // return redirect()->back()
-    //         //     ->with('success', 'Cập nhật thông tin tài khoản thành công.');
-    //         return response()->json([
-    //             'success' => true,
-    //             'redirect_url' => url()->previous(),
-    //         ]);
-    //     } else {
-    //         Session::flash('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
-    //         // return redirect()->back()
-    //         //     ->with('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
-    //         return response()->json([
-    //             'success' => true,
-    //             'redirect_url' => url()->previous(),
-    //         ]);
-    //     }
-    // }
+            // return redirect()->back()
+            //     ->with('success', 'Cập nhật thông tin tài khoản thành công.');
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(),
+            ]);
+        } else {
+            Session::flash('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
+            // return redirect()->back()
+            //     ->with('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url()->previous(),
+            ]);
+        }
+    }
 }

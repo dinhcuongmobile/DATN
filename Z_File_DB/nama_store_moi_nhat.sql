@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 18, 2024 lúc 03:06 PM
+-- Thời gian đã tạo: Th10 04, 2024 lúc 11:17 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -117,7 +117,7 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (61, 12, 'uploads/sanPham/H4up3gwssdKfKMnaEwTbj75ZcTYmNDvyryEsFESo.webp', 'M', 'Xám', '#808080', 400, '2024-10-16 08:48:28', '2024-10-16 08:48:28'),
 (62, 12, 'uploads/sanPham/MicErds8vIMsx3W2AbWmLuC4zApwip32mra94e7p.webp', 'L', 'Xám', '#808080', 400, '2024-10-16 08:48:38', '2024-10-16 08:48:38'),
 (63, 12, 'uploads/sanPham/Wfpat3ytgM9lCK5nipDFRriJwdy9rTSDJE0EmCfg.webp', 'XL', 'Xám', '#808080', 400, '2024-10-16 08:48:48', '2024-10-16 08:48:48'),
-(64, 12, 'uploads/sanPham/8VCSOo0C4tLU8FQQBVGWdlXe9QuCI10aTq00MkLa.webp', 'XXL', 'Xám', '#808080', 400, '2024-10-16 08:48:58', '2024-10-16 08:48:58'),
+(64, 12, 'uploads/sanPham/8VCSOo0C4tLU8FQQBVGWdlXe9QuCI10aTq00MkLa.webp', 'XXL', 'Xám', '#808080', 400, '2024-10-16 08:48:58', '2024-10-27 14:41:47'),
 (65, 13, 'uploads/sanPham/ND2zzVdAO3duHyzRr19oDwOKacScQTilLsT9Xh4B.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:23', '2024-10-16 08:51:23'),
 (66, 13, 'uploads/sanPham/9wANlIcBqGbx5s4LzSjQldw07Kz5NTm0lrK95HTf.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:38', '2024-10-16 08:51:38'),
 (67, 13, 'uploads/sanPham/Bfhfhzh7OpbLJHE3b8XxZMUyKoyfeiS78HnTsYhe.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:53', '2024-10-16 08:51:53'),
@@ -144,7 +144,7 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (88, 14, 'uploads/sanPham/yxGasaMghQjKEDbF10qtPsD7eqXg5QGCp1ilqoax.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-17 00:19:46', '2024-10-17 00:19:46'),
 (89, 15, 'uploads/sanPham/Bg24TdpUWQZu8lv9lLvp4j6449mrasBf7uTZqYKo.webp', 'L', 'Đen', '#000000', 2998, '2024-10-17 00:21:58', '2024-10-17 00:24:12'),
 (90, 15, 'uploads/sanPham/sr8q8h43dDo4zjixu89W1ROGtr2V0SwDvs0Mw1Ih.webp', 'XL', 'Đen', '#000000', 2998, '2024-10-17 00:22:12', '2024-10-17 00:23:46'),
-(91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 2997, '2024-10-17 00:28:15', '2024-10-17 00:28:15'),
+(91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 10, '2024-10-17 00:28:15', '2024-10-17 00:28:15'),
 (92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2997, '2024-10-17 00:28:45', '2024-10-17 00:28:45'),
 (93, 17, 'uploads/sanPham/h0pKJmbuA0Ro8YITIRYHnOB5OdDsyVrGe2tP8Z1G.webp', 'L', 'Đen', '#000000', 999, '2024-10-17 00:32:15', '2024-10-17 00:32:15'),
 (94, 17, 'uploads/sanPham/tGxFHsSyPDelh0nwYHCqDXeF4dJeV8uP9Qa7Yel1.webp', 'XL', 'Đen', '#000000', 999, '2024-10-17 00:32:36', '2024-10-17 00:32:36'),
@@ -199,14 +199,6 @@ CREATE TABLE `danh_gias` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `danh_gias`
---
-
-INSERT INTO `danh_gias` (`id`, `san_pham_id`, `user_id`, `noi_dung`, `so_sao`, `created_at`, `updated_at`) VALUES
-(1, 7, 1, NULL, 5, '2024-10-18 12:36:33', NULL),
-(2, 16, 1, NULL, 4, '2024-10-18 12:36:33', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -244,6 +236,34 @@ CREATE TABLE `danh_muc_tin_tucs` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `dia_chis`
+--
+
+CREATE TABLE `dia_chis` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `ho_va_ten_nhan` varchar(255) NOT NULL,
+  `so_dien_thoai_nhan` varchar(10) NOT NULL,
+  `ma_tinh_thanh_pho` bigint(20) UNSIGNED NOT NULL,
+  `ma_quan_huyen` bigint(20) UNSIGNED NOT NULL,
+  `ma_phuong_xa` bigint(20) UNSIGNED NOT NULL,
+  `dia_chi_chi_tiet` varchar(255) DEFAULT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT 2,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `dia_chis`
+--
+
+INSERT INTO `dia_chis` (`id`, `user_id`, `ho_va_ten_nhan`, `so_dien_thoai_nhan`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `ma_phuong_xa`, `dia_chi_chi_tiet`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(2, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, 'Phú hữu 2', 2, '2024-11-02 12:59:34', '2024-11-02 13:37:18'),
+(3, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, NULL, 1, '2024-11-04 08:51:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -292,11 +312,21 @@ CREATE TABLE `gio_hangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `san_pham_id` bigint(20) UNSIGNED NOT NULL,
+  `bien_the_id` bigint(20) UNSIGNED NOT NULL,
   `so_luong` int(11) NOT NULL,
   `thanh_tien` double(20,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `gio_hangs`
+--
+
+INSERT INTO `gio_hangs` (`id`, `user_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `thanh_tien`, `created_at`, `updated_at`) VALUES
+(20, 8, 8, 18, 3, 597000.00, '2024-11-04 04:58:30', '2024-11-04 09:50:03'),
+(23, 8, 16, 92, 2, 572000.00, '2024-11-04 08:23:15', '2024-11-04 09:50:01'),
+(24, 8, 17, 96, 4, 858000.00, '2024-11-04 08:23:22', '2024-11-04 09:50:02');
 
 -- --------------------------------------------------------
 
@@ -384,15 +414,22 @@ INSERT INTO `mau_sacs` (`id`, `ten_mau`, `ma_mau`, `created_at`, `updated_at`) V
 
 CREATE TABLE `ma_khuyen_mais` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `san_pham_id` bigint(20) UNSIGNED NOT NULL,
   `ma_giam_gia` varchar(255) NOT NULL,
   `so_tien_giam` decimal(10,2) NOT NULL,
   `ngay_bat_dau` date NOT NULL,
   `ngay_ket_thuc` date NOT NULL,
   `gia_tri_toi_thieu` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `trang_thai` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ma_khuyen_mais`
+--
+
+INSERT INTO `ma_khuyen_mais` (`id`, `ma_giam_gia`, `so_tien_giam`, `ngay_bat_dau`, `ngay_ket_thuc`, `gia_tri_toi_thieu`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(1, 'STMU5EJ0VB', 70000.00, '2024-11-05', '2024-11-06', 25000000.00, 1, '2024-11-04 06:35:03', '2024-11-04 06:43:31');
 
 -- --------------------------------------------------------
 
@@ -437,7 +474,13 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2024_10_16_160558_create_mau_sacs_table', 7),
 (25, '2024_10_16_160725_create_kich_cos_table', 7),
 (26, '2024_10_18_102412_add_da_ban_san_phams_table', 8),
-(27, '2024_10_18_184918_create_danh_gias_table', 9);
+(27, '2024_10_18_184918_create_danh_gias_table', 9),
+(28, '2024_10_24_203606_add_bien_the_gio_hangs_table', 10),
+(30, '2024_10_24_204250_add_bien_the_id_gio_hangs_table', 11),
+(39, '2024_10_24_205028_create_gio_hangs_table', 12),
+(40, '2024_11_02_095708_create_dia_chis_table', 12),
+(42, '2024_11_04_085236_create_ma_khuyen_mais_table', 13),
+(43, '2024_11_04_120948_create_phi_ships_table', 14);
 
 -- --------------------------------------------------------
 
@@ -474,6 +517,28 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `phi_ships`
+--
+
+CREATE TABLE `phi_ships` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ma_tinh_thanh_pho` bigint(20) UNSIGNED NOT NULL,
+  `ma_quan_huyen` bigint(20) UNSIGNED NOT NULL,
+  `phi_ship` double(10,2) NOT NULL DEFAULT 0.00,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `phi_ships`
+--
+
+INSERT INTO `phi_ships` (`id`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `phi_ship`, `created_at`, `updated_at`) VALUES
+(4, 1, 277, 35000.00, '2024-11-04 07:38:22', '2024-11-04 07:38:22');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `san_phams`
 --
 
@@ -497,17 +562,17 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_san_pham`, `khuyen_mai`, `mo_ta`, `luot_xem`, `da_ban`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, 5, 'uploads/sanPham/oxGYQk7Qzb4ybY6bNjpRRz0VjkpIKlZJCX696l6W.webp', 'Áo Sơ Mi Denim Dài Tay Chất Jean Lụa', 240000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:00:47', '2024-10-16 08:24:25', NULL),
+(7, 5, 'uploads/sanPham/oxGYQk7Qzb4ybY6bNjpRRz0VjkpIKlZJCX696l6W.webp', 'Áo Sơ Mi Denim Dài Tay Chất Jean Lụa', 240000.00, 0, '<p>⛔️ LƯU Ý:&nbsp;</p><p>- Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch.&nbsp;</p><p>- Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng.&nbsp;</p><p>&nbsp;</p><p>HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN:&nbsp;</p><p>- Giặt ở nhiệt độ bình thường, với đồ có màu tương tự.&nbsp;</p><p>- Không được dùng hóa chất tẩy.&nbsp;</p><p>- Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp.&nbsp;</p><p>- Lộn mặt trái khi phơi tránh bị phai màu&nbsp;</p><p>&nbsp;</p><p>CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM:&nbsp;</p><p>1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách.&nbsp;</p><p>2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng.&nbsp;</p><p>3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé!&nbsp;</p><p>&nbsp;</p><p>LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:00:47', '2024-10-21 15:45:46', NULL),
 (8, 5, 'uploads/sanPham/paBzgx6idf6og7kdC4WXosT8DUhttIq7FTuBFmIJ.webp', 'Áo Sơ Mi Dài Tay Cổ Tàu', 199000.00, 0, '<p>Thông tin sản phẩm áo sơ mi nam dài tay cổ tàu Namad: - Sản phẩm: áo sơ mi nam cổ bẻ dài tay vải OXFORD cao cấp, phom dáng thoải mái thấm hút cực tốt - Chất liệu áo sơ mi: chất vải OXFORD ít nhăn. Đặc điểm: - Áo sơ mi nam là sự kết hợp hoàn hảo giữa áo thun và áo polo, là món đồ không thể thiếu trong tủ đồ của các chàng trai. - Thiết kế kiểu dáng cơ bản với cổ bẻ lịch lãm, sang trọng. - Sơ mi được thiết kế phong cách trơn mặc hằng ngày. - Chất vải Oxford dệt thoáng khí lớn thấm hút mồ hôi, co giãn tốt. - Áo sơ mi nam có thể phối với nhiều trang phục khác như áo vest, quần jean, quần short, quần Tây đen,... - Sơ mi dài tay phù hợp mặc đi làm, đi chơi, dã ngoại, du lịch,... Hướng dẫn bảo quản sơ mi nam cổ bẻ đúng cách: - Nên giặt bằng tay lần đầu để sơ mi có độ bền cao. - Khi giặt thì giặt với các sản phẩm cùng màu để giữ độ bền màu tốt nhất. - Giặt áo với nhiệt độ tối đa 30 độ C. - Sấy ở nhiệt độ thường. - Là ủi ở nhiệt độ thấp. * Quyền lợi và điều kiện đổi trả: - Chính sách đổi trả hàng miễn phí khi sản phẩm kém chất lượng, không giống hình, nhầm size, số lượng mà quý khách đã đặt. - Sản phẩm chỉ được đổi/ trả khi còn nguyên tem mác. - Sản phẩm bị lỗi khi vận chuyển. * Namad cam kết: - Sản phẩm áo sơ mi giống như mô tả và hình ảnh. - Tư vấn hỗ trợ khách hàng nhiệt tình, chu đáo. - Thời gian chuẩn bị hàng tối ưu nhất. - Đổi trả hàng theo đúng quy định của Shopee. - Bảo hành 1 đổi 1 nếu như sản phẩm lỗi sản xuất từ phía shop. #ao #so #mi #dai #tay #nam #nu #thun #cotton #tron #co #be #hanquoc #thoitrangnam #akuba #box #dep #taydai #sominam #aotrang #trang #somitrang #somitron #aosomi #aosominam #cong #so #congso</p>', 0, 0, '2024-10-16 08:12:48', '2024-10-16 08:12:48', NULL),
 (9, 5, 'uploads/sanPham/JqL2rtS5JzSrjjAxvEJ6c23L23jle0ZpESw5RL8d.webp', 'Áo Sơ Mi Bò Dài Tay Denim', 259000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:26:27', '2024-10-16 08:26:27', NULL),
 (10, 5, 'uploads/sanPham/SonAbJp3dhJQYUMDwIKm0WjEnmaLH0kYc97yCGg7.webp', 'Áo Sơ Mi Trơn Dài Tay Cổ Đức', 199000.00, 0, '<p>ÁO SƠ MI DÀI TAY OXFORD ÁO SƠ MI NAM NỮ --------------------------------------- THÔNG TIN SẢN PHẨM - Áo sơ mi dài tay oxford dày dặn sờ êm tay, có thể giặt máy thoải mãi - Áo sơ mi phối túi mang phong cách trẻ trung, sang trọng, mạnh mẽ và cá tính - Áo sơ mi dễ dàng phối cùng quần jean, kaki, hay đi cùng 1 đôi giày tây, giày sneaker đều tạo ấn tượng vô cùng - Đường may sắc sảo, đẹp mắt, tỉ mỉ trong từng chi tiết -------------------------------------- CHÍNH SÁCH: Cam kết chất lượng và mẫu mã sản phẩm giống với hình ảnh. Hoàn tiền nếu sản phẩm không giống với mô tả.</p>', 0, 0, '2024-10-16 08:31:01', '2024-10-16 08:31:01', NULL),
 (11, 6, 'uploads/sanPham/UtCfRPw8K6nXrP8qv8FFBqVKL3FxEHeeJ6Z8KoeZ.webp', 'Áo Sơ Mi Bò Cộc Tay Denim', 199000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 0, 0, '2024-10-16 08:40:05', '2024-10-16 08:40:05', NULL),
-(12, 6, 'uploads/sanPham/Vq2sZuvjB4N9gSF2uPMALP8kcrB6F1Tw4PJnfido.webp', 'Áo Sơ Mi Cộc Tay Túi Hộp', 199000.00, 0, '<p>Áo Sơ Mi Nam cộc tay chất liệu thô cotton thiết kế túi hộp lạ mắt THÔNG TIN SẢN PHẨM Áo Sơ Mi cộc tay Namad - Chất liệu: Vải thô hàn - Màu Sắc: Trắng, nâu, xám - Size: M L XL XXL Ưu điểm: - Chất liệu vải thô hàn thoáng mát và co giãn tốt, những sản phẩm bằng vải thô hàn thông thường giữ form dáng rất là tốt khi sử dụng xong, chỉ cần chúng ta xử lý nhẹ qua là treo áo lên thì form áo sẽ không bao giờ mất - Thiết kế cách điệu, basic, trẻ trung, phong cách hàn quốc - Dễ dàng phối đồ, khoác ngoài mà không gây bí bách, nóng nực - Sản phẩm có độ hoàn thiện cao, đường kim mũi chỉ khâu máy chắc chắn, tỉ mỉ. NAMAD CAM KẾT: 1. Hình ảnh sản phẩm là ảnh thật do shop tự chụp 2. Hàng chính hãng 100%, áo được kiểm tra kỹ, cẩn thận và tư vấn nhiệt tình 3. Chính sách đổi trả lên đến 5 ngày 4. Hàng có sẵn, giao hàng ngay khi nhận được đơn 5. Hoàn tiền nếu sản phẩm không giống với mô tả QUY ĐỊNH BẢO HÀNH ĐỔI TRẢ 1. Điều kiện áp dụng (trong vòng 5 ngày kể từ khi nhận sản phẩm) - Hàng hoá vẫn còn mới, chưa qua sử dụng - Hàng hoá bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất ( Chương trình không áp dụng đối với các sản phẩm quà tặng) 2. Trường hợp được chấp nhận: - Hàng không đúng size, kiểu dáng như quý khách đặt hàng - Không đủ số lượng, không đủ bộ như trong đơn hàng 3. Trường hợp không đủ điều kiện áp dụng chính sách: - Quá 5 ngày kể từ khi Quý khách nhận hàng - Gửi lại hàng không đúng mẫu mã, không phải sản phẩm của Shop. - Không thích, không hợp, đặt nhầm mã, nhầm màu,... Do màn hình và điều kiện ánh sáng khác nhau, màu sắc thực tế của sản phẩm có thể chênh lệch khoảng 3-5%. CHÚC QUÝ KHÁCH CÓ TRẢI NGHIỆM ƯNG Ý KHI MUA SP BÊN MÌNH!</p>', 0, 0, '2024-10-16 08:45:09', '2024-10-16 08:45:09', NULL),
+(12, 6, 'uploads/sanPham/Vq2sZuvjB4N9gSF2uPMALP8kcrB6F1Tw4PJnfido.webp', 'Áo Sơ Mi Cộc Tay Túi Hộp', 199000.00, 20, '<p>Áo Sơ Mi Nam cộc tay chất liệu thô cotton thiết kế túi hộp lạ mắt THÔNG TIN SẢN PHẨM Áo Sơ Mi cộc tay Namad - Chất liệu: Vải thô hàn - Màu Sắc: Trắng, nâu, xám - Size: M L XL XXL Ưu điểm: - Chất liệu vải thô hàn thoáng mát và co giãn tốt, những sản phẩm bằng vải thô hàn thông thường giữ form dáng rất là tốt khi sử dụng xong, chỉ cần chúng ta xử lý nhẹ qua là treo áo lên thì form áo sẽ không bao giờ mất - Thiết kế cách điệu, basic, trẻ trung, phong cách hàn quốc - Dễ dàng phối đồ, khoác ngoài mà không gây bí bách, nóng nực - Sản phẩm có độ hoàn thiện cao, đường kim mũi chỉ khâu máy chắc chắn, tỉ mỉ. NAMAD CAM KẾT: 1. Hình ảnh sản phẩm là ảnh thật do shop tự chụp 2. Hàng chính hãng 100%, áo được kiểm tra kỹ, cẩn thận và tư vấn nhiệt tình 3. Chính sách đổi trả lên đến 5 ngày 4. Hàng có sẵn, giao hàng ngay khi nhận được đơn 5. Hoàn tiền nếu sản phẩm không giống với mô tả QUY ĐỊNH BẢO HÀNH ĐỔI TRẢ 1. Điều kiện áp dụng (trong vòng 5 ngày kể từ khi nhận sản phẩm) - Hàng hoá vẫn còn mới, chưa qua sử dụng - Hàng hoá bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất ( Chương trình không áp dụng đối với các sản phẩm quà tặng) 2. Trường hợp được chấp nhận: - Hàng không đúng size, kiểu dáng như quý khách đặt hàng - Không đủ số lượng, không đủ bộ như trong đơn hàng 3. Trường hợp không đủ điều kiện áp dụng chính sách: - Quá 5 ngày kể từ khi Quý khách nhận hàng - Gửi lại hàng không đúng mẫu mã, không phải sản phẩm của Shop. - Không thích, không hợp, đặt nhầm mã, nhầm màu,... Do màn hình và điều kiện ánh sáng khác nhau, màu sắc thực tế của sản phẩm có thể chênh lệch khoảng 3-5%. CHÚC QUÝ KHÁCH CÓ TRẢI NGHIỆM ƯNG Ý KHI MUA SP BÊN MÌNH!</p>', 0, 0, '2024-10-16 08:45:09', '2024-10-22 14:36:05', NULL),
 (13, 6, 'uploads/sanPham/GS6wvUb9xGaY6qSiguDHTWxNmKmXF1OVLLqgtk1r.webp', 'Áo Sơ Mi Đũi Gân Nam Ngắn Tay', 199000.00, 0, '<p>ÁO SƠ MI NAM CỔ VEST NAMAD CHẤT ĐŨI GÂN THOÁNG MÁT, PHONG CÁCH TRẺ TRUNG NAMAD là thương hiệu chuyên bán buôn, bán sỉ, các mặt hàng thời trang áo phông từ lâu. Trong 5 năm làm nghề, chúng tôi luôn đem đến cho quý khách hàng những mẫu mới nhất, chất lượng nhất đến với Quý khách hàng 🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo sơ mi ngắn tay - Thương hiệu: NAMAD - Màu sắc: Đen , trắng, be, nâu rêu - Size: M / L / XL/ XXL - Kiểu dáng: xuông - Chất liệu: đũi gân. ✅ ĐẶC ĐIỂM: - Chất vải 100% dệt tự nhiên an toàn với da. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-16 08:50:51', '2024-10-16 08:50:51', NULL),
 (14, 7, 'uploads/sanPham/LgVjNJuNWmHTgl1jDdccpG8S6wAVJogrS4mZ6B8c.webp', 'Áo Phông UANCAR', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - Màu sắc: Đen , nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 0, 0, '2024-10-17 00:17:31', '2024-10-17 00:17:31', NULL),
 (15, 7, 'uploads/sanPham/pQhuW0Wf6CyDEnc53zNTp9YKmvFKkzj2Feyc5fTK.webp', 'Áo Phông Don\'t Care', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo thun nam rộng tay lỡ - Thương hiệu: NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 0, 0, '2024-10-17 00:21:30', '2024-10-17 00:21:30', NULL),
 (16, 7, 'uploads/sanPham/Hpx1kR8A4I1ZJ8CJ43zaAjSQHs6EJn9cKNhYrGoI.webp', 'Áo Phông Young Rich', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Phông Unisex - Thương hiệu:NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,.... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-17 00:27:20', '2024-10-17 00:27:20', NULL),
-(17, 7, 'uploads/sanPham/iUcdm273OgyXGnA6AmjaiX5cSizX6EcSqskbr7Dv.webp', 'Áo Phông DualMatch', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - - Màu sắc: Đen, nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-17 00:31:15', '2024-10-17 00:31:15', NULL);
+(17, 7, 'uploads/sanPham/iUcdm273OgyXGnA6AmjaiX5cSizX6EcSqskbr7Dv.webp', 'Áo Phông DualMatch', 286000.00, 25, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - - Màu sắc: Đen, nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 0, 0, '2024-10-17 00:31:15', '2024-10-20 16:19:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -539,7 +604,6 @@ CREATE TABLE `users` (
   `email_verification_token` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `so_dien_thoai` varchar(10) DEFAULT NULL,
-  `dia_chi` varchar(255) DEFAULT NULL,
   `vai_tro_id` bigint(20) UNSIGNED NOT NULL,
   `remember_token` varchar(255) DEFAULT NULL,
   `password_reset_token` varchar(255) DEFAULT NULL,
@@ -552,9 +616,9 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `dia_chi`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(1, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$.fqq77z1ALy2uqrAPtQMqegnqoA0RmRWLV8iyj7LpiIo6IUP8xv5m', '0964426518', 'Thành phố Hà Nội, Huyện Chương Mỹ, Xã Phú Nghĩa, Phú Hữu 2', 1, NULL, NULL, 0, '2024-10-08 12:25:25', '2024-10-09 01:41:36'),
-(6, 'Tống Hoàng Bách', 'cuongndph38237@fpt.edu.vn', '2024-10-15 14:22:03', NULL, '$2y$10$GUVI6AmnkcO0mcIburj.KupcC7D8mzEmG6ltEWPyYIuRT8cohKonO', NULL, NULL, 3, NULL, NULL, 0, '2024-10-15 14:21:30', '2024-10-15 14:22:03');
+INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(8, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$W9..8boBws1rvemZsjT36urhdxrU0AwzM7/MdUwCweSos5VDNbsgm', '0964426518', 1, NULL, NULL, 0, '2024-11-02 03:45:17', '2024-11-02 03:45:17'),
+(9, 'Tống Hoàng Bách', 'tonghoangbach@gmail.com', NULL, NULL, '$2y$10$vFSLoPGfpOwtHL8o.3GkeuayRI5yfQwTMhUy8sZtAeIoI6DDMICvm', NULL, 2, NULL, NULL, 0, '2024-11-02 03:48:43', '2024-11-02 04:46:15');
 
 -- --------------------------------------------------------
 
@@ -12633,6 +12697,16 @@ ALTER TABLE `danh_muc_tin_tucs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `dia_chis`
+--
+ALTER TABLE `dia_chis`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dia_chis_user_id_foreign` (`user_id`),
+  ADD KEY `dia_chis_ma_tinh_thanh_pho_foreign` (`ma_tinh_thanh_pho`),
+  ADD KEY `dia_chis_ma_quan_huyen_foreign` (`ma_quan_huyen`),
+  ADD KEY `dia_chis_ma_phuong_xa_foreign` (`ma_phuong_xa`);
+
+--
 -- Chỉ mục cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
@@ -12652,7 +12726,8 @@ ALTER TABLE `failed_jobs`
 ALTER TABLE `gio_hangs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `gio_hangs_user_id_foreign` (`user_id`),
-  ADD KEY `gio_hangs_san_pham_id_foreign` (`san_pham_id`);
+  ADD KEY `gio_hangs_san_pham_id_foreign` (`san_pham_id`),
+  ADD KEY `gio_hangs_bien_the_id_foreign` (`bien_the_id`);
 
 --
 -- Chỉ mục cho bảng `kich_cos`
@@ -12676,8 +12751,7 @@ ALTER TABLE `mau_sacs`
 -- Chỉ mục cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ma_khuyen_mais_san_pham_id_foreign` (`san_pham_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `migrations`
@@ -12698,6 +12772,14 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Chỉ mục cho bảng `phi_ships`
+--
+ALTER TABLE `phi_ships`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `phi_ships_ma_tinh_thanh_pho_foreign` (`ma_tinh_thanh_pho`),
+  ADD KEY `phi_ships_ma_quan_huyen_foreign` (`ma_quan_huyen`);
 
 --
 -- Chỉ mục cho bảng `san_phams`
@@ -12794,6 +12876,12 @@ ALTER TABLE `danh_muc_tin_tucs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `dia_chis`
+--
+ALTER TABLE `dia_chis`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
@@ -12809,7 +12897,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_cos`
@@ -12833,19 +12921,25 @@ ALTER TABLE `mau_sacs`
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `phi_ships`
+--
+ALTER TABLE `phi_ships`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `san_phams`
@@ -12863,7 +12957,7 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`
@@ -12903,6 +12997,15 @@ ALTER TABLE `danh_gias`
   ADD CONSTRAINT `danh_gias_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `dia_chis`
+--
+ALTER TABLE `dia_chis`
+  ADD CONSTRAINT `dia_chis_ma_phuong_xa_foreign` FOREIGN KEY (`ma_phuong_xa`) REFERENCES `vn_phuong_xas` (`ma_phuong_xa`),
+  ADD CONSTRAINT `dia_chis_ma_quan_huyen_foreign` FOREIGN KEY (`ma_quan_huyen`) REFERENCES `vn_quan_huyens` (`ma_quan_huyen`),
+  ADD CONSTRAINT `dia_chis_ma_tinh_thanh_pho_foreign` FOREIGN KEY (`ma_tinh_thanh_pho`) REFERENCES `vn_tinh_thanh_phos` (`ma_tinh_thanh_pho`),
+  ADD CONSTRAINT `dia_chis_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Các ràng buộc cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
@@ -12912,14 +13015,16 @@ ALTER TABLE `don_hangs`
 -- Các ràng buộc cho bảng `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
+  ADD CONSTRAINT `gio_hangs_bien_the_id_foreign` FOREIGN KEY (`bien_the_id`) REFERENCES `bien_thes` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gio_hangs_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gio_hangs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `ma_khuyen_mais`
+-- Các ràng buộc cho bảng `phi_ships`
 --
-ALTER TABLE `ma_khuyen_mais`
-  ADD CONSTRAINT `ma_khuyen_mais_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
+ALTER TABLE `phi_ships`
+  ADD CONSTRAINT `phi_ships_ma_quan_huyen_foreign` FOREIGN KEY (`ma_quan_huyen`) REFERENCES `vn_quan_huyens` (`ma_quan_huyen`),
+  ADD CONSTRAINT `phi_ships_ma_tinh_thanh_pho_foreign` FOREIGN KEY (`ma_tinh_thanh_pho`) REFERENCES `vn_tinh_thanh_phos` (`ma_tinh_thanh_pho`);
 
 --
 -- Các ràng buộc cho bảng `san_phams`

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 02, 2024 lúc 02:52 PM
+-- Thời gian đã tạo: Th10 04, 2024 lúc 04:23 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -404,15 +404,23 @@ INSERT INTO `mau_sacs` (`id`, `ten_mau`, `ma_mau`, `created_at`, `updated_at`) V
 
 CREATE TABLE `ma_khuyen_mais` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `san_pham_id` bigint(20) UNSIGNED NOT NULL,
   `ma_giam_gia` varchar(255) NOT NULL,
   `so_tien_giam` decimal(10,2) NOT NULL,
   `ngay_bat_dau` date NOT NULL,
   `ngay_ket_thuc` date NOT NULL,
   `gia_tri_toi_thieu` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `trang_thai` int(11) NOT NULL COMMENT '1. Giảm giá đơn hàng, 2. Giảm giá vận chuyển',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ma_khuyen_mais`
+--
+
+INSERT INTO `ma_khuyen_mais` (`id`, `ma_giam_gia`, `so_tien_giam`, `ngay_bat_dau`, `ngay_ket_thuc`, `gia_tri_toi_thieu`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(2, 'DE3Q2Y0LIK', 100000.00, '2024-11-04', '2024-11-06', 500000.00, 1, '2024-11-04 03:05:53', '2024-11-04 03:15:20'),
+(3, '8524IRBJEU', 333910.00, '2024-11-06', '2024-11-13', 500000.00, 2, '2024-11-04 03:21:25', '2024-11-04 03:21:35');
 
 -- --------------------------------------------------------
 
@@ -461,7 +469,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (28, '2024_10_24_203606_add_bien_the_gio_hangs_table', 10),
 (30, '2024_10_24_204250_add_bien_the_id_gio_hangs_table', 11),
 (39, '2024_10_24_205028_create_gio_hangs_table', 12),
-(40, '2024_11_02_095708_create_dia_chis_table', 12);
+(40, '2024_11_02_095708_create_dia_chis_table', 12),
+(41, '2024_11_04_085236_create_ma_khuyen_mais_table', 13);
 
 -- --------------------------------------------------------
 
@@ -12710,8 +12719,7 @@ ALTER TABLE `mau_sacs`
 -- Chỉ mục cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ma_khuyen_mais_san_pham_id_foreign` (`san_pham_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `migrations`
@@ -12849,7 +12857,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_cos`
@@ -12873,13 +12881,13 @@ ALTER TABLE `mau_sacs`
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -12964,12 +12972,6 @@ ALTER TABLE `gio_hangs`
   ADD CONSTRAINT `gio_hangs_bien_the_id_foreign` FOREIGN KEY (`bien_the_id`) REFERENCES `bien_thes` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gio_hangs_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gio_hangs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Các ràng buộc cho bảng `ma_khuyen_mais`
---
-ALTER TABLE `ma_khuyen_mais`
-  ADD CONSTRAINT `ma_khuyen_mais_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `san_phams`

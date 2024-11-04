@@ -20,7 +20,7 @@
                     <h6>Xin hãy nhanh chân! Có người đã đặt hàng một trong những mặt hàng bạn có trong giỏ hàng.</h6>
                 </div>
             </div>
-            <div class="col-xxl-9 col-xl-8">
+            <div class="col-xxl-12 col-xl-12 gioHangFull">
                 <div class="cart-table">
                     <div class="table-title">
                         <h5></h5>
@@ -56,7 +56,7 @@
                                         $tiet_kiem += (($sanPham->gia_san_pham * $item->so_luong) - $thanh_tien);
                                     @endphp
                                     <tr>
-                                        <td><input type="checkbox" data-id="{{ $item->id }}"></td>
+                                        <td><input type="checkbox" name="select[]" data-id="{{ $item->id }}" value="{{ $item->id }}"></td>
                                         <td>
                                             <div class="cart-box">
                                                 <a class="style-border" href="{{ route('san-pham.chi-tiet-san-pham', $sanPham->id) }}">
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-3 col-xl-4">
+            <div class="col-xxl-3 col-xl-4 gioHangTiepTuc" style="display: none">
                 <div class="cart-items">
                     <div class="cart-body">
                         <h6>Chi tiết đơn hàng (<span>{{count($gio_hangs)}}</span> sản phẩm) </h6>
@@ -152,10 +152,11 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="btn btn_black w-100 rounded sm" href="check-out.html">Tiếp tục</a>
+                    <input type="hidden" class="tokenTiepTuc" name="_token" value="{{ csrf_token() }}" />
+                    <button class="btn btn_black w-100 rounded sm" id="tiepTucDatHangBtn">Tiếp tục</button>
                 </div>
             </div>
-            <div class="col-12 mt-5">
+            <div class="col-12" style="margin-top: 100px">
                 <div class="cart-slider">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>

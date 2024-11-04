@@ -59,7 +59,7 @@
                 Quản lý
             </div>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- quan ly tai khoan -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -81,7 +81,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+           <!-- quan ly danh muc -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
@@ -99,7 +99,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- quan ly san pham -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseFour">
@@ -110,7 +110,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Danh sách biến thể</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-ma-khuyen-mai')}}">Quản lý khuyến mại</a>
                         <a class="collapse-item" href="{{route('san-pham.quan-ly-size')}}">Quản lý size</a>
                         <a class="collapse-item" href="{{route('san-pham.quan-ly-mau-sac')}}">Quản lý màu sắc</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>
@@ -118,6 +117,25 @@
                 </div>
             </li>
 
+            <!-- quan ly khuyen mai -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
+                    aria-expanded="true" aria-controls="collapseEight">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>Quản lý khuyến mại</span>
+                </a>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-don-hang')}}">Khuyến mại đơn hàng</a>
+                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen')}}">Khuyến mại vận chuyển</a>
+                        <a class="collapse-item" href="{{route('khuyen-mai.show-them-ma-khuyen-mai')}}" style="background-color: #48dbfb;">
+                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                            <span>Thêm mới</span></a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- quan ly don hang -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseFive">
@@ -138,6 +156,8 @@
                     </div>
                 </div>
             </li>
+
+            <!-- quan ly tin tuc -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                     aria-expanded="true" aria-controls="collapseSix">
@@ -163,6 +183,7 @@
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lienhe.dsLienHe') }}">Quản lý liên hệ</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>
