@@ -105,7 +105,7 @@ function ajaxThemDiaChi(){
                         let errors = xhr.responseJSON.errors;
 
                         for (let key in errors) {
-                            $('.' + key + '-error').text(errors[key][0]);
+                            $('.' + key + '-error-dia-chi').text(errors[key][0]);
                         }
                     }
                 }
@@ -113,4 +113,5 @@ function ajaxThemDiaChi(){
         });
     });
 }
+ajaxThemDiaChi();
 

@@ -21,7 +21,7 @@ class DanhMucAdminController extends Controller
     public function showDanhSach(Request $request){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
             $this->views['DSDanhmuc'] = DanhMuc::orderBy('id', 'desc')->paginate(10);
         }
@@ -31,7 +31,7 @@ class DanhMucAdminController extends Controller
     public function danhSachDanhMucDaXoa(Request $request){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
             $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->orderBy('id', 'desc')->paginate(10);
         }
@@ -41,7 +41,7 @@ class DanhMucAdminController extends Controller
     public function danhMucSanPham(Request $request, int $id){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
             $this->views['DSDanhmuc'] = DanhMuc::where('id',$id)->orderBy('id', 'desc')->paginate(10);
         }

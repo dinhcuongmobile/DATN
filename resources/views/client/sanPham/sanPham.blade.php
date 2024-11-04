@@ -133,7 +133,7 @@
                                     <div class="accordion-body">
                                         <ul class="catagories-side theme-scrollbar styleSPDanhMuc">
                                             @foreach ($danh_mucs as $item)
-                                                <li> <a href="#">{{ $item->ten_danh_muc }}
+                                                <li> <a href="{{route('san-pham.san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}
                                                         ({{ $count_sp_danh_muc[$item->id] ?? 0 }})
                                                     </a></li>
                                             @endforeach
