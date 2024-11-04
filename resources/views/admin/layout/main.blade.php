@@ -110,10 +110,26 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Danh sách biến thể</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-ma-khuyen-mai')}}">Quản lý khuyến mại</a>
                         <a class="collapse-item" href="{{route('san-pham.quan-ly-size')}}">Quản lý size</a>
                         <a class="collapse-item" href="{{route('san-pham.quan-ly-mau-sac')}}">Quản lý màu sắc</a>
                         <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
+                    aria-expanded="true" aria-controls="collapseEight">
+                    <i class="fas fa-fw fa-list"></i>
+                    <span>Quản lý khuyến mại</span>
+                </a>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-don-hang')}}">Khuyến mại đơn hàng</a>
+                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen')}}">Khuyến mại vận chuyển</a>
+                        <a class="collapse-item" href="{{route('khuyen-mai.show-them-ma-khuyen-mai')}}" style="background-color: #48dbfb;">
+                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                            <span>Thêm mới</span></a>
                     </div>
                 </div>
             </li>

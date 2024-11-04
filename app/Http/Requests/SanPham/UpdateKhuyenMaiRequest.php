@@ -16,18 +16,7 @@ class UpdateKhuyenMaiRequest extends FormRequest
     public function rules()
     {
         return [
-            'ma_giam_gia' => 'required|max:255',
-            'so_tien_giam' => [
-            'required',
-            'numeric',
-            'min:0',
-            function($attribute, $value, $fail) {
-                $sanPham = SanPham::find(request('san_pham_id'));
-                if ($sanPham && $value > $sanPham->gia_san_pham) {
-                    $fail('Số tiền giảm không được lớn hơn giá trị sản phẩm.');
-                }
-            }
-        ],
+            'so_tien_giam' => 'required|numeric|min:0',
             'ngay_bat_dau' => 'required|before:ngay_ket_thuc|after_or_equal:today',
             'ngay_ket_thuc' => 'required|after:ngay_bat_dau',
             'gia_tri_toi_thieu' => 'required|numeric|min:0'
@@ -38,8 +27,6 @@ class UpdateKhuyenMaiRequest extends FormRequest
     public function messages()
     {
         return [
-            'ma_giam_gia.required' => 'Vui lòng nhập mã giảm giá.',
-            'ma_giam_gia.max' => 'Mã giảm giá không được vượt quá 255 ký tự.',
             'so_tien_giam.required' => 'Vui lòng nhập số tiền giảm.',
             'so_tien_giam.numeric' => 'Số tiền giảm phải là một số.',
             'so_tien_giam.min' => 'Số tiền giảm không được nhỏ hơn 0.',
@@ -53,4 +40,5 @@ class UpdateKhuyenMaiRequest extends FormRequest
             'gia_tri_toi_thieu.min' => 'Giá trị tối thiểu không được nhỏ hơn 0.'
         ];
     }
+
 }
