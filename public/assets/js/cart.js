@@ -436,6 +436,42 @@ document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-light').forEach(func
     });
 });
 
+// tiep tuc dat hang
+
+// Gửi AJAX request khi người dùng nhấn vào nút "Tiếp tục đặt hàng"
+$('#tiepTucDatHangBtn').on('click', function() {
+    let selectedItems = [];
+    $('#cart-table input[name="select[]"]:checked').each(function() {
+        selectedItems.push($(this).val());
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/gio-hang/tiep-tuc-dat-hang',
+        data: {
+            _token: $('.gioHangTiepTuc .tokenTiepTuc').val(), // Token bảo mật
+            select: selectedItems,
+        },
+        success: function(response) {
+            if (response.success) {
+                window.location.href = response.redirect;
+            } else {
+                document.querySelector('#thongbaothemgiohang').style.display='block';
+                document.querySelector('#thongbaothemgiohang #cart-message').textContent= "Không có sản phẩm nào được chọn !";
+                setTimeout(() => {
+                    document.querySelector('#thongbaothemgiohang').style.display = 'none';
+                }, 1200);
+            }
+        },
+        error: function(error) {
+            console.log(error);
+            alert("Có lỗi xảy ra khi gửi yêu cầu.");
+        }
+    });
+
+});
+
+
 
 
 

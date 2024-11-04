@@ -140,4 +140,25 @@ if(taoMaTuDong){
     })
 }
 
+document.addEventListener('DOMContentLoaded',()=>{
+    formatCurrency();
+});
+
+function formatCurrency() {
+    const displayInput = document.getElementById('tienJSDisplay');
+    const hiddenInput = document.getElementById('tienJSHidden');
+    if (displayInput && hiddenInput) {
+        // Xóa các dấu chấm hiện tại và chuyển thành số
+        const rawValue = displayInput.value.replace(/\./g, '');
+
+        // Cập nhật giá trị không có dấu chấm cho input ẩn
+        hiddenInput.value = rawValue;
+
+        // Định dạng lại giá trị hiển thị với dấu chấm
+        displayInput.value = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
+}
+
+
 
