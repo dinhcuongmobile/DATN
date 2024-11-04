@@ -117,7 +117,7 @@ class SanPhamController extends Controller
         return view('client.sanPham.sanPham', $this->views);
     }
 
-    public function sanPhamDanhMuc()
+    public function sanPhamDanhMuc(int $id)
     {
         return view('client.sanPham.sanPhamDanhMuc');
     }

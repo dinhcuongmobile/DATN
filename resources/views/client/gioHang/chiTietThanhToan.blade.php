@@ -5,13 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Check Out</h4>
-                </div>
-                <div class="col-sm-6">
-                    <ul class="breadcrumb float-end">
-                        <li class="breadcrumb-item"> <a href="index.html">Home </a></li>
-                        <li class="breadcrumb-item active"> <a href="#">Check Out</a></li>
-                    </ul>
+                    <h4>Chi tiết thanh toán</h4>
                 </div>
             </div>
         </div>
@@ -24,99 +18,36 @@
                 <div class="left-sidebar-checkout sticky">
                     <div class="address-option">
                         <div class="address-title">
-                            <h4>Shipping Address </h4><a href="#" data-bs-toggle="modal"
-                                data-bs-target="#address-modal" title="add product" tabindex="0">+ Add New
-                                Address</a>
+                            <h4>Địa chỉ giao hàng </h4>
+                            <a href="#" data-bs-toggle="modal"
+                                data-bs-target="#address-modal" title="add product" tabindex="0">+ Thêm địa chỉ mới</a>
                         </div>
                         <div class="row">
-                            <div class="col-xxl-4"><label for="address-billing-0"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-0" type="radio"
-                                                checked="checked" name="radio"></span><span
-                                            class="address-detail"><span class="address"> <span
-                                                    class="address-title">New Home </span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag"> Address:</span>26, Starts Hollow
-                                                    Colony, Denver, Colorado, United States</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Pin Code:</span>80014</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Phone :</span>+1
-                                                    5551855359</span></span></span></span></label></div>
-                            <div class="col-xxl-4"><label for="address-billing-1"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-1" type="radio"
-                                                name="radio"></span><span class="address-detail"><span
-                                                class="address"> <span class="address-title">Old Home
-                                                </span></span><span class="address"> <span class="address-home">
-                                                    <span class="address-tag"> Address:</span>53B, Claire New
-                                                    Street, San Jose, California, United States</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Pin Code:</span>94088</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Phone :</span>+1
-                                                    5551855359</span></span></span></span></label></div>
-                            <div class="col-xxl-4"><label for="address-billing-2"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-2" type="radio"
-                                                name="radio"></span><span class="address-detail"><span
-                                                class="address"> <span class="address-title">IT
-                                                    Office</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">
-                                                        Address:</span>101 Maple Drive, Placeholder Town, USA
-                                                    44556</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Pin
-                                                        Code:</span>54786</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Phone :</span>+1
-                                                    2547896314</span></span></span></span></label></div>
-                        </div>
-                    </div>
-                    <div class="address-option">
-                        <div class="address-title">
-                            <h4>Billing Address</h4><a href="#" data-bs-toggle="modal"
-                                data-bs-target="#address-modal" title="add product" tabindex="0">+ Add New
-                                Address</a>
-                        </div>
-                        <div class="row">
-                            <div class="col-xxl-4"><label for="address-billing-3"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-3" type="radio"
-                                                name="radio"></span><span class="address-detail"><span
-                                                class="address"> <span class="address-title">New Home
-                                                </span></span><span class="address"> <span class="address-home">
-                                                    <span class="address-tag"> Address:</span>123 Main Street,
-                                                    Anytown, Colorado, United States</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Pin Code:</span>85421</span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag">Phone :</span>+1
-                                                    7845123658</span></span></span></span></label></div>
-                            <div class="col-xxl-4"><label for="address-billing-4"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-4" type="radio"
-                                                checked="checked" name="radio"></span><span
-                                            class="address-detail"><span class="address"> <span
-                                                    class="address-title">Old Home </span></span><span
-                                                class="address"> <span class="address-home"> <span
-                                                        class="address-tag"> Address:</span>456 Elm Street, Sample
-                                                    City, United States</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Pin
-                                                        Code:</span>35412</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Phone :</span>+1
-                                                    9547862134</span></span></span></span></label></div>
-                            <div class="col-xxl-4"><label for="address-billing-6"> <span
-                                        class="delivery-address-box"> <span class="form-check"> <input
-                                                class="custom-radio" id="address-billing-6" type="radio"
-                                                name="radio"></span><span class="address-detail"><span
-                                                class="address"> <span class="address-title">IT
-                                                    Office</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">
-                                                        Address:</span>101 Maple Drive, Placeholder Town, United
-                                                    States</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Pin
-                                                        Code:</span>57412</span></span><span class="address"> <span
-                                                    class="address-home"> <span class="address-tag">Phone :</span>+1
-                                                    87453312145</span></span></span></span></label></div>
+                            <div class="col-xxl-4">
+                                <label for="address-billing-0">
+                                    <span class="delivery-address-box">
+                                        <span class="form-check">
+                                            <input class="custom-radio" id="address-billing-0" type="radio" checked="checked" name="radio">
+                                        </span>
+                                        <span class="address-detail">
+                                            <span class="address">
+                                                <span class="address-title">New Home </span>
+                                            </span>
+                                            <span class="address">
+                                                <span class="address-home">
+                                                    <span class="address-tag">Phone :</span>+1 5551855359
+                                                </span>
+                                            </span>
+                                            <span class="address">
+                                                <span class="address-home">
+                                                    <span class="address-tag"> Address:</span>26, Starts Hollow
+                                                    Colony, Denver, Colorado, United States
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="payment-options">

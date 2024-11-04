@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('ma_khuyen_mais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
             $table->string('ma_giam_gia');
             $table->decimal('so_tien_giam', 10, 2);
             $table->date('ngay_bat_dau');
             $table->date('ngay_ket_thuc');
             $table->decimal('gia_tri_toi_thieu', 10, 2)->default(0);
+            $table->integer('trang_thai');  // 1. Giảm giá đơn hàng, 2. giảm giá vận chuyển
             $table->timestamps();
         });
     }

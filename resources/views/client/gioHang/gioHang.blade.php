@@ -20,7 +20,7 @@
                     <h6>Xin hãy nhanh chân! Có người đã đặt hàng một trong những mặt hàng bạn có trong giỏ hàng.</h6>
                 </div>
             </div>
-            <div class="col-xxl-9 col-xl-8">
+            <div class="col-xxl-12 col-xl-12 gioHangFull">
                 <div class="cart-table">
                     <div class="table-title">
                         <h5></h5>
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-3 col-xl-4">
+            <div class="col-xxl-3 col-xl-4 gioHangTiepTuc" style="display: none">
                 <div class="cart-items">
                     <div class="cart-body">
                         <h6>Chi tiết đơn hàng (<span>{{count($gio_hangs)}}</span> sản phẩm) </h6>
@@ -152,7 +152,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="btn btn_black w-100 rounded sm" href="check-out.html">Tiếp tục</a>
+                    <a class="btn btn_black w-100 rounded sm" href="{{route('gio-hang.chi-tiet-thanh-toan')}}">Tiếp tục</a>
                 </div>
             </div>
             <div class="col-12 mt-5">
