@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="col-md-6 d-none d-lg-block">
                                     <div class="newslwtter-img">
-                                        <img class="img-fluid" src="../assets/images/other-img/news-latter4.png"
+                                        <img class="img-fluid" src="{{asset('assets/images/other-img/DM-Sơ Mi Dài Tay.png')}}"
                                             alt="">
                                     </div>
                                 </div>
