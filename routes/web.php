@@ -92,6 +92,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('check-bien-the-size', [GioHangController::class, 'checkBienTheSize']);
         Route::get('check-bien-the-color', [GioHangController::class, 'checkBienTheColor']);
         Route::post('tiep-tuc-dat-hang', [GioHangController::class, 'tiepTucDatHang']);
+        Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
     });
 
     Route::prefix('tin-tuc')->group(function () {

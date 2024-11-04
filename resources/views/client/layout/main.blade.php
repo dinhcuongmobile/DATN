@@ -723,7 +723,6 @@
             </div>
         </div>
     </div>
-
     {{-- <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
         aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
