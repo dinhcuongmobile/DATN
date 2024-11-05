@@ -1138,7 +1138,7 @@
                                         <div class="loader-line"></div>
                                         <h4>Địa chỉ của tôi</h4>
                                     </div>
-                                    <div class="row gy-3">
+                                    <div class="row gy-3 dia-chi-item">
                                         @foreach ($dia_chis as $item)
                                             <div class="col-xxl-4 col-md-6">
                                                 <div class="address-option">
@@ -1146,7 +1146,7 @@
                                                         <span class="delivery-address-box">
                                                             <span class="form-check">
                                                                 <input class="custom-radio" id="address-billing-0"
-                                                                    type="radio" checked="checked" name="radio">
+                                                                    type="radio" name="radio" {{$item->trang_thai==1?'checked':''}}>
                                                             </span>
                                                             <span class="address-detail">
                                                                 <span class="address">
@@ -1184,8 +1184,7 @@
                                             </div>
                                         @endforeach
                                     </div><button class="btn add-address" data-bs-toggle="modal"
-                                        data-bs-target="#add-address" title="Quick View" tabindex="0">+ Thêm địa chỉ
-                                        mới</button>
+                                        data-bs-target="#add-address" title="Thêm địa chỉ" tabindex="0">+ Thêm địa chỉ mới</button>
                                 </div>
                             </div>
                         </div>
@@ -1452,7 +1451,6 @@
             </div>
         </div>
 
-        {{-- CHƯA XONG --}}
         {{-- Nhập địa chỉ mới --}}
         <div class="reviews-modal modal theme-modal fade" id="add-address" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">

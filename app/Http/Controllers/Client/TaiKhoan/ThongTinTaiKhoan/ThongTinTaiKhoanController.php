@@ -49,8 +49,7 @@ class ThongTinTaiKhoanController extends Controller
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
 
-    public function updateThongTinTaiKhoan(UpdateThongTinTaiKhoanRequest $request)
-    {
+    public function updateThongTinTaiKhoan(UpdateThongTinTaiKhoanRequest $request){
         $user = Auth::user();
         $dia_chi = DiaChi::where('user_id',$user->id)->orderBy('trang_thai','ASC')->first();
         $dataUpdate = [
@@ -90,14 +89,13 @@ class ThongTinTaiKhoanController extends Controller
             // return redirect()->back()
             //     ->with('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'redirect_url' => url()->previous(),
             ]);
         }
     }
 
-    public function doiMatKhau(Request $request)
-    {
+    public function doiMatKhau(Request $request){
         $user = Auth::user();
 
         $validate = Validator::make(
@@ -154,16 +152,15 @@ class ThongTinTaiKhoanController extends Controller
             Session::flash('error', 'Đã có lỗi xảy ra. Vui lòng thử lại !');
 
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'redirect_url' => url()->previous(), // giống redirect()->back()
             ]);
         }
     }
 
     //CHUA XONG
-    
-    public function addDiaChi(Request $request)
-    {
+
+    public function addDiaChi(Request $request){
         $request->validate([
             'ho_va_ten' => 'required|string|max:255',
             'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
@@ -182,7 +179,11 @@ class ThongTinTaiKhoanController extends Controller
             'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
         ]);
         $user = Auth::user();
-
+        if (!DiaChi::where('user_id', $user->id)->exists()) {
+            $trang_thai = 1;
+        } else {
+            $trang_thai = 2;
+        }
         $dataInsert = [
             'user_id' => $user->id,
             'ho_va_ten_nhan' => $request->ho_va_ten,
@@ -191,26 +192,26 @@ class ThongTinTaiKhoanController extends Controller
             'ma_quan_huyen' => $request->quan_huyen,
             'ma_phuong_xa' => $request->phuong_xa,
             'dia_chi_chi_tiet' => $request->dia_chi_chi_tiet,
-            'trang_thai' => 1,
+            'trang_thai' => $trang_thai,
         ];
         if ($user instanceof User) {
             // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
             DiaChi::create($dataInsert);
-
+            $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->where('user_id',$user->id)->orderBy('id','desc')->first();
             Session::flash('success', 'Cập nhật thông tin tài khoản thành công.');
 
             // return redirect()->back()
             //     ->with('success', 'Cập nhật thông tin tài khoản thành công.');
             return response()->json([
                 'success' => true,
-                'redirect_url' => url()->previous(),
+                'dia_chi' => $dia_chi
             ]);
         } else {
             Session::flash('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
             // return redirect()->back()
             //     ->with('error', 'Không thể cập nhật thông tin tài khoản. Vui lòng thử lại.');
             return response()->json([
-                'success' => true,
+                'success' => false,
                 'redirect_url' => url()->previous(),
             ]);
         }
