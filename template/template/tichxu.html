@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điểm Danh Tích Xu</title>
+    <style>
+        /* Style cho nền mờ khi hiển thị pop-up */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s;
+        }
+        .overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .popup {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .popup .title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .week-days {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+        .day {
+            width: 35px;
+            height: 35px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #666;
+        }
+        .day.checked {
+            background-color: #ff5c39;
+            color: #fff;
+        }
+        .points {
+            font-size: 1.2em;
+            color: #ff5c39;
+            margin: 15px 0;
+        }
+        .check-in-btn {
+            display: inline-block;
+            background-color: #ff5c39;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .check-in-btn:hover {
+            background-color: #ff7f50;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Nút để mở pop-up -->
+<button onclick="togglePopup()">Điểm Danh</button>
+
+<!-- Overlay chứa pop-up -->
+<div class="overlay" id="checkInPopup">
+    <div class="popup">
+        <div class="title">Điểm Danh Hàng Tuần</div>
+        
+        <!-- Ngày trong tuần -->
+        <div class="week-days">
+            <div class="day">T2</div>
+            <div class="day">T3</div>
+            <div class="day">T4</div>
+            <div class="day">T5</div>
+            <div class="day">T6</div>
+            <div class="day">T7</div>
+            <div class="day">CN</div>
+        </div>
+        
+        <!-- Hiển thị số xu -->
+        <div class="points">Bạn có <strong>100</strong> xu</div>
+        
+        <!-- Nút điểm danh -->
+        <button class="check-in-btn" onclick="checkIn()">Điểm danh hôm nay</button>
+    </div>
+</div>
+
+<script>
+    // Hàm mở/tắt pop-up
+    function togglePopup() {
+        document.getElementById("checkInPopup").classList.toggle("show");
+    }
+    
+    // Hàm điểm danh và thay đổi trạng thái ngày trong tuần
+    function checkIn() {
+        const today = new Date().getDay(); // Lấy ngày hiện tại (0: Chủ nhật, 1: Thứ Hai,...)
+        const days = document.querySelectorAll('.day');
+        
+        // Đánh dấu ngày hiện tại
+        if (today === 0) {
+            days[6].classList.add('checked'); // Chủ nhật
+        } else {
+            days[today - 1].classList.add('checked'); // Thứ Hai - Thứ Bảy
+        }
+        alert("Điểm danh thành công! Bạn đã nhận được xu.");
+    }
+</script>
+
+</body>
+</html>
