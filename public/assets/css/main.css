@@ -227,3 +227,106 @@ font-family: Outfit, sans-serif;
     padding-left: 360px;
 }
 
+/* popup voucher chi tiet thanh toan  */
+#popup-voucher .card {
+    border: none;
+}
+
+#popup-voucher .card-header,
+#popup-voucher .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f6f6f6;
+    font-weight: bold;
+    color: #222;
+}
+
+#popup-voucher .nhap-voucher {
+    display: flex;
+    gap: 5px;
+}
+
+#popup-voucher .nhap-voucher input[type="text"] {
+    padding: 8px;
+    flex: 1;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#popup-voucher .nhap-voucher button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #ff5722;
+    color: white;
+    border-radius: 5px;
+}
+
+#popup-voucher .card-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#popup-voucher .voucher-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    box-shadow: 0 0 5px #00000061;
+    margin-top: 14px;
+}
+
+#popup-voucher .voucher-item img {
+    border-radius: 5px;
+}
+
+#popup-voucher .voucher-item p {
+    margin: 5px 0;
+}
+
+#popup-voucher .voucher-item input[type="radio"] {
+    margin-top: 15px;
+    margin-right: 20px;
+    width: 15px; /* Kích thước theo chiều ngang */
+    height: 15px; /* Kích thước theo chiều dọc */
+    transform: scale(1.5); /* Phóng to 1.5 lần */
+}
+
+#popup-voucher .card-footer button,
+#popup-voucher .card-footer Button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #ff5722;
+    color: white;
+    border-radius: 5px;
+}
+
+#popup-voucher .card-footer Button {
+    background-color: #ff9f43;
+}
+
+#popup-voucher .item-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+#popup-voucher .free-ship{
+    padding-bottom: 60px;
+    border-bottom: 2px solid #bcb8b8;
+}
+#popup-voucher .titleGiamGia{
+    font-weight: 600;
+    font-size: 19px;
+    color: #000;
+}
+
+#popup-voucher .card-body .text-content .tien{
+    color: red;
+}
+
+/* end popup chon voucher */
+

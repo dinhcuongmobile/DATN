@@ -28,7 +28,8 @@
                                 <label for="address-billing-0">
                                     <span class="delivery-address-box">
                                         <span class="form-check">
-                                            <input class="custom-radio" id="address-billing-0" type="radio" {{$item->trang_thai==1?'checked':''}} name="selectDiaChi" data-id="{{$item->id}}">
+                                            <input class="custom-radio" id="address-billing-0" type="radio" data-maQuanHuyen="{{$item->ma_quan_huyen}}"
+                                             {{$item->trang_thai==1?'checked':''}} name="selectDiaChi" data-id="{{$item->id}}">
                                         </span>
                                         <span class="address-detail">
                                             <span class="address">
@@ -107,10 +108,10 @@
                                     <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span>{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
-                                    <p>Tổng tiền phí vận chuyển</p><span>50.000đ</span>
+                                    <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ number_format($phi_ship_goc->phi_ship, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
-                                    <p>Chọn mã giảm giá</p><a href="javascript:void(0)" style="color: #05a">Chọn mã</a>
+                                    <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
                                 </li>
                                 <li>
                                     <p>Giảm giá vận chuyển</p><span>2 ty</span>
@@ -139,5 +140,87 @@
             </div>
         </div>
     </div>
+    {{-- popup chọn voucher chi tiết thanh toán  --}}
+    <div class="modal theme-modal fade" id="popup-voucher" tabindex="-1" role="dialog" aria-modal="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Chọn voucher của shop</h4>
+                        <div class="nhap-voucher">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="free-ship">
+                            <p class="titleGiamGia">Mã miễn phí vận chuyển</p>
+                            @foreach ($ma_giam_gia_van_chuyen as $item)
+                                @php
+                                    $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
+                                    $ngayHienTai = now();
+                                    $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                @endphp
+                                <div class="voucher-item">
+                                    <div class="img-item">
+                                        <img src="{{asset('assets/images/cart/nen-free-ship.jpg')}}" alt="" width="120px">
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="text-content">
+                                            <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                            <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                            @if ($gioConLai>0 && $gioConLai<=24)
+                                                <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
+                                            @elseif ($gioConLai > 24)
+                                                <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
+                                            @endif
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" name="ma_giam_gia_van_chuyen[]" value="{{$item->id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="free-order mt-4">
+                            <p class="titleGiamGia">Mã giảm giá đơn hàng</p>
+                            @foreach ($ma_giam_gia_don_hang as $item)
+                                @php
+                                    $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
+                                    $ngayHienTai = now();
+                                    $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                @endphp
+                                <div class="voucher-item">
+                                    <div class="img-item">
+                                        <img src="{{asset('assets/images/cart/nen-free-order.jpg')}}" alt="" width="120px">
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="text-content">
+                                            <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                            <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                            @if ($gioConLai>0 && $gioConLai<=24)
+                                                <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
+                                            @elseif ($gioConLai > 24)
+                                                <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
+                                            @endif
+                                        </div>
+                                        <div class="radio-container">
+                                            <input type="radio" name="ma_giam_gia_don_hang[]" value="{{$item->id}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button class="btnQuayLai">Quay lại</button>
+                        <Button class="btnXacNhan" disabled>Xác nhận</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+@endsection
+@section('js')
+<script src="{{asset('assets/js/check-out.js')}}"></script>
 @endsection

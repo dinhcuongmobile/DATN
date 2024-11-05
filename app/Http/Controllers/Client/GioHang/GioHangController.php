@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BienThe;
 use App\Models\DiaChi;
+use App\Models\KhuyenMai;
+use App\Models\PhiShip;
 use Illuminate\Support\Facades\Auth;
 
 class GioHangController extends Controller
@@ -52,7 +54,11 @@ class GioHangController extends Controller
                                         ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
         $this->views['gio_hangs'] = session()->get('gio_hangs', []);
         $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
-
+        $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai',2)->orderBy('id','desc')->get();
+        $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai',1)->orderBy('id','desc')->get();
+        $dia_chi_checked = DiaChi::where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->first();
+        $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho','quanHuyen')
+                                                ->where('ma_quan_huyen',$dia_chi_checked->ma_quan_huyen)->first();
         return view('client.gioHang.chiTietThanhToan',$this->views);
     }
 
@@ -227,5 +233,14 @@ class GioHangController extends Controller
         }
 
         return response()->json(['gio_hang'=>$gio_hang,'bien_the'=>$bien_the]);
+    }
+
+    public function tinhPhiShipDiaChi(Request $request){
+        $ma_quan_huyen = $request->input('ma_quan_huyen');
+
+        $phi_ships = PhiShip::with('tinhThanhPho','quanHuyen')
+                        ->where('ma_quan_huyen',$ma_quan_huyen)->first();
+
+        return response()->json(['phi_ships'=>$phi_ships]);
     }
 }
