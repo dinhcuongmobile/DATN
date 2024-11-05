@@ -108,7 +108,7 @@
                                     <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span>{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
-                                    <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ number_format($phi_ship_goc->phi_ship, 0, ',', '.') }}đ</span>
+                                    <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
                                 </li>
                                 <li>
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
