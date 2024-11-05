@@ -525,7 +525,7 @@
         <div class="row row-cols-xl-5 row-cols-md-4 row-cols-2 ratio_square-1">
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/17.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/Sơ Mi Bò Xanh.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
@@ -542,16 +542,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/18.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/SM-Trơn Xanh Trời.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -578,16 +578,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/19.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/sơ mi bò.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -595,16 +595,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/20.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/AP-Young Rich.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
