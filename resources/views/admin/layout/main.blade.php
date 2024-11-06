@@ -59,7 +59,7 @@
                 Quản lý
             </div>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <!-- quan ly tai khoan -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -81,7 +81,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+           <!-- quan ly danh muc -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
@@ -99,7 +99,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- quan ly san pham -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
                     aria-expanded="true" aria-controls="collapseFour">
@@ -117,6 +117,7 @@
                 </div>
             </li>
 
+            <!-- quan ly khuyen mai -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
                     aria-expanded="true" aria-controls="collapseEight">
@@ -134,6 +135,7 @@
                 </div>
             </li>
 
+            <!-- quan ly don hang -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseFive">
@@ -154,6 +156,8 @@
                     </div>
                 </div>
             </li>
+
+            <!-- quan ly tin tuc -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                     aria-expanded="true" aria-controls="collapseSix">
@@ -179,6 +183,7 @@
                 <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lienhe.dsLienHe') }}">Quản lý liên hệ</a>
                         <a class="collapse-item" href="#">Quản lý bình luận</a>

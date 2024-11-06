@@ -27,6 +27,10 @@ class QuanHuyen extends Model
         return $this->hasMany(DiaChi::class, 'ma_quan_huyen');
     }
 
+    public function phiShip() {
+        return $this->hasMany(PhiShip::class, 'ma_quan_huyen');
+    }
+
     public function tinhThanhPho() {
         return $this->belongsTo(TinhThanhPho::class, 'ma_tinh_thanh_pho');
     }

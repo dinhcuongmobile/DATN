@@ -32,7 +32,8 @@
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Giá</label>
-                <input type="text" class="form-control" id="" name="gia_san_pham" placeholder="Nhập giá..." value="{{old('gia_san_pham')}}">
+                <input type="hidden" name="gia_san_pham" id="tienJSHidden" value="">
+                <input type="text" class="form-control" id="tienJSDisplay" placeholder="Nhập giá..." oninput="formatCurrency()">
                 @error('gia_san_pham')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
