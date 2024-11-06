@@ -9,6 +9,7 @@
     <meta name="description" content="Namad">
     <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <link rel="icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/icon_web.png')}}" type="image/x-icon">
     <title>Namad Store </title><!-- icon_web icon-->
@@ -30,6 +31,99 @@
     <link href="{{asset('assets/css/landing_page.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     @yield('css')
+    {{-- Chưa xong --}}
+    {{-- Css của giao diện nhận xu --}}
+    {{-- <style>
+        /* Khung tổng thể */
+        .coin-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fce082, #fabb42);
+            text-align: center;
+            color: #fff;
+        }
+
+        /* Header */
+        .coin-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Số xu hiện tại */
+        .current-coin {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        /* Vòng ngày nhận xu */
+        .days-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Ngày nhận xu */
+        .day-box {
+            flex: 1;
+            text-align: center;
+            font-size: 0.85rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .day-box img {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+        }
+
+        .day-box.received {
+            transform: scale(1.1);
+            opacity: 1;
+            border-radius: 8px;
+        }
+
+        .check-icon {
+            font-size: 1.5rem;
+            color: #4CAF50; /* Màu xanh của dấu tích */
+        }
+
+        .day-box.received .coin-icon {
+            display: none;
+        }
+
+        .day-box.received .check-icon {
+            display: inline-block;
+        }
+
+        /* Ngày hôm nay */
+        .day-box.today {
+            border: 2px solid #ff6600;
+            border-radius: 8px;
+            color: #ff6600;
+        }
+
+        /* Ngày đã hoàn thành (Ngày 7) */
+        .day-box.complete {
+            border: 2px solid #ff0000;
+            border-radius: 8px;
+        }
+
+        /* Thông báo nhận xu */
+        .receive-message {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background-color: #f5f5f5;
+            color: #999;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style> --}}
 </head>
 
 <body class="layout-4 skeleton_body">
@@ -296,6 +390,73 @@
     </div>
     {{-- end popup thông báo --}}
 
+    {{-- GIAO DIỆN NHẠN XU --}}
+
+    {{-- <button id="dailyCoinButton">Nhận coin hôm nay</button>
+    <div id="coinMessage"></div> --}}
+
+    {{-- <div class="" id="" tabindex="-1" role="dialog"
+        aria-modal="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <div id="dailyCoinContainer" class="coin-container">
+                        <div class="coin-header">Ưu đãi Shopee Xu</div>
+                        <div class="current-coin">100</div>
+                        <div id="chuoiNgay" class="days-container d-flex">
+                            <div class="day-box" id="day-1">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 1</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-2">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 2</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-3">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 3</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-4">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 4</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-5">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 5</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-6">
+                                <div class="coin-icon">💰</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 6</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box complete" id="day-7">
+                                <div class="coin-icon">🎉</div>
+                                <div class="check-icon" style="display: none;">✔️</div>
+                                <div>Ngày 7</div>
+                                <div>+100</div>
+                            </div>
+                        </div>
+                        <button class="btn" id="dailyCoinButton">Nhận Xu</button>
+                        <div id="coinMessage"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    {{-- END GIAO DIỆN NHẬN XU --}}
     @yield('container')
 
     {{-- footer --}}
@@ -776,6 +937,76 @@
     <script src="{{asset('assets/js/otp.js')}}"></script>
     <script src="{{asset('assets/js/ajax.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+    {{-- JS CỦA NHẬN XU (CHƯA XONG) --}}
+    {{-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lấy trạng thái từ localStorage và cập nhật giao diện
+            const soNgay = JSON.parse(localStorage.getItem('soNgay')) || 0;
+            const ngayCuoi = localStorage.getItem('ngayCuoi') || '';
+
+            // Kiểm tra xem có phải là ngày mới không
+            const homNay = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
+            const currentDayIndex = new Date().getDay(); // 0 = Chủ nhật, 1 = Thứ hai, ..., 6 = Thứ bảy
+            const displayDay = currentDayIndex === 0 ? 7 : currentDayIndex; // Chuyển đổi Chủ nhật thành ngày 7
+
+            // Cập nhật giao diện cho ngày hiện tại
+            const dayBox = document.getElementById(`day-${displayDay}`);
+            dayBox.classList.add('today'); // Thêm lớp 'today' cho ô ngày hiện tại
+            
+            if (ngayCuoi !== homNay) {
+                // Nếu không phải là ngày hôm nay
+                if (soNgay === 7) {
+                    // Nếu chuỗi ngày đã nhận là 7, reset lại
+                    localStorage.setItem('soNgay', 0);
+                } else {
+                    // Cập nhật ngày nhận mới
+                    localStorage.setItem('ngayCuoi', homNay);
+                }
+                updateDayBoxes(soNgay); // Cập nhật giao diện
+            }
+
+            updateDayBoxes(soNgay);
+            localStorage.clear();
+
+            
+        });
+
+        document.getElementById("dailyCoinButton").addEventListener("click", function() {
+            fetch('{{ route("coin.nhan-xu") }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('coinMessage').innerText = data.message;
+
+                if (data.so_ngay) {
+                    // Cập nhật giao diện theo số ngày đã nhận
+                    localStorage.setItem('soNgay', data.so_ngay); // Lưu số ngày đã nhận vào localStorage
+                    updateDayBoxes(data.so_ngay);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function updateDayBoxes(soNgay) {
+            for (let i = 1; i <= 7; i++) {
+                const dayBox = document.getElementById(`day-${i}`);
+                if (i <= soNgay) {
+                    dayBox.classList.add('received');
+                    dayBox.querySelector('.check-icon').style.display = 'block'; // Hiện biểu tượng tích
+                } else {
+                    dayBox.classList.remove('received');
+                    dayBox.querySelector('.check-icon').style.display = 'none'; // Ẩn biểu tượng tích
+                }
+            }
+        }
+
+    </script> --}}
     @yield('js')
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
