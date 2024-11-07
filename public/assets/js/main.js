@@ -1,3 +1,4 @@
+
 // Tỉnh thành phố, quận huyện
 $('select[name="tinh_thanh_pho"]').on('change', function () {
     var matp = $(this).val();
@@ -79,4 +80,5 @@ document.querySelectorAll('.quickViewClick').forEach((el) => {
 
     });
 });
+
 

@@ -1,3 +1,4 @@
+
 .style-border{
     border: 1px solid #0000002b;
 }
@@ -330,3 +331,21 @@ font-family: Outfit, sans-serif;
 
 /* end popup chon voucher */
 
+/* thong tin tai khoan */
+.profile-information .thayDoiHoTen,
+.profile-information .thayDoiSDT{
+    color: rgba(var(--theme-default), 1);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.profile-information .thayDoiHoTen:hover,
+.profile-information .thayDoiSDT:hover{
+    text-decoration: underline;
+}
+
+.profile-information .form-control{
+    display: inline;
+    width: auto;
+}
