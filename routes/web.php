@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminCo
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
+use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -41,6 +42,10 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
     Route::prefix('home')->group(function(){
         Route::get('quick-view', [HomeController::class, 'quickView']);
+    });
+    Route::middleware('auth')->prefix('/coin')->group(function() {
+        Route::post('/nhan-xu', [CoinController::class, 'addDailyCoin'])->name('coin.nhan-xu');
+        Route::get('/tong-xu', [CoinController::class, 'getUserCoin'])->name('coin.tong-xu');
     });
     Route::prefix('/tai-khoan')->group(function(){
         Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
