@@ -449,7 +449,7 @@ $('#tiepTucDatHangBtn').on('click', function() {
         type: 'POST',
         url: '/gio-hang/tiep-tuc-dat-hang',
         data: {
-            _token: $('.gioHangTiepTuc .tokenTiepTuc').val(), // Token bảo mật
+            _token: $('.gioHangTiepTuc .tokenTiepTuc').val(),
             select: selectedItems,
         },
         success: function(response) {

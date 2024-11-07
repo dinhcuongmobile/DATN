@@ -194,7 +194,6 @@
         </div>
     </div>
 </section>
-{{-- end popup thông báo --}}
 @endsection
 @section('js')
 <script src="{{asset('assets/js/cart.js')}}"></script>

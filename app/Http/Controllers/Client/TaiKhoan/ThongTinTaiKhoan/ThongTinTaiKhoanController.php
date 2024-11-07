@@ -226,10 +226,10 @@ class ThongTinTaiKhoanController extends Controller
             DiaChi::create($dataInsert);
             $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->where('user_id',$user->id)->orderBy('id','desc')->first();
 
-            // return redirect()->back()
-            //     ->with('success', 'Cập nhật thông tin tài khoản thành công.');
+            Session::flash('success', 'Bạn đã thêm thành công địa chỉ mới.');
             return response()->json([
                 'success' => true,
+                'redirect_url' => url()->previous(),
                 'dia_chi' => $dia_chi
             ]);
         } else {
