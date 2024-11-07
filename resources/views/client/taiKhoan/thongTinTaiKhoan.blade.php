@@ -43,12 +43,6 @@
                                 </div>
                                 <div class="profile-name">
                                     <h4>{{ Auth::user()->ho_va_ten }}</h4>
-                                    @php
-                                        $email = Auth::user()->email;
-                                    @endphp
-                                    <h6>{{ substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@')) }}</h6>
-                                    <span data-bs-toggle="modal" data-bs-target="#edit-box" title="Quick View"
-                                        tabindex="0">Chỉnh sửa thông tin</span>
                                 </div>
                             </div>
                         </div>
@@ -180,13 +174,26 @@
                                                     <h5>Thông Tin Tài Khoản</h5>
                                                 </div>
                                                 <ul class="profile-information">
+                                                    <input type="hidden" class="tokenThongTin" name="_token" value="{{ csrf_token() }}" />
                                                     <li>
                                                         <h6>Họ&Tên :</h6>
                                                         <p>{{ Auth::user()->ho_va_ten }}</p>
+                                                        <a class="thayDoiHoTen" href="javascript:void(0)">Thay đổi</a>
+                                                    </li>
+                                                    <li class="form-hoVaTen" style="display: none;">
+                                                        <input class="form-control" type="text" value="{{ Auth::user()->ho_va_ten }}">
+                                                        <button class="btn btn-danger" data-id="{{Auth::user()->id}}">Lưu</button>
+                                                        <p class="text-danger" style="width: 100%"></p>
                                                     </li>
                                                     <li>
                                                         <h6>Số Điện Thoại:</h6>
                                                         <p>{{ Auth::user()->so_dien_thoai }}</p>
+                                                        <a class="thayDoiSDT" href="javascript:void(0)">Thay đổi</a>
+                                                    </li>
+                                                    <li class="form-SDT" style="display: none;">
+                                                        <input class="form-control" type="text" value="{{ Auth::user()->so_dien_thoai }}">
+                                                        <button class="btn btn-danger" data-id="{{Auth::user()->id}}">Lưu</button>
+                                                        <p class="text-danger" style="width: 100%"></p>
                                                     </li>
                                                     <li>
                                                         <h6>Địa Chỉ:</h6>
@@ -1139,45 +1146,52 @@
                                         <h4>Địa chỉ của tôi</h4>
                                     </div>
                                     <div class="row gy-3 dia-chi-item">
+                                        <input type="hidden" class="tokenThietLap" name="_token" value="{{ csrf_token() }}" />
                                         @foreach ($dia_chis as $item)
                                             <div class="col-xxl-4 col-md-6">
                                                 <div class="address-option">
                                                     <label for="address-billing-0">
                                                         <span class="delivery-address-box">
-                                                            <span class="form-check">
-                                                                <input class="custom-radio" id="address-billing-0"
-                                                                    type="radio" name="radio" {{$item->trang_thai==1?'checked':''}}>
-                                                            </span>
-                                                            <span class="address-detail">
+                                                            <span class="address-detail" style="width: 100%">
                                                                 <span class="address">
                                                                     <span class="address-title">{{ $item->ho_va_ten_nhan }}</span>
                                                                 </span>
                                                                 <span class="address">
                                                                     <span class="address-home">
                                                                         <span class="address-tag">Địa chỉ :</span>
-                                                                        @if ($item->dia_chi_chi_tiet)
-                                                                            {{ $item->dia_chi_chi_tiet }},
-                                                                        @endif
-                                                                        {{ $item->phuongXa?->ten_phuong_xa }},
-                                                                        {{ $item->quanHuyen?->ten_quan_huyen }},
-                                                                        {{ $item->tinhThanhPho?->ten_tinh_thanh_pho }}
+                                                                        <p class="dia-chi" style="display: inline">
+                                                                            @if ($item->dia_chi_chi_tiet)
+                                                                                {{ $item->dia_chi_chi_tiet }},
+                                                                            @endif
+                                                                            {{ $item->phuongXa?->ten_phuong_xa }},
+                                                                            {{ $item->quanHuyen?->ten_quan_huyen }},
+                                                                            {{ $item->tinhThanhPho?->ten_tinh_thanh_pho }}
+                                                                        </p>
                                                                     </span>
                                                                 </span>
                                                                 <span class="address">
                                                                     <span class="address-home">
-                                                                        <span class="address-tag">Số điện thoại :</span>{{ $item->so_dien_thoai_nhan }}</span>
+                                                                        <span class="address-tag">Số điện thoại :</span>
+                                                                        <p class="so-dien-thoai" style="display: inline">
+                                                                            {{ $item->so_dien_thoai_nhan }}
+                                                                        </p>
+                                                                    </span>
                                                                 </span>
                                                             </span>
                                                         </span>
                                                         <span class="buttons">
-                                                            <a class="btn btn_black sm" href="#"
-                                                                data-bs-toggle="modal" data-bs-target="#edit-box"
-                                                                title="Quick View" tabindex="0">Sửa
+                                                            <button class="btn btn_outline sm thietLapDiaChiMacDinh" data-id="{{$item->id}}"
+                                                                    {{$item->trang_thai==1?'disabled':''}}>Thiết lập mặc định</button>
+                                                        </span>
+                                                        <span class="buttons actionsDiaChi">
+                                                            <a class="btn btn_black sm suaDiaChi" data-id="{{$item->id}}" href="javascript:void(0)"
+                                                                title="edit" tabindex="0">Sửa
                                                             </a>
-                                                            <a class="btn btn_outline sm" href="#"
-                                                                data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                                title="Quick View" tabindex="0">Xóa
-                                                            </a>
+                                                            @if ($item->trang_thai!=1)
+                                                                <a class="btn btn_outline sm btnDelete" data-id="{{$item->id}}"
+                                                                    href="javascript:void(0)" title="delete">Xóa
+                                                                </a>
+                                                            @endif
                                                         </span>
                                                     </label>
                                                 </div>
@@ -1288,108 +1302,53 @@
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4>Chỉnh sửa thông tin</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        <h4>Chỉnh sửa thông tin địa chỉ</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-0">
-                        <form id="loginForm" action="{{ route('tai-khoan.cap-nhat-thong-tin-tai-khoan') }}"
-                            method="POST">
-                            @csrf
-                            @method('put')
-                            <div class="row g-3">
-                                <div class="col-6">
-                                    <div class="from-group">
-                                        <label class="form-label">Họ và tên</label>
-                                        <input class="form-control @error('ho_va_ten') is-invalid @enderror"
-                                            type="text" name="ho_va_ten" placeholder="Nhập họ và tên..."
-                                            value="{{ Auth::user()->ho_va_ten }}">
-                                    </div>
-                                    <p class="Err text-danger ho_va_ten-error">
-                                        @error('ho_va_ten')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
+                        <div class="row g-3">
+                            <div class="col-6 hoVaTen">
+                                <div class="from-group">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input class="form-control" type="text" placeholder="Nhập họ và tên...">
                                 </div>
-                                <div class="col-6">
-                                    <div class="from-group">
-                                        <label class="form-label">Số điện thoại</label>
-                                        <input class="form-control @error('so_dien_thoai') is-invalid @enderror"
-                                            type="text" name="so_dien_thoai" placeholder="Nhập số điện thoại."
-                                            value="{{ Auth::user()->so_dien_thoai }}">
-                                    </div>
-                                    <p class="Err text-danger so_dien_thoai-error">
-                                        @error('so_dien_thoai')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label" for="tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
-                                    <select class="form-select @error('tinh_thanh_pho') is-invalid @enderror"
-                                        id="tinh_thanh_pho" name="tinh_thanh_pho">
-                                        <option value="">--Chọn tỉnh thành phố--</option>
-                                        @foreach ($tinh_thanh_pho as $item)
-                                            <option
-                                                {{ $dia_chi ? ($item->ma_tinh_thanh_pho === $dia_chi->tinhThanhPho->ma_tinh_thanh_pho ? 'selected' : '') : '' }}
-                                                value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <p class="Err text-danger tinh_thanh_pho-error">
-                                        @error('tinh_thanh_pho')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" for="quan_huyen">Chọn Quận/Huyện</label>
-                                    <select class="form-select @error('quan_huyen') is-invalid @enderror"
-                                        id="quan_huyen" name="quan_huyen">
-                                        <option value="">--Chọn quận huyện--</option>
-                                        @foreach ($quan_huyen as $item)
-                                            <option
-                                                {{ $dia_chi ? ($item->ma_quan_huyen === $dia_chi->quanHuyen->ma_quan_huyen ? 'selected' : '') : '' }}
-                                                value="{{ $item->ma_quan_huyen }}">{{ $item->ten_quan_huyen }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <p class="Err text-danger quan_huyen-error">
-                                        @error('quan_huyen')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
-                                </div>
-                                <div class="col-6">
-                                    <label class="form-label" for="phuong_xa">Chọn Phường/Xã/Thị trấn</label>
-                                    <select class="form-select @error('phuong_xa') is-invalid @enderror" id="phuong_xa"
-                                        name="phuong_xa">
-                                        <option value="">--Chọn phường xã--</option>
-                                        @foreach ($phuong_xa as $item)
-                                            <option
-                                                {{ $dia_chi ? ($item->ma_phuong_xa === $dia_chi->phuongXa->ma_phuong_xa ? 'selected' : '') : '' }}
-                                                value="{{ $item->ma_phuong_xa }}">{{ $item->ten_phuong_xa }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <p class="Err text-danger phuong_xa-error">
-                                        @error('phuong_xa')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
-                                    <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4"
-                                        class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror">{{ $dia_chi ? $dia_chi->dia_chi_chi_tiet : '' }}</textarea>
-                                    <p class="Err text-danger dia_chi_chi_tiet-error">
-                                        @error('dia_chi_chi_tiet')
-                                            {{ $message }}
-                                        @enderror
-                                    </p>
-                                </div>
-                                <button class="btn btn-submit mt-3" type="submit" onclick="ajaxAuth()">Xác nhận</button>
+                                <p class="text-danger"></p>
                             </div>
-                        </form>
+                            <div class="col-6 soDienThoai">
+                                <div class="from-group ">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input class="form-control" type="text" placeholder="Nhập số điện thoại...">
+                                </div>
+                                <p class="text-danger"></p>
+                            </div>
+                            <div class="col-12 tinhThanhPho">
+                                <label class="form-label" for="tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
+                                <select class="form-select" name="tinh_thanh_pho">
+                                    <option value="">--Chọn tỉnh thành phố--</option>
+                                </select>
+                                <p class="text-danger"></p>
+                            </div>
+                            <div class="col-6 quanHuyen">
+                                <label class="form-label" for="quan_huyen" >Chọn Quận/Huyện</label>
+                                <select class="form-select" name="quan_huyen">
+                                    <option value="">--Chọn quận huyện--</option>
+                                </select>
+                                <p class="text-danger"></p>
+                            </div>
+                            <div class="col-6 phuongXa">
+                                <label class="form-label" for="phuong_xa">Chọn Phường/Xã/Thị trấn</label>
+                                <select class="form-select" name="phuong_xa">
+                                    <option value="">--Chọn phường xã--</option>
+                                </select>
+                                <p class="text-danger"></p>
+                            </div>
+                            <div class="col-12 diaChiChiTiet">
+                                <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
+                                <textarea cols="5" rows="4" class="form-control form-control-sm"></textarea>
+                            </div>
+                            <input type="hidden" class="tokenSuaDiaChi" name="_token" value="{{ csrf_token() }}" />
+                            <button class="btn btn-submit mt-3">Xác nhận</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1539,7 +1498,7 @@
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit">Xác nhận</button>
                             </div>
                         </form>
                     </div>

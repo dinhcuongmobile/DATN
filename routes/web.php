@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminCo
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
+use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -42,6 +43,10 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::prefix('home')->group(function(){
         Route::get('quick-view', [HomeController::class, 'quickView']);
     });
+    Route::middleware('auth')->prefix('/coin')->group(function() {
+        Route::post('/nhan-xu', [CoinController::class, 'addDailyCoin'])->name('coin.nhan-xu');
+        Route::get('/tong-xu', [CoinController::class, 'getUserCoin'])->name('coin.tong-xu');
+    });
     Route::prefix('/tai-khoan')->group(function(){
         Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
         Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
@@ -61,14 +66,20 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
-        Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
-            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
+
+        Route::put('/sua-thong-tin', [ThongTinTaiKhoanController::class, 'suaThongTin']);
+
+        Route::get('/lay-dia-chi-sua', [ThongTinTaiKhoanController::class, 'layDiaChiSua']);
+        Route::put('/sua-dia-chi', [ThongTinTaiKhoanController::class, 'suaDiaChi']);
+        Route::put('/thiet-lap-dia-chi-mac-dinh', [ThongTinTaiKhoanController::class, 'thietLapDiaChiMacDinh']);
 
         Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
             ->name('tai-khoan.doi-mat-khau')->middleware('auth');
 
         Route::post('/them-dia-chi-moi', [ThongTinTaiKhoanController::class, 'addDiaChi'])
         ->name('tai-khoan.them-dia-chi-moi')->middleware('auth');
+        Route::get('/xoa-dia-chi', [ThongTinTaiKhoanController::class, 'xoaDiaChi'])
+        ->name('tai-khoan.xoa-dia-chi')->middleware('auth');
 
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
