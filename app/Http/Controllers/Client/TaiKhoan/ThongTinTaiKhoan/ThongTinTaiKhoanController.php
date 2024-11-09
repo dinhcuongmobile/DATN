@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
+use App\Models\Coin;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -43,6 +44,8 @@ class ThongTinTaiKhoanController extends Controller
 
         $this->views['tai_khoan'] = $tai_khoan;
         $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
+
+        $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
 
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }

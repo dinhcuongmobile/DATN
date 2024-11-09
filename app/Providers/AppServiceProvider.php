@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $gio_hangs = [];
             $count_gio_hang = 0;
             $danh_mucs = DanhMuc::all();
+            $userId = Auth::id();
 
             if (Auth::check()) {
                 $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
@@ -39,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
                 $count_gio_hang = $gio_hangs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs'));
+            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
         });
     }
 }
