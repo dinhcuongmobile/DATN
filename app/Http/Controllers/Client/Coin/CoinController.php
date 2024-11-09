@@ -29,7 +29,10 @@ class CoinController extends Controller
         
         if ($check && $check->ngay_nhan == $ngayNhan) {
             // Người dùng đã nhận xu hôm nay
-            return response()->json(['message' => 'Bạn đã nhận xu hôm nay rồi!'], 200);
+            return response()->json([
+                'message' => 'Bạn đã nhận xu hôm nay rồi!',
+                'userId' => $user->id
+            ], 200);
         }
 
         // Chuỗi nhận xu là 7 ngày
@@ -61,6 +64,6 @@ class CoinController extends Controller
         $user = Auth::user();
         $tongCoin = Coin::where('user_id', $user->id)->sum('coin');
 
-        return response()->json(['tong_xu', $tongCoin], 200);
+        return response()->json(['tong_xu' => $tongCoin], 200);
     }
 }

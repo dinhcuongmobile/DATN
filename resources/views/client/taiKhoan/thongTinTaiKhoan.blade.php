@@ -145,7 +145,7 @@
                                                     </div>
                                                     <div class="totle-detail">
                                                         <h6>Tổng Xu</h6>
-                                                        <h4>500</h4>
+                                                        <h4>{{ $tongCoin }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
