@@ -14,15 +14,26 @@
 <section class="section-b-space pt-0">
     <div class="custom-container container">
         <div class="row">
+            <div class="col-12">
+                @if (session('success'))
+                    <div class="alert alert-success" id="error-alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger" id="error-alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
             <div class="col-xxl-8 col-lg-7">
                 <div class="left-sidebar-checkout sticky">
                     <div class="address-option">
                         <div class="address-title">
                             <h4>Địa chỉ giao hàng </h4>
-                            <a href="#" data-bs-toggle="modal"
-                                data-bs-target="#address-modal" title="add product" tabindex="0">+ Thêm địa chỉ mới</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#add-address-checkout" tabindex="0">+ Thêm địa chỉ mới</a>
                         </div>
-                        <div class="row">
+                        <div class="row dia-chi-item">
                             @foreach ($dia_chis as $item)
                             <div class="col-xxl-4" style="width: 100%">
                                 <label for="address-billing-0">
@@ -105,7 +116,7 @@
                         <div class="summary-total">
                             <ul>
                                 <li>
-                                    <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span>{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
+                                    <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
                                     <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
@@ -114,27 +125,30 @@
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
                                 </li>
                                 <li>
-                                    <p>Giảm giá vận chuyển</p><span>2 ty</span>
+                                    <p>Giảm giá vận chuyển</p><span class="giamTienVanChuyen">0đ</span>
                                 </li>
                                 <li>
-                                    <p>Giảm giá đơn hàng</p><span>1 ty</span>
+                                    <p>Giảm giá đơn hàng</p><span class="giamTienDonHang">0đ</span>
                                 </li>
                             </ul>
                         </div>
                         <div class="total">
                             <h6>Tổng tiền hàng : </h6>
-                            <h6>$ 37.73</h6>
+                            <h6 class="textColor tongTienHang">{{ number_format($tong_tien, 0, ',', '.') }}đ</h6>
                         </div>
                         <div class="total">
                             <h6>Tổng tiền phí vận chuyển : </h6>
-                            <h6>$ 37.73</h6>
+                            <h6 class="textColor tongPhiVanChuyen">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</h6>
                         </div>
                         <div class="total">
+                            @php
+                                $phi_ship = $phi_ship_goc ? $phi_ship_goc->phi_ship : 0;
+                                $tong_thanh_toan = $tong_tien + $phi_ship;
+                            @endphp
                             <h6>Tổng thanh toán : </h6>
-                            <h6>$ 37.73</h6>
+                            <h6 class="textColor tongThanhToan">{{ number_format($tong_thanh_toan, 0, ',', '.') }}đ</h6>
                         </div>
-                        <div class="order-button"><a class="btn btn_black sm w-100 rounded" href="#">Đặt hàng
-                            </a></div>
+                        <div class="order-button btn btn_black sm w-100 rounded">Đặt hàng</div>
                     </div>
                 </div>
             </div>
@@ -147,66 +161,72 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Chọn voucher của shop</h4>
-                        <div class="nhap-voucher">
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="free-ship">
                             <p class="titleGiamGia">Mã miễn phí vận chuyển</p>
                             @foreach ($ma_giam_gia_van_chuyen as $item)
                                 @php
+                                    $ngayBatDau = \Carbon\Carbon::parse($item->ngay_bat_dau);
                                     $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
                                     $ngayHienTai = now();
+                                    $gioRaMat = $ngayHienTai->diffInSeconds($ngayBatDau, false);
                                     $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
                                 @endphp
-                                <div class="voucher-item">
-                                    <div class="img-item">
-                                        <img src="{{asset('assets/images/cart/nen-free-ship.jpg')}}" alt="" width="120px">
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="text-content">
-                                            <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                            <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
-                                            @if ($gioConLai>0 && $gioConLai<=24)
-                                                <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
-                                            @elseif ($gioConLai > 24)
-                                                <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
-                                            @endif
+                                @if ($gioConLai>0 && $gioRaMat<0)
+                                    <div class="voucher-item">
+                                        <div class="img-item">
+                                            <img src="{{asset('assets/images/cart/nen-free-ship.jpg')}}" alt="" width="120px">
                                         </div>
-                                        <div class="radio-container">
-                                            <input type="radio" name="ma_giam_gia_van_chuyen[]" value="{{$item->id}}">
+                                        <div class="item-content">
+                                            <div class="text-content">
+                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                @if ($gioConLai>0 && $gioConLai<=24)
+                                                    <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
+                                                @elseif ($gioConLai > 24)
+                                                    <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
+                                                @endif
+                                            </div>
+                                            <div class="radio-container">
+                                                <input type="radio" name="ma_giam_gia_van_chuyen" value="{{$item->id}}">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                         <div class="free-order mt-4">
                             <p class="titleGiamGia">Mã giảm giá đơn hàng</p>
                             @foreach ($ma_giam_gia_don_hang as $item)
                                 @php
+                                    $ngayBatDau = \Carbon\Carbon::parse($item->ngay_bat_dau);
                                     $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
                                     $ngayHienTai = now();
+                                    $gioRaMat = $ngayHienTai->diffInSeconds($ngayBatDau, false);
                                     $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
                                 @endphp
-                                <div class="voucher-item">
-                                    <div class="img-item">
-                                        <img src="{{asset('assets/images/cart/nen-free-order.jpg')}}" alt="" width="120px">
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="text-content">
-                                            <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                            <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
-                                            @if ($gioConLai>0 && $gioConLai<=24)
-                                                <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
-                                            @elseif ($gioConLai > 24)
-                                                <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
-                                            @endif
+                                @if ($gioConLai>0 && $gioRaMat < 0)
+                                    <div class="voucher-item">
+                                        <div class="img-item">
+                                            <img src="{{asset('assets/images/cart/nen-free-order.jpg')}}" alt="" width="120px">
                                         </div>
-                                        <div class="radio-container">
-                                            <input type="radio" name="ma_giam_gia_don_hang[]" value="{{$item->id}}">
+                                        <div class="item-content">
+                                            <div class="text-content">
+                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                @if ($gioConLai>0 && $gioConLai<=24)
+                                                    <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
+                                                @elseif ($gioConLai > 24)
+                                                    <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
+                                                @endif
+                                            </div>
+                                            <div class="radio-container">
+                                                <input type="radio" name="ma_giam_gia_don_hang" value="{{$item->id}}">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
 
@@ -219,7 +239,104 @@
             </div>
         </div>
     </div>
+
+    {{-- Nhập địa chỉ mới --}}
+    <div class="reviews-modal modal theme-modal fade" id="add-address-checkout" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Địa chỉ mới</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <form id="themDiaChiMoiCheckOut" action="{{ route('tai-khoan.them-dia-chi-moi') }}"
+                        method="POST">
+                        @csrf
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="from-group">
+                                    <label class="form-label">Họ và tên</label>
+                                    <input class="form-control @error('ho_va_ten_nhan') is-invalid @enderror"
+                                        type="text" name="ho_va_ten" placeholder="Nhập họ và tên..."
+                                        value="">
+                                </div>
+                                <p class="Err text-danger ho_va_ten-error-dia-chi">
+                                    @error('ho_va_ten')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <div class="from-group">
+                                    <label class="form-label">Số điện thoại</label>
+                                    <input class="form-control @error('so_dien_thoai_nhan') is-invalid @enderror"
+                                        type="text" name="so_dien_thoai" placeholder="Nhập số điện thoại."
+                                        value="">
+                                </div>
+                                <p class="Err text-danger so_dien_thoai-error-dia-chi">
+                                    @error('so_dien_thoai')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="them_tinh_thanh_pho">Chọn Tỉnh/Thành phố</label>
+                                <select class="form-select @error('them_tinh_thanh_pho') is-invalid @enderror"
+                                    id="them_tinh_thanh_pho" name="tinh_thanh_pho">
+                                    <option value="">--Chọn tỉnh thành phố--</option>
+                                    @foreach ($tinh_thanh_pho as $item)
+                                        <option value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="Err text-danger tinh_thanh_pho-error-dia-chi">
+                                    @error('tinh_thanh_pho')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="them_quan_huyen">Chọn Quận/Huyện</label>
+                                <select class="form-select @error('quan_huyen') is-invalid @enderror"
+                                    id="them_quan_huyen" name="quan_huyen">
+                                    <option value="">--Chọn quận huyện--</option>
+                                </select>
+                                <p class="Err text-danger quan_huyen-error-dia-chi">
+                                    @error('quan_huyen')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="them_phuong_xa">Chọn Phường/Xã/Thị trấn</label>
+                                <select class="form-select @error('phuong_xa') is-invalid @enderror" id="them_phuong_xa"
+                                    name="phuong_xa">
+                                    <option value="">--Chọn phường xã--</option>
+                                </select>
+                                <p class="Err text-danger phuong_xa-error-dia-chi">
+                                    @error('phuong_xa')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...)</label>
+                                <textarea name="dia_chi_chi_tiet" id="them_dia_chi_chi_tiet" cols="5" rows="4"
+                                    class="form-control form-control-sm @error('dia_chi_chi_tiet') is-invalid @enderror"></textarea>
+                                <p class="Err text-danger dia_chi_chi_tiet-error-dia-chi">
+                                    @error('dia_chi_chi_tiet')
+                                        {{ $message }}
+                                    @enderror
+                                </p>
+                            </div>
+                            <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChiCheckOut()">Xác nhận</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 @endsection
 @section('js')
 <script src="{{asset('assets/js/check-out.js')}}"></script>

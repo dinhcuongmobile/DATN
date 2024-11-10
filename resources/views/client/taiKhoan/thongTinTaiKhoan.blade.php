@@ -145,7 +145,7 @@
                                                     </div>
                                                     <div class="totle-detail">
                                                         <h6>Tổng Xu</h6>
-                                                        <h4>500</h4>
+                                                        <h4>{{ $tongCoin }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1498,7 +1498,7 @@
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
                             </div>
                         </form>
                     </div>

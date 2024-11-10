@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Client\GioHang;
 
+use App\Models\User;
+use App\Models\DiaChi;
 use App\Models\KichCo;
 use App\Models\MauSac;
+use App\Models\BienThe;
 use App\Models\GioHang;
+use App\Models\PhiShip;
 use App\Models\SanPham;
+use App\Models\KhuyenMai;
+use App\Models\TinhThanhPho;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BienThe;
-use App\Models\DiaChi;
-use App\Models\KhuyenMai;
-use App\Models\PhiShip;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class GioHangController extends Controller
 {
@@ -44,44 +47,6 @@ class GioHangController extends Controller
             $this->views['gio_hangs'] = $gioHangs;
         }
         return view('client.gioHang.gioHang', $this->views);
-    }
-
-    public function chiTietThanhToan(){
-        if(empty(session()->get('gio_hangs', []))){
-            return redirect()->route('gio-hang.gio-hang');
-        }
-        $this->views['dia_chis']= DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')
-                                        ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
-        $this->views['gio_hangs'] = session()->get('gio_hangs', []);
-        $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
-        $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai',2)->orderBy('id','desc')->get();
-        $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai',1)->orderBy('id','desc')->get();
-        $dia_chi_checked = DiaChi::where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->first();
-        $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho','quanHuyen')
-                                                ->where('ma_quan_huyen',$dia_chi_checked->ma_quan_huyen)->first();
-        return view('client.gioHang.chiTietThanhToan',$this->views);
-    }
-
-    public function tiepTucDatHang(Request $request){
-
-        $gio_hang_ids = $request->input('select', []);
-
-        if (empty($gio_hang_ids)) {
-            return response()->json(['success' => false]);
-        }
-
-        // Lấy thông tin chi tiết của các sản phẩm được chọn từ cơ sở dữ liệu
-        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
-                            ->where('user_id',Auth::user()->id)
-                            ->whereIn('gio_hangs.id',$gio_hang_ids)
-                            ->get();
-
-        // Lưu thông tin vào session
-        session()->put('gio_hangs', $gio_hang);
-
-        // Trả về đường dẫn để chuyển hướng
-        return response()->json(['success' => true, 'redirect' => route('gio-hang.chi-tiet-thanh-toan')]);
-
     }
 
     public function themGioHang(Request $request){
@@ -235,6 +200,48 @@ class GioHangController extends Controller
         return response()->json(['gio_hang'=>$gio_hang,'bien_the'=>$bien_the]);
     }
 
+    public function chiTietThanhToan(){
+        if(empty(session()->get('gio_hangs', []))){
+            return redirect()->route('gio-hang.gio-hang');
+        }
+        $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
+        $this->views['dia_chis']= DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')
+                                        ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
+        $this->views['gio_hangs'] = session()->get('gio_hangs', []);
+        $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
+        $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai',2)->orderBy('id','desc')->get();
+        $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai',1)->orderBy('id','desc')->get();
+        $dia_chi_checked = DiaChi::where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->first();
+        $this->views['phi_ship_goc']=[];
+        if($dia_chi_checked){
+            $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho','quanHuyen')
+                                                ->where('ma_quan_huyen',$dia_chi_checked->ma_quan_huyen)->first();
+        }
+        return view('client.gioHang.chiTietThanhToan',$this->views);
+    }
+
+    public function tiepTucDatHang(Request $request){
+
+        $gio_hang_ids = $request->input('select', []);
+
+        if (empty($gio_hang_ids)) {
+            return response()->json(['success' => false]);
+        }
+
+        // Lấy thông tin chi tiết của các sản phẩm được chọn từ cơ sở dữ liệu
+        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id',Auth::user()->id)
+                            ->whereIn('gio_hangs.id',$gio_hang_ids)
+                            ->get();
+
+        // Lưu thông tin vào session
+        session()->put('gio_hangs', $gio_hang);
+
+        // Trả về đường dẫn để chuyển hướng
+        return response()->json(['success' => true, 'redirect' => route('gio-hang.chi-tiet-thanh-toan')]);
+
+    }
+
     public function tinhPhiShipDiaChi(Request $request){
         $ma_quan_huyen = $request->input('ma_quan_huyen');
 
@@ -242,5 +249,17 @@ class GioHangController extends Controller
                         ->where('ma_quan_huyen',$ma_quan_huyen)->first();
 
         return response()->json(['phi_ships'=>$phi_ships]);
+    }
+
+    public function chonMaGiamGia(Request $request){
+        $giamGiaVanChuyen = KhuyenMai::find($request->input('maVanChuyenId'));
+        $giamGiaDonHang = KhuyenMai::find($request->input('maDonHangId'));
+        $gioHangCu = session()->get('gio_hangs', []);
+        return response()->json([
+            'success'=>true,
+            'giamGiaVanChuyen' => $giamGiaVanChuyen,
+            'giamGiaDonHang' => $giamGiaDonHang,
+            'gioHangCu' => $gioHangCu
+        ]);
     }
 }

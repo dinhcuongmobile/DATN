@@ -349,3 +349,7 @@ font-family: Outfit, sans-serif;
     display: inline;
     width: auto;
 }
+
+.textColor{
+    color: rgba(var(--theme-default), 1);
+}
