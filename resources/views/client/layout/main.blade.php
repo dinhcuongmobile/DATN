@@ -204,8 +204,7 @@
         <div class="top_header">
             @if (Auth::check())
                 <p> Ưu đã Namad Xu truy cập website hàng ngày để nhận xu <span>NEW</span>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#daily-coin"
-                        title="Quick View" tabindex="0"> NHẬN NGAY</a></p>
+                    <a href="javascript:void(0)" id="tich-xu" title="Quick View" tabindex="0"> NHẬN NGAY</a></p>
             @else
                 <p> Ưu đã Namad Xu truy cập website hàng ngày để nhận xu <span>NEW</span>
                     <a href="{{ route('tai-khoan.dang-nhap') }}"> ĐĂNG NHẬP ĐỂ NHẬN XU</a></p>
@@ -304,97 +303,6 @@
     </div>
     {{-- end popup thông báo --}}
 
-    {{-- GIAO DIỆN NHẠN XU --}}
-    <div class="modal theme-modal fade" id="daily-coin" tabindex="-1" role="dialog"
-        aria-modal="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                <div class="modal-body p-0">
-                    <div id="dailyCoinContainer" class="coin-container">
-                        <div class="coin-header">Namad Xu</div>
-                        {{-- Tổng xu --}}
-                        <div id="userCoin" class="current-coin"></div>
-                        <div class="days-container d-flex">
-                            <div class="day-box" id="day-1">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="lỗi">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 1</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box" id="day-2">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 2</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box" id="day-3">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 3</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box" id="day-4">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 4</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box" id="day-5">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 5</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box" id="day-6">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 6</div>
-                                <div>+100</div>
-                            </div>
-                            <div class="day-box complete" id="day-7">
-                                <div class="coin-icon">
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
-                                </div>
-                                <div class="check-icon" style="display: none;">
-                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
-                                </div>
-                                <div>Ngày 7</div>
-                                <div>+300</div>
-                            </div>
-                        </div>
-                        <button class="btn btn_black rounded sm mt-3" id="dailyCoinButton">Nhận Xu</button>
-                        <div class="mt-3" style="color: red; font-size: 20px" id="coinMessage"></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
     {{-- END GIAO DIỆN NHẬN XU --}}
     @yield('container')
 
@@ -492,6 +400,98 @@
             </div>
         </section>
     </footer>
+    {{-- GIAO DIỆN NHẠN XU --}}
+    <div class="modal theme-modal fade" id="daily-coin" data-id="{{$userId}}" tabindex="-1" role="dialog"
+        aria-modal="true">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <div id="dailyCoinContainer" class="coin-container">
+                        <div class="coin-header">Namad Xu</div>
+                        {{-- Tổng xu --}}
+                        <div id="userCoin" class="current-coin"></div>
+                        <div class="days-container d-flex">
+                            <div class="day-box" id="day-1">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="lỗi">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 1</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-2">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 2</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-3">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 3</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-4">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 4</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-5">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 5</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box" id="day-6">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 6</div>
+                                <div>+100</div>
+                            </div>
+                            <div class="day-box complete" id="day-7">
+                                <div class="coin-icon">
+                                    <img src="{{ asset('assets/images/coin.png') }}" alt="coin">
+                                </div>
+                                <div class="check-icon" style="display: none;">
+                                    <img src="{{ asset('assets/images/v.png') }}" alt="lỗi">
+                                </div>
+                                <div>Ngày 7</div>
+                                <div>+300</div>
+                            </div>
+                        </div>
+                        <button class="btn btn_black rounded sm mt-3" id="dailyCoinButton">Nhận Xu</button>
+                        <div class="mt-3" style="color: red; font-size: 20px" id="coinMessage"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- xem nhanh san pham quick view --}}
     <div class="modal theme-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -561,7 +561,6 @@
             </div>
         </div>
     </div>
-
     {{-- cửa sổ nhỏ thêm thành công sản phẩm vào giỏ hàng --}}
     <div class="modal theme-modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -870,115 +869,8 @@
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/otp.js')}}"></script>
     <script src="{{asset('assets/js/ajax.js')}}"></script>
+    <script src="{{asset('assets/js/tich-xu.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
-    {{-- JS CỦA NHẬN XU --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const idUser = @json($userId);
-            const soNgayKey = `soNgay_${idUser}`;
-            const ngayCuoiKey = `ngayCuoi_${idUser}`;
-
-            const dailyCoinButton = document.getElementById("dailyCoinButton");
-
-            // Lấy trạng thái từ localStorage và cập nhật giao diện
-            const soNgay = JSON.parse(localStorage.getItem(soNgayKey)) || 0;
-            const ngayCuoi = localStorage.getItem(ngayCuoiKey) || '';
-
-            // Kiểm tra xem có phải là ngày mới không
-            const homNay = new Date().toLocaleDateString('en-CA').split('T')[0]; // Lấy ngày hiện tại
-            const homQua = new Date(new Date() - 86400000).toISOString().split('T')[0]; // Lấy ngày hôm qua
-
-            if (ngayCuoi !== homNay) {
-                // Nếu không phải là ngày hôm nay
-                if (soNgay === 7) {
-                    // Nếu chuỗi ngày đã nhận là 7, reset lại
-                    localStorage.setItem(soNgayKey, 0);
-                } else {
-                    if (ngayCuoi !== homQua) {
-                        localStorage.setItem(soNgayKey, 0);
-                    } else {
-                        // Cập nhật ngày nhận mới
-                        localStorage.setItem(ngayCuoiKey, homNay);
-                    }
-
-                    localStorage.setItem(ngayCuoiKey, homNay);
-                }
-
-                updateDayBoxes(soNgay); // Cập nhật giao diện
-            }
-
-            fetch('{{ route("coin.tong-xu") }}')
-                .then(response => response.json())
-                .then(data => {
-                    // Cập nhật số xu trên giao diện
-                    document.getElementById('userCoin').innerHTML = `
-                        <img src="{{ asset('assets/images/coin.png') }}" alt="lỗi" style="width: 40px; height: 40px;"> ${data.tong_xu}`;
-                })
-                .catch(error => console.error('Error:', error));
-
-            updateDayBoxes(soNgay);
-
-
-            // Xử lý xác nhận
-            dailyCoinButton.addEventListener("click", function() {
-                fetch('{{ route("coin.nhan-xu") }}', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'same-origin'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('coinMessage').innerText = data.message;
-
-                    if (data.so_ngay) {
-                        // Cập nhật giao diện theo số ngày đã nhận
-                        localStorage.setItem(soNgayKey, data.so_ngay); // Lưu số ngày đã nhận vào localStorage
-                        updateDayBoxes(data.so_ngay);
-
-                        // Cập nhật hiển thị tổng xu
-                        fetch('{{ route("coin.tong-xu") }}')
-                            .then(response => response.json())
-                            .then(dataCoin => {
-                                // Cập nhật số xu trên giao diện
-                                document.getElementById('userCoin').innerHTML = `
-                                    <img src="{{ asset('assets/images/coin.png') }}" alt="lỗi" style="width: 40px; height: 40px;"> ${dataCoin.tong_xu}`;
-                            })
-                            .catch(error => console.error('Error:', error));
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        });
-
-
-        function updateDayBoxes(soNgay) {
-            for (let i = 1; i <= 7; i++) {
-                const dayBox = document.getElementById(`day-${i}`);
-                if (i <= soNgay) {
-                    dayBox.classList.add('received');
-                    dayBox.querySelector('.check-icon').style.display = 'block'; // Hiện biểu tượng tích
-                } else {
-                    dayBox.classList.remove('received');
-                    dayBox.querySelector('.check-icon').style.display = 'none'; // Ẩn biểu tượng tích
-                }
-            }
-
-            // Xóa lớp 'today' khỏi tất cả các ô ngày trước khi thêm vào ngày hiện tại
-            for (let i = 1; i <= 7; i++) {
-                const dayBox = document.getElementById(`day-${i}`);
-                dayBox.classList.remove('today');
-            }
-
-            // Gán lớp 'today' cho ô ngày hiện tại trong chuỗi điểm danh
-            const todayBox = document.getElementById(`day-${soNgay}`);
-            if (todayBox) {
-                todayBox.classList.add('today');
-            }
-        }
-    </script>
     @yield('js')
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->

@@ -26,7 +26,7 @@ class CoinController extends Controller
         // Lấy lịch sử nhận xu gần nhất của người dùng
         $check = Coin::where('user_id', $user->id)
             ->latest('ngay_nhan')->first();
-        
+
         if ($check && $check->ngay_nhan == $ngayNhan) {
             // Người dùng đã nhận xu hôm nay
             return response()->json([
