@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         .then(dataCoin => {
                             // Cập nhật số xu trên giao diện
                             document.getElementById('userCoin').innerHTML = `
-                                <img src="assets/images/coin.png" alt="lỗi" style="width: 40px; height: 40px;"> ${dataCoin.tong_xu}`;
+                                <img src="/assets/images/coin.png" alt="lỗi" style="width: 40px; height: 40px;"> ${dataCoin.tong_xu}`;
                         })
                 }
             })

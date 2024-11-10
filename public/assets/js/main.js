@@ -1,4 +1,22 @@
 
+// Lưu trạng thái khi vào trang chi tiết thanh toán
+let checkUrl = false;
+if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
+    checkUrl=true;
+}else{
+    checkUrl=false;
+}
+
+if (!checkUrl) {
+    fetch('/gio-hang/xoa-session-gio-hang', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    });
+}
+
+
 // Tỉnh thành phố, quận huyện
 $('select[name="tinh_thanh_pho"]').on('change', function () {
     var matp = $(this).val();

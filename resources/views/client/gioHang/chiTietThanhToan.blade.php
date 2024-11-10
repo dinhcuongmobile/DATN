@@ -125,7 +125,7 @@
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
                                 </li>
                                 <li>
-                                    <p>Sử dụng xu (<span>300</span> xu)</p>
+                                    <p>Sử dụng xu (<span class="tongCoin">{{$tongCoin}}</span> xu)</p>
                                     <div class="toggle-button">
                                         <div class="toggle-circle"></div>
                                     </div>
@@ -344,7 +344,7 @@
                                     @enderror
                                 </p>
                             </div>
-                            <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChiCheckOut()">Xác nhận</button>
+                            <button class="btn btn-submit mt-3 check-url" type="submit" onsubmit="ajaxThemDiaChiCheckOut()">Xác nhận</button>
                         </div>
                     </form>
                 </div>

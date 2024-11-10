@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     success: function (response) {
                         if (response.login == false) {
-                            window.location.href = '/tai-khoan/dang-nhap';
+                            window.location.href = '/tai-khoan/dang-nhap'; 
                         } else {
                             $('#addtocart').modal('show');
                             var tenSanPham = document.querySelector('#tenSanPhamChiTiet');

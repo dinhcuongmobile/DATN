@@ -9,7 +9,19 @@ document.querySelector('.cart-listing #chon-voucher').addEventListener('click',f
 
 document.querySelector('.right-sidebar-checkout .toggle-button').addEventListener('click', function() {
     this.classList.toggle('active');
+
+    const soCoin = parseFloat(document.querySelector('.summary-total .tongCoin').textContent) || 0;
+    let tongThanhToan = parseFloat(document.querySelector('.tongThanhToan').textContent.replace(/[đ,.]/g, '')) || 0;
+
+    if (this.classList.contains('active')) {
+        tongThanhToan -= soCoin;
+    } else {
+        tongThanhToan += soCoin;
+    }
+
+    document.querySelector('.tongThanhToan').textContent = `${tongThanhToan.toLocaleString('vi-VN')}đ`;
 });
+
 
 document.querySelector('#popup-voucher .card-footer .btnQuayLai').addEventListener('click',function(){
     $('#popup-voucher').modal('hide');
@@ -27,21 +39,35 @@ document.querySelectorAll(".address-option #address-billing-0").forEach(function
             },
             success: function(response) {
                 if(response.phi_ships){
+
+                    document.querySelector('#tienPhiShip').textContent = "0đ";
+                    document.querySelector('.tongPhiVanChuyen').textContent = "0đ";
+                    document.querySelector('.tongThanhToan').textContent = "0đ";
+                    document.querySelector('.giamTienVanChuyen').textContent = "0đ";
+                    document.querySelector('#popup-voucher input[name="ma_giam_gia_van_chuyen"]:checked').checked=false;
+
+                    // Cập nhật lại phí vận chuyển mới
                     document.querySelector('#tienPhiShip').textContent = `${response.phi_ships.phi_ship.toLocaleString('vi-VN')}đ`;
+                    const phiShipGoc = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
+                    const giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.-]/g, '')) || 0;
+
+                    document.querySelector('.tongPhiVanChuyen').textContent = `${(phiShipGoc - giamTienVanChuyen).toLocaleString('vi-VN')}đ`;
+
+                    const tongPhiVanChuyen = parseFloat(document.querySelector('.tongPhiVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
+                    const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
                 }else{
                     document.querySelector('#tienPhiShip').textContent = "0đ";
                 }
-
             },
             error: function(error) {
                 console.log(error);
                 alert("Có lỗi xảy ra khi gửi yêu cầu.");
             }
         });
-
-
     });
-})
+});
+
 
 // them địa chỉ mới
 function ajaxThemDiaChiCheckOut(){
@@ -121,6 +147,15 @@ function chonMaKhuyenMai() {
                         const giamTienVanChuyen = response.giamGiaVanChuyen.so_tien_giam;
                         document.querySelector('.giamTienVanChuyen').textContent = `-${giamTienVanChuyen.toLocaleString('vi-VN')}đ`;
                         document.querySelector('.tongPhiVanChuyen').textContent = `${(phiShipGoc - giamTienVanChuyen).toLocaleString('vi-VN')}đ`;
+                        // Kiểm tra nếu giảm giá vận chuyển lớn hơn phí ship gốc
+                        const tienGiamGiaVanChuyen = phiShipGoc > giamTienVanChuyen ? giamTienVanChuyen : phiShipGoc;
+
+                        // Cập nhật giảm giá vận chuyển
+                        if (tienGiamGiaVanChuyen > 0) {
+                            document.querySelector('.giamTienVanChuyen').textContent = `-${tienGiamGiaVanChuyen.toLocaleString('vi-VN')}đ`;
+                            // Cập nhật tổng phí vận chuyển sau khi giảm giá
+                            document.querySelector('.tongPhiVanChuyen').textContent = `${(phiShipGoc - tienGiamGiaVanChuyen).toLocaleString('vi-VN')}đ`;
+                        }
                     }
 
                     // Cập nhật giảm giá đơn hàng
@@ -133,7 +168,6 @@ function chonMaKhuyenMai() {
                     // Cập nhật tổng tiền thanh toán
                     const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
                     const tongPhiVanChuyen = parseFloat(document.querySelector('.tongPhiVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
-
                     document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
 
                     // Đóng popup
@@ -146,5 +180,7 @@ function chonMaKhuyenMai() {
         });
     });
 }
+
+
 
 
