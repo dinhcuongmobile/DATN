@@ -885,14 +885,6 @@
             const ngayCuoi = localStorage.getItem(ngayCuoiKey) || '';
 
             // Kiểm tra xem có phải là ngày mới không
-            const homNay = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
-            const currentDayIndex = new Date().getDay(); // 0 = Chủ nhật, 1 = Thứ hai, ..., 6 = Thứ bảy
-            const displayDay = currentDayIndex === 0 ? 7 : currentDayIndex; // Chuyển đổi Chủ nhật thành ngày 7
-
-            // Cập nhật giao diện cho ngày hiện tại
-            const dayBox = document.getElementById(`day-${displayDay}`);
-            dayBox.classList.add('today'); // Thêm lớp 'today' cho ô ngày hiện tại
-
             const homNay = new Date().toLocaleDateString('en-CA').split('T')[0]; // Lấy ngày hiện tại
             const homQua = new Date(new Date() - 86400000).toISOString().split('T')[0]; // Lấy ngày hôm qua
 
@@ -926,29 +918,6 @@
 
             updateDayBoxes(soNgay);
 
-
-        });
-
-        document.getElementById("dailyCoinButton").addEventListener("click", function() {
-            fetch('{{ route("coin.nhan-xu") }}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin'
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('coinMessage').innerText = data.message;
-
-                if (data.so_ngay) {
-                    // Cập nhật giao diện theo số ngày đã nhận
-                    localStorage.setItem('soNgay', data.so_ngay); // Lưu số ngày đã nhận vào localStorage
-                    updateDayBoxes(data.so_ngay);
-                }
-            })
-            .catch(error => console.error('Error:', error));
 
             // Xử lý xác nhận
             dailyCoinButton.addEventListener("click", function() {
