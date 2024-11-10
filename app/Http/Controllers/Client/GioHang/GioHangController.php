@@ -204,19 +204,26 @@ class GioHangController extends Controller
         if(empty(session()->get('gio_hangs', []))){
             return redirect()->route('gio-hang.gio-hang');
         }
+        //them dia chi
         $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
+        //hien thi dia chi
         $this->views['dia_chis']= DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')
                                         ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
+        //tong so tien (* san pham)
         $this->views['gio_hangs'] = session()->get('gio_hangs', []);
         $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
+        //popup giam gia
         $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai',2)->orderBy('id','desc')->get();
         $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai',1)->orderBy('id','desc')->get();
+        
+        //tinh phi ship
         $dia_chi_checked = DiaChi::where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->first();
         $this->views['phi_ship_goc']=[];
         if($dia_chi_checked){
             $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho','quanHuyen')
                                                 ->where('ma_quan_huyen',$dia_chi_checked->ma_quan_huyen)->first();
         }
+
         return view('client.gioHang.chiTietThanhToan',$this->views);
     }
 

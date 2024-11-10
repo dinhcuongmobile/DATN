@@ -451,7 +451,7 @@
                         <button class="btn" id="dailyCoinButton">Nhận Xu</button>
                         <div id="coinMessage"></div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -467,7 +467,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="footer-content">
                             <div class="footer-logo">
-                                <a href="index.html"> 
+                                <a href="index.html">
                                     <img class="img-fluid"
                                         src="{{asset('assets/images/logo/logo_namad.png')}}" alt="Footer Logo">
                                 </a>
@@ -564,25 +564,25 @@
                             <div class="quick-view-img">
                                 <div class="swiper modal-slide-1">
                                     <div class="swiper-wrapper ratio_square-2">
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/1.jpg')}}"
+                                        <div class="swiper-slide anhLon1"><img class="bg-img" src="{{asset('assets/images/pro/1.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/2.jpg')}}"
+                                        <div class="swiper-slide anhLon2"><img class="bg-img" src="{{asset('assets/images/pro/2.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/3.jpg')}}"
+                                        <div class="swiper-slide anhLon3"><img class="bg-img" src="{{asset('assets/images/pro/3.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/4.jpg')}}"
+                                        <div class="swiper-slide anhLon4"><img class="bg-img" src="{{asset('assets/images/pro/4.jpg')}}"
                                                 alt=""></div>
                                     </div>
                                 </div>
                                 <div class="swiper modal-slide-2">
                                     <div class="swiper-wrapper ratio3_4">
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/5.jpg')}}"
+                                        <div class="swiper-slide anhNho1"><img class="bg-img" src="{{asset('assets/images/pro/5.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/6.jpg')}}"
+                                        <div class="swiper-slide anhNho2"><img class="bg-img" src="{{asset('assets/images/pro/6.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/7.jpg')}}"
+                                        <div class="swiper-slide anhNho3"><img class="bg-img" src="{{asset('assets/images/pro/7.jpg')}}"
                                                 alt=""></div>
-                                        <div class="swiper-slide"><img class="bg-img" src="{{asset('assets/images/pro/8.jpg')}}"
+                                        <div class="swiper-slide anhNho4"><img class="bg-img" src="{{asset('assets/images/pro/8.jpg')}}"
                                                 alt=""></div>
                                     </div>
                                 </div>
@@ -590,19 +590,14 @@
                         </div>
                         <div class="col-lg-6 rtl-text">
                             <div class="product-right">
-                                <h3>Women Pink Shirt</h3>
-                                <h5>$32.96<del>$50.12</del></h5>
+                                <h3></h3>
+                                <h5></h5>
                                 <ul class="color-variant">
                                     <li class="bg-color-brown"></li>
                                     <li class="bg-color-chocolate"></li>
                                     <li class="bg-color-coffee"></li>
                                     <li class="bg-color-black"></li>
                                 </ul>
-                                <div class="border-product">
-                                    <h6>Product details</h6>
-                                    <p>Western yoke on an Indigo shirt made of 100% cotton. Ideal for informal
-                                        gatherings, this top will ensure your comfort and style throughout the day.</p>
-                                </div>
                                 <div class="product-description">
                                     <div class="size-box">
                                         <ul>
@@ -952,7 +947,7 @@
             // Cập nhật giao diện cho ngày hiện tại
             const dayBox = document.getElementById(`day-${displayDay}`);
             dayBox.classList.add('today'); // Thêm lớp 'today' cho ô ngày hiện tại
-            
+
             if (ngayCuoi !== homNay) {
                 // Nếu không phải là ngày hôm nay
                 if (soNgay === 7) {
@@ -968,7 +963,7 @@
             updateDayBoxes(soNgay);
             localStorage.clear();
 
-            
+
         });
 
         document.getElementById("dailyCoinButton").addEventListener("click", function() {

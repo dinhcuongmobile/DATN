@@ -7,6 +7,10 @@ document.querySelector('.cart-listing #chon-voucher').addEventListener('click',f
     $('#popup-voucher').modal('show');
 });
 
+document.querySelector('.right-sidebar-checkout .toggle-button').addEventListener('click', function() {
+    this.classList.toggle('active');
+});
+
 document.querySelector('#popup-voucher .card-footer .btnQuayLai').addEventListener('click',function(){
     $('#popup-voucher').modal('hide');
 });

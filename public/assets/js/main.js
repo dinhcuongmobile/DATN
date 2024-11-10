@@ -56,29 +56,60 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 // end thong bao loi error
 
-document.querySelectorAll('.quickViewClick').forEach((el) => {
-    el.addEventListener('click',function(){
-        $('#quick-view').modal('show');
-        let sanPhamID = el.getAttribute('data-id');
+// document.querySelectorAll('.quickViewClick').forEach((el) => {
+//     el.addEventListener('click', function () {
+//         $('#quick-view').modal('show');
+//         let sanPhamID = el.getAttribute('data-id');
 
-        $.ajax({
-            type: 'GET',
-            url: '/home/quick-view/',
-            data: {
-                san_pham_id: sanPhamID
-            },
-            success: function (response) {
-                let quickView = document.getElementById('quick-view');
+//         $.ajax({
+//             type: 'GET',
+//             url: '/home/quick-view/',
+//             data: {
+//                 san_pham_id: sanPhamID
+//             },
+//             success: function (response) {
+//                 console.log(response.hinhAnh[0].hinh_anh);
+
+//                 let sanPham = response.san_pham;
+//                 // Cập nhật tên sản phẩm
+//                 document.querySelector('.product-right h3').textContent = sanPham.ten_san_pham;
+
+//                 // Cập nhật giá sản phẩm
+//                 const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai/100);
+//                 document.querySelector('.product-right h5').innerHTML = `${giaBan.toLocaleString('vi-VN')}đ <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
+
+//                 // Cập nhật các slide ảnh
+//                 const slide1Wrapper = document.querySelector('#quick-view .ratio_square-2');
+//                 const slide2Wrapper = document.querySelector('#quick-view .ratio3_4');
+//                 if(response.hinhAnh[0]){
+//                     slide1Wrapper.querySelector('.anhLon1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[4]){
+//                     slide1Wrapper.querySelector('.anhLon2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[8]){
+//                     slide1Wrapper.querySelector('.anhLon3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[12]){
+//                     slide1Wrapper.querySelector('.anhLon4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
+//                 }
+
+//             },
+//             error: function (error) {
+//                 console.error('Lỗi: ', error);
+//                 alert('Có lỗi xảy ra');
+//             }
+//         });
+//     });
+// });
 
 
-            },
-            error: function (error) {
-                console.error('Lỗi: ', error);
-                alert('Có lỗi xảy ra');
-            }
-        });
-
-    });
-});
 
 

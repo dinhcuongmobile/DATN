@@ -119,10 +119,16 @@
                                     <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
-                                    <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
+                                    <p>Phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
                                 </li>
                                 <li>
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
+                                </li>
+                                <li>
+                                    <p>Sử dụng xu (<span>300</span> xu)</p>
+                                    <div class="toggle-button">
+                                        <div class="toggle-circle"></div>
+                                    </div>
                                 </li>
                                 <li>
                                     <p>Giảm giá vận chuyển</p><span class="giamTienVanChuyen">0đ</span>
@@ -180,16 +186,21 @@
                                         </div>
                                         <div class="item-content">
                                             <div class="text-content">
-                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
                                                 @if ($gioConLai>0 && $gioConLai<=24)
                                                     <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
                                                 @elseif ($gioConLai > 24)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
+                                                @if ($tong_tien < $item->gia_tri_toi_thieu)
+                                                    <p class="tien">Giá trị đơn hàng chưa đủ.</p>
+                                                @endif
                                             </div>
                                             <div class="radio-container">
-                                                <input type="radio" name="ma_giam_gia_van_chuyen" value="{{$item->id}}">
+                                                @if ($tong_tien >= $item->gia_tri_toi_thieu)
+                                                    <input type="radio" name="ma_giam_gia_van_chuyen" value="{{$item->id}}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -213,16 +224,21 @@
                                         </div>
                                         <div class="item-content">
                                             <div class="text-content">
-                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
                                                 @if ($gioConLai>0 && $gioConLai<=24)
                                                     <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
                                                 @elseif ($gioConLai > 24)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
+                                                @if ($tong_tien < $item->gia_tri_toi_thieu)
+                                                    <p class="tien">Giá trị đơn hàng chưa đủ.</p>
+                                                @endif
                                             </div>
                                             <div class="radio-container">
-                                                <input type="radio" name="ma_giam_gia_don_hang" value="{{$item->id}}">
+                                                @if ($tong_tien >= $item->gia_tri_toi_thieu)
+                                                    <input type="radio" name="ma_giam_gia_don_hang" value="{{$item->id}}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
