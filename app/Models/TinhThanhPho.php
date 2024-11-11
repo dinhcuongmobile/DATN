@@ -10,6 +10,7 @@ class TinhThanhPho extends Model
     use HasFactory;
 
     protected $table = 'vn_tinh_thanh_phos';
+    protected $primaryKey = 'ma_tinh_thanh_pho';
 
     protected $fillable = [
         'ma_tinh_thanh_pho',
@@ -18,6 +19,14 @@ class TinhThanhPho extends Model
     ];
 
     public function quanHuyen() {
-        return $this->hasMany(QuanHuyen::class);
+        return $this->hasMany(QuanHuyen::class, 'ma_tinh_thanh_pho');
+    }
+
+    public function diaChi() {
+        return $this->hasMany(DiaChi::class, 'ma_tinh_thanh_pho');
+    }
+
+    public function phiShip() {
+        return $this->hasMany(PhiShip::class, 'ma_tinh_thanh_pho');
     }
 }

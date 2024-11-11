@@ -33,7 +33,8 @@
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Giá</label>
-                <input type="text" class="form-control" id="" name="gia_san_pham" placeholder="Nhập giá..." value="{{old('gia_san_pham',$san_pham->gia_san_pham)}}">
+                <input type="hidden" name="gia_san_pham" id="tienJSHidden" value="">
+                <input type="text" class="form-control" id="tienJSDisplay" placeholder="Nhập giá..." oninput="formatCurrency()" value="{{$san_pham->gia_san_pham}}">
                 @error('gia_san_pham')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
@@ -78,14 +79,6 @@
     </div>
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-    .create(document.querySelector('#mo_ta'))
-    .catch(error => {
-        console.error(error);
-    });
-</script>
-
 </div>
 <!-- /.container-fluid -->
 @endsection

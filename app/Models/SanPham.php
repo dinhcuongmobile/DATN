@@ -38,11 +38,6 @@ class SanPham extends Model
         return $this->hasMany(BienThe::class, 'san_pham_id');
     }
 
-    public function khuyenMais()
-    {
-        return $this->hasMany(KhuyenMai::class, 'san_pham_id');
-    }
-
     public function danhGias()
     {
         return $this->hasMany(DanhGia::class, 'san_pham_id');

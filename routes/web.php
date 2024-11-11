@@ -18,6 +18,11 @@ use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
+use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
+use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
+use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
+use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
+use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -32,9 +37,16 @@ use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanContro
 */
 
 // Client
-Route::middleware('autoDangNhap')->prefix('/')->group(function(){
+Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
+    Route::prefix('home')->group(function(){
+        Route::get('quick-view', [HomeController::class, 'quickView']);
+    });
+    Route::middleware('auth')->prefix('/coin')->group(function() {
+        Route::post('/nhan-xu', [CoinController::class, 'addDailyCoin'])->name('coin.nhan-xu');
+        Route::get('/tong-xu', [CoinController::class, 'getUserCoin'])->name('coin.tong-xu');
+    });
     Route::prefix('/tai-khoan')->group(function(){
         Route::get('/dang-ky',[TaiKhoanController::class,'showDangKy'])->name('tai-khoan.dang-ky')->middleware('checkUser');
         Route::post('/dang-ky',[TaiKhoanController::class,'dangKy'])->name('tai-khoan.dang-ky');
@@ -54,18 +66,27 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
 
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
-        Route::put('/cap-nhat-thong-tin-tai-khoan', [ThongTinTaiKhoanController::class, 'updateThongTinTaiKhoan'])
-            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan')->middleware('auth');
+
+        Route::put('/sua-thong-tin', [ThongTinTaiKhoanController::class, 'suaThongTin']);
+
+        Route::get('/lay-dia-chi-sua', [ThongTinTaiKhoanController::class, 'layDiaChiSua']);
+        Route::put('/sua-dia-chi', [ThongTinTaiKhoanController::class, 'suaDiaChi']);
+        Route::put('/thiet-lap-dia-chi-mac-dinh', [ThongTinTaiKhoanController::class, 'thietLapDiaChiMacDinh']);
 
         Route::post('/doi-mat-khau', [ThongTinTaiKhoanController::class, 'doiMatKhau'])
             ->name('tai-khoan.doi-mat-khau')->middleware('auth');
+
+        Route::post('/them-dia-chi-moi', [ThongTinTaiKhoanController::class, 'addDiaChi'])
+        ->name('tai-khoan.them-dia-chi-moi')->middleware('auth');
+        Route::get('/xoa-dia-chi', [ThongTinTaiKhoanController::class, 'xoaDiaChi'])
+        ->name('tai-khoan.xoa-dia-chi')->middleware('auth');
 
         Route::get('/dang-xuat', [TaiKhoanController::class, 'dangXuat'])->name('tai-khoan.dang-xuat');
     });
 
     Route::prefix('san-pham')->group(function () {
         Route::get('/', [SanPhamController::class, 'sanPham'])->name('san-pham.san-pham');
-        Route::get('san-pham-danh-muc', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
+        Route::get('san-pham-danh-muc/{danh_muc_id}', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
         Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
         Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
 
@@ -73,12 +94,26 @@ Route::middleware('autoDangNhap')->prefix('/')->group(function(){
 
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
-        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
+        Route::post('/xoa-session-gio-hang', [GioHangController::class, 'xoaSessionGioHang'])->name('gio-hang.xoa-session');
+        Route::post('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
+        Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
+        Route::get('xoa-san-pham-gio-hang', [GioHangController::class, 'xoaSanPhamGioHang']);
+        Route::get('so-luong-mua', [GioHangController::class, 'soLuongMua']);
+        Route::get('thay-doi-bien-the', [GioHangController::class, 'thayDoiBienThe']);
+        Route::get('check-bien-the-size', [GioHangController::class, 'checkBienTheSize']);
+        Route::get('check-bien-the-color', [GioHangController::class, 'checkBienTheColor']);
+        Route::post('tiep-tuc-dat-hang', [GioHangController::class, 'tiepTucDatHang']);
+
+        //chi tiet thanh toan
+        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan')->middleware('auth');
+        Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
+        Route::get('chon-ma-giam-gia', [GioHangController::class, 'chonMaGiamGia']);
+        Route::post('dat-hang', [GioHangController::class, 'datHang']);
     });
 
     Route::prefix('tin-tuc')->group(function () {
         Route::get('/', [TinTucController::class, 'tinTuc'])->name('tin-tuc.tin-tuc');
-        Route::get('/chi-tiet-tin-tuc', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
+        Route::get('/chi-tiet-tin-tuc/{id}', [TinTucController::class, 'chiTietTinTuc'])->name('tin-tuc.chi-tiet-tin-tuc');
         Route::get('/tin-tuc-danh-muc', [TinTucController::class, 'tinTucDanhMuc'])->name('tin-tuc.tin-tuc-danh-muc');
     });
 
@@ -128,6 +163,14 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('update/{id}', [TaiKhoanAdminController::class, 'update'])->name('tai-khoan.update');
         Route::get('khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'khoaTaiKhoan'])->name('tai-khoan.khoa-tai-khoan');
         Route::get('mo-khoa-tai-khoan/{id}', [TaiKhoanAdminController::class, 'moKhoaTaiKhoan'])->name('tai-khoan.mo-khoa-tai-khoan');
+
+        // Thông tin tài khoản
+        Route::get('/thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'showThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.thong-tin-tai-khoan-admin');
+        Route::put('/cap-nhat-thong-tin-tai-khoan-admin', [ThongTinTaiKhoanAdminController::class, 'updateThongTinTaiKhoanAdmin'])
+            ->name('tai-khoan.cap-nhat-thong-tin-tai-khoan-admin');
+        Route::post('/doi-mat-khau-admin', [ThongTinTaiKhoanAdminController::class, 'doiMatKhauAdmin'])
+            ->name('tai-khoan.doi-mat-khau-admin');
     });
 
     //Danh Muc
@@ -163,9 +206,6 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::get('quan-ly-size',[SanPhamAdminController::class, 'danhSachSize'])->name('san-pham.quan-ly-size');
         Route::get('quan-ly-mau-sac',[SanPhamAdminController::class, 'danhSachMauSac'])->name('san-pham.quan-ly-mau-sac');
         Route::get('bien-the-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadBienTheOneSanPham'])->name('san-pham.bien-the-san-pham');
-        Route::get('danh-sach-ma-khuyen-mai',[SanPhamAdminController::class, 'danhSachMaKhuyenMai'])->name('san-pham.danh-sach-ma-khuyen-mai');
-        Route::get('khuyen-mai-san-pham/{san_pham_id}',[SanPhamAdminController::class, 'loadKhuyenMaiOneSanPham'])->name('san-pham.khuyen-mai-san-pham');
-        Route::get('san-pham-ma-khuyen-mai/{san_pham_id}',[SanPhamAdminController::class, 'loadOneSanPham'])->name('san-pham.san-pham-ma-khuyen-mai');
         Route::get('danh-sach-san-pham-da-xoa',[SanPhamAdminController::class, 'danhSachDaXoa'])->name('san-pham.danh-sach-san-pham-da-xoa');
         Route::get('danh-sach-san-pham-danh-muc/{danh_muc_id}',[SanPhamAdminController::class, 'sanPhamDanhMuc'])->name('san-pham.danh-sach-san-pham-danh-muc');
 
@@ -182,18 +222,12 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::get('show-them-bien-the-san-pham',[SanPhamAdminController::class, 'showThemBienThe'])->name('san-pham.show-them-bien-the-san-pham');
         Route::post('them-bien-the-san-pham',[SanPhamAdminController::class, 'themBienThe'])->name('san-pham.them-bien-the-san-pham');
 
-        Route::get('show-them-ma-khuyen-mai',[SanPhamAdminController::class, 'showThemMaKhuyenMai'])->name('san-pham.show-them-ma-khuyen-mai');
-        Route::post('them-ma-khuyen-mai',[SanPhamAdminController::class, 'themMaKhuyenMai'])->name('san-pham.them-ma-khuyen-mai');
-
         //update
         Route::get('show-sua-san-pham/{id}',[SanPhamAdminController::class, 'showSuaSanPham'])->name('san-pham.show-sua-san-pham');
         Route::put('sua-san-pham/{id}',[SanPhamAdminController::class, 'suaSanPham'])->name('san-pham.sua-san-pham');
 
         Route::get('show-sua-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'showSuaBienThe'])->name('san-pham.show-sua-bien-the-san-pham');
         Route::put('sua-bien-the-san-pham/{id}',[SanPhamAdminController::class, 'suaBienThe'])->name('san-pham.sua-bien-the-san-pham');
-
-        Route::get('show-sua-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'ShowSuaMaKhuyenMai'])->name('san-pham.show-sua-ma-khuyen-mai');
-        Route::put('sua-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'suaMaKhuyenMai'])->name('san-pham.sua-ma-khuyen-mai');
 
         //delete
         Route::get('xoa-san-pham/{id}',[SanPhamAdminController::class, 'xoaSanPham'])->name('san-pham.xoa-san-pham');
@@ -206,9 +240,6 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
         Route::get('xoa-mau-sac/{id}',[SanPhamAdminController::class, 'xoaMauSac'])->name('san-pham.xoa-mau-sac');
 
-        Route::get('xoa-ma-khuyen-mai/{id}',[SanPhamAdminController::class, 'xoaKhuyenMai'])->name('san-pham.xoa-ma-khuyen-mai');
-        Route::post('xoa-nhieu-ma-khuyen-mai',[SanPhamAdminController::class, 'xoaNhieuKhuyenMai'])->name('san-pham.xoa-nhieu-ma-khuyen-mai');
-
         Route::get('xoa-san-pham-vinh-vien/{id}', [SanPhamAdminController::class, 'xoaSanPhamVinhVien'])->name('san-pham.xoa-san-pham-vinh-vien');
 
         Route::post('xoa-nhieu-san-pham-vinh-vien', [SanPhamAdminController::class, 'xoaNhieuSanPhamVinhVien'])->name('san-pham.xoa-nhieu-san-pham-vinh-vien');
@@ -216,6 +247,60 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
     });
 
+    Route::prefix('khuyen-mai')->group(function () {
+        Route::get('danh-sach-ma-khuyen-mai-don-hang',[KhuyenMaiAdminController::class, 'danhSachMaKhuyenMaiDonHang'])->name('khuyen-mai.danh-sach-ma-khuyen-mai-don-hang');
+        Route::get('danh-sach-ma-khuyen-mai-van-chuyen',[KhuyenMaiAdminController::class, 'danhSachMaKhuyenMaiVanChuyen'])->name('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen');
+
+        Route::get('show-them-ma-khuyen-mai',[KhuyenMaiAdminController::class, 'showThemMaKhuyenMai'])->name('khuyen-mai.show-them-ma-khuyen-mai');
+        Route::post('them-ma-khuyen-mai',[KhuyenMaiAdminController::class, 'themMaKhuyenMai'])->name('khuyen-mai.them-ma-khuyen-mai');
+
+        Route::get('show-sua-ma-khuyen-mai/{id}',[KhuyenMaiAdminController::class, 'ShowSuaMaKhuyenMai'])->name('khuyen-mai.show-sua-ma-khuyen-mai');
+        Route::put('sua-ma-khuyen-mai/{id}',[KhuyenMaiAdminController::class, 'suaMaKhuyenMai'])->name('khuyen-mai.sua-ma-khuyen-mai');
+
+        Route::get('xoa-ma-khuyen-mai/{id}',[KhuyenMaiAdminController::class, 'xoaKhuyenMai'])->name('khuyen-mai.xoa-ma-khuyen-mai');
+        Route::post('xoa-nhieu-ma-khuyen-mai',[KhuyenMaiAdminController::class, 'xoaNhieuKhuyenMai'])->name('khuyen-mai.xoa-nhieu-ma-khuyen-mai');
+
+    });
+
+    Route::prefix('phi-ship')->group(function () {
+        Route::get('danh-sach', [PhiShipAdminController::class, 'showDanhSach'])->name('phi-ship.danh-sach');
+        //add
+        Route::get('them-phi-ship', [PhiShipAdminController::class, 'viewAdd'])->name('phi-ship.them-phi-ship');
+        Route::post('add', [PhiShipAdminController::class, 'add'])->name('phi-ship.add');
+
+        //update
+        Route::get('sua-phi-ship/{id}', [PhiShipAdminController::class, 'viewUpdate'])->name('phi-ship.sua-phi-ship');
+        Route::put('update/{id}', [PhiShipAdminController::class, 'update'])->name('phi-ship.update');
+
+        //delete
+        Route::get('delete/{id}', [PhiShipAdminController::class, 'delete'])->name('phi-ship.delete');
+
+        Route::post('xoa-nhieu', [PhiShipAdminController::class, 'xoaNhieuPhiShip'])->name('phi-ship.xoa-nhieu');
+    });
+
+    Route::prefix('danh-muc-tin-tuc')->group(function () {
+        Route::get('danh-sach-danh-muc', [DanhMucTinTucAdminController::class, 'showDanhSach'])->name('danh-muc-tin-tuc.danh-sach');
+
+        //add
+        Route::get('them-danh-muc-tin-tuc', [DanhMucTinTucAdminController::class, 'viewAdd'])->name('danh-muc-tin-tuc.them-danh-muc-tin-tuc');
+        Route::post('add', [DanhMucTinTucAdminController::class, 'add'])->name('danh-muc-tin-tuc.add');
+
+        //update
+        Route::get('danh-muc-tin-tuc/{id}', [DanhMucTinTucAdminController::class, 'viewUpdate'])->name('danh-muc-tin-tuc.danh-muc');
+        Route::put('update/{id}', [DanhMucTinTucAdminController::class, 'update'])->name('danh-muc-tin-tuc.update');
+
+        //delete
+        Route::get('delete/{id}', [DanhMucTinTucAdminController::class, 'delete'])->name('danh-muc-tin-tuc.delete');
+        Route::post('xoa-nhieu', [DanhMucTinTucAdminController::class, 'xoaNhieuTinTuc'])->name('danh-muc-tin-tuc.xoa-nhieu');
+
+        Route::get('danh-sach-danh-muc-tin-tuc-da-xoa', [DanhMucTinTucAdminController::class, 'danhSachDanhMucDaXoa'])->name('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa');
+
+        Route::get('xoa-danh-muc-vinh-vien/{id}', [DanhMucTinTucAdminController::class, 'xoaDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-danh-muc-vinh-vien');
+
+        Route::post('xoa-nhieu-vinh-vien', [DanhMucTinTucAdminController::class, 'xoaNhieuDanhMucVinhVien'])->name('danh-muc-tin-tuc.xoa-nhieu-vinh-vien');
+
+        Route::get('khoi-phuc-danh-muc/{id}', [DanhMucTinTucAdminController::class, 'khoiPhucDanhMuc'])->name('danh-muc-tin-tuc.khoi-phuc-danh-muc');
+    });
     Route::prefix('tin-tuc')->group(function () {
         Route::get('danh-sach', [TinTucAdminController::class, 'showDanhSach'])->name('tin-tuc.danh-sach');
 
@@ -251,8 +336,6 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lienhe.phanHoi');
         Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
         Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
-
-
     });
 });
 

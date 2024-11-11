@@ -30,6 +30,16 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @if (session('success'))
+                        <div class="alert alert-success"id="alert-message">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger" id="alert-message">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
@@ -38,6 +48,7 @@
                                 <th>Image</th>
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
+                                <th>Danh mục</th>
                                 <th>Ngày đăng</th>
                                 <th>Action</th>
                             </tr>
@@ -52,6 +63,9 @@
                                             alt="err" height=60px></td>
                                     <td class="col-2 align-middle">{{ $item->tieu_de }}</td>
                                     <td class="col-3 align-middle">{!! Str::limit(strip_tags($item->noi_dung), 100, '...') !!}</td>
+                                    <td class="col-2 align-middle">
+                                        {{ $item->tenDanhMuc }}
+                                    </td>
                                     <td class="col-2 align-middle">{{ $item->created_at }}</td>
                                     <td class="col-2 align-middle"><a href="{{ route('tin-tuc.sua-tin-tuc', $item->id) }}"
                                             class="btn btn-warning btn-sm">Sửa</a> |
@@ -60,7 +74,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                     <div class="phantrang">
@@ -71,5 +84,14 @@
         </div>
         </form>
     </div>
+    <script>
+        // Đoạn mã này sẽ ẩn thông báo sau 5 giây
+        setTimeout(function() {
+            var alert = document.getElementById('alert-message');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }, 5000); // 5000 ms = 5 giây
+    </script>
     <!-- /.container-fluid -->
 @endsection

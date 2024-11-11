@@ -18,15 +18,11 @@ class KhuyenMai extends Model
         'ngay_bat_dau',
         'ngay_ket_thuc',
         'gia_tri_toi_thieu',
+        'trang_thai'
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
-
-    public function sanPham()
-    {
-        return $this->belongsTo(SanPham::class, 'san_pham_id');
-    }
 }

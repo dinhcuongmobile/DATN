@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gio_hangs', function (Blueprint $table) {
+        Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
-            $table->integer('so_luong');
-            $table->double('thanh_tien', 20, 2);
+            $table->foreignId('user_id')->constrained('users');
+            $table->integer('coin');
+            $table->date('ngay_nhan');
+            $table->integer('so_ngay')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gio_hangs');
+        Schema::dropIfExists('coins');
     }
 };

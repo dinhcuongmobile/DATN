@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Client;
 
-use App\Http\Controllers\Controller;
+use App\Models\KichCo;
+use App\Models\MauSac;
+use App\Models\TinTuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     protected $views;
+    protected $tin_tucs;
     public function __construct() {
         $this->views=[];
+        $this->tin_tucs=new TinTuc();
     }
 
     public function home(){
@@ -22,7 +27,19 @@ class HomeController extends Controller
         $this->views['san_pham_moi_nhat']=$san_pham_moi_nhat;
         $this->views['san_pham_ban_chay']=$san_pham_ban_chay;
         $this->views['san_pham_khuyen_mai']=$san_pham_khuyen_mai;
+        $this->views['tin_tucs']=$this->tin_tucs->loadAllTinTuc();
         return view('client.home',$this->views);
+    }
+
+    public function quickView(Request $request){
+        $san_pham = SanPham::with('bienThes','danhGias')->find($request->input('san_pham_id'));
+        $hinhAnh = $san_pham->bienThes->unique('ma_mau');
+        $kich_cos = KichCo::all();
+        $mau_sacs = MauSac::all();
+        return response()->json([
+            'san_pham'=>$san_pham,
+            'hinhAnh' => $hinhAnh
+        ]);
     }
 
     public function error404()

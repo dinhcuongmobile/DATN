@@ -14,6 +14,7 @@ class GioHang extends Model
     protected $fillable = [
         'user_id',
         'san_pham_id',
+        'bien_the_id',
         'so_luong',
         'thanh_tien',
     ];
@@ -31,6 +32,11 @@ class GioHang extends Model
     public function sanPham()
     {
         return $this->belongsTo(SanPham::class, 'san_pham_id');
+    }
+
+    public function bienThe()
+    {
+        return $this->belongsTo(BienThe::class, 'bien_the_id');
     }
 }
 

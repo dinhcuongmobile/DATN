@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="home-content">
-                    <p>Create Your Style<span></span></p>
-                    <h2>New Style For</h2>
-                    <h1>Spring & Summer</h1>
-                    <h6>Amet minim mollit non deserunt dolor do amet sint. </h6><a class="btn btn_outline"
-                        href="collection-left-sidebar.html">Shop Now</a>
+                    <p>Nâng tầm phong cách phái mạnh - Tự tin, lịch lãm mỗi ngày!<span></span></p>
+                    <h2></h2>
+                    <h1>Mùa Thu & Mùa Hè</h1>
+                    <h6>Diện mạo hoàn hảo cho phái mạnh - Phong cách không thể bỏ qua! </h6><a class="btn btn_outline"
+                        href="{{route('san-pham.san-pham')}}">Khám Phá Ngay</a>
                 </div>
                 <div class="product-1">
                     <div class="product"> <img class="img-fluid" src="../assets/images/layout-4/p-1.jpg" alt="">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="home-images">
-                    <div class="main-images"></div><img class="img-fluid" src="../assets/images/layout-4/1.png"
+                    <div class="main-images"></div><img class="img-fluid" src="../assets/images/layout-4/bner.png"
                         alt="">
                 </div>
                 <div class="shape-images"> <img class="img-1 img-fluid" src="../assets/images/layout-4/s-1.png"
@@ -148,18 +148,14 @@
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                                        <a href="compare.html" tabindex="0">
-                                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
-                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0">
-                                                                <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
-                                                        </a>
+                                                        <i class="iconsax" data-icon="heart" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                                    </a>
+                                                    <a class="quickViewClick" data-id="{{$item->id}}" href="javascript:void(0)" tabindex="0">
+                                                        <i class="iconsax" data-icon="eye" aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -225,9 +221,6 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -291,9 +284,6 @@
                                                 </div>
                                             </div>
                                             <div class="product-detail">
-                                                <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#addtocart" title="add product"
-                                                        tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                                                 <div class="color-box">
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
@@ -416,9 +406,6 @@
                         </div>
                     </div>
                     <div class="product-detail">
-                        <div class="add-button"><a href="#" data-bs-toggle="modal"
-                                data-bs-target="#addtocart" title="add product"
-                                tabindex="0"><i class="fa-solid fa-plus"></i> Thêm giỏ hàng</a></div>
                         <div class="color-box">
                             <ul class="color-variant">
                                 {{-- bien the mau sac --}}
@@ -461,7 +448,7 @@
 <section class="section-t-space">
     <div class="custom-container container">
         <div class="title">
-            <h3>Latest Blog</h3>
+            <h3>Tin tức</h3>
         </div>
         <div class="swiper blog-slide">
             <div class="swiper-wrapper">
@@ -474,9 +461,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc thêm
-                                    </a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -489,9 +477,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Đọc
-                                    thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -504,10 +493,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
-
-                                Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -520,10 +509,10 @@
                                 <h5>Many desktop publishing pack-ages abd page editor...</h5>
                             </a>
                             <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">
-
-                                    Đọc thêm</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Đọc thêm</a></div>
+                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered"
+                                    href="#">Read More</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -536,7 +525,7 @@
         <div class="row row-cols-xl-5 row-cols-md-4 row-cols-2 ratio_square-1">
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/17.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/Sơ Mi Bò Xanh.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
@@ -553,16 +542,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/18.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/SM-Trơn Xanh Trời.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -589,16 +578,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/19.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/sơ mi bò.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>
@@ -606,16 +595,16 @@
             </div>
             <div class="col">
                 <div class="instagram-box">
-                    <div class="instashop-effect"><img class="bg-img" src="../assets/images/instagram/20.jpg"
+                    <div class="instashop-effect"><img class="bg-img" src="{{asset('assets/images/instagram/AP-Young Rich.jpg')}}"
                             alt="">
                         <div class="insta-txt">
                             <div>
                                 <p>Instashop</p>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="product.html">Khám phá</a>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a>
                                         <a class="btn btn_underline link-strong link-strong-hovered"
-                                        href="product.html">Khám phá</a></div>
+                                        href="https://www.instagram.com/namad.store.official/">Khám phá</a></div>
                             </div>
                         </div>
                     </div>

@@ -1,113 +1,62 @@
-// Khai báo biến để lưu kích cỡ và màu sắc đã chọn
-let selectedSize = null;
-let selectedColor = null;
-const soLuongTon = document.getElementById('soLuongTon');
 
-// Hàm để cập nhật số lượng tồn kho bằng AJAX
-function updateQuantity() {
-    if (selectedSize && selectedColor) {
-        let san_pham_id= soLuongTon.getAttribute('data-id');
-        // Gửi yêu cầu AJAX đến máy chủ để lấy số lượng tồn kho
-        $.ajax({
-            url: '/san-pham/so-luong-ton-kho',  // Đường dẫn đến route xử lý trên server
-            method: 'GET',
-            data: {
-                kich_co: selectedSize,
-                mau_sac: selectedColor,
-                san_pham_id: san_pham_id // ID sản phẩm hiện tại
-            },
-            success: function(response) {
-                // Cập nhật số lượng tồn kho khi server trả về dữ liệu
-                document.getElementById('soLuongTon').textContent = response.quantity;
-            },
-            error: function() {
-                // Xử lý lỗi nếu có
-                alert('Có lỗi xảy ra khi lấy số lượng tồn kho!');
-            }
-        });
-    }
+// Lưu trạng thái khi vào trang chi tiết thanh toán
+let checkUrl = false;
+if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
+    checkUrl=true;
+}else{
+    checkUrl=false;
+}
+
+if (!checkUrl) {
+    fetch('/gio-hang/xoa-session-gio-hang', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    });
 }
 
 
-// Bắt sự kiện click cho các kích cỡ
-document.querySelectorAll('#selectSize li').forEach(function(sizeElement) {
-    sizeElement.addEventListener('click', function() {
-        // Cập nhật kích cỡ đã chọn
-        selectedSize = this.getAttribute('data-size');
-
-        // Xóa class active khỏi các phần tử khác
-        document.querySelectorAll('#selectSize li').forEach(function(el) {
-            el.classList.remove('active');
-        });
-
-        // Thêm class active vào phần tử được nhấn
-        this.classList.add('active');
-
-        // Gọi hàm cập nhật số lượng tồn kho
-        updateQuantity();
-    });
-});
-
-// Bắt sự kiện click cho các màu sắc
-document.querySelectorAll('#selectMauSac li').forEach(function(colorElement) {
-    colorElement.addEventListener('click', function() {
-        // Cập nhật màu sắc đã chọn
-        selectedColor = this.getAttribute('data-color');
-
-        // Xóa class active khỏi các phần tử khác
-        document.querySelectorAll('#selectMauSac li').forEach(function(el) {
-            el.classList.remove('activ');
-        });
-
-        // Thêm class active vào phần tử được nhấn
-        this.classList.add('activ');
-
-        // Gọi hàm cập nhật số lượng tồn kho
-        updateQuantity();
-    });
-});
-
 // Tỉnh thành phố, quận huyện
-$('#tinh_thanh_pho').on('change', function () {
+$('select[name="tinh_thanh_pho"]').on('change', function () {
     var matp = $(this).val();
-    if(matp!==""){
+    if (matp !== "") {
         $.ajax({
             url: '/dia-chi/quan-huyen/' + matp,
             type: 'GET',
             success: function (data) {
-                $('#quan_huyen').html('<option value="">--Chọn quận huyện--</option>');
+                $('select[name="quan_huyen"]').html('<option value="">--Chọn quận huyện--</option>');
                 data.forEach(function (quanHuyen) {
-                    $('#quan_huyen').append('<option value="' + quanHuyen.ma_quan_huyen + '">' + quanHuyen.ten_quan_huyen + '</option>');
+                    $('select[name="quan_huyen"]').append('<option value="' + quanHuyen.ma_quan_huyen + '">' + quanHuyen.ten_quan_huyen + '</option>');
                 });
-                $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
+                $('select[name="phuong_xa"]').html('<option value="">--Chọn phường xã--</option>');
             }
         });
     } else {
         // Nếu bỏ chọn tỉnh, reset quận huyện và phường xã
-        $('#quan_huyen').html('<option value="">--Chọn quận huyện--</option>');
-        $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
+        $('select[name="quan_huyen"]').html('<option value="">--Chọn quận huyện--</option>');
+        $('select[name="phuong_xa"]').html('<option value="">--Chọn phường xã--</option>');
     }
 });
 
-$('#quan_huyen').on('change', function () {
+$('select[name="quan_huyen"]').on('change', function () {
     var maqh = $(this).val();
-    if (maqh!=="") {
+    if (maqh !== "") {
         $.ajax({
             url: '/dia-chi/phuong-xa/' + maqh,
             type: 'GET',
             success: function (data) {
-                $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
+                $('select[name="phuong_xa"]').html('<option value="">--Chọn phường xã--</option>');
                 data.forEach(function (phuongXa) {
-                    $('#phuong_xa').append('<option value="' + phuongXa.ma_phuong_xa + '">' + phuongXa.ten_phuong_xa + '</option>');
+                    $('select[name="phuong_xa"]').append('<option value="' + phuongXa.ma_phuong_xa + '">' + phuongXa.ten_phuong_xa + '</option>');
                 });
             }
         });
     } else {
         // Nếu bỏ chọn quận huyện, reset phường xã
-        $('#phuong_xa').html('<option value="">--Chọn phường xã--</option>');
+        $('select[name="phuong_xa"]').html('<option value="">--Chọn phường xã--</option>');
     }
 });
-
 
 
 // thong bao loi error
@@ -124,4 +73,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 // end thong bao loi error
+
+// document.querySelectorAll('.quickViewClick').forEach((el) => {
+//     el.addEventListener('click', function () {
+//         $('#quick-view').modal('show');
+//         let sanPhamID = el.getAttribute('data-id');
+
+//         $.ajax({
+//             type: 'GET',
+//             url: '/home/quick-view/',
+//             data: {
+//                 san_pham_id: sanPhamID
+//             },
+//             success: function (response) {
+//                 console.log(response.hinhAnh[0].hinh_anh);
+
+//                 let sanPham = response.san_pham;
+//                 // Cập nhật tên sản phẩm
+//                 document.querySelector('.product-right h3').textContent = sanPham.ten_san_pham;
+
+//                 // Cập nhật giá sản phẩm
+//                 const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai/100);
+//                 document.querySelector('.product-right h5').innerHTML = `${giaBan.toLocaleString('vi-VN')}đ <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
+
+//                 // Cập nhật các slide ảnh
+//                 const slide1Wrapper = document.querySelector('#quick-view .ratio_square-2');
+//                 const slide2Wrapper = document.querySelector('#quick-view .ratio3_4');
+//                 if(response.hinhAnh[0]){
+//                     slide1Wrapper.querySelector('.anhLon1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[4]){
+//                     slide1Wrapper.querySelector('.anhLon2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[8]){
+//                     slide1Wrapper.querySelector('.anhLon3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
+//                 }
+
+//                 if(response.hinhAnh[12]){
+//                     slide1Wrapper.querySelector('.anhLon4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
+//                     slide2Wrapper.querySelector('.anhNho4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
+//                 }
+
+//             },
+//             error: function (error) {
+//                 console.error('Lỗi: ', error);
+//                 alert('Có lỗi xảy ra');
+//             }
+//         });
+//     });
+// });
+
+
+
 

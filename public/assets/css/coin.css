@@ -1,0 +1,98 @@
+/* Css tích xu */
+.coin-content {
+    background: linear-gradient(180deg, #e2835a, #fabb42);
+}
+
+.coin-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Header */
+.coin-header {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Số xu hiện tại */
+.current-coin {
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Vòng ngày nhận xu */
+.days-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Ngày nhận xu */
+.day-box {
+    margin: 7px;
+    padding: 5px;
+    flex: 1;
+    text-align: center;
+    font-size: 0.85rem;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.6;
+}
+
+.day-box img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.day-box.received {
+    transform: scale(1.1);
+    opacity: 1;
+    border-radius: 8px;
+}
+
+.check-icon {
+    font-size: 1.5rem;
+    color: #4CAF50; /* Màu xanh của dấu tích */
+}
+
+.day-box.received .coin-icon {
+    display: none;
+}
+
+.day-box.received .check-icon {
+    display: inline-block;
+}
+
+/* Ngày hôm nay */
+.day-box.today {
+    border: 2px solid #ff6600;
+    border-radius: 8px;
+    color: #ff6600;
+}
+
+/* Ngày đã hoàn thành (Ngày 7) */
+.day-box.complete {
+    border: 2px solid red;
+    color: red;
+    border-radius: 8px;
+    transform: scale(1.1);
+}
+
+/* Thông báo nhận xu */
+.receive-message {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    background-color: #f5f5f5;
+    color: #999;
+    padding: 10px;
+    border-radius: 5px;
+}

@@ -1,5 +1,10 @@
+
 .style-border{
     border: 1px solid #0000002b;
+}
+
+.product-box:hover .style-border{
+    border: 2px solid rgba(var(--theme-default));
 }
 
 #selectMauSac .activ {
@@ -31,3 +36,359 @@
     color: rgba(var(--theme-default), 1);
     letter-spacing: 1.1px;
 }
+
+/* gio hang */
+.shopping-details .no-data{
+    padding: 0px 10px 10px 20px;
+    margin-bottom: 150px;
+
+}
+.shopping-details .no-data h4{
+    font-size: 20px;
+
+}
+.shopping-details .no-data p{
+    font-size: 15px;
+
+}
+.shopping-details .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+}
+.cart-table .no-data p a{
+    text-decoration: none;
+    color: rgba(var(--theme-default), 1);
+    font-weight: 600;
+    display: block;
+}
+.cart-table .thayDoi{
+    color: rgba(var(--theme-default), 1);
+    cursor: pointer;
+}
+.cart-table .thayDoi:hover{
+    text-decoration: underline;
+}
+
+.cart-table .cart-box div{
+    text-align: left;
+}
+
+#errSelect{
+    font-size: 16px;
+    margin-bottom: 30px;
+    display: none;
+}
+
+#nameProductSuccess{
+    font-weight: 500;
+    color: #000;
+}
+
+.table-title #selectAll{
+    text-decoration: none;
+    color: #000;
+}
+.table-title #selectAll span{
+    text-decoration: none;
+    color: #000;
+    font-size: 18px;
+}
+.cart-table #data-show{
+    text-align: center;
+}
+
+.cart-items .cart-body h6 span{
+    color: #000;
+    font-size: 1rem;
+}
+
+/* popup */
+#thongbaothemgiohang {
+    width: 400px;
+    height: 200px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 20px;
+    z-index: 9999;
+    border-radius: 5px;
+}
+#thongbaothemgiohang #cart-message {
+padding: 70px 20px;
+text-align: center;
+font-weight: bold;
+color: rgb(136, 255, 106,0.86);
+font-size: 18px;
+font-family: Outfit, sans-serif;
+}
+
+/* popup thay doi bien the  */
+.thayDoiBienThe {
+    position: absolute;
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-radius: 0.125rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: none;
+    z-index: 100;
+    font-family: Outfit, sans-serif;
+    text-align: left;
+}
+
+.thayDoiBienThe .bodyThayDoi {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.thayDoiBienThe .bodyThayDoi .sizeBox,
+.thayDoiBienThe .bodyThayDoi .colorBox {
+    margin-bottom: 15px;
+}
+
+.thayDoiBienThe h5 {
+    margin-bottom: 10px;
+}
+
+.thayDoiBienThe .bodyThayDoi .sizeBox ul,
+.thayDoiBienThe .bodyThayDoi .colorBox ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.thayDoiBienThe .bodyThayDoi .sizeBox li,
+.thayDoiBienThe .bodyThayDoi .colorBox li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.thayDoiBienThe .bodyThayDoi .sizeBox a,
+.thayDoiBienThe .bodyThayDoi .colorBox li {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.thayDoiBienThe .bodyThayDoi .colorBox li{
+    padding: 16px 22px;
+}
+
+.thayDoiBienThe .btnThayDoi{
+    padding-left: 185px;
+}
+
+.thayDoiBienThe .thayDoiSize .active{
+    background-color: rgba(var(--theme-default));
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.thayDoiBienThe .bodyThayDoi .colorBox .active{
+    padding: 19px 24px;
+    box-shadow: 0 0 10px rgba(var(--theme-default));
+}
+
+.thayDoiBienThe .thayDoiSize .disabled{
+    overflow: unset;
+}
+
+.thayDoiBienThe .disable {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* end popup thay doi bien the  */
+
+/* popup */
+#thongBao .modal-content {
+    width: 510px;
+    height: 200px;
+}
+#thongBao .modal-body .row{
+    margin-top: 20px;
+}
+#thongBao .titleThongBao {
+    font-size: 20px;
+    font-family: Outfit, sans-serif;
+}
+#thongBao .modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#thongBao .btnDongY {
+    margin-top: 60px;
+    padding-left: 360px;
+}
+
+/* popup voucher chi tiet thanh toan  */
+#popup-voucher .card {
+    border: none;
+}
+
+#popup-voucher .card-header,
+#popup-voucher .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f6f6f6;
+    font-weight: bold;
+    color: #222;
+}
+
+#popup-voucher .nhap-voucher {
+    display: flex;
+    gap: 5px;
+}
+
+#popup-voucher .nhap-voucher input[type="text"] {
+    padding: 8px;
+    flex: 1;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#popup-voucher .nhap-voucher button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #ff5722;
+    color: white;
+    border-radius: 5px;
+}
+
+#popup-voucher .card-body {
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#popup-voucher .voucher-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    box-shadow: 0 0 5px #00000061;
+    margin-top: 14px;
+}
+
+#popup-voucher .voucher-item img {
+    border-radius: 5px;
+}
+
+#popup-voucher .voucher-item p {
+    margin: 5px 0;
+}
+
+#popup-voucher .voucher-item input[type="radio"] {
+    margin-top: 15px;
+    margin-right: 20px;
+    width: 15px; /* Kích thước theo chiều ngang */
+    height: 15px; /* Kích thước theo chiều dọc */
+    transform: scale(1.5); /* Phóng to 1.5 lần */
+}
+
+#popup-voucher .card-footer button,
+#popup-voucher .card-footer Button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #ff5722;
+    color: white;
+    border-radius: 5px;
+}
+
+#popup-voucher .card-footer Button {
+    background-color: #ff9f43;
+}
+
+#popup-voucher .item-content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+#popup-voucher .free-ship{
+    padding-bottom: 60px;
+    border-bottom: 2px solid #bcb8b8;
+}
+#popup-voucher .titleGiamGia{
+    font-weight: 600;
+    font-size: 19px;
+    color: #000;
+}
+
+#popup-voucher .card-body .text-content .tien{
+    color: red;
+}
+
+/* end popup chon voucher */
+
+/* thong tin tai khoan */
+.profile-information .thayDoiHoTen,
+.profile-information .thayDoiSDT{
+    color: rgba(var(--theme-default), 1);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.profile-information .thayDoiHoTen:hover,
+.profile-information .thayDoiSDT:hover{
+    text-decoration: underline;
+}
+
+.profile-information .form-control{
+    display: inline;
+    width: auto;
+}
+
+.textColor{
+    color: rgba(var(--theme-default), 1);
+}
+
+/* CSS cho Toggle Button */
+.toggle-button {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hình tròn bên trong */
+.toggle-circle {
+    width: 21px;
+    height: 21px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.3s;
+}
+
+/* Khi bật trạng thái (active) */
+.toggle-button.active {
+    background-color: #4CAF50; /* Màu xanh khi bật */
+}
+
+.toggle-button.active .toggle-circle {
+    left: 26px; /* Vị trí khi bật */
+}
+
+.summary-total .ghi-chu p{
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 5px;
+}
+

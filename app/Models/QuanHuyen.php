@@ -10,6 +10,7 @@ class QuanHuyen extends Model
     use HasFactory;
 
     protected $table = 'vn_quan_huyens';
+    protected $primaryKey = 'ma_quan_huyen';
 
     protected $fillable = [
         'ma_quan_huyen',
@@ -19,10 +20,18 @@ class QuanHuyen extends Model
     ];
 
     public function phuongXa() {
-        return $this->hasMany(PhuongXa::class);
+        return $this->hasMany(PhuongXa::class, 'ma_quan_huyen');
+    }
+
+    public function diaChi() {
+        return $this->hasMany(DiaChi::class, 'ma_quan_huyen');
+    }
+
+    public function phiShip() {
+        return $this->hasMany(PhiShip::class, 'ma_quan_huyen');
     }
 
     public function tinhThanhPho() {
-        return $this->belongsTo(TinhThanhPho::class);
+        return $this->belongsTo(TinhThanhPho::class, 'ma_tinh_thanh_pho');
     }
 }

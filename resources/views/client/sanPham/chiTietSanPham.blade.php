@@ -20,7 +20,8 @@
                         <div class="swiper product-slider product-slider-img">
                             <div class="swiper-wrapper">
                                 @foreach ($san_pham->bienThes->unique('ma_mau') as $item)
-                                    <div class="swiper-slide"> <img src="{{Storage::url($item->hinh_anh)}}" alt="">
+                                    <div class="swiper-slide">
+                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="">
                                     </div>
                                 @endforeach
                             </div>
@@ -41,11 +42,11 @@
             <div class="col-lg-6">
                 <div class="product-detail-box">
                     <div class="product-option">
-                        <h3>{{$san_pham->ten_san_pham}}</h3>
+                        <h3 id="tenSanPhamChiTiet">{{$san_pham->ten_san_pham}}</h3>
                         @php
                             $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai / 100);
                         @endphp
-                        <p>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
+                        <p id="giaKhuyenMai" data-giaKM="{{$gia_khuyen_mai}}">{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
                             @if ($san_pham->khuyen_mai>0)
                                 <del>{{ number_format($san_pham->gia_san_pham, 0, ',', '.') }}đ</del>
                                 <span class="offer-btn">{{$san_pham->khuyen_mai}}% off</span>
@@ -96,6 +97,7 @@
                                 <h5>Kích cỡ:</h5>
                                 <div class="size-box">
                                     <ul class="selected" id="selectSize">
+                                        <input type="hidden" id="size" value="">
                                         @foreach ($kich_cos as $item)
                                             @php
                                                 // Kiểm tra nếu có biến thể với kích cỡ này
@@ -113,23 +115,30 @@
                             <h5>Màu sắc:</h5>
                             <div class="color-box">
                                 <ul id="selectMauSac">
+                                    <input type="hidden" id="mauSac" value="">
                                     @foreach ($san_pham->bienThes->unique('ma_mau') as $item)
-                                        <li data-color="{{$item->ma_mau}}" style="background-color: {{$item->ma_mau}}; border: 1px solid #0000003b;"></li>
+                                        <li data-color="{{$item->ma_mau}}" style="background-color: {{$item->ma_mau}}; border: 1px solid #0000003b;" title="{{ $item->ten_mau }}"></li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
+                        <p class="text-danger" id="errSelect">Vui lòng chọn phân loại hàng !</p>
                         <div class="quantity-box d-flex align-items-center gap-3">
-                            <div class="quantity"><button class="minus" type="button"><i
-                                        class="fa-solid fa-minus"></i></button><input type="number" value="1"
-                                    min="1" max="20"><button class="plus" type="button"><i
-                                        class="fa-solid fa-plus"></i></button></div>
-                            <div class="d-flex align-items-center gap-3 w-100"> <a class="btn btn_black sm" href="#"
-                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                    aria-controls="offcanvasRight">Thêm giỏ hàng</a><a class="btn btn_outline sm"
-                                    href="#">Mua ngay</a></div>
+                            <div class="quantity">
+                                <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
+                                <input type="hidden" id="soLuong" value="1">
+                                <input type="number" value="1" min="1" readonly>
+                                <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 w-100">
+                                    <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
+                                    <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
+                                    data-id="{{$san_pham->id}}">Thêm giỏ hàng</a>
+                                <a class="btn btn_outline sm" href="#">Mua ngay</a>
+                            </div>
                         </div>
-                        <div class="buy-box">
+
+                        <div class="buy-box border-buttom">
                             <ul>
                                 <li> <a href="wishlist.html"> <i class="fa-regular fa-heart me-2"></i>Thêm vào yêu thích</a></li>
                             </ul>
@@ -145,7 +154,7 @@
                                 <li>
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>SL kho: </h6>
-                                        <p id="soLuongTon"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')}}</p>
+                                        <p id="soLuongTon" data-quantityOld="{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}</p>
                                     </div>
                                 </li>
                                 <li>
@@ -189,6 +198,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{-- binh luan --}}
                         <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel"
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">
@@ -467,4 +478,7 @@
         </div>
     </div>
 </section>
+@endsection
+@section('js')
+<script src="{{asset('assets/js/touchspin.js')}}"></script>
 @endsection
