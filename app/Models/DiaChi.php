@@ -45,4 +45,9 @@ class DiaChi extends Model
     {
         return $this->belongsTo(TinhThanhPho::class, 'ma_tinh_thanh_pho');
     }
+
+    public function donHangs()
+    {
+        return $this->hasMany(DonHang::class, 'dia_chi_id');
+    }
 }

@@ -272,7 +272,8 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tài khoản</a></li>
+                                                <li> <a href="{{ route('don-hang.don-mua') }}">Đơn mua</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
@@ -788,9 +789,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
-            <div class="text">Dark</div>
     </div>
     <div class="modal theme-modal fade" id="size-chart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

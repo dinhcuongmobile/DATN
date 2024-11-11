@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('don_hangs', function (Blueprint $table) {
             $table->id();
+            $table->string('ma_don_hang',255);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('ho_ten_nhan');
-            $table->dateTime('ngay_dat_hang');
-            $table->string('dia_chi_nhan');
-            $table->string('so_dien_thoai_nhan', 10);
+            $table->foreignId('dia_chi_id')->constrained('dia_chis')->onDelete('cascade');
             $table->double('tong_thanh_toan', 20, 2);
-            $table->integer('phuong_thuc_thanh_toan')->default(0);
-            $table->integer('trang_thai')->default(0);
-            $table->integer('thanh_toan')->default(0);
+            $table->integer('phuong_thuc_thanh_toan')->default(0)->comment('0. ship cod, 1. Chuyển khoản');
+            $table->integer('trang_thai')->default(0)->comment('0. chưa duyệt 1.Đơn hàng mới 2.Đang chuẩn bị hàng 3. Đang giao 4. Đã giao 5. Đã hủy');
+            $table->integer('thanh_toan')->default(0)->comment('0. Chưa thanh toán, 1. Đã thanh toán');
+            $table->text('ghi_chu')->nullable();
+            $table->dateTime('ngay_dat_hang');
             $table->timestamps();
         });
     }

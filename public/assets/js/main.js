@@ -74,6 +74,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 // end thong bao loi error
 
+//don mua
+
+$(document).ready(function(){
+    $(".an").hide();
+    $("#tap1").fadeIn();
+    $(".nav-tab li").click(function(){
+        //active nav tabs
+        $(".nav-tab li").removeClass("active");
+        $(this).addClass("active");
+
+        //Show tap
+        let idtap= $(this).children('a').attr('href');
+        $(".an").hide();
+        $(idtap).fadeIn();
+        return false;
+    });
+});
+
+//end don mua
+
 // document.querySelectorAll('.quickViewClick').forEach((el) => {
 //     el.addEventListener('click', function () {
 //         $('#quick-view').modal('show');
