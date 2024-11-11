@@ -101,18 +101,19 @@
                             @endphp
                             @foreach ($gio_hangs as $item)
                                 @php
-                                    $sanPham = $item->sanPham;
-                                    $gia_khuyen_mai = $sanPham->gia_san_pham - ($sanPham->gia_san_pham * $sanPham->khuyen_mai / 100);
-                                    $thanh_tien = $gia_khuyen_mai * $item->so_luong;
+                                    $sanPham = $item['san_pham'];
+                                    $gia_khuyen_mai = $item['gia_khuyen_mai'];
+                                    $thanh_tien = $gia_khuyen_mai * $item['so_luong'];
                                     $tong_tien += $thanh_tien;
-                                    $tiet_kiem += (($sanPham->gia_san_pham * $item->so_luong) - $thanh_tien);
+                                    $tiet_kiem += (($sanPham->gia_san_pham * $item['so_luong']) - $thanh_tien);
                                 @endphp
-                                <li> <img width="60px" src="{{Storage::url($sanPham->hinh_anh)}}" alt="{{$sanPham->ten_san_pham}}">
+                                <li>
+                                    <img width="60px" src="{{ Storage::url($sanPham->hinh_anh) }}" alt="{{ $sanPham->ten_san_pham }}">
                                     <div>
                                         <h6>{{ Str::limit(strip_tags($sanPham->ten_san_pham), 20, '...') }}</h6>
-                                        <span>{{$item->bienThe->kich_co}}, {{$item->bienThe->ten_mau}}</span>
+                                        <span>{{ $item['bien_the']->kich_co }}, {{ $item['bien_the']->ten_mau }}</span>
                                     </div>
-                                    <p>x{{$item->so_luong}}</p>
+                                    <p>x{{ $item['so_luong'] }}</p>
                                     <p>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ</p>
                                 </li>
                             @endforeach
@@ -120,7 +121,7 @@
                         <div class="summary-total">
                             <ul>
                                 <li>
-                                    <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
+                                    <p>Tổng số tiền ({{$count_gio_hang?$count_gio_hang:0}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
                                     <p>Phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>

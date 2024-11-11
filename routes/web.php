@@ -115,6 +115,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
         Route::get('chon-ma-giam-gia', [GioHangController::class, 'chonMaGiamGia']);
         Route::post('dat-hang', [GioHangController::class, 'datHang']);
+        Route::post('mua-ngay', [GioHangController::class, 'muaNgay']);
     });
 
     Route::prefix('tin-tuc')->group(function () {
