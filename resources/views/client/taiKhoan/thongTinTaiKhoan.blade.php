@@ -130,7 +130,7 @@
                                                     </div>
                                                     <div class="totle-detail">
                                                         <h6>Số Dư Ví</h6>
-                                                        <h4>$ 84.40 </h4>
+                                                        <h4>0đ </h4>
                                                     </div>
                                                 </div>
                                             </div>
