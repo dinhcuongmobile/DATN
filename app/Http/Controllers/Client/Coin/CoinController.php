@@ -49,14 +49,17 @@ class CoinController extends Controller
             $soNgay = 1;
         }
 
+        // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
+        $coins = ($soNgay == 7) ? 300 : 100;
+
         Coin::create([
             'user_id' => $user->id,
-            'coin' => 100,
+            'coin' => $coins,
             'ngay_nhan' => $ngayNhan,
             'so_ngay' => $soNgay,
         ]);
 
-        return response()->json(['message' => 'Nhận xu thành công!', 'coin' => 100, 'so_ngay' => $soNgay], 200);
+        return response()->json(['message' => 'Nhận xu thành công!', 'coin' => $coins, 'so_ngay' => $soNgay], 200);
     }
 
     public function getUserCoin()

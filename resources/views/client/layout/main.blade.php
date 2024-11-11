@@ -401,13 +401,16 @@
         </section>
     </footer>
     {{-- GIAO DIỆN NHẠN XU --}}
-    <div class="modal theme-modal fade" id="daily-coin" data-id="{{$userId}}" tabindex="-1" role="dialog"
+    <div class="reviews-modal modal theme-modal fade" id="daily-coin" data-id="{{$userId}}" tabindex="-1" role="dialog"
         aria-modal="true">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                <div class="modal-body p-0">
+            <div class="modal-content">
+                <div class="modal-body pt-0 coin-content">
+                    <div class="modal-header">
+                        <button class="btn-close" type="button" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
                     <div id="dailyCoinContainer" class="coin-container">
                         <div class="coin-header">Namad Xu</div>
                         {{-- Tổng xu --}}
