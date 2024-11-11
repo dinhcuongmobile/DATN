@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
 use App\Models\Coin;
+use App\Models\DonHang;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -46,6 +47,7 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
 
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
+        $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }

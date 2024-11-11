@@ -189,20 +189,24 @@ function chonMaKhuyenMai() {
 
 function datHang(){
     document.querySelector('.right-sidebar-checkout .order-button').addEventListener('click',function(){
-        let diaChiId = document.querySelector('.dia-chi-item input[name="selectDiaChi"]:checked').getAttribute('data-id');
+        let diaChiId = document.querySelector('.dia-chi-item input[name="selectDiaChi"]:checked');
+        if(!diaChiId){
+            $('#add-address-checkout').modal('show');
+            return;
+        }
         let tongThanhToan = parseFloat(document.querySelector('.tongThanhToan').textContent.replace(/[đ,.]/g, '')) || 0;
         let giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
         let giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.]/g, '')) || 0;
         let phuongThucThanhToan = document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value;
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
-        let ghiChu = document.querySelector('.ghi-chu input').value;
+        let ghiChu = document.querySelector('.ghi-chu input').value || "";
 
         $.ajax({
             type: 'POST',
             url: '/gio-hang/dat-hang',
             data: {
                 _token: document.querySelector('.tokenDatHang').value,
-                dia_chi_id: diaChiId,
+                dia_chi_id: diaChiId.getAttribute('data-id'),
                 tong_thanh_toan: tongThanhToan,
                 phuong_thuc_thanh_toan: phuongThucThanhToan,
                 ghi_chu: ghiChu,
