@@ -153,7 +153,7 @@
                         </ul>
                     </div>
                     <input type="hidden" class="tokenTiepTuc" name="_token" value="{{ csrf_token() }}" />
-                    <button class="btn btn_black w-100 rounded sm" id="tiepTucDatHangBtn">Tiếp tục</button>
+                    <button class="btn btn_black w-100 rounded sm check-url" id="tiepTucDatHangBtn">Tiếp tục</button>
                 </div>
             </div>
             <div class="col-12" style="margin-top: 100px">

@@ -94,7 +94,8 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
-        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan');
+        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan')->middleware('auth');
+        Route::post('/xoa-session-gio-hang', [GioHangController::class, 'xoaSessionGioHang'])->name('gio-hang.xoa-session');
         Route::post('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
         Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
         Route::get('xoa-san-pham-gio-hang', [GioHangController::class, 'xoaSanPhamGioHang']);
