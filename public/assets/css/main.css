@@ -392,3 +392,102 @@ font-family: Outfit, sans-serif;
     margin-bottom: 5px;
 }
 
+/*don mua*/
+.donmua nav ul {
+    display: flex;
+    margin-left: 60px;
+    margin-top: 10px;
+
+  }
+  .donmua nav ul li{
+    margin-right: 15px;
+
+  }
+  .donmua nav ul li:first-child{
+    margin-left: 15px;
+  }
+  .donmua nav ul li a{
+    display: block;
+    color: #000;
+    padding: 10px 30px 10px 30px;
+    position: relative;
+    font-size: 22px;
+
+  }
+  .donmua nav ul li a:last-child{
+    padding-left: 45px;
+  }
+  .donmua nav ul li a::after{
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    bottom: -9px;
+    background-color: transparent;
+  }
+  .donmua nav ul li.active a::after, .donmua nav ul li:hover a::after{
+    background-color: #e97730;
+  }
+  .table tbody td{
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 19px;
+    color: #000;
+  }
+  .table img{
+    border: 1px solid #0000002b;
+    width: 130px;
+  }
+  .table .tenSanPham{
+    text-align: left;
+  }
+  .table .tenSanPham a{
+    font-size: 22px;
+  }
+  .table td a{
+    text-decoration: none;
+  }
+  .tableDonMua tfoot tr td p{
+    font-size: 19px;
+    color: #8b8b8b;
+}
+.tableDonMua tfoot tr td p{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.tableDonMua tfoot .trangThai td p{
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.tableDonMua tfoot tr td{
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+}
+.btnDonMua{
+    float: right;
+    margin-top: 20px;
+
+}
+.btnDonMua .btnDaNhan{
+    color: #fff;
+    font-weight: 500;
+    background-color: #dc3545;
+}
+.btnDonMua .btnMuaLai{
+    color: #fff;
+    font-weight: 500;
+    background-color: #dc3545;
+    margin-left: 10px;
+}
+.btnDonMua a{
+    background-color: #e7ebf0;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+}
+.btnDonMua a:hover{
+    color: #000;
+    background-color: #cacccf;
+}
+

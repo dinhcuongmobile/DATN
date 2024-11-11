@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
 use App\Http\Controllers\Client\Coin\CoinController;
+use App\Http\Controllers\Client\DonHang\DonHangController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 
 /*
@@ -89,6 +90,11 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('san-pham-danh-muc/{danh_muc_id}', [SanPhamController::class, 'sanPhamDanhMuc'])->name('san-pham.san-pham-danh-muc');
         Route::get('chi-tiet-san-pham/{id}', [SanPhamController::class, 'chiTietSanPham'])->name('san-pham.chi-tiet-san-pham');
         Route::get('so-luong-ton-kho', [SanPhamController::class, 'soLuongTonKho'])->name('san-pham.so-luong-ton-kho');
+
+    });
+
+    Route::prefix('don-hang')->group(function () {
+        Route::get('don-mua', [DonHangController::class, 'donMua'])->name('don-hang.don-mua');
 
     });
 
