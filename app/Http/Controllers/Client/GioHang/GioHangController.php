@@ -8,14 +8,19 @@ use App\Models\DiaChi;
 use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\BienThe;
+use App\Models\DonHang;
 use App\Models\GioHang;
 use App\Models\PhiShip;
 use App\Models\SanPham;
+use App\Mail\SendHoaDon;
 use App\Models\KhuyenMai;
+use Illuminate\Support\Str;
 use App\Models\TinhThanhPho;
 use Illuminate\Http\Request;
+use App\Models\ChiTietDonHang;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class GioHangController extends Controller
@@ -275,5 +280,65 @@ class GioHangController extends Controller
             'giamGiaDonHang' => $giamGiaDonHang,
             'gioHangCu' => $gioHangCu
         ]);
+    }
+
+    public function datHang(Request $request){
+        $gio_hangs = session()->get('gio_hangs', []);
+
+        if($request->input('phuong_thuc_thanh_toan')==0){ //cod
+            $phuong_thuc_thanh_toan = 0;
+            $trang_thai = 0;
+            $thanh_toan = 0;
+        }
+        else { //chuyen khoan
+            $phuong_thuc_thanh_toan = 1;
+            $trang_thai = 1;
+            $thanh_toan = 1;
+        }
+
+        $dataInsertDonHang = [
+            'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
+            'user_id' => Auth::user()->id,
+            'dia_chi_id' => $request->input('dia_chi_id'),
+            'tong_thanh_toan' => $request->input('tong_thanh_toan'),
+            'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
+            'trang_thai' => $trang_thai,
+            'thanh_toan' => $thanh_toan,
+            'ghi_chu' => $request->input('ghi_chu'),
+            'ngay_dat_hang' => now(),
+        ];
+
+        $result = DonHang::create($dataInsertDonHang);
+
+        if($result){
+            $donHang = DonHang::with('diaChi')->where('user_id',Auth::user()->id)->orderBy('id','desc')->first();
+            foreach ($gio_hangs as $item) {
+                $dataInsertChiTiet=[
+                    'don_hang_id' => $donHang->id,
+                    'san_pham_id' => $item->san_pham_id,
+                    'bien_the_id' => $item->bien_the_id,
+                    'so_luong' => $item->so_luong,
+                    'don_gia' => ($item->sanPham->gia_san_pham - ($item->sanPham->gia_san_pham * $item->sanPham->khuyen_mai / 100)),
+                    'thanh_tien' => $item->thanh_tien,
+                    'created_at' => now()
+                ];
+                ChiTietDonHang::create($dataInsertChiTiet);
+                BienThe::where('id',$item->bien_the_id)->update(['so_luong'=>($item->bienThe->so_luong-$item->so_luong)]);
+                GioHang::where('user_id', Auth::user()->id)->where('san_pham_id',$item->san_pham_id)
+                        ->where('bien_the_id',$item->bien_the_id)->delete();
+            }
+            $dia_chi = DiaChi::with('tinhThanhPho','quanHuyen','phuongXa')->where('user_id',Auth::user()->id)->where('trang_thai',1)->first();
+            $don_hang = DonHang::with('user','diaChi')->find($donHang->id);
+            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHang->id)->get();
+            $phi_ships = $request->input('phiShip');
+            $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
+            $giamGiaDonHang = $request->input('giamTienDonHang');
+            Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs,$phi_ships, $giamGiaVanChuyen, $giamGiaDonHang));
+
+            return response()->json([
+                'success'=>true,
+                'don_hang' => $donHang
+            ]);
+        }
     }
 }

@@ -94,7 +94,6 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
-        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan')->middleware('auth');
         Route::post('/xoa-session-gio-hang', [GioHangController::class, 'xoaSessionGioHang'])->name('gio-hang.xoa-session');
         Route::post('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
         Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
@@ -104,8 +103,12 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('check-bien-the-size', [GioHangController::class, 'checkBienTheSize']);
         Route::get('check-bien-the-color', [GioHangController::class, 'checkBienTheColor']);
         Route::post('tiep-tuc-dat-hang', [GioHangController::class, 'tiepTucDatHang']);
+
+        //chi tiet thanh toan
+        Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan')->middleware('auth');
         Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
         Route::get('chon-ma-giam-gia', [GioHangController::class, 'chonMaGiamGia']);
+        Route::post('dat-hang', [GioHangController::class, 'datHang']);
     });
 
     Route::prefix('tin-tuc')->group(function () {

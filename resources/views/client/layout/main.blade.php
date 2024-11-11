@@ -786,9 +786,6 @@
             </div>
         </div>
     </div>
-    <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
-            <div class="text">Dark</div>
-    </div>
     <div class="modal theme-modal fade" id="size-chart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">

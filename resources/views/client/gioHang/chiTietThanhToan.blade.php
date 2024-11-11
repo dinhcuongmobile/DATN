@@ -75,12 +75,16 @@
                         <h4 class="mb-3">Phương thức thanh toán</h4>
                         <div class="row gy-3">
                             <div class="col-sm-6">
-                                <div class="payment-box"><input class="custom-radio me-2" id="cod" type="radio"
-                                        checked="checked" name="radio"><label for="cod">Thanh toán khi nhận hàng</label></div>
+                                <div class="payment-box">
+                                    <input class="custom-radio me-2" id="cod" type="radio" checked name="phuong_thuc_thanh_toan" value="0">
+                                    <label for="cod">Thanh toán khi nhận hàng</label>
+                                </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="payment-box"><input class="custom-radio me-2" id="paypal" type="radio"
-                                        name="radio"><label for="paypal">Chuyển khoản</label></div>
+                                <div class="payment-box">
+                                    <input class="custom-radio me-2" id="paypal" type="radio" name="phuong_thuc_thanh_toan" value="1">
+                                    <label for="paypal">Chuyển khoản</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,7 +112,7 @@
                                         <h6>{{ Str::limit(strip_tags($sanPham->ten_san_pham), 20, '...') }}</h6>
                                         <span>{{$item->bienThe->kich_co}}, {{$item->bienThe->ten_mau}}</span>
                                     </div>
-                                    <p>x {{$item->so_luong}}</p>
+                                    <p>x{{$item->so_luong}}</p>
                                     <p>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ</p>
                                 </li>
                             @endforeach
@@ -137,6 +141,10 @@
                                     <p>Giảm giá đơn hàng</p><span class="giamTienDonHang">0đ</span>
                                 </li>
                             </ul>
+                            <div class="ghi-chu mt-3">
+                                <p>Lời nhắn: </p>
+                                <input class="form-control" type="text" placeholder="Gửi lời nhắn đến shop...">
+                            </div>
                         </div>
                         <div class="total">
                             <h6>Tổng tiền hàng : </h6>
@@ -154,6 +162,7 @@
                             <h6>Tổng thanh toán : </h6>
                             <h6 class="textColor tongThanhToan">{{ number_format($tong_thanh_toan, 0, ',', '.') }}đ</h6>
                         </div>
+                        <input type="hidden" class="tokenDatHang" name="_token" value="{{ csrf_token() }}" />
                         <div class="order-button btn btn_black sm w-100 rounded">Đặt hàng</div>
                     </div>
                 </div>

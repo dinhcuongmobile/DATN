@@ -386,3 +386,9 @@ font-family: Outfit, sans-serif;
     left: 26px; /* Vị trí khi bật */
 }
 
+.summary-total .ghi-chu p{
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 5px;
+}
+

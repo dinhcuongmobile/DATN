@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('don_hang_id')->constrained('don_hangs')->onDelete('cascade');
             $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
+            $table->foreignId('bien_the_id')->constrained('bien_thes')->onDelete('cascade');
             $table->integer('so_luong');
             $table->double('don_gia', 10, 2);
             $table->double('thanh_tien', 20, 2);
