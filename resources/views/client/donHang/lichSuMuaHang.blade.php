@@ -91,12 +91,12 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="5" style="">
+                                                        <td colspan="5" >
                                                             <p>Được đặt bởi: <span style="color:#000; margin-left: 60px;">{{$itemDonHang->diaChi->ho_va_ten_nhan}}</span></p>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="5" style="">
+                                                        <td colspan="5" >
                                                             <p>Địa chỉ nhận hàng:
                                                                 <span style="color:#000; margin-left: 15px;">
                                                                     @php
@@ -113,12 +113,12 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="5" style="">
+                                                        <td colspan="5" >
                                                             <p>Số điện thoại nhận: <span style="color:#000; margin-left: 8px;">{{$itemDonHang->diaChi->so_dien_thoai_nhan}}</span></p>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="5" style="">
+                                                        <td colspan="5" >
                                                             <p>Thanh toán: <span style="color:#2ecc71; margin-left: 72px;">
                                                             @if ($itemDonHang->thanh_toan==0)
                                                                 Chưa thanh toán
@@ -130,7 +130,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="5" style="">
+                                                        <td colspan="5" >
                                                             <p>Mã hóa đơn: <span style="color: red; margin-left: 68px;">{{$itemDonHang->ma_don_hang}}</span></p>
                                                         </td>
                                                     </tr>
@@ -142,7 +142,7 @@
                                                 @endif
                                                 @if($itemDonHang->trang_thai==3)
                                                     <input type="hidden"  name="_token" value="{{ csrf_token() }}" />
-                                                    <span data-id="{{$itemDonHang->id}}" onclick="daNhanHang({{$itemDonHang->id}})" class="btn btnDaNhan">Đã nhận hàng</span>
+                                                    <span data-id="{{$itemDonHang->id}}"  class="btn btnDaNhan">Đã nhận hàng</span>
                                                     <button type="submit" class="btn btnMuaLai">Mua lại</button>
                                                 @endif
                                                 @if($itemDonHang->trang_thai==4)
