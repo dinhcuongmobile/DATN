@@ -121,7 +121,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEight"
                     aria-expanded="true" aria-controls="collapseEight">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fas fa-fw fa-tags"></i>
                     <span>Quản lý khuyến mại</span>
                 </a>
                 <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionSidebar">
