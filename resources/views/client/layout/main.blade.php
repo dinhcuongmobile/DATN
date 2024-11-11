@@ -490,8 +490,8 @@
                                             </a>
                                             <div class="buttons"><a class="view-cart btn btn-solid"
                                                     href="cart.html">Giỏ hàng của bạn</a><a class="checkout btn btn-solid"
-                                                    href="check-out.html"></a><a class="continue btn btn-solid"
-                                                    href="index.html">Continue shopping</a></div>
+                                                    href="check-out.html">Kiểm tra</a><a class="continue btn btn-solid"
+                                                    href="index.html">Tiếp tục mua sắm</a></div>
                                             <div class="upsell_payment"><img class="img-fluid blur-up lazyload"
                                                     src="{{asset('assets/images/payment_cart.png')}}" alt=""></div>
                                         </div>
