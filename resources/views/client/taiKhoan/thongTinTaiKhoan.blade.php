@@ -160,7 +160,7 @@
                                                     </div>
                                                     <div class="totle-detail">
                                                         <h6>Đơn Hàng</h6>
-                                                        <h4>12</h4>
+                                                        <h4>{{ $countDonHang }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
