@@ -68,10 +68,18 @@
                                         <td class="col-3 align-middle text-center">
                                             <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"
                                                 href="{{route('san-pham.khoi-phuc-san-pham',$item->id)}}"
-                                                class="btn btn-success btn-sm">Khôi phục</a> |
+                                                class="btn btn-success btn-icon-split btn-sm">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-undo"></i>
+                                            </span>
+                                            <span class="text">Khôi phục</span></a> |
                                             <a onclick="return confirm('Bạn chắc chắn muốn xóa vĩnh viễn không?')"
                                                 href="{{route('san-pham.xoa-san-pham-vinh-vien',$item->id)}}"
-                                                class="btn btn-danger btn-sm">Xóa vĩnh viễn</a>
+                                                class="btn btn-danger btn-icon-split btn-sm">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa Vĩnh Viễn</span></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -80,11 +80,19 @@
                                     </td>
                                     <td class="col-3 align-middle">
                                         <a href="{{ route('banner.updatebanner', $item->id) }}"
-                                            class="btn btn-secondary btn-sm">Cập nhật
+                                            class="btn btn-primary  btn-icon-split btn-sm">
+
+                                            <span class="icon text-white-50">
+                                                    <i class="fas fa-sync"></i>
+                                            </span>
+                                            <span class="text">Cập Nhập</span></a> |
                                         </a> |
                                         <a onclick="return confirm('Bạn có chắc chắn muốn xóa')"
-                                            href="{{ route('banner.delete', $item->id) }}"class="btn btn-secondary btn-sm">
-                                            Xóa
+                                            href="{{ route('banner.delete', $item->id) }}"class="btn btn-danger btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa</span></a>
                                         </a>
                                     </td>
                                 </tr>

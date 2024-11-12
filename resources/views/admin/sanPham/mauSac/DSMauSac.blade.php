@@ -40,7 +40,12 @@
                                     </td>
                                     <td class="text-center col-2 align-middle">
                                         <a  onclick="return confirm('Bạn chắc chắn muốn xóa màu sắc này?')"
-                                            href="{{route('san-pham.xoa-mau-sac',$item->id)}}" class="btn btn-secondary btn-sm">Xóa</a>
+                                            href="{{route('san-pham.xoa-mau-sac',$item->id)}}" class="btn btn-danger btn-icon-split btn-sm">
+                                            <span class="icon text-white-50">
+                                                    <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Xóa</span>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
