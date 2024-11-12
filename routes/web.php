@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Admin\HomeAdminController;
+use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Location\LocationController;
 use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Auth\Admin\AuthAdminController;
@@ -11,19 +12,18 @@ use App\Http\Controllers\Client\TinTuc\TinTucController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Admin\LienHe\LienHeAdminController;
-use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 
+use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
+use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
-use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
-use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
-use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
-use App\Http\Controllers\Client\Coin\CoinController;
+use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
+use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
 
 /*
 |--------------------------------------------------------------------------

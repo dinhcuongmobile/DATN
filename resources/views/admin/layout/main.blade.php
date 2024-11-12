@@ -142,8 +142,7 @@
                     <i class="fas fa-fw fa-cart-arrow-down"></i>
                     <span>Quản lý đơn hàng</span>
                 </a>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
-                    data-parent="#accordionSidebar">
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="#">Danh sách đơn hàng</a>
                         <a class="collapse-item" href="#">Kiểm duyệt đơn hàng
