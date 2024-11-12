@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Models\KichCo;
+use App\Models\MauSac;
 use App\Models\TinTuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
@@ -31,8 +33,13 @@ class HomeController extends Controller
 
     public function quickView(Request $request){
         $san_pham = SanPham::with('bienThes','danhGias')->find($request->input('san_pham_id'));
-
-        return response()->json(['san_pham'=>$san_pham]);
+        $hinhAnh = $san_pham->bienThes->unique('ma_mau');
+        $kich_cos = KichCo::all();
+        $mau_sacs = MauSac::all();
+        return response()->json([
+            'san_pham'=>$san_pham,
+            'hinhAnh' => $hinhAnh
+        ]);
     }
 
     public function error404()

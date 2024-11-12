@@ -75,12 +75,16 @@
                         <h4 class="mb-3">Phương thức thanh toán</h4>
                         <div class="row gy-3">
                             <div class="col-sm-6">
-                                <div class="payment-box"><input class="custom-radio me-2" id="cod" type="radio"
-                                        checked="checked" name="radio"><label for="cod">Thanh toán khi nhận hàng</label></div>
+                                <div class="payment-box">
+                                    <input class="custom-radio me-2" id="cod" type="radio" checked name="phuong_thuc_thanh_toan" value="0">
+                                    <label for="cod">Thanh toán khi nhận hàng</label>
+                                </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="payment-box"><input class="custom-radio me-2" id="paypal" type="radio"
-                                        name="radio"><label for="paypal">Chuyển khoản</label></div>
+                                <div class="payment-box">
+                                    <input class="custom-radio me-2" id="paypal" type="radio" name="phuong_thuc_thanh_toan" value="1">
+                                    <label for="paypal">Chuyển khoản</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -97,18 +101,19 @@
                             @endphp
                             @foreach ($gio_hangs as $item)
                                 @php
-                                    $sanPham = $item->sanPham;
-                                    $gia_khuyen_mai = $sanPham->gia_san_pham - ($sanPham->gia_san_pham * $sanPham->khuyen_mai / 100);
-                                    $thanh_tien = $gia_khuyen_mai * $item->so_luong;
+                                    $sanPham = $item['san_pham'];
+                                    $gia_khuyen_mai = $item['gia_khuyen_mai'];
+                                    $thanh_tien = $gia_khuyen_mai * $item['so_luong'];
                                     $tong_tien += $thanh_tien;
-                                    $tiet_kiem += (($sanPham->gia_san_pham * $item->so_luong) - $thanh_tien);
+                                    $tiet_kiem += (($sanPham->gia_san_pham * $item['so_luong']) - $thanh_tien);
                                 @endphp
-                                <li> <img width="60px" src="{{Storage::url($sanPham->hinh_anh)}}" alt="{{$sanPham->ten_san_pham}}">
+                                <li>
+                                    <img width="60px" src="{{ Storage::url($sanPham->hinh_anh) }}" alt="{{ $sanPham->ten_san_pham }}">
                                     <div>
                                         <h6>{{ Str::limit(strip_tags($sanPham->ten_san_pham), 20, '...') }}</h6>
-                                        <span>{{$item->bienThe->kich_co}}, {{$item->bienThe->ten_mau}}</span>
+                                        <span>{{ $item['bien_the']->kich_co }}, {{ $item['bien_the']->ten_mau }}</span>
                                     </div>
-                                    <p>x {{$item->so_luong}}</p>
+                                    <p>x{{ $item['so_luong'] }}</p>
                                     <p>{{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ</p>
                                 </li>
                             @endforeach
@@ -116,13 +121,19 @@
                         <div class="summary-total">
                             <ul>
                                 <li>
-                                    <p>Tổng số tiền ({{$count_gio_hang}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
+                                    <p>Tổng số tiền ({{$count_gio_hang?$count_gio_hang:0}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
                                 <li>
-                                    <p>Tổng tiền phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
+                                    <p>Phí vận chuyển</p><span id="tienPhiShip">{{ $phi_ship_goc ? (number_format($phi_ship_goc->phi_ship, 0, ',', '.')): "0" }}đ</span>
                                 </li>
                                 <li>
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
+                                </li>
+                                <li>
+                                    <p>Sử dụng xu (<span class="tongCoin">{{$tongCoin}}</span> xu)</p>
+                                    <div class="toggle-button">
+                                        <div class="toggle-circle"></div>
+                                    </div>
                                 </li>
                                 <li>
                                     <p>Giảm giá vận chuyển</p><span class="giamTienVanChuyen">0đ</span>
@@ -131,6 +142,10 @@
                                     <p>Giảm giá đơn hàng</p><span class="giamTienDonHang">0đ</span>
                                 </li>
                             </ul>
+                            <div class="ghi-chu mt-3">
+                                <p>Lời nhắn: </p>
+                                <input class="form-control" type="text" placeholder="Gửi lời nhắn đến shop...">
+                            </div>
                         </div>
                         <div class="total">
                             <h6>Tổng tiền hàng : </h6>
@@ -148,6 +163,7 @@
                             <h6>Tổng thanh toán : </h6>
                             <h6 class="textColor tongThanhToan">{{ number_format($tong_thanh_toan, 0, ',', '.') }}đ</h6>
                         </div>
+                        <input type="hidden" class="tokenDatHang" name="_token" value="{{ csrf_token() }}" />
                         <div class="order-button btn btn_black sm w-100 rounded">Đặt hàng</div>
                     </div>
                 </div>
@@ -180,16 +196,21 @@
                                         </div>
                                         <div class="item-content">
                                             <div class="text-content">
-                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
                                                 @if ($gioConLai>0 && $gioConLai<=24)
                                                     <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
                                                 @elseif ($gioConLai > 24)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
+                                                @if ($tong_tien < $item->gia_tri_toi_thieu)
+                                                    <p class="tien">Giá trị đơn hàng chưa đủ.</p>
+                                                @endif
                                             </div>
                                             <div class="radio-container">
-                                                <input type="radio" name="ma_giam_gia_van_chuyen" value="{{$item->id}}">
+                                                @if ($tong_tien >= $item->gia_tri_toi_thieu)
+                                                    <input type="radio" name="ma_giam_gia_van_chuyen" value="{{$item->id}}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -213,16 +234,21 @@
                                         </div>
                                         <div class="item-content">
                                             <div class="text-content">
-                                                <p>Giảm tối đa <span class="tien">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
-                                                <p>Đơn tối thiểu <span class="tien">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
+                                                <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
+                                                <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
                                                 @if ($gioConLai>0 && $gioConLai<=24)
                                                     <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
                                                 @elseif ($gioConLai > 24)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
+                                                @if ($tong_tien < $item->gia_tri_toi_thieu)
+                                                    <p class="tien">Giá trị đơn hàng chưa đủ.</p>
+                                                @endif
                                             </div>
                                             <div class="radio-container">
-                                                <input type="radio" name="ma_giam_gia_don_hang" value="{{$item->id}}">
+                                                @if ($tong_tien >= $item->gia_tri_toi_thieu)
+                                                    <input type="radio" name="ma_giam_gia_don_hang" value="{{$item->id}}">
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -328,7 +354,7 @@
                                     @enderror
                                 </p>
                             </div>
-                            <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChiCheckOut()">Xác nhận</button>
+                            <button class="btn btn-submit mt-3 check-url" type="submit" onsubmit="ajaxThemDiaChiCheckOut()">Xác nhận</button>
                         </div>
                     </form>
                 </div>

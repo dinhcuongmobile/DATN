@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\ChiTietDonHang;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,15 +12,15 @@ class DonHang extends Model
     protected $table = 'don_hangs';
 
     protected $fillable = [
+        'ma_don_hang',
         'user_id',
-        'ho_ten_nhan',
-        'ngay_dat_hang',
-        'dia_chi_nhan',
-        'so_dien_thoai_nhan',
+        'dia_chi_id',
         'tong_thanh_toan',
         'phuong_thuc_thanh_toan',
         'trang_thai',
         'thanh_toan',
+        'ghi_chu',
+        'ngay_dat_hang',
     ];
 
     protected $casts = [
@@ -35,8 +32,18 @@ class DonHang extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function diaChi()
+    {
+        return $this->belongsTo(DiaChi::class, 'dia_chi_id');
+    }
+
     public function chiTietDonHangs()
     {
         return $this->hasMany(ChiTietDonHang::class, 'don_hang_id');
+    }
+
+    public function donHangHoan()
+    {
+        return $this->hasMany(DonHangHoan::class, 'don_hang_id');
     }
 }

@@ -26,7 +26,7 @@ class CoinController extends Controller
         // Lấy lịch sử nhận xu gần nhất của người dùng
         $check = Coin::where('user_id', $user->id)
             ->latest('ngay_nhan')->first();
-        
+
         if ($check && $check->ngay_nhan == $ngayNhan) {
             // Người dùng đã nhận xu hôm nay
             return response()->json([
@@ -49,14 +49,30 @@ class CoinController extends Controller
             $soNgay = 1;
         }
 
-        Coin::create([
-            'user_id' => $user->id,
-            'coin' => 100,
-            'ngay_nhan' => $ngayNhan,
-            'so_ngay' => $soNgay,
-        ]);
+        // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
+        $coins = ($soNgay == 7) ? 300 : 100;
 
-        return response()->json(['message' => 'Nhận xu thành công!', 'coin' => 100, 'so_ngay' => $soNgay], 200);
+        // Nếu đã nhận xu rồi sẽ cộng dồn xu
+        $updateCoin = $check ? $check->coin + $coins : $coins;
+
+        if ($check) {
+            // Cập nhật cộng dồn số xu
+            $check->update([
+                'coin' => $updateCoin,
+                'ngay_nhan' => $ngayNhan,
+                'so_ngay' => $soNgay
+            ]);
+        } else {
+            // Nếu chưa nhận xu lần nào thì tạo cái mới
+            Coin::create([
+                'user_id' => $user->id,
+                'coin' => $coins,
+                'ngay_nhan' => $ngayNhan,
+                'so_ngay' => $soNgay
+            ]);
+        }
+
+        return response()->json(['message' => 'Nhận xu thành công!', 'coin' => $coins, 'so_ngay' => $soNgay], 200);
     }
 
     public function getUserCoin()

@@ -1,25 +1,30 @@
 /* Css tích xu */
+.coin-content {
+    background: linear-gradient(180deg, #e2835a, #fabb42);
+}
+
 .coin-container {
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    background: linear-gradient(180deg, #fce082, #fabb42);
     text-align: center;
     color: #fff;
 }
 
 /* Header */
 .coin-header {
-    font-size: 1.5rem;
+    font-size: 3.5rem;
     font-weight: bold;
     margin-bottom: 10px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* Số xu hiện tại */
 .current-coin {
     font-size: 50px;
     font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* Vòng ngày nhận xu */
