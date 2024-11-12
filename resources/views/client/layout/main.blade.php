@@ -48,11 +48,11 @@
                     <div class="col-12 p-0">
                         <div class="mobile-fix-option">
                             <ul>
-                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Search</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Cart</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="heart"></i>My Wish</a></li>
-                                <li> <a href="#"><i class="iconsax" data-icon="user-2"></i>Account</a></li>
+                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang Chủ</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Tìm Kiếm</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Giỏ Hàng</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="heart"></i>Yêu Thích</a></li>
+                                <li> <a href="#"><i class="iconsax" data-icon="user-2"></i>Tài Khoản</a></li>
                             </ul>
                         </div>
                     </div>
@@ -342,7 +342,7 @@
                                         <li> <a class="nav" href="index.html">Trang Chủ</a></li>
                                         <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
                                         <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tứcg</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
                                         <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
