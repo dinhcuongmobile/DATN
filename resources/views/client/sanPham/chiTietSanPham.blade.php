@@ -134,7 +134,7 @@
                                     <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
                                     <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
                                     data-id="{{$san_pham->id}}">Thêm giỏ hàng</a>
-                                <a class="btn btn_outline sm" href="#">Mua ngay</a>
+                                <a class="btn btn_outline sm" id="muaNgay" href="javascript:void(0)">Mua ngay</a>
                             </div>
                         </div>
 

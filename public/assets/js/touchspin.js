@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnThemGioHang) {
         btnThemGioHang.addEventListener('click', function () {
             if (selectedSize && selectedColor) {
-                var token= document.querySelector(".tokenThemGioHang").value;
+                let token= document.querySelector(".tokenThemGioHang").value;
                 let sanPhamID = btnThemGioHang.getAttribute('data-id');
                 let soLuong = document.getElementById('soLuong').value;
                 let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     success: function (response) {
                         if (response.login == false) {
-                            window.location.href = '/tai-khoan/dang-nhap'; 
+                            window.location.href = '/tai-khoan/dang-nhap';
                         } else {
                             $('#addtocart').modal('show');
                             var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
@@ -169,3 +169,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    let btnMuaNgay = document.querySelector('#muaNgay');
+    let btnThemGioHang = document.querySelector('#themGioHang');
+    if(btnMuaNgay){
+        btnMuaNgay.addEventListener('click',function(){
+            if(selectedSize && selectedColor){
+                let token= document.querySelector(".tokenThemGioHang").value;
+                let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                let soLuong = document.getElementById('soLuong').value;
+                let kichCo = ipSize.value;
+                let maMau = ipMauSac.value;
+
+                $.ajax({
+                    url: '/gio-hang/mua-ngay',
+                    method: 'POST',
+                    data: {
+                        _token: token,
+                        san_pham_id: sanPhamID,
+                        so_luong: Number(soLuong),
+                        kich_co: kichCo,
+                        ma_mau: maMau
+                    },
+                    success: function (response) {
+                        if (response.login == false) {
+                            window.location.href = '/tai-khoan/dang-nhap';
+                        } else {
+                            window.location.href = '/gio-hang/chi-tiet-thanh-toan';
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra!');
+                    }
+                });
+            }else{
+                document.querySelector('#errSelect').style.display = 'block';
+            }
+        });
+    }
+});
+

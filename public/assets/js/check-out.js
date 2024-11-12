@@ -195,9 +195,9 @@ function datHang(){
             return;
         }
         let tongThanhToan = parseFloat(document.querySelector('.tongThanhToan').textContent.replace(/[đ,.]/g, '')) || 0;
-        let giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
-        let giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.]/g, '')) || 0;
-        let phuongThucThanhToan = document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value;
+        let giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.-]/g, '')) || 0;
+        let giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.-]/g, '')) || 0;
+        let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
         let ghiChu = document.querySelector('.ghi-chu input').value || "";
 
@@ -216,8 +216,6 @@ function datHang(){
             },
             success: function(response) {
                 if(response.success){
-                    console.log(response.don_hang);
-
                     window.location.href="/";
 
                 }
