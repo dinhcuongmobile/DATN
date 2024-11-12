@@ -52,12 +52,25 @@ class CoinController extends Controller
         // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
         $coins = ($soNgay == 7) ? 300 : 100;
 
-        Coin::create([
-            'user_id' => $user->id,
-            'coin' => $coins,
-            'ngay_nhan' => $ngayNhan,
-            'so_ngay' => $soNgay,
-        ]);
+        // Nếu đã nhận xu rồi sẽ cộng dồn xu
+        $updateCoin = $check ? $check->coin + $coins : $coins;
+
+        if ($check) {
+            // Cập nhật cộng dồn số xu
+            $check->update([
+                'coin' => $updateCoin,
+                'ngay_nhan' => $ngayNhan,
+                'so_ngay' => $soNgay
+            ]);
+        } else {
+            // Nếu chưa nhận xu lần nào thì tạo cái mới
+            Coin::create([
+                'user_id' => $user->id,
+                'coin' => $coins,
+                'ngay_nhan' => $ngayNhan,
+                'so_ngay' => $soNgay
+            ]);
+        }
 
         return response()->json(['message' => 'Nhận xu thành công!', 'coin' => $coins, 'so_ngay' => $soNgay], 200);
     }
