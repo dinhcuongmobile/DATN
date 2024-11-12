@@ -37,7 +37,7 @@
                             <div class="icon-box"> <i class="iconsax" data-icon="mail"></i></div>
                             <div class="contact-box">
                                 <h6>Địa chỉ Email</h6>
-                                <p>namadstore@gmail.com</p>
+                                <p>namadstore2024@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <div class="icon-box"> <i class="iconsax" data-icon="phone-calling"></i></div>
                             <div class="contact-box">
                                 <h6>Số điện thoại</h6>
-                                <p>+84 123 456 789</p>
+                                <p>+84 35 786 4779</p>
                             </div>
                         </div>
                     </div>
