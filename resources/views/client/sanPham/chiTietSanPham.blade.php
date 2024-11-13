@@ -157,12 +157,7 @@
                                         <p id="soLuongTon" data-quantityOld="{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}</p>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <h6>Tags: </h6>
-                                        <p>Color Pink Clay , Athletic, Accessories, Vendor Kalles</p>
-                                    </div>
-                                </li>
+                              
                                 <li>
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>Danh mục: </h6>
