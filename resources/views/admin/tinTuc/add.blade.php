@@ -16,21 +16,21 @@
                         <input type="text" class="form-control" id="" name="tieu_de"
                             placeholder="Nhập tiêu đề..." value="{{ old('tieu_de') }}">
                         @error('tieu_de')
-                            <p class="Err mt-1">{{ $message }}</p>
+                            <p class="Err mt-1 text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Ảnh bìa:</label>
                         <input type="file" name="hinh_anh" id="" class="form-control-file border">
                         @error('hinh_anh')
-                            <p class="Err mt-1">{{ $message }}</p>
+                            <p class="Err mt-1 text-danger ">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label for="">Nội dung</label>
                         <textarea class="form-control" rows="10" id="noi_dung" name="noi_dung" placeholder="Nhập nội dung...">{{ old('noi_dung') }}</textarea>
                         @error('noi_dung')
-                            <p class="Err mt-1">{{ $message }}</p>
+                            <p class="Err mt-1 text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="mb-5 ">
@@ -41,7 +41,7 @@
                             @endforeach
                         </select>
                         @error('noi_dung')
-                            <p class="Err mt-1">{{ $message }}</p>
+                            <p class="Err mt-1 text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
