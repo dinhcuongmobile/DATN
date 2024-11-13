@@ -1,964 +1,401 @@
 @extends('client.layout.main')
+@section('css')
+    <style>
+        .page-link {
+            color: black
+        }
+
+        .page-link.active,
+        .active>.page-link {
+            background-color: #cd773d;
+            border-color: #cd773d;
+        }
+    </style>
+@endsection
 @section('container')
-<section class="section-b-space pt-0">
-    <div class="heading-banner">
-        <div class="custom-container container">
-            <div class="row align-items-center">
-                <div class="col-sm-6">
-                    <h4>Collection No Sidebar </h4>
-                </div>
-                <div class="col-sm-6">
-                    <ul class="breadcrumb float-end">
-                        <li class="breadcrumb-item"> <a href="index.html">Home </a></li>
-                        <li class="breadcrumb-item active"> <a href="#">Collection No Sidebar </a></li>
-                    </ul>
+    <section class="section-b-space pt-0">
+        <div class="heading-banner">
+            <div class="custom-container container">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <h4>{{ $danh_muc->ten_danh_muc }} </h4>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<section class="section-b-space pt-0">
-    <div class="custom-container container">
-        <div class="row">
-            <div class="col-12 d-none d-md-block">
-                <div class="shop-banner"> <img class="img-fluid w-100" src="../assets/images/banner/banner-12.jpg"
-                        alt="">
-                    <div class="shop-banner-content">
-                        <h2>New Collection Summer Sale</h2>
-                        <h4>Best Offer</h4>
-                        <p>An evening dress that reveals a woman's ankles while walking is the most disgusting thing
-                            I have ever seen.</p><a class="btn btn_black" href="#">Subscribe</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="top-filter-menu">
-                    <div>
-                        <div class="category-dropdown"><label for="cars">Sort By :</label><select
-                                class="form-select" id="cars" name="carlist">
-                                <option value="">Best selling</option>
-                                <option value="">Popularity</option>
-                                <option value="">Featured</option>
-                                <option value="">Alphabetically, Z-A</option>
-                                <option value="">High - Low Price</option>
-                                <option value="">% Off - Hight To Low</option>
-                            </select></div>
-                    </div>
-                    <ul class="filter-option-grid">
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="2"></button></li>
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="3"></button></li>
-                        <li class="nav-item d-none d-lg-flex"> <button class="nav-link active" data-grid="4"></button></li>
-                        <li class="nav-item d-none d-md-flex"> <button class="nav-link" data-grid="list"></button></li>
-                    </ul>
-                </div>
-                <div class="product-tab-content ratio1_3">
-                    <div class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/1.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/20.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                    </a>
-                                    <p class="list-per">Fashion is to please your eye. Shapes and proportions are
-                                        for your intellect. It is important to be chic. Vanity is the healthiest
-                                        thing in life. Elegance isn't solely defined by what you wear. It's how you
-                                        carry yourself, how you speak, what you read. Fashion is made to become
-                                        unfashionable.</p>
-                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
+    </section>
+    <section class="section-b-space pt-0">
+        <div class="custom-container container">
+            <div class="row">
+                <div class="col-3">
+                    <div class="custom-accordion theme-scrollbar left-box">
+                        <div class="left-accordion">
+                            <h5>Thoát </h5><i class="back-button fa-solid fa-xmark"></i>
                         </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/2.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/19.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                    <div class="countdown">
-                                        <ul class="clockdiv1">
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="days"></div>
-                                                </div><span class="title">Days</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="hours"></div>
-                                                </div><span class="title">Hours</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="minutes"></div>
-                                                </div><span class="title">Min</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="seconds"></div>
-                                                </div><span class="title">Sec</span>
-                                            </li>
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="search-box"><input type="search" name="text" placeholder="Tìm kiếm..."><i
+                                    class="iconsax" data-icon="search-normal-2"></i></div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Từ
+                                            khóa</span><span>Xem tất cả</span></button></h2>
+                                <div class="accordion-collapse collapse show" id="panelsStayOpen-collapse">
+                                    <div class="accordion-body">
+                                        <ul class="tags">
+                                            <li> <a href="#">T-Shirt <i class="iconsax" data-icon="add"></i></a></li>
+                                            <li> <a href="#">Handbags<i class="iconsax" data-icon="add"></i></a></li>
+                                            <li> <a href="#">Trends<i class="iconsax" data-icon="add"></i></a></li>
+                                            <li> <a href="#">Minimog<i class="iconsax" data-icon="add"></i></a></li>
+                                            <li> <a href="#">Denim<i class="iconsax" data-icon="add"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Wide Linen-Blend Trousers</h6>
-                                    </a>
-                                    <p class="list-per">I was the first person to have a punk rock hairstyle. It is
-                                        not easy to dress well. I have my permanent muses and my muses of the
-                                        moment. We live in an era of globalization and the era of the woman. Never
-                                        in the history of the world have women been more in control of their
-                                        destiny. You have a more interesting life if you wear impressive clothes.
-                                    </p>
-                                    <p>$100.00 <del>$18.00 </del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button>
+                                </h2>
+                                <div class="accordion-collapse collapse show mb-3" id="panelsStayOpen-collapseFour">
+                                    <div class="accordion-body">
+                                        <form
+                                            action="{{ route('san-pham.san-pham-danh-muc', ['danh_muc_id' => $danh_muc->id]) }}"
+                                            method="get" data-id="{{ $danh_muc->id }}">
+                                            <div class="range-slider">
+                                                <input id="minPrice" name="minPrice" class="range-slider-input"
+                                                    type="range" min="0" max="{{ $maxPrice }}" step="1"
+                                                    value="{{ request()->get('minPrice', $minPrice) }}">
+                                                <input id="maxPrice" name="maxPrice" class="range-slider-input"
+                                                    type="range" min="0" max="{{ $maxPrice }}" step="1"
+                                                    value="{{ request()->get('maxPrice', $maxPrice) }}">
+                                                <div class="range-slider-display"></div>
+                                            </div>
+                                            <button type="submit" id="enterLoc" class="btn">Lọc</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/3.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/18.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">I don't like trends. They tend to make everybody look the
-                                        same. Clothes can transform your mood and confidence. I like the body. I
-                                        like to design everything to do with the body. Fashion is made to become
-                                        unfashionable. I adore the challenge of creating truly modern clothes, where
-                                        a woman's personality and sense of self are revealed. I want people to see
-                                        the dress, but focus on the woman.</p>
-                                    <p>$120.30 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/4.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/17.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Blue lined White T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">If you wear clothes that don't suit you, you're a fashion
-                                        victim. You have to wear clothes that make you look better. I think I'd go
-                                        mad if I didn't have a place to escape to. In order to be irreplaceable one
-                                        must always be different. Clothes mean nothing until someone lives in them.
-                                        It's really easy to get colors right. It's really hard to get black - and
-                                        neutrals - right. Black is certainly a color but it's also an illusion.</p>
-                                    <p>$190.00 <del>$210.00</del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/9.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/16.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                    <div class="countdown">
-                                        <ul class="clockdiv3">
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="days"></div>
-                                                </div><span class="title">Days</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="hours"></div>
-                                                </div><span class="title">Hours</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="minutes"></div>
-                                                </div><span class="title">Min</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="seconds"></div>
-                                                </div><span class="title">Sec</span>
-                                            </li>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo"><span>Danh mục</span></button>
+                                </h2>
+                                <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseTwo">
+                                    <div class="accordion-body">
+                                        <ul class="catagories-side theme-scrollbar styleSPDanhMuc">
+                                            @foreach ($danh_mucs as $item)
+                                                <li> <a href="{{ route('san-pham.san-pham-danh-muc', $item->id) }}">{{ $item->ten_danh_muc }}
+                                                        ({{ $count_sp_danh_muc[$item->id] ?? 0 }})
+                                                    </a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                    </a>
-                                    <p class="list-per">I try as much as possible to give you a great basic product
-                                        and what comes out, I feel, is really amazing. I believe that my clothes can
-                                        give people a better image of themselves - that it can increase their
-                                        feelings of confidence and happiness. Every day I'm thinking about change.
-                                        Luxury will be always around, no matter what happens in the world. I am like
-                                        a freight train. Working on the details, twisting them and playing with them
-                                        over the years, but always staying on the same track.</p>
-                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/10.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/15.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Wide Linen-Blend Trousers</h6>
-                                    </a>
-                                    <p class="list-per">Fashion fades, only style remains the same. I like the body.
-                                        I like to design everything to do with the body. Men don't want another man
-                                        to look at their woman because they don't know how to handle it. The key to
-                                        my collections is sensuality. I wanted to dress the woman who lives and
-                                        works, not the woman in a painting.</p>
-                                    <p>$100.00 <del>$18.00 </del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/11.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/14.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">Clothes mean nothing until someone lives in them. I was the
-                                        first person to have a punk rock hairstyle. You have to stay true to your
-                                        heritage; that's what your brand is about. What I hate is nasty, ugly
-                                        people. I never like to think that I design for a particular person. I
-                                        design for the woman I wanted to be, the woman I used to be, and - to some
-                                        degree - the woman I'm still a little piece of.</p>
-                                    <p>$120.30 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/12.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/13.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Blue lined White T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">Every day I'm thinking about change. Fashion to me has
-                                        become very disposable; I wanted to get back to craft, to clothes that could
-                                        last. I want people to be afraid of the women I dress. I didn't want to be a
-                                        fashion designer, and for a good half of my career I didn't like it. I
-                                        always wanted to do other things. When I was young, I lived like an old
-                                        woman, and when I got old, I had to live like a young person.</p>
-                                    <p>$190.00 <del>$210.00</del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/13.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/12.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                    </a>
-                                    <p class="list-per">Luxury will be always around, no matter what happens in the
-                                        world. For me, the summer will be pure gray - mother-of-pearl gray, very
-                                        pale gray. To me, this is the big statement for summer. Then we have light
-                                        blue, light turquoise, lots of pink. It is difficult to talk about fashion
-                                        in the abstract, without a human body before my eyes, without drawings,
-                                        without a choice of fabric - without a practical or visual reality. The
-                                        great thing about fashion is that it always looks forward. You have a more
-                                        interesting life if you wear impressive clothes.</p>
-                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/14.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/11.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Wide Linen-Blend Trousers</h6>
-                                    </a>
-                                    <p class="list-per">I don't like trends. They tend to make everybody look the
-                                        same. Men have got more of a discerning eye. They appreciate cut and
-                                        details, things that aren't so obvious. They like things that have cachet
-                                        and gentlemanliness. I like the things around me to be beautiful and
-                                        slightly dreamy, with a feeling of worldliness. I think there is something
-                                        about luxury - it's not something people need, but it's what they want. It
-                                        really pulls at their heart. Money doesn't buy elegance. You can take an
-                                        inexpensive sheath, add a pretty scarf, gray shoes, and a wonderful bag, and
-                                        it will always be elegant.</p>
-                                    <p>$100.00 <del>$18.00 </del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/15.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/4.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                    <div class="countdown">
-                                        <ul class="clockdiv5">
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="days"></div>
-                                                </div><span class="title">Days</span>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>vận chuyển
+                                            & Giao hàng</span><span></span></button></h2>
+                                <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseSeven">
+                                    <div class="accordion-body">
+                                        <ul class="widget-card">
+                                            <li><i class="iconsax" data-icon="truck-fast"></i>
+                                                <div>
+                                                    <h6>Miễn phí vận chuyển</h6>
+                                                </div>
                                             </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="hours"></div>
-                                                </div><span class="title">Hours</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="minutes"></div>
-                                                </div><span class="title">Min</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="seconds"></div><span class="title">Sec</span>
+                                            <li><i class="iconsax" data-icon="headphones"></i>
+                                                <div>
+                                                    <h6>Hỗ trợ 24/7</h6>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">Online media is increasingly influential in fashion.
-                                        Everything I do is a matter of heart, body and soul. A girl should be two
-                                        things: classy and fabulous. I am not interested in the past, except as the
-                                        road to the future. Even Michelangelo got paid for doing the Sistine Chapel.
-                                        To those artists who say they're doing it for the love of art, I say: Get
-                                        real.</p>
-                                    <p>$120.30 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/16.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/3.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Blue lined White T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">Don't dress to kill, dress to survive. I believe that my
-                                        clothes can give people a better image of themselves - that it can increase
-                                        their feelings of confidence and happiness. The only way to do something in
-                                        depth is to work hard. The key to my collections is sensuality. Delete the
-                                        negative; accentuate the positive!</p>
-                                    <p>$190.00 <del>$210.00</del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/17.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/2.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                    <div class="countdown">
-                                        <ul class="clockdiv7">
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="days"></div>
-                                                </div><span class="title">Days</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="hours"></div>
-                                                </div><span class="title">Hours</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="minutes"></div>
-                                                </div><span class="title">Min</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="seconds"></div>
-                                                </div><span class="title">Sec</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                    </a>
-                                    <p class="list-per">Clothes mean nothing until someone lives in them. I was the
-                                        first person to have a punk rock hairstyle. You have to stay true to your
-                                        heritage; that's what your brand is about. What I hate is nasty, ugly
-                                        people. I never like to think that I design for a particular person. I
-                                        design for the woman I wanted to be, the woman I used to be, and - to some
-                                        degree - the woman I'm still a little piece of.</p>
-                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/18.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/1.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-regular fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Wide Linen-Blend Trousers</h6>
-                                    </a>
-                                    <p class="list-per">I try as much as possible to give you a great basic product
-                                        and what comes out, I feel, is really amazing. I believe that my clothes can
-                                        give people a better image of themselves - that it can increase their
-                                        feelings of confidence and happiness. Every day I'm thinking about change.
-                                        Luxury will be always around, no matter what happens in the world. I am like
-                                        a freight train. Working on the details, twisting them and playing with them
-                                        over the years, but always staying on the same track.</p>
-                                    <p>$100.00 <del>$18.00 </del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/19.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/11.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">A girl should be two things: classy and fabulous. I want
-                                        people to be afraid of the women I dress. Every day I'm thinking about
-                                        change. I remember walking the dog one day, I saw a car full of teenage
-                                        girls, and one of them rolled down the window and yelled, 'Marc Jacobs!' in
-                                        a French accent. I have a fantastic relationship with money. I use it to buy
-                                        my freedom.</p>
-                                    <p>$120.30 <del>$140.00</del><span>-20%</span></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="product-box-3">
-                                <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i></a>
-                                    </div>
-                                    <div class="product-image"><a class="pro-first" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/20.jpg"
-                                                alt="product"></a><a class="pro-sec" href="product.html"> <img
-                                                class="bg-img" src="../assets/images/product/product-3/3.jpg"
-                                                alt="product"></a></div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" title="Add to cart" tabindex="0"><i
-                                                class="iconsax" data-icon="basket-2" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to card"> </i></a><a
-                                            href="compare.html" tabindex="0"><i class="iconsax"
-                                                data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a><a href="#"
-                                            data-bs-toggle="modal" data-bs-target="#quick-view" tabindex="0"><i
-                                                class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i></a></div>
-                                    <div class="countdown">
-                                        <ul class="clockdiv8">
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="days"></div>
-                                                </div><span class="title">Days</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="hours"></div>
-                                                </div><span class="title">Hours</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="minutes"></div>
-                                                </div><span class="title">Min</span>
-                                            </li>
-                                            <li class="dot"> <span>:</span></li>
-                                            <li>
-                                                <div class="timer">
-                                                    <div class="seconds"></div>
-                                                </div><span class="title">Sec</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-detail">
-                                    <ul class="rating">
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star"></i></li>
-                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                        <li>4.3</li>
-                                    </ul><a href="product.html">
-                                        <h6>Blue lined White T-Shirt</h6>
-                                    </a>
-                                    <p class="list-per">Luxury will be always around, no matter what happens in the
-                                        world. For me, the summer will be pure gray - mother-of-pearl gray, very
-                                        pale gray. To me, this is the big statement for summer. Then we have light
-                                        blue, light turquoise, lots of pink. It is difficult to talk about fashion
-                                        in the abstract, without a human body before my eyes, without drawings,
-                                        without a choice of fabric - without a practical or visual reality. The
-                                        great thing about fashion is that it always looks forward. You have a more
-                                        interesting life if you wear impressive clothes.</p>
-                                    <p>$190.00 <del>$210.00</del></p>
-                                    <div class="listing-button"> <a class="btn" href="cart.html">Quick Shop</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="pagination-wrap">
-                    <ul class="pagination">
-                        <li> <a class="prev" href="#"><i class="iconsax" data-icon="chevron-left"></i></a></li>
-                        <li> <a href="#">1</a></li>
-                        <li> <a class="active" href="#">2</a></li>
-                        <li> <a href="#">3 </a></li>
-                        <li> <a class="next" href="#"> <i class="iconsax" data-icon="chevron-right"></i></a></li>
-                    </ul>
+                <div class="col-xl-9">
+                    <div class="top-filter-menu">
+                        <div> <a class="filter-button btn">
+                                <h6> <i class="iconsax" data-icon="filter"></i>Danh sách bộ lọc </h6>
+                            </a>
+                            <form id="formFilter"
+                                action="{{ route('san-pham.san-pham-danh-muc', ['danh_muc_id' => $danh_muc->id]) }}"
+                                method="get" data-id="{{ $danh_muc->id }}">
+                                <div class="category-dropdown">
+                                    <label for="orderby">Sắp xếp theo :</label>
+                                    <select class="form-select" id="orderby" name="orderby">
+                                        <option value="" {{ request('orderby') == '' ? 'selected' : '' }}>Mặc
+                                            định</option>
+                                        <option value="best-selling"
+                                            {{ request('orderby') == 'best-selling' ? 'selected' : '' }}>Bán chạy nhất
+                                        </option>
+                                        <option value="a-z" {{ request('orderby') == 'a-z' ? 'selected' : '' }}>
+                                            Theo
+                                            thứ tự, A-Z</option>
+                                        <option value="price-high-low"
+                                            {{ request('orderby') == 'price-high-low' ? 'selected' : '' }}>Giá cao -
+                                            thấp</option>
+                                        <option value="discount-high-low"
+                                            {{ request('orderby') == 'discount-high-low' ? 'selected' : '' }}>Giảm giá
+                                            %
+                                            từ cao - thấp</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="product-tab-content ratio1_3">
+                        <div id="productList"
+                            class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
+                            @foreach ($san_phams as $item)
+                                <div>
+                                    <div class="product-box-3">
+                                        <div class="img-wrapper">
+                                            <div class="label-block">
+                                                <a class="label-2 wishlist-icon" href="#" tabindex="0">
+                                                    <i class="iconsax" data-icon="heart" title="Wishlist">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M12 21.6516C11.69 21.6516 11.39 21.6116 11.14 21.5216C7.32 20.2116 1.25
+                                                                                                                                                                                                                                                                                15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
+                                                                                                                                                                                                                                                                                12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
+                                                                                                                                                                                                                                                                                15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
+                                                                                                                                                                                                                                                                                6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
+                                                                                                                                                                                                                                                                                19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
+                                                                                                                                                                                                                                                                                12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
+                                                                fill="#292D32">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
+                                                </a>
+                                            </div>
+                                            <div class="product-image style-border">
+                                                <a class="pro-first bg-size"
+                                                    href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
+                                                    style="
+                                                    background-image: url({{ Storage::url($item->hinh_anh) }});
+                                                    background-size:cover;
+                                                    background-position: center;
+                                                    background-repeat: no-repeat;
+                                                    display: block;
+                                                    ">
+                                                    <img class="bg-img" src="{{ Storage::url($item->hinh_anh) }}"
+                                                        alt="Sản phẩm" style="display: none;">
+                                                </a>
+                                                <a class="pro-sec bg-size"
+                                                    href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
+                                                    style="
+                                                    background-image: url({{ Storage::url($item->bienThes->first()->hinh_anh) }});
+                                                    background-size:cover;
+                                                    background-position: center;
+                                                    background-repeat: no-repeat;
+                                                    display: block;
+                                                    ">
+                                                    <img class="bg-img"
+                                                        src="{{ Storage::url($item->bienThes->first()->hinh_anh) }}"
+                                                        alt="Sản phẩm" style="display: none;">
+                                                </a>
+                                            </div>
+                                            <div class="cart-info-icon">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
+                                                    tabindex="0">
+                                                    <i class="iconsax" data-icon="eye" title="Quick view">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004
+                                                                                                                                                                                                                                                                                12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
+                                                                                                                                                                                                                                                                                15.58 10.02 15.58 12Z"
+                                                                stroke="#292D32" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            </path>
+                                                            <path
+                                                                d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81
+                                                                                                                                                                                                                                                                                21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
+                                                                                                                                                                                                                                                                                5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
+                                                                                                                                                                                                                                                                                8.46997 20.27 12 20.27Z"
+                                                                stroke="#292D32" stroke-width="1.5"
+                                                                stroke-linecap="round" stroke-linejoin="round">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-detail">
+                                            <ul class="rating">
+                                                <li>
+                                                    @php
+                                                        $avg_rating = $item->danhGias->avg('so_sao');
+                                                    @endphp
+
+                                                    @php
+                                                        // Tính số sao đầy, sao nửa và sao rỗng
+                                                        $full_stars = floor($avg_rating); // Số sao đầy
+                                                        $half_star = $avg_rating - $full_stars >= 0.5 ? 1 : 0; // Sao nửa
+                                                        $empty_stars = 5 - ($full_stars + $half_star); // Sao rỗng
+                                                    @endphp
+
+                                                    {{-- Hiển thị sao đầy --}}
+                                                    @for ($i = 0; $i < $full_stars; $i++)
+                                                        <i class="fa-solid fa-star"></i>
+                                                    @endfor
+
+                                                    {{-- Hiển thị sao nửa nếu có --}}
+                                                    @if ($half_star)
+                                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                                    @endif
+
+                                                    {{-- Hiển thị sao rỗng --}}
+                                                    @for ($i = 0; $i < $empty_stars; $i++)
+                                                        <i class="fa-regular fa-star"></i>
+                                                    @endfor
+                                                </li>
+
+                                                {{-- Hiển thị số điểm đánh giá --}}
+                                                @php
+                                                    if ($avg_rating > 0) {
+                                                        $danh_gia = number_format($avg_rating, 1);
+                                                    } else {
+                                                        $danh_gia = 'Chưa có đánh giá';
+                                                    }
+                                                @endphp
+                                                <li>({{ $danh_gia }})</li>
+                                            </ul><a href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
+                                                <h6>{{ $item->ten_san_pham }}</h6>
+                                            </a>
+                                            @php
+                                                $gia_khuyen_mai =
+                                                    $item->gia_san_pham -
+                                                    ($item->gia_san_pham * $item->khuyen_mai) / 100;
+                                            @endphp
+                                            <p>
+                                                {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
+                                                @if ($item->khuyen_mai > 0)
+                                                    <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </div>
+                    <div class="pagination-wrap">
+                        <ul class="pagination">
+                            {{-- Nút Previous --}}
+                            <li>
+                                <a class="prev" data-url="{{ $san_phams->previousPageUrl() ?? '#' }}">
+                                    <i class="iconsax" data-icon="chevron-left"></i>
+                                </a>
+                            </li>
+                            {{-- Hiển thị các số trang --}}
+                            @foreach ($san_phams->getUrlRange(1, $san_phams->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $san_phams->currentPage() ? 'active' : '' }}">
+                                    <a href="{{ $url }}" class="page-link"
+                                        data-url="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+                            {{-- Nút Next --}}
+                            <li>
+                                <a class="next" data-url="{{ $san_phams->nextPageUrl() ?? '#' }}">
+                                    <i class="iconsax" data-icon="chevron-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endsection
+@section('js')
+    {{-- Phân trang --}}
+    <script src="{{ asset('assets/js/page.js') }}"></script>
+    {{-- Lọc sản phẩm theo giá --}}
+    <script src="{{ asset('assets/js/filter-range-slider.js') }}"></script>
+    {{-- Sắp xếp sản phẩm --}}
+    <script>
+        $('#orderby').change(function() {
+            var formData = $('#formFilter').serializeArray(); // Lấy dữ liệu từ form
+            var urlParams = new URLSearchParams(window.location.search); // Lấy các tham số từ URL hiện tại
+
+            // Cập nhật các tham số từ formData vào urlParams
+            formData.forEach(function(item) {
+                urlParams.set(item.name, item.value); // Lưu các tham số
+            });
+
+            // Lấy giá trị của orderby
+            var orderbyValue = $('#orderby').val();
+
+            // Thêm hoặc xóa tham số `orderby` vào URLParams
+            if (orderbyValue) {
+                urlParams.set('orderby', orderbyValue); // Thêm tham số orderby
+            } else {
+                urlParams.delete('orderby'); // Xóa tham số orderby nếu là mặc định
+            }
+
+            // Lấy danh mục ID từ data-id trong form
+            var danhMucId = $('#formFilter').data('id');
+
+            // Thêm tham số danh_muc_id vào URLParams (nếu chưa có)
+            if (danhMucId) {
+                urlParams.set('danh_muc_id', danhMucId);
+            }
+
+            // Tạo URL mới
+            var newUrl = $('#formFilter').attr('action') + '?' + urlParams.toString();
+            // Cập nhật URL với tham số mới
+            window.history.pushState(null, '', newUrl); // Cập nhật URL trong thanh địa chỉ
+
+
+            $.ajax({
+                url: '{{ route('san-pham.san-pham-danh-muc', ['danh_muc_id' => $danh_muc->id]) }}', // URL của route cần gửi
+                type: 'GET',
+                data: urlParams.toString(), // Gửi tất cả các tham số đã được thêm vào
+                success: function(response) {
+                    $('#productList').html(response.html); // Cập nhật danh sách sản phẩm
+                },
+                error: function(xhr) {
+                    console.log('Có lỗi xảy ra:', xhr.responseText);
+                }
+            });
+        });
+    </script>
+    <script>
+        function loadFilteredPage(url) {
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(response) {
+                    // Kiểm tra nếu không có sản phẩm
+                    if (response.html.trim() === '') {
+                        $('#productList').html('<p>Không có sản phẩm nào phù hợp với bộ lọc.</p>');
+                        $('.pagination-wrap').hide();
+                    } else {
+                        // Cập nhật danh sách sản phẩm
+                        $('#productList').html(response.html);
+                        $('.pagination-wrap').show();
+                    }
+
+
+                    // Hiển thị và ẩn các nút trang
+                    $('.pagination .page-item').each(function() {
+                        let page = parseInt($(this).find('.page-link').text());
+
+                        // Ẩn nút nếu trang không có trong danh sách `pages`
+                        if (response.pages.includes(page)) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                },
+                error: function() {
+                    console.error('Lỗi');
+                }
+            });
+        }
+    </script>
 @endsection
