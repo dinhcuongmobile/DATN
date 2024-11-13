@@ -37,7 +37,7 @@
                 </nav>
             </div>
             {{-- tap 1 --}}
-            <div id="tap1" class="card-body bg-light an">
+            <div style="border:1px" id="tap1" class="card-body bg-light an">
                 @foreach ($don_hangs['trang_thai_all'] as $itemDonHang)
                     <form action="" method="POST">
                         @csrf
@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="cart-table-container tableDonMua">
+                                        <div class="cart-table-container tableDonMua" >
                                             <table class="table">
                                                 <tbody>
                                                     @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
@@ -59,8 +59,8 @@
                                                                 <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
                                                             </p>
                                                         </td>
-                                                        <td class="col-4"><span>Số lượng:</span> {{$item->so_luong}}</td>
-                                                        <td class="col-3"><span>Thành tiền:</span> {{number_format($item->thanh_tien, 0, ',', '.')}}đ</td>
+                                                        <td class="col-4"><span style="font-size: 20px ; ">Số lượng:</span> {{$item->so_luong}}</td>
+                                                        <td class="col-3"><span style="font-size: 20px">Thành tiền:</span> {{number_format($item->thanh_tien, 0, ',', '.')}}đ</td>
                                                     </tr>
                                                     <input type="hidden" name="ids[]" value="{{$item->san_pham_id}}">
                                                     @endforeach
@@ -92,13 +92,13 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5" >
-                                                            <p>Được đặt bởi: <span style="color:#000; margin-left: 60px;">{{$itemDonHang->diaChi->ho_va_ten_nhan}}</span></p>
+                                                            <p>Được đặt bởi: <span style="color:#000;font-size:20px;  margin-left: 60px;">{{$itemDonHang->diaChi->ho_va_ten_nhan}}</span></p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5" >
                                                             <p>Địa chỉ nhận hàng:
-                                                                <span style="color:#000; margin-left: 15px;">
+                                                                <span style="color:#000;font-size:20px; margin-left: 15px;">
                                                                     @php
                                                                         $dia_chi = $itemDonHang->diaChi;
                                                                     @endphp
@@ -114,12 +114,12 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5" >
-                                                            <p>Số điện thoại nhận: <span style="color:#000; margin-left: 8px;">{{$itemDonHang->diaChi->so_dien_thoai_nhan}}</span></p>
+                                                            <p>Số điện thoại nhận: <span style="color:#000;font-size:20px; margin-left: 8px;">{{$itemDonHang->diaChi->so_dien_thoai_nhan}}</span></p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5" >
-                                                            <p>Thanh toán: <span style="color:#2ecc71; margin-left: 72px;">
+                                                            <p>Thanh toán: <span style="color:#2ecc71; font-size:20px;margin-left: 72px;">
                                                             @if ($itemDonHang->thanh_toan==0)
                                                                 Chưa thanh toán
                                                             @endif
@@ -131,14 +131,15 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="5" >
-                                                            <p>Mã hóa đơn: <span style="color: red; margin-left: 68px;">{{$itemDonHang->ma_don_hang}}</span></p>
+                                                            <p>Mã hóa đơn: <span style="color: red; font-size:20px;margin-left: 68px;">{{$itemDonHang->ma_don_hang}}</span></p>
                                                         </td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
                                             <div class="btnDonMua">
                                                 @if($itemDonHang->trang_thai==0 || $itemDonHang->trang_thai==1 || $itemDonHang->trang_thai==2)
-                                                    <a href="" style="text-decoration: none" class="btn">Hủy đơn hàng</a>
+                                                    <a href="" style="text-decoration: none ; margin-right:15px; border:1px" class="btn">Hủy đơn hàng</a>
+                                                    <a href="" style="text-decoration: none " class="btn">Liên hệ người bán</a>
                                                 @endif
                                                 @if($itemDonHang->trang_thai==3)
                                                     <input type="hidden"  name="_token" value="{{ csrf_token() }}" />
