@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DonHang;
+use App\Models\SanPham;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ChiTietDonHang extends Model
 {
@@ -24,7 +27,6 @@ class ChiTietDonHang extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
-
     public function donHang()
     {
         return $this->belongsTo(DonHang::class, 'don_hang_id');

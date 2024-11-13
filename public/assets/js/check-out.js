@@ -8,7 +8,7 @@ document.querySelector('.cart-listing #chon-voucher').addEventListener('click',f
     $('#popup-voucher').modal('show');
 });
 
-document.querySelector('.right-sidebar-checkout .toggle-button').addEventListener('click', function() {
+document.querySelector('.right-sidebar-checkout .toggle-button')?.addEventListener('click', function() {
     this.classList.toggle('active');
 
     const soCoin = parseFloat(document.querySelector('.summary-total .tongCoin').textContent) || 0;
@@ -200,6 +200,10 @@ function datHang(){
         let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
         let ghiChu = document.querySelector('.ghi-chu input').value || "";
+        let soCoin = 0;
+        if(document.querySelector('.right-sidebar-checkout .toggle-button.active')){
+            soCoin = parseFloat(document.querySelector('.summary-total .tongCoin').textContent) || 0;
+        }
 
         $.ajax({
             type: 'POST',
@@ -213,10 +217,11 @@ function datHang(){
                 giamTienVanChuyen: giamTienVanChuyen,
                 giamTienDonHang: giamTienDonHang,
                 phiShip: phiShip,
+                soCoin: soCoin
             },
             success: function(response) {
                 if(response.success){
-                    window.location.href="/";
+                    window.location.href="/don-hang/don-mua";
 
                 }
 

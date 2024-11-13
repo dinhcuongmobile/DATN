@@ -58,6 +58,7 @@ function updateQuantity() {
                 } else {
                     document.getElementById('soLuongTon').textContent = 'Tạm thời hết hàng';
                     document.querySelector('#themGioHang').disabled = true;
+                    document.querySelector('.btn-mua-hang').innerHTML="";
                 }
 
                 // Cập nhật giá trị tối đa cho input

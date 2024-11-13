@@ -129,12 +129,14 @@
                                 <li>
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
                                 </li>
+                                @if ($tongCoin > 0)
                                 <li>
                                     <p>Sử dụng xu (<span class="tongCoin">{{$tongCoin}}</span> xu)</p>
                                     <div class="toggle-button">
                                         <div class="toggle-circle"></div>
                                     </div>
                                 </li>
+                                @endif
                                 <li>
                                     <p>Giảm giá vận chuyển</p><span class="giamTienVanChuyen">0đ</span>
                                 </li>
