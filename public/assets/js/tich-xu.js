@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             // Cập nhật số xu trên giao diện
                             document.getElementById('userCoin').innerHTML = `
                                 <img src="/assets/images/coin.png" alt="lỗi" style="width: 40px; height: 40px;"> ${dataCoin.tong_xu}`;
-
+                            document.querySelector('.divTongCoin').style.display="flex";
                             if(window.location.pathname === '/tai-khoan/thong-tin-tai-khoan'){
                                 document.querySelector('#dashboard .tongCoin').innerText = dataCoin.tong_xu;
                             }

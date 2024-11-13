@@ -235,6 +235,45 @@ function datHang(){
     });
 }
 
+//ma khuyen mai
+let elHours = document.getElementById('hours');
+let elMinutes = document.getElementById('minutes');
+let elSeconds = document.getElementById('seconds');
+if(elHours && elMinutes && elSeconds){
+    let hours = parseInt(elHours.textContent);
+    let minutes = parseInt(elMinutes.textContent);
+    let seconds = parseInt(elSeconds.textContent);
+
+    function updateCountdown() {
+        if (seconds > 0) {
+            seconds--;
+        } else {
+            seconds = 59;
+            if (minutes > 0) {
+                minutes--;
+            } else {
+                minutes = 59;
+                if (hours > 0) {
+                    hours--;
+                } else {
+                    // Khi thời gian kết thúc
+                    clearInterval(countdownInterval);
+                    document.querySelector('.tdHSD').textContent = 'Đã hết hạn';
+                    return;
+                }
+            }
+        }
+
+        // Cập nhật hiển thị
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // Cập nhật mỗi giây
+    let countdownInterval = setInterval(updateCountdown, 1000);
+}
+
 
 
 

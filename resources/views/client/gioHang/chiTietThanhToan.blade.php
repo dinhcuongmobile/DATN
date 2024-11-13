@@ -129,14 +129,12 @@
                                 <li>
                                     <p>Chọn mã giảm giá</p><a id="chon-voucher" href="javascript:void(0)" style="color: #05a">Chọn mã</a>
                                 </li>
-                                @if ($tongCoin > 0)
-                                <li>
+                                <li class="divTongCoin" style="display: {{$tongCoin>0?"flex":"none"}}">
                                     <p>Sử dụng xu (<span class="tongCoin">{{$tongCoin}}</span> xu)</p>
                                     <div class="toggle-button">
                                         <div class="toggle-circle"></div>
                                     </div>
                                 </li>
-                                @endif
                                 <li>
                                     <p>Giảm giá vận chuyển</p><span class="giamTienVanChuyen">0đ</span>
                                 </li>
@@ -189,9 +187,13 @@
                                     $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
                                     $ngayHienTai = now();
                                     $gioRaMat = $ngayHienTai->diffInSeconds($ngayBatDau, false);
-                                    $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                    $tongGiayConLai = $ngayHienTai->diffInSeconds($ngayKetThuc, false);
+                                    // Tính giờ, phút, giây còn lại
+                                    $gioConLai = floor($tongGiayConLai / 3600);
+                                    $phutConLai = floor(($tongGiayConLai % 3600) / 60);
+                                    $giayConLai = $tongGiayConLai % 60;
                                 @endphp
-                                @if ($gioConLai>0 && $gioRaMat<0)
+                                @if ($giayConLai>0 && $gioRaMat<0)
                                     <div class="voucher-item">
                                         <div class="img-item">
                                             <img src="{{asset('assets/images/cart/nen-free-ship.jpg')}}" alt="" width="120px">
@@ -200,9 +202,9 @@
                                             <div class="text-content">
                                                 <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
                                                 <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
-                                                @if ($gioConLai>0 && $gioConLai<=24)
-                                                    <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
-                                                @elseif ($gioConLai > 24)
+                                                @if ($tongGiayConLai > 0 && $tongGiayConLai <= 86400)
+                                                    <p>Sắp hết hạn: <span>còn <span id="hours">0{{ $gioConLai }}</span> : <span id="minutes">{{ $phutConLai }}</span> : <span id="seconds">{{ $giayConLai }}</span></span></p>
+                                                @elseif ($tongGiayConLai > 86400)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
                                                 @if ($tong_tien < $item->gia_tri_toi_thieu)
@@ -221,15 +223,19 @@
                         </div>
                         <div class="free-order mt-4">
                             <p class="titleGiamGia">Mã giảm giá đơn hàng</p>
-                            @foreach ($ma_giam_gia_don_hang as $item)
-                                @php
+                                @foreach ($ma_giam_gia_don_hang as $item)
+                                    @php
                                     $ngayBatDau = \Carbon\Carbon::parse($item->ngay_bat_dau);
                                     $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
                                     $ngayHienTai = now();
                                     $gioRaMat = $ngayHienTai->diffInSeconds($ngayBatDau, false);
-                                    $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                    $tongGiayConLai = $ngayHienTai->diffInSeconds($ngayKetThuc, false);
+                                    // Tính giờ, phút, giây còn lại
+                                    $gioConLai = floor($tongGiayConLai / 3600);
+                                    $phutConLai = floor(($tongGiayConLai % 3600) / 60);
+                                    $giayConLai = $tongGiayConLai % 60;
                                 @endphp
-                                @if ($gioConLai>0 && $gioRaMat < 0)
+                                @if ($giayConLai>0 && $gioRaMat<0)
                                     <div class="voucher-item">
                                         <div class="img-item">
                                             <img src="{{asset('assets/images/cart/nen-free-order.jpg')}}" alt="" width="120px">
@@ -238,9 +244,9 @@
                                             <div class="text-content">
                                                 <p>Giảm tối đa <span class="textColor">{{ number_format($item->so_tien_giam, 0, ',', '.') }}đ</span></p>
                                                 <p>Đơn tối thiểu <span class="textColor">{{ number_format($item->gia_tri_toi_thieu, 0, ',', '.') }}đ</span></p>
-                                                @if ($gioConLai>0 && $gioConLai<=24)
-                                                    <p>Sắp hết hạn: <span>còn {{$gioConLai}} giờ</span></p>
-                                                @elseif ($gioConLai > 24)
+                                                @if ($tongGiayConLai > 0 && $tongGiayConLai <= 86400)
+                                                    <p>Sắp hết hạn: <span>còn <span id="hours">0{{ $gioConLai }}</span> : <span id="minutes">{{ $phutConLai }}</span> : <span id="seconds">{{ $giayConLai }}</span></span></p>
+                                                @elseif ($tongGiayConLai > 86400)
                                                     <p>HSD: <span>{{$item->ngay_ket_thuc}}</span></p>
                                                 @endif
                                                 @if ($tong_tien < $item->gia_tri_toi_thieu)
