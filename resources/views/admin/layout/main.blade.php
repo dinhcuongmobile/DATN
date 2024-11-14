@@ -144,13 +144,14 @@
                 </a>
                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-don-hang')}}">Danh sách đơn hàng</a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-kiem-duyet')}}">Kiểm duyệt đơn hàng
+                        <a class="collapse-item" href="{{route('don-hang.danh-sach-don-hang')}}">Danh sách đơn hàng </a>
+                        <a class="collapse-item" href="{{route('don-hang.danh-sach-kiem-duyet')}}">Xác nhận đơn hàng
                             {{-- @if ($sub > 0)
                                 <sup style="color: red"><i class="fas fa-fw fa-circle" style="color: red;"></i></sup>
                             @endif --}}
                         </a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-cho-lay-hang')}}">Danh sách chờ lấy hàng</a>
+                        <a class="collapse-item" href="{{route('don-hang.danh-sach-cho-lay-hang')}}">Danh sách chờ lấy hàng </a>
+                        <a class="collapse-item" href="{{route('don-hang.danh-sach-dang-giao')}}">Danh sách đang giao </a>
                         <a class="collapse-item" href="{{route('don-hang.danh-sach-da-giao')}}">Danh sách đã giao</a>
                         <a class="collapse-item" href="{{route('don-hang.danh-sach-da-huy')}}">Danh sách đã hủy</a>
                     </div>
