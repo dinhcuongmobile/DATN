@@ -12,30 +12,36 @@ class DonHangAdminController extends Controller
     // Hiển thị danh sách đơn hàng
     public function showDSDonHang() {
         $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
-            ->where('trang_thai')->get();
+            ->whereIn('trang_thai', [0, 1, 2, 3, 4, 5]) // Lấy tất cả các trạng thái đơn hàng
+            ->get();
         return view('admin.donHang.DSDonHang', compact('donHangs'));
     }
     
     
+    // Hiển thị danh sách đơn hàng chờ lấy hàng
+    public function showDSChoLayHang() {
+        $donHangs = DonHang::where('trang_thai', 2)->get(); // 2 là trạng thái chờ lấy hàng
+        return view('admin.donHang.choLayHang', compact('donHangs'));
+
+    }
+
     // Hiển thị danh sách đang giao
     public function showDSDangGiao() {
-        $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
-            ->where('trang_thai')->get();
-        return view('admin.donHang.DSDonHang', compact('donHangs'));
+        $donHangs = DonHang::where('trang_thai', 3)->get(); //3 là trạng thái đang giao
+        return view('admin.donHang.DSDangGiao', compact('donHangs'));
     }
     
     
     // Hiển thị danh sách đơn hàng đã giao
     public function showDSDaGiao() {
-        $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
-            ->where('trang_thai')->get();
-        return view('admin.donHang.DSDonHang', compact('donHangs'));
+        $donHangs = DonHang::where('trang_thai', 4)->get(); //4 là trang thái đã giao
+        return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
     
 
     // Hiển thị danh sách đơn hàng đã hủy
     public function showDSDaHuy() {
-        $donHangs = DonHang::where('trang_thai', 'da_huy')->get();
+        $donHangs = DonHang::where('trang_thai', 5)->get(); // 5 là trạng thái "Đã Hủy"
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
     }
 
@@ -51,14 +57,7 @@ class DonHangAdminController extends Controller
         $donHang->trang_thai = 2; // 2 là trạng thái chờ lấy hàng
         $donHang->save();
     
-        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
-    }
-    
-    // Hiển thị danh sách đơn hàng chờ lấy hàng
-    public function showDSChoLayHang() {
-        $donHangs = DonHang::where('trang_thai', 2)->get(); // 2 là trạng thái chờ lấy hàng
-        return view('admin.donHang.choLayHang', compact('donHangs'));
-
+        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
     }
 
      // Xử lý yêu cầu lấy hàng cho một đơn hàng
@@ -67,7 +66,7 @@ class DonHangAdminController extends Controller
         $donHang->trang_thai = 3; // 3 là trạng thái Đang Giao
         $donHang->save();
 
-        return redirect()->route('don-hang.danh-sach-dang-giao')->with('success', 'Đơn hàng đã được chuyển sang trạng thái Đang Giao.');
+        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Đơn hàng đã được chuyển sang trạng thái Đang Giao.');
     }
 
     // Xử lý giao hàng cho các đơn hàng đã chọn
@@ -75,7 +74,14 @@ class DonHangAdminController extends Controller
         $ids = $request->input('select', []);
         DonHang::whereIn('id', $ids)->update(['trang_thai' => 3]); // 3 là trạng thái Đang Giao
 
-        return redirect()->route('don-hang.danh-sach-dang-giao')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
+        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
+    }
+    public function daGiao(int $id) {
+        $donHang = DonHang::findOrFail($id);
+        $donHang->trang_thai = 4; // 4 là trạng thái đã giao
+        $donHang->save();
+    
+        return redirect()->route('don-hang.danh-sach-dang-giao')->with('success', 'Đơn hàng đã được giao ');
     }
     
     // Hiển thị chi tiết đơn hàng
@@ -93,10 +99,10 @@ class DonHangAdminController extends Controller
     // Hủy đơn hàng
     public function huyDonHang(int $id) {
         $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 'da_huy';
+        $donHang->trang_thai = 5; // 5 là trạng thái Đã Hủy
         $donHang->save();
-
-        return redirect()->back()->with('success', 'Đơn hàng đã được hủy thành công.');
+    
+        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được hủy thành công.');
     }
 
 
@@ -117,9 +123,10 @@ class DonHangAdminController extends Controller
 
     // Duyệt nhiều đơn hàng
     public function duyetNhieuDonHang(Request $request) {
-        $ids = $request->ids;
-        DonHang::whereIn('id', $ids)->update(['trang_thai' => 'da_duyet']);
-
-        return redirect()->back()->with('success', 'Các đơn hàng đã được duyệt thành công.');
+        if (!empty($ids)) {
+        $ids = $request->input('select', []);
+        DonHang::whereIn('id', $ids)->update(['trang_thai' => 2]); // 2 là trạng thái chờ lấy hàng
+        }
+        return redirect()->back()->with('success', 'Các đơn hàng đã được chuyển sang trạng thái chờ lấy hàng.');
     }
 }
