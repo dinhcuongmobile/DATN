@@ -51,11 +51,6 @@ class User extends Authenticatable
         return $this->hasMany(DanhGia::class, 'user_id');
     }
 
-    public function binhLuans()
-    {
-        return $this->hasMany(BinhLuan::class, 'user_id');
-    }
-
     public function donHangs()
     {
         return $this->hasMany(DonHang::class, 'user_id');

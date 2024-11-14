@@ -3513,7 +3513,7 @@ header .mobile-fix-option {
 .tap-top {
   background: rgba(var(--theme-default));
   border: none;
-  bottom: 30px;
+  bottom: 95px;
   color: rgba(var(--white), 1);
   cursor: pointer;
   font-size: 22px;

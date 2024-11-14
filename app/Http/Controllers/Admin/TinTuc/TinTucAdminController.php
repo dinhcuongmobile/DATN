@@ -41,11 +41,15 @@ class TinTucAdminController extends Controller
 
     public function add(StoreTinTucRequest $request)
     {
+        $tinTuc = TinTuc::all();
         $danh_muc = $request->input('danh_muc_id');
         if ($request->hasFile('hinh_anh')) {
             $fileName = $request->file('hinh_anh')->store('uploads/tinTuc', 'public');
         } else {
             $fileName = null;
+        }
+        if ($request->tieu_de == $tinTuc->tieu_de) {
+            return redirect()->route('tin-tuc.danh-sach')->with('error', 'Tên tiêu đề đã tồn tại. Vui lòng thử lại');
         }
         $dataInsert = [
             'danh_muc_id' => $danh_muc,

@@ -17,7 +17,6 @@ class UpdateKhuyenMaiRequest extends FormRequest
     {
         return [
             'so_tien_giam' => 'required|numeric|min:0',
-            'ngay_bat_dau' => 'required|before:ngay_ket_thuc|after_or_equal:today',
             'ngay_ket_thuc' => 'required|after:ngay_bat_dau',
             'gia_tri_toi_thieu' => 'required|numeric|min:0'
         ];
@@ -30,9 +29,6 @@ class UpdateKhuyenMaiRequest extends FormRequest
             'so_tien_giam.required' => 'Vui lòng nhập số tiền giảm.',
             'so_tien_giam.numeric' => 'Số tiền giảm phải là một số.',
             'so_tien_giam.min' => 'Số tiền giảm không được nhỏ hơn 0.',
-            'ngay_bat_dau.required' => 'Vui lòng chọn ngày bắt đầu.',
-            'ngay_bat_dau.before' => 'Ngày bắt đầu phải trước ngày kết thúc.',
-            'ngay_bat_dau.after_or_equal' => 'Ngày bắt đầu không được là ngày trong quá khứ.',
             'ngay_ket_thuc.required' => 'Vui lòng chọn ngày kết thúc.',
             'ngay_ket_thuc.after' => 'Ngày kết thúc phải sau ngày bắt đầu.',
             'gia_tri_toi_thieu.required' => 'Vui lòng nhập giá trị tối thiểu.',
