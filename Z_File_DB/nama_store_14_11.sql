@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 04, 2024 lúc 11:17 AM
+-- Thời gian đã tạo: Th10 14, 2024 lúc 03:41 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.1.25
 
@@ -32,7 +32,7 @@ CREATE TABLE `banners` (
   `ten_anh` varchar(255) DEFAULT NULL,
   `hinh_anh` varchar(255) NOT NULL,
   `trang_thai` tinyint(1) NOT NULL DEFAULT 1,
-  `ngay_bat-dau` datetime DEFAULT NULL,
+  `ngay_bat_dau` datetime DEFAULT NULL,
   `ngay_ket_thuc` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -61,32 +61,32 @@ CREATE TABLE `bien_thes` (
 --
 
 INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, `ma_mau`, `so_luong`, `created_at`, `updated_at`) VALUES
-(8, 7, 'uploads/sanPham/Nunm2vjiPTw7LF2NKSH1zS6gj2o6SvaYKEm9oJki.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:03:23', '2024-10-16 08:03:23'),
-(9, 8, 'uploads/sanPham/0ibBfNsQGY3it5vAPdK5pTZiUbU5Qx1bRNekwCAL.webp', 'M', 'Đen', '#000000', 350, '2024-10-16 08:14:48', '2024-10-16 08:14:58'),
-(10, 8, 'uploads/sanPham/jNfOEA4DPljchdkDdnJNw1k45x9Hmr7h8VC7QmCo.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:15:22', '2024-10-16 08:15:22'),
+(8, 7, 'uploads/sanPham/Nunm2vjiPTw7LF2NKSH1zS6gj2o6SvaYKEm9oJki.webp', 'M', 'Xanh Than', '#003366', 392, '2024-10-16 08:03:23', '2024-11-13 16:58:45'),
+(9, 8, 'uploads/sanPham/0ibBfNsQGY3it5vAPdK5pTZiUbU5Qx1bRNekwCAL.webp', 'M', 'Đen', '#000000', 346, '2024-10-16 08:14:48', '2024-11-11 16:41:55'),
+(10, 8, 'uploads/sanPham/jNfOEA4DPljchdkDdnJNw1k45x9Hmr7h8VC7QmCo.webp', 'L', 'Đen', '#000000', 398, '2024-10-16 08:15:22', '2024-11-11 16:41:55'),
 (11, 8, 'uploads/sanPham/n4z0Pz9JxvCq8HQPZFbafWK1X7oqZqJJ2LPGQpGn.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:15:40', '2024-10-16 08:15:40'),
 (12, 8, 'uploads/sanPham/rQXt2OPeWjYPevuLOtQRdxukPSjMjyFxT9QHAtDV.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:15:56', '2024-10-16 08:15:56'),
-(13, 8, 'uploads/sanPham/3tsIypXvaryMePDqnfWX0PmHVKD5jVuWLB7ZKx87.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:01', '2024-10-16 08:17:01'),
+(13, 8, 'uploads/sanPham/3tsIypXvaryMePDqnfWX0PmHVKD5jVuWLB7ZKx87.webp', 'M', 'Trắng', '#FFFFFF', 398, '2024-10-16 08:17:01', '2024-11-11 13:19:07'),
 (14, 8, 'uploads/sanPham/xu93BsT4qtPDNFfWJsAqI1EZTMsno1udTHwUDlBh.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:13', '2024-10-16 08:17:13'),
 (15, 8, 'uploads/sanPham/zCHJKPABZYmiffCfG3BfVYmwmW9oHNMPpCBFE9OC.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:37', '2024-10-16 08:17:37'),
 (16, 8, 'uploads/sanPham/aFQp6fK6zaA8keQl3UfTh5GfV8nplwZoDy4jAKpP.webp', 'XXL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:17:46', '2024-10-16 08:17:46'),
 (17, 8, 'uploads/sanPham/LzxP5dVnVq8kgC3ihGNx6qWAsaJ02V9E67yAUri0.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:28', '2024-10-16 08:18:28'),
-(18, 8, 'uploads/sanPham/g0wIXM5Td8hRDJtEk3LRLKnegyjEaCxMwydutXQf.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:40', '2024-10-16 08:18:40'),
+(18, 8, 'uploads/sanPham/g0wIXM5Td8hRDJtEk3LRLKnegyjEaCxMwydutXQf.webp', 'L', 'Xanh Trời', '#00BFFF', 397, '2024-10-16 08:18:40', '2024-11-11 10:19:41'),
 (19, 8, 'uploads/sanPham/j0IglOuzIJvtxQa0ORmwPuzGFmVN0nnDiVmIep3F.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:18:53', '2024-10-16 08:18:53'),
 (20, 8, 'uploads/sanPham/ssgna2Q5XC6V2wrreT90MTg36YRdhoM8bmgxPdDg.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:19:15', '2024-10-16 08:19:15'),
-(21, 8, 'uploads/sanPham/ETAbCNONxsaAMdb0ptybHKA6DWvagW9QzseUSXyj.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:21:50', '2024-10-16 08:21:50'),
+(21, 8, 'uploads/sanPham/ETAbCNONxsaAMdb0ptybHKA6DWvagW9QzseUSXyj.webp', 'M', 'Xanh Than', '#003366', 399, '2024-10-16 08:21:50', '2024-11-11 13:19:07'),
 (22, 8, 'uploads/sanPham/eErdZZ9kG06cRbIUoCOzxWFpr5F0y7OjcmslIWj3.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:01', '2024-10-16 08:22:01'),
-(23, 8, 'uploads/sanPham/bTRdfRR9b5y92bJj7m2qdAmjsp9wZCY0AlQHdPTm.webp', 'XL', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:13', '2024-10-16 08:22:13'),
+(23, 8, 'uploads/sanPham/bTRdfRR9b5y92bJj7m2qdAmjsp9wZCY0AlQHdPTm.webp', 'XL', 'Xanh Than', '#003366', 399, '2024-10-16 08:22:13', '2024-11-11 10:29:22'),
 (24, 8, 'uploads/sanPham/4QSVzu6sZxFnlWuUOJ7ts7NRDBupUlEYOdCpBM3A.webp', 'XXL', 'Xanh Than', '#003366', 400, '2024-10-16 08:22:35', '2024-10-16 08:22:35'),
-(25, 9, 'uploads/sanPham/TqsgSVFlIBN3KAqBYWVfEC6T1zjzt3ynUPA0EcDw.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:27:49', '2024-10-16 08:27:49'),
-(26, 9, 'uploads/sanPham/SX9AkdSwG1mJCMrKUj4CRJ3z0bvpm4VXTu5L7tWB.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:04', '2024-10-16 08:28:04'),
+(25, 9, 'uploads/sanPham/TqsgSVFlIBN3KAqBYWVfEC6T1zjzt3ynUPA0EcDw.webp', 'M', 'Xanh Trời', '#00BFFF', 399, '2024-10-16 08:27:49', '2024-11-11 10:24:04'),
+(26, 9, 'uploads/sanPham/SX9AkdSwG1mJCMrKUj4CRJ3z0bvpm4VXTu5L7tWB.webp', 'L', 'Xanh Trời', '#00BFFF', 398, '2024-10-16 08:28:04', '2024-11-11 10:40:54'),
 (27, 9, 'uploads/sanPham/up4ySWaAgvtKqHWQ1akJINQubLShyttmpvG8if6F.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:29', '2024-10-16 08:28:29'),
 (28, 9, 'uploads/sanPham/dVR1uJTsncpbUq014IAkkXGeoey2YWKiVvVEBs9U.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:28:44', '2024-10-16 08:28:44'),
 (29, 10, 'uploads/sanPham/pzRMsKeDpbt68iW4xWvZTTEIvW9gnygwatiKEYCL.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:31:48', '2024-10-16 08:31:48'),
 (30, 10, 'uploads/sanPham/Ase4vPpZJmmHRDNNFQC24fzFrey2efoWxp8hkjAB.webp', 'L', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:09', '2024-10-16 08:32:09'),
 (31, 10, 'uploads/sanPham/rp9BPAwzh38SkbmPuEdSrXHLHMzzIe9Raw3R6Ynn.webp', 'XL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:20', '2024-10-16 08:32:20'),
 (32, 10, 'uploads/sanPham/wv8IwG1FRCylm7pig2MK4hVIiEkjN16iiFNQSiCS.webp', 'XXL', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:32:32', '2024-10-16 08:32:32'),
-(33, 10, 'uploads/sanPham/7ibTJq6Z7afQkrjQgtz5KZkb5KDP4Q8QOcOxqXzx.webp', 'M', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:06', '2024-10-16 08:33:06'),
+(33, 10, 'uploads/sanPham/7ibTJq6Z7afQkrjQgtz5KZkb5KDP4Q8QOcOxqXzx.webp', 'M', 'Xanh Trời', '#00BFFF', 399, '2024-10-16 08:33:06', '2024-11-11 10:30:34'),
 (34, 10, 'uploads/sanPham/n8UaeG7PYQDvxnrj9PFpYUKZNMgWwoboo6W8xSJZ.webp', 'L', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:19', '2024-10-16 08:33:19'),
 (35, 10, 'uploads/sanPham/cXxoubh8QkAmcnoJYE4rhzLJYhbxkOa7SxeTJKzQ.webp', 'XL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:31', '2024-10-16 08:33:31'),
 (36, 10, 'uploads/sanPham/bJuFBkyAdYzyvzswo2xyWB34rOfvJ0xBQ0zLe5Bj.webp', 'XXL', 'Xanh Trời', '#00BFFF', 400, '2024-10-16 08:33:43', '2024-10-16 08:33:43'),
@@ -110,12 +110,12 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (54, 12, 'uploads/sanPham/m8g1oNRuNhlDJBWF6AIz25hIkUsJwzggcomLrgqn.webp', 'L', 'Đen', '#000000', 400, '2024-10-16 08:46:31', '2024-10-16 08:46:31'),
 (55, 12, 'uploads/sanPham/4JRXN6R80pzmMPaYGLlW9IJCQWJSuLABXxcC1IoA.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:46:42', '2024-10-16 08:46:42'),
 (56, 12, 'uploads/sanPham/t6aihFtXr7d2Cqhqc8tz5ouSh22ZgheFFivNEzn1.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:46:53', '2024-10-16 08:46:53'),
-(57, 12, 'uploads/sanPham/A3h9BXVLyHA6iDtymUkZLMIK3PHSSvrpd3iJxNcF.webp', 'M', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:15', '2024-10-16 08:47:15'),
+(57, 12, 'uploads/sanPham/A3h9BXVLyHA6iDtymUkZLMIK3PHSSvrpd3iJxNcF.webp', 'M', 'Nâu', '#8B4513', 399, '2024-10-16 08:47:15', '2024-11-11 10:07:27'),
 (58, 12, 'uploads/sanPham/QS0ZUEkZoaNDf1vhAwRlh0uB2kCNMIULmJY1aO2E.webp', 'L', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:27', '2024-10-16 08:47:27'),
 (59, 12, 'uploads/sanPham/IKMeL1zd8J15GllscDWThFotxNCBmd1fUHBoTP9h.webp', 'XL', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:38', '2024-10-16 08:47:38'),
 (60, 12, 'uploads/sanPham/A1SnDcCaMMhMSgbuACqhNiAK8FL3Z4RVRO43wWL5.webp', 'XXL', 'Nâu', '#8B4513', 400, '2024-10-16 08:47:48', '2024-10-16 08:47:48'),
 (61, 12, 'uploads/sanPham/H4up3gwssdKfKMnaEwTbj75ZcTYmNDvyryEsFESo.webp', 'M', 'Xám', '#808080', 400, '2024-10-16 08:48:28', '2024-10-16 08:48:28'),
-(62, 12, 'uploads/sanPham/MicErds8vIMsx3W2AbWmLuC4zApwip32mra94e7p.webp', 'L', 'Xám', '#808080', 400, '2024-10-16 08:48:38', '2024-10-16 08:48:38'),
+(62, 12, 'uploads/sanPham/MicErds8vIMsx3W2AbWmLuC4zApwip32mra94e7p.webp', 'L', 'Xám', '#808080', 399, '2024-10-16 08:48:38', '2024-11-11 10:07:27'),
 (63, 12, 'uploads/sanPham/Wfpat3ytgM9lCK5nipDFRriJwdy9rTSDJE0EmCfg.webp', 'XL', 'Xám', '#808080', 400, '2024-10-16 08:48:48', '2024-10-16 08:48:48'),
 (64, 12, 'uploads/sanPham/8VCSOo0C4tLU8FQQBVGWdlXe9QuCI10aTq00MkLa.webp', 'XXL', 'Xám', '#808080', 400, '2024-10-16 08:48:58', '2024-10-27 14:41:47'),
 (65, 13, 'uploads/sanPham/ND2zzVdAO3duHyzRr19oDwOKacScQTilLsT9Xh4B.webp', 'M', 'Trắng', '#FFFFFF', 400, '2024-10-16 08:51:23', '2024-10-16 08:51:23'),
@@ -144,27 +144,12 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (88, 14, 'uploads/sanPham/yxGasaMghQjKEDbF10qtPsD7eqXg5QGCp1ilqoax.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-17 00:19:46', '2024-10-17 00:19:46'),
 (89, 15, 'uploads/sanPham/Bg24TdpUWQZu8lv9lLvp4j6449mrasBf7uTZqYKo.webp', 'L', 'Đen', '#000000', 2998, '2024-10-17 00:21:58', '2024-10-17 00:24:12'),
 (90, 15, 'uploads/sanPham/sr8q8h43dDo4zjixu89W1ROGtr2V0SwDvs0Mw1Ih.webp', 'XL', 'Đen', '#000000', 2998, '2024-10-17 00:22:12', '2024-10-17 00:23:46'),
-(91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 10, '2024-10-17 00:28:15', '2024-10-17 00:28:15'),
-(92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2997, '2024-10-17 00:28:45', '2024-10-17 00:28:45'),
+(91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 0, '2024-10-17 00:28:15', '2024-11-13 15:17:13'),
+(92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2993, '2024-10-17 00:28:45', '2024-11-11 10:13:39'),
 (93, 17, 'uploads/sanPham/h0pKJmbuA0Ro8YITIRYHnOB5OdDsyVrGe2tP8Z1G.webp', 'L', 'Đen', '#000000', 999, '2024-10-17 00:32:15', '2024-10-17 00:32:15'),
 (94, 17, 'uploads/sanPham/tGxFHsSyPDelh0nwYHCqDXeF4dJeV8uP9Qa7Yel1.webp', 'XL', 'Đen', '#000000', 999, '2024-10-17 00:32:36', '2024-10-17 00:32:36'),
-(95, 17, 'uploads/sanPham/v1fDjelaMl5qW3YXcrWOSB0Q6U1LxSr95cRvK111.webp', 'L', 'Nâu', '#8B4513', 999, '2024-10-17 00:33:09', '2024-10-17 00:33:09'),
-(96, 17, 'uploads/sanPham/f0sXYtNlF4JbZCV55WRuZ9bMTZUz41zLOqxPPVL4.webp', 'XL', 'Nâu', '#8B4513', 999, '2024-10-17 00:33:20', '2024-10-17 00:33:20');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `binh_luans`
---
-
-CREATE TABLE `binh_luans` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `san_pham_id` bigint(20) UNSIGNED NOT NULL,
-  `noi_dung` text NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(95, 17, 'uploads/sanPham/v1fDjelaMl5qW3YXcrWOSB0Q6U1LxSr95cRvK111.webp', 'L', 'Nâu', '#8B4513', 997, '2024-10-17 00:33:09', '2024-11-11 10:38:39'),
+(96, 17, 'uploads/sanPham/f0sXYtNlF4JbZCV55WRuZ9bMTZUz41zLOqxPPVL4.webp', 'XL', 'Nâu', '#8B4513', 995, '2024-10-17 00:33:20', '2024-11-11 10:03:00');
 
 -- --------------------------------------------------------
 
@@ -176,12 +161,43 @@ CREATE TABLE `chi_tiet_don_hangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `don_hang_id` bigint(20) UNSIGNED NOT NULL,
   `san_pham_id` bigint(20) UNSIGNED NOT NULL,
+  `bien_the_id` bigint(20) UNSIGNED NOT NULL,
   `so_luong` int(11) NOT NULL,
   `don_gia` double(10,2) NOT NULL,
   `thanh_tien` double(20,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chi_tiet_don_hangs`
+--
+
+INSERT INTO `chi_tiet_don_hangs` (`id`, `don_hang_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `don_gia`, `thanh_tien`, `created_at`, `updated_at`) VALUES
+(46, 42, 7, 8, 5, 240000.00, 1200000.00, '2024-11-13 16:58:45', '2024-11-13 16:58:45');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `coins`
+--
+
+CREATE TABLE `coins` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `coin` int(11) NOT NULL,
+  `ngay_nhan` date NOT NULL,
+  `so_ngay` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `coins`
+--
+
+INSERT INTO `coins` (`id`, `user_id`, `coin`, `ngay_nhan`, `so_ngay`, `created_at`, `updated_at`) VALUES
+(15, 12, 100, '2024-11-14', 2, '2024-11-13 16:57:39', '2024-11-14 14:38:58');
 
 -- --------------------------------------------------------
 
@@ -262,8 +278,13 @@ CREATE TABLE `dia_chis` (
 --
 
 INSERT INTO `dia_chis` (`id`, `user_id`, `ho_va_ten_nhan`, `so_dien_thoai_nhan`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `ma_phuong_xa`, `dia_chi_chi_tiet`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(2, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, 'Phú hữu 2', 2, '2024-11-02 12:59:34', '2024-11-02 13:37:18'),
-(3, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, NULL, 1, '2024-11-04 08:51:27', NULL);
+(102, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, 'Phú Hữu 2', 1, '2024-11-07 14:41:27', '2024-11-10 16:33:34'),
+(106, 8, 'Nguyễn Đình Cường', '0964426517', 1, 3, 91, NULL, 2, '2024-11-11 02:02:25', '2024-11-11 02:02:25'),
+(107, 8, 'Tống Hoàng Bách', '0964426517', 2, 24, 688, NULL, 2, '2024-11-11 02:03:15', '2024-11-11 02:03:15'),
+(108, 10, 'Nguyễn Thiện Giáp', '0357864779', 34, 343, 13189, NULL, 1, '2024-11-11 08:08:53', '2024-11-11 08:08:53'),
+(109, 11, 'Tống Hoàng Bách', '0917261473', 24, 218, 7444, NULL, 1, '2024-11-11 08:09:50', '2024-11-11 08:09:50'),
+(110, 12, 'Trương Thị Hồng Ngọc', '0964426515', 1, 277, 10033, NULL, 1, '2024-11-11 14:55:52', '2024-11-11 14:55:52'),
+(111, 12, 'Tống Hoàng Bách', '0964426518', 2, 24, 688, NULL, 2, '2024-11-11 15:52:33', '2024-11-11 15:52:33');
 
 -- --------------------------------------------------------
 
@@ -273,15 +294,39 @@ INSERT INTO `dia_chis` (`id`, `user_id`, `ho_va_ten_nhan`, `so_dien_thoai_nhan`,
 
 CREATE TABLE `don_hangs` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `ma_don_hang` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `ho_ten_nhan` varchar(255) NOT NULL,
-  `ngay_dat_hang` datetime NOT NULL,
-  `dia_chi_nhan` varchar(255) NOT NULL,
-  `so_dien_thoai_nhan` varchar(10) NOT NULL,
+  `dia_chi_id` bigint(20) UNSIGNED NOT NULL,
+  `giam_gia_van_chuyen` double(10,2) NOT NULL DEFAULT 0.00,
+  `giam_gia_don_hang` double(10,2) NOT NULL DEFAULT 0.00,
   `tong_thanh_toan` double(20,2) NOT NULL,
-  `phuong_thuc_thanh_toan` int(11) NOT NULL DEFAULT 0,
-  `trang_thai` int(11) NOT NULL DEFAULT 0,
-  `thanh_toan` int(11) NOT NULL DEFAULT 0,
+  `phuong_thuc_thanh_toan` int(11) NOT NULL DEFAULT 0 COMMENT '0. ship cod, 1. Chuyển khoản',
+  `trang_thai` int(11) NOT NULL DEFAULT 0 COMMENT '0. chưa duyệt 1.Đơn hàng mới 2.Đang chuẩn bị hàng 3. Đang giao 4. Đã giao 5. Đã hủy',
+  `thanh_toan` int(11) NOT NULL DEFAULT 0 COMMENT '0. Chưa thanh toán, 1. Đã thanh toán',
+  `ghi_chu` text DEFAULT NULL,
+  `ngay_dat_hang` datetime NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `don_hangs`
+--
+
+INSERT INTO `don_hangs` (`id`, `ma_don_hang`, `user_id`, `dia_chi_id`, `giam_gia_van_chuyen`, `giam_gia_don_hang`, `tong_thanh_toan`, `phuong_thuc_thanh_toan`, `trang_thai`, `thanh_toan`, `ghi_chu`, `ngay_dat_hang`, `created_at`, `updated_at`) VALUES
+(42, 'DHR6144CVX', 12, 110, 30000.00, 10000.00, 1194900.00, 0, 0, 0, NULL, '2024-11-13 23:58:45', '2024-11-13 16:58:45', '2024-11-13 16:58:45');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `don_hang_hoans`
+--
+
+CREATE TABLE `don_hang_hoans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `don_hang_id` bigint(20) UNSIGNED NOT NULL,
+  `ly_do` text NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT 0 COMMENT '0.Chưa xử lý, 1.Đang xử lý, 2.Đã xử lý	',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -324,9 +369,7 @@ CREATE TABLE `gio_hangs` (
 --
 
 INSERT INTO `gio_hangs` (`id`, `user_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `thanh_tien`, `created_at`, `updated_at`) VALUES
-(20, 8, 8, 18, 3, 597000.00, '2024-11-04 04:58:30', '2024-11-04 09:50:03'),
-(23, 8, 16, 92, 2, 572000.00, '2024-11-04 08:23:15', '2024-11-04 09:50:01'),
-(24, 8, 17, 96, 4, 858000.00, '2024-11-04 08:23:22', '2024-11-04 09:50:02');
+(51, 12, 16, 92, 2, 572000.00, '2024-11-13 15:44:22', '2024-11-13 15:54:11');
 
 -- --------------------------------------------------------
 
@@ -415,11 +458,11 @@ INSERT INTO `mau_sacs` (`id`, `ten_mau`, `ma_mau`, `created_at`, `updated_at`) V
 CREATE TABLE `ma_khuyen_mais` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `ma_giam_gia` varchar(255) NOT NULL,
-  `so_tien_giam` decimal(10,2) NOT NULL,
+  `so_tien_giam` double(10,2) NOT NULL,
   `ngay_bat_dau` date NOT NULL,
   `ngay_ket_thuc` date NOT NULL,
-  `gia_tri_toi_thieu` decimal(10,2) NOT NULL DEFAULT 0.00,
-  `trang_thai` int(11) NOT NULL,
+  `gia_tri_toi_thieu` double(10,2) NOT NULL DEFAULT 0.00,
+  `trang_thai` int(11) NOT NULL COMMENT '1. Đơn hàng, 2. Vận chuyển',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -429,7 +472,12 @@ CREATE TABLE `ma_khuyen_mais` (
 --
 
 INSERT INTO `ma_khuyen_mais` (`id`, `ma_giam_gia`, `so_tien_giam`, `ngay_bat_dau`, `ngay_ket_thuc`, `gia_tri_toi_thieu`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(1, 'STMU5EJ0VB', 70000.00, '2024-11-05', '2024-11-06', 25000000.00, 1, '2024-11-04 06:35:03', '2024-11-04 06:43:31');
+(5, 'X52X6CVFPN', 20000.00, '2024-11-07', '2024-11-30', 500000.00, 1, '2024-11-07 15:33:18', '2024-11-13 16:47:02'),
+(6, 'AX1N1I52R6', 25000.00, '2024-11-07', '2024-11-30', 100000.00, 2, '2024-11-07 15:34:00', '2024-11-13 16:47:27'),
+(7, 'YEJ8QTBDKP', 25000.00, '2024-11-07', '2024-11-14', 150000.00, 1, '2024-11-07 15:35:30', '2024-11-13 16:11:21'),
+(8, '7GLU1LOHP0', 30000.00, '2024-11-08', '2024-11-14', 250000.00, 2, '2024-11-07 15:35:54', '2024-11-13 16:47:19'),
+(9, '3S6T9MCQJI', 30000.00, '2024-11-07', '2024-11-15', 200000.00, 2, '2024-11-07 15:36:27', '2024-11-13 16:47:13'),
+(10, 'HY3KZPM12D', 10000.00, '2024-11-07', '2024-11-15', 100000.00, 1, '2024-11-07 15:36:50', '2024-11-13 16:46:53');
 
 -- --------------------------------------------------------
 
@@ -480,7 +528,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (39, '2024_10_24_205028_create_gio_hangs_table', 12),
 (40, '2024_11_02_095708_create_dia_chis_table', 12),
 (42, '2024_11_04_085236_create_ma_khuyen_mais_table', 13),
-(43, '2024_11_04_120948_create_phi_ships_table', 14);
+(43, '2024_11_04_120948_create_phi_ships_table', 14),
+(44, '2024_11_05_090204_create_coins_table', 15),
+(51, '2024_11_11_092023_create_don_hangs_table', 16),
+(52, '2024_11_11_092038_create_chi_tiet_don_hangs_table', 16),
+(53, '2024_11_11_092116_create_don_hang_hoans_table', 16),
+(54, '2024_11_12_230907_create_chats_table', 17);
 
 -- --------------------------------------------------------
 
@@ -534,7 +587,8 @@ CREATE TABLE `phi_ships` (
 --
 
 INSERT INTO `phi_ships` (`id`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `phi_ship`, `created_at`, `updated_at`) VALUES
-(4, 1, 277, 35000.00, '2024-11-04 07:38:22', '2024-11-04 07:38:22');
+(4, 1, 277, 35000.00, '2024-11-04 07:38:22', '2024-11-04 07:38:22'),
+(9, 2, 24, 5000.00, '2024-11-04 15:53:30', '2024-11-04 15:53:30');
 
 -- --------------------------------------------------------
 
@@ -617,8 +671,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(8, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$W9..8boBws1rvemZsjT36urhdxrU0AwzM7/MdUwCweSos5VDNbsgm', '0964426518', 1, NULL, NULL, 0, '2024-11-02 03:45:17', '2024-11-02 03:45:17'),
-(9, 'Tống Hoàng Bách', 'tonghoangbach@gmail.com', NULL, NULL, '$2y$10$vFSLoPGfpOwtHL8o.3GkeuayRI5yfQwTMhUy8sZtAeIoI6DDMICvm', NULL, 2, NULL, NULL, 0, '2024-11-02 03:48:43', '2024-11-02 04:46:15');
+(8, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$OONTi4gZOL/iMZus4Gt0ROTshYkSsxtLLUzF5hR5FIZQE2SBzjdz6', '0964426518', 1, 'Z9hZesoFI7Ly86GQ96JncXIbfyXBs9QoG6QlfHDWyh9Ab4eY1rmM9TutPj9E', NULL, 0, '2024-11-02 03:45:17', '2024-11-07 02:42:18'),
+(10, 'Nguyễn Thiện Giáp', 'thiengiapnguyen04@gmail.com', NULL, NULL, '$2y$10$DZhiRJ7dSRmKT/9k3avHi.ppKvWrSsPI4ZP9fnZz.JjusyOHc0M16', '0357864779', 1, NULL, NULL, 0, '2024-11-11 08:08:53', '2024-11-11 08:08:53'),
+(11, 'Tống Hoàng Bách', 'hoangbach25102004@gmail.com', NULL, NULL, '$2y$10$52nSJjT5rYE5oRAOYZg9vuBxN0ERqxXTtM/u98ZfCcgD0xQ8BqP46', '0917261473', 1, NULL, NULL, 0, '2024-11-11 08:09:50', '2024-11-11 08:09:50'),
+(12, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$qkmrXERkJ5Ks7Pmayim62uxhfDRC7CBPQvn9kZ9oOa0nbVpmvgn/i', '0964427897', 3, NULL, NULL, 0, '2024-11-11 14:50:37', '2024-11-11 14:50:37');
 
 -- --------------------------------------------------------
 
@@ -12661,20 +12717,20 @@ ALTER TABLE `bien_thes`
   ADD KEY `bien_thes_san_pham_id_foreign` (`san_pham_id`);
 
 --
--- Chỉ mục cho bảng `binh_luans`
---
-ALTER TABLE `binh_luans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `binh_luans_user_id_foreign` (`user_id`),
-  ADD KEY `binh_luans_san_pham_id_foreign` (`san_pham_id`);
-
---
 -- Chỉ mục cho bảng `chi_tiet_don_hangs`
 --
 ALTER TABLE `chi_tiet_don_hangs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `chi_tiet_don_hangs_don_hang_id_foreign` (`don_hang_id`),
-  ADD KEY `chi_tiet_don_hangs_san_pham_id_foreign` (`san_pham_id`);
+  ADD KEY `chi_tiet_don_hangs_san_pham_id_foreign` (`san_pham_id`),
+  ADD KEY `chi_tiet_don_hangs_bien_the_id_foreign` (`bien_the_id`);
+
+--
+-- Chỉ mục cho bảng `coins`
+--
+ALTER TABLE `coins`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coins_user_id_foreign` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `danh_gias`
@@ -12711,7 +12767,15 @@ ALTER TABLE `dia_chis`
 --
 ALTER TABLE `don_hangs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `don_hangs_user_id_foreign` (`user_id`);
+  ADD KEY `don_hangs_user_id_foreign` (`user_id`),
+  ADD KEY `don_hangs_dia_chi_id_foreign` (`dia_chi_id`);
+
+--
+-- Chỉ mục cho bảng `don_hang_hoans`
+--
+ALTER TABLE `don_hang_hoans`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `don_hang_hoans_don_hang_id_foreign` (`don_hang_id`);
 
 --
 -- Chỉ mục cho bảng `failed_jobs`
@@ -12846,16 +12910,16 @@ ALTER TABLE `bien_thes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
--- AUTO_INCREMENT cho bảng `binh_luans`
---
-ALTER TABLE `binh_luans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hangs`
 --
 ALTER TABLE `chi_tiet_don_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT cho bảng `coins`
+--
+ALTER TABLE `coins`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_gias`
@@ -12879,12 +12943,18 @@ ALTER TABLE `danh_muc_tin_tucs`
 -- AUTO_INCREMENT cho bảng `dia_chis`
 --
 ALTER TABLE `dia_chis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT cho bảng `don_hang_hoans`
+--
+ALTER TABLE `don_hang_hoans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -12897,7 +12967,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_cos`
@@ -12921,13 +12991,13 @@ ALTER TABLE `mau_sacs`
 -- AUTO_INCREMENT cho bảng `ma_khuyen_mais`
 --
 ALTER TABLE `ma_khuyen_mais`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -12939,7 +13009,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT cho bảng `phi_ships`
 --
 ALTER TABLE `phi_ships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `san_phams`
@@ -12957,7 +13027,7 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`
@@ -12976,18 +13046,18 @@ ALTER TABLE `bien_thes`
   ADD CONSTRAINT `bien_thes_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
 
 --
--- Các ràng buộc cho bảng `binh_luans`
---
-ALTER TABLE `binh_luans`
-  ADD CONSTRAINT `binh_luans_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `binh_luans_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
 -- Các ràng buộc cho bảng `chi_tiet_don_hangs`
 --
 ALTER TABLE `chi_tiet_don_hangs`
+  ADD CONSTRAINT `chi_tiet_don_hangs_bien_the_id_foreign` FOREIGN KEY (`bien_the_id`) REFERENCES `bien_thes` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `chi_tiet_don_hangs_don_hang_id_foreign` FOREIGN KEY (`don_hang_id`) REFERENCES `don_hangs` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `chi_tiet_don_hangs_san_pham_id_foreign` FOREIGN KEY (`san_pham_id`) REFERENCES `san_phams` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `coins`
+--
+ALTER TABLE `coins`
+  ADD CONSTRAINT `coins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Các ràng buộc cho bảng `danh_gias`
@@ -13009,7 +13079,14 @@ ALTER TABLE `dia_chis`
 -- Các ràng buộc cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
+  ADD CONSTRAINT `don_hangs_dia_chi_id_foreign` FOREIGN KEY (`dia_chi_id`) REFERENCES `dia_chis` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `don_hangs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `don_hang_hoans`
+--
+ALTER TABLE `don_hang_hoans`
+  ADD CONSTRAINT `don_hang_hoans_don_hang_id_foreign` FOREIGN KEY (`don_hang_id`) REFERENCES `don_hangs` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `gio_hangs`
