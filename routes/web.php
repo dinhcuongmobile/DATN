@@ -354,13 +354,17 @@ Route::prefix('dia-chi')->group(function () {
 });
 //Don hang
 Route::prefix('don-hang')->group(function(){
+    Route::get('danh-sach-dang-giao', [DonHangAdminController::class,'showDSDangGiao'])->name('don-hang.danh-sach-dang-giao');
+    Route::post('yeu-cau-lay-hang/{id}', [DonHangAdminController::class, 'yeuCauLayHangDonHang'])->name('don-hang.yeu-cau-lay-hang');
     Route::get('danh-sach-da-giao', [DonHangAdminController::class,'showDSDaGiao'])->name('don-hang.danh-sach-da-giao');
     Route::get('danh-sach-da-huy', [DonHangAdminController::class,'showDSDaHuy'])->name('don-hang.danh-sach-da-huy');
     Route::get('danh-sach-don-hang', [DonHangAdminController::class,'showDSDonHang'])->name('don-hang.danh-sach-don-hang');
+
     Route::get('danh-sach-kiem-duyet', [DonHangAdminController::class,'showDSKiemDuyet'])->name('don-hang.danh-sach-kiem-duyet');
+    Route::post('/duyet/{id}', [DonHangAdminController::class, 'duyetDonHang'])->name('don-hang.duyet');
     // Route::get('chi-tiet-don-hang/{id}', [DonHangAdminController::class,'showChiTietDonHang'])->name('don-hang.chi-tiet-don-hang');
     Route::post('duyet-nhieu-don-hang', [DonHangAdminController::class,'duyetNhieuDonHang'])->name('don-hang.duyet-nhieu-don-hang');
-    Route::get('duyet-don-hang/{id}', [DonHangAdminController::class,'duyetDonHang'])->name('don-hang.duyet-don-hang');
+    Route::post('duyet-don-hang/{id}', [DonHangAdminController::class,'duyetDonHang'])->name('don-hang.duyet-don-hang');
     Route::get('huy-don-hang/{id}', [DonHangAdminController::class,'huyDonHang'])->name('don-hang.huy-don-hang');
     Route::get('danh-sach-cho-lay-hang', [DonHangAdminController::class,'ShowDSChoLayHang'])->name('don-hang.danh-sach-cho-lay-hang');
     // Route::get('cap-nhat-don-hang/{id}', [DonHangAdminController::class,'showCapNhatDonHang'])->name('don-hang.cap-nhat-don-hang');

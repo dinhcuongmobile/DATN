@@ -2,7 +2,7 @@
 @section('containerAdmin')
 <div class="container-fluid">  
     
-    <h1 class="h3 mb-2 text-gray-800">Tất Cả Đơn Hàng (245)</h1>  
+    <h1 class="h3 mb-2 text-gray-800">Đang Giao (245)</h1>  
     <div class="card shadow mb-4"> 
         <div class="card-header py-3">
             <div class=" float-right">
@@ -63,7 +63,7 @@
                                 <br>  
                             </td>  
                             <td>253.000₫<br><small>Thanh toán khi nhận hàng</small></td>  
-                            <td>Chờ lấy hàng<br><small>Để tránh việc giao hàng trễ</small></td>  
+                            <td>Đang Giao<br><small>Để tránh việc giao hàng trễ</small></td>  
                             <td>Nhanh</td>  
                             <td>SPX Express</td>  
                             <td>
