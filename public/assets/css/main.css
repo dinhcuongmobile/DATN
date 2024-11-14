@@ -139,6 +139,12 @@
     box-shadow: 0 0 10px rgba(0, 123, 255);
 }
 
+#selectMauSac-quick-view .activ {
+    width: 37px;
+    height: 37px;
+    box-shadow: 0 0 10px rgba(0, 123, 255);
+}
+
 #enterLoc{
     background-color: #dc9260;
     color: #ffffff;
@@ -201,6 +207,12 @@
 }
 
 #errSelect{
+    font-size: 16px;
+    margin-bottom: 30px;
+    display: none;
+}
+
+#errSelect-quick-view{
     font-size: 16px;
     margin-bottom: 30px;
     display: none;
@@ -615,5 +627,9 @@ font-family: Outfit, sans-serif;
 .btnDonMua a:hover{
     color: #000;
     background-color: #cacccf;
+}
+
+.img-quick-view img{
+    border: 1px solid #0000002b;
 }
 

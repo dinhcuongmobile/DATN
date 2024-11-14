@@ -94,59 +94,255 @@ $(document).ready(function(){
 
 //end don mua
 
-// document.querySelectorAll('.quickViewClick').forEach((el) => {
-//     el.addEventListener('click', function () {
-//         $('#quick-view').modal('show');
-//         let sanPhamID = el.getAttribute('data-id');
+//quick-view
+let selectedSizeQuickView = null;
+let selectedColorQuickView = null;
+var ipSize = document.getElementById('size-quick-view');
+var ipMauSac = document.getElementById('mauSac-quick-view');
+const soLuong = document.querySelectorAll('#quick-view .quantity');
+document.querySelectorAll('.quickViewClick').forEach((el) => {
+    el.addEventListener('click', function () {
+        $('#quick-view').modal('show');
+        document.querySelector('#errSelect-quick-view').style.display = 'none';
+        let sanPhamID = el.getAttribute('data-id');
+        document.querySelector('#quick-view').setAttribute('data-id',sanPhamID);
 
-//         $.ajax({
-//             type: 'GET',
-//             url: '/home/quick-view/',
-//             data: {
-//                 san_pham_id: sanPhamID
-//             },
-//             success: function (response) {
-//                 console.log(response.hinhAnh[0].hinh_anh);
+        $.ajax({
+            type: 'GET',
+            url: '/home/quick-view/',
+            data: { san_pham_id: sanPhamID },
+            success: function (response) {
+                let sanPham = response.san_pham;
+                let kichCos = response.kich_cos;
+                let bienThes = sanPham.bien_thes;
 
-//                 let sanPham = response.san_pham;
-//                 // Cập nhật tên sản phẩm
-//                 document.querySelector('.product-right h3').textContent = sanPham.ten_san_pham;
+                // Cập nhật tên sản phẩm
+                document.querySelector('#quick-view .product-right h3').textContent = sanPham.ten_san_pham;
 
-//                 // Cập nhật giá sản phẩm
-//                 const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai/100);
-//                 document.querySelector('.product-right h5').innerHTML = `${giaBan.toLocaleString('vi-VN')}đ <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
+                // Cập nhật giá sản phẩm
+                const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai / 100);
+                document.querySelector('#quick-view .product-right h5').innerHTML = `<span class="giaKhuyenMai" data-giaKM="${giaBan}">${giaBan.toLocaleString('vi-VN')}đ</span> <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
 
-//                 // Cập nhật các slide ảnh
-//                 const slide1Wrapper = document.querySelector('#quick-view .ratio_square-2');
-//                 const slide2Wrapper = document.querySelector('#quick-view .ratio3_4');
-//                 if(response.hinhAnh[0]){
-//                     slide1Wrapper.querySelector('.anhLon1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
-//                 }
+                // Cập nhật ảnh
+                document.querySelector('#quick-view .img-quick-view').innerHTML = `<img src="/storage/${sanPham.hinh_anh}" alt="err" width="100%">`;
 
-//                 if(response.hinhAnh[4]){
-//                     slide1Wrapper.querySelector('.anhLon2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
-//                 }
+                // Cập nhật link "button"
+                document.querySelector('#quick-view .product-buttons').innerHTML = `
+                    <a class="btn btn-solid" id="themGioHang-quick-view" data-id="${sanPhamID}" href="javascript:void(0);">Thêm vào giỏ hàng</a>
+                    <a class="btn btn-solid chiTiet" href="/san-pham/chi-tiet-san-pham/${sanPhamID}">Xem chi tiết</a>
+                `;
 
-//                 if(response.hinhAnh[8]){
-//                     slide1Wrapper.querySelector('.anhLon3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
-//                 }
+                // Cập nhật kích cỡ
+                let kichCoBox = document.querySelector('#selectSize-quick-view');
+                kichCoBox.innerHTML = "";
 
-//                 if(response.hinhAnh[12]){
-//                     slide1Wrapper.querySelector('.anhLon4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
-//                 }
+                let kichCoTonTai = kichCos.filter((item) =>
+                    bienThes.some((bienThe) => bienThe.kich_co === item.kich_co)
+                );
+                kichCoTonTai.forEach((item) => {
+                    kichCoBox.innerHTML += `<li data-size="${item.kich_co}"><a href="javascript:void(0);">${item.kich_co}</a></li>`;
+                });
 
-//             },
-//             error: function (error) {
-//                 console.error('Lỗi: ', error);
-//                 alert('Có lỗi xảy ra');
-//             }
-//         });
-//     });
-// });
+                // Cập nhật màu sắc
+                let mauSacBox = document.querySelector('#selectMauSac-quick-view');
+                mauSacBox.innerHTML = "";
+
+                let mauSacTonTai = bienThes.reduce((unique, item) => {
+                    if (!unique.some((u) => u.ma_mau === item.ma_mau)) unique.push(item);
+                    return unique;
+                }, []);
+                mauSacTonTai.forEach((item) => {
+                    mauSacBox.innerHTML += `<li data-color="${item.ma_mau}" style="background-color: ${item.ma_mau}; border: 1px solid #0000003b;" title="${item.ten_mau}"></li>`;
+                });
+                selectSize();
+                selectColor();
+                updateQuantity();
+                soLuongMua();
+                themGioHang();
+            },
+            error: function (error) {
+                console.error('Lỗi: ', error);
+                alert('Có lỗi xảy ra');
+            }
+        });
+    });
+});
+
+function soLuongMua() {
+    // Đặt sự kiện `click` cho nút Plus và Minus
+    soLuong.forEach((element) => {
+        const addButton = element.querySelector('.plus');
+        const subButton = element.querySelector('.minus');
+        const inputEl = element.querySelector("input[type='number']");
+        const ipHidden = element.querySelector('#soLuong-quick-view');
+
+        // Nút tăng số lượng
+        addButton.addEventListener('click', function () {
+            if (inputEl.value < parseInt(inputEl.getAttribute('data-max'))) {
+                inputEl.value = Number(inputEl.value) + 1;
+                ipHidden.value = inputEl.value;
+                subButton.disabled = false;
+            }
+            if (inputEl.value == parseInt(inputEl.getAttribute('data-max'))) {
+                addButton.disabled = true;
+            }
+        });
+
+        // Nút giảm số lượng
+        subButton.addEventListener('click', function () {
+            if (inputEl.value > 1) {
+                inputEl.value = Number(inputEl.value) - 1;
+                ipHidden.value = inputEl.value;
+                addButton.disabled = false;
+            }
+            if (inputEl.value == 1) {
+                subButton.disabled = true;
+            }
+        });
+    });
+}
+
+function maxInputQuantity(soLuongTon){
+    soLuong.forEach((element) => {
+        const addButton = element.querySelector('.plus');
+        const subButton = element.querySelector('.minus');
+        const inputEl = element.querySelector("input[type='number']");
+
+        inputEl.setAttribute('data-max', soLuongTon);
+        inputEl.value = Math.min(inputEl.value, soLuongTon);
+        addButton.disabled = inputEl.value >= soLuongTon;
+        subButton.disabled = inputEl.value <= 1;
+    });
+}
+// Hàm cập nhật tồn kho qua AJAX
+function updateQuantity() {
+    if (selectedSizeQuickView && selectedColorQuickView) {
+        document.querySelector('#errSelect-quick-view').style.display = 'none';
+        let san_pham_id = document.querySelector('#quick-view').getAttribute('data-id');
+
+        $.ajax({
+            url: '/san-pham/so-luong-ton-kho',
+            method: 'GET',
+            data: {
+                kich_co: selectedSizeQuickView,
+                mau_sac: selectedColorQuickView,
+                san_pham_id: san_pham_id
+            },
+            success: function (response) {
+                var soLuongTon = response.quantity;
+                if (soLuongTon > 0) {
+                    document.querySelector('#quick-view .product-buttons').innerHTML = `
+                        <a class="btn btn-solid" id="themGioHang-quick-view" data-id="${san_pham_id}" href="javascript:void(0);">Thêm vào giỏ hàng</a>
+                        <a class="btn btn-solid chiTiet" href="/san-pham/chi-tiet-san-pham/${san_pham_id}">Xem chi tiết</a>
+                    `;
+                    document.querySelector("#quick-view .quantity input[type='number']").value=1;
+                } else {
+                    document.querySelector('#quick-view .product-buttons').innerHTML=`<button class="btn btn_black sm">Hết hàng</button>`;
+                }
+                // Cập nhật giá trị tối đa cho input
+                maxInputQuantity(soLuongTon);
+                themGioHang();
+            },
+            error: function () {
+                alert('Có lỗi xảy ra khi lấy số lượng tồn kho!');
+            }
+        });
+    }else{
+        document.querySelector('#quick-view .plus').disabled=true;
+        document.querySelector('#quick-view .minus').disabled=true;
+        document.querySelector("#quick-view input[type='number']").value=1;
+
+    }
+}
+
+// Xử lý chọn kích cỡ
+function selectSize(){
+    document.querySelectorAll('#selectSize-quick-view li').forEach(function (sizeElement) {
+        sizeElement.addEventListener('click', function () {
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+                selectedSizeQuickView = null;
+                ipSize.value = "";
+            } else {
+                selectedSizeQuickView = this.getAttribute('data-size');
+                ipSize.value = selectedSizeQuickView;
+
+                document.querySelectorAll('#selectSize-quick-view li').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            }
+            updateQuantity();
+        });
+    });
+}
+
+// Xử lý chọn màu sắc
+function selectColor(){
+    document.querySelectorAll('#selectMauSac-quick-view li').forEach(function (colorElement) {
+        colorElement.addEventListener('click', function () {
+            if (this.classList.contains('activ')) {
+                this.classList.remove('activ');
+                selectedColorQuickView = null;
+                ipMauSac.value = "";
+            } else {
+                selectedColorQuickView = this.getAttribute('data-color');
+                ipMauSac.value = selectedColorQuickView;
+
+                document.querySelectorAll('#selectMauSac-quick-view li').forEach(el => el.classList.remove('activ'));
+                this.classList.add('activ');
+            }
+            updateQuantity();
+        });
+    });
+}
+
+// Thêm vào giỏ hàng
+function themGioHang(){
+    let btnThemGioHang = document.querySelector('#themGioHang-quick-view');
+
+    if (btnThemGioHang) {
+        btnThemGioHang.addEventListener('click', function () {
+            if (selectedSizeQuickView && selectedColorQuickView) {
+                let token= document.querySelector("#quick-view .tokenThemGioHang").value;
+                let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                let soLuong = document.querySelector('#soLuong-quick-view').value;
+                let giaKhuyenMai = document.querySelector('#quick-view .giaKhuyenMai').getAttribute('data-giaKM');
+                let kichCo = ipSize.value;
+                let maMau = ipMauSac.value;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/gio-hang/them-gio-hang/',
+                    data: {
+                        _token: token,
+                        san_pham_id: sanPhamID,
+                        gia_khuyen_mai: Number(giaKhuyenMai),
+                        so_luong: Number(soLuong),
+                        kich_co: kichCo,
+                        ma_mau: maMau
+                    },
+                    success: function (response) {
+                        if (response.login == false) {
+                            window.location.href = '/tai-khoan/dang-nhap';
+                        } else {
+                            $('#quick-view').modal('hide');
+                            $('#addtocart').modal('show');
+                            let tenSanPham = document.querySelector('#quick-view .product-right h3');
+                            document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
+                            document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                            document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+            } else {
+                document.querySelector('#errSelect-quick-view').style.display = 'block';
+            }
+        });
+    }
+}
 
 
 
