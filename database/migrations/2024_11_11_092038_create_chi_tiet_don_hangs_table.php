@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('binh_luans', function (Blueprint $table) {
+        Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('don_hang_id')->constrained('don_hangs')->onDelete('cascade');
             $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
-            $table->text('noi_dung');
+            $table->foreignId('bien_the_id')->constrained('bien_thes')->onDelete('cascade');
+            $table->integer('so_luong');
+            $table->double('don_gia', 10, 2);
+            $table->double('thanh_tien', 20, 2);
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('binh_luans');
+        Schema::dropIfExists('chi_tiet_don_hangs');
     }
 };

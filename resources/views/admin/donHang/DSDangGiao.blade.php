@@ -2,7 +2,7 @@
 @section('containerAdmin')
 <div class="container-fluid">  
     
-    <h1 class="h3 mb-2 text-gray-800">Đơn Hủy (2)</h1>  
+    <h1 class="h3 mb-2 text-gray-800">Đang Giao (245)</h1>  
     <div class="card shadow mb-4"> 
         <div class="card-header py-3">
             <div class=" float-right">
@@ -21,10 +21,11 @@
             <form action="" method="post">
     
                 <div class="float-left">
-                    <button type="button" class="btn btn-secondary btn-sm" >Chờ Xác Nhận</button>
-                    <button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button>
+                    <a href="{{route('don-hang.danh-sach-kiem-duyet')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Xác Nhận</button></a>
+                    <a href="{{route('don-hang.danh-sach-cho-lay-hang')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button></a>
                     <button type="submit" class="btn btn-secondary btn-sm" >Đang Giao</button>
-                    <button type="submit" class="btn btn-secondary btn-sm">Đơn Hủy</button> 
+                    <a href="{{route('don-hang.danh-sach-da-giao')}}"><button type="submit" class="btn btn-secondary btn-sm" >Đã Giao</button></a>
+                    <a href="{{route('don-hang.danh-sach-da-huy')}}"><button type="submit" class="btn btn-secondary btn-sm">Đơn Hủy</button> </a>
                     <button type="submit" class="btn btn-secondary btn-sm">Trả Hàng/Hoàn Tiền</button> 
                 </div>
             </form>
@@ -60,13 +61,9 @@
                                 <br>  
                                 <small>Variation: Ngọc trai JC 11</small>
                                 <br>  
-                                gel metal nổi Gulauri 
-                                <span class="badge badge-secondary">x1</span>
-                                <br>  
-                                <small>Variation: Ảnh động JC 13</small>  
                             </td>  
-                            <td>₫253.000<br><small>Thanh toán khi nhận hàng</small></td>  
-                            <td>Chờ lấy hàng<br><small>Để tránh việc giao hàng trễ</small></td>  
+                            <td>253.000₫<br><small>Thanh toán khi nhận hàng</small></td>  
+                            <td>Đang Giao<br><small>Để tránh việc giao hàng trễ</small></td>  
                             <td>Nhanh</td>  
                             <td>SPX Express</td>  
                             <td>

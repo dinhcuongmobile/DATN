@@ -8,14 +8,19 @@ use App\Models\DiaChi;
 use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\BienThe;
+use App\Models\DonHang;
 use App\Models\GioHang;
 use App\Models\PhiShip;
 use App\Models\SanPham;
+use App\Mail\SendHoaDon;
 use App\Models\KhuyenMai;
+use Illuminate\Support\Str;
 use App\Models\TinhThanhPho;
 use Illuminate\Http\Request;
+use App\Models\ChiTietDonHang;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class GioHangController extends Controller
@@ -90,6 +95,45 @@ class GioHangController extends Controller
             }
         }
     }
+
+    public function muaNgay(Request $request) {
+        if (!Auth::check()) {
+            return response()->json(['login' => false]);
+        }
+
+        $san_pham_id = $request->input('san_pham_id');
+        $so_luong = $request->input('so_luong');
+        $kich_co = $request->input('kich_co');
+        $ma_mau = $request->input('ma_mau');
+
+        $san_pham = SanPham::find($san_pham_id);
+        $bien_the = BienThe::where('san_pham_id', $san_pham_id)
+                            ->where('kich_co', $kich_co)
+                            ->where('ma_mau', $ma_mau)
+                            ->first();
+
+        // Tính thành tiền
+        $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai / 100);
+
+        // Dữ liệu sản phẩm để lưu vào session
+        $data = [
+            'san_pham_id' => $san_pham->id,
+            'so_luong' => $so_luong,
+            'kich_co' => $kich_co,
+            'ma_mau' => $ma_mau,
+            'gia_khuyen_mai' => $gia_khuyen_mai
+        ];
+
+        // Lấy giỏ hàng hiện tại từ session và thêm sản phẩm mới
+        $gio_hangs = session()->get('gio_hangs', []);
+        $gio_hangs[] = $data;
+
+        // Lưu lại giỏ hàng vào session
+        session()->put('gio_hangs', $gio_hangs);
+
+        return response()->json(['login' => true]);
+    }
+
 
     public function xoaTatCa(Request $request){
         $gio_hang_id =  $request->input('gio_hang_id');
@@ -202,32 +246,55 @@ class GioHangController extends Controller
     }
 
     public function chiTietThanhToan(){
-        if(empty(session()->get('gio_hangs', []))){
+        if (empty(session()->get('gio_hangs', []))) {
             return redirect()->route('gio-hang.gio-hang');
         }
-        //them dia chi
-        $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
-        //hien thi dia chi
-        $this->views['dia_chis']= DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')
-                                        ->where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->get();
-        //tong so tien (* san pham)
-        $this->views['gio_hangs'] = session()->get('gio_hangs', []);
-        $this->views['count_gio_hang'] = $this->views['gio_hangs']->count();
-        //popup giam gia
-        $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai',2)->orderBy('id','desc')->get();
-        $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai',1)->orderBy('id','desc')->get();
 
-        //tinh phi ship
-        $dia_chi_checked = DiaChi::where('user_id',Auth::user()->id)->orderBy('trang_thai','ASC')->first();
-        $this->views['phi_ship_goc']=[];
-        if($dia_chi_checked){
-            $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho','quanHuyen')
-                                                ->where('ma_quan_huyen',$dia_chi_checked->ma_quan_huyen)->first();
+        // Lấy thông tin địa chỉ
+        $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
+        $this->views['dia_chis'] = DiaChi::with('user', 'tinhThanhPho', 'quanHuyen', 'phuongXa')
+                                        ->where('user_id', Auth::user()->id)
+                                        ->orderBy('trang_thai', 'ASC')
+                                        ->get();
+
+        // Lấy dữ liệu giỏ hàng từ session và truy vấn sản phẩm
+        $gio_hangs = session()->get('gio_hangs', []);
+        $san_phams = [];
+        foreach ($gio_hangs as $item) {
+            $san_pham = SanPham::find($item['san_pham_id']);
+            $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
+                                ->where('kich_co', $item['kich_co'])
+                                ->where('ma_mau', $item['ma_mau'])
+                                ->first();
+            if ($san_pham && $bien_the) {
+                $san_phams[] = [
+                    'san_pham' => $san_pham,
+                    'bien_the' => $bien_the,
+                    'so_luong' => $item['so_luong'],
+                    'gia_khuyen_mai' => $item['gia_khuyen_mai'],
+                ];
+            }
+        }
+        $this->views['gio_hangs'] = $san_phams;
+        $this->views['count_gio_hang'] = count($this->views['gio_hangs']);
+
+        // Popup giảm giá
+        $this->views['ma_giam_gia_van_chuyen'] = KhuyenMai::where('trang_thai', 2)->orderBy('id', 'desc')->get();
+        $this->views['ma_giam_gia_don_hang'] = KhuyenMai::where('trang_thai', 1)->orderBy('id', 'desc')->get();
+
+        // Tính phí ship
+        $dia_chi_checked = DiaChi::where('user_id', Auth::user()->id)->orderBy('trang_thai', 'ASC')->first();
+        $this->views['phi_ship_goc'] = [];
+        if ($dia_chi_checked) {
+            $this->views['phi_ship_goc'] = PhiShip::with('tinhThanhPho', 'quanHuyen')
+                                                ->where('ma_quan_huyen', $dia_chi_checked->ma_quan_huyen)
+                                                ->first();
         }
         $this->views['tongCoin'] = Coin::where('user_id', Auth::user()->id)->sum('coin');
 
-        return view('client.gioHang.chiTietThanhToan',$this->views);
+        return view('client.gioHang.chiTietThanhToan', $this->views);
     }
+
 
     public function xoaSessionGioHang(){
             session()->forget('gio_hangs');
@@ -235,7 +302,6 @@ class GioHangController extends Controller
 
 
     public function tiepTucDatHang(Request $request){
-
         $gio_hang_ids = $request->input('select', []);
 
         if (empty($gio_hang_ids)) {
@@ -243,18 +309,30 @@ class GioHangController extends Controller
         }
 
         // Lấy thông tin chi tiết của các sản phẩm được chọn từ cơ sở dữ liệu
-        $gio_hang = GioHang::with('user', 'sanPham', 'bienThe')
-                            ->where('user_id',Auth::user()->id)
-                            ->whereIn('gio_hangs.id',$gio_hang_ids)
+        $gio_hang = GioHang::with('sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->whereIn('id', $gio_hang_ids)
                             ->get();
 
-        // Lưu thông tin vào session
-        session()->put('gio_hangs', $gio_hang);
+        // Chuẩn bị dữ liệu giỏ hàng cần lưu vào session
+        $gio_hangs = [];
+        foreach ($gio_hang as $item) {
+            $gio_hangs[] = [
+                'san_pham_id' => $item->sanPham->id,
+                'so_luong' => $item->so_luong,
+                'kich_co' => $item->bienThe->kich_co,
+                'ma_mau' => $item->bienThe->ma_mau,
+                'gia_khuyen_mai' => $item->sanPham->gia_san_pham - ($item->sanPham->gia_san_pham * $item->sanPham->khuyen_mai / 100),
+            ];
+        }
+
+        // Lưu dữ liệu vào session
+        session()->put('gio_hangs', $gio_hangs);
 
         // Trả về đường dẫn để chuyển hướng
         return response()->json(['success' => true, 'redirect' => route('gio-hang.chi-tiet-thanh-toan')]);
-
     }
+
 
     public function tinhPhiShipDiaChi(Request $request){
         $ma_quan_huyen = $request->input('ma_quan_huyen');
@@ -276,4 +354,94 @@ class GioHangController extends Controller
             'gioHangCu' => $gioHangCu
         ]);
     }
+
+    public function datHang(Request $request){
+        $gio_hangs = session()->get('gio_hangs', []);
+
+        $phi_ships = $request->input('phiShip');
+        $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
+        $giamGiaDonHang = $request->input('giamTienDonHang');
+
+        // Kiểm tra phương thức thanh toán
+        if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
+            $phuong_thuc_thanh_toan = 0;
+            $trang_thai = 0;
+            $thanh_toan = 0;
+        } else { // Chuyển khoản
+            $phuong_thuc_thanh_toan = 1;
+            $trang_thai = 1;
+            $thanh_toan = 1;
+        }
+
+        // Tạo đơn hàng mới
+        $dataInsertDonHang = [
+            'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
+            'user_id' => Auth::user()->id,
+            'dia_chi_id' => $request->input('dia_chi_id'),
+            'giam_gia_van_chuyen' => $giamGiaVanChuyen,
+            'giam_gia_don_hang' => $giamGiaDonHang,
+            'tong_thanh_toan' => $request->input('tong_thanh_toan'),
+            'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
+            'trang_thai' => $trang_thai,
+            'thanh_toan' => $thanh_toan,
+            'ghi_chu' => $request->input('ghi_chu'),
+            'ngay_dat_hang' => now(),
+        ];
+
+        $result = DonHang::create($dataInsertDonHang);
+
+        if ($result) {
+            $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+
+            foreach ($gio_hangs as $item) {
+                $san_pham = SanPham::find($item['san_pham_id']);
+                $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
+                                    ->where('kich_co', $item['kich_co'])
+                                    ->where('ma_mau', $item['ma_mau'])
+                                    ->first();
+                $coin = Coin::where('user_id', Auth::user()->id)->first();
+
+                // Tạo chi tiết đơn hàng
+                $dataInsertChiTiet = [
+                    'don_hang_id' => $donHang->id,
+                    'san_pham_id' => $item['san_pham_id'],
+                    'bien_the_id' => $bien_the->id,
+                    'so_luong' => $item['so_luong'],
+                    'don_gia' => $item['gia_khuyen_mai'],
+                    'thanh_tien' => $item['gia_khuyen_mai'] * $item['so_luong'],
+                    'created_at' => now(),
+                ];
+                ChiTietDonHang::create($dataInsertChiTiet);
+
+                // Cập nhật số lượng tồn kho cho biến thể
+                $bien_the->decrement('so_luong', $item['so_luong']);
+
+                // Xóa sản phẩm trong giỏ hàng của người dùng
+                GioHang::where('user_id', Auth::user()->id)
+                    ->where('san_pham_id', $item['san_pham_id'])
+                    ->where('bien_the_id', $bien_the->id)
+                    ->delete();
+            }
+            // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
+            if ($coin && $request->input('soCoin') > 0) {
+                $coin->decrement('coin', $request->input('soCoin'));
+            }
+
+            // Gửi email xác nhận đơn hàng
+            $dia_chi = DiaChi::with('tinhThanhPho', 'quanHuyen', 'phuongXa')
+                            ->where('user_id', Auth::user()->id)
+                            ->where('trang_thai', 1)
+                            ->first();
+
+            $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
+            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
+
+            Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang));
+
+            return response()->json([
+                'success' => true,
+            ]);
+        }
+    }
+
 }

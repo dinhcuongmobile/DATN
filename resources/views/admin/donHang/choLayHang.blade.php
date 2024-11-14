@@ -2,7 +2,7 @@
 @section('containerAdmin')
 <div class="container-fluid">  
     
-    <h1 class="h3 mb-2 text-gray-800">Chờ xác nhận ({{ $donHangs->count() }})</h1>  
+    <h1 class="h3 mb-2 text-gray-800">Chờ Lấy Hàng ({{ $donHangs->count() }})</h1>  
     
     <!-- Các nút chức năng và thanh tìm kiếm -->
     <div class="card shadow mb-4">
@@ -23,8 +23,8 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-secondary btn-sm">Duyệt các đơn hàng đã chọn</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
+                    <button type="submit" class="btn btn-secondary btn-sm">Giao các đơn hàng đã chọn</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Giao Hàng Loạt</button> 
                 </div>
             </form>
         </div> 
@@ -96,9 +96,9 @@
                             </td>
                             <td class="col-1">GHTK</td>
                             <td>
-                                <form action="{{ route('don-hang.duyet', $item->id) }}" method="POST" style="display:inline;">
+                                <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Duyệt</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</button>
                                 </form>
                                 {{-- <form action="{{ route('admin.donHang.huy', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf

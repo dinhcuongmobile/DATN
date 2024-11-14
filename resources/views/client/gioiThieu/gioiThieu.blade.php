@@ -5,7 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Về Chúng Tôi</h4>
+                    <h4>Về chúng tôi</h4>
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb float-end">

@@ -41,11 +41,10 @@
             </div>
             <div class="card-body" id="table_sp">
                 <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" cellspacing="0">
+                    <table class="table table-bordered danhSachMaKhuyenMai" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th></th>
-                                <th>#</th>
                                 <th>Mã giảm giá</th>
                                 <th>Số tiền giảm</th>
                                 <th>Ngày bắt đầu</th>
@@ -60,7 +59,6 @@
                                 @foreach ($ma_khuyen_mais as $index => $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
-                                        <td class="align-middle text-center">{{$index+1}}</td>
                                         <td class="col-1 align-middle text-danger">{{$item->ma_giam_gia}}</td>
                                         <td class="col-2 align-middle">{{ number_format($item->so_tien_giam, 0, ',', '.') }} VND</td>
                                         <td class="align-middle">{{$item->ngay_bat_dau}}</td>
@@ -69,12 +67,19 @@
                                         @php
                                             $ngayKetThuc = \Carbon\Carbon::parse($item->ngay_ket_thuc);
                                             $ngayHienTai = now();
-                                            $gioConLai = $ngayHienTai->diffInHours($ngayKetThuc, false); // Tính giờ còn lại
+                                            $tongGiayConLai = $ngayHienTai->diffInSeconds($ngayKetThuc, false);
+
+                                            // Tính giờ, phút, giây còn lại
+                                            $gioConLai = floor($tongGiayConLai / 3600);
+                                            $phutConLai = floor(($tongGiayConLai % 3600) / 60);
+                                            $giayConLai = $tongGiayConLai % 60;
                                         @endphp
 
-                                        @if ($gioConLai > 0 && $gioConLai <= 24)
-                                            <td class="col-1 align-middle text-warning">Sắp kết thúc (còn {{ $gioConLai }} giờ)</td>
-                                        @elseif ($gioConLai > 24)
+                                        @if ($tongGiayConLai > 0 && $tongGiayConLai <= 86400)
+                                            <td class="col-2 align-middle text-warning tdHSD">
+                                                Sắp kết thúc (còn <span id="hours">0{{ $gioConLai }}</span> : <span id="minutes">{{ $phutConLai }}</span> : <span id="seconds">{{ $giayConLai }}</span>)
+                                            </td>
+                                        @elseif ($tongGiayConLai > 86400)
                                             <td class="col-1 align-middle text-success">Đang diễn ra</td>
                                         @else
                                             <td class="col-1 align-middle text-muted">Đã hết hạn</td>

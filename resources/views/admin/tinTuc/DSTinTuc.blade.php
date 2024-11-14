@@ -67,10 +67,17 @@
                                         {{ $item->tenDanhMuc }}
                                     </td>
                                     <td class="col-2 align-middle">{{ $item->created_at }}</td>
-                                    <td class="col-2 align-middle"><a href="{{ route('tin-tuc.sua-tin-tuc', $item->id) }}"
-                                            class="btn btn-warning btn-sm">Sửa</a> |
+                                    <td class="col-2 align-middle">
+                                        <a href="{{ route('tin-tuc.sua-tin-tuc', $item->id) }}"
+                                            class="btn btn-warning btn-sm">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            Sửa
+                                        </a> |
                                         <a href="{{ route('tin-tuc.delete', $item->id) }}"
-                                            class="btn btn-danger btn-sm">Xóa</a>
+                                            class="btn btn-danger btn-sm">
+                                            <i class="fa-solid fa-trash"></i>
+                                            Xóa
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach

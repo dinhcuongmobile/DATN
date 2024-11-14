@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DonHang;
+use App\Models\SanPham;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ChiTietDonHang extends Model
 {
@@ -14,6 +17,7 @@ class ChiTietDonHang extends Model
     protected $fillable = [
         'don_hang_id',
         'san_pham_id',
+        'bien_the_id',
         'so_luong',
         'don_gia',
         'thanh_tien',
@@ -23,7 +27,6 @@ class ChiTietDonHang extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
-
     public function donHang()
     {
         return $this->belongsTo(DonHang::class, 'don_hang_id');
@@ -32,5 +35,10 @@ class ChiTietDonHang extends Model
     public function sanPham()
     {
         return $this->belongsTo(SanPham::class, 'san_pham_id');
+    }
+
+    public function bienThe()
+    {
+        return $this->belongsTo(BienThe::class, 'bien_the_id');
     }
 }

@@ -35,4 +35,9 @@ class BienThe extends Model
         return $this->hasMany(GioHang::class, 'bien_the_id');
     }
 
+    public function chiTietDonHangs()
+    {
+        return $this->hasMany(ChiTietDonHang::class, 'bien_the_id');
+    }
+
 }

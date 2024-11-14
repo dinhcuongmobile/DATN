@@ -37,7 +37,7 @@
 <body class="layout-4 skeleton_body">
     <div class="tap-top">
         <div><i class="fa-solid fa-angle-up"></i></div>
-</div>
+    </div>
     <div class="skeleton_loader">
         <header>
             <div class="top_header">
@@ -48,11 +48,11 @@
                     <div class="col-12 p-0">
                         <div class="mobile-fix-option">
                             <ul>
-                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang chủ</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Search</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Cart</a></li>
-                                <li><a href="#"><i class="iconsax" data-icon="heart"></i>My Wish</a></li>
-                                <li> <a href="#"><i class="iconsax" data-icon="user-2"></i>Account</a></li>
+                                <li> <a href="{{route('trang-chu.home')}}"><i class="iconsax" data-icon="home-1"></i>Trang Chủ</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="search-normal-2"></i>Tìm Kiếm</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="shopping-cart"></i>Giỏ Hàng</a></li>
+                                <li><a href="#"><i class="iconsax" data-icon="heart"></i>Yêu Thích</a></li>
+                                <li> <a href="#"><i class="iconsax" data-icon="user-2"></i>Tài Khoản</a></li>
                             </ul>
                         </div>
                     </div>
@@ -272,7 +272,8 @@
                                     <div class="onhover-show-div user">
                                         <ul>
                                             @if (Auth::check())
-                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Thông Tin</a></li>
+                                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tài khoản</a></li>
+                                                <li> <a href="{{ route('don-hang.don-mua') }}">Đơn mua</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
@@ -341,7 +342,7 @@
                                         <li> <a class="nav" href="index.html">Trang Chủ</a></li>
                                         <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
                                         <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tứcg</a></li>
+                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
                                         <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
                                     </ul>
                                 </div>
@@ -400,8 +401,33 @@
             </div>
         </section>
     </footer>
-    {{-- GIAO DIỆN NHẠN XU --}}
+
     @if (Auth::check())
+
+        {{-- Chát trực tiếp --}}
+        <div class="chat-button" id="chatButton" onclick="toggleChat()">
+            <span class="chat-icon">💬</span>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <h3>Gửi tin nhắn</h3>
+                <button class="btn-close" type="button" onclick="closeChat()"></button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Tin nhắn sẽ được load ở đây -->
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
+                <button onclick="sendMessage()">Gửi</button>
+            </div>
+        </div>
+        <script src="{{asset('assets/js/chat.js')}}"></script>
+        {{-- END Chát trực tiếp --}}
+
+        {{-- GIAO DIỆN NHẠN XU --}}
         <div class="reviews-modal modal theme-modal fade" id="daily-coin" data-id="{{$userId}}" tabindex="-1" role="dialog"
             aria-modal="true">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -790,9 +816,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="theme-btns"><button class="btntheme" id="dark-btn"><i class="fa-regular fa-moon"></i>
-            <div class="text">Dark</div>
     </div>
     <div class="modal theme-modal fade" id="size-chart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

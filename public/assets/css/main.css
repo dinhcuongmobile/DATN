@@ -1,4 +1,130 @@
 
+/* div chat */
+.chat-container {
+    height: 400px;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    display: none; /* Ẩn mặc định */
+    flex-direction: column;
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    padding-bottom: 25px;
+    overflow: hidden;
+    opacity: 0; /* Độ mờ ban đầu */
+    transition: opacity 0.3s, transform 0.3s; /* Thêm hiệu ứng chuyển tiếp */
+    transform: translateY(20px); /* Nâng lên một chút */
+    z-index: 1000;
+}
+
+.chat-container.show {
+    display: flex; /* Hiển thị khi thêm lớp show */
+    opacity: 1; /* Hiện đầy đủ */
+    transform: translateY(0); /* Đưa về vị trí ban đầu */
+}
+
+.chat-header {
+    padding: 7px;
+    background-color: #ff5722;
+}
+
+.chat-header h3{
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    color: #fff;
+}
+
+.chat-header button{
+    margin-left: 205px;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px; /* Giới hạn chiều cao */
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    max-width: 70%;
+}
+
+.message.user {
+    background-color: #d8e9ff;
+    align-self: flex-end;
+}
+
+.message.admin {
+    background-color: #e2ffe2;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.chat-input button {
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.chat-input button:hover {
+    background-color: #e64a19;
+}
+
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000; /* Đảm bảo nút nằm trên cùng */
+}
+
+.chat-button:hover {
+    background-color: #e64a19;
+}
+
+.chat-icon {
+    font-size: 24px;
+}
+/* end div chat */
+
 .style-border{
     border: 1px solid #0000002b;
 }
@@ -384,5 +510,110 @@ font-family: Outfit, sans-serif;
 
 .toggle-button.active .toggle-circle {
     left: 26px; /* Vị trí khi bật */
+}
+
+.summary-total .ghi-chu p{
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+/*don mua*/
+.donmua nav ul {
+    display: flex;
+    margin-left: 60px;
+    margin-top: 10px;
+
+  }
+  .donmua nav ul li{
+    margin-right: 15px;
+
+  }
+  .donmua nav ul li:first-child{
+    margin-left: 15px;
+  }
+  .donmua nav ul li a{
+    display: block;
+    color: #000;
+    padding: 10px 30px 10px 30px;
+    position: relative;
+    font-size: 22px;
+
+  }
+  .donmua nav ul li a:last-child{
+    padding-left: 45px;
+  }
+  .donmua nav ul li a::after{
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    bottom: -9px;
+    background-color: transparent;
+  }
+  .donmua nav ul li.active a::after, .donmua nav ul li:hover a::after{
+    background-color: #e97730;
+  }
+  .table tbody td{
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 19px;
+    color: #000;
+  }
+  .table img{
+    border: 1px solid #0000002b;
+    width: 130px;
+  }
+  .table .tenSanPham{
+    text-align: left;
+  }
+  .table .tenSanPham a{
+    font-size: 22px;
+  }
+  .table td a{
+    text-decoration: none;
+  }
+  .tableDonMua tfoot tr td p{
+    font-size: 19px;
+    color: #8b8b8b;
+}
+.tableDonMua tfoot tr td p{
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.tableDonMua tfoot .trangThai td p{
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.tableDonMua tfoot tr td{
+    border-top: none;
+    border-bottom: 1px solid #dee2e6;
+}
+.btnDonMua{
+    float: right;
+    margin-top: 20px;
+
+}
+.btnDonMua .btnDaNhan{
+    color: #fff;
+    font-weight: 500;
+    background-color: #dc3545;
+}
+.btnDonMua .btnMuaLai{
+    color: #fff;
+    font-weight: 500;
+    background-color: #dc3545;
+    margin-left: 10px;
+}
+.btnDonMua a{
+    background-color: #e7ebf0;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+}
+.btnDonMua a:hover{
+    color: #000;
+    background-color: #cacccf;
 }
 

@@ -6,11 +6,14 @@
     },
     "devDependencies": {
         "axios": "^1.1.2",
+        "laravel-vite": "^0.0.24",
         "laravel-vite-plugin": "^0.7.2",
-        "vite": "^4.0.0"
+        "vite": "^4.5.5"
     },
     "dependencies": {
         "ckeditor5": "^43.2.0",
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "laravel-echo": "^1.17.0",
+        "pusher-js": "^8.4.0-rc2"
     }
 }
