@@ -85,7 +85,6 @@ class KhuyenMaiAdminController extends Controller
 
         $dataUpdate= [
             'so_tien_giam' => $request->so_tien_giam,
-            'ngay_bat_dau' => $request->ngay_bat_dau,
             'ngay_ket_thuc' => $request->ngay_ket_thuc,
             'gia_tri_toi_thieu' => $request->gia_tri_toi_thieu,
             'updated_at' => now()

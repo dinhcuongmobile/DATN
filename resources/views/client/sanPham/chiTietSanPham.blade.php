@@ -103,9 +103,11 @@
                                                 // Kiểm tra nếu có biến thể với kích cỡ này
                                                 $kichCoTonTai = $san_pham->bienThes->contains('kich_co', $item->kich_co);
                                             @endphp
-                                            <li class="{{ !$kichCoTonTai ? 'disabled' : '' }}" data-size="{{ $item->kich_co }}">
-                                                <a href="javascript:void(0);">{{ $item->kich_co }}</a>
-                                            </li>
+                                            @if ($kichCoTonTai)
+                                                <li data-size="{{ $item->kich_co }}">
+                                                    <a href="javascript:void(0);">{{ $item->kich_co }}</a>
+                                                </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </div>
@@ -123,6 +125,7 @@
                             </div>
                         </div>
                         <p class="text-danger" id="errSelect">Vui lòng chọn phân loại hàng !</p>
+                        <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
                         <div class="quantity-box d-flex align-items-center gap-3">
                             <div class="quantity">
                                 <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
@@ -130,11 +133,10 @@
                                 <input type="number" value="1" min="1" readonly>
                                 <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
                             </div>
-                            <div class="d-flex align-items-center gap-3 w-100">
-                                    <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
+                            <div class="d-flex align-items-center gap-3 w-100 btn-mua-hang">
                                     <a id="themGioHang" class="btn btn_black sm" href="javascript:void(0);"
                                     data-id="{{$san_pham->id}}">Thêm giỏ hàng</a>
-                                <a class="btn btn_outline sm" id="muaNgay" href="javascript:void(0)">Mua ngay</a>
+                                    <a class="btn btn_outline sm" id="muaNgay" href="javascript:void(0)">Mua ngay</a>
                             </div>
                         </div>
 
@@ -157,7 +159,7 @@
                                         <p id="soLuongTon" data-quantityOld="{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}"  data-id="{{$san_pham->id}}">{{$san_pham->bienThes->sum('so_luong')>0?$san_pham->bienThes->sum('so_luong'):'Tạm thời hết hàng'}}</p>
                                     </div>
                                 </li>
-                              
+
                                 <li>
                                     <div class="d-flex align-items-center gap-2">
                                         <h6>Danh mục: </h6>

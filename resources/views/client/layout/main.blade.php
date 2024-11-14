@@ -37,7 +37,7 @@
 <body class="layout-4 skeleton_body">
     <div class="tap-top">
         <div><i class="fa-solid fa-angle-up"></i></div>
-</div>
+    </div>
     <div class="skeleton_loader">
         <header>
             <div class="top_header">
@@ -401,8 +401,33 @@
             </div>
         </section>
     </footer>
-    {{-- GIAO DIỆN NHẠN XU --}}
+
     @if (Auth::check())
+
+        {{-- Chát trực tiếp --}}
+        <div class="chat-button" id="chatButton" onclick="toggleChat()">
+            <span class="chat-icon">💬</span>
+        </div>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header">
+                <h3>Gửi tin nhắn</h3>
+                <button class="btn-close" type="button" onclick="closeChat()"></button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Tin nhắn sẽ được load ở đây -->
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
+                <button onclick="sendMessage()">Gửi</button>
+            </div>
+        </div>
+        <script src="{{asset('assets/js/chat.js')}}"></script>
+        {{-- END Chát trực tiếp --}}
+
+        {{-- GIAO DIỆN NHẠN XU --}}
         <div class="reviews-modal modal theme-modal fade" id="daily-coin" data-id="{{$userId}}" tabindex="-1" role="dialog"
             aria-modal="true">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

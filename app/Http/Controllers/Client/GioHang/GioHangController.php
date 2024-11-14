@@ -358,6 +358,10 @@ class GioHangController extends Controller
     public function datHang(Request $request){
         $gio_hangs = session()->get('gio_hangs', []);
 
+        $phi_ships = $request->input('phiShip');
+        $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
+        $giamGiaDonHang = $request->input('giamTienDonHang');
+
         // Kiểm tra phương thức thanh toán
         if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
             $phuong_thuc_thanh_toan = 0;
@@ -374,6 +378,8 @@ class GioHangController extends Controller
             'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
             'user_id' => Auth::user()->id,
             'dia_chi_id' => $request->input('dia_chi_id'),
+            'giam_gia_van_chuyen' => $giamGiaVanChuyen,
+            'giam_gia_don_hang' => $giamGiaDonHang,
             'tong_thanh_toan' => $request->input('tong_thanh_toan'),
             'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
             'trang_thai' => $trang_thai,
@@ -393,6 +399,7 @@ class GioHangController extends Controller
                                     ->where('kich_co', $item['kich_co'])
                                     ->where('ma_mau', $item['ma_mau'])
                                     ->first();
+                $coin = Coin::where('user_id', Auth::user()->id)->first();
 
                 // Tạo chi tiết đơn hàng
                 $dataInsertChiTiet = [
@@ -415,6 +422,10 @@ class GioHangController extends Controller
                     ->where('bien_the_id', $bien_the->id)
                     ->delete();
             }
+            // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
+            if ($coin && $request->input('soCoin') > 0) {
+                $coin->decrement('coin', $request->input('soCoin'));
+            }
 
             // Gửi email xác nhận đơn hàng
             $dia_chi = DiaChi::with('tinhThanhPho', 'quanHuyen', 'phuongXa')
@@ -424,9 +435,6 @@ class GioHangController extends Controller
 
             $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
             $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
-            $phi_ships = $request->input('phiShip');
-            $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
-            $giamGiaDonHang = $request->input('giamTienDonHang');
 
             Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang));
 
