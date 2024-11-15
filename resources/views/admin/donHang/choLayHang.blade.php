@@ -3,7 +3,16 @@
 <div class="container-fluid">  
     
     <h1 class="h3 mb-2 text-gray-800">Chờ Lấy Hàng ({{ $donHangs->count() }})</h1>  
-    
+    @if (session('success'))
+            <div class="alert alert-success" id="error-alert">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger" id="error-alert">
+                {{ session('error') }}
+            </div>
+        @endif
     <!-- Các nút chức năng và thanh tìm kiếm -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -100,11 +109,6 @@
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</button>
                                 </form>
-                                {{-- <form action="{{ route('admin.donHang.huy', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">Hủy</button>
-                                </form> --}}
                             </td>
                         </tr>  
                     </tbody>  

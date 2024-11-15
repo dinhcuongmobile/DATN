@@ -99,7 +99,7 @@
                                     <ul class="selected" id="selectSize">
                                         <input type="hidden" id="size" value="">
                                         @foreach ($kich_cos as $item)
-                                            @php
+                                            @php 
                                                 // Kiểm tra nếu có biến thể với kích cỡ này
                                                 $kichCoTonTai = $san_pham->bienThes->contains('kich_co', $item->kich_co);
                                             @endphp

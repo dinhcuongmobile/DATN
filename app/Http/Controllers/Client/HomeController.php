@@ -33,12 +33,12 @@ class HomeController extends Controller
 
     public function quickView(Request $request){
         $san_pham = SanPham::with('bienThes','danhGias')->find($request->input('san_pham_id'));
-        $hinhAnh = $san_pham->bienThes->unique('ma_mau');
         $kich_cos = KichCo::all();
         $mau_sacs = MauSac::all();
         return response()->json([
             'san_pham'=>$san_pham,
-            'hinhAnh' => $hinhAnh
+            'kich_cos' => $kich_cos,
+            'mau_sacs' => $mau_sacs
         ]);
     }
 
