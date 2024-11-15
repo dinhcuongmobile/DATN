@@ -380,5 +380,5 @@ Route::prefix('don-hang')->group(function(){
     // Route::get('cap-nhat-don-hang/{id}', [DonHangAdminController::class,'showCapNhatDonHang'])->name('don-hang.cap-nhat-don-hang');
     // Route::put('cap-nhat-don-hang/{id}', [DonHangAdminController::class,'capNhatDonHang'])->name('don-hang.cap-nhat-don-hang');
     // Route::get('in-hoa-don/{id}', [DonHangAdminController::class,'inHoaDon'])->name('don-hang.in-hoa-don');
-    
+
 });
