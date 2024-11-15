@@ -37,7 +37,7 @@
                 </nav>
             </div>
             {{-- tap 1 --}}
-            <div style="border:1px" id="tap1" class="card-body bg-light an">
+            <div id="tap1" class="card-body bg-light an">
                 @foreach ($don_hangs['trang_thai_all'] as $itemDonHang)
                     <form action="" method="POST">
                         @csrf
@@ -139,7 +139,7 @@
                                             <div class="btnDonMua">
                                                 @if($itemDonHang->trang_thai==0 || $itemDonHang->trang_thai==1 || $itemDonHang->trang_thai==2)
                                                     <a href="" style="text-decoration: none ; margin-right:15px; border:1px" class="btn">Hủy đơn hàng</a>
-                                                    <a href="" style="text-decoration: none " class="btn">Liên hệ người bán</a>
+                                                    <a href="/lien-he" style="text-decoration: none " class="btn">Liên hệ người bán</a>
                                                 @endif
                                                 @if($itemDonHang->trang_thai==3)
                                                     <input type="hidden"  name="_token" value="{{ csrf_token() }}" />
