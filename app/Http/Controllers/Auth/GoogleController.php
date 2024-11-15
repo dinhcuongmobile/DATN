@@ -51,7 +51,7 @@ class GoogleController extends Controller
                     'ho_va_ten' => $userGooge->name,
                     'google_id' => $userGooge->id,
                     'vai_tro_id' => 3,
-                    'password' => Hash::make($randomPassword)
+                    'password' => bcrypt($randomPassword)
                 ]);
 
                 Auth::login($newUser);
