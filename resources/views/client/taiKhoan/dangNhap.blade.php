@@ -95,7 +95,7 @@
                         <div class="log-in-button">
                             <ul>
                                 <li>
-                                    <a href="https://www.google.com/" target="_blank"> <i class="fa-brands fa-google me-2">
+                                    <a href="{{ route('auth.google') }}" target="_blank"> <i class="fa-brands fa-google me-2">
                                         </i>Google</a>
                                 </li>
                                 <li>
