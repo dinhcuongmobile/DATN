@@ -144,7 +144,7 @@
                                                 @endif
 
                                                 <div class="product-image style-border"><a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
-                                                    <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="sản phẩm"></a>
+                                                    <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="err"></a>
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
