@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 15, 2024 lúc 05:40 PM
+-- Thời gian đã tạo: Th10 15, 2024 lúc 06:26 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -264,7 +264,6 @@ CREATE TABLE `dia_chis` (
 --
 
 INSERT INTO `dia_chis` (`id`, `user_id`, `ho_va_ten_nhan`, `so_dien_thoai_nhan`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `ma_phuong_xa`, `dia_chi_chi_tiet`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(112, 17, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, 'Phú Hữu 2', 1, '2024-11-15 16:34:39', '2024-11-15 16:34:39'),
 (113, 18, 'Tống Hoàng Bách', '0917261473', 24, 218, 7444, NULL, 1, '2024-11-15 16:37:09', '2024-11-15 16:37:09'),
 (114, 19, 'Nguyễn Thiện Giáp', '0357864779', 1, 279, 10183, NULL, 1, '2024-11-15 16:38:50', '2024-11-15 16:38:50'),
 (115, 20, 'Trương Thị Hồng Ngọc', '0917261473', 1, 277, 10072, NULL, 1, '2024-11-15 16:40:08', '2024-11-15 16:40:08');
@@ -641,10 +640,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `google_id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(17, NULL, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$GYqZQYzmb4l1Ur60Zp.kRuFdRL/tCMcFPu5nXPM5/x4wqmyJJCqYO', '0964426518', 1, NULL, NULL, 0, '2024-11-15 16:34:39', '2024-11-15 16:34:39'),
+(1, '112158713502204375107', 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$KWVBCd6txEck8IvLT4dn0OxrK.XEjQHOsfXIrotT7LsrkXaoQ0eS6', '0964426518', 1, NULL, NULL, 0, '2024-11-15 17:07:28', '2024-11-15 17:22:12'),
 (18, NULL, 'Tống Hoàng Bách', 'hoangbach25102004@gmail.com', NULL, NULL, '$2y$10$K33cM1B7/7NAiuT8aO7Yke.CpClvYuxKWYe2l3uYDfTRZUzyyVPcy', '0917261473', 1, NULL, NULL, 0, '2024-11-15 16:37:09', '2024-11-15 16:37:09'),
 (19, NULL, 'Nguyễn Thiện Giáp', 'thiengiapnguyen04@gmail.com', NULL, NULL, '$2y$10$3GyyMF9NSSKc8p9fMZVwSONnINk9mz.0cUG5U0nsHa5Un.9T7pIcu', '0357864779', 1, NULL, NULL, 0, '2024-11-15 16:38:50', '2024-11-15 16:38:50'),
-(20, NULL, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$dp46V5swGf3c64qorVR7Iu4kThmJg1phlHAHWU/hGj65YmCPo9zmO', '0917261473', 2, NULL, NULL, 0, '2024-11-15 16:40:08', '2024-11-15 16:40:08');
+(20, NULL, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$dp46V5swGf3c64qorVR7Iu4kThmJg1phlHAHWU/hGj65YmCPo9zmO', '0917261473', 2, NULL, NULL, 0, '2024-11-15 16:40:08', '2024-11-15 16:40:08'),
+(24, NULL, 'Nguyễn Đình Cường', 'cuongndph38237@fpt.edu.vn', NULL, NULL, '$2y$10$V/atpYcFM5QVKpUVEBYA7upwizydQC.qughU6Fq8L8ezqzsz1Dw/2', '0964426517', 3, NULL, NULL, 0, '2024-11-15 17:18:02', '2024-11-15 17:18:02');
 
 -- --------------------------------------------------------
 
@@ -12913,7 +12913,7 @@ ALTER TABLE `danh_muc_tin_tucs`
 -- AUTO_INCREMENT cho bảng `dia_chis`
 --
 ALTER TABLE `dia_chis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hangs`
@@ -12997,7 +12997,7 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`

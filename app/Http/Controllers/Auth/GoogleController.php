@@ -15,53 +15,77 @@ use Illuminate\Support\Str;
 class GoogleController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Redirect to Google login page.
      */
-
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
 
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Handle Google callback.
      */
-
     public function handleGoogleCallback(Request $request)
     {
         try {
-            $userGooge = Socialite::driver('google')->user();
+            // Lấy thông tin người dùng từ Google
+            $userGoogle = Socialite::driver('google')->user();
 
-            $finduser = User::where('google_id', $userGooge->id)->first();
+            $finduser = User::where('google_id', $userGoogle->id)
+                ->orWhere('email', $userGoogle->email)
+                ->first();
 
             if ($finduser) {
-                Auth::login($finduser);
-
-                Cookie::queue('remember_cookie', $request->email, 43200); // Lưu cookie trong 30 ngày
-
-                return redirect()->route('trang-chu.home');
+                // Nếu người dùng tồn tại, đăng nhập
+                $this->updateGoogleIdIfNeeded($finduser, $userGoogle->id);
+                $this->loginUser($finduser, $userGoogle->email);
             } else {
-                $randomPassword = Str::random(20);
-
-                $newUser = User::updateOrCreate(['email' => $userGooge->email], [
-                    'ho_va_ten' => $userGooge->name,
-                    'google_id' => $userGooge->id,
-                    'vai_tro_id' => 3,
-                    'password' => bcrypt($randomPassword)
-                ]);
-
-                Auth::login($newUser);
-
-                Cookie::queue('remember_cookie', $request->email, 43200); // Lưu cookie trong 30 ngày
-
-                return redirect()->route('trang-chu.home');
+                // Tạo tài khoản mới nếu người dùng chưa tồn tại
+                $newUser = $this->createNewUser($userGoogle);
+                $this->loginUser($newUser, $userGoogle->email);
             }
+
+            return redirect()->route('trang-chu.home');
         } catch (Exception $e) {
-            return redirect()->route('tai-khoan.dang-nhap')->with('error', 'Đăng nhập thất bại. Vui lòng thử lại!');
+            // Ghi log và chuyển hướng đến trang đăng nhập với thông báo lỗi
+            report($e);
+            return redirect()->route('tai-khoan.dang-nhap')
+                ->with('error', 'Đăng nhập thất bại. Vui lòng thử lại sau!');
         }
+    }
+
+    /**
+     * Update Google ID for existing user if needed.
+     */
+    private function updateGoogleIdIfNeeded($user, $googleId)
+    {
+        if (!$user->google_id) {
+            $user->update(['google_id' => $googleId]);
+        }
+    }
+
+    /**
+     * Log in user and set remember cookie.
+     */
+    private function loginUser($user, $email)
+    {
+        Auth::login($user);
+        Cookie::queue('remember_cookie', $email, 43200); // 30 ngày
+    }
+
+    /**
+     * Create a new user from Google data.
+     */
+    private function createNewUser($userGoogle)
+    {
+        $randomPassword = Str::random(16); // Tạo mật khẩu mạnh hơn
+        return User::create([
+            'google_id' => $userGoogle->id,
+            'ho_va_ten' => $userGoogle->name,
+            'email' => $userGoogle->email,
+            'password' => Hash::make($randomPassword),
+            'vai_tro_id' => 3,
+            'created_at' => now(),
+        ]);
     }
 }
