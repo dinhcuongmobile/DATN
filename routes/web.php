@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
+use App\Http\Controllers\Auth\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,12 @@ use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminCo
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Đăng nhập client với bên thứ 3
+Route::controller(GoogleController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
 
 // Client
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
