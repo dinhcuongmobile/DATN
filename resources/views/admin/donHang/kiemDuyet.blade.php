@@ -36,7 +36,7 @@
                     <button type="submit" class="btn btn-secondary btn-sm">Duyệt các đơn hàng đã chọn</button>
                     <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
                 </div>
-            
+            </form>
         </div> 
     </div>
 
@@ -132,6 +132,5 @@
             document.querySelectorAll('input[name="select[]"]').forEach(checkbox => checkbox.checked = false);
         }
     </script>
-    </form>
 </div>  
 @endsection
