@@ -18,6 +18,80 @@
     transform: translateY(20px); /* Nâng lên một chút */
     z-index: 1000;
 }
+/* Flash Sale  */
+/* Container chính */
+.coming-soon-box {
+    text-align: center;
+    background: #eecd81; /* Nền vàng nhạt */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+/* Header Flash Sale */
+.flash-sale-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.flash-sale-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #f05024; /* Màu chữ cam nổi bật */
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.flash-sale-header .icon-lightning {
+    width: 36px;
+    height: 36px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Countdown Timer */
+.countdown .clockdiv9 {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.clockdiv9 .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff4a; /* Nền trắng */
+    border: 2px solid #f05024; /* Viền cam */
+    border-radius: 10px;
+    padding: 3px 6px;
+    min-width: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
+}
+
+.clockdiv9 .timer {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fd3700;
+    font-family: 'Courier New', monospace;
+}
+
+.clockdiv9 .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #606060;
+    margin-top: 5px;
+}
+
+/* Animation chống rung */
+.countdown .timer {
+    display: inline-block;
+    width: 45px; /* Chiều rộng cố định */
+    text-align: center;
+}
 
 .chat-container.show {
     display: flex; /* Hiển thị khi thêm lớp show */
