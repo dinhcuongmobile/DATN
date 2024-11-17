@@ -330,27 +330,28 @@
             <div class="col-xl-9">
                 <div class="row g-4">
                     <div class="col-md-5">
-                        <div class="best-seller-img ratio_square-3"><a href="collection-left-sidebar.html"> <img
-                                    class="bg-img" src="../assets/images/layout-4/main-category/1.png" alt=""></a>
+                        <div class="best-seller-img ratio_square-3"><a href="{{route('san-pham.san-pham')}}"> <img
+                                    class="bg-img" src="{{asset('assets/images/layout-4/Bo-Suu-Tap1.png')}}" alt="" width="10px"></a>
                         </div>
                     </div>
                     <div class="col-md-7 ratio_landscape">
                         <div class="style-content">
                             <h6>Mặc theo phong cách của bạn</h6>
                             <h2>Tạo phiên bản mới của chính bạn</h2>
-                            <h4>Mua hàng trực tuyến</h4>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a></div>
-                        </div><a href="collection-left-sidebar.html"> <img class="bg-img"
-                                src="../assets/images/layout-4/main-category/2.jpg" alt=""></a>
+                            <div class="link-hover-anim underline">
+                                <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                                <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                            </div>
+                        </div>
+                        <a href="{{route('san-pham.san-pham')}}">
+                            <img class="bg-img"src="{{asset('assets/images/layout-4/Bo-Suu-Tap2.png')}}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-3 d-none d-xl-block">
                 <div class="best-seller-box">
-                    <div class="offer-banner"><a href="collection-left-sidebar.html">
+                    <div class="offer-banner"><a href="{{route('san-pham.san-pham')}}">
                             <h2>Giảm thêm 15%</h2><span> </span>
                             <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.</p>
                             <div class="btn">
@@ -358,12 +359,10 @@
                             </div>
                         </a></div>
                     <div class="best-seller-content">
-                        <h3>Làm bạn thoải mái và sang trọng</h3><span> </span>
-                        <div class="link-hover-anim underline"><a
-                                class="btn btn_underline link-strong link-strong-unhovered"
-                                href="collection-left-sidebar.html">Bộ sưu tập</a>
-                                <a class="btn btn_underline link-strong link-strong-hovered"
-                                href="collection-left-sidebar.html">Bộ sưu tập</a></div>
+                        <h3>Giúp Thoải mái và Tinh Tế</h3><span> </span>
+                        <div class="link-hover-anim underline">
+                            <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                            <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a></div>
                     </div>
                 </div>
             </div>
