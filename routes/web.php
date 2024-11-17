@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
+use App\Http\Controllers\Auth\FaceBookController;
 use App\Http\Controllers\Auth\GoogleController;
 
 /*
@@ -43,6 +44,11 @@ use App\Http\Controllers\Auth\GoogleController;
 Route::controller(GoogleController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback');
+});
+
+Route::controller(FaceBookController::class)->group(function(){
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });
 
 // Client

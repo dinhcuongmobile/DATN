@@ -99,7 +99,7 @@
                                         </i>Google</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><i
+                                    <a href="{{ route('auth.facebook') }}"><i
                                             class="fa-brands fa-facebook-f me-2"></i>Facebook </a>
                                 </li>
                             </ul>
