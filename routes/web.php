@@ -376,7 +376,7 @@ Route::prefix('don-hang')->group(function(){
     Route::get('danh-sach-da-giao', [DonHangAdminController::class,'showDSDaGiao'])->name('don-hang.danh-sach-da-giao');
     Route::get('danh-sach-da-huy', [DonHangAdminController::class,'showDSDaHuy'])->name('don-hang.danh-sach-da-huy');
     Route::get('danh-sach-don-hang', [DonHangAdminController::class,'showDSDonHang'])->name('don-hang.danh-sach-don-hang');
-    // Route::get('chi-tiet-don-hang/{id}', [DonHangAdminController::class,'showChiTietDonHang'])->name('don-hang.chi-tiet-don-hang');
+    Route::get('chi-tiet-don-hang/{id}', [DonHangAdminController::class,'showChiTietDonHang'])->name('don-hang.chi-tiet-don-hang');
     // Route::get('cap-nhat-don-hang/{id}', [DonHangAdminController::class,'showCapNhatDonHang'])->name('don-hang.cap-nhat-don-hang');
     // Route::put('cap-nhat-don-hang/{id}', [DonHangAdminController::class,'capNhatDonHang'])->name('don-hang.cap-nhat-don-hang');
     // Route::get('in-hoa-don/{id}', [DonHangAdminController::class,'inHoaDon'])->name('don-hang.in-hoa-don');

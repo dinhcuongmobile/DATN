@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\BienThe;
 use App\Models\DonHang;
 use App\Models\SanPham;
 use Illuminate\Support\Facades\DB;

@@ -36,7 +36,7 @@
                     <button type="submit" class="btn btn-secondary btn-sm">Duyệt các đơn hàng đã chọn</button>
                     <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
                 </div>
-            
+            </form>
         </div> 
     </div>
 
@@ -114,6 +114,11 @@
                                     @csrf
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
                                 </form>
+                                <hr>
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
+                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
+                                  </a> 
+                                
                             </td>
                         </tr>  
                     </tbody>  
@@ -132,6 +137,5 @@
             document.querySelectorAll('input[name="select[]"]').forEach(checkbox => checkbox.checked = false);
         }
     </script>
-    </form>
 </div>  
 @endsection
