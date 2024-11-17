@@ -351,13 +351,43 @@
             </div>
             <div class="col-3 d-none d-xl-block">
                 <div class="best-seller-box">
-                    <div class="offer-banner"><a href="{{route('san-pham.san-pham')}}">
-                            <h2>Giảm thêm 15%</h2><span> </span>
-                            <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.</p>
-                            <div class="btn">
-                                <h6>Use Code: <span>KHUTRD***</span></h6>
-                            </div>
-                        </a></div>
+                    <div class="coming-soon-box">
+                        <div class="flash-sale-header">
+                            <h2>
+                                <i class="fas fa-bolt"></i> Flash Sale
+                                <p> Giảm Toàn Bộ Cửa Hàng 15%</p>
+                            </h2>
+                            
+                        </div>
+                        <div class="countdown">
+                            <ul class="clockdiv9">
+                                <li>
+                                    <div class="countdown-item">
+                                        <span class="timer days">00</span>
+                                        <span class="title">Ngày</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="countdown-item">
+                                        <span class="timer hours">00</span>
+                                        <span class="title">Giờ</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="countdown-item">
+                                        <span class="timer minutes">00</span>
+                                        <span class="title">Phút</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="countdown-item">
+                                        <span class="timer seconds">00</span>
+                                        <span class="title">Giây</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="best-seller-content">
                         <h3>Giúp Thoải mái và Tinh Tế</h3><span> </span>
                         <div class="link-hover-anim underline">
