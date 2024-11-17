@@ -357,31 +357,31 @@
                                 <i class="fas fa-bolt"></i> Flash Sale
                                 <p> Giảm Toàn Bộ Cửa Hàng 15%</p>
                             </h2>
-                            
+
                         </div>
-                        <div class="countdown">
-                            <ul class="clockdiv9">
+                        <div class="thoi-gian">
+                            <ul class="ul-thoi-gian">
                                 <li>
-                                    <div class="countdown-item">
-                                        <span class="timer days">00</span>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
                                         <span class="title">Ngày</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="countdown-item">
-                                        <span class="timer hours">00</span>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
                                         <span class="title">Giờ</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="countdown-item">
-                                        <span class="timer minutes">00</span>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
                                         <span class="title">Phút</span>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="countdown-item">
-                                        <span class="timer seconds">00</span>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
                                         <span class="title">Giây</span>
                                     </div>
                                 </li>

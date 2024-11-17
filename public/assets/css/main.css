@@ -53,14 +53,14 @@
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-/* Countdown Timer */
-.countdown .clockdiv9 {
+/* thoi-gian Timer */
+.thoi-gian .ul-thoi-gian {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
 
-.clockdiv9 .countdown-item {
+.ul-thoi-gian .item-thoi-gian {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,14 +72,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
 }
 
-.clockdiv9 .timer {
+.ul-thoi-gian .timer {
     font-size: 28px;
     font-weight: bold;
     color: #fd3700;
     font-family: 'Courier New', monospace;
 }
 
-.clockdiv9 .title {
+.ul-thoi-gian .title {
     font-size: 18px;
     font-weight: 500;
     color: #606060;
@@ -87,12 +87,13 @@
 }
 
 /* Animation chống rung */
-.countdown .timer {
+.thoi-gian .timer {
     display: inline-block;
     width: 45px; /* Chiều rộng cố định */
     text-align: center;
 }
 
+/* chat  */
 .chat-container.show {
     display: flex; /* Hiển thị khi thêm lớp show */
     opacity: 1; /* Hiện đầy đủ */
