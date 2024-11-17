@@ -273,7 +273,7 @@
                                         <ul>
                                             @if (Auth::check())
                                                 <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tài khoản</a></li>
-                                                <li> <a href="{{ route('don-hang.don-mua') }}">Đơn mua</a></li>
+                                                <li> <a class="donMuaMenu">Đơn mua</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>

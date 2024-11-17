@@ -101,10 +101,10 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     });
 
-    Route::prefix('don-hang')->group(function () {
-        Route::get('don-mua', [DonHangController::class, 'donMua'])->name('don-hang.don-mua');
+    //don hang
+    // Route::prefix('don-hang')->group(function () {
 
-    });
+    // });
 
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');

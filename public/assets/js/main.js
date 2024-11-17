@@ -16,6 +16,40 @@ if (!checkUrl) {
     });
 }
 
+// don-mua-menu-click
+const donMuaMenu = document.querySelector('.donMuaMenu');
+if (donMuaMenu) {
+    donMuaMenu.addEventListener('click',function(){
+        if (window.location.pathname !== '/tai-khoan/thong-tin-tai-khoan') {
+            sessionStorage.setItem("activeTab", "order");
+            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+        }else{
+            let checkNavLink = document.querySelectorAll('.nav-link');
+            let checkTabPane = document.querySelectorAll('.tab-pane');
+            checkNavLink.forEach((el)=>{
+                el.classList.remove('active');
+                el.setAttribute('aria-selected', 'false');
+                el.setAttribute('tabindex', '-1');
+            });
+
+            checkTabPane.forEach((el)=>{
+                el.classList.remove('active','show');
+            });
+            
+            const donHangTab = document.querySelector('#order-tab');
+            const donHangContent = document.querySelector('#order');
+
+            donHangTab.classList.add('active');
+            donHangTab.setAttribute('aria-selected', 'true');
+            if (donHangTab.hasAttribute('tabindex') && donHangTab.getAttribute('tabindex') === "-1") {
+                donHangTab.removeAttribute('tabindex');
+            }
+
+            donHangContent.classList.add('active','show');
+        }
+    })
+}
+
 
 // Tỉnh thành phố, quận huyện
 $('select[name="tinh_thanh_pho"]').on('change', function () {
