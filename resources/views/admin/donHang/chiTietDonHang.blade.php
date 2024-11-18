@@ -8,29 +8,33 @@
           <!-- Thông tin đơn hàng -->
           <div class="row mb-3">
               <div class="col-lg-6">
+                <h5 class="mb-3"><strong>Thông Tin Khách Hàng</strong></h5>
                 <p><strong>Tên Khách Hàng:</strong> {{ $donHang->user->ho_va_ten }}</p>
-                  <p><strong>Mã đơn hàng:</strong> {{ $donHang->ma_don_hang }}</p>
-                  <p><strong>Địa chỉ nhận hàng:</strong> {{ $donHang->diaChi->dia_chi }}</p>
-                  <p><strong>Phương thức thanh toán:</strong> 
-                      {{ $donHang->phuong_thuc_thanh_toan == 0 ? 'Ship COD' : 'Chuyển khoản' }}
+                  <p><strong>Mã Đơn Hàng:</strong> <span style="color: red">{{ $donHang->ma_don_hang }}</span></p>
+                  <p><strong>Địa Chỉ Nhận Hàng:</strong> {{ $donHang->diaChi->dia_chi }}</p>
+                  <p><strong>Phương Thức Thanh Toán:</strong> 
+                    <span style="background-color: #f0f0f0; color: green; padding: 5px; border-radius: 9px;">
+                      {{ $donHang->phuong_thuc_thanh_toan == 0 ? 'Thanh Toán Khi Nhận Hàng' : 'Chuyển Khoản' }}
+                    </span>
                   </p>
-                  <p><strong>Tổng sản phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} sản phẩm</p>
+                  <p><strong>Tổng Sản Phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} Sản Phẩm</p>
+                  <p><strong>Ghi Chú :</strong>{{$donHang->ghi_chu}} </p>
               </div>
               <div class="col-lg-6 text-right">
                   <button class="btn btn-primary btn-sm">💬Chat</button>
               </div>
           </div>
           <!-- Thông tin thanh toán -->
-          <h5 class="mb-3"><strong>Thông tin thanh toán</strong></h5>
+          <h5 class="mb-3"><strong>Thông Tin Thanh Toán</strong></h5>
           <div class="table-responsive">
               <table class="table table-bordered">
                   <thead>
                       <tr>
                           <th>STT</th>
-                          <th>Sản phẩm</th>
+                          <th>Sản Phẩm</th>
                           <th>Đơn Giá</th>
-                          <th>Số lượng</th>
-                          <th>Thành tiền</th>
+                          <th>Số Lượng</th>
+                          <th>Thành Tiền</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -41,7 +45,7 @@
                               <img src="{{ Storage::url($chiTiet->bienThe->hinh_anh) }}" alt="product" width="10%">
                               <strong>{{ $chiTiet->sanPham->ten_san_pham }}</strong>
                               @if($chiTiet->bienThe)
-                              <br><small>Phân loại: {{ $chiTiet->bienThe->kich_co }}, {{ $chiTiet->bienThe->ten_mau }}</small>
+                              <br><small>Phân Loại: {{ $chiTiet->bienThe->kich_co }}, {{ $chiTiet->bienThe->ten_mau }}</small>
                               @endif
                           </td>
                           <td>{{ number_format($chiTiet->don_gia, 0, ',', '.') }}đ</td>
@@ -52,19 +56,19 @@
                   </tbody>
                   <tfoot>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Tổng tiền sản phẩm:</strong></td>
+                          <td colspan="4" class="text-right"><strong>Tổng Tiền Sản Phẩm:</strong></td>
                           <td>{{ number_format($tongTienSanPham, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Giảm giá vận chuyển:</strong></td>
+                          <td colspan="4" class="text-right"><strong>Giảm Giá Vận Chuyển:</strong></td>
                           <td>{{ number_format($phiVanChuyen, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Giảm giá đơn hàng:</strong></td>
+                          <td colspan="4" class="text-right"><strong>Giảm Giá Đơn Hàng:</strong></td>
                           <td>{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Tổng thanh toán:</strong></td>
+                          <td colspan="4" class="text-right"><strong>Tổng Thanh Toán:</strong></td>
                           <td class="text-danger"><strong>{{ number_format($tongThanhToan, 0, ',', '.') }}đ</strong></td>
                       </tr>
                   </tfoot>

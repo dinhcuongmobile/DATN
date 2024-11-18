@@ -78,7 +78,7 @@
                             </td>
                             <td>{{ number_format($item->tong_thanh_toan, 0, ',', '.') }}₫</td>
                             <td>
-                                <p><span style="color:#cc2e2e;">
+                                <p><span style="color:#cc2e2e; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
