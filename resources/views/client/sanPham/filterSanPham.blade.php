@@ -24,7 +24,7 @@
                 <div class="product-image style-border">
                     <a class="pro-first bg-size" href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
                         style="
-                        background-image: url({{ Storage::url($item->hinh_anh) }});
+                        background-image: url({{ Storage::url($item->hinh_anh)}});
                         background-size:cover;
                         background-position: center;
                         background-repeat: no-repeat;
