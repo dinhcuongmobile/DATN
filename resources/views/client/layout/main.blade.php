@@ -358,7 +358,7 @@
                                         <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
                                         <li> <a class="nav" href="variant-radio.html">Quần jeans hiệu</a></li>
                                         <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
-                                        <li> <a class="nav" href="variant-images.html">Áo hoodie nhiều màu Sắc</a></li>
+                                        <li> <a class="nav" href="variant-images.html">Áo hoodie nhiều màu sắc</a></li>
                                         <li> <a class="nav" href="variant-dropdown.html">Nước hoa tốt nhất</a></li>
                                     </ul>
                                 </div>
@@ -391,7 +391,7 @@
                                         <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
                                         <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
-                                        <li> <a class="nav" href="#">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
