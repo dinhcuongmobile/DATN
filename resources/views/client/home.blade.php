@@ -222,7 +222,7 @@
                                                     <ul class="color-variant">
                                                         {{-- bien the mau sac --}}
                                                         @foreach ($item->bienThes->unique('ma_mau')->take(4) as $mau_sac)
-                                                            <li style="background-color: {{$mau_sac->ma_mau}}; border: 1px solid #0000003b;"></li>
+                                                            <li style="background-color: {{$mau_sac->ma_mau}}; border: 1px solid #0000003b"></li>
                                                         @endforeach
                                                     </ul>
                                                     {{-- danh gia --}}
