@@ -273,7 +273,7 @@
                                         <ul>
                                             @if (Auth::check())
                                                 <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tài khoản</a></li>
-                                                <li> <a href="{{ route('don-hang.don-mua') }}">Đơn mua</a></li>
+                                                <li> <a class="donMuaMenu">Đơn mua</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
@@ -375,7 +375,7 @@
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
                                         <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp </a></li>
+                                        <li> <a class="nav" href="#">Câu hỏi thường gặp </a></li>
                                     </ul>
                                 </div>
                             </div>

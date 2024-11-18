@@ -221,8 +221,8 @@ function datHang(){
             },
             success: function(response) {
                 if(response.success){
-                    window.location.href="/don-hang/don-mua";
-
+                    sessionStorage.setItem("activeTab", "order");
+                    window.location.href="/tai-khoan/thong-tin-tai-khoan";
                 }
 
             },

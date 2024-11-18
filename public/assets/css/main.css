@@ -18,7 +18,82 @@
     transform: translateY(20px); /* Nâng lên một chút */
     z-index: 1000;
 }
+/* Flash Sale  */
+/* Container chính */
+.coming-soon-box {
+    text-align: center;
+    background: #eecd81; /* Nền vàng nhạt */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
+    margin: 20px auto;
+    max-width: 500px;
+}
 
+/* Header Flash Sale */
+.flash-sale-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.flash-sale-header h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #f05024; /* Màu chữ cam nổi bật */
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.flash-sale-header .icon-lightning {
+    width: 36px;
+    height: 36px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* thoi-gian Timer */
+.thoi-gian .ul-thoi-gian {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.ul-thoi-gian .item-thoi-gian {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff4a; /* Nền trắng */
+    border: 2px solid #f05024; /* Viền cam */
+    border-radius: 10px;
+    padding: 3px 6px;
+    min-width: 80px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng nổi */
+}
+
+.ul-thoi-gian .timer {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fd3700;
+    font-family: 'Courier New', monospace;
+}
+
+.ul-thoi-gian .title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #606060;
+    margin-top: 5px;
+}
+
+/* Animation chống rung */
+.thoi-gian .timer {
+    display: inline-block;
+    width: 45px; /* Chiều rộng cố định */
+    text-align: center;
+}
+
+/* chat  */
 .chat-container.show {
     display: flex; /* Hiển thị khi thêm lớp show */
     opacity: 1; /* Hiện đầy đủ */
@@ -533,27 +608,19 @@ font-family: Outfit, sans-serif;
 /*don mua*/
 .donmua nav ul {
     display: flex;
-    margin-left: 60px;
-    margin-top: 10px;
 
   }
   .donmua nav ul li{
-    margin-right: 15px;
+    margin-right: 33px;
 
-  }
-  .donmua nav ul li:first-child{
-    margin-left: 15px;
   }
   .donmua nav ul li a{
     display: block;
     color: #000;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 0px;
     position: relative;
-    font-size: 22px;
+    font-size: 19px;
 
-  }
-  .donmua nav ul li a:last-child{
-    padding-left: 45px;
   }
   .donmua nav ul li a::after{
     content: "";
@@ -570,18 +637,21 @@ font-family: Outfit, sans-serif;
   .table tbody td{
     border-top: none;
     border-bottom: 1px solid #dee2e6;
-    font-size: 19px;
+    font-size: 17px;
     color: #000;
   }
   .table img{
     border: 1px solid #0000002b;
-    width: 130px;
+    width: 100px;
   }
   .table .tenSanPham{
     text-align: left;
   }
   .table .tenSanPham a{
-    font-size: 22px;
+    font-size: 18px;
+  }
+  .table .tenSanPham p{
+    font-size: 14px;
   }
   .table td a{
     text-decoration: none;
@@ -631,5 +701,50 @@ font-family: Outfit, sans-serif;
 
 .img-quick-view img{
     border: 1px solid #0000002b;
+}
+
+td .chatLS{
+    background-color: red;
+    padding: 10px 10px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.shopLS{
+    margin-left: 7px;
+    border: 1px solid #0000002b;
+    padding: 7px 10px;
+    color: #626060;
+    border-radius: 5px;
+}
+.thongBaoLS .thongBao{
+    cursor: pointer;
+    color: #26aa99;
+    font-size: 16px;
+}
+.thongBaoLS .choThanhToan{
+    color: red;
+    font-size: 16px;
+}
+td.giaTienLS span:first-child{
+    color: red;
+}
+td.giaTienLS span{
+    font-size: 17px;
+}
+.thanhTien{
+    padding: 10px 0px;
+    text-align: right;
+    font-size: 16px;
+    color: #000;
+}
+.thanhTien span{
+    margin-left: 5px;
+    color: red;
+    font-size: 22px;
+}
+
+.tableDonMua .product-row{
+    cursor: pointer;
 }
 

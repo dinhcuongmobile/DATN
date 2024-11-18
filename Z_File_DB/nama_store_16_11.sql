@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 14, 2024 lúc 03:41 PM
+-- Thời gian đã tạo: Th10 15, 2024 lúc 06:26 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.1.25
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -169,13 +169,6 @@ CREATE TABLE `chi_tiet_don_hangs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `chi_tiet_don_hangs`
---
-
-INSERT INTO `chi_tiet_don_hangs` (`id`, `don_hang_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `don_gia`, `thanh_tien`, `created_at`, `updated_at`) VALUES
-(46, 42, 7, 8, 5, 240000.00, 1200000.00, '2024-11-13 16:58:45', '2024-11-13 16:58:45');
-
 -- --------------------------------------------------------
 
 --
@@ -191,13 +184,6 @@ CREATE TABLE `coins` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `coins`
---
-
-INSERT INTO `coins` (`id`, `user_id`, `coin`, `ngay_nhan`, `so_ngay`, `created_at`, `updated_at`) VALUES
-(15, 12, 100, '2024-11-14', 2, '2024-11-13 16:57:39', '2024-11-14 14:38:58');
 
 -- --------------------------------------------------------
 
@@ -278,13 +264,9 @@ CREATE TABLE `dia_chis` (
 --
 
 INSERT INTO `dia_chis` (`id`, `user_id`, `ho_va_ten_nhan`, `so_dien_thoai_nhan`, `ma_tinh_thanh_pho`, `ma_quan_huyen`, `ma_phuong_xa`, `dia_chi_chi_tiet`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(102, 8, 'Nguyễn Đình Cường', '0964426518', 1, 277, 10033, 'Phú Hữu 2', 1, '2024-11-07 14:41:27', '2024-11-10 16:33:34'),
-(106, 8, 'Nguyễn Đình Cường', '0964426517', 1, 3, 91, NULL, 2, '2024-11-11 02:02:25', '2024-11-11 02:02:25'),
-(107, 8, 'Tống Hoàng Bách', '0964426517', 2, 24, 688, NULL, 2, '2024-11-11 02:03:15', '2024-11-11 02:03:15'),
-(108, 10, 'Nguyễn Thiện Giáp', '0357864779', 34, 343, 13189, NULL, 1, '2024-11-11 08:08:53', '2024-11-11 08:08:53'),
-(109, 11, 'Tống Hoàng Bách', '0917261473', 24, 218, 7444, NULL, 1, '2024-11-11 08:09:50', '2024-11-11 08:09:50'),
-(110, 12, 'Trương Thị Hồng Ngọc', '0964426515', 1, 277, 10033, NULL, 1, '2024-11-11 14:55:52', '2024-11-11 14:55:52'),
-(111, 12, 'Tống Hoàng Bách', '0964426518', 2, 24, 688, NULL, 2, '2024-11-11 15:52:33', '2024-11-11 15:52:33');
+(113, 18, 'Tống Hoàng Bách', '0917261473', 24, 218, 7444, NULL, 1, '2024-11-15 16:37:09', '2024-11-15 16:37:09'),
+(114, 19, 'Nguyễn Thiện Giáp', '0357864779', 1, 279, 10183, NULL, 1, '2024-11-15 16:38:50', '2024-11-15 16:38:50'),
+(115, 20, 'Trương Thị Hồng Ngọc', '0917261473', 1, 277, 10072, NULL, 1, '2024-11-15 16:40:08', '2024-11-15 16:40:08');
 
 -- --------------------------------------------------------
 
@@ -308,13 +290,6 @@ CREATE TABLE `don_hangs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `don_hangs`
---
-
-INSERT INTO `don_hangs` (`id`, `ma_don_hang`, `user_id`, `dia_chi_id`, `giam_gia_van_chuyen`, `giam_gia_don_hang`, `tong_thanh_toan`, `phuong_thuc_thanh_toan`, `trang_thai`, `thanh_toan`, `ghi_chu`, `ngay_dat_hang`, `created_at`, `updated_at`) VALUES
-(42, 'DHR6144CVX', 12, 110, 30000.00, 10000.00, 1194900.00, 0, 0, 0, NULL, '2024-11-13 23:58:45', '2024-11-13 16:58:45', '2024-11-13 16:58:45');
 
 -- --------------------------------------------------------
 
@@ -363,13 +338,6 @@ CREATE TABLE `gio_hangs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `gio_hangs`
---
-
-INSERT INTO `gio_hangs` (`id`, `user_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `thanh_tien`, `created_at`, `updated_at`) VALUES
-(51, 12, 16, 92, 2, 572000.00, '2024-11-13 15:44:22', '2024-11-13 15:54:11');
 
 -- --------------------------------------------------------
 
@@ -652,6 +620,7 @@ CREATE TABLE `tin_tucs` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `google_id` varchar(255) DEFAULT NULL,
   `ho_va_ten` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -670,11 +639,12 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
-(8, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$OONTi4gZOL/iMZus4Gt0ROTshYkSsxtLLUzF5hR5FIZQE2SBzjdz6', '0964426518', 1, 'Z9hZesoFI7Ly86GQ96JncXIbfyXBs9QoG6QlfHDWyh9Ab4eY1rmM9TutPj9E', NULL, 0, '2024-11-02 03:45:17', '2024-11-07 02:42:18'),
-(10, 'Nguyễn Thiện Giáp', 'thiengiapnguyen04@gmail.com', NULL, NULL, '$2y$10$DZhiRJ7dSRmKT/9k3avHi.ppKvWrSsPI4ZP9fnZz.JjusyOHc0M16', '0357864779', 1, NULL, NULL, 0, '2024-11-11 08:08:53', '2024-11-11 08:08:53'),
-(11, 'Tống Hoàng Bách', 'hoangbach25102004@gmail.com', NULL, NULL, '$2y$10$52nSJjT5rYE5oRAOYZg9vuBxN0ERqxXTtM/u98ZfCcgD0xQ8BqP46', '0917261473', 1, NULL, NULL, 0, '2024-11-11 08:09:50', '2024-11-11 08:09:50'),
-(12, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$qkmrXERkJ5Ks7Pmayim62uxhfDRC7CBPQvn9kZ9oOa0nbVpmvgn/i', '0964427897', 3, NULL, NULL, 0, '2024-11-11 14:50:37', '2024-11-11 14:50:37');
+INSERT INTO `users` (`id`, `google_id`, `ho_va_ten`, `email`, `email_verified_at`, `email_verification_token`, `password`, `so_dien_thoai`, `vai_tro_id`, `remember_token`, `password_reset_token`, `trang_thai`, `created_at`, `updated_at`) VALUES
+(1, '112158713502204375107', 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$KWVBCd6txEck8IvLT4dn0OxrK.XEjQHOsfXIrotT7LsrkXaoQ0eS6', '0964426518', 1, NULL, NULL, 0, '2024-11-15 17:07:28', '2024-11-15 17:22:12'),
+(18, NULL, 'Tống Hoàng Bách', 'hoangbach25102004@gmail.com', NULL, NULL, '$2y$10$K33cM1B7/7NAiuT8aO7Yke.CpClvYuxKWYe2l3uYDfTRZUzyyVPcy', '0917261473', 1, NULL, NULL, 0, '2024-11-15 16:37:09', '2024-11-15 16:37:09'),
+(19, NULL, 'Nguyễn Thiện Giáp', 'thiengiapnguyen04@gmail.com', NULL, NULL, '$2y$10$3GyyMF9NSSKc8p9fMZVwSONnINk9mz.0cUG5U0nsHa5Un.9T7pIcu', '0357864779', 1, NULL, NULL, 0, '2024-11-15 16:38:50', '2024-11-15 16:38:50'),
+(20, NULL, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$dp46V5swGf3c64qorVR7Iu4kThmJg1phlHAHWU/hGj65YmCPo9zmO', '0917261473', 2, NULL, NULL, 0, '2024-11-15 16:40:08', '2024-11-15 16:40:08'),
+(24, NULL, 'Nguyễn Đình Cường', 'cuongndph38237@fpt.edu.vn', NULL, NULL, '$2y$10$V/atpYcFM5QVKpUVEBYA7upwizydQC.qughU6Fq8L8ezqzsz1Dw/2', '0964426517', 3, NULL, NULL, 0, '2024-11-15 17:18:02', '2024-11-15 17:18:02');
 
 -- --------------------------------------------------------
 
@@ -12919,7 +12889,7 @@ ALTER TABLE `chi_tiet_don_hangs`
 -- AUTO_INCREMENT cho bảng `coins`
 --
 ALTER TABLE `coins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `danh_gias`
@@ -12943,7 +12913,7 @@ ALTER TABLE `danh_muc_tin_tucs`
 -- AUTO_INCREMENT cho bảng `dia_chis`
 --
 ALTER TABLE `dia_chis`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT cho bảng `don_hangs`
@@ -13027,7 +12997,7 @@ ALTER TABLE `tin_tucs`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `vai_tros`
@@ -13057,7 +13027,7 @@ ALTER TABLE `chi_tiet_don_hangs`
 -- Các ràng buộc cho bảng `coins`
 --
 ALTER TABLE `coins`
-  ADD CONSTRAINT `coins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `coins_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `danh_gias`
@@ -13073,7 +13043,7 @@ ALTER TABLE `dia_chis`
   ADD CONSTRAINT `dia_chis_ma_phuong_xa_foreign` FOREIGN KEY (`ma_phuong_xa`) REFERENCES `vn_phuong_xas` (`ma_phuong_xa`),
   ADD CONSTRAINT `dia_chis_ma_quan_huyen_foreign` FOREIGN KEY (`ma_quan_huyen`) REFERENCES `vn_quan_huyens` (`ma_quan_huyen`),
   ADD CONSTRAINT `dia_chis_ma_tinh_thanh_pho_foreign` FOREIGN KEY (`ma_tinh_thanh_pho`) REFERENCES `vn_tinh_thanh_phos` (`ma_tinh_thanh_pho`),
-  ADD CONSTRAINT `dia_chis_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `dia_chis_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `don_hangs`

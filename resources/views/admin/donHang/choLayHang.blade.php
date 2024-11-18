@@ -109,6 +109,10 @@
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</button>
                                 </form>
+                                <hr>
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
+                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
+                                  </a>
                             </td>
                         </tr>  
                     </tbody>  

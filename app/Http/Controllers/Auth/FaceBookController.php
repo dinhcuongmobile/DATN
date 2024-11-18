@@ -12,40 +12,37 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 
-class GoogleController extends Controller
+class FaceBookController extends Controller
 {
     /**
      * Redirect to Google login page.
      */
-    public function redirectToGoogle()
+    public function redirectToFacebook()
     {
-        return Socialite::driver('google')
-        ->with(['prompt' => 'select_account']) // Yêu cầu Google hiển thị màn hình chọn tài khoản
-        ->redirect();
-
+        return Socialite::driver('facebook')->redirect();
     }
 
     /**
      * Handle Google callback.
      */
-    public function handleGoogleCallback(Request $request)
+    public function handleFacebookCallback(Request $request)
     {
         try {
             // Lấy thông tin người dùng từ Google
-            $userGoogle = Socialite::driver('google')->user();
+            $userFaceBook = Socialite::driver('facebook')->user();
 
-            $finduser = User::where('google_id', $userGoogle->id)
-                ->orWhere('email', $userGoogle->email)
+            $finduser = User::where('facebook_id', $userFaceBook->id)
+                ->orWhere('email', $userFaceBook->email)
                 ->first();
 
             if ($finduser) {
                 // Nếu người dùng tồn tại, đăng nhập
-                $this->updateGoogleIdIfNeeded($finduser, $userGoogle->id);
-                $this->loginUser($finduser, $userGoogle->email);
+                $this->updateFaceBookIdIfNeeded($finduser, $userFaceBook->id);
+                $this->loginUser($finduser, $userFaceBook->email);
             } else {
                 // Tạo tài khoản mới nếu người dùng chưa tồn tại
-                $newUser = $this->createNewUser($userGoogle);
-                $this->loginUser($newUser, $userGoogle->email);
+                $newUser = $this->createNewUser($userFaceBook);
+                $this->loginUser($newUser, $userFaceBook->email);
             }
 
             return redirect()->route('trang-chu.home');
@@ -60,10 +57,10 @@ class GoogleController extends Controller
     /**
      * Update Google ID for existing user if needed.
      */
-    private function updateGoogleIdIfNeeded($user, $googleId)
+    private function updateFaceBookIdIfNeeded($user, $userFaceBook)
     {
-        if (!$user->google_id) {
-            $user->update(['google_id' => $googleId]);
+        if (!$user->facebook_id) {
+            $user->update(['facebook_id' => $userFaceBook]);
         }
     }
 
@@ -79,13 +76,13 @@ class GoogleController extends Controller
     /**
      * Create a new user from Google data.
      */
-    private function createNewUser($userGoogle)
+    private function createNewUser($userFaceBook)
     {
         $randomPassword = Str::random(16); // Tạo mật khẩu mạnh hơn
         return User::create([
-            'google_id' => $userGoogle->id,
-            'ho_va_ten' => $userGoogle->name,
-            'email' => $userGoogle->email,
+            'facebook_id' => $userFaceBook->id,
+            'ho_va_ten' => $userFaceBook->name,
+            'email' => $userFaceBook->email,
             'password' => Hash::make($randomPassword),
             'vai_tro_id' => 3,
             'created_at' => now(),

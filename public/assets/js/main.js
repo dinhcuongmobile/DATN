@@ -16,6 +16,40 @@ if (!checkUrl) {
     });
 }
 
+// don-mua-menu-click
+const donMuaMenu = document.querySelector('.donMuaMenu');
+if (donMuaMenu) {
+    donMuaMenu.addEventListener('click',function(){
+        if (window.location.pathname !== '/tai-khoan/thong-tin-tai-khoan') {
+            sessionStorage.setItem("activeTab", "order");
+            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+        }else{
+            let checkNavLink = document.querySelectorAll('.nav-link');
+            let checkTabPane = document.querySelectorAll('.tab-pane');
+            checkNavLink.forEach((el)=>{
+                el.classList.remove('active');
+                el.setAttribute('aria-selected', 'false');
+                el.setAttribute('tabindex', '-1');
+            });
+
+            checkTabPane.forEach((el)=>{
+                el.classList.remove('active','show');
+            });
+
+            const donHangTab = document.querySelector('#order-tab');
+            const donHangContent = document.querySelector('#order');
+
+            donHangTab.classList.add('active');
+            donHangTab.setAttribute('aria-selected', 'true');
+            if (donHangTab.hasAttribute('tabindex') && donHangTab.getAttribute('tabindex') === "-1") {
+                donHangTab.removeAttribute('tabindex');
+            }
+
+            donHangContent.classList.add('active','show');
+        }
+    })
+}
+
 
 // Tỉnh thành phố, quận huyện
 $('select[name="tinh_thanh_pho"]').on('change', function () {
@@ -343,6 +377,46 @@ function themGioHang(){
         });
     }
 }
+
+//time
+// function flashSaleTime(){
+//     // Lấy ngày bắt đầu (hiện tại)
+//     const startDate = new Date();
+
+//     // Thêm 10 ngày vào ngày bắt đầu
+//     const endDate = new Date(startDate.getTime() + 10 * 24 * 60 * 60 * 1000);
+
+//     // Hàm đếm ngược
+//     function countdown() {
+//         const now = new Date(); // Thời gian hiện tại
+//         const timeRemaining = endDate - now; // Thời gian còn lại (ms)
+
+//         if (timeRemaining > 0) {
+//             // Tính số ngày, giờ, phút, giây
+//             const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+//             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+//             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+//             // Cập nhật giao diện
+//             document.getElementById("days").textContent = days;
+//             document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+//             document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+//             document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+//         } else {
+//             // Khi hết thời gian
+//             clearInterval(timer);
+//             document.getElementById("countdown").innerHTML = "Thời gian đã kết thúc!";
+//         }
+//     }
+
+//     // Gọi hàm đếm ngược mỗi giây
+//     const timer = setInterval(countdown, 1000);
+
+//     // Gọi ngay khi bắt đầu (để hiển thị đúng thời gian ban đầu)
+//     countdown();
+
+// }
 
 
 
