@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 0 auto;
+        }
+        .order-details a{
+            text-decoration: none;
+        }
+        .order-details .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #7c7c7c4d;
+        }
+        .order-details a.back {
+            color: gray;
+        }
+        .order-details p.maDH span:first-child{
+            padding-right: 5px;
+        }
+        .order-details p.maDH span:last-child{
+            color: red;
+            padding-left: 5px;
+        }
+        .order-details .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 20px 0;
+            border-bottom: 1px solid #7c7c7c4d;
+        }
+        .order-details .step {
+            text-align: center;
+            flex: 1;
+        }
+        .order-details .step i {
+            font-size: 20px;
+            color: #28a745;
+            border: 3px solid #28a745;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            position: relative;
+        }
+        .order-details .step span {
+            font-size: 13px;
+            margin-top: 4px;
+        }
+        .order-details .step p {
+            font-size: 12px;
+            color: #888;
+        }
+        .order-details .step:not(:last-child) i::after {
+            content: "";
+            position: absolute;
+            top: 21px;
+            left: 100%;
+            width: 115px;
+            height: 2px;
+            background: #28a745;
+        }
+        .order-details .van-chuyen{
+            display: flex;
+            justify-content: space-between;
+            background: #fbfbfb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .order-details .van-chuyen .address{
+            font-size: 15px;
+            width: 400px;
+            padding-right: 20px;
+        }
+        .order-details .van-chuyen .delivery-status{
+            width: 100%;
+            border-left: 1px solid #7c7c7c4d;
+            padding-left: 20px;
+        }
+        .order-details .van-chuyen .delivery-status i{
+            color: #b2b0b0;
+            margin-right: 10px;
+        }
+        .order-details .van-chuyen .delivery-status p{
+            position: relative;
+        }
+        .order-details .van-chuyen .delivery-status p:not(:first-child,:last-child) i::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 7px;
+            width: 2px;
+            height: 19px;
+            background: #7c7c7c4d;
+        }
+        .order-details .product-info .product-info-header{
+            padding: 10px 0px;
+            height: 50px;
+            align-content: center;
+            border-bottom: 1px solid #7c7c7c4d;
+        }
+        .order-details .product-info .chatLS{
+            background-color: red;
+            padding: 8px 10px;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .order-details .product-info .shopLS{
+            margin-left: 7px;
+            border: 1px solid #0000002b;
+            padding: 8px 10px;
+            color: #626060;
+            border-radius: 5px;
+        }
+        .order-details .product-list-a{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #000;
+        }
+        .order-details .product-list {
+            display: flex;
+            padding: 10px 0;
+        }
+        .order-details .product-list img {
+            width: 100px;
+            margin-right: 10px;
+        }
+        .order-details .product-details {
+            display: inline-block;
+            height: 100%;
+        }
+        .order-details .product-details .tenSanPham{
+            font-weight: 600;
+        }
+        .order-details .product-details .phanLoaiHang{
+            font-size: 12px;
+        }
+        .order-details .price {
+            color: #e63946;
+        }
+        .order-details .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .order-details .table th{
+            text-align: right;
+            padding: 5px;
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .order-details .table td {
+            text-align: right;
+            padding: 5px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .order-details .action-button {
+            text-align: right;
+            margin: 20px 0;
+        }
+        .order-details .btn {
+            padding: 10px 20px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="order-details">
+        <div class="header">
+            <a class="back">
+                <i class="fas fa-arrow-left" style="margin-right: 5px;"></i>
+                <span>TRỞ LẠI</span>
+            </a>
+            <p class="maDH">
+                <span>MÃ ĐƠN HÀNG: 240508SN4RTJ5M</span> |
+                <span>Đơn Hàng Đã Hoàn Thành</span></p>
+        </div>
+
+        <div class="timeline">
+            <div class="step">
+                <i class="fas fa-file-alt"></i>
+                <span>Đơn Hàng Đã Đặt</span>
+                <p>22:35 08-05-2024</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-dollar-sign"></i>
+                <span>Đơn Hàng Đã Thanh Toán (36.990 VNĐ)</span>
+                <p>22:35 08-05-2024</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-truck"></i>
+                <span>Đã Giao Cho ĐVC</span>
+                <p>18:12 09-05-2024</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-box-open"></i>
+                <span>Đã Nhận Hàng</span>
+                <p>08:53 14-05-2024</p>
+            </div>
+            <div class="step">
+                <i class="fas fa-check-circle"></i>
+                <span>Đơn Hàng Đã Hoàn Thành</span>
+                <p>23:59 13-06-2024</p>
+            </div>
+        </div>
+
+        <div class="van-chuyen">
+            <div class="address">
+                <h3>Địa Chỉ Nhận Hàng</h3>
+                <p>Nguyễn Đình Cường</p>
+                <p>(+84) 964426158</p>
+                <p>Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
+            </div>
+
+            <div class="delivery-status">
+                <h3>Trạng Thái Giao Hàng</h3>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    <span>10:57 10-05-2024</span> - <span>Đơn hàng đã giao thành công.</span>
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    <span>10:57 10-05-2024</span> - <span>Đang vận chuyển.</span>
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Thêm phần thông tin sản phẩm và thanh toán -->
+        <div class="product-info">
+            <div class="product-info-header">
+                <span class="chatLS">💬 Chat</span>
+                <a href="" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+            </div>
+            <a class="product-list-a" href="">
+                <div class="product-list">
+                    <img src="https://via.placeholder.com/60x90" alt="err">
+                    <div class="product-details">
+                        <p class="tenSanPham">Người dám cho đi</p>
+                        <p class="phanLoaiHang">Phân loại hàng:
+                            <span>M, Đen</span>.
+                        </p>
+                        <p>x2</p>
+                    </div>
+                </div>
+                <div class="giaTienLS">
+                    <span>200000đ</span>
+                    <span><del>200000đ</del></span>
+                </div>
+            </a>
+
+            <table class="table">
+                <tr>
+                    <th>Tổng tiền hàng</th>
+                    <td>50.700 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Phí vận chuyển</th>
+                    <td>16.500 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Giảm giá phí vận chuyển</th>
+                    <td>-15.000 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Voucher giảm giá</th>
+                    <td>-15.210 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Namad xu</th>
+                    <td>-15.210 VNĐ</td>
+                </tr>
+                <tr>
+                    <th class="price">Thành tiền</th>
+                    <td class="price">36.990 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Phương thức thanh toán</th>
+                    <td>Ship COD</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="action-button">
+            <button class="btn btnMuaLai">Mua Lại</button>
+            <a href="" class="btn">Liên Hệ Shop</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

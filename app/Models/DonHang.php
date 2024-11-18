@@ -17,18 +17,20 @@ class DonHang extends Model
         'dia_chi_id',
         'giam_gia_van_chuyen',
         'giam_gia_don_hang',
+        'namad_xu',
         'tong_thanh_toan',
         'phuong_thuc_thanh_toan',
         'trang_thai',
         'thanh_toan',
         'ghi_chu',
-        'ngay_dat_hang',
+        'ngay_tao',
+        'ngay_cap_nhat'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
+
+    protected $dates = ['ngay_tao', 'ngay_cap_nhat'];
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

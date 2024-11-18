@@ -21,10 +21,13 @@ class SanPhamController extends Controller
 
     public function chiTietSanPham(int $id)
     {
-        $this->views['san_pham'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
+        $san_pham = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
+        $luot_xem = $san_pham->luot_xem+1;
+        $san_pham->update(['luot_xem'=>$luot_xem]);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
-            ->where('danh_muc_id', $this->views['san_pham']->danh_muc_id)
+            ->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
+        $this->views['san_pham']=$san_pham;
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
         return view('client.sanPham.chiTietSanPham', $this->views);

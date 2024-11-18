@@ -361,6 +361,7 @@ class GioHangController extends Controller
         $phi_ships = $request->input('phiShip');
         $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
         $giamGiaDonHang = $request->input('giamTienDonHang');
+        $soCoin = $request->input('soCoin');
 
         // Kiểm tra phương thức thanh toán
         if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
@@ -380,12 +381,13 @@ class GioHangController extends Controller
             'dia_chi_id' => $request->input('dia_chi_id'),
             'giam_gia_van_chuyen' => $giamGiaVanChuyen,
             'giam_gia_don_hang' => $giamGiaDonHang,
+            'namad_xu' => $soCoin,
             'tong_thanh_toan' => $request->input('tong_thanh_toan'),
             'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
             'trang_thai' => $trang_thai,
             'thanh_toan' => $thanh_toan,
             'ghi_chu' => $request->input('ghi_chu'),
-            'ngay_dat_hang' => now(),
+            'ngay_tao' => now(),
         ];
 
         $result = DonHang::create($dataInsertDonHang);
@@ -423,8 +425,8 @@ class GioHangController extends Controller
                     ->delete();
             }
             // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
-            if ($coin && $request->input('soCoin') > 0) {
-                $coin->decrement('coin', $request->input('soCoin'));
+            if ($coin && $soCoin > 0) {
+                $coin->decrement('coin', $soCoin);
             }
 
             // Gửi email xác nhận đơn hàng
@@ -436,7 +438,7 @@ class GioHangController extends Controller
             $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
             $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
 
-            Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang));
+            Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
 
             return response()->json([
                 'success' => true,

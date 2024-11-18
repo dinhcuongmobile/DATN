@@ -50,6 +50,31 @@ if (donMuaMenu) {
     })
 }
 
+//chi-tiet-don-mua click
+const productRow = document.querySelectorAll('.order .product-row');
+if (productRow) {
+    productRow.forEach((el)=>{
+        el.addEventListener('click',function(){
+            const donHangContent = document.querySelector('#order');
+            const chiTietDonHangContent = document.querySelector('#order-details');
+
+            donHangContent.classList.remove('active','show');
+
+            chiTietDonHangContent.classList.add('active','show');
+
+        });
+    });
+
+    const quayLai = document.querySelector('#order-details .header .back');
+    quayLai?.addEventListener('click',function(){
+        const donHangContent = document.querySelector('#order');
+        const chiTietDonHangContent = document.querySelector('#order-details');
+
+        chiTietDonHangContent.classList.remove('active','show');
+        donHangContent.classList.add('active','show');
+    });
+}
+
 
 // Tỉnh thành phố, quận huyện
 $('select[name="tinh_thanh_pho"]').on('change', function () {

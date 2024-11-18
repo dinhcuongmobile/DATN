@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('don_hang_id')->constrained('don_hangs')->onDelete('cascade');
             $table->text('ly_do');
             $table->integer('trang_thai')->default(0)->comment('0.Chưa xử lý, 1.Đang xử lý, 2.Đã xử lý	');
-            $table->timestamps();
+            $table->dateTime('ngay_tao')->nullable();
+            $table->dateTime('ngay_cap_nhat')->nullable();
         });
     }
 
