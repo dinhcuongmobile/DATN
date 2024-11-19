@@ -53,11 +53,18 @@ class ThongTinTaiKhoanController extends Controller
         //
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user','diaChi')->where('user_id',Auth::user()->id)->orderBy('id','desc')->get(),
-            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->get(),
-            'trang_thai_1_2' => DonHang::where('user_id', Auth::user()->id)->whereIn('trang_thai', [1, 2])->get(),
-            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->get(),
-            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->get(),
-            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->get(),
+            //chua duyet
+            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('id','desc')->get(),
+            //dang chuan bi hang
+            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('id','desc')->get(),
+            //dang giao
+            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('id','desc')->get(),
+            //da giao
+            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id','desc')->get(),
+            //da huy
+            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id','desc')->get(),
+            //tra hang/ hoan tien
+            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->orderBy('id','desc')->get(),
         ];
 
         $chi_tiet_don_hangs = [];

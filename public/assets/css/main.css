@@ -1,3 +1,26 @@
+/* input password */
+.login-box .form-floating{
+    position: relative;
+}
+.login-box .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
+#edit-password .password{
+    position: relative;
+}
+#edit-password .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 41px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
 
 /* div chat */
 .chat-container {
@@ -717,14 +740,12 @@ td .chatLS{
     color: #626060;
     border-radius: 5px;
 }
-.thongBaoLS .thongBao{
-    cursor: pointer;
+.thongBaoLS .thongBao span{
     color: #26aa99;
     font-size: 16px;
 }
-.thongBaoLS .choThanhToan{
-    color: red;
-    font-size: 16px;
+.thongBaoLS .thongBao i{
+    color: #26aa99;
 }
 td.giaTienLS span:first-child{
     color: red;
@@ -747,4 +768,228 @@ td.giaTienLS span{
 .tableDonMua .product-row{
     cursor: pointer;
 }
+
+/* order details */
+/* .order-details{
+
+} */
+.order-details a{
+    text-decoration: none;
+}
+.order-details .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #7c7c7c4d;
+    padding-bottom: 16px;
+    padding-top: 2px;
+}
+.order-details a.back {
+    color: gray;
+}
+.order-details p.maDH span:first-child{
+    padding-right: 5px;
+}
+.order-details p.maDH .thongBaoDonHang{
+    padding-left: 5px;
+}
+.order-details .timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 20px 0;
+    border-bottom: 1px solid #7c7c7c4d;
+}
+.order-details .timeline .zezo{
+    display: none;
+}
+.order-details .step {
+    text-align: center;
+    flex: 1;
+}
+.order-details .step i {
+    font-size: 30px;
+    border-radius: 50%;
+    color: #b1b1b1;
+    border: 4px solid #b1b1b1;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    position: relative;
+}
+.order-details .step i.change{
+    color: #28a745;
+    border: 4px solid #28a745;
+}
+.order-details .step i.next-change{
+    color: #28a745;
+    border: 4px solid #28a745;
+}
+.order-details .step span {
+    font-size: 13px;
+    margin-top: 4px;
+}
+.order-details .step:not(:last-child) i::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 107%;
+    width: 145px;
+    height: 4px;
+    background: #b1b1b1;
+}
+.order-details .step:not(:last-child) i.change::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 107%;
+    width: 145px;
+    height: 4px;
+    background: #28a745;
+}
+.order-details .van-chuyen{
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    padding: 15px;
+    margin: 20px 0;
+}
+.order-details .van-chuyen .address{
+    font-size: 15px;
+    width: 550px;
+    padding-right: 20px;
+}
+.order-details .van-chuyen .address .sdt-nhan{
+    padding: 5px 0px;
+}
+.order-details .van-chuyen .address .ten-nhan-hang{
+    font-size: 19px;
+    color: #000;
+}
+.order-details .delivery-status{
+    width: 100%;
+    border-left: 1px solid #7c7c7c4d;
+    padding-left: 20px;
+}
+.order-details .delivery-status i{
+    color: #b2b0b0;
+    margin-right: 10px;
+    font-size: 13px;
+}
+.order-details .delivery-status p{
+    position: relative;
+    padding-bottom: 10px;
+}
+.order-details .delivery-status p:not(:first-child,:last-child) i::after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    left: 5px;
+    width: 3px;
+    height: 30px;
+    background: #7c7c7c4d;
+}
+.order-details .delivery-status p.active i{
+    color: #26aa99;
+}
+.order-details .delivery-status p.active span:last-child{
+    color: #26aa99;
+}
+.order-details .product-info .product-info-header{
+    height: 55px;
+    border-bottom: 1px solid #7c7c7c4d;
+}
+.order-details .product-info .chatLS{
+    background-color: red;
+    padding: 11px 10px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.order-details .product-info .shopLS{
+    margin-left: 7px;
+    border: 1px solid #0000002b;
+    padding: 8px 10px;
+    color: #626060;
+    border-radius: 5px;
+}
+.order-details .product-list-a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+}
+.order-details .product-list {
+    display: flex;
+    padding: 10px 0;
+}
+.order-details .product-list img {
+    width: 100px;
+    margin-right: 10px;
+}
+.order-details .product-details {
+    display: inline-block;
+    height: 100%;
+}
+.order-details .product-details .tenSanPham{
+    font-weight: 600;
+    color: #000000;
+    font-size: 18px;
+}
+.order-details .giaTienLS span:first-child{
+    font-weight: 600;
+    color: red;
+    font-size: 18px;
+    padding-right: 5px;
+}
+.order-details .giaTienLS span:last-child{
+    font-weight: 600;
+    font-size: 18px;
+}
+.order-details .product-details .phanLoaiHang{
+    font-size: 12px;
+}
+.order-details .price {
+    color: #e63946;
+}
+.order-details .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.order-details .table th{
+    text-align: right;
+    padding: 5px;
+    font-weight: 600;
+    color: #000000;
+    font-size: 18px;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.order-details .table td {
+    text-align: right;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.order-details .action-button {
+    text-align: right;
+    margin: 20px 0;
+}
+.order-details .action-button a{
+    display: block;
+    width: 196px;
+    margin-left: 810px;
+    padding: 10px 0px;
+    margin-top: 10px;
+}
+.order-details .action-button button{
+    padding: 10px 70px;
+    margin-right: 15px;
+}
+
 

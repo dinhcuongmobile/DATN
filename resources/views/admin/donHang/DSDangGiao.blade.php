@@ -87,19 +87,19 @@
                             </td>
                             <td>{{ number_format($item->tong_thanh_toan, 0, ',', '.') }}₫</td>
                             <td>
-                                <p><span style="color:#2ecc71;">
+                                <p><span style="color:#2ecc71; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
-                                        Đơn Hàng Mới
-                                    @elseif($item->trang_thai == 2)
                                         Đang Chuẩn Bị Hàng
-                                    @elseif($item->trang_thai == 3)
+                                    @elseif($item->trang_thai == 2)
                                         Đang Giao
-                                    @elseif($item->trang_thai == 4)
+                                    @elseif($item->trang_thai == 3)
                                         Đã Giao
-                                    @else
+                                    @elseif($item->trang_thai == 4)
                                         Đã Hủy
+                                    @else
+                                        Trả Hàng/Hoàn Tiền
                                     @endif
                                 </span></p>
                             </td>
@@ -110,7 +110,7 @@
                             <td>
                                 <form action="{{ route('don-hang.da-giao', $item->id) }}" method="POST" style="display:inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Đã Giao</button>
+                                    <button type="submit" class="btn btn-success btn-sm">Đã Giao</button>
                                 </form>
                                 <hr>
                                   <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 

@@ -15,12 +15,13 @@ class DonHangHoan extends Model
         'don_hang_id',
         'ly_do',
         'trang_thai',
+        'ngay_tao',
+        'ngay_cap_nhat'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
+
+    protected $dates = ['ngay_tao', 'ngay_cap_nhat'];
 
     public function donHang()
     {

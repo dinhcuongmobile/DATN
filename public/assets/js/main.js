@@ -1,4 +1,23 @@
-
+document.addEventListener('DOMContentLoaded',()=>{
+    const togglePassword = document.querySelectorAll('.toggle-password');
+    if(togglePassword){
+        togglePassword.forEach((el)=>{
+            el.addEventListener('click',function(){
+                const passwordInput = el.closest('.password').querySelector('.inputPassword');
+                const passwordIcon = el.querySelector('i');
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove('fa-eye-slash');
+                    passwordIcon.classList.add('fa-eye');
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove('fa-eye');
+                    passwordIcon.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    }
+});
 // Lưu trạng thái khi vào trang chi tiết thanh toán
 let checkUrl = false;
 if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
@@ -48,6 +67,107 @@ if (donMuaMenu) {
             donHangContent.classList.add('active','show');
         }
     })
+}
+
+//chi-tiet-don-mua click
+const productRow = document.querySelectorAll('.order .product-row');
+if (productRow) {
+    productRow.forEach((el)=>{
+        el.addEventListener('click',function(){
+            const donHangContent = document.querySelector('#order');
+            const chiTietDonHangContent = document.querySelector('#order-details');
+            const donHangId= el.getAttribute('data-donHangId');
+
+            $.ajax({
+                type: 'GET',
+                url: '/don-hang/chi-tiet-don-hang/',
+                data: {
+                    donHangId: donHangId
+                },
+                success: function (response) {
+                    if(response.success){
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        console.log(response.don_hang);
+
+                        let donHang = response.don_hang;
+                        document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
+                        const timeline = document.querySelector('#order-details .timeline');
+                        timeline.querySelectorAll('i').forEach((el)=>{
+                            el.classList.remove('change','next-change');
+                        });
+                        switch (donHang.trang_thai) {
+                            case 0:
+                                //thong bao
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-warning'>Chờ xác nhận</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('next-change');
+
+                                break;
+                            case 1:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đang chuẩn bị hàng</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('next-change');
+                            break;
+                            case 2:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đang giao</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('change');
+                                timeline.querySelector('.three i').classList.add('next-change');
+                            break;
+                            case 3:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đã giao</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('change');
+                                timeline.querySelector('.three i').classList.add('change');
+                                timeline.querySelector('.four i').classList.add('next-change');
+                            break;
+                            case 4:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-danger'>Đã hủy</span>";
+                            break;
+                            case 5:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
+                            break;
+                        }
+
+                        //show
+                        donHangContent.classList.remove('active','show');
+                        chiTietDonHangContent.classList.add('active','show');
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
+        });
+    });
+
+    const quayLai = document.querySelector('#order-details .header .back');
+    quayLai?.addEventListener('click',function(){
+        const donHangContent = document.querySelector('#order');
+        const chiTietDonHangContent = document.querySelector('#order-details');
+
+        chiTietDonHangContent.classList.remove('active','show');
+        donHangContent.classList.add('active','show');
+    });
 }
 
 

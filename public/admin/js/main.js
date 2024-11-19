@@ -1,4 +1,23 @@
-
+document.addEventListener('DOMContentLoaded',()=>{
+    const togglePassword = document.querySelectorAll('.toggle-password');
+    if(togglePassword){
+        togglePassword.forEach((el)=>{
+            el.addEventListener('click',function(){
+                const passwordInput = el.closest('.password').querySelector('.inputPassword');
+                const passwordIcon = el.querySelector('i');
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove('fa-eye-slash');
+                    passwordIcon.classList.add('fa-eye');
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove('fa-eye');
+                    passwordIcon.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    }
+});
 
 //checkbox select
 var checkboxs=document.querySelectorAll('input[type="checkbox"]');

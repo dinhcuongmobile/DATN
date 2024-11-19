@@ -19,8 +19,9 @@ class SendHoaDon extends Mailable
     public $phi_ships;
     public $giamGiaVanChuyen;
     public $giamGiaDonHang;
+    public $soCoin;
 
-    public function __construct($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang)
+    public function __construct($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin)
     {
         $this->dia_chi = $dia_chi;
         $this->don_hang = $don_hang;
@@ -28,6 +29,7 @@ class SendHoaDon extends Mailable
         $this->phi_ships = $phi_ships;
         $this->giamGiaVanChuyen = $giamGiaVanChuyen;
         $this->giamGiaDonHang = $giamGiaDonHang;
+        $this->soCoin = $soCoin;
     }
 
     public function build()
