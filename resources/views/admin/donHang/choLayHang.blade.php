@@ -88,15 +88,15 @@
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
-                                        Đơn Hàng Mới
-                                    @elseif($item->trang_thai == 2)
                                         Đang Chuẩn Bị Hàng
-                                    @elseif($item->trang_thai == 3)
+                                    @elseif($item->trang_thai == 2)
                                         Đang Giao
-                                    @elseif($item->trang_thai == 4)
+                                    @elseif($item->trang_thai == 3)
                                         Đã Giao
-                                    @else
+                                    @elseif($item->trang_thai == 4)
                                         Đã Hủy
+                                    @else
+                                        Trả Hàng/Hoàn Tiền
                                     @endif
                                 </span></p>
                             </td>
