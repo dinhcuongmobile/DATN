@@ -20,7 +20,16 @@ class ClientAuth
         if (Auth::check()) {
             // Kiểm tra trạng thái của tài khoản
             $user = Auth::user();
-            if (!$user->trang_thai == 0) {
+            if ($user->trang_thai == 1) {
+                // Xóa cookie remember_cookie
+                Cookie::queue(Cookie::forget('remember_cookie'));
+
+                // Đăng xuất người dùng
+                Auth::logout();
+
+                // Chuyển hướng đến trang đăng nhập hoặc thông báo
+                return redirect()->route('tai-khoan.dang-nhap')->with('error', 'Tài khoản của bạn đã bị khóa !');
+            } elseif ($user->trang_thai == 2) {
                 // Xóa cookie remember_cookie
                 Cookie::queue(Cookie::forget('remember_cookie'));
 

@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
+use App\Http\Controllers\Admin\ThongKe\ThongKeController;
 use App\Http\Controllers\Auth\FaceBookController;
 use App\Http\Controllers\Auth\GoogleController;
 
@@ -166,6 +167,12 @@ Route::prefix('/auth-admin')->group(function(){
 // admin
 Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
     Route::get('index', [HomeAdminController::class, 'homeAdmin'])->name('admin.index');
+
+    Route::prefix('/thong-ke')->group(function() {
+        Route::post('/load-30-ngay', [ThongKeController::class, 'load30Ngay'])->name('thong-ke.load-30-ngay');
+        Route::post('/thong-ke-doanh-so', [ThongKeController::class, 'thongKeDoanhSo'])->name('thong-ke.thong-ke-doanh-so');
+        Route::post('/thong-ke-doanh-so-by', [ThongKeController::class, 'thongKeDoanhSoBy'])->name('thong-ke.thong-ke-doanh-so-by');
+    });
 
     //tai khoan
     Route::prefix('tai-khoan')->group(function () {
