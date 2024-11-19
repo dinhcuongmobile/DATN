@@ -1,3 +1,26 @@
+/* input password */
+.login-box .form-floating{
+    position: relative;
+}
+.login-box .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 18px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
+#edit-password .password{
+    position: relative;
+}
+#edit-password .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 41px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
 
 /* div chat */
 .chat-container {
@@ -767,8 +790,7 @@ td.giaTienLS span{
 .order-details p.maDH span:first-child{
     padding-right: 5px;
 }
-.order-details p.maDH span:last-child{
-    color: red;
+.order-details p.maDH .thongBaoDonHang{
     padding-left: 5px;
 }
 .order-details .timeline {
@@ -778,15 +800,18 @@ td.giaTienLS span{
     padding: 20px 0;
     border-bottom: 1px solid #7c7c7c4d;
 }
+.order-details .timeline .zezo{
+    display: none;
+}
 .order-details .step {
     text-align: center;
     flex: 1;
 }
 .order-details .step i {
     font-size: 30px;
-    color: #28a745;
-    border: 4px solid #28a745;
     border-radius: 50%;
+    color: #b1b1b1;
+    border: 4px solid #b1b1b1;
     width: 65px;
     height: 65px;
     display: flex;
@@ -795,20 +820,33 @@ td.giaTienLS span{
     margin: 0 auto 10px;
     position: relative;
 }
+.order-details .step i.change{
+    color: #28a745;
+    border: 4px solid #28a745;
+}
+.order-details .step i.next-change{
+    color: #28a745;
+    border: 4px solid #28a745;
+}
 .order-details .step span {
     font-size: 13px;
     margin-top: 4px;
-}
-.order-details .step p {
-    font-size: 12px;
-    color: #888;
 }
 .order-details .step:not(:last-child) i::after {
     content: "";
     position: absolute;
     top: 28px;
-    left: 100%;
-    width: 149px;
+    left: 107%;
+    width: 145px;
+    height: 4px;
+    background: #b1b1b1;
+}
+.order-details .step:not(:last-child) i.change::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 107%;
+    width: 145px;
     height: 4px;
     background: #28a745;
 }

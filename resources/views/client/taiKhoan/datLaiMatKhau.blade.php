@@ -43,17 +43,19 @@
                                 @csrf
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input class="form-control" id="floatingInputValue1" type="hidden"
+                                        <input class="form-control" type="hidden"
                                             placeholder="name@example.com" value="{{ request('v') }}" name="email">
                                         {{-- v là email đã được mã hóa bên controller --}}
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input class="form-control @error('password') is-invalid @enderror"
-                                            id="floatingInputValue2" type="password" placeholder="Password" value=""
+                                    <div class="form-floating password">
+                                        <input class="form-control inputPassword @error('password') is-invalid @enderror" type="password" placeholder="Password" value=""
                                             name="password">
-                                        <label for="floatingInputValue2">Mật Khẩu</label>
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                        <label for="">Mật Khẩu</label>
                                     </div>
                                     <p class="Err text-danger password-error">
                                         @error('password')
@@ -62,11 +64,14 @@
                                     </p>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input class="form-control @error('confirm_password') is-invalid @enderror"
-                                            id="floatingInputValue2" type="password" placeholder="Confirm password"
+                                    <div class="form-floating password">
+                                        <input class="form-control inputPassword @error('confirm_password') is-invalid @enderror"
+                                         type="password" placeholder="Confirm password"
                                             value="" name="confirm_password">
-                                        <label for="floatingInputValue2">Nhập lại mật Khẩu</label>
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                        <label for="">Nhập lại mật Khẩu</label>
                                     </div>
                                     <p class="Err text-danger confirm_password-error">
                                         @error('confirm_password')

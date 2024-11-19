@@ -1,3 +1,27 @@
+/* input password */
+#changePassword .password{
+    position: relative;
+}
+#changePassword .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
+.row .password{
+    position: relative;
+}
+.row .toggle-password {
+    position: absolute;
+    right: 30px;
+    top: 40px;
+    font-size: 17px;
+    cursor: pointer;
+    color: #999;
+}
+/* end  */
 .phantrang{
     float: right;
 }

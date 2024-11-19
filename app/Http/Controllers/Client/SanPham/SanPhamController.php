@@ -22,6 +22,9 @@ class SanPhamController extends Controller
     public function chiTietSanPham(int $id)
     {
         $san_pham = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
+        if(!$san_pham){
+            return redirect()->route('404');
+        }
         $luot_xem = $san_pham->luot_xem+1;
         $san_pham->update(['luot_xem'=>$luot_xem]);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')

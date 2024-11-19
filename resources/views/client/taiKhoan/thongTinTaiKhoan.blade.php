@@ -880,7 +880,7 @@
                                                                                                         <span>Đã giao</span>
                                                                                                         @break
                                                                                                     @case(4)
-                                                                                                        <span style="color: red;">Đã hủy</span>
+                                                                                                        <span class="text-danger">Đã hủy</span>
                                                                                                         @break
                                                                                                     @case(5)
                                                                                                         <span class="text-warning">Đang chờ xử lý trả hàng</span>
@@ -892,7 +892,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -966,7 +966,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1025,7 +1025,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1085,7 +1085,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1146,7 +1146,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1205,7 +1205,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1265,7 +1265,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
                                                                                         </td>
@@ -1312,34 +1312,36 @@
                                             <span>TRỞ LẠI</span>
                                         </a>
                                         <p class="maDH">
-                                            <span>MÃ ĐƠN HÀNG: 240508SN4RTJ5M</span> |
-                                            <span>Đơn Hàng Đã Hoàn Thành</span></p>
+                                            <span>MÃ ĐƠN HÀNG:
+                                                <span class="maDonHang">240508SN4RTJ5M</span>
+                                            </span> |
+                                            <span class="thongBaoDonHang"></span>
+                                        </p>
                                     </div>
                                     <div class="timeline">
-                                        <div class="step">
+                                        <div class="step zezo">
+                                            <i class=""></i>
+                                            <span></span>
+                                        </div>
+                                        <div class="step one">
                                             <i class="fas fa-file-alt"></i>
                                             <span>Đơn Hàng Đã Đặt</span>
-                                            <p>22:35 08-05-2024</p>
                                         </div>
-                                        <div class="step">
-                                            <i class="fas fa-dollar-sign"></i>
-                                            <span>Đơn Hàng Đã Thanh Toán (36.990 VNĐ)</span>
-                                            <p>22:35 08-05-2024</p>
+                                        <div class="step two">
+                                            <i class="fa-solid fa-clock"></i>
+                                            <span>Đang chuẩn bị hàng</span>
                                         </div>
-                                        <div class="step">
+                                        <div class="step three">
                                             <i class="fas fa-truck"></i>
                                             <span>Đã Giao Cho ĐVC</span>
-                                            <p>18:12 09-05-2024</p>
                                         </div>
-                                        <div class="step">
+                                        <div class="step four">
                                             <i class="fas fa-box-open"></i>
                                             <span>Đã Nhận Hàng</span>
-                                            <p>08:53 14-05-2024</p>
                                         </div>
-                                        <div class="step">
+                                        <div class="step five">
                                             <i class="fas fa-check-circle"></i>
                                             <span>Đơn Hàng Đã Hoàn Thành</span>
-                                            <p>23:59 13-06-2024</p>
                                         </div>
                                     </div>
 
@@ -1355,23 +1357,23 @@
                                             <h3>Trạng Thái Giao Hàng</h3>
                                             <p class="active">
                                                 <i class="fa-solid fa-circle"></i>
-                                                <span>10:57 10-05-2024</span> - <span>Đơn hàng đã giao thành công.</span>
+                                                <span>Đơn hàng đã giao thành công.</span>
                                             </p>
                                             <p>
                                                 <i class="fa-solid fa-circle"></i>
-                                                <span>10:57 10-05-2024</span> - <span>Đang vận chuyển.</span>
+                                                <span>Đang vận chuyển.</span>
                                             </p>
                                             <p>
                                                 <i class="fa-solid fa-circle"></i>
-                                                <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                                                <span>Đơn hàng đã rời kho.</span>
                                             </p>
                                             <p>
                                                 <i class="fa-solid fa-circle"></i>
-                                                <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                                                <span>Đơn hàng đã rời kho.</span>
                                             </p>
                                             <p>
                                                 <i class="fa-solid fa-circle"></i>
-                                                <span>10:57 10-05-2024</span> - <span>Đơn hàng đã rời kho.</span>
+                                                <span>Đơn hàng đã rời kho.</span>
                                             </p>
                                         </div>
                                     </div>
@@ -1774,10 +1776,13 @@
                             @csrf
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <div class="from-group">
+                                    <div class="from-group password">
                                         <label class="form-label">Nhập mật khẩu hiện tại</label>
-                                        <input class="form-control" type="password" name="current_password"
+                                        <input class="form-control inputPassword" type="password" name="current_password"
                                             placeholder="Nhập mật khẩu hiện tại...">
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
                                     </div>
                                     <p class="Err text-danger current_password-error">
                                         @error('current_password')
@@ -1786,10 +1791,13 @@
                                     </p>
                                 </div>
                                 <div class="col-12">
-                                    <div class="from-group">
+                                    <div class="from-group password">
                                         <label class="form-label">Nhập mật khẩu mới</label>
-                                        <input class="form-control" type="password" name="new_password"
+                                        <input class="form-control inputPassword" type="password" name="new_password"
                                             placeholder="Nhập mật khẩu mới...">
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
                                     </div>
                                     <p class="Err text-danger new_password-error">
                                         @error('new_password')
@@ -1798,10 +1806,13 @@
                                     </p>
                                 </div>
                                 <div class="col-12">
-                                    <div class="from-group">
+                                    <div class="from-group password">
                                         <label class="form-label">Nhập lại mật khẩu mới</label>
-                                        <input class="form-control" type="password" name="confirm_password"
+                                        <input class="form-control inputPassword" type="password" name="confirm_password"
                                             placeholder="Nhập lại mật khẩu mới...">
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
                                     </div>
                                     <p class="Err text-danger confirm_password-error">
                                         @error('confirm_password')

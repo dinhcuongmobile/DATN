@@ -14,7 +14,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control" id="" name="ho_va_ten" placeholder="Nhập họ và tên..." value="{{ old('ho_va_ten') }}">
+                    <input type="text" class="form-control" name="ho_va_ten" placeholder="Nhập họ và tên..." value="{{ old('ho_va_ten') }}">
                     @error('ho_va_ten')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
@@ -28,16 +28,22 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-6 password">
                     <label for="" class="form-label">Mật Khẩu</label>
-                    <input type="password" class="form-control" id="" name="password" placeholder="VD: Example123...">
+                    <input type="password" class="form-control inputPassword" name="password" placeholder="VD: Example123...">
+                    <span class="toggle-password">
+                        <i class="fas fa-eye-slash"></i>
+                    </span>
                     @error('password')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 password">
                     <label for="" class="form-label">Nhập lại mật khẩu</label>
-                    <input type="password" class="form-control" id="" name="confirm_password">
+                    <input type="password" class="form-control inputPassword" name="confirm_password">
+                    <span class="toggle-password">
+                        <i class="fas fa-eye-slash"></i>
+                    </span>
                     @error('confirm_password')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
@@ -46,7 +52,7 @@
             <div class="mb-3 row">
                 <div class="col-md-6">
                     <label for="" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="" name="so_dien_thoai" placeholder="Nhập số điện thoại..." value="{{ old('so_dien_thoai') }}">
+                    <input type="text" class="form-control" name="so_dien_thoai" placeholder="Nhập số điện thoại..." value="{{ old('so_dien_thoai') }}">
                     @error('so_dien_thoai')
                         <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
@@ -98,7 +104,7 @@
                     <label>Ghi địa chỉ cụ thể (VD: số nhà, ngõ ngách, xóm...) <span class="text-danger"></span></label>
                     <textarea name="dia_chi_chi_tiet" id="dia_chi_chi_tiet" cols="5" rows="4" class="form-control form-control-sm"></textarea>
                     @error('dia_chi_chi_tiet')
-                        <p class="text-danger mt-1">{{ $message }}</p> 
+                        <p class="text-danger mt-1">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
