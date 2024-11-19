@@ -207,7 +207,7 @@
                 // the chart.
 
                 // The name of the data record attribute that contains x-values.
-                xkey: 'ngay_dat_hang',
+                xkey: 'ngay_tao',
                 // A list of names of data record attributes that contain y-values.
                 ykeys: ['tong_thanh_toan'],
                 // Labels for the ykeys -- will be displayed when you hover over the
