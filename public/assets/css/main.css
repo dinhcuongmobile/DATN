@@ -717,14 +717,12 @@ td .chatLS{
     color: #626060;
     border-radius: 5px;
 }
-.thongBaoLS .thongBao{
-    cursor: pointer;
+.thongBaoLS .thongBao span{
     color: #26aa99;
     font-size: 16px;
 }
-.thongBaoLS .choThanhToan{
-    color: red;
-    font-size: 16px;
+.thongBaoLS .thongBao i{
+    color: #26aa99;
 }
 td.giaTienLS span:first-child{
     color: red;
