@@ -62,6 +62,7 @@ class AppServiceProvider extends ServiceProvider
                 ->selectRaw('san_phams.id, san_phams.ten_san_pham, san_phams.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
                 ->groupBy('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.hinh_anh')
                 ->orderByDesc('tong_doanh_thu')
+                ->take(3)
                 ->get();
             foreach ($thongKeSanPhams as $item) {
                 $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
@@ -77,6 +78,7 @@ class AppServiceProvider extends ServiceProvider
                 ->selectRaw('danh_mucs.id, danh_mucs.ten_danh_muc, danh_mucs.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
                 ->groupBy('danh_mucs.id', 'danh_mucs.ten_danh_muc', 'danh_mucs.hinh_anh')
                 ->orderByDesc('tong_doanh_thu')
+                ->take(3)
                 ->get();
             foreach ($thongKeDanhMucs as $item) {
                 $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.'); 
