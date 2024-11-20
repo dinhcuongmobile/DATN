@@ -23,7 +23,7 @@
                                     Thành viên</div>
                                 <div class="row no-gutters align-items-center">
                                     <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1
+                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $tongTaiKhoan }}
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Đơn hàng</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tongDonHang }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-cart-arrow-down fa-2x text-gray-300"></i>
@@ -61,7 +61,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Bình luận</div>
+                                    Đánh Giá</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
                             </div>
                             <div class="col-auto">
@@ -94,7 +94,7 @@
         <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
+            <div class="col-xl-12 col-lg-12">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -106,7 +106,8 @@
                             @csrf
                             <div class="col-md-3">
                                 <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                                <input type="button" class="btn btn-success form-control col-md-4" id="btn-dashboard-filter" value="Lọc">
+                                <input type="button" class="btn btn-success form-control col-md-4"
+                                    id="btn-dashboard-filter" value="Lọc">
                             </div>
                             <div class="col-md-3">
                                 <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
@@ -128,7 +129,7 @@
                             </div>
                         </form>
                     </div>
-                    
+
                     <!-- Card Body -->
                     <div class="card-body">
                         <div class="chart-area">
@@ -137,146 +138,244 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
+        </div>
+        <div class="row">
+            <!-- Thứ hạng sản phẩm -->
+            <div class="col-lg-6">
                 <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Biểu Đồ</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Sản Phẩm</h6>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="product-ranking-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="by-sales-tab" data-toggle="pill" href="#by-sales"
+                                    role="tab">Theo doanh số</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="by-product-id-tab" data-toggle="pill" href="#by-product-id"
+                                    role="tab">Theo số sản phẩm</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="by-views-tab" data-toggle="pill" href="#by-views"
+                                    role="tab">Theo lượt xem</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="product-ranking-tabContent">
+                            <div class="tab-pane fade show active" id="by-sales" role="tabpanel">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Thứ Hạng</th>
+                                            <th>Thông Tin Sản Phẩm</th>
+                                            <th>Doanh Thu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Liên kết sơn gel Ibd siêu bền</td>
+                                            <td>₫1.739,94K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Máy hút bụi tích điện Mr Nail</td>
+                                            <td>₫1.402,50K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Đầu mài kim cương</td>
+                                            <td>₫1.283,95K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Set gel đậm ombre Qingyou</td>
+                                            <td>₫616,65K</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <!-- Các tab khác có thể thêm vào đây -->
                         </div>
                     </div>
-                    <!-- Card Body -->
+                </div>
+            </div>
+
+            <!-- Thứ hạng ngành hàng -->
+            <div class="col-lg-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Danh Mục</h6>
+                    </div>
                     <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                            <canvas id="myPieChart" width="447" height="306" style="display: block; height: 245px; width: 358px;" class="chartjs-render-monitor"></canvas>
-                        </div>
-                        <div class="mt-4 text-center small">
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
-                            </span>
+                        <ul class="nav nav-pills mb-3" id="industry-ranking-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="by-sales-industry-tab" data-toggle="pill"
+                                    href="#by-sales-industry" role="tab">Theo doanh số</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="industry-ranking-tabContent">
+                            <div class="tab-pane fade show active" id="by-sales-industry" role="tabpanel">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Thứ Hạng</th>
+                                            <th>Danh Mục</th>
+                                            <th>Doanh Thu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Sắc Đẹp</td>
+                                            <td>₫9.826,67K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Thiết Bị Điện Gia Dụng</td>
+                                            <td>₫1.447,50K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Nhà cửa & Đời sống</td>
+                                            <td>₫127,35K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Nhà cửa & Đời sống</td>
+                                            <td>₫88,372</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    <!-- /.container-fluid -->
-@endsection
+        <!-- /.container-fluid -->
+    @endsection
 
-@section('scripts')
-    <script type="text/javascript">
-        $("#datepicker").datepicker({
-            prevText: "Tháng trước",
-            nextText: "Tháng sau",
-            dateFormat: "yy-mm-dd",
-            dayNamesMin: [ "Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ],
-            dration: "slow"
-        });
-        $("#datepicker2").datepicker({
-            prevText: "Tháng trước",
-            nextText: "Tháng sau",
-            dateFormat: "yy-mm-dd",
-            dayNamesMin: [ "Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" ],
-            dration: "slow"
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            load30Ngay();
-
-            var chart = new Morris.Area({
-                // ID of the element in which to draw the chart.
-                element: 'chart',
-
-                lineColors: ['#0090F7', '#FF970D'],
-                pointFillColors: ['#ffffff'],
-                pointStrokeColors: ['black'],
-                // Chart data records -- each entry in this array corresponds to a point on
-                fillOpacity: 0.3,
-                hideHover: 'auto',
-                parseTime: false,
-                behaveLikeLine: true,
-                // the chart.
-
-                // The name of the data record attribute that contains x-values.
-                xkey: 'ngay_tao',
-                // A list of names of data record attributes that contain y-values.
-                ykeys: ['tong_don_hang', 'tong_thanh_toan'],
-                // Labels for the ykeys -- will be displayed when you hover over the
-                // chart.
-                labels: ['Đơn hàng', 'Doanh thu']
+    @section('scripts')
+        <script type="text/javascript">
+            $("#datepicker").datepicker({
+                prevText: "Tháng trước",
+                nextText: "Tháng sau",
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"],
+                dration: "slow"
             });
+            $("#datepicker2").datepicker({
+                prevText: "Tháng trước",
+                nextText: "Tháng sau",
+                dateFormat: "yy-mm-dd",
+                dayNamesMin: ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"],
+                dration: "slow"
+            });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                load30Ngay();
 
-            function load30Ngay() {
-                var _token = $('input[name="_token"]').val();
+                var chart = new Morris.Area({
+                    // ID of the element in which to draw the chart.
+                    element: 'chart',
 
-                $.ajax({
-                    url: "{{ route('thong-ke.load-30-ngay') }}",
-                    method: "POST",
-                    dataType: "JSON",
-                    data: {_token:_token},
-                    success:function(data) {
-                        chart.setData(data.chart_data);
+                    lineColors: ['#0090F7', '#FF970D'],
+                    pointFillColors: ['#ffffff'],
+                    pointStrokeColors: ['black'],
+                    // Chart data records -- each entry in this array corresponds to a point on
+                    fillOpacity: 0.3,
+                    hideHover: 'auto',
+                    parseTime: false,
+                    behaveLikeLine: true,
+                    // the chart.
 
-                        // Đổ tổng tiền thanh toán vào view
-                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
-                    }
+                    // The name of the data record attribute that contains x-values.
+                    xkey: 'ngay_tao',
+                    // A list of names of data record attributes that contain y-values.
+                    ykeys: ['tong_don_hang', 'tong_thanh_toan'],
+                    // Labels for the ykeys -- will be displayed when you hover over the
+                    // chart.
+                    labels: ['Đơn hàng', 'Doanh thu']
                 });
-            }
 
-            $('.dashboard-filter-by').change(function() {
-                var _token = $('input[name="_token"]').val();
-                var dashboardValue = $(this).val();
+                function load30Ngay() {
+                    var _token = $('input[name="_token"]').val();
 
-                $.ajax({
-                    url: "{{ route('thong-ke.thong-ke-doanh-so-by') }}",
-                    method: "POST",
-                    dataType: "JSON",
-                    data: {dashboardValue:dashboardValue, _token:_token},
-                    success:function(data) {
-                        chart.setData(data.chart_data);
+                    $.ajax({
+                        url: "{{ route('thong-ke.load-30-ngay') }}",
+                        method: "POST",
+                        dataType: "JSON",
+                        data: {
+                            _token: _token
+                        },
+                        success: function(data) {
+                            chart.setData(data.chart_data);
 
-                        // Đổ tổng tiền thanh toán vào view
-                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
-                    }
-                });
+                            // Đổ tổng tiền thanh toán vào view
+                            $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+                        }
+                    });
+                }
+
+                $('.dashboard-filter-by').change(function() {
+                    var _token = $('input[name="_token"]').val();
+                    var dashboardValue = $(this).val();
+
+                    $.ajax({
+                        url: "{{ route('thong-ke.thong-ke-doanh-so-by') }}",
+                        method: "POST",
+                        dataType: "JSON",
+                        data: {
+                            dashboardValue: dashboardValue,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            chart.setData(data.chart_data);
+
+                            // Đổ tổng tiền thanh toán vào view
+                            $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+                        }
+                    });
+                })
+
+                $('#btn-dashboard-filter').click(function() {
+                    var _token = $('input[name="_token"]').val();
+                    var fromDate = $('#datepicker').val();
+                    var toDate = $('#datepicker2').val();
+
+                    $.ajax({
+                        url: "{{ route('thong-ke.thong-ke-doanh-so') }}",
+                        method: "POST",
+                        dataType: "JSON",
+                        data: {
+                            fromDate: fromDate,
+                            toDate: toDate,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            chart.setData(data.chart_data);
+
+                            // Đổ tổng tiền thanh toán vào view
+                            $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+                        }
+                    });
+                })
             })
-
-            $('#btn-dashboard-filter').click(function() {
-                var _token = $('input[name="_token"]').val();
-                var fromDate = $('#datepicker').val();
-                var toDate = $('#datepicker2').val();
-
-                $.ajax({
-                    url: "{{ route('thong-ke.thong-ke-doanh-so') }}",
-                    method: "POST",
-                    dataType: "JSON",
-                    data: {fromDate:fromDate, toDate:toDate, _token:_token},
-                    success:function(data) {
-                        chart.setData(data.chart_data);
-
-                        // Đổ tổng tiền thanh toán vào view
-                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
-                    }
-                });
-            })
-        })
+        </script>
+    @endsection
+    {{-- Chuyển tab thống kê --}}
+    <script>
+        $(document).ready(function() {
+            // Khởi tạo tabs
+            $('#product-ranking-tab a').click(function(e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            $('#industry-ranking-tab a').click(function(e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
     </script>
-@endsection
