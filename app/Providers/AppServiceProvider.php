@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
@@ -50,5 +51,11 @@ class AppServiceProvider extends ServiceProvider
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
+        //Thống Kê Tài Khoản
+        $tongTaiKhoan = User::count();
+        View::share('tongTaiKhoan', $tongTaiKhoan);
+        //Thống Kê Đơn Hàng
+        $tongDonHang = DonHang::count();
+        View::share('tongDonHang', $tongDonHang);
     }
 }
