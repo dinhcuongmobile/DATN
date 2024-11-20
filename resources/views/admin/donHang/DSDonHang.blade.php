@@ -104,7 +104,7 @@
                                     </td>
                                     <td class="col-1">GHTK</td>
                                     <td>
-                                        @if ($item->trang_thai == 0 || $item->trang_thai == 2 || $item->trang_thai == 3)
+                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 || $item->trang_thai == 2)
                                             {{-- Các nút tùy thuộc trạng thái --}}
                                             @if ($item->trang_thai == 0)
                                                 {{-- Trạng thái chờ xác nhận --}}
@@ -119,7 +119,7 @@
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
                                                 </form>
-                                            @elseif ($item->trang_thai == 2)
+                                            @elseif ($item->trang_thai == 1)
                                                 {{-- Trạng thái chờ lấy hàng --}}
                                                 <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}"
                                                     method="POST" style="display:inline;">
@@ -127,7 +127,7 @@
                                                     <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy
                                                         hàng</button>
                                                 </form>
-                                            @elseif ($item->trang_thai == 3)
+                                            @elseif ($item->trang_thai == 2)
                                                 {{-- Trạng thái đang giao --}}
                                                 <form action="{{ route('don-hang.da-giao', $item->id) }}" method="POST"
                                                     style="display:inline;">
