@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use App\Models\TinhThanhPho;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -356,93 +357,104 @@ class GioHangController extends Controller
     }
 
     public function datHang(Request $request){
-        $gio_hangs = session()->get('gio_hangs', []);
+        DB::beginTransaction();
+        try {
+            $gio_hangs = session()->get('gio_hangs', []);
+            $phi_ships = $request->input('phiShip');
+            $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
+            $giamGiaDonHang = $request->input('giamTienDonHang');
+            $soCoin = $request->input('soCoin');
+            $check=false;
 
-        $phi_ships = $request->input('phiShip');
-        $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
-        $giamGiaDonHang = $request->input('giamTienDonHang');
-        $soCoin = $request->input('soCoin');
-
-        // Kiểm tra phương thức thanh toán
-        if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
-            $phuong_thuc_thanh_toan = 0;
-            $trang_thai = 0;
-            $thanh_toan = 0;
-        } else { // Chuyển khoản
-            $phuong_thuc_thanh_toan = 1;
-            $trang_thai = 1;
-            $thanh_toan = 1;
-        }
-
-        // Tạo đơn hàng mới
-        $dataInsertDonHang = [
-            'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
-            'user_id' => Auth::user()->id,
-            'dia_chi_id' => $request->input('dia_chi_id'),
-            'giam_gia_van_chuyen' => $giamGiaVanChuyen,
-            'giam_gia_don_hang' => $giamGiaDonHang,
-            'namad_xu' => $soCoin,
-            'tong_thanh_toan' => $request->input('tong_thanh_toan'),
-            'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
-            'trang_thai' => $trang_thai,
-            'thanh_toan' => $thanh_toan,
-            'ghi_chu' => $request->input('ghi_chu'),
-            'ngay_tao' => now(),
-        ];
-
-        $result = DonHang::create($dataInsertDonHang);
-
-        if ($result) {
-            $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
-
-            foreach ($gio_hangs as $item) {
-                $san_pham = SanPham::find($item['san_pham_id']);
-                $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
-                                    ->where('kich_co', $item['kich_co'])
-                                    ->where('ma_mau', $item['ma_mau'])
-                                    ->first();
-                $coin = Coin::where('user_id', Auth::user()->id)->first();
-
-                // Tạo chi tiết đơn hàng
-                $dataInsertChiTiet = [
-                    'don_hang_id' => $donHang->id,
-                    'san_pham_id' => $item['san_pham_id'],
-                    'bien_the_id' => $bien_the->id,
-                    'so_luong' => $item['so_luong'],
-                    'don_gia' => $item['gia_khuyen_mai'],
-                    'thanh_tien' => $item['gia_khuyen_mai'] * $item['so_luong'],
-                    'created_at' => now(),
-                ];
-                ChiTietDonHang::create($dataInsertChiTiet);
-
-                // Cập nhật số lượng tồn kho cho biến thể
-                $bien_the->decrement('so_luong', $item['so_luong']);
-
-                // Xóa sản phẩm trong giỏ hàng của người dùng
-                GioHang::where('user_id', Auth::user()->id)
-                    ->where('san_pham_id', $item['san_pham_id'])
-                    ->where('bien_the_id', $bien_the->id)
-                    ->delete();
-            }
-            // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
-            if ($coin && $soCoin > 0) {
-                $coin->decrement('coin', $soCoin);
+            // Kiểm tra phương thức thanh toán
+            if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
+                $phuong_thuc_thanh_toan = 0;
+                $trang_thai = 0;
+                $thanh_toan = 0;
+            } else { // Chuyển khoản
+                $phuong_thuc_thanh_toan = 1;
+                $trang_thai = 1;
+                $thanh_toan = 1;
             }
 
-            // Gửi email xác nhận đơn hàng
-            $dia_chi = DiaChi::with('tinhThanhPho', 'quanHuyen', 'phuongXa')
-                            ->where('user_id', Auth::user()->id)
-                            ->where('trang_thai', 1)
-                            ->first();
+            // Tạo đơn hàng mới
+            $dataInsertDonHang = [
+                'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
+                'user_id' => Auth::user()->id,
+                'dia_chi_id' => $request->input('dia_chi_id'),
+                'giam_gia_van_chuyen' => $giamGiaVanChuyen,
+                'giam_gia_don_hang' => $giamGiaDonHang,
+                'namad_xu' => $soCoin,
+                'tong_thanh_toan' => $request->input('tong_thanh_toan'),
+                'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
+                'trang_thai' => $trang_thai,
+                'thanh_toan' => $thanh_toan,
+                'ghi_chu' => $request->input('ghi_chu'),
+                'ngay_tao' => now(),
+            ];
 
-            $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
-            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
+            $result = DonHang::create($dataInsertDonHang);
 
-            Mail::to(Auth::user()->email)->send(new SendHoaDon($dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
+            if ($result) {
+                $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
 
-            return response()->json([
-                'success' => true,
-            ]);
+                foreach ($gio_hangs as $item) {
+                    $san_pham = SanPham::find($item['san_pham_id']);
+                    $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
+                                        ->where('kich_co', $item['kich_co'])
+                                        ->where('ma_mau', $item['ma_mau'])
+                                        ->first();
+                    $coin = Coin::where('user_id', Auth::user()->id)->first();
+
+                    // Tạo chi tiết đơn hàng
+                    $dataInsertChiTiet = [
+                        'don_hang_id' => $donHang->id,
+                        'san_pham_id' => $item['san_pham_id'],
+                        'bien_the_id' => $bien_the->id,
+                        'so_luong' => $item['so_luong'],
+                        'don_gia' => $item['gia_khuyen_mai'],
+                        'thanh_tien' => $item['gia_khuyen_mai'] * $item['so_luong'],
+                        'created_at' => now(),
+                    ];
+                    ChiTietDonHang::create($dataInsertChiTiet);
+
+                    // Cập nhật số lượng tồn kho cho biến thể
+                    $bien_the->decrement('so_luong', $item['so_luong']);
+
+                    // Xóa sản phẩm trong giỏ hàng của người dùng
+                    GioHang::where('user_id', Auth::user()->id)
+                        ->where('san_pham_id', $item['san_pham_id'])
+                        ->where('bien_the_id', $bien_the->id)
+                        ->delete();
+                }
+                // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
+                if ($coin && $soCoin > 0) {
+                    $coin->decrement('coin', $soCoin);
+                }
+
+                // Gửi email xác nhận đơn hàng
+                $dia_chi = DiaChi::with('tinhThanhPho', 'quanHuyen', 'phuongXa')
+                                ->where('user_id', Auth::user()->id)
+                                ->where('trang_thai', 1)
+                                ->first();
+
+                $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
+                $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
+                $user = User::find(Auth::user()->id);
+
+                Mail::to(Auth::user()->email)->queue(new SendHoaDon($user,$dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
+
+                $check=true;
+            }
+            if($check){
+                DB::commit();
+                return response()->json([
+                    'success' => true,
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 

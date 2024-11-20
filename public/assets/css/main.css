@@ -840,6 +840,7 @@ td.giaTienLS span{
     width: 145px;
     height: 4px;
     background: #b1b1b1;
+    flex: 1;
 }
 .order-details .step:not(:last-child) i.change::after {
     content: "";
@@ -849,6 +850,7 @@ td.giaTienLS span{
     width: 145px;
     height: 4px;
     background: #28a745;
+    flex: 1;
 }
 .order-details .van-chuyen{
     display: flex;
