@@ -355,11 +355,9 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Danh Mục Mới</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
-                                        <li> <a class="nav" href="variant-radio.html">Quần jeans hiệu</a></li>
+                                        <li> <a class="nav" href="product-bundle.html">Áo sơ mi dài tay</a></li>
                                         <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
                                         <li> <a class="nav" href="variant-images.html">Áo hoodie nhiều màu sắc</a></li>
-                                        <li> <a class="nav" href="variant-dropdown.html">Nước hoa tốt nhất</a></li>
                                     </ul>
                                 </div>
                             </div>
