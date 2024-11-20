@@ -98,17 +98,17 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h4 class="font-weight-bold text-primary text-center mt-3">Thống Kê Doanh Số</h4>
+                        <h4 class="font-weight-bold text-primary text-center mt-3">Thống Kê Doanh Thu</h4>
                     </div>
 
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <form autocomplete="off" class="d-flex">
                             @csrf
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
                                 <input type="button" class="btn btn-success form-control col-md-4" id="btn-dashboard-filter" value="Lọc">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
                             </div>
                             <div class="col-md-4">
@@ -122,6 +122,9 @@
                                         <option value="365NgayQua">365 ngày qua</option>
                                     </select>
                                 </p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Tổng doanh thu:</strong> <span id="tong_thanh_toan">0 đ</span></p>
                             </div>
                         </form>
                     </div>
@@ -198,21 +201,27 @@
         $(document).ready(function() {
             load30Ngay();
 
-            var chart = new Morris.Bar({
+            var chart = new Morris.Area({
                 // ID of the element in which to draw the chart.
                 element: 'chart',
+
+                lineColors: ['#0090F7', '#FF970D'],
+                pointFillColors: ['#ffffff'],
+                pointStrokeColors: ['black'],
                 // Chart data records -- each entry in this array corresponds to a point on
+                fillOpacity: 0.3,
                 hideHover: 'auto',
                 parseTime: false,
+                behaveLikeLine: true,
                 // the chart.
 
                 // The name of the data record attribute that contains x-values.
                 xkey: 'ngay_tao',
                 // A list of names of data record attributes that contain y-values.
-                ykeys: ['tong_thanh_toan'],
+                ykeys: ['tong_don_hang', 'tong_thanh_toan'],
                 // Labels for the ykeys -- will be displayed when you hover over the
                 // chart.
-                labels: ['Doanh thu']
+                labels: ['Đơn hàng', 'Doanh thu']
             });
 
             function load30Ngay() {
@@ -224,7 +233,10 @@
                     dataType: "JSON",
                     data: {_token:_token},
                     success:function(data) {
-                        chart.setData(data);
+                        chart.setData(data.chart_data);
+
+                        // Đổ tổng tiền thanh toán vào view
+                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
                     }
                 });
             }
@@ -239,7 +251,10 @@
                     dataType: "JSON",
                     data: {dashboardValue:dashboardValue, _token:_token},
                     success:function(data) {
-                        chart.setData(data);
+                        chart.setData(data.chart_data);
+
+                        // Đổ tổng tiền thanh toán vào view
+                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
                     }
                 });
             })
@@ -255,7 +270,10 @@
                     dataType: "JSON",
                     data: {fromDate:fromDate, toDate:toDate, _token:_token},
                     success:function(data) {
-                        chart.setData(data);
+                        chart.setData(data.chart_data);
+
+                        // Đổ tổng tiền thanh toán vào view
+                        $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
                     }
                 });
             })
