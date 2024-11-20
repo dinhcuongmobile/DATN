@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('coin');
             $table->date('ngay_nhan');
             $table->integer('so_ngay')->default(1);

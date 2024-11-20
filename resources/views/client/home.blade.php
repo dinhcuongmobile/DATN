@@ -144,7 +144,7 @@
                                                 @endif
 
                                                 <div class="product-image style-border"><a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
-                                                    <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="sản phẩm"></a>
+                                                    <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="err"></a>
                                                 </div>
                                                 <div class="cart-info-icon">
                                                     <a class="wishlist-icon" href="javascript:void(0)" tabindex="0">
@@ -330,40 +330,69 @@
             <div class="col-xl-9">
                 <div class="row g-4">
                     <div class="col-md-5">
-                        <div class="best-seller-img ratio_square-3"><a href="collection-left-sidebar.html"> <img
-                                    class="bg-img" src="../assets/images/layout-4/main-category/1.png" alt=""></a>
+                        <div class="best-seller-img ratio_square-3"><a href="{{route('san-pham.san-pham')}}"> <img
+                                    class="bg-img" src="{{asset('assets/images/layout-4/Bo-Suu-Tap1.png')}}" alt="" width="10px"></a>
                         </div>
                     </div>
                     <div class="col-md-7 ratio_landscape">
                         <div class="style-content">
                             <h6>Mặc theo phong cách của bạn</h6>
                             <h2>Tạo phiên bản mới của chính bạn</h2>
-                            <h4>Mua hàng trực tuyến</h4>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a><a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a></div>
-                        </div><a href="collection-left-sidebar.html"> <img class="bg-img"
-                                src="../assets/images/layout-4/main-category/2.jpg" alt=""></a>
+                            <div class="link-hover-anim underline">
+                                <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                                <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                            </div>
+                        </div>
+                        <a href="{{route('san-pham.san-pham')}}">
+                            <img class="bg-img"src="{{asset('assets/images/layout-4/Bo-Suu-Tap2.png')}}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="col-3 d-none d-xl-block">
                 <div class="best-seller-box">
-                    <div class="offer-banner"><a href="collection-left-sidebar.html">
-                            <h2>Giảm thêm 15%</h2><span> </span>
-                            <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.</p>
-                            <div class="btn">
-                                <h6>Use Code: <span>KHUTRD***</span></h6>
-                            </div>
-                        </a></div>
+                    <div class="coming-soon-box">
+                        <div class="flash-sale-header">
+                            <h2>
+                                <i class="fas fa-bolt"></i> Flash Sale
+                                <p> Giảm Toàn Bộ Cửa Hàng 15%</p>
+                            </h2>
+
+                        </div>
+                        <div class="thoi-gian">
+                            <ul class="ul-thoi-gian">
+                                <li>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
+                                        <span class="title">Ngày</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
+                                        <span class="title">Giờ</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
+                                        <span class="title">Phút</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-thoi-gian">
+                                        <span class="timer">00</span>
+                                        <span class="title">Giây</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="best-seller-content">
-                        <h3>Làm bạn thoải mái và sang trọng</h3><span> </span>
-                        <div class="link-hover-anim underline"><a
-                                class="btn btn_underline link-strong link-strong-unhovered"
-                                href="collection-left-sidebar.html">Bộ sưu tập</a>
-                                <a class="btn btn_underline link-strong link-strong-hovered"
-                                href="collection-left-sidebar.html">Bộ sưu tập</a></div>
+                        <h3>Giúp Thoải mái và Tinh Tế</h3><span> </span>
+                        <div class="link-hover-anim underline">
+                            <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
+                            <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a></div>
                     </div>
                 </div>
             </div>

@@ -95,11 +95,11 @@
                         <div class="log-in-button">
                             <ul>
                                 <li>
-                                    <a href="{{ route('auth.google') }}" target="_blank"> <i class="fa-brands fa-google me-2">
+                                    <a href="{{ route('auth.google') }}"> <i class="fa-brands fa-google me-2">
                                         </i>Google</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><i
+                                    <a href="{{ route('auth.facebook') }}"><i
                                             class="fa-brands fa-facebook-f me-2"></i>Facebook </a>
                                 </li>
                             </ul>

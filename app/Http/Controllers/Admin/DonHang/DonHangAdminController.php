@@ -85,9 +85,22 @@ class DonHangAdminController extends Controller
     }
     
     // Hiển thị chi tiết đơn hàng
-    public function showChiTietDonHang($id) {
-        $donHang = DonHang::with('chiTietDonHangs')->findOrFail($id);
-        return view('admin.donHang.chiTietDonHang', compact('donHang'));
+    public function showChiTietDonHang($id)
+    {
+        // Lấy thông tin đơn hàng và các chi tiết liên quan
+        $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($id);
+
+        // Tính tổng tiền sản phẩm từ chi tiết đơn hàng
+        $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
+
+        // Truyền dữ liệu qua view
+        return view('admin.donHang.chiTietDonHang', [
+            'donHang' => $donHang,
+            'tongTienSanPham' => $tongTienSanPham,
+            'phiVanChuyen' => $donHang->giam_gia_van_chuyen,
+            'giamGiaDonHang' => $donHang->giam_gia_don_hang,
+            'tongThanhToan' => $donHang->tong_thanh_toan
+        ]);
     }
 
     // In hóa đơn

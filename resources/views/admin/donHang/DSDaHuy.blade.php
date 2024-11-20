@@ -58,7 +58,7 @@
                             <th>Trạng thái</th>  
                             <th>Thanh Toán</th>  
                             <th>Đơn vị vận chuyển</th>  
-                            
+                            <th>Thao Tác</th>
                         </tr>  
                     </thead>  
                     <tbody>  
@@ -98,7 +98,11 @@
                                 {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
                             </td>
                             <td class="col-1">GHTK</td>
-                            
+                            <td>
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
+                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
+                                  </a>
+                            </td>
                         </tr>  
                     </tbody>  
                 </table>  
