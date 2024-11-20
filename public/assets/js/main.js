@@ -87,13 +87,51 @@ if (productRow) {
                 success: function (response) {
                     if(response.success){
                         window.scrollTo({ top: 0, behavior: 'smooth' });
-                        console.log(response.don_hang);
 
                         let donHang = response.don_hang;
+                        let diaChi = response.dia_chi;
+                        let chiTietDonHang = response.chi_tiet_don_hangs;
+
+                        console.log(donHang,diaChi,chiTietDonHang);
+
                         document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
+                        document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
+                        document.querySelector('#order-details .van-chuyen .sdt-nhan').textContent = `(+84) ${diaChi.so_dien_thoai_nhan.slice(1)}`;
+                        document.querySelector('#order-details .van-chuyen .dia-chi-nhan').textContent = `
+                            ${diaChi.dia_chi_chi_tiet?diaChi.dia_chi_chi_tiet + ", " : ""}
+                            ${diaChi.phuong_xa.ten_phuong_xa},
+                            ${diaChi.quan_huyen.ten_quan_huyen},
+                            ${diaChi.tinh_thanh_pho.ten_tinh_thanh_pho}.
+                        `;
+                        document.querySelector('#order-details .list-san-pham').innerHTML="";
+                        chiTietDonHang.forEach((item)=>{
+                            $('#order-details .list-san-pham').prepend(
+                                `<a class="product-list-a" href="">
+                                    <div class="product-list">
+                                        <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
+                                        <div class="product-details">
+                                            <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                            <p class="phanLoaiHang">Phân loại hàng:
+                                                <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
+                                            </p>
+                                            <p>x${item.so_luong}</p>
+                                        </div>
+                                    </div>
+                                    <div class="giaTienLS">
+                                        <span>200000đ</span>
+                                        <span><del>200000đ</del></span>
+                                    </div>
+                                </a>`
+                            );
+                        });
+
                         const timeline = document.querySelector('#order-details .timeline');
+                        const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
                         timeline.querySelectorAll('i').forEach((el)=>{
                             el.classList.remove('change','next-change');
+                        });
+                        deliveryStatus.querySelectorAll('p').forEach((el)=>{
+                            el.classList.remove('active');
                         });
                         switch (donHang.trang_thai) {
                             case 0:
@@ -104,6 +142,7 @@ if (productRow) {
                                 //trang thai theo doi
                                 timeline.querySelector('.zezo i').classList.add('change');
                                 timeline.querySelector('.one i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
 
                                 break;
                             case 1:
@@ -114,6 +153,10 @@ if (productRow) {
                                 timeline.querySelector('.zezo i').classList.add('change');
                                 timeline.querySelector('.one i').classList.add('change');
                                 timeline.querySelector('.two i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
                             break;
                             case 2:
                                 document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
@@ -124,6 +167,11 @@ if (productRow) {
                                 timeline.querySelector('.one i').classList.add('change');
                                 timeline.querySelector('.two i').classList.add('change');
                                 timeline.querySelector('.three i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
                             break;
                             case 3:
                                 document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
@@ -134,7 +182,14 @@ if (productRow) {
                                 timeline.querySelector('.one i').classList.add('change');
                                 timeline.querySelector('.two i').classList.add('change');
                                 timeline.querySelector('.three i').classList.add('change');
-                                timeline.querySelector('.four i').classList.add('next-change');
+                                timeline.querySelector('.four i').classList.add('change');
+                                timeline.querySelector('.five i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đã được giao thành công tới ${diaChi.ho_va_ten_nhan}</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
                             break;
                             case 4:
                                 document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
@@ -145,7 +200,7 @@ if (productRow) {
                                 "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
                             break;
                         }
- 
+
                         //show
                         donHangContent.classList.remove('active','show');
                         chiTietDonHangContent.classList.add('active','show');

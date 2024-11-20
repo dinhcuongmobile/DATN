@@ -1350,31 +1350,14 @@
                                             <h3>Địa Chỉ Nhận Hàng</h3>
                                             <p class="ten-nhan-hang">Nguyễn Đình Cường</p>
                                             <p class="sdt-nhan">(+84) 964426158</p>
-                                            <p>Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
+                                            <p class="dia-chi-nhan">Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
                                         </div>
 
                                         <div class="delivery-status">
                                             <h3>Trạng Thái Giao Hàng</h3>
-                                            <p class="active">
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã giao thành công.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đang vận chuyển.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
+                                            <div class="trang-thai">
+
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1384,22 +1367,9 @@
                                             <span class="chatLS">💬 Chat</span>
                                             <a href="{{route('san-pham.san-pham')}}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
                                         </div>
-                                        <a class="product-list-a" href="">
-                                            <div class="product-list">
-                                                <img src="https://via.placeholder.com/60x90" alt="err">
-                                                <div class="product-details">
-                                                    <p class="tenSanPham">Người dám cho đi</p>
-                                                    <p class="phanLoaiHang">Phân loại hàng:
-                                                        <span>M, Đen</span>.
-                                                    </p>
-                                                    <p>x2</p>
-                                                </div>
-                                            </div>
-                                            <div class="giaTienLS">
-                                                <span>200000đ</span>
-                                                <span><del>200000đ</del></span>
-                                            </div>
-                                        </a>
+                                        <div class="list-san-pham">
+
+                                        </div>
 
                                         <table class="table">
                                             <tr>

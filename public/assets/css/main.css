@@ -885,19 +885,19 @@ td.giaTienLS span{
     position: relative;
     padding-bottom: 10px;
 }
-.order-details .delivery-status p:not(:first-child,:last-child) i::after {
+.order-details .delivery-status .trang-thai p:not(:last-child) i::after {
     content: "";
     position: absolute;
     top: 19px;
     left: 5px;
     width: 3px;
-    height: 30px;
+    height: 24px;
     background: #7c7c7c4d;
 }
 .order-details .delivery-status p.active i{
     color: #26aa99;
 }
-.order-details .delivery-status p.active span:last-child{
+.order-details .delivery-status .trang-thai p.active span{
     color: #26aa99;
 }
 .order-details .product-info .product-info-header{
@@ -923,6 +923,8 @@ td.giaTienLS span{
     justify-content: space-between;
     align-items: center;
     color: #000;
+    border-bottom: 1px solid #7c7c7c4d;
+    padding: 5px;
 }
 .order-details .product-list {
     display: flex;
