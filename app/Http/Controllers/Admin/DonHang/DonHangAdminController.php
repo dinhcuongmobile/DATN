@@ -13,6 +13,7 @@ class DonHangAdminController extends Controller
     public function showDSDonHang() {
         $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
             ->whereIn('trang_thai', [0, 1, 2, 3, 4, 5]) // Lấy tất cả các trạng thái đơn hàng
+            ->MoiNhat()
             ->get();
         return view('admin.donHang.DSDonHang', compact('donHangs'));
     }
@@ -20,34 +21,44 @@ class DonHangAdminController extends Controller
     
     // Hiển thị danh sách đơn hàng chờ lấy hàng
     public function showDSChoLayHang() {
-        $donHangs = DonHang::where('trang_thai', 1)->get(); // 1 là trạng thái chờ lấy hàng
+        $donHangs = DonHang::where('trang_thai', 1)
+        ->MoiNhat()
+        ->get(); // 1 là trạng thái chờ lấy hàng
         return view('admin.donHang.choLayHang', compact('donHangs'));
 
     }
 
     // Hiển thị danh sách đang giao
     public function showDSDangGiao() {
-        $donHangs = DonHang::where('trang_thai', 2)->get(); //2 là trạng thái đang giao
+        $donHangs = DonHang::where('trang_thai', 2)
+        ->MoiNhat()
+        ->get(); //2 là trạng thái đang giao
         return view('admin.donHang.DSDangGiao', compact('donHangs'));
     }
     
     
     // Hiển thị danh sách đơn hàng đã giao
     public function showDSDaGiao() {
-        $donHangs = DonHang::where('trang_thai', 3)->get(); //3 là trang thái đã giao
+        $donHangs = DonHang::where('trang_thai', 3)
+        ->MoiNhat()
+        ->get(); //3 là trang thái đã giao
         return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
     
 
     // Hiển thị danh sách đơn hàng đã hủy
     public function showDSDaHuy() {
-        $donHangs = DonHang::where('trang_thai', 4)->get(); // 4 là trạng thái "Đã Hủy"
+        $donHangs = DonHang::where('trang_thai', 4)
+        ->MoiNhat()
+        ->get(); // 4 là trạng thái "Đã Hủy"
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
     }
 
     // Hiển thị danh sách đơn hàng chờ duyệt
     public function showDSKiemDuyet() {
-        $donHangs = DonHang::where('trang_thai', 0)->get(); // 0 là trạng thái chưa duyệt
+        $donHangs = DonHang::where('trang_thai', 0)
+        ->MoiNhat()
+        ->get(); // 0 là trạng thái chưa duyệt
         return view('admin.donHang.kiemDuyet', compact('donHangs'));
     }
 
@@ -87,13 +98,9 @@ class DonHangAdminController extends Controller
     // Hiển thị chi tiết đơn hàng
     public function showChiTietDonHang($id)
     {
-        // Lấy thông tin đơn hàng và các chi tiết liên quan
         $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($id);
-
-        // Tính tổng tiền sản phẩm từ chi tiết đơn hàng
         $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
 
-        // Truyền dữ liệu qua view
         return view('admin.donHang.chiTietDonHang', [
             'donHang' => $donHang,
             'tongTienSanPham' => $tongTienSanPham,
@@ -116,22 +123,6 @@ class DonHangAdminController extends Controller
         $donHang->save();
     
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được hủy thành công.');
-    }
-
-
-    // Hiển thị form cập nhật đơn hàng
-    public function showCapNhatDonHang(int $id) {
-        $donHang = DonHang::findOrFail($id);
-        return view('admin.donHang.update', compact('donHang'));
-    }
-
-    // Cập nhật trạng thái đơn hàng
-    public function capNhatDonHang(Request $request, int $id) {
-        $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = $request->trang_thai;
-        $donHang->save();
-
-        return redirect()->back()->with('success', 'Trạng thái đơn hàng đã được cập nhật.');
     }
 
     // Duyệt nhiều đơn hàng

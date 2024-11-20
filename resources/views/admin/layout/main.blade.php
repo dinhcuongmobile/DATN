@@ -172,6 +172,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('danh-muc-tin-tuc.danh-sach')}}">Danh mục tin tức</a>
                         <a class="collapse-item" href="{{route('tin-tuc.danh-sach')}}">Danh sách tin tức</a>
+                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa')}}">Thùng rác</a>
                     </div>
                 </div>
             </li>
