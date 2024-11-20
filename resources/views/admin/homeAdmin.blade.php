@@ -110,10 +110,10 @@
                                 </p>
                             </div>
                             <div class="col-md-3">
-                                <p>Từ ngày: <input type="text" id="datepicker" class="form-control" id="datepicker"></p>
+                                <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
                             </div>
                             <div class="col-md-3">
-                                <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" id="datepicker2">
+                                <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" >
                                 </p>
                             </div>
                             <div class="col-md-3">
@@ -340,17 +340,3 @@
         })
     </script>
 @endsection
-{{-- Chuyển tab thống kê --}}
-<script>
-    $(document).ready(function() {
-        // Khởi tạo tabs
-        $('#product-ranking-tab a').click(function(e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-        $('#industry-ranking-tab a').click(function(e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-    });
-</script>

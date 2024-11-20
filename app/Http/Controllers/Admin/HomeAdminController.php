@@ -24,10 +24,6 @@ class HomeAdminController extends Controller
         $tongTaiKhoan = User::count();
     return view('admin.homeAdmin', ['tongTaiKhoan' => $tongTaiKhoan,]);
     }
-    public function thongKeDonHang(){
-        $tongDonHang = DonHang::count();
-    return view('admin.homeAdmin', ['tongDonHang' => $tongDonHang,]);
-    }
     public function thongKeLuotXem(){
         if(!Session::has('luot_xem')){
             $tongLuotXem = Cache::get('tong_luot_xem', 0) + 1;
