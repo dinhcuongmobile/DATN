@@ -20,7 +20,7 @@ class UpdateDanhMucTinTucRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:danh_mucs,ten_danh_muc,'.$id,
+                'unique:danh_muc_tin_tucs,ten_danh_muc,'.$id,
                 'regex:/^[^\d]*$/'
             ],
         ];
