@@ -476,7 +476,7 @@
         </div>
         <div class="swiper blog-slide">
             <div class="swiper-wrapper">
-                @foreach ($tinTucs as $item)
+                @foreach ($tin_tucs as $item)
                 <div class="swiper-slide">
                     <div class="blog-main">
                         <div class="blog-box ratio3_2">
