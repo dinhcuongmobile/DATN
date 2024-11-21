@@ -222,49 +222,121 @@
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">{{ $donHangMoi->count() + $lienHeMoi->count() + $donHangDaGiao->count() + $lienHeDaPhanHoi->count() }}+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
-                                    Alerts Center
+                                    Thông Báo
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                        
+                                <!-- Thông báo đơn hàng mới -->
+                                @foreach($donHangMoi as $item)
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                            <i class="fas fa-box text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <div class="small text-gray-500">{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y')
+ }}</div>
+                                        <span class="font-weight-bold">Đơn hàng: {{ $item->ma_don_hang }} - Bạn có đơn hàng mới!</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @endforeach
+                        
+                                <!-- Thông báo đơn hàng đã giao -->
+                                @foreach($donHangDaGiao as $item)
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                            <i class="fas fa-truck text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
+                                        <div class="small text-gray-500">{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y')
+ }}</div>
+                                        <span class="font-weight-bold">Đơn hàng: {{ $item->ma_don_hang }} - Đã giao thành công!</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @endforeach
+                        
+                                <!-- Thông báo liên hệ mới -->
+                                @foreach($lienHeMoi as $item)
+                                <a class="dropdown-item d-flex align-items-center" href="{{route('lienhe.dsLienHeChuaPhanHoi')}}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                            <i class="fas fa-comments text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
+                                        <div class="small text-gray-500">{{ $item->created_at }}</div>
+                                        <span class="font-weight-bold">Bạn có liên hệ mới từ {{ $item->ho_va_ten }}!</span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                @endforeach
+                        
+                                <!-- Thông báo liên hệ đã phản hồi -->
+                                @foreach($lienHeDaPhanHoi as $item)
+                                <a class="dropdown-item d-flex align-items-center" href="{{route('lienhe.dsLienHeDaPhanHoi')}}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-info">
+                                            <i class="fas fa-check-circle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">{{ $item->created_at }}</div>
+                                        <span class="font-weight-bold">Liên hệ từ {{ $item->email }} đã được phản hồi!</span>
+                                    </div>
+                                </a>
+                                @endforeach
+                        
+                                <a class="dropdown-item text-center small text-gray-500" href="#" data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị Thông Báo</a>
                             </div>
                         </li>
+                        <!-- Modal for displaying all notifications -->
+                        <div class="modal fade" id="showAllAlertsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Tất Cả Thông Báo</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                                        <!-- Display all the notifications here -->
+                                        <!-- Thông báo đơn hàng mới -->
+                                        @foreach($donHangMoiAll as $item)
+                                        <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Bạn có đơn hàng mới!</strong></p>
+                                        <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small></p>
+                                        @endforeach
+
+                                        <!-- Thông báo đơn hàng đã giao -->
+                                        @foreach($donHangDaGiaoAll as $item)
+                                        <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Đã giao thành công!</strong></p>
+                                        <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small></p>
+                                        @endforeach
+
+                                        <!-- Thông báo liên hệ mới -->
+                                        @foreach($lienHeMoiAll as $item)
+                                        <p><strong>Liên hệ mới từ: {{ $item->ho_va_ten }}</strong></p>
+                                        <p><small>{{ $item->created_at }}</small></p>
+                                        @endforeach
+
+                                        <!-- Thông báo liên hệ đã phản hồi -->
+                                        @foreach($lienHeDaPhanHoiAll as $item)
+                                        <p><strong>Liên hệ từ: {{ $item->email }} đã được phản hồi!</strong></p>
+                                        <p><small>{{ $item->created_at }}</small></p>
+                                        @endforeach
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
