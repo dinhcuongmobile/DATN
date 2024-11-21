@@ -856,7 +856,6 @@
                                                                         <div class="cart-table-container tableDonMua">
                                                                             <table class="table">
                                                                                 <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
                                                                                     <tr>
                                                                                         <td colspan="2">
                                                                                             <span class="chatLS">💬 Chat</span>
@@ -892,6 +891,7 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </tr>
+                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
                                                                                     <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
@@ -1372,31 +1372,31 @@
                                         </div>
 
                                         <table class="table">
-                                            <tr>
+                                            <tr class="tongTienHang">
                                                 <th>Tổng tiền hàng</th>
                                                 <td>50.700 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="phiVanChuyen">
                                                 <th>Phí vận chuyển</th>
                                                 <td>16.500 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="giamGiaVanChuyen">
                                                 <th>Giảm giá phí vận chuyển</th>
                                                 <td>-15.000 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="giamGiaDonHang">
                                                 <th>Voucher giảm giá</th>
                                                 <td>-15.210 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="namadXu">
                                                 <th>Namad xu</th>
                                                 <td>-15.210 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="thanhTien">
                                                 <th>Thành tiền</th>
                                                 <td class="price">36.990 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="phuongThucThanhToan">
                                                 <th>Phương thức thanh toán</th>
                                                 <td>Ship COD</td>
                                             </tr>
