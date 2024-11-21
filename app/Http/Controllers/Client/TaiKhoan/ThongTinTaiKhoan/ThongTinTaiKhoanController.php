@@ -7,6 +7,7 @@ use App\Models\DiaChi;
 use App\Models\PhuongXa;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
+use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,13 @@ class ThongTinTaiKhoanController extends Controller
 
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
+
+        // Danh sách yêu thích
+        $this->views['yeuThichs'] = YeuThich::where('nguoi_dung_id', $tai_khoan->id)
+            ->join('san_phams', 'yeu_thichs.san_pham_id', '=', 'san_phams.id')
+            ->select('san_phams.*')
+            ->get();
+
 
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
