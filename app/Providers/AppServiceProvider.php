@@ -53,14 +53,6 @@ class AppServiceProvider extends ServiceProvider
         //danh mục tin tức
         $danh_muc_tin_tucs = DanhMucTinTuc::all();
         view()->share('danh_muc_tin_tucs', $danh_muc_tin_tucs);
-        //tin tức
-        view()->composer('client.home', function ($view) {
-            $tinTucs = TinTuc::with('user')
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-            $view->with('tinTucs', $tinTucs);
-        });
         //admin
         View::composer('admin.layout.main', function ($view) {
             // Lấy dữ liệu từ model
