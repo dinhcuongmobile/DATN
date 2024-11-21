@@ -1,86 +1,156 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
-<div class="container-fluid">  
-    
-    <h1 class="h3 mb-2 text-gray-800">Tất Cả Đơn Hàng (245)</h1>  
-    <div class="card shadow mb-4"> 
-        <div class="card-header py-3">
-            <div class=" float-right">
-                <form action="#" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm...">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+    <div class="container-fluid">
+
+        <h1 class="h3 mb-2 text-gray-800">Danh Sách Đơn Hàng ({{ $donHangs->count() }})</h1>
+
+        <!-- Các nút chức năng và thanh tìm kiếm -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="float-right">
+                    <form action="#" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
                         </div>
-                        
-                    </div>
-                </form>
-            </div>
-            <form action="" method="post">
-    
-                <div class="float-left">
-                    <a href="{{route('don-hang.danh-sach-kiem-duyet')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Xác Nhận</button></a>
-                    <a href="{{route('don-hang.danh-sach-cho-lay-hang')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button></a>
-                    <button type="submit" class="btn btn-secondary btn-sm" >Đang Giao</button>
-                    <a href="{{route('don-hang.danh-sach-da-giao')}}"><button type="submit" class="btn btn-secondary btn-sm" >Đã Giao</button></a>
-                    <a href="{{route('don-hang.danh-sach-da-huy')}}"><button type="submit" class="btn btn-secondary btn-sm">Đơn Hủy</button> </a>
-                    <button type="submit" class="btn btn-secondary btn-sm">Trả Hàng/Hoàn Tiền</button> 
+                    </form>
                 </div>
-            </form>
-        </div> 
-        <div class="card-body">  
-            <div class="table-responsive">  
-                <div class="d-flex justify-content-between mb-3">  
-                    <div>  
-                        <strong>Tên khách hàng: th.lie</strong>  
-                    </div>  
-                    <div>  
-                        <strong>Mã đơn hàng: 2411122SUHDYCS</strong>  
-                    </div>  
-                </div>  
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">  
-                    <thead>  
-                        <tr>  
-                           
-                            <th>Sản phẩm</th>  
-                            <th>Tổng cộng</th>  
-                            <th>Trạng thái</th>  
-                            <th>Đếm ngược</th>  
-                            <th>Đơn vị vận chuyển</th>  
-                            <th>Thao Tác</th>
-                        </tr>  
-                    </thead>  
-                    <tbody>  
-                        <tr>  
-                            
-                            <td>   
-                                gel metal nổi Gulauri 
-                                <span class="badge badge-secondary">x1</span>
-                                <br>  
-                                <small>Variation: Ngọc trai JC 11</small>
-                                <br>  
-                                gel metal nổi Gulauri 
-                                <span class="badge badge-secondary">x1</span>
-                                <br>  
-                                <small>Variation: Ảnh động JC 13</small>  
-                            </td>  
-                            <td>253.000₫<br><small>Thanh toán khi nhận hàng</small></td>  
-                            <td>Chờ lấy hàng<br><small>Để tránh việc giao hàng trễ</small></td>  
-                            <td>Nhanh</td>  
-                            <td>SPX Express</td>  
-                            <td>
-                                <button class="btn btn-primary btn-sm">Xem Chi Tiết</button>
-                            </td>
-                        </tr>  
-                        
-                        <!-- Thêm nhiều sản phẩm khác tại đây -->  
-                    </tbody>  
-                </table>  
-            </div>  
-        </div>  
-    </div>  
-    
-</div>  
+                <div class="float-left">
+                    <a href="{{ route('don-hang.danh-sach-kiem-duyet') }}"><button type="button"
+                            class="btn btn-secondary btn-sm">Chờ Xác Nhận</button></a>
+                    <a href="{{ route('don-hang.danh-sach-cho-lay-hang') }}"><button type="button"
+                            class="btn btn-secondary btn-sm">Chờ Lấy Hàng</button></a>
+                    <a href="{{ route('don-hang.danh-sach-dang-giao') }}"><button type="button"
+                            class="btn btn-secondary btn-sm">Đang Giao</button></a>
+                    <a href="{{ route('don-hang.danh-sach-da-giao') }}"><button type="button"
+                            class="btn btn-secondary btn-sm">Đa Giao</button></a>
+                    <a href="{{ route('don-hang.danh-sach-da-huy') }}"><button type="button"
+                            class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
+                    <button type="button" class="btn btn-secondary btn-sm">Trả Hàng/Hoàn Tiền</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hiển thị mỗi đơn hàng trong một bảng riêng -->
+        @foreach ($donHangs as $item)
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <!-- Tên khách hàng và mã đơn hàng -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <div>
+                            <strong>Tên khách hàng: {{ $item->user->ho_va_ten }}</strong>
+                        </div>
+                        <div>
+                            <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng cộng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thanh Toán</th>
+                                    <th>Đơn vị vận chuyển</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">
+                                        <input type="checkbox" name="select[]" value="{{ $item->id }}">
+                                    </td>
+                                    <td class="col-4">
+                                        @foreach ($item->chiTietDonHangs as $chiTiet)
+                                            <img src="{{ Storage::url($chiTiet->bienThe->hinh_anh) }}" alt="product"
+                                                width="15%">
+                                            {{ $chiTiet->sanPham->ten_san_pham }}
+                                            <span class="badge badge-secondary">x{{ $chiTiet->so_luong }}</span>
+                                            <br>
+                                            <small>Loại: {{ $chiTiet->bienThe->kich_co }},
+                                                {{ $chiTiet->bienThe->ten_mau }}</small>
+                                            <br>
+                                        @endforeach
+                                    </td>
+                                    <td>{{ number_format($item->tong_thanh_toan, 0, ',', '.') }}₫</td>
+                                    <td>
+                                        <p><span
+                                                style="color:#2ecc71; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
+                                                @if ($item->trang_thai == 0)
+                                                    Chờ Xác Nhận
+                                                @elseif($item->trang_thai == 1)
+                                                    Đơn Hàng Mới
+                                                @elseif($item->trang_thai == 2)
+                                                    Đang Chuẩn Bị Hàng
+                                                @elseif($item->trang_thai == 3)
+                                                    Đang Giao
+                                                @elseif($item->trang_thai == 4)
+                                                    Đã Giao
+                                                @else
+                                                    Đã Hủy
+                                                @endif
+                                            </span></p>
+                                    </td>
+                                    <td class="col-2">
+                                        {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
+                                    </td>
+                                    <td class="col-1">GHTK</td>
+                                    <td>
+                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 || $item->trang_thai == 2)
+                                            {{-- Các nút tùy thuộc trạng thái --}}
+                                            @if ($item->trang_thai == 0)
+                                                {{-- Trạng thái chờ xác nhận --}}
+                                                <form action="{{ route('don-hang.duyet-don-hang', $item->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm">Duyệt</button>
+                                                </form>
+                                                <form action="{{ route('don-hang.huy-don-hang', $item->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
+                                                </form>
+                                            @elseif ($item->trang_thai == 1)
+                                                {{-- Trạng thái chờ lấy hàng --}}
+                                                <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy
+                                                        hàng</button>
+                                                </form>
+                                            @elseif ($item->trang_thai == 2)
+                                                {{-- Trạng thái đang giao --}}
+                                                <form action="{{ route('don-hang.da-giao', $item->id) }}" method="POST"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success btn-sm">Đã giao</button>
+                                                </form>
+                                            @endif
+
+                                            {{-- Thẻ <hr> chỉ xuất hiện khi có nút --}}
+                                            <hr>
+                                        @endif
+
+                                        <a href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}">
+                                            <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+    </div>
 @endsection

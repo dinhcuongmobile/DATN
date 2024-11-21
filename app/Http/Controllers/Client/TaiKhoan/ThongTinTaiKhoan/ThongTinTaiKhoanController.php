@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan;
 
+use App\Models\Coin;
 use App\Models\User;
 use App\Models\DiaChi;
+use App\Models\DonHang;
 use App\Models\PhuongXa;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
 use App\Models\YeuThich;
 use Illuminate\Http\Request;
+use App\Models\ChiTietDonHang;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
-use App\Models\Coin;
-use App\Models\DonHang;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -56,7 +57,32 @@ class ThongTinTaiKhoanController extends Controller
             ->select('san_phams.*')
             ->get();
 
+        //
+        $don_hangs = [
+            'trang_thai_all' => DonHang::with('user','diaChi')->where('user_id',Auth::user()->id)->orderBy('id','desc')->get(),
+            //chua duyet
+            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('id','desc')->get(),
+            //dang chuan bi hang
+            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('id','desc')->get(),
+            //dang giao
+            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('id','desc')->get(),
+            //da giao
+            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id','desc')->get(),
+            //da huy
+            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id','desc')->get(),
+            //tra hang/ hoan tien
+            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->orderBy('id','desc')->get(),
+        ];
 
+        $chi_tiet_don_hangs = [];
+
+        foreach ($don_hangs as $key => $items) {
+            foreach ($items as $item) {
+                $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$item->id)->get();
+            }
+        }
+        $this->views['don_hangs'] = $don_hangs;
+        $this->views['chi_tiet_don_hangs'] = $chi_tiet_don_hangs;
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
 

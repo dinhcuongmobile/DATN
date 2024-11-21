@@ -253,7 +253,9 @@
                                 <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Áo Sơ Mi</a></li>
+                                        @foreach ($danh_muc_tin_tucs as $item)
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc', $item->id) }}">{{$item->ten_danh_muc}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên Hệ </a></li>
@@ -273,7 +275,7 @@
                                         <ul>
                                             @if (Auth::check())
                                                 <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tài khoản</a></li>
-                                                <li> <a href="{{ route('don-hang.don-mua') }}">Đơn mua</a></li>
+                                                <li> <a class="donMuaMenu">Đơn mua</a></li>
                                                 <li> <a href="{{ route('tai-khoan.dang-xuat') }}">Đăng Xuất</a></li>
                                             @else
                                                 <li> <a href="{{route('tai-khoan.dang-nhap')}}">Đăng Nhập </a></li>
@@ -339,11 +341,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Về Chúng Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="index.html">Trang Chủ</a></li>
-                                        <li> <a class="nav" href="collection-left-sidebar.html">Giới Thiệu</a></li>
-                                        <li> <a class="nav" href="about-us.html">Sản Phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin Tức</a></li>
-                                        <li> <a class="nav" href="contact.html">Liên Hệ</a></li>
+                                        <li> <a class="nav" href="{{route('trang-chu.home')}}">Trang chủ</a></li>
+                                        <li> <a class="nav" href="{{route('gioi-thieu')}}">Giới thiệu</a></li>
+                                        <li> <a class="nav" href="{{route('san-pham.san-pham')}}">Sản phẩm</a></li>
+                                        <li> <a class="nav" href="{{route('tin-tuc.tin-tuc')}}">Tin tức</a></li>
+                                        <li> <a class="nav" href="{{route('lien-he.lien-he')}}">Liên hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -353,13 +355,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Danh mục mới</h5>
+                                    <h5>Danh Mục</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
-                                        <li> <a class="nav" href="variant-radio.html">Quần Jeans hiệu</a></li>
-                                        <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
-                                        <li> <a class="nav" href="variant-images.html">Áo Hoodie Nhiều Màu Sắc</a></li>
-                                        <li> <a class="nav" href="variant-dropdown.html">Nước hoa tốt nhất</a></li>
+                                        @foreach ($danh_mucs as $item)
+                                        <li> 
+                                            <a class="nav" href="{{route('san-pham.san-pham-danh-muc',$item->id)}}">{{$item->ten_danh_muc}}</a>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -374,8 +376,8 @@
                                         <li> <a class="nav" href="order-success.html">Đơn hàng của bạn</a></li>
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
-                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn của bạn</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
+                                        <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
+                                        <li> <a class="nav" href="#">Câu hỏi thường gặp </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -385,13 +387,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Tài khoản của tôi</h5>
+                                    <h5>Tài Khoản Của Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của tôi</a></li>
-                                        <li> <a class="nav" href="login.html">Đăng nhập/Đăng ký</a></li>
-                                        <li> <a class="nav" href="cart.html">Giỏ Hàng</a></li>
+                                        <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
+                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp về mua sắm</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -523,68 +525,37 @@
             </div>
         </div>
     @endif
-    {{-- xem nhanh san pham quick view --}}
+    {{-- Xem nhanh sản phẩm quick view --}}
     <div class="modal theme-modal fade" id="quick-view" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-body"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                <div class="modal-body">
+                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="row align-items-center">
-                        <div class="col-lg-6 col-xs-12">
-                            <div class="quick-view-img">
-                                <div class="swiper modal-slide-1">
-                                    <div class="swiper-wrapper ratio_square-2">
-                                        <div class="swiper-slide anhLon1"><img class="bg-img" src="{{asset('assets/images/pro/1.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhLon2"><img class="bg-img" src="{{asset('assets/images/pro/2.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhLon3"><img class="bg-img" src="{{asset('assets/images/pro/3.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhLon4"><img class="bg-img" src="{{asset('assets/images/pro/4.jpg')}}"
-                                                alt=""></div>
-                                    </div>
-                                </div>
-                                <div class="swiper modal-slide-2">
-                                    <div class="swiper-wrapper ratio3_4">
-                                        <div class="swiper-slide anhNho1"><img class="bg-img" src="{{asset('assets/images/pro/5.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhNho2"><img class="bg-img" src="{{asset('assets/images/pro/6.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhNho3"><img class="bg-img" src="{{asset('assets/images/pro/7.jpg')}}"
-                                                alt=""></div>
-                                        <div class="swiper-slide anhNho4"><img class="bg-img" src="{{asset('assets/images/pro/8.jpg')}}"
-                                                alt=""></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-lg-6 col-xs-12 img-quick-view"></div>
                         <div class="col-lg-6 rtl-text">
                             <div class="product-right">
                                 <h3></h3>
                                 <h5></h5>
-                                <ul class="color-variant">
-                                    <li class="bg-color-brown"></li>
-                                    <li class="bg-color-chocolate"></li>
-                                    <li class="bg-color-coffee"></li>
-                                    <li class="bg-color-black"></li>
-                                </ul>
+                                <input type="hidden" id="mauSac-quick-view" value="">
+                                <ul class="color-variant" id="selectMauSac-quick-view"></ul>
                                 <div class="product-description">
                                     <div class="size-box">
-                                        <ul>
-                                            <li class="active"><a href="#">s</a></li>
-                                            <li><a href="#">m</a></li>
-                                            <li><a href="#">l</a></li>
-                                            <li><a href="#">xl</a></li>
-                                        </ul>
+                                        <input type="hidden" id="size-quick-view" value="">
+                                        <ul id="selectSize-quick-view"></ul>
                                     </div>
-                                    <h6 class="product-title">Quantity</h6>
-                                    <div class="quantity"><button class="minus" type="button"><i
-                                                class="fa-solid fa-minus"></i></button><input type="number" value="1"
-                                            min="1" max="20"><button class="plus" type="button"><i
-                                                class="fa-solid fa-plus"></i></button></div>
+                                    <p class="text-danger" id="errSelect-quick-view">Vui lòng chọn phân loại hàng !</p>
+                                    <h6 class="product-title">Số lượng</h6>
+                                    <div class="quantity">
+                                        <button class="minus" type="button" disabled> <i class="fa-solid fa-minus" ></i> </button>
+                                        <input type="hidden" id="soLuong-quick-view" value="1">
+                                        <input type="number" value="1" min="1" readonly>
+                                        <button class="plus" type="button" disabled> <i class="fa-solid fa-plus"></i> </button>
+                                    </div>
                                 </div>
-                                <div class="product-buttons"><a class="btn btn-solid" href="cart.html">Thêm vào giỏ hàng</a><a
-                                        class="btn btn-solid" href="product.html">Xem chi tiết</a></div>
+                                <input class="tokenThemGioHang" type="hidden"  name="_token" value="{{ csrf_token() }}" />
+                                <div class="product-buttons">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -592,6 +563,7 @@
             </div>
         </div>
     </div>
+
     {{-- cửa sổ nhỏ thêm thành công sản phẩm vào giỏ hàng --}}
     <div class="modal theme-modal fade cart-modal" id="addtocart" tabindex="-1" role="dialog" aria-modal="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -660,6 +632,7 @@
             </div>
         </div>
     </div>
+    {{-- tim kiem --}}
     <div class="offcanvas offcanvas-top search-details" id="offcanvasTop" tabindex="-1"
         aria-labelledby="offcanvasTopLabel">
         <div class="offcanvas-header"><button class="btn-close" type="button" data-bs-dismiss="offcanvas"
@@ -849,35 +822,6 @@
             </div>
         </div>
     </div>
-    {{-- <div class="modal theme-modal newsletter-modal newsletter-4 fade" id="newsletter" tabindex="-1" role="dialog"
-        aria-modal="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content"><button class="btn-close" type="button" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-                <div class="modal-body p-0">
-                    <div class="news-latter-box">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <div class="newslwtter-content">
-                                    <h2>Stay Fashionable</h2><span>Stay Informed</span>
-                                    <h4>Subscriber to Our Newsletter!</h4>
-                                    <p>Keep up to date so you don't miss any new updates or goods we reveal.</p>
-                                    <div class="form-floating"><input type="text" placeholder="Enter Your Name.."></div>
-                                    <div class="form-floating"><input type="email" placeholder="Enter Your Email..">
-                                    </div><button class="btn btn-submit" type="submit" data-bs-dismiss="modal"
-                                        aria-label="Close">Submit</button>
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-none d-lg-block">
-                                <div class="newslwtter-img"> <img class="img-fluid"
-                                        src="{{asset('assets/images/other-img/news-latter4.png')}}" alt=""></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     <!-- Bootstrap js-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -885,11 +829,9 @@
     <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/iconsax.js')}}"> </script><!-- cursor js-->
     <script src="{{asset('assets/js/stats.min.js')}}"> </script>
-    <script src="{{asset('assets/js/cursor.js')}}"> </script>
     <script src="{{asset('assets/js/swiper-slider/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/swiper-slider/swiper-custom.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>
-    <script src="{{asset('assets/js/newsletter.js')}}"></script>
     <script src="{{asset('assets/js/skeleton-loader.js')}}"></script><!-- touchspin-->
     <script src="{{asset('assets/js/cookie.js')}}"></script><!-- tost js -->
     <script src="{{asset('assets/js/toastify.js')}}"></script>

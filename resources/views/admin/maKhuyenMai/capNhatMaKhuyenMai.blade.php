@@ -37,13 +37,6 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="" class="form-label">Ngày bắt đầu</label>
-                <input type="date" class="form-control" name="ngay_bat_dau" value="{{old('ngay_bat_dau',$khuyen_mai->ngay_bat_dau)}}">
-                @error('ngay_bat_dau')
-                    <p class="text-danger mt-1">{{$message}}</p>
-                @enderror
-            </div>
-            <div class="mb-3">
                 <label for="" class="form-label">Ngày kết thúc</label>
                 <input type="date" class="form-control" name="ngay_ket_thuc" value="{{old('ngay_ket_thuc',$khuyen_mai->ngay_ket_thuc)}}">
                 @error('ngay_ket_thuc')

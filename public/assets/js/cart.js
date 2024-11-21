@@ -1,3 +1,4 @@
+
 //chon tất cả
 const buttonSelectAll = document.querySelector('#selectAll');
 const ipSelectAll = document.querySelector('.cart-table .table-title input[type="checkbox"]');

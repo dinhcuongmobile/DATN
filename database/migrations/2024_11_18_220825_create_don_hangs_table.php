@@ -18,13 +18,14 @@ return new class extends Migration
             $table->foreignId('dia_chi_id')->constrained('dia_chis')->onDelete('cascade');
             $table->double('giam_gia_van_chuyen', 10, 2)->default(0);
             $table->double('giam_gia_don_hang', 10, 2)->default(0);
+            $table->integer('namad_xu')->default(0);
             $table->double('tong_thanh_toan', 20, 2);
             $table->integer('phuong_thuc_thanh_toan')->default(0)->comment('0. ship cod, 1. Chuyển khoản');
-            $table->integer('trang_thai')->default(0)->comment('0. chưa duyệt 1.Đơn hàng mới 2.Đang chuẩn bị hàng 3. Đang giao 4. Đã giao 5. Đã hủy');
+            $table->integer('trang_thai')->default(0)->comment('0. chưa duyệt 1.Đang chuẩn bị hàng 2. Đang giao 3. Đã giao 4. Đã hủy 5. Trả hàng/Hoàn tiền');
             $table->integer('thanh_toan')->default(0)->comment('0. Chưa thanh toán, 1. Đã thanh toán');
             $table->text('ghi_chu')->nullable();
-            $table->dateTime('ngay_dat_hang');
-            $table->timestamps();
+            $table->date('ngay_tao')->nullable();
+            $table->dateTime('ngay_cap_nhat')->nullable();
         });
     }
 

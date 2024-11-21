@@ -1,4 +1,23 @@
-
+document.addEventListener('DOMContentLoaded',()=>{
+    const togglePassword = document.querySelectorAll('.toggle-password');
+    if(togglePassword){
+        togglePassword.forEach((el)=>{
+            el.addEventListener('click',function(){
+                const passwordInput = el.closest('.password').querySelector('.inputPassword');
+                const passwordIcon = el.querySelector('i');
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    passwordIcon.classList.remove('fa-eye-slash');
+                    passwordIcon.classList.add('fa-eye');
+                } else {
+                    passwordInput.type = "password";
+                    passwordIcon.classList.remove('fa-eye');
+                    passwordIcon.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    }
+});
 // Lưu trạng thái khi vào trang chi tiết thanh toán
 let checkUrl = false;
 if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
@@ -13,6 +32,196 @@ if (!checkUrl) {
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
+    });
+}
+
+// don-mua-menu-click
+const donMuaMenu = document.querySelector('.donMuaMenu');
+if (donMuaMenu) {
+    donMuaMenu.addEventListener('click',function(){
+        if (window.location.pathname !== '/tai-khoan/thong-tin-tai-khoan') {
+            sessionStorage.setItem("activeTab", "order");
+            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+        }else{
+            let checkNavLink = document.querySelectorAll('.nav-link');
+            let checkTabPane = document.querySelectorAll('.tab-pane');
+            checkNavLink.forEach((el)=>{
+                el.classList.remove('active');
+                el.setAttribute('aria-selected', 'false');
+                el.setAttribute('tabindex', '-1');
+            });
+
+            checkTabPane.forEach((el)=>{
+                el.classList.remove('active','show');
+            });
+
+            const donHangTab = document.querySelector('#order-tab');
+            const donHangContent = document.querySelector('#order');
+
+            donHangTab.classList.add('active');
+            donHangTab.setAttribute('aria-selected', 'true');
+            if (donHangTab.hasAttribute('tabindex') && donHangTab.getAttribute('tabindex') === "-1") {
+                donHangTab.removeAttribute('tabindex');
+            }
+
+            donHangContent.classList.add('active','show');
+        }
+    })
+}
+
+//chi-tiet-don-mua click
+const productRow = document.querySelectorAll('.order .product-row');
+if (productRow) {
+    productRow.forEach((el)=>{
+        el.addEventListener('click',function(){
+            const donHangContent = document.querySelector('#order');
+            const chiTietDonHangContent = document.querySelector('#order-details');
+            const donHangId= el.getAttribute('data-donHangId');
+
+            $.ajax({
+                type: 'GET',
+                url: '/don-hang/chi-tiet-don-hang/',
+                data: {
+                    donHangId: donHangId
+                },
+                success: function (response) {
+                    if(response.success){
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                        let donHang = response.don_hang;
+                        let diaChi = response.dia_chi;
+                        let chiTietDonHang = response.chi_tiet_don_hangs;
+
+                        console.log(donHang,diaChi,chiTietDonHang);
+
+                        document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
+                        document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
+                        document.querySelector('#order-details .van-chuyen .sdt-nhan').textContent = `(+84) ${diaChi.so_dien_thoai_nhan.slice(1)}`;
+                        document.querySelector('#order-details .van-chuyen .dia-chi-nhan').textContent = `
+                            ${diaChi.dia_chi_chi_tiet?diaChi.dia_chi_chi_tiet + ", " : ""}
+                            ${diaChi.phuong_xa.ten_phuong_xa},
+                            ${diaChi.quan_huyen.ten_quan_huyen},
+                            ${diaChi.tinh_thanh_pho.ten_tinh_thanh_pho}.
+                        `;
+                        document.querySelector('#order-details .list-san-pham').innerHTML="";
+                        chiTietDonHang.forEach((item)=>{
+                            $('#order-details .list-san-pham').prepend(
+                                `<a class="product-list-a" href="">
+                                    <div class="product-list">
+                                        <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
+                                        <div class="product-details">
+                                            <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                            <p class="phanLoaiHang">Phân loại hàng:
+                                                <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
+                                            </p>
+                                            <p>x${item.so_luong}</p>
+                                        </div>
+                                    </div>
+                                    <div class="giaTienLS">
+                                        <span>200000đ</span>
+                                        <span><del>200000đ</del></span>
+                                    </div>
+                                </a>`
+                            );
+                        });
+
+                        const timeline = document.querySelector('#order-details .timeline');
+                        const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
+                        timeline.querySelectorAll('i').forEach((el)=>{
+                            el.classList.remove('change','next-change');
+                        });
+                        deliveryStatus.querySelectorAll('p').forEach((el)=>{
+                            el.classList.remove('active');
+                        });
+                        switch (donHang.trang_thai) {
+                            case 0:
+                                //thong bao
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-warning'>Chờ xác nhận</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
+
+                                break;
+                            case 1:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đang chuẩn bị hàng</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
+                            break;
+                            case 2:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đang giao</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('change');
+                                timeline.querySelector('.three i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
+                            break;
+                            case 3:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-success'>Đã giao</span>";
+
+                                //trang thai theo doi
+                                timeline.querySelector('.zezo i').classList.add('change');
+                                timeline.querySelector('.one i').classList.add('change');
+                                timeline.querySelector('.two i').classList.add('change');
+                                timeline.querySelector('.three i').classList.add('change');
+                                timeline.querySelector('.four i').classList.add('change');
+                                timeline.querySelector('.five i').classList.add('next-change');
+                                deliveryStatus.innerHTML=`
+                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đã được giao thành công tới ${diaChi.ho_va_ten_nhan}</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                `;
+                            break;
+                            case 4:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-danger'>Đã hủy</span>";
+                            break;
+                            case 5:
+                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
+                            break;
+                        }
+
+                        //show
+                        donHangContent.classList.remove('active','show');
+                        chiTietDonHangContent.classList.add('active','show');
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
+        });
+    });
+
+    const quayLai = document.querySelector('#order-details .header .back');
+    quayLai?.addEventListener('click',function(){
+        const donHangContent = document.querySelector('#order');
+        const chiTietDonHangContent = document.querySelector('#order-details');
+
+        chiTietDonHangContent.classList.remove('active','show');
+        donHangContent.classList.add('active','show');
     });
 }
 
@@ -94,59 +303,295 @@ $(document).ready(function(){
 
 //end don mua
 
-// document.querySelectorAll('.quickViewClick').forEach((el) => {
-//     el.addEventListener('click', function () {
-//         $('#quick-view').modal('show');
-//         let sanPhamID = el.getAttribute('data-id');
+//quick-view
+let selectedSizeQuickView = null;
+let selectedColorQuickView = null;
+var ipSize = document.getElementById('size-quick-view');
+var ipMauSac = document.getElementById('mauSac-quick-view');
+const soLuong = document.querySelectorAll('#quick-view .quantity');
+document.querySelectorAll('.quickViewClick').forEach((el) => {
+    el.addEventListener('click', function () {
+        $('#quick-view').modal('show');
+        document.querySelector('#errSelect-quick-view').style.display = 'none';
+        let sanPhamID = el.getAttribute('data-id');
+        document.querySelector('#quick-view').setAttribute('data-id',sanPhamID);
 
-//         $.ajax({
-//             type: 'GET',
-//             url: '/home/quick-view/',
-//             data: {
-//                 san_pham_id: sanPhamID
-//             },
-//             success: function (response) {
-//                 console.log(response.hinhAnh[0].hinh_anh);
+        $.ajax({
+            type: 'GET',
+            url: '/home/quick-view/',
+            data: { san_pham_id: sanPhamID },
+            success: function (response) {
+                let sanPham = response.san_pham;
+                let kichCos = response.kich_cos;
+                let bienThes = sanPham.bien_thes;
 
-//                 let sanPham = response.san_pham;
-//                 // Cập nhật tên sản phẩm
-//                 document.querySelector('.product-right h3').textContent = sanPham.ten_san_pham;
+                // Cập nhật tên sản phẩm
+                document.querySelector('#quick-view .product-right h3').textContent = sanPham.ten_san_pham;
 
-//                 // Cập nhật giá sản phẩm
-//                 const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai/100);
-//                 document.querySelector('.product-right h5').innerHTML = `${giaBan.toLocaleString('vi-VN')}đ <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
+                // Cập nhật giá sản phẩm
+                const giaBan = sanPham.gia_san_pham - (sanPham.gia_san_pham * sanPham.khuyen_mai / 100);
+                document.querySelector('#quick-view .product-right h5').innerHTML = `<span class="giaKhuyenMai" data-giaKM="${giaBan}">${giaBan.toLocaleString('vi-VN')}đ</span> <del>${sanPham.gia_san_pham.toLocaleString('vi-VN')}đ</del>`;
 
-//                 // Cập nhật các slide ảnh
-//                 const slide1Wrapper = document.querySelector('#quick-view .ratio_square-2');
-//                 const slide2Wrapper = document.querySelector('#quick-view .ratio3_4');
-//                 if(response.hinhAnh[0]){
-//                     slide1Wrapper.querySelector('.anhLon1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho1 img').src= `/storage/${response.hinhAnh[0].hinh_anh}`;
-//                 }
+                // Cập nhật ảnh
+                document.querySelector('#quick-view .img-quick-view').innerHTML = `<img src="/storage/${sanPham.hinh_anh}" alt="err" width="100%">`;
 
-//                 if(response.hinhAnh[4]){
-//                     slide1Wrapper.querySelector('.anhLon2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho2 img').src= `/storage/${response.hinhAnh[4].hinh_anh}`;
-//                 }
+                // Cập nhật link "button"
+                document.querySelector('#quick-view .product-buttons').innerHTML = `
+                    <a class="btn btn-solid" id="themGioHang-quick-view" data-id="${sanPhamID}" href="javascript:void(0);">Thêm vào giỏ hàng</a>
+                    <a class="btn btn-solid chiTiet" href="/san-pham/chi-tiet-san-pham/${sanPhamID}">Xem chi tiết</a>
+                `;
 
-//                 if(response.hinhAnh[8]){
-//                     slide1Wrapper.querySelector('.anhLon3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho3 img').src= `/storage/${response.hinhAnh[8].hinh_anh}`;
-//                 }
+                // Cập nhật kích cỡ
+                let kichCoBox = document.querySelector('#selectSize-quick-view');
+                kichCoBox.innerHTML = "";
 
-//                 if(response.hinhAnh[12]){
-//                     slide1Wrapper.querySelector('.anhLon4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
-//                     slide2Wrapper.querySelector('.anhNho4 img').src= `/storage/${response.hinhAnh[12].hinh_anh}`;
-//                 }
+                let kichCoTonTai = kichCos.filter((item) =>
+                    bienThes.some((bienThe) => bienThe.kich_co === item.kich_co)
+                );
+                kichCoTonTai.forEach((item) => {
+                    kichCoBox.innerHTML += `<li data-size="${item.kich_co}"><a href="javascript:void(0);">${item.kich_co}</a></li>`;
+                });
 
-//             },
-//             error: function (error) {
-//                 console.error('Lỗi: ', error);
-//                 alert('Có lỗi xảy ra');
-//             }
-//         });
-//     });
-// });
+                // Cập nhật màu sắc
+                let mauSacBox = document.querySelector('#selectMauSac-quick-view');
+                mauSacBox.innerHTML = "";
+
+                let mauSacTonTai = bienThes.reduce((unique, item) => {
+                    if (!unique.some((u) => u.ma_mau === item.ma_mau)) unique.push(item);
+                    return unique;
+                }, []);
+                mauSacTonTai.forEach((item) => {
+                    mauSacBox.innerHTML += `<li data-color="${item.ma_mau}" style="background-color: ${item.ma_mau}; border: 1px solid #0000003b;" title="${item.ten_mau}"></li>`;
+                });
+                selectSize();
+                selectColor();
+                updateQuantity();
+                soLuongMua();
+                themGioHang();
+            },
+            error: function (error) {
+                console.error('Lỗi: ', error);
+                alert('Có lỗi xảy ra');
+            }
+        });
+    });
+});
+
+function soLuongMua() {
+    // Đặt sự kiện `click` cho nút Plus và Minus
+    soLuong.forEach((element) => {
+        const addButton = element.querySelector('.plus');
+        const subButton = element.querySelector('.minus');
+        const inputEl = element.querySelector("input[type='number']");
+        const ipHidden = element.querySelector('#soLuong-quick-view');
+
+        // Nút tăng số lượng
+        addButton.addEventListener('click', function () {
+            if (inputEl.value < parseInt(inputEl.getAttribute('data-max'))) {
+                inputEl.value = Number(inputEl.value) + 1;
+                ipHidden.value = inputEl.value;
+                subButton.disabled = false;
+            }
+            if (inputEl.value == parseInt(inputEl.getAttribute('data-max'))) {
+                addButton.disabled = true;
+            }
+        });
+
+        // Nút giảm số lượng
+        subButton.addEventListener('click', function () {
+            if (inputEl.value > 1) {
+                inputEl.value = Number(inputEl.value) - 1;
+                ipHidden.value = inputEl.value;
+                addButton.disabled = false;
+            }
+            if (inputEl.value == 1) {
+                subButton.disabled = true;
+            }
+        });
+    });
+}
+
+function maxInputQuantity(soLuongTon){
+    soLuong.forEach((element) => {
+        const addButton = element.querySelector('.plus');
+        const subButton = element.querySelector('.minus');
+        const inputEl = element.querySelector("input[type='number']");
+
+        inputEl.setAttribute('data-max', soLuongTon);
+        inputEl.value = Math.min(inputEl.value, soLuongTon);
+        addButton.disabled = inputEl.value >= soLuongTon;
+        subButton.disabled = inputEl.value <= 1;
+    });
+}
+// Hàm cập nhật tồn kho qua AJAX
+function updateQuantity() {
+    if (selectedSizeQuickView && selectedColorQuickView) {
+        document.querySelector('#errSelect-quick-view').style.display = 'none';
+        let san_pham_id = document.querySelector('#quick-view').getAttribute('data-id');
+
+        $.ajax({
+            url: '/san-pham/so-luong-ton-kho',
+            method: 'GET',
+            data: {
+                kich_co: selectedSizeQuickView,
+                mau_sac: selectedColorQuickView,
+                san_pham_id: san_pham_id
+            },
+            success: function (response) {
+                var soLuongTon = response.quantity;
+                if (soLuongTon > 0) {
+                    document.querySelector('#quick-view .product-buttons').innerHTML = `
+                        <a class="btn btn-solid" id="themGioHang-quick-view" data-id="${san_pham_id}" href="javascript:void(0);">Thêm vào giỏ hàng</a>
+                        <a class="btn btn-solid chiTiet" href="/san-pham/chi-tiet-san-pham/${san_pham_id}">Xem chi tiết</a>
+                    `;
+                    document.querySelector("#quick-view .quantity input[type='number']").value=1;
+                } else {
+                    document.querySelector('#quick-view .product-buttons').innerHTML=`<button class="btn btn_black sm">Hết hàng</button>`;
+                }
+                // Cập nhật giá trị tối đa cho input
+                maxInputQuantity(soLuongTon);
+                themGioHang();
+            },
+            error: function () {
+                alert('Có lỗi xảy ra khi lấy số lượng tồn kho!');
+            }
+        });
+    }else{
+        document.querySelector('#quick-view .plus').disabled=true;
+        document.querySelector('#quick-view .minus').disabled=true;
+        document.querySelector("#quick-view input[type='number']").value=1;
+
+    }
+}
+
+// Xử lý chọn kích cỡ
+function selectSize(){
+    document.querySelectorAll('#selectSize-quick-view li').forEach(function (sizeElement) {
+        sizeElement.addEventListener('click', function () {
+            if (this.classList.contains('active')) {
+                this.classList.remove('active');
+                selectedSizeQuickView = null;
+                ipSize.value = "";
+            } else {
+                selectedSizeQuickView = this.getAttribute('data-size');
+                ipSize.value = selectedSizeQuickView;
+
+                document.querySelectorAll('#selectSize-quick-view li').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            }
+            updateQuantity();
+        });
+    });
+}
+
+// Xử lý chọn màu sắc
+function selectColor(){
+    document.querySelectorAll('#selectMauSac-quick-view li').forEach(function (colorElement) {
+        colorElement.addEventListener('click', function () {
+            if (this.classList.contains('activ')) {
+                this.classList.remove('activ');
+                selectedColorQuickView = null;
+                ipMauSac.value = "";
+            } else {
+                selectedColorQuickView = this.getAttribute('data-color');
+                ipMauSac.value = selectedColorQuickView;
+
+                document.querySelectorAll('#selectMauSac-quick-view li').forEach(el => el.classList.remove('activ'));
+                this.classList.add('activ');
+            }
+            updateQuantity();
+        });
+    });
+}
+
+// Thêm vào giỏ hàng
+function themGioHang(){
+    let btnThemGioHang = document.querySelector('#themGioHang-quick-view');
+
+    if (btnThemGioHang) {
+        btnThemGioHang.addEventListener('click', function () {
+            if (selectedSizeQuickView && selectedColorQuickView) {
+                let token= document.querySelector("#quick-view .tokenThemGioHang").value;
+                let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                let soLuong = document.querySelector('#soLuong-quick-view').value;
+                let giaKhuyenMai = document.querySelector('#quick-view .giaKhuyenMai').getAttribute('data-giaKM');
+                let kichCo = ipSize.value;
+                let maMau = ipMauSac.value;
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/gio-hang/them-gio-hang/',
+                    data: {
+                        _token: token,
+                        san_pham_id: sanPhamID,
+                        gia_khuyen_mai: Number(giaKhuyenMai),
+                        so_luong: Number(soLuong),
+                        kich_co: kichCo,
+                        ma_mau: maMau
+                    },
+                    success: function (response) {
+                        if (response.login == false) {
+                            window.location.href = '/tai-khoan/dang-nhap';
+                        } else {
+                            $('#quick-view').modal('hide');
+                            $('#addtocart').modal('show');
+                            let tenSanPham = document.querySelector('#quick-view .product-right h3');
+                            document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
+                            document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                            document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+            } else {
+                document.querySelector('#errSelect-quick-view').style.display = 'block';
+            }
+        });
+    }
+}
+
+//time
+// function flashSaleTime(){
+//     // Lấy ngày bắt đầu (hiện tại)
+//     const startDate = new Date();
+
+//     // Thêm 10 ngày vào ngày bắt đầu
+//     const endDate = new Date(startDate.getTime() + 10 * 24 * 60 * 60 * 1000);
+
+//     // Hàm đếm ngược
+//     function countdown() {
+//         const now = new Date(); // Thời gian hiện tại
+//         const timeRemaining = endDate - now; // Thời gian còn lại (ms)
+
+//         if (timeRemaining > 0) {
+//             // Tính số ngày, giờ, phút, giây
+//             const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+//             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+//             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+//             // Cập nhật giao diện
+//             document.getElementById("days").textContent = days;
+//             document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+//             document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+//             document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+//         } else {
+//             // Khi hết thời gian
+//             clearInterval(timer);
+//             document.getElementById("countdown").innerHTML = "Thời gian đã kết thúc!";
+//         }
+//     }
+
+//     // Gọi hàm đếm ngược mỗi giây
+//     const timer = setInterval(countdown, 1000);
+
+//     // Gọi ngay khi bắt đầu (để hiển thị đúng thời gian ban đầu)
+//     countdown();
+
+// }
 
 
 

@@ -50,9 +50,9 @@
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <input class="form-control @error('email') is-invalid @enderror"
-                                            id="floatingInputValue" type="" placeholder="name@example.com"
+                                             type="" placeholder="name@example.com"
                                             value="{{ old('email') }}" name="email">
-                                        <label for="floatingInputValue">Email</label>
+                                        <label for="">Email</label>
                                     </div>
                                     <p class="Err text-danger email-error">
                                         @error('email')
@@ -61,11 +61,14 @@
                                     </p>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-floating">
-                                        <input class="form-control @error('password') is-invalid @enderror"
-                                            id="floatingInputValue1" type="password" placeholder="Password confirm"
+                                    <div class="form-floating password">
+                                        <input class="form-control inputPassword @error('password') is-invalid @enderror"
+                                             type="password" placeholder="Password confirm"
                                             value="" name="password">
-                                        <label for="floatingInputValue1">Mật Khẩu</label>
+                                        <span class="toggle-password">
+                                            <i class="fas fa-eye-slash"></i>
+                                        </span>
+                                        <label for="">Mật Khẩu</label>
                                     </div>
                                     <p class="Err text-danger password-error">
                                         @error('password')
@@ -95,11 +98,11 @@
                         <div class="log-in-button">
                             <ul>
                                 <li>
-                                    <a href="https://www.google.com/" target="_blank"> <i class="fa-brands fa-google me-2">
+                                    <a href="{{ route('auth.google') }}"> <i class="fa-brands fa-google me-2">
                                         </i>Google</a>
                                 </li>
                                 <li>
-                                    <a href="https://www.facebook.com/" target="_blank"><i
+                                    <a href="{{ route('auth.facebook') }}"><i
                                             class="fa-brands fa-facebook-f me-2"></i>Facebook </a>
                                 </li>
                             </ul>

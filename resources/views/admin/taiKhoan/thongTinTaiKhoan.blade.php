@@ -194,30 +194,39 @@
                 <div class="modal-body">
                     <form id="resetPasswordForm" action="{{ route('tai-khoan.doi-mat-khau-admin') }}" method="POST">
                         @csrf
-                        <div class="from-group">
+                        <div class="from-group password">
                             <label class="form-label">Nhập mật khẩu hiện tại</label>
-                            <input class="form-control" type="password" name="current_password"
+                            <input class="form-control inputPassword" type="password" name="current_password"
                                 placeholder="Nhập mật khẩu hiện tại...">
+                            <span class="toggle-password">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
                         </div>
                         <p class="Err text-danger current_password-error">
                             @error('current_password')
                                 {{ $message }}
                             @enderror
                         </p>
-                        <div class="from-group">
+                        <div class="from-group password">
                             <label class="form-label">Nhập mật khẩu mới</label>
-                            <input class="form-control" type="password" name="new_password"
+                            <input class="form-control inputPassword" type="password" name="new_password"
                                 placeholder="Nhập mật khẩu mới...">
+                            <span class="toggle-password">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
                         </div>
                         <p class="Err text-danger new_password-error">
                             @error('new_password')
                                 {{ $message }}
                             @enderror
                         </p>
-                        <div class="from-group">
+                        <div class="from-group password">
                             <label class="form-label">Nhập lại mật khẩu mới</label>
-                            <input class="form-control" type="password" name="confirm_password"
+                            <input class="form-control inputPassword" type="password" name="confirm_password"
                                 placeholder="Nhập lại mật khẩu mới...">
+                            <span class="toggle-password">
+                                <i class="fas fa-eye-slash"></i>
+                            </span>
                         </div>
                         <p class="Err text-danger confirm_password-error">
                             @error('confirm_password')

@@ -19,7 +19,7 @@ class StoreDanhMucTinTucRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:danh_mucs,ten_danh_muc',
+                'unique:danh_muc_tin_tucs,ten_danh_muc',
                 'regex:/^[^\d]*$/'
             ],
         ];
