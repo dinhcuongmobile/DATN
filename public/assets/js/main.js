@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded',()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    thongBaoLoi();
+    checkSession();
+    togglePassword();
+    tabDonMua();
+    donMuaMenu();
+    chiTietDonMua();
+});
+function togglePassword(){
     const togglePassword = document.querySelectorAll('.toggle-password');
     if(togglePassword){
         togglePassword.forEach((el)=>{
@@ -17,212 +26,244 @@ document.addEventListener('DOMContentLoaded',()=>{
             });
         });
     }
-});
-// Lưu trạng thái khi vào trang chi tiết thanh toán
-let checkUrl = false;
-if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
-    checkUrl=true;
-}else{
-    checkUrl=false;
 }
+// Lưu trạng thái khi vào trang chi tiết thanh toán
+function checkSession(){
+    let checkUrl = false;
+    if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
+        checkUrl=true;
+    }else{
+        checkUrl=false;
+    }
 
-if (!checkUrl) {
-    fetch('/gio-hang/xoa-session-gio-hang', {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        }
-    });
+    if (!checkUrl) {
+        fetch('/gio-hang/xoa-session-gio-hang', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        });
+    }
 }
 
 // don-mua-menu-click
-const donMuaMenu = document.querySelector('.donMuaMenu');
-if (donMuaMenu) {
-    donMuaMenu.addEventListener('click',function(){
-        if (window.location.pathname !== '/tai-khoan/thong-tin-tai-khoan') {
-            sessionStorage.setItem("activeTab", "order");
-            window.location.href="/tai-khoan/thong-tin-tai-khoan";
-        }else{
-            let checkNavLink = document.querySelectorAll('.nav-link');
-            let checkTabPane = document.querySelectorAll('.tab-pane');
-            checkNavLink.forEach((el)=>{
-                el.classList.remove('active');
-                el.setAttribute('aria-selected', 'false');
-                el.setAttribute('tabindex', '-1');
-            });
+function donMuaMenu(){
+    const donMuaMenu = document.querySelector('.donMuaMenu');
+    if (donMuaMenu) {
+        donMuaMenu.addEventListener('click',function(){
+            if (window.location.pathname !== '/tai-khoan/thong-tin-tai-khoan') {
+                sessionStorage.setItem("activeTab", "order");
+                window.location.href="/tai-khoan/thong-tin-tai-khoan";
+            }else{
+                let checkNavLink = document.querySelectorAll('.nav-link');
+                let checkTabPane = document.querySelectorAll('.tab-pane');
+                checkNavLink.forEach((el)=>{
+                    el.classList.remove('active');
+                    el.setAttribute('aria-selected', 'false');
+                    el.setAttribute('tabindex', '-1');
+                });
 
-            checkTabPane.forEach((el)=>{
-                el.classList.remove('active','show');
-            });
+                checkTabPane.forEach((el)=>{
+                    el.classList.remove('active','show');
+                });
 
-            const donHangTab = document.querySelector('#order-tab');
-            const donHangContent = document.querySelector('#order');
+                const donHangTab = document.querySelector('#order-tab');
+                const donHangContent = document.querySelector('#order');
 
-            donHangTab.classList.add('active');
-            donHangTab.setAttribute('aria-selected', 'true');
-            if (donHangTab.hasAttribute('tabindex') && donHangTab.getAttribute('tabindex') === "-1") {
-                donHangTab.removeAttribute('tabindex');
+                donHangTab.classList.add('active');
+                donHangTab.setAttribute('aria-selected', 'true');
+                if (donHangTab.hasAttribute('tabindex') && donHangTab.getAttribute('tabindex') === "-1") {
+                    donHangTab.removeAttribute('tabindex');
+                }
+
+                donHangContent.classList.add('active','show');
             }
-
-            donHangContent.classList.add('active','show');
-        }
-    })
+        })
+    }
 }
 
 //chi-tiet-don-mua click
-const productRow = document.querySelectorAll('.order .product-row');
-if (productRow) {
-    productRow.forEach((el)=>{
-        el.addEventListener('click',function(){
+function chiTietDonMua(){
+    const productRow = document.querySelectorAll('.order .product-row');
+    if (productRow) {
+        productRow.forEach((el)=>{
+            el.addEventListener('click',function(){
+                const donHangContent = document.querySelector('#order');
+                const chiTietDonHangContent = document.querySelector('#order-details');
+                const donHangId= el.getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/don-hang/chi-tiet-don-hang/',
+                    data: {
+                        donHangId: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                            let donHang = response.don_hang;
+                            let diaChi = response.dia_chi;
+                            let chiTietDonHang = response.chi_tiet_don_hangs;
+                            let tongTienHang = 0 ;
+                            let phiShip = response.phi_ships ? response.phi_ships.phi_ship : 0;
+
+                            console.log(donHang,phiShip);
+
+                            document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
+                            document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
+                            document.querySelector('#order-details .van-chuyen .sdt-nhan').textContent = `(+84) ${diaChi.so_dien_thoai_nhan.slice(1)}`;
+                            document.querySelector('#order-details .van-chuyen .dia-chi-nhan').textContent = `
+                                ${diaChi.dia_chi_chi_tiet?diaChi.dia_chi_chi_tiet + ", " : ""}
+                                ${diaChi.phuong_xa.ten_phuong_xa},
+                                ${diaChi.quan_huyen.ten_quan_huyen},
+                                ${diaChi.tinh_thanh_pho.ten_tinh_thanh_pho}.
+                            `;
+                            document.querySelector('#order-details .list-san-pham').innerHTML="";
+                            chiTietDonHang.forEach((item)=>{
+                                $('#order-details .list-san-pham').prepend(
+                                    `<a class="product-list-a" href="">
+                                        <div class="product-list">
+                                            <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
+                                            <div class="product-details">
+                                                <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                                <p class="phanLoaiHang">Phân loại hàng:
+                                                    <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
+                                                </p>
+                                                <p>x${item.so_luong}</p>
+                                            </div>
+                                        </div>
+                                        <div class="giaTienLS">
+                                            <span>${item.don_gia.toLocaleString('vi-VN')}đ</span>
+                                            <span><del>${item.san_pham.gia_san_pham.toLocaleString('vi-VN')}đ</del></span>
+                                        </div>
+                                    </a>`
+                                );
+                                tongTienHang += item.thanh_tien;
+                            });
+
+                            const elgiamGiaVanChuyen = document.querySelector('#order-details .table .giamGiaVanChuyen');
+                            const elgiamGiaDonHang = document.querySelector('#order-details .table .giamGiaDonHang');
+                            const elnamadXu = document.querySelector('#order-details .table .namadXu');
+
+                            donHang.giam_gia_van_chuyen>0 ? elgiamGiaVanChuyen.style.display="" : elgiamGiaVanChuyen.style.display="none";
+                            donHang.giam_gia_don_hang>0 ? elgiamGiaDonHang.style.display="" : elgiamGiaDonHang.style.display="none";
+                            donHang.namad_xu>0 ? elnamadXu.style.display="" : elnamadXu.style.display="none";
+
+                            document.querySelector('#order-details .table .tongTienHang td').textContent=`${tongTienHang.toLocaleString('vi-VN')}đ`;
+
+                            document.querySelector('#order-details .table .phiVanChuyen td').textContent=`${phiShip.toLocaleString('vi-VN')}đ`;
+
+                            elgiamGiaVanChuyen.querySelector('td').textContent=`-${donHang.giam_gia_van_chuyen.toLocaleString('vi-VN')}đ`;
+
+                            elgiamGiaDonHang.querySelector('td').textContent=`-${donHang.giam_gia_don_hang.toLocaleString('vi-VN')}đ`;
+
+                            elnamadXu.querySelector('td').textContent=`-${donHang.namad_xu.toLocaleString('vi-VN')}đ`;
+
+                            document.querySelector('#order-details .table .thanhTien td').textContent=`${donHang.tong_thanh_toan.toLocaleString('vi-VN')}đ`;
+
+                            document.querySelector('#order-details .table .phuongThucThanhToan td').textContent=
+                                `${donHang.phuong_thuc_thanh_toan==0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản'}`;
+
+                            const timeline = document.querySelector('#order-details .timeline');
+                            const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
+                            timeline.querySelectorAll('i').forEach((el)=>{
+                                el.classList.remove('change','next-change');
+                            });
+                            deliveryStatus.querySelectorAll('p').forEach((el)=>{
+                                el.classList.remove('active');
+                            });
+                            switch (donHang.trang_thai) {
+                                case 0:
+                                    //thong bao
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-warning'>Chờ xác nhận</span>";
+
+                                    //trang thai theo doi
+                                    timeline.querySelector('.zezo i').classList.add('change');
+                                    timeline.querySelector('.one i').classList.add('next-change');
+                                    deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
+
+                                    break;
+                                case 1:
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-success'>Đang chuẩn bị hàng</span>";
+
+                                    //trang thai theo doi
+                                    timeline.querySelector('.zezo i').classList.add('change');
+                                    timeline.querySelector('.one i').classList.add('change');
+                                    timeline.querySelector('.two i').classList.add('next-change');
+                                    deliveryStatus.innerHTML=`
+                                        <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                    `;
+                                break;
+                                case 2:
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-success'>Đang giao</span>";
+
+                                    //trang thai theo doi
+                                    timeline.querySelector('.zezo i').classList.add('change');
+                                    timeline.querySelector('.one i').classList.add('change');
+                                    timeline.querySelector('.two i').classList.add('change');
+                                    timeline.querySelector('.three i').classList.add('next-change');
+                                    deliveryStatus.innerHTML=`
+                                        <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                    `;
+                                break;
+                                case 3:
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-success'>Đã giao</span>";
+
+                                    //trang thai theo doi
+                                    timeline.querySelector('.zezo i').classList.add('change');
+                                    timeline.querySelector('.one i').classList.add('change');
+                                    timeline.querySelector('.two i').classList.add('change');
+                                    timeline.querySelector('.three i').classList.add('change');
+                                    timeline.querySelector('.four i').classList.add('change');
+                                    timeline.querySelector('.five i').classList.add('next-change');
+                                    deliveryStatus.innerHTML=`
+                                        <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đã được giao thành công tới ${diaChi.ho_va_ten_nhan}</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                                        <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                                    `;
+                                break;
+                                case 4:
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-danger'>Đã hủy</span>";
+                                break;
+                                case 5:
+                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                                    "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
+                                break;
+                            }
+
+                            //show
+                            donHangContent.classList.remove('active','show');
+                            chiTietDonHangContent.classList.add('active','show');
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
+
+        const quayLai = document.querySelector('#order-details .header .back');
+        quayLai?.addEventListener('click',function(){
             const donHangContent = document.querySelector('#order');
             const chiTietDonHangContent = document.querySelector('#order-details');
-            const donHangId= el.getAttribute('data-donHangId');
 
-            $.ajax({
-                type: 'GET',
-                url: '/don-hang/chi-tiet-don-hang/',
-                data: {
-                    donHangId: donHangId
-                },
-                success: function (response) {
-                    if(response.success){
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                        let donHang = response.don_hang;
-                        let diaChi = response.dia_chi;
-                        let chiTietDonHang = response.chi_tiet_don_hangs;
-
-                        console.log(donHang,diaChi,chiTietDonHang);
-
-                        document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
-                        document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
-                        document.querySelector('#order-details .van-chuyen .sdt-nhan').textContent = `(+84) ${diaChi.so_dien_thoai_nhan.slice(1)}`;
-                        document.querySelector('#order-details .van-chuyen .dia-chi-nhan').textContent = `
-                            ${diaChi.dia_chi_chi_tiet?diaChi.dia_chi_chi_tiet + ", " : ""}
-                            ${diaChi.phuong_xa.ten_phuong_xa},
-                            ${diaChi.quan_huyen.ten_quan_huyen},
-                            ${diaChi.tinh_thanh_pho.ten_tinh_thanh_pho}.
-                        `;
-                        document.querySelector('#order-details .list-san-pham').innerHTML="";
-                        chiTietDonHang.forEach((item)=>{
-                            $('#order-details .list-san-pham').prepend(
-                                `<a class="product-list-a" href="">
-                                    <div class="product-list">
-                                        <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
-                                        <div class="product-details">
-                                            <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
-                                            <p class="phanLoaiHang">Phân loại hàng:
-                                                <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
-                                            </p>
-                                            <p>x${item.so_luong}</p>
-                                        </div>
-                                    </div>
-                                    <div class="giaTienLS">
-                                        <span>200000đ</span>
-                                        <span><del>200000đ</del></span>
-                                    </div>
-                                </a>`
-                            );
-                        });
-
-                        const timeline = document.querySelector('#order-details .timeline');
-                        const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
-                        timeline.querySelectorAll('i').forEach((el)=>{
-                            el.classList.remove('change','next-change');
-                        });
-                        deliveryStatus.querySelectorAll('p').forEach((el)=>{
-                            el.classList.remove('active');
-                        });
-                        switch (donHang.trang_thai) {
-                            case 0:
-                                //thong bao
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-warning'>Chờ xác nhận</span>";
-
-                                //trang thai theo doi
-                                timeline.querySelector('.zezo i').classList.add('change');
-                                timeline.querySelector('.one i').classList.add('next-change');
-                                deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
-
-                                break;
-                            case 1:
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-success'>Đang chuẩn bị hàng</span>";
-
-                                //trang thai theo doi
-                                timeline.querySelector('.zezo i').classList.add('change');
-                                timeline.querySelector('.one i').classList.add('change');
-                                timeline.querySelector('.two i').classList.add('next-change');
-                                deliveryStatus.innerHTML=`
-                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
-                                `;
-                            break;
-                            case 2:
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-success'>Đang giao</span>";
-
-                                //trang thai theo doi
-                                timeline.querySelector('.zezo i').classList.add('change');
-                                timeline.querySelector('.one i').classList.add('change');
-                                timeline.querySelector('.two i').classList.add('change');
-                                timeline.querySelector('.three i').classList.add('next-change');
-                                deliveryStatus.innerHTML=`
-                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
-                                `;
-                            break;
-                            case 3:
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-success'>Đã giao</span>";
-
-                                //trang thai theo doi
-                                timeline.querySelector('.zezo i').classList.add('change');
-                                timeline.querySelector('.one i').classList.add('change');
-                                timeline.querySelector('.two i').classList.add('change');
-                                timeline.querySelector('.three i').classList.add('change');
-                                timeline.querySelector('.four i').classList.add('change');
-                                timeline.querySelector('.five i').classList.add('next-change');
-                                deliveryStatus.innerHTML=`
-                                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đã được giao thành công tới ${diaChi.ho_va_ten_nhan}</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
-                                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
-                                `;
-                            break;
-                            case 4:
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-danger'>Đã hủy</span>";
-                            break;
-                            case 5:
-                                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
-                            break;
-                        }
-
-                        //show
-                        donHangContent.classList.remove('active','show');
-                        chiTietDonHangContent.classList.add('active','show');
-                    }
-                },
-                error: function (error) {
-                    console.error('Lỗi: ', error);
-                    alert('Có lỗi xảy ra');
-                }
-            });
-
+            chiTietDonHangContent.classList.remove('active','show');
+            donHangContent.classList.add('active','show');
         });
-    });
-
-    const quayLai = document.querySelector('#order-details .header .back');
-    quayLai?.addEventListener('click',function(){
-        const donHangContent = document.querySelector('#order');
-        const chiTietDonHangContent = document.querySelector('#order-details');
-
-        chiTietDonHangContent.classList.remove('active','show');
-        donHangContent.classList.add('active','show');
-    });
+    }
 }
 
 
@@ -269,7 +310,7 @@ $('select[name="quan_huyen"]').on('change', function () {
 
 
 // thong bao loi error
-document.addEventListener('DOMContentLoaded', (event) => {
+function thongBaoLoi(){
     const errorAlert = document.getElementById('error-alert');
     if (errorAlert) {
         setTimeout(() => {
@@ -280,26 +321,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }, 500); // Thời gian cho quá trình mờ dần
         }, 10000); // 10 giây
     }
-});
+}
 // end thong bao loi error
 
 //don mua
 
-$(document).ready(function(){
-    $(".an").hide();
-    $("#tap1").fadeIn();
-    $(".nav-tab li").click(function(){
-        //active nav tabs
-        $(".nav-tab li").removeClass("active");
-        $(this).addClass("active");
-
-        //Show tap
-        let idtap= $(this).children('a').attr('href');
+function tabDonMua(){
+    $(document).ready(function(){
         $(".an").hide();
-        $(idtap).fadeIn();
-        return false;
+        $("#tap1").fadeIn();
+        $(".nav-tab li").click(function(){
+            //active nav tabs
+            $(".nav-tab li").removeClass("active");
+            $(this).addClass("active");
+
+            //Show tap
+            let idtap= $(this).children('a').attr('href');
+            $(".an").hide();
+            $(idtap).fadeIn();
+            return false;
+        });
     });
-});
+}
 
 //end don mua
 
