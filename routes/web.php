@@ -153,6 +153,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
 
     Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
+    // chinh sach bao mat 
+    Route::get('chinh-sach-bao-mat', [HomeController::class, 'chinhSachBaoMat'])->name('chinh-sach-bao-mat');
+    Route::get('cau-hoi-thuong-gap', [HomeController::class, 'cauHoiThuongGap'])->name('cau-hoi-thuong-gap');
 });
 
 // Đăng nhập admin

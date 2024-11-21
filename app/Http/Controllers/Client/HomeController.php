@@ -49,4 +49,14 @@ class HomeController extends Controller
     {
         return view('auth.404');
     }
+    public function chinhSachBaoMat()
+    {
+        return view('client.chinhSachBaoMat.chinhSachBaoMat');
+    }
+
+    public function cauHoiThuongGap()
+    {
+        return view('client.cauHoiThuongGap.cauHoiThuongGap');
+    }
 }
+
