@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\LienHe;
 use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
@@ -115,5 +116,44 @@ class AppServiceProvider extends ServiceProvider
             $tongLuotXem = Cache::get('tong_luot_xem', 0);
         }
         View::share('tongLuotXem', $tongLuotXem);
+
+        //Thông Báo Admin mini
+        $donHangMoi = DonHang::where('trang_thai', 0)
+            ->orderBy('ngay_tao', 'desc')
+            ->take(2)
+            ->get();
+        $donHangDaGiao = DonHang::where('trang_thai', 3)
+            ->orderBy('ngay_tao', 'desc')
+            ->take(2)
+            ->get();
+        $lienHeMoi = LienHe::where('trang_thai', 0)
+            ->orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+        $lienHeDaPhanHoi = LienHe::where('trang_thai', 1)
+            ->orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+        View::share('donHangMoi', $donHangMoi);
+        View::share('donHangDaGiao', $donHangDaGiao);
+        View::share('lienHeMoi', $lienHeMoi);
+        View::share('lienHeDaPhanHoi', $lienHeDaPhanHoi);
+        //Tất cả thông báo
+        $donHangMoiAll = DonHang::where('trang_thai', 0)
+            ->orderBy('ngay_tao', 'desc')
+            ->get();
+        $donHangDaGiaoAll = DonHang::where('trang_thai', 3)
+            ->orderBy('ngay_tao', 'desc')
+            ->get();
+        $lienHeMoiAll = LienHe::where('trang_thai', 0)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $lienHeDaPhanHoiAll = LienHe::where('trang_thai', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        View::share('donHangMoiAll', $donHangMoiAll);
+        View::share('donHangDaGiaoAll', $donHangDaGiaoAll);
+        View::share('lienHeMoiAll', $lienHeMoiAll);
+        View::share('lienHeDaPhanHoiAll', $lienHeDaPhanHoiAll);
+     }
     }
-}
