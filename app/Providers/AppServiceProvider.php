@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
+use App\Models\DanhMucTinTuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-
+        //client
         View::composer('client.layout.main', function ($view) {
             $gio_hangs = [];
             $count_gio_hang = 0;
@@ -46,6 +48,17 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
+        });
+        //danh mục tin tức
+        $danh_muc_tin_tucs = DanhMucTinTuc::all();
+        view()->share('danh_muc_tin_tucs', $danh_muc_tin_tucs);
+        //tin tức
+        view()->composer('client.home', function ($view) {
+            $tinTucs = TinTuc::with('user')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+            $view->with('tinTucs', $tinTucs);
         });
         //admin
         View::composer('admin.layout.main', function ($view) {

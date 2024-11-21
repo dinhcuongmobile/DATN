@@ -112,7 +112,7 @@
                         <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab"
                                 data-bs-target="#features-products" role="tab" aria-controls="features-products"
                                 aria-selected="true">
-                                <h6>Sản Phẩm nổi bật</h6>
+                                <h6>Sản Phẩm Nổi Bật</h6>
                             </a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab"
                                 data-bs-target="#latest-products" role="tab" aria-controls="latest-products"
@@ -476,70 +476,27 @@
         </div>
         <div class="swiper blog-slide">
             <div class="swiper-wrapper">
+                @foreach ($tinTucs as $item)
                 <div class="swiper-slide">
                     <div class="blog-main">
-                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
-                        <div class="blog-txt">
-                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                        <div class="blog-box ratio3_2">
+                            <a class="blog-img" href="{{route('tin-tuc.chi-tiet-tin-tuc', $item->id)}}">
+                                <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="">
                             </a>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a>
-                                </div>
+                        </div>
+                        <div class="blog-txt">
+                            <p> {{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</p>
+                            <a href="{{route('tin-tuc.chi-tiet-tin-tuc', $item->id)}}">
+                                <h5>{{$item->tieu_de}}</h5>
+                            </a>
+                        </div>
+                        <div class="link-hover-anim underline">
+                            <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm</a>
+                            <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm </a>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="blog-main">
-                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
-                        <div class="blog-txt">
-                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                            </a>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="blog-main">
-                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
-                        <div class="blog-txt">
-                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                            </a>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="blog-main">
-                        <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                    class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a></div>
-                        <div class="blog-txt">
-                            <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                            </a>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered" href="#">Read More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="#">Read More</a>
-                                </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

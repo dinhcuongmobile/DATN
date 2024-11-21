@@ -5,7 +5,7 @@
         <div class="custom-container container">
             <div class="row align-items-center">
                 <div class="col-sm-6">
-                    <h4>Blog Left Sidebar</h4>
+                    <h4>Tin Tức</h4>
                 </div>
             </div>
         </div>
@@ -16,202 +16,49 @@
         <div class="row gy-4">
             <div class="col-xl-9 col-lg-8 ratio50_2">
                 <div class="row gy-4 sticky">
+                    @foreach ($tin_tucs as $item)
                     <div class="col-xl-4 col-sm-6">
                         <div class="blog-main-box">
                             <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/1.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/1.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
+                                <div class="blog-img"> 
+                                    <a href="{{route("tin-tuc.chi-tiet-tin-tuc", $item->id)}}">
+                                        <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="Post">
+                                    </a>
                                 </div>
+                            </div>
+                            <div class="blog-content">  
+                                <span class="blog-date">{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</span>
+                                <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
+                                    <h4>{{$item->tieu_de}}</h4>
+                                </a>
+                                <p>{!! Str::limit(strip_tags($item->noi_dung), 150, '...') !!}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/2.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"><span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/2.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/3.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/3.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/4.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/8.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/5.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"><span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/9.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/6.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/10.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/7.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/8.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/8.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"><span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/9.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="blog-main-box">
-                            <div>
-                                <div class="blog-img"> <img class="img-fluid bg-img"
-                                        src="../assets/images/blog/blog-page/9.jpg" alt=""></div>
-                            </div>
-                            <div class="blog-content"> <span class="blog-date">May 9, 2018 Stylish</span><a
-                                    href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}">
-                                    <h4>How Black Trans Women Are Redefining Beauty Standards</h4>
-                                </a>
-                                <p>Sed non mauris vitae erat consequat. Proin gravida nibh vel velit auctor aliquet.
-                                    Aenean sollicitudin, lom quis bibenm auctor</p>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center gap-2"><img class="img-fluid"
-                                            src="../assets/images/user/10.jpg" alt="">
-                                        <h6>by John wiki on</h6>
-                                    </div><a href="{{ route('tin-tuc.chi-tiet-tin-tuc') }}"> Read More..</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                     <div class="pagination-wrap mt-0">
                         <ul class="pagination">
-                            <li> <a class="prev" href="#"><i class="iconsax" data-icon="chevron-left"></i></a></li>
-                            <li> <a href="#">1</a></li>
-                            <li> <a class="active" href="#">2</a></li>
-                            <li> <a href="#">3 </a></li>
-                            <li> <a class="next" href="#"> <i class="iconsax" data-icon="chevron-right"></i></a>
+                            {{-- Nút "Trước" --}}
+                            <li class="{{ $tin_tucs->onFirstPage() ? 'disabled' : '' }}">
+                                <a class="prev" href="{{ $tin_tucs->previousPageUrl() }}">
+                                    <i class="iconsax" data-icon="chevron-left"></i>
+                                </a>
+                            </li>
+                    
+                            {{-- Hiển thị số trang --}}
+                            @for ($i = 1; $i <= $tin_tucs->lastPage(); $i++)
+                                @if ($i == $tin_tucs->currentPage())
+                                    <li><a class="active" href="#">{{ $i }}</a></li>
+                                @else
+                                    <li><a href="{{ $tin_tucs->url($i) }}">{{ $i }}</a></li>
+                                @endif
+                            @endfor
+                    
+                            {{-- Nút "Tiếp" --}}
+                            <li class="{{ $tin_tucs->hasMorePages() ? '' : 'disabled' }}">
+                                <a class="next" href="{{ $tin_tucs->nextPageUrl() }}">
+                                    <i class="iconsax" data-icon="chevron-right"></i>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -221,130 +68,44 @@
                 <div class="blog-sidebar">
                     <div class="row gy-4">
                         <div class="col-12">
-                            <div class="blog-search"> <input type="search" placeholder="Search Here..."><i
-                                    class="iconsax" data-icon="search-normal-2"></i></div>
-                        </div>
-                        <div class="col-12">
                             <div class="sidebar-box">
                                 <div class="sidebar-title">
                                     <div class="loader-line"></div>
-                                    <h5> Categories</h5>
+                                    <h5> Danh Mục</h5>
                                 </div>
+                                @foreach ($danh_muc_tin_tucs as $item)
                                 <ul class="categories">
                                     <li>
-                                        <p>Fashion<span>30</span></p>
-                                    </li>
-                                    <li>
-                                        <p>Trends<span>20</span></p>
-                                    </li>
-                                    <li>
-                                        <p>Designer<span>3</span></p>
-                                    </li>
-                                    <li>
-                                        <p>Swimwear<span>15</span></p>
-                                    </li>
-                                    <li>
-                                        <p>Handbags<span>11</span></p>
+                                        <a href="{{ route('tin-tuc.tin-tuc-danh-muc', $item->id) }}">
+                                            <p>{{$item->ten_danh_muc}}</p>
+                                        </a>
                                     </li>
                                 </ul>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="sidebar-box">
                                 <div class="sidebar-title">
                                     <div class="loader-line"></div>
-                                    <h5> Top Post</h5>
+                                    <h5> Bài Viết Gần Đây</h5>
                                 </div>
+                                @foreach ($tin_tuc_gan_day as $item)
                                 <ul class="top-post">
-                                    <li> <img class="img-fluid" src="../assets/images/other-img/blog-1.jpg" alt="">
-                                        <div> <a href="blog-details.html">
-                                                <h6>Study 2020: Fake Engagement is Only Half the Problem</h6>
+                                    <li> 
+                                        <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
+                                             <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="Post">
+                                        </a>
+                                        <div> 
+                                            <a href="{{ route('tin-tuc.chi-tiet-tin-tuc', $item->id) }}">
+                                                <h6>{{$item->tieu_de}}</h6>
                                             </a>
-                                            <p>September 28, 2021</p>
-                                        </div>
-                                    </li>
-                                    <li> <img class="img-fluid" src="../assets/images/other-img/blog-2.jpg" alt="">
-                                        <div> <a href="blog-details.html">
-                                                <h6>Top 10 Interior Design in 2020 New York Business</h6>
-                                            </a>
-                                            <p>September 28, 2021</p>
-                                        </div>
-                                    </li>
-                                    <li> <img class="img-fluid" src="../assets/images/other-img/blog-3.jpg" alt="">
-                                        <div> <a href="blog-details.html">
-                                                <h6>Ecommerce Brands Tend to Create Strong Communities</h6>
-                                            </a>
-                                            <p>September 28, 2021</p>
-                                        </div>
-                                    </li>
-                                    <li> <img class="img-fluid" src="../assets/images/other-img/blog-4.jpg" alt="">
-                                        <div> <a href="blog-details.html">
-                                                <h6>What Do I Need to Make It in the World of Business?</h6>
-                                            </a>
-                                            <p>September 28, 2021</p>
+                                            <p>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</p>
                                         </div>
                                     </li>
                                 </ul>
+                                @endforeach
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="sidebar-box">
-                                <div class="sidebar-title">
-                                    <div class="loader-line"></div>
-                                    <h5> Popular Tags</h5>
-                                </div>
-                                <ul class="popular-tag">
-                                    <li>
-                                        <p>T-shirt</p>
-                                    </li>
-                                    <li>
-                                        <p>Handbags </p>
-                                    </li>
-                                    <li>
-                                        <p>Trends </p>
-                                    </li>
-                                    <li>
-                                        <p>Fashion</p>
-                                    </li>
-                                    <li>
-                                        <p>Designer</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="sidebar-box">
-                                <div class="sidebar-title">
-                                    <div class="loader-line"></div>
-                                    <h5>Follow Us</h5>
-                                </div>
-                                <ul class="social-icon">
-                                    <li> <a href="https://www.facebook.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-facebook-f"></i></div>
-                                            <h6>Facebook</h6>
-                                        </a></li>
-                                    <li> <a href="https://www.instagram.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-instagram"> </i></div>
-                                            <h6>Instagram</h6>
-                                        </a></li>
-                                    <li> <a href="https://twitter.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-x-twitter"></i></div>
-                                            <h6>Twitter</h6>
-                                        </a></li>
-                                    <li> <a href="https://www.youtube.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-youtube"></i></div>
-                                            <h6>Youtube</h6>
-                                        </a></li>
-                                    <li> <a href="https://www.whatsapp.com/" target="_blank">
-                                            <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
-                                            <h6>Whatsapp</h6>
-                                        </a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-12 d-none d-lg-block">
-                            <div class="blog-offer-box"> <img class="img-fluid"
-                                    src="../assets/images/other-img/blog-offer.jpg" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -352,5 +113,4 @@
         </div>
     </div>
 </section>
-
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\DanhMucTinTuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -77,5 +78,9 @@ class TinTuc extends Model
     public function deleteTinTuc($id)
     {
         DB::table('tin_tucs')->delete($id);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

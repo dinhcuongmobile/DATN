@@ -41,23 +41,20 @@
                 <div class="blog-sidebar sticky">
                     <div class="row gy-4">
                         <div class="col-12">
-                            <div class="blog-search"> <input type="search" placeholder="Search Here..."><i
-                                    class="iconsax" data-icon="search-normal-2"></i></div>
-                        </div>
-                        <div class="col-12">
-                            @foreach ($danh_mucs as $item)
                             <div class="sidebar-box">
                                 <div class="sidebar-title">
                                     <div class="loader-line"></div>
                                     <h5> Danh Mục</h5>
                                 </div>
+                                @foreach ($danh_muc_tin_tucs as $item)
                                 <ul class="categories">
                                     <li>
-                                        <p>{{$item->ten_danh_muc}}<span>({{ $count_danh_muc_tin_tuc[$item->id] ?? 0 }})</span></p>
+                                        <p>{{$item->ten_danh_muc}}<span></span></p>
                                     </li>
                                 </ul>
+                                @endforeach
                             </div>                         
-                            @endforeach
+                            
                         </div>
                         <div class="col-12">
                             <div class="sidebar-box">
