@@ -49,9 +49,9 @@
                 <form action="" method="post">
                     @csrf
                     <div class="float-left">
-                        <a href="{{ route('lienhe.dsLienHe') }}" class="btn btn-secondary btn-sm">Danh Sách Tất Cả</a>
-                        <a href="{{ route('lienhe.dsLienHeDaPhanHoi') }}" class="btn btn-secondary btn-sm">Danh Sách Đã Phản Hồi</a>
-                        <a href="{{ route('lienhe.dsLienHeChuaPhanHoi') }}" class="btn btn-secondary btn-sm">Danh Sách Chưa Phản Hồi</a>
+                        <a href="{{ route('lien-he.danh-sach') }}" class="btn btn-secondary btn-sm">Danh Sách Tất Cả</a>
+                        <a href="{{ route('lien-he.danh-sach-da-phan-hoi') }}" class="btn btn-secondary btn-sm">Danh Sách Đã Phản Hồi</a>
+                        <a href="{{ route('lien-he.danh-sach-chua-phan-hoi') }}" class="btn btn-secondary btn-sm">Danh Sách Chưa Phản Hồi</a>
                     </div>
             </div>
             <div class="card-body">
@@ -111,7 +111,7 @@
                                             <tr>
                                                <th>Action</th>
                                                 <td>
-                                                    <form action="{{ route('lienhe.phanHoi', $item->id) }}" method="POST" style="display: inline;" enctype="multipart/form-data">
+                                                    <form action="{{ route('lien-he.phan-hoi', $item->id) }}" method="POST" style="display: inline;" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Bạn có chắc đã phản hồi liên hệ này?')">
