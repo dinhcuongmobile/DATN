@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
 
+use App\Http\Controllers\Admin\ThongKe\ThongKeController;
 use App\Http\Controllers\Client\DonHang\DonHangController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
 use App\Http\Controllers\Client\SanPham\SanPhamController;
@@ -25,11 +26,11 @@ use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
+use App\Http\Controllers\Admin\ThongBao\ThongBaoAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
-use App\Http\Controllers\Admin\ThongKe\ThongKeController;
 
 
 /*
@@ -373,11 +374,11 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         Route::post('xoa-nhieu-banner', [BannerController::class, 'deleteAll'])->name('banner.deleteAll');
     });
 
-    Route::prefix('lienHe')->group(function (){
-        Route::get('danh-sach',[LienHeAdminController::class,'dsLienHe'])->name('lienhe.dsLienHe');
-        Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lienhe.phanHoi');
-        Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lienhe.dsLienHeDaPhanHoi');
-        Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lienhe.dsLienHeChuaPhanHoi');
+    Route::prefix('lien-he')->group(function (){
+        Route::get('danh-sach',[LienHeAdminController::class,'dsLienHe'])->name('lien-he.danh-sach');
+        Route::put('phan-hoi/{id}', [LienHeAdminController::class, 'phanHoi'])->name('lien-he.phan-hoi');
+        Route::get('danh-sach-da-phan-hoi', [LienHeAdminController::class, 'dsLienHeDaPhanHoi'])->name('lien-he.danh-sach-da-phan-hoi');
+        Route::get('danh-sach-chua-phan-hoi', [LienHeAdminController::class, 'dsLienHeChuaPhanHoi'])->name('lien-he.danh-sach-chua-phan-hoi');
     });
 
     //Don hang
@@ -403,6 +404,7 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
         // Route::get('in-hoa-don/{id}', [DonHangAdminController::class,'inHoaDon'])->name('don-hang.in-hoa-don');
 
     });
+    Route::get('thong-bao', [ThongBaoAdminController::class,'layThongBao'])->name('thong-bao.thong-bao-admin');
 });
 
 // dia chỉ

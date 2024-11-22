@@ -106,11 +106,20 @@
                             @csrf
                             <div class="col-md-3 ">
                                 <p class="alert alert-info text-center">
+                                    <strong>Tổng Đơn Hàng:</strong> <span id="so-don-hang">0</span>
+                                </p>
+                                <p class="alert alert-info text-center">
                                     <strong>Tổng Doanh Thu:</strong> <span id="tong_thanh_toan">0 đ</span>
                                 </p>
                             </div>
                             <div class="col-md-3">
                                 <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+                                <br>
+                                <button type="button"
+                                    class="btn btn-success form-control align-items-center justify-content-center col-6"
+                                    id="btn-dashboard-filter">
+                                    <i class="fas fa-filter mr-2"></i> Lọc
+                                </button>
                             </div>
                             <div class="col-md-3">
                                 <p>Đến ngày: <input type="text" id="datepicker2" class="form-control" >
@@ -120,20 +129,12 @@
                                 <p>
                                     Lọc theo:
                                     <select class="dashboard-filter-by form-control" id="dashboard-filter-by">
-                                        <option>--Chọn--</option>
+                                        <option value="thangNay">Tháng này</option>
                                         <option value="7ngay">7 ngày qua</option>
                                         <option value="thangTruoc">Tháng trước</option>
-                                        <option value="thangNay">Tháng này</option>
                                         <option value="365NgayQua">365 ngày qua</option>
                                     </select>
                                 </p>
-                            </div>
-                            <div class="col-md-2 d-flex align-items-end">
-                                <button type="button"
-                                    class="btn btn-success form-control align-items-center justify-content-center"
-                                    id="btn-dashboard-filter">
-                                    <i class="fas fa-filter mr-2"></i> Lọc
-                                </button>
                             </div>
                         </form>
                     </div>
@@ -290,6 +291,9 @@
 
                         // Đổ tổng tiền thanh toán vào view
                         $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+
+                        // Đổ tổng số đơn hàng vào view
+                        $('#so-don-hang').text(data.so_don_hang.toLocaleString());
                     }
                 });
             }
@@ -311,6 +315,9 @@
 
                         // Đổ tổng tiền thanh toán vào view
                         $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+
+                        // Đổ tổng số đơn hàng vào view
+                        $('#so-don-hang').text(data.so_don_hang.toLocaleString());
                     }
                 });
             })
@@ -334,6 +341,9 @@
 
                         // Đổ tổng tiền thanh toán vào view
                         $('#tong_thanh_toan').text(data.tong_doanh_thu.toLocaleString() + ' đ');
+
+                        // Đổ tổng số đơn hàng vào view
+                        $('#so-don-hang').text(data.so_don_hang.toLocaleString());
                     }
                 });
             })

@@ -116,7 +116,7 @@ class AuthAdminController extends Controller
             );
 
             //Gửi Otp qua mail
-            Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+            Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
             $emailEncrypted = Crypt::encryptString($email);
 
@@ -162,7 +162,7 @@ class AuthAdminController extends Controller
                 );
 
                 // Gửi OTP qua email
-                Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+                Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
                 return redirect()->back()->with('success', 'OTP đã được gửi lại thành công!');
             }
