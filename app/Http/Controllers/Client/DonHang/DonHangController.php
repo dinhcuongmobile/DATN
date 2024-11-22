@@ -42,4 +42,24 @@ class DonHangController extends Controller
         }
 
     }
+
+    public function huyDonHang(Request $request){
+        $don_hang_id = $request->input('don_hang_id');
+        $don_hang = DonHang::with('user','diaChi','chiTietDonHangs','donHangHoan')->find($don_hang_id);
+        if($don_hang){
+            $don_hang->update([
+                'trang_thai' => 4,
+                'ngay_cap_nhat'=>now()
+            ]);
+
+            return response()->json([
+                'success' => true
+            ]);
+        }
+        else{
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
 }

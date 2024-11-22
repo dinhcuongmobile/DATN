@@ -50,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
         });
+
         //danh mục tin tức
         $danh_muc_tin_tucs = DanhMucTinTuc::all();
         view()->share('danh_muc_tin_tucs', $danh_muc_tin_tucs);
@@ -60,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
+        
         // Tổng doanh thu theo sản phẩm đã giao
         View::composer('admin.homeAdmin', function ($view) {
             $thongKeSanPhams = DonHang::where('trang_thai', 3) // Trạng thái đã giao
@@ -87,7 +89,7 @@ class AppServiceProvider extends ServiceProvider
                 ->take(3)
                 ->get();
             foreach ($thongKeDanhMucs as $item) {
-                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.'); 
+                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
             }
 
             // Truyền dữ liệu vào view
@@ -99,7 +101,7 @@ class AppServiceProvider extends ServiceProvider
         //Thống Kê Đơn Hàng
         $tongDonHang = DonHang::count();
         View::share('tongDonHang', $tongDonHang);
-        //Thống Kê Lượt Xem 
+        //Thống Kê Lượt Xem
         if (!Session::has('luot_xem')) {
             $tongLuotXem = Cache::get('tong_luot_xem', 0) + 1;
             Cache::put('tong_luot_xem', $tongLuotXem);

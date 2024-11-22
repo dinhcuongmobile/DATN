@@ -358,7 +358,7 @@
                                     <h5>Danh Mục</h5>
                                     <ul class="footer-details accordion-hidden">
                                         @foreach ($danh_mucs as $item)
-                                        <li> 
+                                        <li>
                                             <a class="nav" href="{{route('san-pham.san-pham-danh-muc',$item->id)}}">{{$item->ten_danh_muc}}</a>
                                         </li>
                                         @endforeach
@@ -421,7 +421,7 @@
                 <!-- Tin nhắn sẽ được load ở đây -->
             </div>
 
-            <div class="chat-input">
+            <div class="chat-input" data-id="{{Auth::user()->id}}">
                 <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
                 <button onclick="sendMessage()">Gửi</button>
             </div>
