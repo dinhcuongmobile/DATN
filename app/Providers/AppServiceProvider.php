@@ -61,42 +61,39 @@ class AppServiceProvider extends ServiceProvider
             $view->with('sub', $sub);
         });
         //Thông Báo Admin mini
-        $donHangMoi = DonHang::where('trang_thai', 0)
-            ->orderBy('ngay_tao', 'desc')
-            ->take(2)
-            ->get();
-        $donHangDaGiao = DonHang::where('trang_thai', 3)
-            ->orderBy('ngay_tao', 'desc')
-            ->take(2)
-            ->get();
-        $lienHeMoi = LienHe::where('trang_thai', 0)
-            ->orderBy('created_at', 'desc')
-            ->take(2)
-            ->get();
-        $lienHeDaPhanHoi = LienHe::where('trang_thai', 1)
-            ->orderBy('created_at', 'desc')
-            ->take(2)
-            ->get();
-        View::share('donHangMoi', $donHangMoi);
-        View::share('donHangDaGiao', $donHangDaGiao);
-        View::share('lienHeMoi', $lienHeMoi);
-        View::share('lienHeDaPhanHoi', $lienHeDaPhanHoi);
-        //Tất cả thông báo
-        $donHangMoiAll = DonHang::where('trang_thai', 0)
-            ->orderBy('ngay_tao', 'desc')
-            ->get();
-        $donHangDaGiaoAll = DonHang::where('trang_thai', 3)
-            ->orderBy('ngay_tao', 'desc')
-            ->get();
-        $lienHeMoiAll = LienHe::where('trang_thai', 0)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        $lienHeDaPhanHoiAll = LienHe::where('trang_thai', 1)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        View::share('donHangMoiAll', $donHangMoiAll);
-        View::share('donHangDaGiaoAll', $donHangDaGiaoAll);
-        View::share('lienHeMoiAll', $lienHeMoiAll);
-        View::share('lienHeDaPhanHoiAll', $lienHeDaPhanHoiAll);
+        View::composer('layout.main', function ($view) {
+            $thongBaos = collect();
+            $donHangMoi = DonHang::where('trang_thai', 0)
+                ->orderBy('ngay_tao', 'desc')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'type' => 'Đơn hàng mới',
+                        'icon' => 'fas fa-box',
+                        'color' => 'bg-primary',
+                        'message' => "Đơn hàng: {$item->ma_don_hang} - Bạn có đơn hàng mới!",
+                        'link' => route('don-hang.chi-tiet-don-hang', $item->id),
+                        'date' => $item->ngay_tao,
+                    ];
+                });
+            $lienHeMoi = LienHe::where('trang_thai', 0)
+                ->orderBy('created_at', 'desc')
+                ->get()
+                ->map(function ($item) {
+                    return [
+                        'type' => 'Liên hệ mới',
+                        'icon' => 'fas fa-comments',
+                        'color' => 'bg-warning',
+                        'message' => "Bạn có liên hệ mới từ {$item->ho_va_ten}!",
+                        'link' => route('lienhe.dsLienHeChuaPhanHoi'),
+                        'date' => $item->created_at,
+                    ];
+                });
+            $thongBaos = $thongBaos->concat($donHangMoi)->concat($lienHeMoi);
+            // Sắp xếp theo thời gian giảm dần
+            $thongBaos = $thongBaos->sortByDesc('date');
+            // Share thông báo với view
+            $view->with('thongBaos', $thongBaos);
+        });
      }
     }

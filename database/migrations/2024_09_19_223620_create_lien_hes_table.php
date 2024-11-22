@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('so_dien_thoai', 10);
             $table->text('noi_dung');
-            $table->integer('trang_thai')->default(0);
+            $table->integer('trang_thai')->default(0)->comment('0.Chưa Phản Hồi 1.Đã Phản Hồi');
             $table->timestamps();
         });
     }
