@@ -60,40 +60,5 @@ class AppServiceProvider extends ServiceProvider
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
-        //Thông Báo Admin mini
-        View::composer('layout.main', function ($view) {
-            $thongBaos = collect();
-            $donHangMoi = DonHang::where('trang_thai', 0)
-                ->orderBy('ngay_tao', 'desc')
-                ->get()
-                ->map(function ($item) {
-                    return [
-                        'type' => 'Đơn hàng mới',
-                        'icon' => 'fas fa-box',
-                        'color' => 'bg-primary',
-                        'message' => "Đơn hàng: {$item->ma_don_hang} - Bạn có đơn hàng mới!",
-                        'link' => route('don-hang.chi-tiet-don-hang', $item->id),
-                        'date' => $item->ngay_tao,
-                    ];
-                });
-            $lienHeMoi = LienHe::where('trang_thai', 0)
-                ->orderBy('created_at', 'desc')
-                ->get()
-                ->map(function ($item) {
-                    return [
-                        'type' => 'Liên hệ mới',
-                        'icon' => 'fas fa-comments',
-                        'color' => 'bg-warning',
-                        'message' => "Bạn có liên hệ mới từ {$item->ho_va_ten}!",
-                        'link' => route('lienhe.dsLienHeChuaPhanHoi'),
-                        'date' => $item->created_at,
-                    ];
-                });
-            $thongBaos = $thongBaos->concat($donHangMoi)->concat($lienHeMoi);
-            // Sắp xếp theo thời gian giảm dần
-            $thongBaos = $thongBaos->sortByDesc('date');
-            // Share thông báo với view
-            $view->with('thongBaos', $thongBaos);
-        });
      }
     }
