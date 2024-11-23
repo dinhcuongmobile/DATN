@@ -112,7 +112,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     // don hang
     Route::prefix('don-hang')->group(function () {
         Route::get('chi-tiet-don-hang',[DonHangController::class,'showChiTietDonHang']);
+        Route::get('show-modal-danh-gia',[DonHangController::class,'showModalDanhGia']);
         Route::post('huy-don-hang',[DonHangController::class,'huyDonHang']);
+        Route::post('danh-gia',[DonHangController::class,'danhGia']);
     });
 
     Route::prefix('gio-hang')->group(function () {
@@ -147,6 +149,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     });
 
     Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
+    // chinh sach bao mat
+    Route::get('chinh-sach-bao-mat', [HomeController::class, 'chinhSachBaoMat'])->name('chinh-sach-bao-mat');
+    Route::get('cau-hoi-thuong-gap', [HomeController::class, 'cauHoiThuongGap'])->name('cau-hoi-thuong-gap');
 });
 
 // Đăng nhập admin

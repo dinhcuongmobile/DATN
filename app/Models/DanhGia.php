@@ -18,6 +18,8 @@ class DanhGia extends Model
         'so_sao',
     ];
 
+    public $timestamp = false;
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
@@ -31,5 +33,10 @@ class DanhGia extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function anhDanhGias()
+    {
+        return $this->hasMany(AnhDanhGia::class, 'danh_gia_id');
     }
 }

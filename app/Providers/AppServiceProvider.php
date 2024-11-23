@@ -61,56 +61,6 @@ class AppServiceProvider extends ServiceProvider
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
-        
-        // Tổng doanh thu theo sản phẩm đã giao
-        View::composer('admin.homeAdmin', function ($view) {
-            $thongKeSanPhams = DonHang::where('trang_thai', 3) // Trạng thái đã giao
-                ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
-                ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->selectRaw('san_phams.id, san_phams.ten_san_pham, san_phams.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
-                ->groupBy('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.hinh_anh')
-                ->orderByDesc('tong_doanh_thu')
-                ->take(3)
-                ->get();
-            foreach ($thongKeSanPhams as $item) {
-                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
-            }
-            $view->with('thongKeSanPhams', $thongKeSanPhams);
-        });
-        // Tổng doanh thu theo danh mục đã giao
-        View::composer('admin.homeAdmin', function ($view) {
-            $thongKeDanhMucs = DonHang::where('trang_thai', 3) // Trạng thái đã giao
-                ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
-                ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->join('danh_mucs', 'san_phams.danh_muc_id', '=', 'danh_mucs.id')
-                ->selectRaw('danh_mucs.id, danh_mucs.ten_danh_muc, danh_mucs.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
-                ->groupBy('danh_mucs.id', 'danh_mucs.ten_danh_muc', 'danh_mucs.hinh_anh')
-                ->orderByDesc('tong_doanh_thu')
-                ->take(3)
-                ->get();
-            foreach ($thongKeDanhMucs as $item) {
-                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
-            }
-
-            // Truyền dữ liệu vào view
-            $view->with('thongKeDanhMucs', $thongKeDanhMucs);
-        });
-        //Thống Kê Tài Khoản
-        $tongTaiKhoan = User::count();
-        View::share('tongTaiKhoan', $tongTaiKhoan);
-        //Thống Kê Đơn Hàng
-        $tongDonHang = DonHang::count();
-        View::share('tongDonHang', $tongDonHang);
-        //Thống Kê Lượt Xem
-        if (!Session::has('luot_xem')) {
-            $tongLuotXem = Cache::get('tong_luot_xem', 0) + 1;
-            Cache::put('tong_luot_xem', $tongLuotXem);
-            Session::put('luot_xem', true);
-        } else {
-            $tongLuotXem = Cache::get('tong_luot_xem', 0);
-        }
-        View::share('tongLuotXem', $tongLuotXem);
-
         //Thông Báo Admin mini
         $donHangMoi = DonHang::where('trang_thai', 0)
             ->orderBy('ngay_tao', 'desc')
@@ -149,5 +99,5 @@ class AppServiceProvider extends ServiceProvider
         View::share('donHangDaGiaoAll', $donHangDaGiaoAll);
         View::share('lienHeMoiAll', $lienHeMoiAll);
         View::share('lienHeDaPhanHoiAll', $lienHeDaPhanHoiAll);
-     }
     }
+}

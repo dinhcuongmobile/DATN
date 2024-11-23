@@ -916,7 +916,7 @@
                                                                             @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai==1)
                                                                                 <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
-                                                                                <button data-id="{{ $itemDonHang->id }}" class="btn btn-success">Đã nhận hàng</button>
+                                                                                <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
                                                                                 <button class="btn btn-primary">Mua lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 3)
                                                                                 <button class="btn btn-primary">Mua lại</button>
@@ -1871,6 +1871,35 @@
                                 <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Đánh giá --}}
+        <div class="reviews-modal modal theme-modal fade" id="reviews" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="max-width: 850px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Đánh giá sản phẩm</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-0">
+                        {{-- ****** --}}
+                        <div class="row">
+                            <div class="thongBao">
+                                <img src="/assets/images/coin.png" alt="coin">
+                                <p>Chia sẻ cảm nhận của bạn về tất cả sản phẩm trong cùng đơn hàng với tối thiểu 50 ký tự cùng
+                                    ít nhất 1 hình ảnh để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội dung không phù hợp
+                                    Namad xu sẽ bị thu hồi cùng với đánh giá của bạn sẽ bị xóa.
+                                </p>
+                            </div>
+                        </div>
+                        {{-- ***** --}}
+
+                        <div class="main">
+                            
+                        </div>
                     </div>
                 </div>
             </div>

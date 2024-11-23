@@ -377,7 +377,7 @@
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
                                         <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
-                                        <li> <a class="nav" href="#">Câu hỏi thường gặp </a></li>
+                                        <li> <a class="nav" href="{{route('cau-hoi-thuong-gap')}}">Câu hỏi thường gặp </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
                                         <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
                                         <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="{{route('chinh-sach-bao-mat')}}">Chính sách bảo mật</a></li>
                                     </ul>
                                 </div>
                             </div>

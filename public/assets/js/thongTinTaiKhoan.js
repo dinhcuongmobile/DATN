@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded',function(){
     activeTapDonMua();
     chiTietDonMua();
     huyDonHang();
+    reviews();
 });
 
 //active don hang
@@ -113,8 +114,6 @@ function chiTietDonMua(){
                             let chiTietDonHang = response.chi_tiet_don_hangs;
                             let tongTienHang = 0 ;
                             let phiShip = response.phi_ships ? response.phi_ships.phi_ship : 0;
-
-                            console.log(donHang,phiShip);
 
                             document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
                             document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
@@ -303,5 +302,275 @@ function huyDonHang(){
 
             });
         });
+    }
+}
+
+//danh gia de hoan thanh don mua
+function previewImages() {
+    let elChonAnh = document.querySelectorAll('.img input[type="file"]');
+    if (elChonAnh) {
+        elChonAnh.forEach((el) => {
+            el.addEventListener('change', function () {
+                const previewContainer = el.closest('.img').querySelector('.image-preview');
+                previewContainer.innerHTML = ""; // Xóa các hình ảnh cũ
+
+                const maxFiles = 6; // Giới hạn số lượng ảnh
+                const err = el.closest('.img').querySelector('.soLuongAnhErr');
+
+                if (this.files.length > maxFiles) {
+                    err.textContent = `Chỉ thêm được tối đa ${maxFiles} ảnh.`;
+                    err.style.display = "block";
+                    setTimeout(() => {
+                        err.style.display = 'none';
+                    }, 5000);
+                    return;
+                }
+
+                if (this.files && this.files.length > 0) {
+                    const countSpan = el.closest('.img').querySelector('.soLuongAnh span:first-child');
+                    countSpan.textContent = this.files.length;
+
+                    Array.from(this.files).forEach((file) => {
+                        const objectURL = URL.createObjectURL(file); // Tạo URL tạm thời từ file
+                        const img = document.createElement('img');
+                        img.src = objectURL;
+
+                        previewContainer.appendChild(img);
+
+                        img.onload = () => URL.revokeObjectURL(objectURL);
+                    });
+                }
+            });
+        });
+    }
+}
+
+function starRating() {
+    let allStarContainers = document.querySelectorAll('#reviews .star-rating');
+    if (allStarContainers) {
+        allStarContainers.forEach((container) => {
+            let stars = container.querySelectorAll('i');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function () {
+
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.remove('fa-regular', 'fa-star');
+                            s.classList.add('fas', 'fa-star'); // Tô đầy
+                        } else {
+                            s.classList.remove('fas', 'fa-star');
+                            s.classList.add('fa-regular', 'fa-star'); // Trống
+                        }
+                    });
+
+                    let rating = index + 1;
+                    container.setAttribute('data-rating', rating);
+                });
+            });
+        });
+    }
+}
+
+function ratingBtns(){
+    const ratingBtns = document.querySelectorAll('#reviews .rating-btns');
+    if(ratingBtns){
+        ratingBtns.forEach((el)=>{
+            let button = el.querySelectorAll('button');
+
+            button.forEach((btn)=>{
+                btn.closest('.row').querySelector('.noi-dung textarea').value = "";
+                btn.addEventListener('click',function(){
+                    btn.closest('.row').querySelector('.noi-dung textarea').value=btn.textContent;
+                });
+            });
+        });
+    }
+}
+
+function reviews(){
+    let btnDaNhanHang = document.querySelectorAll('.btnDonMua .daNhanHang');
+    if(btnDaNhanHang){
+        btnDaNhanHang.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let donHangId = el.closest('.card').getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/don-hang/show-modal-danh-gia/',
+                    data: {
+                        don_hang_id: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            let donHang = response.don_hang;
+                            let chiTietDonHang = response.chi_tiet_don_hangs;
+
+                            document.querySelector('#reviews .main').innerHTML="";
+                            if(chiTietDonHang.length>0){
+                                $('#reviews').modal('show');
+                                chiTietDonHang.forEach((item, index)=>{
+                                    $('#reviews .main').prepend(
+                                        `<div class="row g-3 mt-1" data-idSp=${item.san_pham_id} style="display: block;">
+                                            <div class="boder"></div>
+                                            <div class="product">
+                                                <div class="product-list">
+                                                    <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
+                                                    <div class="product-details">
+                                                        <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                                        <p class="phanLoaiHang">Phân loại hàng:
+                                                            <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="star-rating mt-2" data-rating="0">
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </div>
+                                                <p class="starRatingErr text-danger"></p>
+                                            </div>
+
+                                            <div class="rating-btns">
+                                                <button>Chất lượng sản phẩm tuyệt vời</button>
+                                                <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
+                                                <button>Shop phục vụ rất tốt</button>
+                                                <button>Rất đáng tiền</button>
+                                                <button>Thời gian giao hàng nhanh</button>
+                                            </div>
+                                            <div class="noi-dung">
+                                                <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                                <div class="img mt-2">
+                                                    <p>Tải ảnh lên:</p>
+                                                    <div class="image-upload">
+                                                        <input type="file" id="fileUpload${index}" accept="image/*" multiple>
+                                                        <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
+                                                    </div>
+                                                    <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
+                                                    <p class="soLuongAnhErr text-danger"></p>
+                                                    <div class="image-preview mt-3"></div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-info mb-3 guiDanhGia">Gửi Đánh Giá</button>
+                                        </div>`
+                                    );
+                                });
+                            }
+
+                            previewImages();
+                            starRating();
+                            guiDanhGia();
+                            ratingBtns();
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
+    }
+}
+
+function guiDanhGia(){
+    let namadXu = 0;
+    let btnGuiDanhGia = document.querySelectorAll('#reviews .guiDanhGia');
+    if(btnGuiDanhGia){
+        btnGuiDanhGia.forEach((el, index)=>{
+            el.addEventListener('click',function(){
+                const sanPhamId = el.closest('.row').getAttribute('data-idSp');
+                const soSao = el.closest('.row').querySelector('.star-rating').getAttribute('data-rating');
+                const noiDung = el.closest('.row').querySelector('.noi-dung textarea').value;
+
+                const inputFiles = el.closest('.row').querySelector('.img input[type="file"]').files;
+                const formData = new FormData();
+
+                Array.from(inputFiles).forEach(file => {
+                    formData.append('images[]', file); // Thêm file vào formData
+                });
+
+                if (noiDung.length >= 50 && inputFiles.length > 0) {
+                    namadXu = 200;
+                }
+                if (soSao > 0) {
+                    const formData = new FormData();
+                    formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+                    formData.append('san_pham_id', sanPhamId);
+                    formData.append('noiDung', noiDung);
+                    formData.append('soSao', soSao);
+                    formData.append('namadXu', namadXu);
+
+                    Array.from(inputFiles).forEach(file => {
+                        formData.append('images[]', file); // Thêm file vào formData
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/don-hang/danh-gia/',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            if (response.success) {
+
+                                const thanhYouPopup = el.closest('.row');
+                                thanhYouPopup.style.transition = 'opacity 0.5s ease-out';
+                                setTimeout(() => {
+                                    thanhYouPopup.style.display = 'none';
+                                }, 400);
+
+                                $('#reviews .main').prepend(`
+                                    <div class="row g-3 mt-1">
+                                        <div class="boder"></div>
+                                        <div class="popup-content">
+                                            <i class="fas fa-check-circle"></i>
+                                            <h2>Cảm ơn bạn!</h2>
+                                            <p>Đánh giá của bạn đã được ghi nhận.</p>
+                                        </div>
+                                    </div>
+                                `);
+
+                                setTimeout(() => {
+                                    let soSanPham = document.querySelectorAll('#reviews .main .row');
+                                    let hideModal = true;
+
+                                    soSanPham.forEach((el) => {
+                                        if (el.style.display === "block") {
+                                            hideModal = false;
+                                        }
+                                    });
+
+                                    if (hideModal) {
+                                        $('#reviews').modal('hide');
+                                    }
+                                }, 1200);
+
+
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Lỗi: ', error);
+                            alert('Có lỗi xảy ra');
+                        }
+                    });
+                }
+                else{
+                    const errRating = el.closest('.main').querySelector('.product .starRatingErr');
+                    errRating.textContent="Vui lòng chọn số sao. Để tiếp tục đánh giá !";
+                    errRating.style.display="block";
+                    setTimeout(() => {
+                        errRating.style.transition = 'opacity 0.5s ease-out';
+                        setTimeout(() => {
+                            errRating.style.display = 'none';
+                        }, 500); // Thời gian cho quá trình mờ dần
+                    }, 5000);
+                }
+
+            });
+        });
+
     }
 }

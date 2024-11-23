@@ -51,7 +51,7 @@ class TaiKhoanController extends Controller
         $user = User::create($dataInsert);
 
         if ($user) {
-            Mail::to($user->email)->send(new UserRegistered($user));
+            Mail::to($user->email)->queue(new UserRegistered($user));
 
             Session::flash('success', 'Bạn đã đăng kí tài khoản thành công ! Vui lòng kiểm tra Email để xác nhận !');
 
@@ -97,7 +97,7 @@ class TaiKhoanController extends Controller
             $user->email_verification_token = Str::random(10);
             $user->save();
 
-            Mail::to($user->email)->send(new UserRegistered($user));
+            Mail::to($user->email)->queue(new UserRegistered($user));
 
             return redirect()->back()->with('success', 'Email xác thực đã được gửi lại. Vui lòng kiểm tra email của bạn.');
         }
@@ -193,7 +193,7 @@ class TaiKhoanController extends Controller
         );
 
         //Gửi Otp qua mail
-        Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+        Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
         $emailEncrypted = Crypt::encryptString($email);
 
@@ -226,7 +226,7 @@ class TaiKhoanController extends Controller
             );
 
             // Gửi OTP qua email
-            Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+            Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
             return redirect()->back()->with('success', 'OTP đã được gửi lại thành công!');
         } catch (DecryptException $e) {

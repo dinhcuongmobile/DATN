@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Client\DonHang;
 
-use App\Http\Controllers\Controller;
-use App\Models\ChiTietDonHang;
 use App\Models\DiaChi;
+use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\PhiShip;
+use App\Models\SanPham;
+use App\Models\AnhDanhGia;
 use Illuminate\Http\Request;
+use App\Models\ChiTietDonHang;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Coin;
+use Illuminate\Support\Facades\Auth;
 
 class DonHangController extends Controller
 {
@@ -62,4 +68,82 @@ class DonHangController extends Controller
             ]);
         }
     }
+
+    public function showModalDanhGia(Request $request){
+        $don_hang_id = $request->input('don_hang_id');
+        $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs', 'donHangHoan')->find($don_hang_id);
+        $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')
+            ->where('don_hang_id', $don_hang_id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+
+        $chiTietChuaDanhGia = [];
+
+        foreach ($chi_tiet_don_hangs as $item) {
+
+            $danhGia = DanhGia::where('user_id', Auth::id())
+                ->where('san_pham_id', $item->san_pham_id)
+                ->first();
+
+
+            if (!$danhGia) {
+                $chiTietChuaDanhGia[] = $item;
+            }
+        }
+
+        if ($don_hang) {
+            return response()->json([
+                'success' => true,
+                'don_hang' => $don_hang,
+                'chi_tiet_don_hangs' => $chiTietChuaDanhGia
+            ]);
+        } else {
+            return response()->json([
+                'success' => false
+            ]);
+        }
+    }
+
+    public function danhGia(Request $request){
+        DB::beginTransaction();
+        try {
+            // Lưu đánh giá
+            $danhGia = DanhGia::create([
+                'san_pham_id' => $request->input('san_pham_id'),
+                'user_id' => Auth::id(),
+                'noi_dung' => $request->input('noiDung'),
+                'so_sao' => $request->input('soSao'),
+                'created_at' => now(),
+            ]);
+
+            // Xử lý file và lưu vào bảng `anh_danh_gias`
+            if ($request->hasFile('images')) {
+                if($danhGia){
+                    foreach ($request->file('images') as $image) {
+                        $filePath = $image->store('uploads/anhDanhGia', 'public');
+
+                        AnhDanhGia::create([
+                            'danh_gia_id' => $danhGia->id,
+                            'hinh_anh' => $filePath,
+                            'created_at' => now(),
+                        ]);
+                    }
+                }
+            }
+            $coin = Coin::where('user_id', Auth::user()->id)->first();
+            $soCoin = $request->input('namadXu');
+            if ($coin && $soCoin > 0) {
+                $coin->increment('coin', $soCoin);
+            }
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
 }
