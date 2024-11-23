@@ -65,7 +65,7 @@ class DonHangAdminController extends Controller
     // Duyệt đơn hàng - Chuyển trạng thái đơn hàng sang chờ lấy hàng
     public function duyetDonHang(int $id) {
         $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 1; // 2 là trạng thái chờ lấy hàng
+        $donHang->trang_thai = 1; // 1 là trạng thái chờ lấy hàng
         $donHang->save();
     
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
@@ -74,7 +74,7 @@ class DonHangAdminController extends Controller
      // Xử lý yêu cầu lấy hàng cho một đơn hàng
      public function yeuCauLayHangDonHang(int $id) {
         $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 2; // 3 là trạng thái Đang Giao
+        $donHang->trang_thai = 2; // 2 là trạng thái Đang Giao
         $donHang->save();
 
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Đơn hàng đã được chuyển sang trạng thái Đang Giao.');
@@ -83,13 +83,14 @@ class DonHangAdminController extends Controller
     // Xử lý giao hàng cho các đơn hàng đã chọn
     public function giaoNhieuDonHang(Request $request) {
         $ids = $request->input('select', []);
-        DonHang::whereIn('id', $ids)->update(['trang_thai' => 3]); // 3 là trạng thái Đang Giao
+        DonHang::whereIn('id', $ids)->update(['trang_thai' => 2]); // 3 là trạng thái Đang Giao
 
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
     }
     public function daGiao(int $id) {
         $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 3; // 4 là trạng thái đã giao
+        $donHang->trang_thai = 3; // 3 là trạng thái đã giao
+        $donHang->ngay_cap_nhat = now();
         $donHang->save();
     
         return redirect()->route('don-hang.danh-sach-dang-giao')->with('success', 'Đơn hàng đã được giao ');
