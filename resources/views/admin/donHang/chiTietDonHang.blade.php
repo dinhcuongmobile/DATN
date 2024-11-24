@@ -18,7 +18,7 @@
                     </span>
                   </p>
                   <p><strong>Tổng Sản Phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} Sản Phẩm</p>
-                  <p><strong>Ghi Chú :</strong>{{$donHang->ghi_chu}} </p>
+                  <p><strong>Ghi Chú : </strong>{{$donHang->ghi_chu}} </p>
               </div>
               <div class="col-lg-6 text-right">
                   <button class="btn btn-primary btn-sm">💬Chat</button>
@@ -74,6 +74,24 @@
                   </tfoot>
               </table>
               <div class="col-lg-13 text-right">
+                @if ($donHang->trang_thai == 0)
+                    {{-- Trạng thái chờ xác nhận --}}
+                    <form action="{{ route('don-hang.duyet-don-hang', $donHang->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm">Duyệt</button>
+                    </form>
+                    <form action="{{ route('don-hang.huy-don-hang', $donHang->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
+                    </form>
+                @elseif ($donHang->trang_thai == 1)
+                    {{-- Trạng thái chờ lấy hàng --}}
+                    <form action="{{ route('don-hang.yeu-cau-lay-hang', $donHang->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy hàng</button>
+                    </form>
+                @endif
                 <a href="{{ url()->previous() }}">
                     <button class="btn btn-secondary btn-sm">Quay Lại</button>
                 </a>
