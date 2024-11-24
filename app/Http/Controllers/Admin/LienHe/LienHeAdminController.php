@@ -31,12 +31,6 @@ class LienHeAdminController extends Controller
         }
         return view('admin.lienhe.dSLienHe',$this->view);
     }
-    public function viewCapNhatTrangThai($id)
-{
-    $lienHe = LienHe::findOrFail($id);
-    return view('admin.lienhe.capNhatTrangThai', compact('lienHe'));
-}
-
     public function phanHoi($id)
     {
     try {

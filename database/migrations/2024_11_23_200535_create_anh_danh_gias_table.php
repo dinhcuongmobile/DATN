@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lien_hes', function (Blueprint $table) {
+        Schema::create('anh_danh_gias', function (Blueprint $table) {
             $table->id();
-            $table->string('ho_va_ten');
-            $table->string('email');
-            $table->string('so_dien_thoai', 10);
-            $table->text('noi_dung');
-            $table->integer('trang_thai')->default(0)->comment('0.Chưa Phản Hồi 1.Đã Phản Hồi');
+            $table->foreignId('danh_gia_id')->constrained('danh_gias')->onDelete('cascade');
+            $table->string('hinh_anh')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lien_hes');
+        Schema::dropIfExists('anh_danh_gias');
     }
 };

@@ -253,7 +253,9 @@
                                 <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc') }}">Áo Sơ Mi</a></li>
+                                        @foreach ($danh_muc_tin_tucs as $item)
+                                        <li> <a href="{{ route('tin-tuc.tin-tuc-danh-muc', $item->id) }}">{{$item->ten_danh_muc}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li> <a class="nav-link" href="{{ route('lien-he.lien-he') }}">Liên Hệ </a></li>
@@ -339,11 +341,11 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Về Chúng Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="index.html">Trang chủ</a></li>
-                                        <li> <a class="nav" href="collection-left-sidebar.html">Giới thiệu</a></li>
-                                        <li> <a class="nav" href="about-us.html">Sản phẩm</a></li>
-                                        <li> <a class="nav" href="blog-left-sidebar.html">Tin tức</a></li>
-                                        <li> <a class="nav" href="contact.html">Liên hệ</a></li>
+                                        <li> <a class="nav" href="{{route('trang-chu.home')}}">Trang chủ</a></li>
+                                        <li> <a class="nav" href="{{route('gioi-thieu')}}">Giới thiệu</a></li>
+                                        <li> <a class="nav" href="{{route('san-pham.san-pham')}}">Sản phẩm</a></li>
+                                        <li> <a class="nav" href="{{route('tin-tuc.tin-tuc')}}">Tin tức</a></li>
+                                        <li> <a class="nav" href="{{route('lien-he.lien-he')}}">Liên hệ</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -353,12 +355,13 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Danh Mục Mới</h5>
+                                    <h5>Danh Mục</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="product-bundle.html">Giày mới nhất</a></li>
-                                        <li> <a class="nav" href="variant-radio.html">Quần jeans hiệu</a></li>
-                                        <li> <a class="nav" href="product.html">Áo khoác mới</a></li>
-                                        <li> <a class="nav" href="variant-images.html">Áo hoodie nhiều màu sắc</a></li>
+                                        @foreach ($danh_mucs as $item)
+                                        <li>
+                                            <a class="nav" href="{{route('san-pham.san-pham-danh-muc',$item->id)}}">{{$item->ten_danh_muc}}</a>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -374,7 +377,7 @@
                                         <li> <a class="nav" href="dashboard.html">Tài khoản của bạn</a></li>
                                         <li> <a class="nav" href="order-tracking.html">Theo dõi đơn hàng</a></li>
                                         <li> <a class="nav" href="wishlist.html">Danh sách mong muốn</a></li>
-                                        <li> <a class="nav" href="#">Câu hỏi thường gặp </a></li>
+                                        <li> <a class="nav" href="{{route('cau-hoi-thuong-gap')}}">Câu hỏi thường gặp </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -390,7 +393,7 @@
                                         <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
                                         <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
-                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="{{route('chinh-sach-bao-mat')}}">Chính sách bảo mật</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -418,7 +421,7 @@
                 <!-- Tin nhắn sẽ được load ở đây -->
             </div>
 
-            <div class="chat-input">
+            <div class="chat-input" data-id="{{Auth::user()->id}}">
                 <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
                 <button onclick="sendMessage()">Gửi</button>
             </div>

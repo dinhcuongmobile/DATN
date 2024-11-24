@@ -848,453 +848,434 @@
                                             {{-- tap 1 --}}
                                             <div id="tap1" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_all'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                @switch($itemDonHang->trang_thai)
-                                                                                                    @case(0)
-                                                                                                        <span class="text-warning">Chờ xác nhận</span>
-                                                                                                        @break
-                                                                                                    @case(1)
-                                                                                                        <span>Đang chuẩn bị hàng</span>
-                                                                                                        @break
-                                                                                                    @case(2)
-                                                                                                        <i class="fas fa-truck icon"></i>
-                                                                                                        <span>Đang giao</span>
-                                                                                                        @break
-                                                                                                    @case(3)
-                                                                                                        <i class="fas fa-truck icon"></i>
-                                                                                                        <span>Đã giao</span>
-                                                                                                        @break
-                                                                                                    @case(4)
-                                                                                                        <span class="text-danger">Đã hủy</span>
-                                                                                                        @break
-                                                                                                    @case(5)
-                                                                                                        <span class="text-warning">Đang chờ xử lý trả hàng</span>
-                                                                                                        @break
-                                                                                                @endswitch
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai==1)
-                                                                                    <a href="" style="margin-right:15px;" class="btn btn-outline-danger">Hủy đơn hàng</a>
-                                                                                    <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                                @elseif ($itemDonHang->trang_thai == 2)
-                                                                                    <span data-id="{{ $itemDonHang->id }}" class="btn btn-success">Đã nhận hàng</span>
-                                                                                    <button class="btn btn-primary">Mua lại</button>
-                                                                                    <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                                @elseif ($itemDonHang->trang_thai == 3)
-                                                                                    <button class="btn btn-primary">Mua lại</button>
-                                                                                    <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                                @elseif ($itemDonHang->trang_thai == 4)
-                                                                                    <button class="btn btn-primary">Mua lại</button>
-                                                                                    <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
-                                                                                    <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                                @elseif ($itemDonHang->trang_thai == 5)
-                                                                                    <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                                @endif
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                            @switch($itemDonHang->trang_thai)
+                                                                                                @case(0)
+                                                                                                    <span class="text-warning">Chờ xác nhận</span>
+                                                                                                    @break
+                                                                                                @case(1)
+                                                                                                    <span>Đang chuẩn bị hàng</span>
+                                                                                                    @break
+                                                                                                @case(2)
+                                                                                                    <i class="fas fa-truck icon"></i>
+                                                                                                    <span>Đang giao</span>
+                                                                                                    @break
+                                                                                                @case(3)
+                                                                                                    <i class="fas fa-truck icon"></i>
+                                                                                                    <span>Đã giao</span>
+                                                                                                    @break
+                                                                                                @case(4)
+                                                                                                    <span class="text-danger">Đã hủy</span>
+                                                                                                    @break
+                                                                                                @case(5)
+                                                                                                    <span class="text-warning">Đang chờ xử lý trả hàng</span>
+                                                                                                    @break
+                                                                                            @endswitch
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai==1)
+                                                                                <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
+                                                                            @elseif ($itemDonHang->trang_thai == 2)
+                                                                                <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
+                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                            @elseif ($itemDonHang->trang_thai == 3)
+                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                            @elseif ($itemDonHang->trang_thai == 4)
+                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                                <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
+                                                                            @endif
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 2 --}}
                                             <div id="tap2" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_0'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                <span class="text-warning">Chờ xác nhận</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <a href="" style="margin-right:15px;" class="btn btn-outline-danger">Hủy đơn hàng</a>
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                            <span class="text-warning">Chờ xác nhận</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row">
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 3 --}}
                                             <div id="tap3" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_1'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                <span>Đang chuẩn bị hàng</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <a href="" style="margin-right:15px;" class="btn btn-outline-danger">Hủy đơn hàng</a>
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                            <span>Đang chuẩn bị hàng</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 4 --}}
                                             <div id="tap4" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_2'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                <i class="fas fa-truck icon"></i>
-                                                                                                <span>Đang giao</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <span data-id="{{ $itemDonHang->id }}" class="btn btn-success">Đã nhận hàng</span>
-                                                                                <button class="btn btn-primary">Mua lại</button>
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                            <i class="fas fa-truck icon"></i>
+                                                                                            <span>Đang giao</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <button data-id="{{ $itemDonHang->id }}" class="btn btn-success">Đã nhận hàng</button>
+                                                                            <button class="btn btn-primary">Mua lại</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 5 --}}
                                             <div id="tap5" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_3'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                    <i class="fas fa-truck icon"></i>
-                                                                                                    <span>Đã giao</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <button class="btn btn-primary">Mua lại</button>
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                                <i class="fas fa-truck icon"></i>
+                                                                                                <span>Đã giao</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <button class="btn btn-primary">Mua lại</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 6 --}}
                                             <div id="tap6" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_4'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                    <span style="color: red;">Đã hủy</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <button class="btn btn-primary">Mua lại</button>
-                                                                                <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                                <span style="color: red;">Đã hủy</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <button class="btn btn-primary">Mua lại</button>
+                                                                            <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                             {{-- tap 7 --}}
                                             <div id="tap7" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_5'] as $itemDonHang)
-                                                    <form>
-                                                        <div class="card shadow-0 border mb-4" style="border-radius: 10px;">
-                                                            <div class="card-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="cart-table-container tableDonMua">
-                                                                            <table class="table">
-                                                                                <tbody>
-                                                                                    @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr>
-                                                                                        <td colspan="2">
-                                                                                            <span class="chatLS">💬 Chat</span>
-                                                                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
-                                                                                        </td>
-                                                                                        <td colspan="2" class="thongBaoLS" style="text-align: right">
-                                                                                            <span class="thongBao">
-                                                                                                    <span class="text-warning">Đang chờ xử lý trả hàng</span>
-                                                                                            </span> |
-                                                                                            <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
-                                                                                                {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
-                                                                                            </span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <tr class="product-row" data-donHangId="{{$itemDonHang->id}}">
-                                                                                        <td class="img">
-                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                        </td>
-                                                                                        <td class="col-9 tenSanPham">
-                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                            <p>Phân loại hàng:
-                                                                                                <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                            </p>
-                                                                                            <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                        </td>
-                                                                                        <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
-                                                                                    @endforeach
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
-                                                                            <div class="btnDonMua">
-                                                                                <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
-                                                                            </div>
-                                                                        </div><!-- End .cart-table-container -->
-                                                                    </div><!-- End .col-lg-8 -->
-                                                                </div>
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="cart-table-container tableDonMua">
+                                                                        <table class="table">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="2">
+                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                    </td>
+                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                        <span class="thongBao">
+                                                                                                <span class="text-warning">Đang chờ xử lý trả hàng</span>
+                                                                                        </span> |
+                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                            {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
+                                                                                <tr class="product-row" >
+                                                                                    <td class="img">
+                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
+                                                                                    </td>
+                                                                                    <td class="col-9 tenSanPham">
+                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                        <p>Phân loại hàng:
+                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
+                                                                                        </p>
+                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
+                                                                                    </td>
+                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
+                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <div class="btnDonMua">
+                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                        </div>
+                                                                    </div><!-- End .cart-table-container -->
+                                                                </div><!-- End .col-lg-8 -->
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -1350,31 +1331,14 @@
                                             <h3>Địa Chỉ Nhận Hàng</h3>
                                             <p class="ten-nhan-hang">Nguyễn Đình Cường</p>
                                             <p class="sdt-nhan">(+84) 964426158</p>
-                                            <p>Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
+                                            <p class="dia-chi-nhan">Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
                                         </div>
 
                                         <div class="delivery-status">
                                             <h3>Trạng Thái Giao Hàng</h3>
-                                            <p class="active">
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã giao thành công.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đang vận chuyển.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
-                                            <p>
-                                                <i class="fa-solid fa-circle"></i>
-                                                <span>Đơn hàng đã rời kho.</span>
-                                            </p>
+                                            <div class="trang-thai">
+
+                                            </div>
                                         </div>
                                     </div>
 
@@ -1384,49 +1348,36 @@
                                             <span class="chatLS">💬 Chat</span>
                                             <a href="{{route('san-pham.san-pham')}}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
                                         </div>
-                                        <a class="product-list-a" href="">
-                                            <div class="product-list">
-                                                <img src="https://via.placeholder.com/60x90" alt="err">
-                                                <div class="product-details">
-                                                    <p class="tenSanPham">Người dám cho đi</p>
-                                                    <p class="phanLoaiHang">Phân loại hàng:
-                                                        <span>M, Đen</span>.
-                                                    </p>
-                                                    <p>x2</p>
-                                                </div>
-                                            </div>
-                                            <div class="giaTienLS">
-                                                <span>200000đ</span>
-                                                <span><del>200000đ</del></span>
-                                            </div>
-                                        </a>
+                                        <div class="list-san-pham">
+
+                                        </div>
 
                                         <table class="table">
-                                            <tr>
+                                            <tr class="tongTienHang">
                                                 <th>Tổng tiền hàng</th>
                                                 <td>50.700 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="phiVanChuyen">
                                                 <th>Phí vận chuyển</th>
                                                 <td>16.500 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="giamGiaVanChuyen">
                                                 <th>Giảm giá phí vận chuyển</th>
                                                 <td>-15.000 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="giamGiaDonHang">
                                                 <th>Voucher giảm giá</th>
                                                 <td>-15.210 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="namadXu">
                                                 <th>Namad xu</th>
                                                 <td>-15.210 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="thanhTien">
                                                 <th>Thành tiền</th>
                                                 <td class="price">36.990 VNĐ</td>
                                             </tr>
-                                            <tr>
+                                            <tr class="phuongThucThanhToan">
                                                 <th>Phương thức thanh toán</th>
                                                 <td>Ship COD</td>
                                             </tr>
@@ -1920,6 +1871,35 @@
                                 <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Đánh giá --}}
+        <div class="reviews-modal modal theme-modal fade" id="reviews" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document" style="max-width: 850px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Đánh giá sản phẩm</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-0">
+                        {{-- ****** --}}
+                        <div class="row">
+                            <div class="thongBao">
+                                <img src="/assets/images/coin.png" alt="coin">
+                                <p>Chia sẻ cảm nhận của bạn về tất cả sản phẩm trong cùng đơn hàng với tối thiểu 50 ký tự cùng
+                                    ít nhất 1 hình ảnh để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội dung không phù hợp
+                                    Namad xu sẽ bị thu hồi cùng với đánh giá của bạn sẽ bị xóa.
+                                </p>
+                            </div>
+                        </div>
+                        {{-- ***** --}}
+
+                        <div class="main">
+                            
+                        </div>
                     </div>
                 </div>
             </div>
