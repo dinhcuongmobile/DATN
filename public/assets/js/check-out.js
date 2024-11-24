@@ -200,10 +200,7 @@ function datHang(){
         let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
         let ghiChu = document.querySelector('.ghi-chu input').value || "";
-        let soCoin = 0;
-        if(document.querySelector('.right-sidebar-checkout .toggle-button.active')){
-            soCoin = parseFloat(document.querySelector('.summary-total .tongCoin').textContent) || 0;
-        }
+        let soCoin = document.querySelector('.summary-total .divTongCoin .active') ? parseInt(document.querySelector('.summary-total .tongCoin').textContent) || 0 : 0;
 
         $.ajax({
             type: 'POST',

@@ -15,7 +15,7 @@ use Illuminate\Support\Str;
 class FaceBookController extends Controller
 {
     /**
-     * Redirect to Google login page.
+     * Redirect to FaceBook login page.
      */
     public function redirectToFacebook()
     {
@@ -23,12 +23,12 @@ class FaceBookController extends Controller
     }
 
     /**
-     * Handle Google callback.
+     * Handle FaceBook callback.
      */
     public function handleFacebookCallback(Request $request)
     {
         try {
-            // Lấy thông tin người dùng từ Google
+            // Lấy thông tin người dùng từ FaceBook
             $userFaceBook = Socialite::driver('facebook')->user();
 
             $finduser = User::where('facebook_id', $userFaceBook->id)
@@ -55,7 +55,7 @@ class FaceBookController extends Controller
     }
 
     /**
-     * Update Google ID for existing user if needed.
+     * Update FaceBook ID for existing user if needed.
      */
     private function updateFaceBookIdIfNeeded($user, $userFaceBook)
     {
@@ -74,7 +74,7 @@ class FaceBookController extends Controller
     }
 
     /**
-     * Create a new user from Google data.
+     * Create a new user from FaceBook data.
      */
     private function createNewUser($userFaceBook)
     {

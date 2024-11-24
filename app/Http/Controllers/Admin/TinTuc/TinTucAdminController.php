@@ -48,9 +48,6 @@ class TinTucAdminController extends Controller
         } else {
             $fileName = null;
         }
-        if ($request->tieu_de == $tinTuc->tieu_de) {
-            return redirect()->route('tin-tuc.danh-sach')->with('error', 'Tên tiêu đề đã tồn tại. Vui lòng thử lại');
-        }
         $dataInsert = [
             'danh_muc_id' => $danh_muc,
             'hinh_anh' => $fileName,
@@ -78,11 +75,6 @@ class TinTucAdminController extends Controller
     {
         $tin_tuc = $this->tin_tucs->loadOneTinTuc($id);
         $danh_muc = $request->input('danh_muc_id');
-        if (!$tin_tuc) {
-            return redirect()->route('tin_tuc.danh-sach')->withErrors('Có lỗi xảy ra, Vui lòng thử lại.');
-        }
-
-
         if ($request->hasFile('hinh_anh')) {
             $fileName = $request->file('hinh_anh')->store('uploads/tintuc', 'public');
 

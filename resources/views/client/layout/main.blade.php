@@ -390,7 +390,7 @@
                                         <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
                                         <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
-                                        <li> <a class="nav" href="#">Câu hỏi thường gặp</a></li>
+                                        <li> <a class="nav" href="faq.html">Câu hỏi thường gặp</a></li>
                                     </ul>
                                 </div>
                             </div>

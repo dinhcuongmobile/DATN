@@ -127,7 +127,7 @@
     <title>Document</title>
 </head>
 <body>
-<p>Chào {{ Auth::user()->ho_va_ten }},</p>
+<p>Chào {{ $user->ho_va_ten }},</p>
 <p>Cảm ơn bạn đã luôn tin tưởng và lựa chọn sản phẩm của chúng tôi. Dưới đây là hóa đơn của đơn hàng bạn đã đặt :</p>
      <!-- Begin Page Content -->
  <div class="container-fluid">
@@ -147,9 +147,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="col-3">{{Auth::user()->ho_va_ten}}</td>
-                    <td class="col-2">{{Auth::user()->so_dien_thoai}}</td>
-                    <td class="col-3">{{Auth::user()->email}}</td>
+                    <td class="col-3">{{$user->ho_va_ten}}</td>
+                    <td class="col-2">{{$user->so_dien_thoai}}</td>
+                    <td class="col-3">{{$user->email}}</td>
                     <td class="col-4">
                         @if ($dia_chi->dia_chi_chi_tiet)
                             {{ $dia_chi->dia_chi_chi_tiet }},
