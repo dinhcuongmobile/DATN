@@ -87,15 +87,7 @@ class DonHangAdminController extends Controller
 
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
     }
-    public function daGiao(int $id) {
-        $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 3; // 3 là trạng thái đã giao
-        $donHang->ngay_cap_nhat = now();
-        $donHang->save();
-    
-        return redirect()->route('don-hang.danh-sach-dang-giao')->with('success', 'Đơn hàng đã được giao ');
-    }
-    
+ 
     // Hiển thị chi tiết đơn hàng
     public function showChiTietDonHang($id)
     {
