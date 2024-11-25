@@ -18,15 +18,15 @@ class ThongKeController extends Controller
 
     public function load30Ngay()
     {
-        $dauThangNay = Carbon::now()->startOfMonth()->toDateString();
+        $sub30Ngay = Carbon::now()->subDays(30)->toDateString();
         $hienTai = Carbon::now()->toDateString();
 
         $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-            ->whereBetween('ngay_tao', [$dauThangNay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            ->whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
 
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
-        $soDonHang = DonHang::whereBetween('ngay_tao', [$dauThangNay, $hienTai])->where('trang_thai', 3)->count();
+        $soDonHang = DonHang::whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
