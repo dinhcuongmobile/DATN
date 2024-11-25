@@ -70,20 +70,9 @@
                                         data-icon="heart"></i>Yêu Thích </button>
                             </li>
                             <li>
-                                <button class="nav-link" id="saved-card-tab" data-bs-toggle="pill"
-                                    data-bs-target="#saved-card" role="tab" aria-controls="saved-card"
-                                    aria-selected="false"> <i class="iconsax" data-icon="bank-card"></i>Thẻ Ngân
-                                    Hàng</button>
-                            </li>
-                            <li>
                                 <button class="nav-link" id="address-tab" data-bs-toggle="pill" data-bs-target="#address"
                                     role="tab" aria-controls="address" aria-selected="false"><i class="iconsax"
                                         data-icon="cue-cards"></i>Địa Chỉ</button>
-                            </li>
-                            <li>
-                                <button class="nav-link" id="privacy-tab" data-bs-toggle="pill" data-bs-target="#privacy"
-                                    role="tab" aria-controls="privacy" aria-selected="false">
-                                    <i class="iconsax" data-icon="security-user"></i>Bảo Mật</button>
                             </li>
                         </ul>
                         <div class="logout-button">
@@ -1390,113 +1379,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- Thẻ tín dụng --}}
-                        <div class="tab-pane fade" id="saved-card" role="tabpanel" aria-labelledby="saved-card-tab">
-                            <div class="dashboard-right-box">
-                                <div class="saved-card">
-                                    <div class="sidebar-title">
-                                        <div class="loader-line"></div>
-                                        <h4>My Card Details</h4>
-                                    </div>
-                                    <div class="payment-section">
-                                        <div class="row gy-3">
-                                            <div class="col-xxl-4 col-md-6">
-                                                <div class="payment-card">
-                                                    <div class="bank-info"><img class="bank"
-                                                            src="../assets/images/bank-card/bank1.png" alt="bank1">
-                                                        <div class="card-type"><img class="bank-card"
-                                                                src="../assets/images/bank-card/1.png" alt="card">
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-details"><span>Card Number</span>
-                                                        <h5>6458 50XX XXXX 0851</h5>
-                                                    </div>
-                                                    <div class="card-details-wrap">
-                                                        <div class="card-details"><span>Name On Card</span>
-                                                            <h5>Josephin water</h5>
-                                                        </div>
-                                                        <div class="text-center card-details"><span>Validity</span>
-                                                            <h5>XX/XX</h5>
-                                                        </div>
-                                                        <div class="btn-box"><span data-bs-toggle="modal"
-                                                                data-bs-target="#edit-bank-card" title="Quick View"
-                                                                tabindex="0"><i class="iconsax"
-                                                                    data-icon="edit-1"></i></span><span
-                                                                data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                                title="Quick View" tabindex="0"><i class="iconsax"
-                                                                    data-icon="trash"></i></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-4 col-md-6">
-                                                <div class="payment-card">
-                                                    <div class="bank-info"><img class="bank"
-                                                            src="../assets/images/bank-card/bank2.png" alt="bank1">
-                                                        <div class="card-type"><img class="bank-card"
-                                                                src="../assets/images/bank-card/2.png" alt="card">
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-details"><span>Card Number</span>
-                                                        <h5>6458 50XX XXXX 0851</h5>
-                                                    </div>
-                                                    <div class="card-details-wrap">
-                                                        <div class="card-details"><span>Name On Card</span>
-                                                            <h5>Josephin water</h5>
-                                                        </div>
-                                                        <div class="text-center card-details"><span>Validity</span>
-                                                            <h5>XX/XX</h5>
-                                                        </div>
-                                                        <div class="btn-box"><span data-bs-toggle="modal"
-                                                                data-bs-target="#edit-bank-card" title="Quick View"
-                                                                tabindex="0"><i class="iconsax"
-                                                                    data-icon="edit-1"></i></span><span
-                                                                data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                                title="Quick View" tabindex="0"><i class="iconsax"
-                                                                    data-icon="trash"></i></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-4 col-md-6">
-                                                <div class="payment-card">
-                                                    <div class="bank-info"><img class="bank"
-                                                            src="../assets/images/bank-card/bank3.png" alt="bank1">
-                                                        <div class="card-type"><img class="bank-card"
-                                                                src="../assets/images/bank-card/3.png" alt="card">
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-details"><span>Card Number</span>
-                                                        <h5>6458 50XX XXXX 0851</h5>
-                                                    </div>
-                                                    <div class="card-details-wrap">
-                                                        <div class="card-details"><span>Name On Card</span>
-                                                            <h5>Josephin water</h5>
-                                                        </div>
-                                                        <div class="text-center card-details"><span>Validity</span>
-                                                            <h5>XX/XX</h5>
-                                                        </div>
-                                                        <div class="btn-box"><span data-bs-toggle="modal"
-                                                                data-bs-target="#edit-bank-card" title="Quick View"
-                                                                tabindex="0"><i class="iconsax"
-                                                                    data-icon="edit-1"></i></span><span
-                                                                data-bs-toggle="modal" data-bs-target="#bank-card-modal"
-                                                                title="Quick View" tabindex="0"><i class="iconsax"
-                                                                    data-icon="trash"></i></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xxl-4 col-md-6">
-                                                <div class="payment-card">
-                                                    <div class="add-card">
-                                                        <h6 data-bs-toggle="modal" data-bs-target="#add-bank-card"
-                                                            title="Quick View" tabindex="0">+ Add Card</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         {{-- Địa chỉ --}}
                         <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                             <div class="dashboard-right-box">
@@ -1559,97 +1441,6 @@
                                         @endforeach
                                     </div><button class="btn add-address" data-bs-toggle="modal"
                                         data-bs-target="#add-address" title="Thêm địa chỉ" tabindex="0">+ Thêm địa chỉ mới</button>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Bảo mật --}}
-                        <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab">
-                            <div class="dashboard-right-box">
-                                <div class="privacy-tab">
-                                    <div class="sidebar-title">
-                                        <div class="loader-line"></div>
-                                        <h4>Privacy</h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="privacy-title">
-                                                <h5>Allows others to see my profile</h5>
-                                                <p>Choose who can access your app and if users need to <a
-                                                        href="sign-up.html"> sign up.</a></p>
-                                            </div><span class="short-title">access</span>
-                                            <ul class="privacy-items">
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax" data-icon="lock-2"></i>
-                                                    </div>
-                                                    <div class="privacy-contant">
-                                                        <h6>Private</h6>
-                                                        <p>Only users you choose can access</p>
-                                                    </div><label class="switch"><input type="checkbox"
-                                                            checked=""><span class="slider round"></span></label>
-                                                </li>
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="globe"></i>
-                                                    </div>
-                                                    <div class="privacy-contant">
-                                                        <h6>Public</h6>
-                                                        <p>Anyone with the link can</p>
-                                                    </div><label class="switch"><input type="checkbox"><span
-                                                            class="slider round"></span></label>
-                                                </li>
-                                            </ul><span class="short-title">Users</span>
-                                            <ul class="privacy-items">
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="package"></i></div>
-                                                    <div class="privacy-contant">
-                                                        <h6>Users in the users table </h6>
-                                                        <p>Only users in the users table can sign in </p>
-                                                    </div><label class="switch"><input type="checkbox"
-                                                            checked=""><span class="slider round"></span></label>
-                                                </li>
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="fingerprint-circle"></i></div>
-                                                    <div class="privacy-contant">
-                                                        <h6>ongoing production team </h6>
-                                                        <p>only members of your team can sign in </p>
-                                                    </div><label class="switch"><input type="checkbox"><span
-                                                            class="slider round"></span></label>
-                                                </li>
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="add-layer"></i></div>
-                                                    <div class="privacy-contant">
-                                                        <h6>anyone form domain(s)</h6>
-                                                        <p>only users with your email domain </p>
-                                                    </div><label class="switch"><input type="checkbox"
-                                                            checked=""><span class="slider round"></span></label>
-                                                </li>
-                                                <li>
-                                                    <div class="privacy-icon"> <i class="iconsax"
-                                                            data-icon="mail"></i>
-                                                    </div>
-                                                    <div class="privacy-contant">
-                                                        <h6>any email in table </h6>
-                                                        <p>Anyone with email included in a table </p>
-                                                    </div><label class="switch"><input type="checkbox"><span
-                                                            class="slider round"></span></label>
-                                                </li>
-                                            </ul><span class="short-title"> </span>
-                                            <ul class="privacy-items">
-                                                <li>
-                                                    <div class="privacy-contant">
-                                                        <h6>Publishing </h6>
-                                                        <p>Your Project is Published</p>
-                                                    </div>
-                                                    <div class="publish-button"> <button
-                                                            class="btn">Unpublish</button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
