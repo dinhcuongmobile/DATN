@@ -61,11 +61,11 @@
                       </tr>
                       <tr>
                           <td colspan="4" class="text-right"><strong>Giảm Giá Vận Chuyển:</strong></td>
-                          <td>{{ number_format($phiVanChuyen, 0, ',', '.') }}đ</td>
+                          <td>-{{ number_format($phiVanChuyen, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
                           <td colspan="4" class="text-right"><strong>Giảm Giá Đơn Hàng:</strong></td>
-                          <td>{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</td>
+                          <td>-{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
                           <td colspan="4" class="text-right"><strong>Tổng Thanh Toán:</strong></td>
