@@ -34,7 +34,7 @@
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
                     <button type="submit" class="btn btn-danger btn-sm">Yêu Cầu Lấy Hàng Loạt</button> 
-                    <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm">In Hóa Đơn Hàng Loạt</a>
+                    <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm" target="_blank">In Hóa Đơn Hàng Loạt</a>
                 </div>
         </div> 
     </div>
@@ -53,7 +53,7 @@
                 </div> 
 
             </div>
-            <a href="{{route('don-hang.in-hoa-don', $item->id)}}" class="btn btn-success btn-sm float-right">
+            <a href="{{route('don-hang.in-hoa-don', $item->id)}}" class="btn btn-success btn-sm float-right" target="_blank">
                 Xuất Hóa Đơn
               </a>  
         </div>
