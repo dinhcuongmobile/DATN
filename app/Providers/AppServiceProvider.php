@@ -61,5 +61,38 @@ class AppServiceProvider extends ServiceProvider
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
+         // Chia sẻ dữ liệu cho view in hóa đơn
+        View::composer('admin.donHang.hoaDon', function ($view) {
+            $donHangId = request()->route('id');
+            $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($donHangId);
+            $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
+            $view->with(['donHang'=> $donHang,
+            'tongTienSanPham' => $tongTienSanPham,
+            'phiVanChuyen' => $donHang->giam_gia_van_chuyen,
+            'giamGiaDonHang' => $donHang->giam_gia_don_hang,
+            'tongThanhToan' => $donHang->tong_thanh_toan
+          ]);
+        });
+        // Chia sẻ dữ liệu cho view in hàng loạt hóa đơn
+        View::composer('admin.donHang.inHoaDonHangLoat', function ($view) {
+            $donHangs = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->where('trang_thai', 1)->get();
+             // Tính tổng tiền sản phẩm cho tất cả các đơn hàng
+        $tongTienSanPham = $donHangs->reduce(function ($carry, $donHang) {
+         return $carry + $donHang->chiTietDonHangs->sum('thanh_tien');
+        }, 0);
+        $donHangs->each(function ($donHang) {
+            $donHang->tongThanhToan = $donHang->tong_thanh_toan;
+        });
+    
+        $view->with([
+            'donHangs' => $donHangs,
+            'tongTienSanPham' => $tongTienSanPham,  // Tổng tiền sản phẩm cho tất cả các đơn hàng
+            'phiVanChuyen' => $donHangs->sum('giam_gia_van_chuyen'),  // Tổng phí vận chuyển cho tất cả các đơn hàng
+            'giamGiaDonHang' => $donHangs->sum('giam_gia_don_hang'),  // Tổng giảm giá đơn hàng
+            'tongThanhToan' => $donHangs->map(function ($donHang) {
+                return $donHang->tongThanhToan;  // Tổng thanh toán riêng biệt cho mỗi đơn hàng
+            }),
+        ]);
+     });
     }
 }

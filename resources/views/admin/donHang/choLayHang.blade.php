@@ -28,14 +28,14 @@
                     </div>
                 </form>
             </div>
-            <form action="" method="post">
+            <form action="{{ route('don-hang.giao-nhieu-don-hang') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-secondary btn-sm">Giao các đơn hàng đã chọn</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Giao Hàng Loạt</button> 
+                    <button type="submit" class="btn btn-danger btn-sm">Yêu Cầu Lấy Hàng Loạt</button> 
+                    <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm">In Hóa Đơn Hàng Loạt</a>
                 </div>
-            </form>
         </div> 
     </div>
 
@@ -50,8 +50,12 @@
                 </div>  
                 <div>  
                     <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>  
-                </div>  
-            </div> 
+                </div> 
+
+            </div>
+            <a href="{{route('don-hang.in-hoa-don', $item->id)}}" class="btn btn-success btn-sm float-right">
+                Xuất Hóa Đơn
+              </a>  
         </div>
         <div class="card-body">  
             <div class="table-responsive"> 
@@ -121,6 +125,20 @@
         </div>  
     </div>  
     @endforeach
-    
+</form>
 </div>  
+<script>
+    function chontatca() {
+    document.querySelectorAll('input[name="select[]"]').forEach(checkbox => {
+        checkbox.checked = true;
+    });
+}
+
+function bochontatca() {
+    document.querySelectorAll('input[name="select[]"]').forEach(checkbox => {
+        checkbox.checked = false;
+    });
+}
+</script>
+
 @endsection
