@@ -116,8 +116,6 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('show-modal-danh-gia',[DonHangController::class,'showModalDanhGia']);
         Route::post('huy-don-hang',[DonHangController::class,'huyDonHang']);
         Route::post('danh-gia',[DonHangController::class,'danhGia']);
-        Route::post('cong-namad-xu-danh-gia',[DonHangController::class,'congNamadXuDanhGia']);
-        Route::post('cap-nhat-trang-thai-da-giao',[DonHangController::class,'capNhatTrangThaiDaGiao']);
     });
 
     Route::prefix('gio-hang')->group(function () {
@@ -384,11 +382,12 @@ Route::middleware('adminAuth:admin')->prefix('admin')->group(function () {
 
         Route::get('danh-sach-kiem-duyet', [DonHangAdminController::class,'showDSKiemDuyet'])->name('don-hang.danh-sach-kiem-duyet');
         Route::post('duyet-don-hang/{id}', [DonHangAdminController::class,'duyetDonHang'])->name('don-hang.duyet-don-hang');
-        Route::post('giao-nhieu-don-hang', [DonHangAdminController::class, 'giaoNhieuDonHang'])->name('don-hang.giao-nhieu-don-hang');
+        Route::post('duyet-nhieu-don-hang', [DonHangAdminController::class,'duyetNhieuDonHang'])->name('don-hang.duyet-nhieu-don-hang');
         Route::post('huy-don-hang/{id}', [DonHangAdminController::class,'huyDonHang'])->name('don-hang.huy-don-hang');
 
         Route::get('danh-sach-cho-lay-hang', [DonHangAdminController::class,'ShowDSChoLayHang'])->name('don-hang.danh-sach-cho-lay-hang');
         Route::post('yeu-cau-lay-hang/{id}', [DonHangAdminController::class, 'yeuCauLayHangDonHang'])->name('don-hang.yeu-cau-lay-hang');
+        Route::post('giao-nhieu-don-hang', [DonHangAdminController::class,'giaoNhieuDonHang'])->name('don-hang.giao-nhieu-don-hang');
 
         Route::get('danh-sach-dang-giao', [DonHangAdminController::class,'showDSDangGiao'])->name('don-hang.danh-sach-dang-giao');
         Route::post('da-giao/{id}', [DonHangAdminController::class, 'daGiao'])->name('don-hang.da-giao');
