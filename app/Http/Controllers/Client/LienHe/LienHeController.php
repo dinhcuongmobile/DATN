@@ -5,13 +5,29 @@ namespace App\Http\Controllers\Client\LienHe;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LienHe\StoreLienHeRequest;
 use App\Models\LienHe;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LienHeController extends Controller
 {
-    public function lienHe()
+
+    protected $views;
+    public function __construct()
     {
-        return view('client.lienHe.lienHe');
+        $this->views = [];
+    }
+    public function lienHe()
+    { // Tổng yêu thích
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $user = User::find($nguoi_dung_id);
+            $tongYeuThich = $user->yeuThich()->count();
+            //
+            $this->views['tong_yeu_thich'] = $tongYeuThich;
+        }
+        //
+        return view('client.lienHe.lienHe', $this->views);
     }
 
     public function guiLienHe(Request $request)

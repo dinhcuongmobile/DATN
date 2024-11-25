@@ -18,7 +18,7 @@ class YeuThich extends Model
 
     public function NguoiDung()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'nguoi_dung_id','id');
     }
 
     public function SanPham()

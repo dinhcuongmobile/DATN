@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DanhGia;
 use App\Models\DanhMuc;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
 {
@@ -22,17 +24,27 @@ class SanPhamController extends Controller
     public function chiTietSanPham(int $id)
     {
         $san_pham = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
-        if(!$san_pham){
+        if (!$san_pham) {
             return redirect()->route('404');
         }
-        $luot_xem = $san_pham->luot_xem+1;
-        $san_pham->update(['luot_xem'=>$luot_xem]);
+        $luot_xem = $san_pham->luot_xem + 1;
+        $san_pham->update(['luot_xem' => $luot_xem]);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
             ->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
-        $this->views['san_pham']=$san_pham;
+        $this->views['san_pham'] = $san_pham;
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
+
+        // Tổng yêu thích
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $user = User::find($nguoi_dung_id);
+            $tongYeuThich = $user->yeuThich()->count();
+            //
+            $this->views['tong_yeu_thich'] = $tongYeuThich;
+        }
+        //
         return view('client.sanPham.chiTietSanPham', $this->views);
     }
 
@@ -108,6 +120,15 @@ class SanPhamController extends Controller
             ->selectRaw('danh_muc_id, COUNT(*) as count')
             ->pluck('count', 'danh_muc_id');
 
+        // Tổng yêu thích
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $user = User::find($nguoi_dung_id);
+            $tongYeuThich = $user->yeuThich()->count();
+            //
+            $this->views['tong_yeu_thich'] = $tongYeuThich;
+        }
+        //
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {
             $html = view('client.sanPham.filterSanPham', $this->views)->render();
@@ -197,6 +218,15 @@ class SanPhamController extends Controller
             ->selectRaw('danh_muc_id, COUNT(*) as count')
             ->pluck('count', 'danh_muc_id');
 
+        // Tổng yêu thích
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $user = User::find($nguoi_dung_id);
+            $tongYeuThich = $user->yeuThich()->count();
+            //
+            $this->views['tong_yeu_thich'] = $tongYeuThich;
+        }
+        //
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {
             $html = view('client.sanPham.filterSanPham', $this->views)->render();
