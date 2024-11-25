@@ -520,7 +520,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">${formatDate(item.ngay_tao)}</div>
+                                    <div class="small text-gray-500">${item.ngay_tao}</div>
                                     <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</span>
                                 </div>
                             </a>
@@ -545,7 +545,7 @@
     
                         response.lienHeMoi.forEach(item => {
                             content += `
-                            <a class="dropdown-item d-flex align-items-center" href="/lienhe/danh-sach-chua-phan-hoi">
+                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-chua-phan-hoi">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-warning">
                                         <i class="fas fa-comments text-white"></i>
@@ -561,7 +561,7 @@
     
                         response.lienHeDaPhanHoi.forEach(item => {
                             content += `
-                            <a class="dropdown-item d-flex align-items-center" href="/lienhe/danh-sach-da-phan-hoi">
+                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-da-phan-hoi">
                                 <div class="mr-3">
                                     <div class="icon-circle bg-info">
                                         <i class="fas fa-check-circle text-white"></i>
@@ -601,7 +601,7 @@
                             <div class="media">
                                 <div class="media-body">
                                     <h5 class="mt-0">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</h5>
-                                    <p>Ngày tạo: ${formatDate(item.ngay_tao)}</p>
+                                    <p>Ngày tạo: ${item.ngay_tao}</p>
                                 </div>
                             </div>
                             `;
@@ -647,9 +647,14 @@
                     }
                 });
             });
-    
+            // Gọi hàm cập nhật thông báo mỗi 3 giây (3000ms)
+            setInterval(updateNotifications, 3000);
             // Gọi ngay khi trang load để hiển thị thông báo ban đầu
             updateNotifications();
+            Echo.channel('notifications')
+            .listen('NotificationUpdated', (e) => {
+                updateNotifications();
+            });
         });
     </script>
     {{-- Css Modal Thông Báo --}}

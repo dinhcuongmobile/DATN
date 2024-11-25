@@ -459,7 +459,7 @@
                 <!-- Tin nhắn sẽ được load ở đây -->
             </div>
 
-            <div class="chat-input">
+            <div class="chat-input" data-id="{{ Auth::user()->id }}">
                 <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
                 <button onclick="sendMessage()">Gửi</button>
             </div>

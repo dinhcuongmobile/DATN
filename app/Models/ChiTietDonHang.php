@@ -24,6 +24,8 @@ class ChiTietDonHang extends Model
         'thanh_tien',
     ];
 
+    public $timestamp = false;
+
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'

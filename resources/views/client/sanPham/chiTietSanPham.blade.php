@@ -99,7 +99,7 @@
                                     <ul class="selected" id="selectSize">
                                         <input type="hidden" id="size" value="">
                                         @foreach ($kich_cos as $item)
-                                            @php 
+                                            @php
                                                 // Kiểm tra nếu có biến thể với kích cỡ này
                                                 $kichCoTonTai = $san_pham->bienThes->contains('kich_co', $item->kich_co);
                                             @endphp
@@ -196,32 +196,41 @@
                             </div>
                         </div>
 
-                        {{-- binh luan --}}
+                        {{-- Đánh giá --}}
                         <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel"
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="review-right">
                                         <div class="customer-rating">
                                             <div class="global-rating">
                                                 <div>
-                                                    <h5>4.5</h5>
+                                                    <h5>{{ number_format($avg_rating, 1) }}</h5>
                                                 </div>
                                                 <div>
-                                                    <h6>Average Ratings</h6>
+                                                    <h6>Đánh giá trung bình</h6>
                                                     <ul class="rating p-0 mb">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                        <li><span>(14)</span></li>
+                                                        {{-- Hiển thị sao đầy --}}
+                                                        @for ($i = 0; $i < $full_stars; $i++)
+                                                            <li><i class="fa-solid fa-star"></i></li>
+                                                        @endfor
+
+                                                        {{-- Hiển thị sao nửa nếu có --}}
+                                                        @if ($half_star)
+                                                            <li><i class="fa-solid fa-star-half-stroke"></i></li>
+                                                        @endif
+
+                                                        {{-- Hiển thị sao rỗng --}}
+                                                        @for ($i = 0; $i < $empty_stars; $i++)
+                                                            <li><i class="fa-regular fa-star"></i></li>
+                                                        @endfor
+                                                        <li><span>({{$san_pham->danhGias->count()}})</span></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <ul class="rating-progess">
                                                 <li>
-                                                    <p>5 Star</p>
+                                                    <p>5 Sao</p>
                                                     <div class="progress" role="progressbar"
                                                         aria-label="Animated striped example" aria-valuenow="75"
                                                         aria-valuemin="0" aria-valuemax="100">
@@ -231,7 +240,7 @@
                                                     <p>80%</p>
                                                 </li>
                                                 <li>
-                                                    <p>4 Star</p>
+                                                    <p>4 Sao</p>
                                                     <div class="progress" role="progressbar"
                                                         aria-label="Animated striped example" aria-valuenow="75"
                                                         aria-valuemin="0" aria-valuemax="100">
@@ -241,7 +250,7 @@
                                                     <p>70%</p>
                                                 </li>
                                                 <li>
-                                                    <p>3 Star</p>
+                                                    <p>3 Sao</p>
                                                     <div class="progress" role="progressbar"
                                                         aria-label="Animated striped example" aria-valuenow="75"
                                                         aria-valuemin="0" aria-valuemax="100">
@@ -251,7 +260,7 @@
                                                     <p>55%</p>
                                                 </li>
                                                 <li>
-                                                    <p>2 Star</p>
+                                                    <p>2 Sao</p>
                                                     <div class="progress" role="progressbar"
                                                         aria-label="Animated striped example" aria-valuenow="75"
                                                         aria-valuemin="0" aria-valuemax="100">
@@ -261,7 +270,7 @@
                                                     <p>40%</p>
                                                 </li>
                                                 <li>
-                                                    <p>1 Star</p>
+                                                    <p>1 Sao</p>
                                                     <div class="progress" role="progressbar"
                                                         aria-label="Animated striped example" aria-valuenow="75"
                                                         aria-valuemin="0" aria-valuemax="100">
@@ -270,19 +279,17 @@
                                                     </div>
                                                     <p>25%</p>
                                                 </li>
-                                            </ul><button class="btn reviews-modal" data-bs-toggle="modal"
-                                                data-bs-target="#Reviews-modal" title="Quick View"
-                                                tabindex="0">Write a review</button>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-12">
                                     <div class="comments-box">
                                         <h5>Comments </h5>
                                         <ul class="theme-scrollbar">
                                             <li>
                                                 <div class="comment-items">
-                                                    <div class="user-img"> <img src="../assets/images/user/1.jpg"
+                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
                                                             alt=""></div>
                                                     <div class="user-content">
                                                         <div class="user-info">
@@ -312,7 +319,7 @@
                                             </li>
                                             <li class="reply">
                                                 <div class="comment-items">
-                                                    <div class="user-img"> <img src="../assets/images/user/2.jpg"
+                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
                                                             alt=""></div>
                                                     <div class="user-content">
                                                         <div class="user-info">
@@ -342,7 +349,7 @@
                                             </li>
                                             <li>
                                                 <div class="comment-items">
-                                                    <div class="user-img"> <img src="../assets/images/user/3.jpg"
+                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
                                                             alt=""></div>
                                                     <div class="user-content">
                                                         <div class="user-info">

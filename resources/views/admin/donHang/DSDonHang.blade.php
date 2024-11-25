@@ -87,15 +87,15 @@
                                                 @if ($item->trang_thai == 0)
                                                     Chờ Xác Nhận
                                                 @elseif($item->trang_thai == 1)
-                                                    Đơn Hàng Mới
-                                                @elseif($item->trang_thai == 2)
                                                     Đang Chuẩn Bị Hàng
-                                                @elseif($item->trang_thai == 3)
+                                                @elseif($item->trang_thai == 2)
                                                     Đang Giao
-                                                @elseif($item->trang_thai == 4)
+                                                @elseif($item->trang_thai == 3)
                                                     Đã Giao
-                                                @else
+                                                @elseif($item->trang_thai == 4)
                                                     Đã Hủy
+                                                @else
+                                                    Trả Hàng/Hoàn Tiền
                                                 @endif
                                             </span></p>
                                     </td>
@@ -104,7 +104,7 @@
                                     </td>
                                     <td class="col-1">GHTK</td>
                                     <td>
-                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 || $item->trang_thai == 2)
+                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 )
                                             {{-- Các nút tùy thuộc trạng thái --}}
                                             @if ($item->trang_thai == 0)
                                                 {{-- Trạng thái chờ xác nhận --}}
@@ -126,13 +126,6 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy
                                                         hàng</button>
-                                                </form>
-                                            @elseif ($item->trang_thai == 2)
-                                                {{-- Trạng thái đang giao --}}
-                                                <form action="{{ route('don-hang.da-giao', $item->id) }}" method="POST"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-success btn-sm">Đã giao</button>
                                                 </form>
                                             @endif
 
