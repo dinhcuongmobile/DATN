@@ -50,30 +50,35 @@ class DonHangController extends Controller
     }
 
     public function huyDonHang(Request $request){
-        $don_hang_id = $request->input('don_hang_id');
-        $don_hang = DonHang::with('user','diaChi','chiTietDonHangs','donHangHoan')->find($don_hang_id);
-        if($don_hang){
-            $don_hang->update([
-                'trang_thai' => 4,
-                'ngay_cap_nhat'=>now()
-            ]);
-
+        DB::beginTransaction();
+        try {
+            $don_hang_id = $request->input('don_hang_id');
+            $don_hang = DonHang::with('user','diaChi','chiTietDonHangs','donHangHoan')->find($don_hang_id);
+            if($don_hang){
+                $don_hang->update([
+                    'trang_thai' => 4,
+                    'ngay_cap_nhat'=>now()
+                ]);
+            }
+            DB::commit();
             return response()->json([
                 'success' => true
             ]);
-        }
-        else{
-            return response()->json([
-                'success' => false
-            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
         }
     }
 
     public function showModalDanhGia(Request $request){
         $don_hang_id = $request->input('don_hang_id');
         $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs', 'donHangHoan')->find($don_hang_id);
-        $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')
+        $subQuery = ChiTietDonHang::selectRaw('MIN(id) as id')
             ->where('don_hang_id', $don_hang_id)
+            ->groupBy('san_pham_id');
+
+        $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')
+            ->whereIn('id', $subQuery)
             ->orderBy('id', 'desc')
             ->get();
 
@@ -131,15 +136,47 @@ class DonHangController extends Controller
                     }
                 }
             }
-            $coin = Coin::where('user_id', Auth::user()->id)->first();
-            $soCoin = $request->input('namadXu');
-            if ($coin && $soCoin > 0) {
-                $coin->increment('coin', $soCoin);
-            }
+
 
             DB::commit();
 
             return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function congNamadXuDanhGia(Request $request){
+        DB::beginTransaction();
+        try {
+            $coin = Coin::where('user_id', Auth::user()->id)->first();
+            $soCoin = $request->input('namad_xu');
+            if ($coin && $soCoin > 0) {
+                $coin->increment('coin', $soCoin);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+    }
+
+    public function capNhatTrangThaiDaGiao(Request $request){
+        DB::beginTransaction();
+        try {
+            $don_hang_id = $request->input('don_hang_id');
+            $don_hang = DonHang::find($don_hang_id);
+            if($don_hang){
+                $don_hang->update([
+                    'trang_thai' => 3,
+                    'thanh_toan' => 1,
+                    'ngay_cap_nhat'=>now()
+                ]);
+            }
+            DB::commit();
+            return response()->json([
+                'success' => true
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'error' => $e->getMessage()]);

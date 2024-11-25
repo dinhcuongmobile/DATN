@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded',function(){
     tabDonMua();
     activeDonHang();
-    activeTapDonMua();
+    activeTabDonMua("activeTabDaHuy", "tap6");
+    activeTabDonMua("activeTabHoanThanh", "tap5");
     chiTietDonMua();
     huyDonHang();
     reviews();
@@ -46,7 +47,7 @@ function tabDonMua() {
 
     document.querySelectorAll('#order .nav-tab li').forEach((tabItem) => {
         tabItem.addEventListener('click', function () {
-            const tab = tabItem.querySelector('a').getAttribute('href').replace('#', '');
+            const tab = tabItem.querySelector('a').getAttribute('data-tap');
 
             document.querySelectorAll('#order .nav-tab li').forEach((el) => {
                 el.classList.remove('active');
@@ -63,30 +64,31 @@ function tabDonMua() {
 
 
 //end don mua
-function activeTapDonMua() {
-    const activeTabDaHuy = sessionStorage.getItem("activeTabDaHuy");
-
-    if (activeTabDaHuy === "tap6") {
+function activeTabDonMua(tabKey, tabId) {
+    const activeTab = sessionStorage.getItem(tabKey);
+    if (activeTab === tabId) {
         const order = document.getElementById('order');
 
-        order.querySelectorAll('.nav-tab li').forEach((el) => {
-            el.classList.remove('active');
-        });
+        // Xóa class active của tất cả các tab
+        order.querySelectorAll('.nav-tab li').forEach(el => el.classList.remove('active'));
 
-        const targetTab = order.querySelector(`.nav-tab a[href="#tap6"]`);
+        // Thêm class active vào tab hiện tại
+        const targetTab = order.querySelector(`.nav-tab a[data-tap="${tabId}"]`);
         if (targetTab) {
             targetTab.closest('li').classList.add('active');
         }
 
-        order.querySelectorAll('.an').forEach((el) => {
-            el.style.display = "none";
-        });
+        // Ẩn tất cả các phần tử có class 'an'
+        order.querySelectorAll('.an').forEach(el => el.style.display = "none");
 
-        order.querySelector('div#tap6').style.display = "";
+        // Hiển thị tab tương ứng
+        order.querySelector(`div#${tabId}`).style.display = "";
 
-        sessionStorage.removeItem("activeTabDaHuy");
+        // Xóa sessionStorage sau khi xử lý
+        sessionStorage.removeItem(tabKey);
     }
 }
+
 
 
 //chi-tiet-don-mua click
@@ -410,49 +412,49 @@ function reviews(){
                                 $('#reviews').modal('show');
                                 chiTietDonHang.forEach((item, index)=>{
                                     $('#reviews .main').prepend(
-                                        `<div class="row g-3 mt-1" data-idSp=${item.san_pham_id} style="display: block;">
+                                        `<div class="row g-3 mt-1" data-idSp="${item.san_pham_id}" data-idDH="${item.don_hang_id}">
                                             <div class="boder"></div>
-                                            <div class="product">
-                                                <div class="product-list">
-                                                    <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
-                                                    <div class="product-details">
-                                                        <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
-                                                        <p class="phanLoaiHang">Phân loại hàng:
-                                                            <span>${item.bien_the.kich_co}, ${item.bien_the.ten_mau}</span>.
-                                                        </p>
+                                            <div class="popup-content"></div>
+                                            <div class="row-item">
+                                                <div class="product">
+                                                    <div class="product-list">
+                                                        <img src="/storage/${item.san_pham.hinh_anh}" alt="err">
+                                                        <div class="product-details" style="padding-top:10px;">
+                                                            <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                                        </div>
                                                     </div>
+                                                    <div class="star-rating mt-2" data-rating="0">
+                                                        <i class="fa-regular fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i>
+                                                        <i class="fa-regular fa-star"></i>
+                                                    </div>
+                                                    <p class="starRatingErr text-danger"></p>
                                                 </div>
-                                                <div class="star-rating mt-2" data-rating="0">
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                    <i class="fa-regular fa-star"></i>
-                                                </div>
-                                                <p class="starRatingErr text-danger"></p>
-                                            </div>
 
-                                            <div class="rating-btns">
-                                                <button>Chất lượng sản phẩm tuyệt vời</button>
-                                                <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
-                                                <button>Shop phục vụ rất tốt</button>
-                                                <button>Rất đáng tiền</button>
-                                                <button>Thời gian giao hàng nhanh</button>
-                                            </div>
-                                            <div class="noi-dung">
-                                                <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
-                                                <div class="img mt-2">
-                                                    <p>Tải ảnh lên:</p>
-                                                    <div class="image-upload">
-                                                        <input type="file" id="fileUpload${index}" accept="image/*" multiple>
-                                                        <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
-                                                    </div>
-                                                    <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
-                                                    <p class="soLuongAnhErr text-danger"></p>
-                                                    <div class="image-preview mt-3"></div>
+                                                <div class="rating-btns">
+                                                    <button>Chất lượng sản phẩm tuyệt vời</button>
+                                                    <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
+                                                    <button>Shop phục vụ rất tốt</button>
+                                                    <button>Rất đáng tiền</button>
+                                                    <button>Thời gian giao hàng nhanh</button>
                                                 </div>
+                                                <div class="noi-dung mt-3">
+                                                    <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                                    <div class="img mt-2">
+                                                        <p>Tải ảnh lên:</p>
+                                                        <div class="image-upload">
+                                                            <input type="file" id="fileUpload${index}" accept="image/*" multiple>
+                                                            <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
+                                                        </div>
+                                                        <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
+                                                        <p class="soLuongAnhErr text-danger"></p>
+                                                        <div class="image-preview mt-3"></div>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-info mb-3 mt-3 guiDanhGia">Gửi Đánh Giá</button>
                                             </div>
-                                            <button class="btn btn-info mb-3 guiDanhGia">Gửi Đánh Giá</button>
                                         </div>`
                                     );
                                 });
@@ -477,31 +479,31 @@ function reviews(){
 
 function guiDanhGia(){
     let namadXu = 0;
+    let unreviewedItems = Array.from(document.querySelectorAll('#reviews .main .row .row-item')).map(rowItem => ({
+        id: rowItem.closest('.row').getAttribute('data-idSp'),
+        content: rowItem.querySelector('.noi-dung textarea').value,
+        files: rowItem.querySelector('.img input[type="file"]').files
+    }));
     let btnGuiDanhGia = document.querySelectorAll('#reviews .guiDanhGia');
     if(btnGuiDanhGia){
         btnGuiDanhGia.forEach((el, index)=>{
             el.addEventListener('click',function(){
                 const sanPhamId = el.closest('.row').getAttribute('data-idSp');
-                const soSao = el.closest('.row').querySelector('.star-rating').getAttribute('data-rating');
-                const noiDung = el.closest('.row').querySelector('.noi-dung textarea').value;
+                const donHangId = el.closest('.row').getAttribute('data-idDH');
+                const soSao = el.closest('.row-item').querySelector('.star-rating').getAttribute('data-rating');
+                const noiDung = el.closest('.row-item').querySelector('.noi-dung textarea').value;
 
-                const inputFiles = el.closest('.row').querySelector('.img input[type="file"]').files;
+                const inputFiles = el.closest('.row-item').querySelector('.img input[type="file"]').files;
                 const formData = new FormData();
-
                 Array.from(inputFiles).forEach(file => {
                     formData.append('images[]', file); // Thêm file vào formData
                 });
-
-                if (noiDung.length >= 50 && inputFiles.length > 0) {
-                    namadXu = 200;
-                }
                 if (soSao > 0) {
                     const formData = new FormData();
                     formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
                     formData.append('san_pham_id', sanPhamId);
                     formData.append('noiDung', noiDung);
                     formData.append('soSao', soSao);
-                    formData.append('namadXu', namadXu);
 
                     Array.from(inputFiles).forEach(file => {
                         formData.append('images[]', file); // Thêm file vào formData
@@ -515,40 +517,83 @@ function guiDanhGia(){
                         contentType: false,
                         success: function (response) {
                             if (response.success) {
+                                const row = el.closest('.row');
+                                const rowItem = row.querySelector('.row-item');
+                                const popupContent = row.querySelector('.popup-content');
 
-                                const thanhYouPopup = el.closest('.row');
-                                thanhYouPopup.style.transition = 'opacity 0.5s ease-out';
+                                rowItem.style.transition = 'opacity 0.5s ease-out';
+                                rowItem.style.opacity = 0;
+
                                 setTimeout(() => {
-                                    thanhYouPopup.style.display = 'none';
-                                }, 400);
-
-                                $('#reviews .main').prepend(`
-                                    <div class="row g-3 mt-1">
-                                        <div class="boder"></div>
-                                        <div class="popup-content">
+                                    rowItem.remove();
+                                    if (popupContent) {
+                                        popupContent.style.display = "block";
+                                        popupContent.innerHTML = `
                                             <i class="fas fa-check-circle"></i>
                                             <h2>Cảm ơn bạn!</h2>
-                                            <p>Đánh giá của bạn đã được ghi nhận.</p>
-                                        </div>
-                                    </div>
-                                `);
+                                            <p>Đánh giá của bạn đã được ghi nhận.</p>`;
+                                    }
+                                }, 500);
 
                                 setTimeout(() => {
-                                    let soSanPham = document.querySelectorAll('#reviews .main .row');
-                                    let hideModal = true;
-
-                                    soSanPham.forEach((el) => {
-                                        if (el.style.display === "block") {
-                                            hideModal = false;
+                                    //cap nhat lai mang
+                                    unreviewedItems.forEach(item => {
+                                        if (item.id === sanPhamId) {
+                                            item.content = noiDung;
+                                            item.files = inputFiles;
                                         }
                                     });
 
-                                    if (hideModal) {
-                                        $('#reviews').modal('hide');
+                                    // Kiểm tra xem tất cả đã đánh giá đủ điều kiện chưa
+                                    const allReviewed = unreviewedItems.every(item => item.content.length >= 50 && item.files.length > 0);
+
+                                    if (allReviewed) {
+                                        namadXu=200;
+                                        // Tạo dữ liệu để gửi qua AJAX
+                                        const dataXu = new FormData();
+                                        dataXu.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+                                        dataXu.append('namad_xu', namadXu);
+
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/don-hang/cong-namad-xu-danh-gia',
+                                            data: dataXu,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function (response) {
+                                            },
+                                            error: function (error) {
+                                                console.error('Lỗi: ', error);
+                                                alert('Không thể cộng Namad Xu. Vui lòng thử lại sau.');
+                                            }
+                                        });
                                     }
-                                }, 1200);
 
+                                    const hiddenModal = document.querySelectorAll('#reviews .main .row .row-item');
+                                    if (hiddenModal.length===0) {
+                                        $('#reviews').modal('hide');
 
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: '/don-hang/cap-nhat-trang-thai-da-giao',
+                                            data: {
+                                                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                                don_hang_id: donHangId
+                                            },
+                                            success: function (response) {
+                                                if(response){
+                                                    sessionStorage.setItem("activeTab", "order");
+                                                    sessionStorage.setItem("activeTabHoanThanh", "tap5");
+                                                    window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                                                }
+                                            },
+                                            error: function (error) {
+                                                console.error('Lỗi: ', error);
+                                                alert('Vui lòng thử lại sau.');
+                                            }
+                                        });
+                                    }
+                                }, 1300);
                             }
                         },
                         error: function (error) {
@@ -558,7 +603,7 @@ function guiDanhGia(){
                     });
                 }
                 else{
-                    const errRating = el.closest('.main').querySelector('.product .starRatingErr');
+                    const errRating = el.closest('.row').querySelector('.product .starRatingErr');
                     errRating.textContent="Vui lòng chọn số sao. Để tiếp tục đánh giá !";
                     errRating.style.display="block";
                     setTimeout(() => {
@@ -571,6 +616,7 @@ function guiDanhGia(){
 
             });
         });
+
 
     }
 }

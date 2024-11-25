@@ -39,7 +39,7 @@
                             </div>
                             <div class="profile-contain">
                                 <div class="profile-image">
-                                    <img class="img-fluid" src="../assets/images/user/12.jpg" alt="">
+                                    <img class="img-fluid" src="{{asset('assets/images/user/12.jpg')}}" alt="">
                                 </div>
                                 <div class="profile-name">
                                     <h4>{{ Auth::user()->ho_va_ten }}</h4>
@@ -835,13 +835,13 @@
                                             <div class="card-header text-center donmua">
                                                 <nav>
                                                     <ul class="nav-tab">
-                                                        <li class="active"><a href="#tap1">Tất cả</a></li>
-                                                        <li><a href="#tap2">Chờ xác nhận</a></li>
-                                                        <li><a href="#tap3">Chờ giao hàng</a></li>
-                                                        <li><a href="#tap4">Đang giao</a></li>
-                                                        <li><a href="#tap5">Hoàn thành</a></li>
-                                                        <li><a href="#tap6">Đã hủy</a></li>
-                                                        <li><a href="#tap7">Trả hàng/Hoàn tiền</a></li>
+                                                        <li class="active"><a data-tap="tap1">Tất cả</a></li>
+                                                        <li><a data-tap="tap2">Chờ xác nhận</a></li>
+                                                        <li><a data-tap="tap3">Chờ giao hàng</a></li>
+                                                        <li><a data-tap="tap4">Đang giao</a></li>
+                                                        <li><a data-tap="tap5">Hoàn thành</a></li>
+                                                        <li><a data-tap="tap6">Đã hủy</a></li>
+                                                        <li><a data-tap="tap7">Trả hàng/Hoàn tiền</a></li>
                                                     </ul>
                                                 </nav>
                                             </div>
@@ -874,7 +874,6 @@
                                                                                                     <span>Đang giao</span>
                                                                                                     @break
                                                                                                 @case(3)
-                                                                                                    <i class="fas fa-truck icon"></i>
                                                                                                     <span>Đã giao</span>
                                                                                                     @break
                                                                                                 @case(4)
@@ -1095,7 +1094,7 @@
                                                                         </table>
                                                                         <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
                                                                         <div class="btnDonMua">
-                                                                            <button data-id="{{ $itemDonHang->id }}" class="btn btn-success">Đã nhận hàng</button>
+                                                                            <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
                                                                             <button class="btn btn-primary">Mua lại</button>
                                                                             <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
                                                                         </div>
@@ -1890,7 +1889,7 @@
                             <div class="thongBao">
                                 <img src="/assets/images/coin.png" alt="coin">
                                 <p>Chia sẻ cảm nhận của bạn về tất cả sản phẩm trong cùng đơn hàng với tối thiểu 50 ký tự cùng
-                                    ít nhất 1 hình ảnh để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội dung không phù hợp
+                                    ít nhất 1 hình ảnh (trên một sản phẩm) để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội dung không phù hợp
                                     Namad xu sẽ bị thu hồi cùng với đánh giá của bạn sẽ bị xóa.
                                 </p>
                             </div>
@@ -1898,7 +1897,92 @@
                         {{-- ***** --}}
 
                         <div class="main">
-                            
+                            <div class="row g-3 mt-1">
+                                <div class="boder"></div>
+                                <div>
+                                    <div class="product">
+                                        <div class="product-list">
+                                            <img src="" alt="err">
+                                            <div class="product-details" style="padding-top:10px;">
+                                                <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                            </div>
+                                        </div>
+                                        <div class="star-rating mt-2" data-rating="0">
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                        <p class="starRatingErr text-danger"></p>
+                                    </div>
+
+                                    <div class="rating-btns">
+                                        <button>Chất lượng sản phẩm tuyệt vời</button>
+                                        <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
+                                        <button>Shop phục vụ rất tốt</button>
+                                        <button>Rất đáng tiền</button>
+                                        <button>Thời gian giao hàng nhanh</button>
+                                    </div>
+                                    <div class="noi-dung">
+                                        <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                        <div class="img mt-2">
+                                            <p>Tải ảnh lên:</p>
+                                            <div class="image-upload">
+                                                <input type="file" id="fileUpload${index}" accept="image/*" multiple>
+                                                <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
+                                            </div>
+                                            <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
+                                            <p class="soLuongAnhErr text-danger"></p>
+                                            <div class="image-preview mt-3"></div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-info mb-3 guiDanhGia">Gửi Đánh Giá</button>
+                                </div>
+                            </div>
+                            <div class="row g-3 mt-1">
+                                <div class="boder"></div>
+                                <div>
+                                    <div class="product">
+                                        <div class="product-list">
+                                            <img src="" alt="err">
+                                            <div class="product-details" style="padding-top:10px;">
+                                                <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                            </div>
+                                        </div>
+                                        <div class="star-rating mt-2" data-rating="0">
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                            <i class="fa-regular fa-star"></i>
+                                        </div>
+                                        <p class="starRatingErr text-danger"></p>
+                                    </div>
+
+                                    <div class="rating-btns">
+                                        <button>Chất lượng sản phẩm tuyệt vời</button>
+                                        <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
+                                        <button>Shop phục vụ rất tốt</button>
+                                        <button>Rất đáng tiền</button>
+                                        <button>Thời gian giao hàng nhanh</button>
+                                    </div>
+                                    <div class="noi-dung mt-3">
+                                        <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                        <div class="img mt-2">
+                                            <p>Tải ảnh lên:</p>
+                                            <div class="image-upload">
+                                                <input type="file" id="fileUpload${index}" accept="image/*" multiple>
+                                                <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
+                                            </div>
+                                            <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
+                                            <p class="soLuongAnhErr text-danger"></p>
+                                            <div class="image-preview mt-3"></div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-info mb-3 mt-3 guiDanhGia">Gửi Đánh Giá</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

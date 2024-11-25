@@ -1127,13 +1127,15 @@ td.giaTienLS span{
     height: .1875rem;
     width: 100%;
 }
-
-
+#reviews .guiDanhGia{
+    width: 100%;
+}
 #reviews .popup-content {
     text-align: center;
     width: 100%;
     padding: 20px 0px;
     background: #f6f6f6;
+    display: none;
 }
 
 #reviews .popup-content i {
