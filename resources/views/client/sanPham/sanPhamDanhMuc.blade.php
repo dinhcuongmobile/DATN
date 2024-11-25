@@ -197,7 +197,7 @@
                                                 </a>
                                             </div>
                                             <div class="cart-info-icon">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
+                                                <a class="quickViewClick" data-id="{{$item->id}}" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
                                                     tabindex="0">
                                                     <i class="iconsax" data-icon="eye" title="Quick view">
                                                         <svg width="24" height="24" viewBox="0 0 24 24"

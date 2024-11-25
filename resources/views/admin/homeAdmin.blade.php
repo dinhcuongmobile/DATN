@@ -114,7 +114,6 @@
                             </div>
                             <div class="col-md-3">
                                 <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                                <br>
                                 <button type="button"
                                     class="btn btn-success form-control align-items-center justify-content-center col-6"
                                     id="btn-dashboard-filter">
