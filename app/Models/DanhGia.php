@@ -12,6 +12,7 @@ class DanhGia extends Model
     protected $table = 'danh_gias';
 
     protected $fillable = [
+        'don_hang_id',
         'san_pham_id',
         'user_id',
         'noi_dung',
@@ -24,6 +25,11 @@ class DanhGia extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function donHang()
+    {
+        return $this->belongsTo(DonHang::class, 'don_hang_id');
+    }
 
     public function sanPham()
     {
