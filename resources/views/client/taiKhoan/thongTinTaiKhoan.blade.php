@@ -39,7 +39,7 @@
                             </div>
                             <div class="profile-contain">
                                 <div class="profile-image">
-                                    <img class="img-fluid" src="{{asset('assets/images/user/12.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{ asset('assets/images/user/12.jpg') }}" alt="">
                                 </div>
                                 <div class="profile-name">
                                     <h4>{{ Auth::user()->ho_va_ten }}</h4>
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                {{--Nội dung--}}
+                {{-- Nội dung --}}
                 <div class="col-xl-9 col-lg-8">
                     <div class="tab-content" id="v-pills-tabContent">
                         {{-- Thông tin tài khoản --}}
@@ -163,15 +163,18 @@
                                                     <h5>Thông Tin Tài Khoản</h5>
                                                 </div>
                                                 <ul class="profile-information">
-                                                    <input type="hidden" class="tokenThongTin" name="_token" value="{{ csrf_token() }}" />
+                                                    <input type="hidden" class="tokenThongTin" name="_token"
+                                                        value="{{ csrf_token() }}" />
                                                     <li>
                                                         <h6>Họ&Tên :</h6>
                                                         <p>{{ Auth::user()->ho_va_ten }}</p>
                                                         <a class="thayDoiHoTen" href="javascript:void(0)">Thay đổi</a>
                                                     </li>
                                                     <li class="form-hoVaTen" style="display: none;">
-                                                        <input class="form-control" type="text" value="{{ Auth::user()->ho_va_ten }}">
-                                                        <button class="btn btn-danger" data-id="{{Auth::user()->id}}">Lưu</button>
+                                                        <input class="form-control" type="text"
+                                                            value="{{ Auth::user()->ho_va_ten }}">
+                                                        <button class="btn btn-danger"
+                                                            data-id="{{ Auth::user()->id }}">Lưu</button>
                                                         <p class="text-danger" style="width: 100%"></p>
                                                     </li>
                                                     <li>
@@ -180,8 +183,10 @@
                                                         <a class="thayDoiSDT" href="javascript:void(0)">Thay đổi</a>
                                                     </li>
                                                     <li class="form-SDT" style="display: none;">
-                                                        <input class="form-control" type="text" value="{{ Auth::user()->so_dien_thoai }}">
-                                                        <button class="btn btn-danger" data-id="{{Auth::user()->id}}">Lưu</button>
+                                                        <input class="form-control" type="text"
+                                                            value="{{ Auth::user()->so_dien_thoai }}">
+                                                        <button class="btn btn-danger"
+                                                            data-id="{{ Auth::user()->id }}">Lưu</button>
                                                         <p class="text-danger" style="width: 100%"></p>
                                                     </li>
                                                     <li>
@@ -210,7 +215,8 @@
                                                         @php
                                                             $email = Auth::user()->email;
                                                         @endphp
-                                                        <p>{{ substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@')) }}</p>
+                                                        <p>{{ substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@')) }}
+                                                        </p>
                                                     </li>
                                                     <li>
                                                         <h6>Password :</h6>
@@ -368,445 +374,38 @@
                                 <div class="wishlist-box ratio1_3">
                                     <div class="sidebar-title">
                                         <div class="loader-line"></div>
-                                        <h4>Wishlist</h4>
+                                        <h4>Danh sách yêu thích</h4>
                                     </div>
                                     <div class="row-cols-md-3 row-cols-2 grid-section view-option row gy-4 g-xl-4">
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="#"> <img
-                                                                class="bg-img"
-                                                                src="../assets/images/product/product-3/1.jpg"
-                                                                alt="product"></a><a class="pro-sec" href="#">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/20.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="countdown">
-                                                        <ul class="clockdiv1">
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="days"></div>
-                                                                </div><span class="title">Days</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="hours"></div>
-                                                                </div><span class="title">Hours</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="minutes"></div>
-                                                                </div><span class="title">Min</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="seconds"></div>
-                                                                </div><span class="title">Sec</span>
-                                                            </li>
-                                                        </ul>
+                                        @foreach ($yeuThichs as $item)
+                                            <div class="col">
+                                                <div class="product-box-3 product-wishlist">
+                                                    <div class="img-wrapper">
+                                                        <div class="label-block"><a
+                                                                class="label-2 wishlist-icon delete-button"
+                                                                href="javascript:void(0)" title="Add to Wishlist"
+                                                                tabindex="0"><i class="iconsax" data-icon="trash"
+                                                                    aria-hidden="true"></i></a>
+                                                        </div>
+                                                        <div class="product-image">
+                                                            <a class="pro-first" href="#">
+                                                                <img class="bg-img"
+                                                                    src="{{ Storage::url($item->hinh_anh) }}"
+                                                                    alt="product">
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="product-detail">
+                                                            <a
+                                                                href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
+                                                                <h6>{{ $item->ten_san_pham }}</h6>
+                                                            </a>
+                                                            <p>{{ number_format($item->gia_san_pham) }} VNĐ</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="#">
-                                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                                    </a>
-                                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/2.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/19.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Wide Linen-Blend Trousers</h6>
-                                                    </a>
-                                                    <p>$100.00 <del>$18.00 </del></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/3.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/18.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                                    </a>
-                                                    <p>$120.30 <del>$140.00</del><span>-20%</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/4.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/17.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="countdown">
-                                                        <ul class="clockdiv2">
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="days"></div>
-                                                                </div><span class="title">Days</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="hours"></div>
-                                                                </div><span class="title">Hours</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="minutes"></div>
-                                                                </div><span class="title">Min</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="seconds"></div>
-                                                                </div><span class="title">Sec</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Blue lined White T-Shirt</h6>
-                                                    </a>
-                                                    <p>$190.00 <del>$210.00</del></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/9.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/16.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="countdown">
-                                                        <ul class="clockdiv3">
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="days"></div>
-                                                                </div><span class="title">Days</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="hours"></div>
-                                                                </div><span class="title">Hours</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="minutes"></div>
-                                                                </div><span class="title">Min</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="seconds"></div>
-                                                                </div><span class="title">Sec</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Greciilooks Women's Stylish Top</h6>
-                                                    </a>
-                                                    <p>$100.00 <del>$140.00</del><span>-20%</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/10.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/15.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Wide Linen-Blend Trousers</h6>
-                                                    </a>
-                                                    <p>$100.00 <del>$18.00 </del></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/11.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/14.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Long Sleeve Rounded T-Shirt</h6>
-                                                    </a>
-                                                    <p>$120.30 <del>$140.00</del><span>-20% </span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="product-box-3 product-wishlist">
-                                                <div class="img-wrapper">
-                                                    <div class="label-block"><a
-                                                            class="label-2 wishlist-icon delete-button"
-                                                            href="javascript:void(0)" title="Add to Wishlist"
-                                                            tabindex="0"><i class="iconsax" data-icon="trash"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="product-image"><a class="pro-first" href="product.html">
-                                                            <img class="bg-img"
-                                                                src="../assets/images/product/product-3/12.jpg"
-                                                                alt="product"></a><a class="pro-sec"
-                                                            href="product.html"> <img class="bg-img"
-                                                                src="../assets/images/product/product-3/13.jpg"
-                                                                alt="product"></a></div>
-                                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#addtocart" title="Add to cart"
-                                                            tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                                aria-hidden="true"> </i></a><a href="compare.html"
-                                                            title="Compare" tabindex="0"><i class="iconsax"
-                                                                data-icon="arrow-up-down" aria-hidden="true"></i></a><a
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view" title="Quick View"
-                                                            tabindex="0"><i class="iconsax" data-icon="eye"
-                                                                aria-hidden="true"></i></a></div>
-                                                    <div class="countdown">
-                                                        <ul class="clockdiv4">
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="days"></div>
-                                                                </div><span class="title">Days</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="hours"></div>
-                                                                </div><span class="title">Hours</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="minutes"></div>
-                                                                </div><span class="title">Min</span>
-                                                            </li>
-                                                            <li class="dot"> <span>:</span></li>
-                                                            <li>
-                                                                <div class="timer">
-                                                                    <div class="seconds"></div>
-                                                                </div><span class="title">Sec</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="product-detail">
-                                                    <ul class="rating">
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                        <li>4.3</li>
-                                                    </ul><a href="product.html">
-                                                        <h6>Blue lined White T-Shirt</h6>
-                                                    </a>
-                                                    <p>$190.00 <del>$210.00</del></p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -837,7 +436,8 @@
                                             {{-- tap 1 --}}
                                             <div id="tap1" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_all'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -847,72 +447,105 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
                                                                                             @switch($itemDonHang->trang_thai)
                                                                                                 @case(0)
-                                                                                                    <span class="text-warning">Chờ xác nhận</span>
-                                                                                                    @break
+                                                                                                    <span class="text-warning">Chờ
+                                                                                                        xác nhận</span>
+                                                                                                @break
+
                                                                                                 @case(1)
                                                                                                     <span>Đang chuẩn bị hàng</span>
-                                                                                                    @break
+                                                                                                @break
+
                                                                                                 @case(2)
-                                                                                                    <i class="fas fa-truck icon"></i>
+                                                                                                    <i
+                                                                                                        class="fas fa-truck icon"></i>
                                                                                                     <span>Đang giao</span>
-                                                                                                    @break
+                                                                                                @break
+
                                                                                                 @case(3)
                                                                                                     <span>Đã giao</span>
-                                                                                                    @break
+                                                                                                @break
+
                                                                                                 @case(4)
-                                                                                                    <span class="text-danger">Đã hủy</span>
-                                                                                                    @break
+                                                                                                    <span class="text-danger">Đã
+                                                                                                        hủy</span>
+                                                                                                @break
+
                                                                                                 @case(5)
-                                                                                                    <span class="text-warning">Đang chờ xử lý trả hàng</span>
-                                                                                                    @break
+                                                                                                    <span class="text-warning">Đang
+                                                                                                        chờ xử lý trả hàng</span>
+                                                                                                @break
                                                                                             @endswitch
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai==1)
-                                                                                <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
+                                                                            @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai == 1)
+                                                                                <button style="margin-right:15px;"
+                                                                                    class="btn btn-outline-danger huyDonHang">Hủy
+                                                                                    đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
-                                                                                <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
-                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                                <button
+                                                                                    class="btn btn-success daNhanHang">Đã
+                                                                                    nhận hàng</button>
+                                                                                <button class="btn btn-primary">Mua
+                                                                                    lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 3)
-                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                                <button class="btn btn-primary">Mua
+                                                                                    lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 4)
-                                                                                <button class="btn btn-primary">Mua lại</button>
-                                                                                <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
+                                                                                <button class="btn btn-primary">Mua
+                                                                                    lại</button>
+                                                                                <a href=""
+                                                                                    class="btn btn-outline-secondary">Xem
+                                                                                    chi tiết hủy đơn</a>
                                                                             @endif
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -924,7 +557,8 @@
                                             {{-- tap 2 --}}
                                             <div id="tap2" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_0'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -934,42 +568,60 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
-                                                                                            <span class="text-warning">Chờ xác nhận</span>
+                                                                                            <span class="text-warning">Chờ
+                                                                                                xác nhận</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row">
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button style="margin-right:15px;"
+                                                                                class="btn btn-outline-danger huyDonHang">Hủy
+                                                                                đơn hàng</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -981,7 +633,8 @@
                                             {{-- tap 3 --}}
                                             <div id="tap3" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_1'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -991,42 +644,59 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
                                                                                             <span>Đang chuẩn bị hàng</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button style="margin-right:15px;"
+                                                                                class="btn btn-outline-danger huyDonHang">Hủy
+                                                                                đơn hàng</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -1038,7 +708,8 @@
                                             {{-- tap 4 --}}
                                             <div id="tap4" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_2'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -1048,44 +719,62 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
-                                                                                            <i class="fas fa-truck icon"></i>
+                                                                                            <i
+                                                                                                class="fas fa-truck icon"></i>
                                                                                             <span>Đang giao</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
-                                                                            <button class="btn btn-primary">Mua lại</button>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button class="btn btn-success daNhanHang">Đã
+                                                                                nhận hàng</button>
+                                                                            <button class="btn btn-primary">Mua
+                                                                                lại</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -1097,7 +786,8 @@
                                             {{-- tap 5 --}}
                                             <div id="tap5" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_3'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -1107,43 +797,60 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
-                                                                                                <i class="fas fa-truck icon"></i>
-                                                                                                <span>Đã giao</span>
+                                                                                            <i
+                                                                                                class="fas fa-truck icon"></i>
+                                                                                            <span>Đã giao</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <button class="btn btn-primary">Mua lại</button>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button class="btn btn-primary">Mua
+                                                                                lại</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -1155,7 +862,8 @@
                                             {{-- tap 6 --}}
                                             <div id="tap6" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_4'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -1165,43 +873,62 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
-                                                                                                <span style="color: red;">Đã hủy</span>
+                                                                                            <span style="color: red;">Đã
+                                                                                                hủy</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <button class="btn btn-primary">Mua lại</button>
-                                                                            <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button class="btn btn-primary">Mua
+                                                                                lại</button>
+                                                                            <a href=""
+                                                                                class="btn btn-outline-secondary">Xem chi
+                                                                                tiết hủy đơn</a>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -1213,7 +940,8 @@
                                             {{-- tap 7 --}}
                                             <div id="tap7" class="card-body bg-light an">
                                                 @foreach ($don_hangs['trang_thai_5'] as $itemDonHang)
-                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="{{$itemDonHang->id}}">
+                                                    <div class="card shadow-0 border mb-4" style="border-radius: 10px;"
+                                                        data-donHangId="{{ $itemDonHang->id }}">
                                                         <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
@@ -1223,41 +951,57 @@
                                                                                 <tr>
                                                                                     <td colspan="2">
                                                                                         <span class="chatLS">💬 Chat</span>
-                                                                                        <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                                                                        <a href="{{ route('san-pham.san-pham') }}"
+                                                                                            class="shopLS"><i
+                                                                                                class="fas fa-box"></i> Xem
+                                                                                            cửa hàng</a>
                                                                                     </td>
-                                                                                    <td colspan="2" class="thongBaoLS" style="text-align: right">
+                                                                                    <td colspan="2" class="thongBaoLS"
+                                                                                        style="text-align: right">
                                                                                         <span class="thongBao">
-                                                                                                <span class="text-warning">Đang chờ xử lý trả hàng</span>
+                                                                                            <span class="text-warning">Đang
+                                                                                                chờ xử lý trả hàng</span>
                                                                                         </span> |
-                                                                                        <span class="choThanhToan" style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
+                                                                                        <span class="choThanhToan"
+                                                                                            style="color: {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'red' : '#26aa99' }}; font-size: 16px">
                                                                                             {{ $itemDonHang->phuong_thuc_thanh_toan == 0 ? 'Chưa thanh toán' : 'Đã thanh toán' }}
                                                                                         </span>
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                <tr class="product-row" >
-                                                                                    <td class="img">
-                                                                                        <img src="{{ Storage::url($item->bienThe->hinh_anh) }}" alt="product">
-                                                                                    </td>
-                                                                                    <td class="col-9 tenSanPham">
-                                                                                        <a>{{ $item->sanPham->ten_san_pham }}</a>
-                                                                                        <p>Phân loại hàng:
-                                                                                            <span class="phanLoaiHang">{{ $item->bienThe->kich_co }}, {{ $item->bienThe->ten_mau }}</span>.
-                                                                                        </p>
-                                                                                        <p style="color: #000">x{{ $item->so_luong }}</p>
-                                                                                    </td>
-                                                                                    <td class="col-3 giaTienLS" style="text-align: right">
-                                                                                        <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
-                                                                                        <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
+                                                                                    <tr class="product-row">
+                                                                                        <td class="img">
+                                                                                            <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
+                                                                                                alt="product">
+                                                                                        </td>
+                                                                                        <td class="col-9 tenSanPham">
+                                                                                            <a>{{ $item->sanPham->ten_san_pham }}</a>
+                                                                                            <p>Phân loại hàng:
+                                                                                                <span
+                                                                                                    class="phanLoaiHang">{{ $item->bienThe->kich_co }},
+                                                                                                    {{ $item->bienThe->ten_mau }}</span>.
+                                                                                            </p>
+                                                                                            <p style="color: #000">
+                                                                                                x{{ $item->so_luong }}</p>
+                                                                                        </td>
+                                                                                        <td class="col-3 giaTienLS"
+                                                                                            style="text-align: right">
+                                                                                            <span>{{ number_format($item->thanh_tien, 0, ',', '.') }}đ</span>
+                                                                                            <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <input type="hidden" name="ids[]"
+                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
-                                                                        <p class="thanhTien">Thành tiền: <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span></p>
+                                                                        <p class="thanhTien">Thành tiền:
+                                                                            <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
+                                                                        </p>
                                                                         <div class="btnDonMua">
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -1319,7 +1063,8 @@
                                             <h3>Địa Chỉ Nhận Hàng</h3>
                                             <p class="ten-nhan-hang">Nguyễn Đình Cường</p>
                                             <p class="sdt-nhan">(+84) 964426158</p>
-                                            <p class="dia-chi-nhan">Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện Chương Mỹ, Hà Nội</p>
+                                            <p class="dia-chi-nhan">Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện
+                                                Chương Mỹ, Hà Nội</p>
                                         </div>
 
                                         <div class="delivery-status">
@@ -1334,7 +1079,8 @@
                                     <div class="product-info">
                                         <div class="product-info-header">
                                             <span class="chatLS">💬 Chat</span>
-                                            <a href="{{route('san-pham.san-pham')}}" class="shopLS"><i class="fas fa-box"></i> Xem cửa hàng</a>
+                                            <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i
+                                                    class="fas fa-box"></i> Xem cửa hàng</a>
                                         </div>
                                         <div class="list-san-pham">
 
@@ -1374,7 +1120,8 @@
 
                                     <div class="action-button">
                                         <button class="btn btn-danger btnMuaLai">Mua Lại</button>
-                                        <a href="{{route('lien-he.lien-he')}}" class="btn btn-outline-secondary">Liên Hệ Shop</a>
+                                        <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên
+                                            Hệ Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -1388,7 +1135,8 @@
                                         <h4>Địa chỉ của tôi</h4>
                                     </div>
                                     <div class="row gy-3 dia-chi-item">
-                                        <input type="hidden" class="tokenThietLap" name="_token" value="{{ csrf_token() }}" />
+                                        <input type="hidden" class="tokenThietLap" name="_token"
+                                            value="{{ csrf_token() }}" />
                                         @foreach ($dia_chis as $item)
                                             <div class="col-xxl-4 col-md-6">
                                                 <div class="address-option">
@@ -1396,7 +1144,8 @@
                                                         <span class="delivery-address-box">
                                                             <span class="address-detail" style="width: 100%">
                                                                 <span class="address">
-                                                                    <span class="address-title">{{ $item->ho_va_ten_nhan }}</span>
+                                                                    <span
+                                                                        class="address-title">{{ $item->ho_va_ten_nhan }}</span>
                                                                 </span>
                                                                 <span class="address">
                                                                     <span class="address-home">
@@ -1422,15 +1171,20 @@
                                                             </span>
                                                         </span>
                                                         <span class="buttons">
-                                                            <button class="btn btn_outline sm thietLapDiaChiMacDinh" data-id="{{$item->id}}"
-                                                                    {{$item->trang_thai==1?'disabled':''}}>Thiết lập mặc định</button>
+                                                            <button class="btn btn_outline sm thietLapDiaChiMacDinh"
+                                                                data-id="{{ $item->id }}"
+                                                                {{ $item->trang_thai == 1 ? 'disabled' : '' }}>Thiết lập
+                                                                mặc
+                                                                định</button>
                                                         </span>
                                                         <span class="buttons actionsDiaChi">
-                                                            <a class="btn btn_black sm suaDiaChi" data-id="{{$item->id}}" href="javascript:void(0)"
+                                                            <a class="btn btn_black sm suaDiaChi"
+                                                                data-id="{{ $item->id }}" href="javascript:void(0)"
                                                                 title="edit" tabindex="0">Sửa
                                                             </a>
-                                                            @if ($item->trang_thai!=1)
-                                                                <a class="btn btn_outline sm btnDelete" data-id="{{$item->id}}"
+                                                            @if ($item->trang_thai != 1)
+                                                                <a class="btn btn_outline sm btnDelete"
+                                                                    data-id="{{ $item->id }}"
                                                                     href="javascript:void(0)" title="delete">Xóa
                                                                 </a>
                                                             @endif
@@ -1440,7 +1194,8 @@
                                             </div>
                                         @endforeach
                                     </div><button class="btn add-address" data-bs-toggle="modal"
-                                        data-bs-target="#add-address" title="Thêm địa chỉ" tabindex="0">+ Thêm địa chỉ mới</button>
+                                        data-bs-target="#add-address" title="Thêm địa chỉ" tabindex="0">+ Thêm địa chỉ
+                                        mới</button>
                                 </div>
                             </div>
                         </div>
@@ -1453,8 +1208,8 @@
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4>Chỉnh sửa thông tin địa chỉ</h4><button class="btn-close" type="button" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <h4>Chỉnh sửa thông tin địa chỉ</h4><button class="btn-close" type="button"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-0">
                         <div class="row g-3">
@@ -1480,7 +1235,7 @@
                                 <p class="text-danger"></p>
                             </div>
                             <div class="col-6 quanHuyen">
-                                <label class="form-label" for="quan_huyen" >Chọn Quận/Huyện</label>
+                                <label class="form-label" for="quan_huyen">Chọn Quận/Huyện</label>
                                 <select class="form-select" name="quan_huyen">
                                     <option value="">--Chọn quận huyện--</option>
                                 </select>
@@ -1504,7 +1259,7 @@
                 </div>
             </div>
         </div>
-        {{-- Đổi mật khẩu--}}
+        {{-- Đổi mật khẩu --}}
         <div class="reviews-modal modal theme-modal fade" id="edit-password" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -1579,8 +1334,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body pt-0">
-                        <form id="themDiaChiMoi" action="{{ route('tai-khoan.them-dia-chi-moi') }}"
-                            method="POST">
+                        <form id="themDiaChiMoi" action="{{ route('tai-khoan.them-dia-chi-moi') }}" method="POST">
                             @csrf
                             <div class="row g-3">
                                 <div class="col-6">
@@ -1615,7 +1369,8 @@
                                         id="them_tinh_thanh_pho" name="tinh_thanh_pho">
                                         <option value="">--Chọn tỉnh thành phố--</option>
                                         @foreach ($tinh_thanh_pho as $item)
-                                            <option value="{{ $item->ma_tinh_thanh_pho }}">{{ $item->ten_tinh_thanh_pho }}</option>
+                                            <option value="{{ $item->ma_tinh_thanh_pho }}">
+                                                {{ $item->ten_tinh_thanh_pho }}</option>
                                         @endforeach
                                     </select>
                                     <p class="Err text-danger tinh_thanh_pho-error-dia-chi">
@@ -1638,8 +1393,8 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label" for="them_phuong_xa">Chọn Phường/Xã/Thị trấn</label>
-                                    <select class="form-select @error('phuong_xa') is-invalid @enderror" id="them_phuong_xa"
-                                        name="phuong_xa">
+                                    <select class="form-select @error('phuong_xa') is-invalid @enderror"
+                                        id="them_phuong_xa" name="phuong_xa">
                                         <option value="">--Chọn phường xã--</option>
                                     </select>
                                     <p class="Err text-danger phuong_xa-error-dia-chi">
@@ -1658,7 +1413,8 @@
                                         @enderror
                                     </p>
                                 </div>
-                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác nhận</button>
+                                <button class="btn btn-submit mt-3" type="submit" onsubmit="ajaxThemDiaChi()">Xác
+                                    nhận</button>
                             </div>
                         </form>
                     </div>
@@ -1679,8 +1435,10 @@
                         <div class="row">
                             <div class="thongBao">
                                 <img src="/assets/images/coin.png" alt="coin">
-                                <p>Chia sẻ cảm nhận của bạn về tất cả sản phẩm trong cùng đơn hàng với tối thiểu 50 ký tự cùng
-                                    ít nhất 1 hình ảnh (trên một sản phẩm) để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội dung không phù hợp
+                                <p>Chia sẻ cảm nhận của bạn về tất cả sản phẩm trong cùng đơn hàng với tối thiểu 50 ký tự
+                                    cùng
+                                    ít nhất 1 hình ảnh (trên một sản phẩm) để nhận 200 Namad Xu. Lưu ý: Nếu đánh giá có nội
+                                    dung không phù hợp
                                     Namad xu sẽ bị thu hồi cùng với đánh giá của bạn sẽ bị xóa.
                                 </p>
                             </div>
@@ -1716,7 +1474,8 @@
                                         <button>Thời gian giao hàng nhanh</button>
                                     </div>
                                     <div class="noi-dung">
-                                        <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                        <textarea class="form-control mb-3" rows="4"
+                                            placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
                                         <div class="img mt-2">
                                             <p>Tải ảnh lên:</p>
                                             <div class="image-upload">
@@ -1759,7 +1518,8 @@
                                         <button>Thời gian giao hàng nhanh</button>
                                     </div>
                                     <div class="noi-dung mt-3">
-                                        <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                        <textarea class="form-control mb-3" rows="4"
+                                            placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
                                         <div class="img mt-2">
                                             <p>Tải ảnh lên:</p>
                                             <div class="image-upload">
@@ -1782,5 +1542,5 @@
     </section>
 @endsection
 @section('js')
-<script src="{{asset('assets/js/thongTinTaiKhoan.js')}}"></script>
+    <script src="{{ asset('assets/js/thongTinTaiKhoan.js') }}"></script>
 @endsection

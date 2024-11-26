@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(DiaChi::class, 'user_id');
     }
+
+    public function yeuThich()
+    {
+        return $this->hasMany(YeuThich::class, 'nguoi_dung_id', 'id');
+    }
 }
