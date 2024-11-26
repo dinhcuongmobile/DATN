@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\YeuThich\YeuThichController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Client\HomeController;
@@ -150,6 +151,12 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('/', [LienHeController::class, 'lienHe'])->name('lien-he.lien-he');
         Route::post('/gui-lien-he', [LienHeController::class, 'guiLienHe'])->name('lien-he.gui-lien-he');
     });
+
+    Route::prefix('/yeu-thich')->group(function () {
+        Route::post('/them-yeu-thich', [YeuThichController::class, 'themYeuThich'])->name('yeu-thich.them-yeu-thich');
+    });
+
+
 
     Route::get('gioi-thieu', [GioiThieuController::class, 'gioiThieu'])->name('gioi-thieu');
     // chinh sach bao mat

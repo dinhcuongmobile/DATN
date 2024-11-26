@@ -9,6 +9,7 @@ use App\Models\DonHang;
 use App\Models\PhuongXa;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
+use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use App\Http\Controllers\Controller;
@@ -27,22 +28,23 @@ class ThongTinTaiKhoanController extends Controller
         $this->views = [];
     }
 
-    public function showThongTinTaiKhoan(){
+    public function showThongTinTaiKhoan()
+    {
         $tai_khoan = Auth::user();
-        $this->views['dia_chi'] = DiaChi::where('user_id',$tai_khoan->id)->orderBy('trang_thai','ASC')->first();
+        $this->views['dia_chi'] = DiaChi::where('user_id', $tai_khoan->id)->orderBy('trang_thai', 'ASC')->first();
 
-        if($this->views['dia_chi']){
-            $this->views['quan_huyen'] = QuanHuyen::where('ma_tinh_thanh_pho',$this->views['dia_chi']->tinhThanhPho->ma_tinh_thanh_pho)
-                                                    ->orderBy('ma_quan_huyen', 'ASC')->get();
-            $this->views['phuong_xa'] = PhuongXa::where('ma_quan_huyen',$this->views['dia_chi']->quanHuyen->ma_quan_huyen)
-                                                ->orderBy('ma_phuong_xa', 'ASC')->get();
-        }else{
-            $this->views['quan_huyen']=[];
-            $this->views['phuong_xa']=[];
+        if ($this->views['dia_chi']) {
+            $this->views['quan_huyen'] = QuanHuyen::where('ma_tinh_thanh_pho', $this->views['dia_chi']->tinhThanhPho->ma_tinh_thanh_pho)
+                ->orderBy('ma_quan_huyen', 'ASC')->get();
+            $this->views['phuong_xa'] = PhuongXa::where('ma_quan_huyen', $this->views['dia_chi']->quanHuyen->ma_quan_huyen)
+                ->orderBy('ma_phuong_xa', 'ASC')->get();
+        } else {
+            $this->views['quan_huyen'] = [];
+            $this->views['phuong_xa'] = [];
         }
 
         // tap dia chi
-        $this->views['dia_chis'] = DiaChi::where('user_id',$tai_khoan->id)->get();
+        $this->views['dia_chis'] = DiaChi::where('user_id', $tai_khoan->id)->get();
 
         $this->views['tai_khoan'] = $tai_khoan;
         $this->views['tinh_thanh_pho'] = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
@@ -50,65 +52,81 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
+        // Danh sách yêu thích
+        $this->views['yeuThichs'] = YeuThich::where('nguoi_dung_id', $tai_khoan->id)
+            ->join('san_phams', 'yeu_thichs.san_pham_id', '=', 'san_phams.id')
+            ->select('san_phams.*')
+            ->get();
+
+        //
+
+        // Tổng yêu thích
+        if (Auth::check()) {
+            $nguoi_dung_id = Auth::id();
+            $user = User::find($nguoi_dung_id);
+            $tongYeuThich = $user->yeuThich()->count();
+            //
+            $this->views['tong_yeu_thich'] = $tongYeuThich;
+        }
         //
         $don_hangs = [
-            'trang_thai_all' => DonHang::with('user','diaChi')->where('user_id',Auth::user()->id)->orderBy('id','desc')->get(),
+            'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get(),
             //chua duyet
-            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('id','desc')->get(),
+            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('id', 'desc')->get(),
             //dang chuan bi hang
-            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('id','desc')->get(),
+            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('id', 'desc')->get(),
             //dang giao
-            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('id','desc')->get(),
+            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('id', 'desc')->get(),
             //da giao
-            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id','desc')->get(),
+            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id', 'desc')->get(),
             //da huy
-            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id','desc')->get(),
+            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id', 'desc')->get(),
             //tra hang/ hoan tien
-            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->orderBy('id','desc')->get(),
+            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->orderBy('id', 'desc')->get(),
         ];
 
         $chi_tiet_don_hangs = [];
 
         foreach ($don_hangs as $key => $items) {
             foreach ($items as $item) {
-                $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$item->id)->get();
+                $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $item->id)->get();
             }
         }
-
         $this->views['don_hangs'] = $don_hangs;
         $this->views['chi_tiet_don_hangs'] = $chi_tiet_don_hangs;
-
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
 
-    public function suaThongTin(Request $request){
-        if($request->has('ho_va_ten')){
-            $result = User::where('id',$request->input('user_id'))->update(['ho_va_ten'=> $request->input('ho_va_ten')]);
-            if($result){
+    public function suaThongTin(Request $request)
+    {
+        if ($request->has('ho_va_ten')) {
+            $result = User::where('id', $request->input('user_id'))->update(['ho_va_ten' => $request->input('ho_va_ten')]);
+            if ($result) {
                 $user = User::find($request->input('user_id'));
                 return response()->json(['success' => true, 'user' => $user]);
-            }else{
+            } else {
                 return response()->json(['success' => false]);
             }
         }
-        if($request->has('so_dien_thoai')){
-            $result = User::where('id',$request->input('user_id'))->update(['so_dien_thoai'=> $request->input('so_dien_thoai')]);
-            if($result){
+        if ($request->has('so_dien_thoai')) {
+            $result = User::where('id', $request->input('user_id'))->update(['so_dien_thoai' => $request->input('so_dien_thoai')]);
+            if ($result) {
                 $user = User::find($request->input('user_id'));
                 return response()->json(['success' => true, 'user' => $user]);
-            }else{
+            } else {
                 return response()->json(['success' => false]);
             }
         }
     }
 
-    public function layDiaChiSua(Request $request){
+    public function layDiaChiSua(Request $request)
+    {
 
-        $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->find($request->input('dia_chi_id'));
-        $tinh_thanh_pho= TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
-        $quan_huyen= QuanHuyen::where('ma_tinh_thanh_pho',$dia_chi->ma_tinh_thanh_pho)->orderBy('ma_quan_huyen','ASC')->get();
-        $phuong_xa = PhuongXa::where('ma_quan_huyen',$dia_chi->ma_quan_huyen)->orderBy('ma_phuong_xa','ASC')->get();
-        if($dia_chi){
+        $dia_chi = DiaChi::with('user', 'tinhThanhPho', 'quanHuyen', 'phuongXa')->find($request->input('dia_chi_id'));
+        $tinh_thanh_pho = TinhThanhPho::orderBy('ma_tinh_thanh_pho', 'ASC')->get();
+        $quan_huyen = QuanHuyen::where('ma_tinh_thanh_pho', $dia_chi->ma_tinh_thanh_pho)->orderBy('ma_quan_huyen', 'ASC')->get();
+        $phuong_xa = PhuongXa::where('ma_quan_huyen', $dia_chi->ma_quan_huyen)->orderBy('ma_phuong_xa', 'ASC')->get();
+        if ($dia_chi) {
             return response()->json(
                 [
                     'success' => true,
@@ -118,24 +136,25 @@ class ThongTinTaiKhoanController extends Controller
                     'phuong_xa' => $phuong_xa
                 ]
             );
-        }else{
+        } else {
             return response()->json(['success' => false]);
         }
     }
 
-    public function thietLapDiaChiMacDinh(Request $request){
-        DiaChi::where('user_id',Auth::user()->id)->where('trang_thai',1)->update(['trang_thai'=>2]);
-        $result = DiaChi::where('id',$request->input('dia_chi_id'))->where('user_id',Auth::user()->id)->update(['trang_thai'=>1]);
-        if($result){
-            $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->find($request->input('dia_chi_id'));
+    public function thietLapDiaChiMacDinh(Request $request)
+    {
+        DiaChi::where('user_id', Auth::user()->id)->where('trang_thai', 1)->update(['trang_thai' => 2]);
+        $result = DiaChi::where('id', $request->input('dia_chi_id'))->where('user_id', Auth::user()->id)->update(['trang_thai' => 1]);
+        if ($result) {
+            $dia_chi = DiaChi::with('user', 'tinhThanhPho', 'quanHuyen', 'phuongXa')->find($request->input('dia_chi_id'));
             return response()->json(['success' => true, 'dia_chi' => $dia_chi]);
-        }else{
+        } else {
             return response()->json(['success' => false]);
         }
-
     }
 
-    public function suaDiaChi(Request $request){
+    public function suaDiaChi(Request $request)
+    {
         $dataUpdate = [
             'ho_va_ten_nhan' => $request->input('ho_va_ten_nhan'),
             'so_dien_thoai_nhan' => $request->input('so_dien_thoai_nhan'),
@@ -145,20 +164,21 @@ class ThongTinTaiKhoanController extends Controller
             'dia_chi_chi_tiet' => $request->input('dia_chi_chi_tiet')
         ];
 
-        $result = DiaChi::where('id',$request->input('dia_chi_id'))
-                        ->where('user_id',Auth::user()->id)
-                        ->update($dataUpdate);
+        $result = DiaChi::where('id', $request->input('dia_chi_id'))
+            ->where('user_id', Auth::user()->id)
+            ->update($dataUpdate);
 
-        $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->find($request->input('dia_chi_id'));
+        $dia_chi = DiaChi::with('user', 'tinhThanhPho', 'quanHuyen', 'phuongXa')->find($request->input('dia_chi_id'));
 
-        if($result){
+        if ($result) {
             return response()->json(['success' => true, 'dia_chi' => $dia_chi]);
-        }else{
+        } else {
             return response()->json(['success' => false]);
         }
     }
 
-    public function doiMatKhau(Request $request){
+    public function doiMatKhau(Request $request)
+    {
         $user = Auth::user();
 
         $validate = Validator::make(
@@ -221,24 +241,27 @@ class ThongTinTaiKhoanController extends Controller
         }
     }
 
-    public function addDiaChi(Request $request){
-        $request->validate([
-            'ho_va_ten' => 'required|string|max:255',
-            'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
-            'tinh_thanh_pho' => 'required',
-            'quan_huyen' => 'required_with:tinh_thanh_pho',
-            'phuong_xa'     => 'required_with:quan_huyen',
-        ],
-        [
-            'ho_va_ten.required' => 'Vui lòng không bỏ trống Họ và Tên!',
-            'ho_va_ten.max' => 'Họ và tên quá dài!',
-            'so_dien_thoai.required' => 'Vui lòng không bỏ trống Số điện thoại!',
-            'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
-            'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
-            'tinh_thanh_pho.required' => 'Vui lòng chọn Tỉnh/Thành Phố!',
-            'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện!',
-            'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
-        ]);
+    public function addDiaChi(Request $request)
+    {
+        $request->validate(
+            [
+                'ho_va_ten' => 'required|string|max:255',
+                'so_dien_thoai' => 'required|numeric|regex:/^0[1-9][0-9]{8}$/',
+                'tinh_thanh_pho' => 'required',
+                'quan_huyen' => 'required_with:tinh_thanh_pho',
+                'phuong_xa'     => 'required_with:quan_huyen',
+            ],
+            [
+                'ho_va_ten.required' => 'Vui lòng không bỏ trống Họ và Tên!',
+                'ho_va_ten.max' => 'Họ và tên quá dài!',
+                'so_dien_thoai.required' => 'Vui lòng không bỏ trống Số điện thoại!',
+                'so_dien_thoai.numeric' => 'Số điện thoại phải là số!',
+                'so_dien_thoai.regex' => 'Số điện thoại không hợp lệ!',
+                'tinh_thanh_pho.required' => 'Vui lòng chọn Tỉnh/Thành Phố!',
+                'quan_huyen.required_with' => 'Vui lòng chọn Quận Huyện!',
+                'phuong_xa.required_with' => 'Vui lòng chọn Phường Xã!',
+            ]
+        );
         $user = Auth::user();
         if (!DiaChi::where('user_id', $user->id)->exists()) {
             $trang_thai = 1;
@@ -258,7 +281,7 @@ class ThongTinTaiKhoanController extends Controller
         if ($user instanceof User) {
             // instanceof kiểm tra xem biến $user có thuộc class User trong model ko
             DiaChi::create($dataInsert);
-            $dia_chi = DiaChi::with('user','tinhThanhPho','quanHuyen','phuongXa')->where('user_id',$user->id)->orderBy('id','desc')->first();
+            $dia_chi = DiaChi::with('user', 'tinhThanhPho', 'quanHuyen', 'phuongXa')->where('user_id', $user->id)->orderBy('id', 'desc')->first();
 
             Session::flash('success', 'Bạn đã thêm thành công địa chỉ mới.');
             return response()->json([
@@ -277,13 +300,14 @@ class ThongTinTaiKhoanController extends Controller
         }
     }
 
-    public function xoaDiaChi(Request $request){
+    public function xoaDiaChi(Request $request)
+    {
         $dia_chi_id = $request->input('dia_chi_id');
-        $result = DiaChi::where('user_id',Auth::user()->id)->where('id',$dia_chi_id)->delete();
-        if($result){
-            return response()->json(['success'=>true]);
-        }else{
-            return response()->json(['success'=>false]);
+        $result = DiaChi::where('user_id', Auth::user()->id)->where('id', $dia_chi_id)->delete();
+        if ($result) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success' => false]);
         }
     }
 }
