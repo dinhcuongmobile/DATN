@@ -273,55 +273,6 @@
                                 </div>
                             </div>
                         </div>                        
-                        <!-- Modal for displaying all notifications -->
-                        {{-- <div class="modal fade" id="showAllAlertsModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tất Cả Thông Báo</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                                        <!-- Display all the notifications here -->
-                                        <!-- Thông báo đơn hàng mới -->
-                                        @foreach ($donHangMoiAll as $item)
-                                            <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Bạn có đơn hàng
-                                                    mới!</strong></p>
-                                            <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small>
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Thông báo đơn hàng đã giao -->
-                                        @foreach ($donHangDaGiaoAll as $item)
-                                            <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Đã giao thành
-                                                    công!</strong></p>
-                                            <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small>
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Thông báo liên hệ mới -->
-                                        @foreach ($lienHeMoiAll as $item)
-                                            <p><strong>Liên hệ mới từ: {{ $item->ho_va_ten }}</strong></p>
-                                            <p><small>{{ $item->created_at }}</small></p>
-                                        @endforeach
-
-                                        <!-- Thông báo liên hệ đã phản hồi -->
-                                        @foreach ($lienHeDaPhanHoiAll as $item)
-                                            <p><strong>Liên hệ từ: {{ $item->email }} đã được phản hồi!</strong></p>
-                                            <p><small>{{ $item->created_at }}</small></p>
-                                        @endforeach
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Đóng</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

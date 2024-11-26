@@ -26,6 +26,7 @@
 </head>
 
 <body style="margin: 20px auto;width: 650px; overflow-x: auto; ">
+    @foreach ( $donHangs as $donHang )
     <table align="center" border="0" cellpadding="0" cellspacing="0" style="background-color:rgba(204, 162, 112, 0.05); overflow: hidden; position: relative;  background-image: url(./img/bg.png); background-size: cover; background-repeat: no-repeat;  width: 100%; padding: 30px; box-shadow: 0 0 13px rgba(0, 0, 0, 0.055);">
         <tbody >
             <tr>
@@ -99,7 +100,7 @@
                                     Tổng</th>
                             </tr>
                         </thead>
-                    @foreach ($donHang->chiTietDonHangs as $index => $chiTiet) 
+                        @foreach ($donHang->chiTietDonHangs as $index => $chiTiet) 
                         <tbody>
                             <tr>
                                 <td style="text-align: center; font-weight: 600;">{{$index+01.}}</td>
@@ -120,7 +121,6 @@
                                 <td style="text-align: center; font-weight: 500; font-size: 14px;">{{ number_format($chiTiet->thanh_tien, 0, ',', '.') }}đ</td>
                             </tr>
                         </tbody>
-                    @endforeach
                     </table>
                     <table width="100%">
                         <tr style="display: flex; justify-content: space-between; gap: 80px;">
@@ -144,7 +144,7 @@
                                                 {{ number_format($phiVanChuyen, 0, ',', '.') }}đ</h5>
                                             <h5
                                                 style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                {{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</h5>
+                                                -{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</h5>
                                         </td>
                                     </tr>
                                     <tr
@@ -158,13 +158,14 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 19px; text-align: start; line-height: 1; color: #fff;">
-                                                {{ number_format($tongThanhToan, 0, ',', '.') }}đ
+                                                {{ number_format($donHang->tongThanhToan, 0, ',', '.') }}đ
                                             </h5>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
+                        @endforeach
                     </table>
                     <table width="100%" style="margin-top: 20px;">
                         <tr style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
@@ -199,6 +200,7 @@
         
     </table>
     <div class="page-break"></div>
+    @endforeach
 </body>
 <script>
     // Tự động in khi load trang
