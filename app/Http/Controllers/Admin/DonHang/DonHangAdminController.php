@@ -72,6 +72,26 @@ class DonHangAdminController extends Controller
     
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
     }
+    // Duyệt nhiều đơn hàng đã chọn
+    public function duyetNhieuDonHang(Request $request)
+    {
+      $ids = $request->input('select', []);
+    if (empty($ids)) {
+        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Vui lòng chọn ít nhất một đơn hàng.');
+    }
+
+     DB::beginTransaction();
+      try {
+        // Cập nhật trạng thái hàng loạt
+        DonHang::whereIn('id', $ids)->update(['trang_thai' => 1]); // 1: Chờ lấy hàng
+
+        DB::commit();
+        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Các đơn hàng đã được duyệt thành công.');
+      } catch (Exception $e) {
+        DB::rollBack();
+        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+     }
+    }
 
      // Xử lý yêu cầu lấy hàng cho một đơn hàng
      public function yeuCauLayHangDonHang(int $id) {

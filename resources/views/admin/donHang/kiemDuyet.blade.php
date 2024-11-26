@@ -28,15 +28,13 @@
                     </div>
                 </form>
             </div>
-            <form action="{{ route('don-hang.duyet-nhieu-don-hang') }}" method="post">
+<form action="{{ route('don-hang.duyet-nhieu-don-hang') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-secondary btn-sm">Duyệt các đơn hàng đã chọn</button>
                     <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
                 </div>
-            </form>
         </div> 
     </div>
 
@@ -125,9 +123,9 @@
                 </table>  
             </div>  
         </div>  
-    </div>  
+    </div>
     @endforeach
-
+</form>  
     <script>
         function chontatca() {
             document.querySelectorAll('input[name="select[]"]').forEach(checkbox => checkbox.checked = true);
