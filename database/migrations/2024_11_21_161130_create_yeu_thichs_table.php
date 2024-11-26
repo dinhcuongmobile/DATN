@@ -13,13 +13,9 @@ return new class extends Migration
     {
         Schema::create('yeu_thichs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nguoi_dung_id');
-            $table->unsignedBigInteger('san_pham_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
             $table->timestamps();
-
-            // khóa ngoại
-            $table->foreign('nguoi_dung_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('san_pham_id')->references('id')->on('san_phams')->onDelete('cascade');
 
         });
     }

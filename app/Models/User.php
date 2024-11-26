@@ -75,6 +75,6 @@ class User extends Authenticatable
 
     public function yeuThich()
     {
-        return $this->hasMany(YeuThich::class, 'nguoi_dung_id', 'id');
+        return $this->hasMany(YeuThich::class, 'user_id');
     }
 }

@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     checkSession();
     togglePassword();
     donMuaMenu();
+    yeuThich();
 });
 function togglePassword(){
     const togglePassword = document.querySelectorAll('.toggle-password');
@@ -147,6 +148,12 @@ var ipMauSac = document.getElementById('mauSac-quick-view');
 const soLuong = document.querySelectorAll('#quick-view .quantity');
 document.querySelectorAll('.quickViewClick').forEach((el) => {
     el.addEventListener('click', function () {
+        document.querySelector('#quick-view .product-right h3').textContent="";
+        document.querySelector('#quick-view .product-right h5').innerHTML="";
+        document.querySelector('#quick-view .img-quick-view').innerHTML="";
+        document.querySelector('#quick-view .product-buttons').innerHTM="";
+        document.querySelector('#selectSize-quick-view').innerHTML="";
+        document.querySelector('#selectMauSac-quick-view').innerHTML="";
         $('#quick-view').modal('show');
         document.querySelector('#errSelect-quick-view').style.display = 'none';
         let sanPhamID = el.getAttribute('data-id');
@@ -160,7 +167,6 @@ document.querySelectorAll('.quickViewClick').forEach((el) => {
                 let sanPham = response.san_pham;
                 let kichCos = response.kich_cos;
                 let bienThes = sanPham.bien_thes;
-
                 // Cập nhật tên sản phẩm
                 document.querySelector('#quick-view .product-right h3').textContent = sanPham.ten_san_pham;
 
@@ -179,7 +185,6 @@ document.querySelectorAll('.quickViewClick').forEach((el) => {
 
                 // Cập nhật kích cỡ
                 let kichCoBox = document.querySelector('#selectSize-quick-view');
-                kichCoBox.innerHTML = "";
 
                 let kichCoTonTai = kichCos.filter((item) =>
                     bienThes.some((bienThe) => bienThe.kich_co === item.kich_co)
@@ -190,7 +195,6 @@ document.querySelectorAll('.quickViewClick').forEach((el) => {
 
                 // Cập nhật màu sắc
                 let mauSacBox = document.querySelector('#selectMauSac-quick-view');
-                mauSacBox.innerHTML = "";
 
                 let mauSacTonTai = bienThes.reduce((unique, item) => {
                     if (!unique.some((u) => u.ma_mau === item.ma_mau)) unique.push(item);
@@ -385,6 +389,43 @@ function themGioHang(){
             } else {
                 document.querySelector('#errSelect-quick-view').style.display = 'block';
             }
+        });
+    }
+}
+
+//yeu thich
+function yeuThich(){
+    const wishlistIcon = document.querySelectorAll('.wishlist-icon');
+    if(wishlistIcon){
+        wishlistIcon.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let sanPhamId= el.getAttribute('data-id');
+
+                $.ajax({
+                    url: '/yeu-thich/them-yeu-thich',
+                    type: 'POST',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        sanPhamId: sanPhamId,
+                    },
+                    success: function(response) {
+                        if(response.success){
+                            console.log(response.id);
+                            Toastify({
+                                text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
+                                duration: 2500,
+                                close: true,
+                            }).showToast();
+
+                        }else{
+                            window.location.href="/tai-khoan/dang-nhap";
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Có lỗi xảy ra: ", error);
+                    }
+                });
+            });
         });
     }
 }

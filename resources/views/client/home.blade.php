@@ -152,14 +152,12 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if (Auth::check())
-                                                                <a class="wishlist-icon" href="javascript:void(0)"
-                                                                    tabindex="0" data-id="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"
-                                                                        data-bs-title="Add to Wishlist"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" href="javascript:void(0)"
+                                                                tabindex="0" data-id="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"
+                                                                    data-bs-title="Add to Wishlist"></i>
+                                                            </a>
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
                                                                 href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
@@ -231,14 +229,12 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if (Auth::check())
-                                                                <a class="wishlist-icon" href="javascript:void(0)"
-                                                                    tabindex="0" data-id="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"
-                                                                        data-bs-title="Add to Wishlist"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" href="javascript:void(0)"
+                                                                tabindex="0" data-id="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"
+                                                                    data-bs-title="Add to Wishlist"></i>
+                                                            </a>
                                                             <a href="compare.html" tabindex="0">
                                                                 <i class="iconsax" data-icon="arrow-up-down"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
@@ -315,14 +311,12 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if (Auth::check())
-                                                                <a class="wishlist-icon" href="javascript:void(0)"
-                                                                    tabindex="0" data-id="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"
-                                                                        data-bs-title="Add to Wishlist"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" href="javascript:void(0)"
+                                                                tabindex="0" data-id="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"
+                                                                    data-bs-title="Add to Wishlist"></i>
+                                                            </a>
                                                             <a href="compare.html" tabindex="0">
                                                                 <i class="iconsax" data-icon="arrow-up-down"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
@@ -459,13 +453,11 @@
                                                 alt="sản phẩm"></a>
                                     </div>
                                     <div class="cart-info-icon">
-                                        @if (Auth::check())
-                                            <a class="wishlist-icon" href="javascript:void(0)" tabindex="0"
-                                                data-id="{{ $item->id }}">
-                                                <i class="iconsax" data-icon="heart" aria-hidden="true"
-                                                    data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
-                                            </a>
-                                        @endif
+                                        <a class="wishlist-icon" href="javascript:void(0)" tabindex="0"
+                                            data-id="{{ $item->id }}">
+                                            <i class="iconsax" data-icon="heart" aria-hidden="true"
+                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
+                                        </a>
                                         <a href="compare.html" tabindex="0">
                                             <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true"
                                                 data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
@@ -704,33 +696,4 @@
             </div>
         </div>
     </section>
-@endsection
-@section('js')
-    <script>
-        // thêm vào yêu thích
-        $(document).ready(function() {
-            // Bắt sự kiện click vào icon wishlist
-            $('.wishlist-icon').click(function() {
-                var productId = $(this).data('id');
-                console.log('Product ID:', productId);
-
-                $.ajax({
-                    url: '/yeu-thich/them-yeu-thich',
-                    type: 'POST',
-                    data: {
-                        productId: productId,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            console.log('Sản phẩm đã được thêm vào danh sách yêu thích!');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Có lỗi xảy ra: ", error);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

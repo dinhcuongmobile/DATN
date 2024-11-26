@@ -53,5 +53,10 @@ class SanPham extends Model
         return $this->hasMany(GioHang::class, 'san_pham_id');
     }
 
+    public function yeuThich()
+    {
+        return $this->hasMany(YeuThich::class, 'san_pham_id');
+    }
+
 }
 

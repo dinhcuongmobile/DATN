@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
@@ -39,9 +40,8 @@ class SanPhamController extends Controller
 
         // Tổng yêu thích
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
+            $yeuThich = YeuThich::where('user_id',Auth::id())->get();
+            $tongYeuThich = $yeuThich->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;
         }

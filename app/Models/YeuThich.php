@@ -12,17 +12,17 @@ class YeuThich extends Model
 
     protected $fillable =
     [
-        'nguoi_dung_id',
+        'user',
         'san_pham_id'
     ];
 
-    public function NguoiDung()
+    public function user()
     {
-        return $this->belongsTo(User::class,'nguoi_dung_id','id');
+        return $this->belongsTo(User::class,'user_id');
     }
 
-    public function SanPham()
+    public function sanPham()
     {
-        return $this->belongsTo(SanPham::class);
+        return $this->belongsTo(SanPham::class,'san_pham_id');
     }
 }

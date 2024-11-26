@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client\YeuThich;
 use App\Http\Controllers\Controller;
 use App\Models\YeuThich;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class YeuThichController extends Controller
 {
@@ -21,34 +22,39 @@ class YeuThichController extends Controller
 
     public function themYeuThich(Request $request)
     {
-        $productId = $request->input('productId');
-        $user = auth()->user();
-
-        // Kiểm tra xem sản phẩm đã có trong danh sách yêu thích chưa
-        $existing = YeuThich::where('nguoi_dung_id', $user->id)
-            ->where('san_pham_id', $productId)
-            ->first();
-
-        if ($existing) {
-            // Nếu sản phẩm đã có trong danh sách yêu thích, chỉ trả về mã trạng thái error
-            return response()->json(['status' => 'error']);
+        if(!Auth::check()){
+            return response()->json(['success' => false]);
+        }else{
+            $san_pham_id = $request->input('sanPhamId');
+        return response()->json(['success' => true,'id'=>$san_pham_id]);
         }
+        // $user = Auth::user();
 
-        $data = [
-            'nguoi_dung_id' => $user->id,
-            'san_pham_id' => $productId
-        ];
+        // // Kiểm tra xem sản phẩm đã có trong danh sách yêu thích chưa
+        // $existing = YeuThich::where('nguoi_dung_id', $user->id)
+        //     ->where('san_pham_id', $san_pham_id)
+        //     ->first();
 
-        // Thực hiện insert vào bảng YeuThich
-        $res = YeuThich::insert($data);
+        // if ($existing) {
+        //     // Nếu sản phẩm đã có trong danh sách yêu thích, chỉ trả về mã trạng thái error
+        //     return response()->json(['status' => 'error']);
+        // }
 
-        if ($res) {
-            // Nếu insert thành công, trả về mã trạng thái success
-            return response()->json(['status' => 'success']);
-        }
+        // $data = [
+        //     'user_id' => $user->id,
+        //     'san_pham_id' => $san_pham_id
+        // ];
 
-        // Nếu insert không thành công, trả về mã trạng thái error
-        return response()->json(['status' => 'error']);
+        // // Thực hiện insert vào bảng YeuThich
+        // $res = YeuThich::insert($data);
+
+        // if ($res) {
+        //     // Nếu insert thành công, trả về mã trạng thái success
+        //     return response()->json(['status' => 'success']);
+        // }
+
+        // // Nếu insert không thành công, trả về mã trạng thái error
+        // return response()->json(['status' => 'error']);
     }
 
 }
