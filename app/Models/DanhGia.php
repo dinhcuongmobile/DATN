@@ -45,4 +45,9 @@ class DanhGia extends Model
     {
         return $this->hasMany(AnhDanhGia::class, 'danh_gia_id');
     }
+
+    public function traLoiDanhGia()
+    {
+        return $this->hasMany(TraLoiDanhGia::class, 'danh_gia_id');
+    }
 }
