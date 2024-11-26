@@ -200,83 +200,87 @@
                         <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel"
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">
-                                <div class="col-lg-12">
-                                    <div class="review-header">
-                                        <h5 class="review-title">ĐÁNH GIÁ SẢN PHẨM</h5>
-                                        <div class="select-button">
-                                            <div class="box-star">
-                                                <p class=""><span>{{ number_format($avg_rating, 1) }}</span> trên 5</p>
-                                                <ul class="rating p-0 mb">
-                                                    {{-- Hiển thị sao đầy --}}
-                                                    @for ($i = 0; $i < $full_stars; $i++)
-                                                        <li><i class="fa-solid fa-star"></i></li>
-                                                    @endfor
+                                @if ($danh_gias->count()>0)
+                                    <div class="col-lg-12">
+                                        <div class="review-header">
+                                            <h5 class="review-title">ĐÁNH GIÁ SẢN PHẨM</h5>
+                                            <div class="select-button">
+                                                <div class="box-star">
+                                                    <p class=""><span>{{ number_format($avg_rating, 1) }}</span> trên 5</p>
+                                                    <ul class="rating p-0 mb">
+                                                        {{-- Hiển thị sao đầy --}}
+                                                        @for ($i = 0; $i < $full_stars; $i++)
+                                                            <li><i class="fa-solid fa-star"></i></li>
+                                                        @endfor
 
-                                                    {{-- Hiển thị sao nửa nếu có --}}
-                                                    @if ($half_star)
-                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                    @endif
+                                                        {{-- Hiển thị sao nửa nếu có --}}
+                                                        @if ($half_star)
+                                                            <li><i class="fa-solid fa-star-half-stroke"></i></li>
+                                                        @endif
 
-                                                    {{-- Hiển thị sao rỗng --}}
-                                                    @for ($i = 0; $i < $empty_stars; $i++)
-                                                        <li><i class="fa-regular fa-star"></i></li>
-                                                    @endfor
-                                                </ul>
-                                            </div>
-                                            <div class="box-button">
-                                                <button class="btn active" data-filter="all">Tất Cả</button>
-                                                <button class="btn" data-filter="5">5 Sao ({{ $saoCounts[5] ?? 0 }})</button>
-                                                <button class="btn" data-filter="4">4 Sao ({{ $saoCounts[4] ?? 0 }})</button>
-                                                <button class="btn" data-filter="3">3 Sao ({{ $saoCounts[3] ?? 0 }})</button>
-                                                <button class="btn" data-filter="2">2 Sao ({{ $saoCounts[2] ?? 0 }})</button>
-                                                <button class="btn" data-filter="1">1 Sao ({{ $saoCounts[1] ?? 0 }})</button>
-                                                <button class="btn mt-3" data-filter="comment">Có Bình Luận ({{ $coBinhLuan }})</button>
-                                                <button class="btn mt-3" data-filter="image">Có Hình ảnh ({{ $coHinhAnh }})</button>
+                                                        {{-- Hiển thị sao rỗng --}}
+                                                        @for ($i = 0; $i < $empty_stars; $i++)
+                                                            <li><i class="fa-regular fa-star"></i></li>
+                                                        @endfor
+                                                    </ul>
+                                                </div>
+                                                <div class="box-button">
+                                                    <button class="btn active" data-filter="all">Tất Cả</button>
+                                                    <button class="btn" data-filter="5">5 Sao ({{ $saoCounts[5] ?? 0 }})</button>
+                                                    <button class="btn" data-filter="4">4 Sao ({{ $saoCounts[4] ?? 0 }})</button>
+                                                    <button class="btn" data-filter="3">3 Sao ({{ $saoCounts[3] ?? 0 }})</button>
+                                                    <button class="btn" data-filter="2">2 Sao ({{ $saoCounts[2] ?? 0 }})</button>
+                                                    <button class="btn" data-filter="1">1 Sao ({{ $saoCounts[1] ?? 0 }})</button>
+                                                    <button class="btn mt-3" data-filter="comment">Có Bình Luận ({{ $coBinhLuan }})</button>
+                                                    <button class="btn mt-3" data-filter="image">Có Hình ảnh ({{ $coHinhAnh }})</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="review-content">
-                                        @foreach ($danh_gias as $key => $item)
-                                            @php
-                                                $email = $item->user->email;
-                                                $tachEmail = strlen($email) > 6
-                                                    ? substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@'))
-                                                    : $email;
-                                                $ratingStars = str_repeat('<li><i class="fa-solid fa-star"></i></li>', $item->so_sao) .
-                                                                str_repeat('<li><i class="fa-regular fa-star"></i></li>', 5 - $item->so_sao);
-                                            @endphp
-                                            <div class="review-item">
-                                                <div class="avt-user">
-                                                    <img src="{{asset('assets/images/user/12.jpg')}}" alt="">
-                                                </div>
-                                                <div class="thong-tin">
-                                                    <span class="user-name">{{$item->user->ho_va_ten?$item->user->ho_va_ten:$tachEmail}}</span>
-                                                    <ul class="rating mt-1">
-                                                        {!! $ratingStars !!}
-                                                    </ul>
-                                                    <div class="date">{{$item->created_at}}</div>
-                                                    <div class="noi-dung">
-                                                        <p class="noi-dung-text">{{$item->noi_dung}}</p>
-                                                        <div class="noi-dung-img">
-                                                            @foreach ($item->anhDanhGias as $anh)
-                                                                <img src="{{Storage::url($anh->hinh_anh)}}">
-                                                            @endforeach
+                                    <div class="col-lg-12">
+                                        <div class="review-content">
+                                            @foreach ($danh_gias as $key => $item)
+                                                @php
+                                                    $email = $item->user->email;
+                                                    $tachEmail = strlen($email) > 6
+                                                        ? substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@'))
+                                                        : $email;
+                                                    $ratingStars = str_repeat('<li><i class="fa-solid fa-star"></i></li>', $item->so_sao) .
+                                                                    str_repeat('<li><i class="fa-regular fa-star"></i></li>', 5 - $item->so_sao);
+                                                @endphp
+                                                <div class="review-item">
+                                                    <div class="avt-user">
+                                                        <img src="{{asset('assets/images/user/12.jpg')}}" alt="">
+                                                    </div>
+                                                    <div class="thong-tin">
+                                                        <span class="user-name">{{$item->user->ho_va_ten?$item->user->ho_va_ten:$tachEmail}}</span>
+                                                        <ul class="rating mt-1">
+                                                            {!! $ratingStars !!}
+                                                        </ul>
+                                                        <div class="date">{{$item->created_at}}</div>
+                                                        <div class="noi-dung">
+                                                            <p class="noi-dung-text">{{$item->noi_dung}}</p>
+                                                            <div class="noi-dung-img">
+                                                                @foreach ($item->anhDanhGias as $anh)
+                                                                    <img src="{{Storage::url($anh->hinh_anh)}}">
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                        <div class="phan-hoi mt-3">
+                                                            <p>Phản hồi của shop</p>
+                                                            <div class="noi-dung-phan-hoi mt-2">
+                                                                <span>Shop cảm ơn bạn đã ủng hộ nha.</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="phan-hoi mt-3">
-                                                        <p>Phản hồi của shop</p>
-                                                        <div class="noi-dung-phan-hoi mt-2">
-                                                            <span>Shop cảm ơn bạn đã ủng hộ nha.</span>
-                                                        </div>
-                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <h5 class="review-title">CHƯA CÓ ĐÁNH GIÁ</h5>
+                                @endif
                             </div>
                             <div class="pagination-wrap">
                                 <ul class="pagination">
