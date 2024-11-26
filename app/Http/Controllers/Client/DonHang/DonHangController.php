@@ -73,6 +73,7 @@ class DonHangController extends Controller
     public function showModalDanhGia(Request $request){
         $don_hang_id = $request->input('don_hang_id');
         $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs', 'donHangHoan')->find($don_hang_id);
+        
         $subQuery = ChiTietDonHang::selectRaw('MIN(id) as id')
             ->where('don_hang_id', $don_hang_id)
             ->groupBy('san_pham_id');
