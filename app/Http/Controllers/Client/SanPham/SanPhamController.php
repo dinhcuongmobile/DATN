@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Client\SanPham;
 use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\BienThe;
+use App\Models\DanhGia;
+use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\DanhGia;
 use App\Models\DanhMuc;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
 {
@@ -27,12 +28,12 @@ class SanPhamController extends Controller
         if (!$san_pham) {
             return redirect()->route('404');
         }
-        $luot_xem = $san_pham->luot_xem + 1;
-        $san_pham->update(['luot_xem' => $luot_xem]);
+        $luot_xem = $san_pham->luot_xem+1;
+        $san_pham->update(['luot_xem'=>$luot_xem]);
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
             ->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
-        $this->views['san_pham'] = $san_pham;
+        $this->views['san_pham']=$san_pham;
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
 

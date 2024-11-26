@@ -201,185 +201,87 @@
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">
                                 <div class="col-lg-12">
-                                    <div class="review-right">
-                                        <div class="customer-rating">
-                                            <div class="global-rating">
-                                                <div>
-                                                    <h5>{{ number_format($avg_rating, 1) }}</h5>
-                                                </div>
-                                                <div>
-                                                    <h6>Đánh giá trung bình</h6>
-                                                    <ul class="rating p-0 mb">
-                                                        {{-- Hiển thị sao đầy --}}
-                                                        @for ($i = 0; $i < $full_stars; $i++)
-                                                            <li><i class="fa-solid fa-star"></i></li>
-                                                        @endfor
+                                    <div class="review-header">
+                                        <h5 class="review-title">ĐÁNH GIÁ SẢN PHẨM</h5>
+                                        <div class="select-button">
+                                            <div class="box-star">
+                                                <p class=""><span>{{ number_format($avg_rating, 1) }}</span> trên 5</p>
+                                                <ul class="rating p-0 mb">
+                                                    {{-- Hiển thị sao đầy --}}
+                                                    @for ($i = 0; $i < $full_stars; $i++)
+                                                        <li><i class="fa-solid fa-star"></i></li>
+                                                    @endfor
 
-                                                        {{-- Hiển thị sao nửa nếu có --}}
-                                                        @if ($half_star)
-                                                            <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                                        @endif
+                                                    {{-- Hiển thị sao nửa nếu có --}}
+                                                    @if ($half_star)
+                                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
+                                                    @endif
 
-                                                        {{-- Hiển thị sao rỗng --}}
-                                                        @for ($i = 0; $i < $empty_stars; $i++)
-                                                            <li><i class="fa-regular fa-star"></i></li>
-                                                        @endfor
-                                                        <li><span>({{$san_pham->danhGias->count()}})</span></li>
-                                                    </ul>
-                                                </div>
+                                                    {{-- Hiển thị sao rỗng --}}
+                                                    @for ($i = 0; $i < $empty_stars; $i++)
+                                                        <li><i class="fa-regular fa-star"></i></li>
+                                                    @endfor
+                                                </ul>
                                             </div>
-                                            <ul class="rating-progess">
-                                                <li>
-                                                    <p>5 Sao</p>
-                                                    <div class="progress" role="progressbar"
-                                                        aria-label="Animated striped example" aria-valuenow="75"
-                                                        aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            style="width: 80%"></div>
-                                                    </div>
-                                                    <p>80%</p>
-                                                </li>
-                                                <li>
-                                                    <p>4 Sao</p>
-                                                    <div class="progress" role="progressbar"
-                                                        aria-label="Animated striped example" aria-valuenow="75"
-                                                        aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            style="width: 70%"></div>
-                                                    </div>
-                                                    <p>70%</p>
-                                                </li>
-                                                <li>
-                                                    <p>3 Sao</p>
-                                                    <div class="progress" role="progressbar"
-                                                        aria-label="Animated striped example" aria-valuenow="75"
-                                                        aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            style="width: 55%"></div>
-                                                    </div>
-                                                    <p>55%</p>
-                                                </li>
-                                                <li>
-                                                    <p>2 Sao</p>
-                                                    <div class="progress" role="progressbar"
-                                                        aria-label="Animated striped example" aria-valuenow="75"
-                                                        aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            style="width: 40%"></div>
-                                                    </div>
-                                                    <p>40%</p>
-                                                </li>
-                                                <li>
-                                                    <p>1 Sao</p>
-                                                    <div class="progress" role="progressbar"
-                                                        aria-label="Animated striped example" aria-valuenow="75"
-                                                        aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                            style="width: 25%"></div>
-                                                    </div>
-                                                    <p>25%</p>
-                                                </li>
-                                            </ul>
+                                            <div class="box-button">
+                                                <button class="btn active" data-filter="all">Tất Cả</button>
+                                                <button class="btn" data-filter="5">5 Sao ({{ $saoCounts[5] ?? 0 }})</button>
+                                                <button class="btn" data-filter="4">4 Sao ({{ $saoCounts[4] ?? 0 }})</button>
+                                                <button class="btn" data-filter="3">3 Sao ({{ $saoCounts[3] ?? 0 }})</button>
+                                                <button class="btn" data-filter="2">2 Sao ({{ $saoCounts[2] ?? 0 }})</button>
+                                                <button class="btn" data-filter="1">1 Sao ({{ $saoCounts[1] ?? 0 }})</button>
+                                                <button class="btn mt-3" data-filter="comment">Có Bình Luận ({{ $coBinhLuan }})</button>
+                                                <button class="btn mt-3" data-filter="image">Có Hình ảnh ({{ $coHinhAnh }})</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="comments-box">
-                                        <h5>Comments </h5>
-                                        <ul class="theme-scrollbar">
-                                            <li>
-                                                <div class="comment-items">
-                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
-                                                            alt=""></div>
-                                                    <div class="user-content">
-                                                        <div class="user-info">
-                                                            <div class="d-flex justify-content-between gap-3">
-                                                                <h6> <i class="iconsax"
-                                                                        data-icon="user-1"></i>Michel Poe</h6><span>
-                                                                    <i class="iconsax" data-icon="clock"></i>Mar 29,
-                                                                    2022</span>
-                                                            </div>
-                                                            <ul class="rating p-0 mb">
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-regular fa-star"></i></li>
-                                                            </ul>
+                                    <div class="review-content">
+                                        @foreach ($danh_gias as $key => $item)
+                                            @php
+                                                $email = $item->user->email;
+                                                $tachEmail = strlen($email) > 6
+                                                    ? substr($email, 0, 4) . '******' . substr($email, strpos($email, '@') - 2, 2) . substr($email, strpos($email, '@'))
+                                                    : $email;
+                                                $ratingStars = str_repeat('<li><i class="fa-solid fa-star"></i></li>', $item->so_sao) .
+                                                                str_repeat('<li><i class="fa-regular fa-star"></i></li>', 5 - $item->so_sao);
+                                            @endphp
+                                            <div class="review-item">
+                                                <div class="avt-user">
+                                                    <img src="{{asset('assets/images/user/12.jpg')}}" alt="">
+                                                </div>
+                                                <div class="thong-tin">
+                                                    <span class="user-name">{{$item->user->ho_va_ten?$item->user->ho_va_ten:$tachEmail}}</span>
+                                                    <ul class="rating mt-1">
+                                                        {!! $ratingStars !!}
+                                                    </ul>
+                                                    <div class="date">{{$item->created_at}}</div>
+                                                    <div class="noi-dung">
+                                                        <p class="noi-dung-text">{{$item->noi_dung}}</p>
+                                                        <div class="noi-dung-img">
+                                                            @foreach ($item->anhDanhGias as $anh)
+                                                                <img src="{{Storage::url($anh->hinh_anh)}}">
+                                                            @endforeach
                                                         </div>
-                                                        <p>Khaki cotton blend military jacket flattering fit mock
-                                                            horn buttons and patch pockets showerproof black
-                                                            lightgrey. Printed lining patch pockets jersey blazer
-                                                            built in pocket square wool casual quilted jacket
-                                                            without hood azure.</p><a href="#"> <span> <i
-                                                                    class="iconsax" data-icon="undo"></i>
-                                                                Replay</span></a>
+                                                    </div>
+                                                    <div class="phan-hoi mt-3">
+                                                        <p>Phản hồi của shop</p>
+                                                        <div class="noi-dung-phan-hoi mt-2">
+                                                            <span>Shop cảm ơn bạn đã ủng hộ nha.</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li class="reply">
-                                                <div class="comment-items">
-                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
-                                                            alt=""></div>
-                                                    <div class="user-content">
-                                                        <div class="user-info">
-                                                            <div class="d-flex justify-content-between gap-3">
-                                                                <h6> <i class="iconsax"
-                                                                        data-icon="user-1"></i>Michel Poe</h6><span>
-                                                                    <i class="iconsax" data-icon="clock"></i>Mar 29,
-                                                                    2022</span>
-                                                            </div>
-                                                            <ul class="rating p-0 mb">
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-regular fa-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <p>Khaki cotton blend military jacket flattering fit mock
-                                                            horn buttons and patch pockets showerproof black
-                                                            lightgrey. Printed lining patch pockets jersey blazer
-                                                            built in pocket square wool casual quilted jacket
-                                                            without hood azure.</p><a href="#"> <span> <i
-                                                                    class="iconsax" data-icon="undo"></i>
-                                                                Replay</span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="comment-items">
-                                                    <div class="user-img"> <img src="{{asset('assets/images/user/12.jpg')}}"
-                                                            alt=""></div>
-                                                    <div class="user-content">
-                                                        <div class="user-info">
-                                                            <div class="d-flex justify-content-between gap-3">
-                                                                <h6> <i class="iconsax"
-                                                                        data-icon="user-1"></i>Michel Poe</h6><span>
-                                                                    <i class="iconsax" data-icon="clock"></i>Mar 29,
-                                                                    2022</span>
-                                                            </div>
-                                                            <ul class="rating p-0 mb">
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-solid fa-star"></i></li>
-                                                                <li><i class="fa-regular fa-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                        <p>Khaki cotton blend military jacket flattering fit mock
-                                                            horn buttons and patch pockets showerproof black
-                                                            lightgrey. Printed lining patch pockets jersey blazer
-                                                            built in pocket square wool casual quilted jacket
-                                                            without hood azure.</p><a href="#"> <span> <i
-                                                                    class="iconsax" data-icon="undo"></i>
-                                                                Replay</span></a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                            </div>
+
+                                        @endforeach
                                     </div>
                                 </div>
+                            </div>
+                            <div class="pagination-wrap">
+                                <ul class="pagination">
+                                    {{$danh_gias->links()}}
+                                </ul>
                             </div>
                         </div>
                     </div>

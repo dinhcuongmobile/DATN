@@ -501,6 +501,7 @@ function guiDanhGia(){
                 if (soSao > 0) {
                     const formData = new FormData();
                     formData.append('_token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+                    formData.append('don_hang_id', donHangId);
                     formData.append('san_pham_id', sanPhamId);
                     formData.append('noiDung', noiDung);
                     formData.append('soSao', soSao);
