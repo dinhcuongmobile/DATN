@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('danh_gias', function (Blueprint $table) {
+        Schema::create('tra_loi_danh_gias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('don_hang_id')->constrained('don_hangs')->onDelete('cascade');
-            $table->foreignId('san_pham_id')->constrained('san_phams')->onDelete('cascade');
+            $table->foreignId('danh_gia_id')->constrained('danh_gias')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->text('noi_dung')->nullable();
-            $table->integer('so_sao');
+            $table->text('noi_dung');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('danh_gias');
+        Schema::dropIfExists('tra_loi_danh_gias');
     }
 };

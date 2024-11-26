@@ -73,6 +73,7 @@ class DonHangController extends Controller
     public function showModalDanhGia(Request $request){
         $don_hang_id = $request->input('don_hang_id');
         $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs', 'donHangHoan')->find($don_hang_id);
+
         $subQuery = ChiTietDonHang::selectRaw('MIN(id) as id')
             ->where('don_hang_id', $don_hang_id)
             ->groupBy('san_pham_id');
@@ -88,6 +89,7 @@ class DonHangController extends Controller
         foreach ($chi_tiet_don_hangs as $item) {
 
             $danhGia = DanhGia::where('user_id', Auth::id())
+                ->where('don_hang_id', $item->don_hang_id)
                 ->where('san_pham_id', $item->san_pham_id)
                 ->first();
 
@@ -115,6 +117,7 @@ class DonHangController extends Controller
         try {
             // Lưu đánh giá
             $danhGia = DanhGia::create([
+                'don_hang_id' => $request->input('don_hang_id'),
                 'san_pham_id' => $request->input('san_pham_id'),
                 'user_id' => Auth::id(),
                 'noi_dung' => $request->input('noiDung'),
