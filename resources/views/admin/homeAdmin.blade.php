@@ -128,8 +128,9 @@
                                 <p>
                                     Lọc theo:
                                     <select class="dashboard-filter-by form-control" id="dashboard-filter-by">
-                                        <option value="thangNay">Tháng này</option>
+                                        <option value="30ngay">--Chọn--</option>
                                         <option value="7ngay">7 ngày qua</option>
+                                        <option value="thangNay">Tháng này</option>
                                         <option value="thangTruoc">Tháng trước</option>
                                         <option value="365NgayQua">365 ngày qua</option>
                                     </select>
