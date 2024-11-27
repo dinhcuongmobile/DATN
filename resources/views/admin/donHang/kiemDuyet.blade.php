@@ -16,9 +16,9 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="float-right">
-                <form action="#" method="GET">
+                <form action="{{ route('don-hang.danh-sach-don-hang') }}" method="GET">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                        <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Tìm kiếm mã đơn hàng...">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search fa-sm"></i>
