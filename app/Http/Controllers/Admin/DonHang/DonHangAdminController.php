@@ -11,57 +11,117 @@ use App\Http\Controllers\Controller;
 
 class DonHangAdminController extends Controller
 {
-    // Hiển thị danh sách đơn hàng
-    public function showDSDonHang() {
-        $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
-            ->whereIn('trang_thai', [0, 1, 2, 3, 4, 5]) // Lấy tất cả các trạng thái đơn hàng
-            ->MoiNhat()
-            ->get();
+    // Hiển thị danh sách tất cả đơn hàng
+    public function showDSDonHang(Request $request)
+    {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->whereIn('trang_thai', [0, 1, 2, 3, 4, 5]);
+
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDonHang', compact('donHangs'));
     }
-    
+
+    // Hiển thị danh sách đơn hàng chờ duyệt
+    public function showDSKiemDuyet(Request $request) {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('trang_thai', 0);
+
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
+        return view('admin.donHang.kiemDuyet', compact('donHangs'));
+    }
+
     
     // Hiển thị danh sách đơn hàng chờ lấy hàng
-    public function showDSChoLayHang() {
-        $donHangs = DonHang::where('trang_thai', 1)
-        ->MoiNhat()
-        ->get(); // 1 là trạng thái chờ lấy hàng
-        return view('admin.donHang.choLayHang', compact('donHangs'));
+    public function showDSChoLayHang(Request $request)
+    {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('trang_thai', 1);
 
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
+        return view('admin.donHang.choLayHang', compact('donHangs'));
     }
 
-    // Hiển thị danh sách đang giao
-    public function showDSDangGiao() {
-        $donHangs = DonHang::where('trang_thai', 2)
-        ->MoiNhat()
-        ->get(); //2 là trạng thái đang giao
+    // Hiển thị danh sách đơn hàng đang giao
+    public function showDSDangGiao(Request $request)
+    {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('trang_thai', 2);
+
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDangGiao', compact('donHangs'));
     }
-    
-    
+
     // Hiển thị danh sách đơn hàng đã giao
-    public function showDSDaGiao() {
-        $donHangs = DonHang::where('trang_thai', 3)
-        ->MoiNhat()
-        ->get(); //3 là trang thái đã giao
+    public function showDSDaGiao(Request $request)
+    {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('trang_thai', 3);
+
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
     
-
     // Hiển thị danh sách đơn hàng đã hủy
-    public function showDSDaHuy() {
+    public function showDSDaHuy(Request $request) {
         $donHangs = DonHang::where('trang_thai', 4)
         ->MoiNhat()
         ->get(); // 4 là trạng thái "Đã Hủy"
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
-    }
-
-    // Hiển thị danh sách đơn hàng chờ duyệt
-    public function showDSKiemDuyet() {
-        $donHangs = DonHang::where('trang_thai', 0)
-        ->MoiNhat()
-        ->get(); // 0 là trạng thái chưa duyệt
-        return view('admin.donHang.kiemDuyet', compact('donHangs'));
     }
 
     // Duyệt đơn hàng - Chuyển trạng thái đơn hàng sang chờ lấy hàng
