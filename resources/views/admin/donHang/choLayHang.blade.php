@@ -28,7 +28,7 @@
                     </div>
                 </form>
             </div>
-            <form action="{{ route('don-hang.giao-nhieu-don-hang') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('don-hang.giao-nhieu-don-hang') }}" method="POST">
                 @csrf
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
@@ -92,7 +92,7 @@
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
-                                        Đang Chuẩn Bị Hàng
+                                        Chờ Giao Hàng
                                     @elseif($item->trang_thai == 2)
                                         Đang Giao
                                     @elseif($item->trang_thai == 3)
@@ -109,10 +109,7 @@
                             </td>
                             <td class="col-1">GHTK</td>
                             <td>
-                                <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</button>
-                                </form>
+                                <a href="{{route('don-hang.yeu-cau-lay-hang', $item->id)}}" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</a>
                                 <hr>
                                   <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
                                     <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
@@ -127,18 +124,4 @@
     @endforeach
 </form>
 </div>  
-<script>
-    function chontatca() {
-    document.querySelectorAll('input[name="select[]"]').forEach(checkbox => {
-        checkbox.checked = true;
-    });
-}
-
-function bochontatca() {
-    document.querySelectorAll('input[name="select[]"]').forEach(checkbox => {
-        checkbox.checked = false;
-    });
-}
-</script>
-
 @endsection

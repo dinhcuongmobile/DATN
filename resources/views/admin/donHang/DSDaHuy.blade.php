@@ -82,7 +82,7 @@
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
-                                        Đang Chuẩn Bị Hàng
+                                        Chờ Giao Hàng
                                     @elseif($item->trang_thai == 2)
                                         Đang Giao
                                     @elseif($item->trang_thai == 3)

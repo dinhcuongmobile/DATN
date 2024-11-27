@@ -1,7 +1,6 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
 <div class="container-fluid">  
-    
     <h1 class="h3 mb-2 text-gray-800">Chờ xác nhận ({{ $donHangs->count() }})</h1>  
     @if (session('success'))
             <div class="alert alert-success" id="error-alert">
@@ -28,7 +27,7 @@
                     </div>
                 </form>
             </div>
-<form action="{{ route('don-hang.duyet-nhieu-don-hang') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('don-hang.duyet-nhieu-don-hang') }}" method="POST">
                 @csrf
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
@@ -87,7 +86,7 @@
                                     @if($item->trang_thai == 0)
                                         Chờ Xác Nhận
                                     @elseif($item->trang_thai == 1)
-                                        Đang Chuẩn Bị Hàng
+                                        Chờ Giao Hàng
                                     @elseif($item->trang_thai == 2)
                                         Đang Giao
                                     @elseif($item->trang_thai == 3)
@@ -104,19 +103,12 @@
                             </td>
                             <td class="col-1">GHTK</td>
                             <td>
-                                <form action="{{ route('don-hang.duyet-don-hang', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary btn-sm">Duyệt</button>
-                                </form>
-                                <form action="{{ route('don-hang.huy-don-hang', $item->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
-                                </form>
+                                <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">Duyệt</a>
+                                <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn hủy đơn này')">Hủy</a>
                                 <hr>
                                   <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
                                     <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
                                   </a> 
-                                
                             </td>
                         </tr>  
                     </tbody>  
@@ -126,14 +118,5 @@
     </div>
     @endforeach
 </form>  
-    <script>
-        function chontatca() {
-            document.querySelectorAll('input[name="select[]"]').forEach(checkbox => checkbox.checked = true);
-        }
-    
-        function bochontatca() {
-            document.querySelectorAll('input[name="select[]"]').forEach(checkbox => checkbox.checked = false);
-        }
-    </script>
 </div>  
 @endsection
