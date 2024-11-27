@@ -900,6 +900,15 @@
     <script src="{{ asset('assets/js/tich-xu.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('js')
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-D79M039PCJ');
+    </script>
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 

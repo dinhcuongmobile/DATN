@@ -53,7 +53,7 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
         // Danh sách yêu thích
-        $this->views['yeuThichs'] = YeuThich::where('nguoi_dung_id', $tai_khoan->id)
+        $this->views['yeuThichs'] = YeuThich::where('user_id', $tai_khoan->id)
             ->join('san_phams', 'yeu_thichs.san_pham_id', '=', 'san_phams.id')
             ->select('san_phams.*')
             ->get();
@@ -62,8 +62,8 @@ class ThongTinTaiKhoanController extends Controller
 
         // Tổng yêu thích
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
+            $user_id = Auth::id();
+            $user = User::find($user_id);
             $tongYeuThich = $user->yeuThich()->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;

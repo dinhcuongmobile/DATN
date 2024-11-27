@@ -85,12 +85,19 @@ class ThongKeController extends Controller
         $dauThangTruoc = Carbon::now()->subMonth()->startOfMonth()->toDateString();
         $cuoiThangTruoc = Carbon::now()->subMonth()->endOfMonth()->toDateString();
 
+        $sub30Ngay = Carbon::now()->subDays(30)->toDateString();
         $sub7Ngay = Carbon::now()->subDays(7)->toDateString();
         $sub365Ngay = Carbon::now()->subDays(365)->toDateString();
 
         $hienTai = Carbon::now()->toDateString();
 
-        if ($data['dashboardValue'] == '7ngay') {
+
+        if ($data['dashboardValue'] == '30ngay') {
+            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+
+            $soDonHang = DonHang::whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
+        } elseif ($data['dashboardValue'] == '7ngay') {
             $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
                 ->whereBetween('ngay_tao', [$sub7Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
 
