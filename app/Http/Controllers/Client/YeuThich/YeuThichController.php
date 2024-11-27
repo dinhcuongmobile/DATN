@@ -22,39 +22,31 @@ class YeuThichController extends Controller
 
     public function themYeuThich(Request $request)
     {
-        if(!Auth::check()){
+        // Kiểm tra đăng nhập
+        if (!Auth::check()) {
             return response()->json(['success' => false]);
-        }else{
-            $san_pham_id = $request->input('sanPhamId');
-        return response()->json(['success' => true,'id'=>$san_pham_id]);
         }
-        // $user = Auth::user();
 
-        // // Kiểm tra xem sản phẩm đã có trong danh sách yêu thích chưa
-        // $existing = YeuThich::where('nguoi_dung_id', $user->id)
-        //     ->where('san_pham_id', $san_pham_id)
-        //     ->first();
+        // Thông tin sản phẩm
+        $san_pham_id = $request->input('sanPhamId');
+        $user = Auth::user();
 
-        // if ($existing) {
-        //     // Nếu sản phẩm đã có trong danh sách yêu thích, chỉ trả về mã trạng thái error
-        //     return response()->json(['status' => 'error']);
-        // }
+        // Kiểm tra tồn tại sản phẩm trong bảng yêu thích theo user chưa
+        $soYeuThich = YeuThich::where('user_id', $user->id)->where('san_pham_id', $san_pham_id)->first();
 
-        // $data = [
-        //     'user_id' => $user->id,
-        //     'san_pham_id' => $san_pham_id
-        // ];
+        if ($soYeuThich) {
+            return response()->json(['success' => false]);
+        }
 
-        // // Thực hiện insert vào bảng YeuThich
-        // $res = YeuThich::insert($data);
+        // Thêm mới sản phẩm vào yêu thích
 
-        // if ($res) {
-        //     // Nếu insert thành công, trả về mã trạng thái success
-        //     return response()->json(['status' => 'success']);
-        // }
+        $data = ['user_id' => $user->id, 'san_pham_id' => $san_pham_id];
+        $request = YeuThich::create($data);
 
-        // // Nếu insert không thành công, trả về mã trạng thái error
-        // return response()->json(['status' => 'error']);
+        if ($request) {
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['success', false]);
+        }
     }
-
 }
