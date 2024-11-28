@@ -108,33 +108,26 @@
                                             {{-- Các nút tùy thuộc trạng thái --}}
                                             @if ($item->trang_thai == 0)
                                                 {{-- Trạng thái chờ xác nhận --}}
-                                                <form action="{{ route('don-hang.duyet-don-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm">Duyệt</button>
-                                                </form>
-                                                <form action="{{ route('don-hang.huy-don-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
-                                                </form>
+                                             <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">
+                                                    Duyệt
+                                                </a>
+                                             <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                                                    Hủy
+                                                </a>
                                             @elseif ($item->trang_thai == 1)
                                                 {{-- Trạng thái chờ lấy hàng --}}
-                                                <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy
-                                                        hàng</button>
-                                                </form>
+                                             <a href="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}" class="btn btn-primary btn-sm">
+                                                    Yêu cầu đến lấy hàng
+                                                </a>
                                             @endif
 
                                             {{-- Thẻ <hr> chỉ xuất hiện khi có nút --}}
                                             <hr>
                                         @endif
 
-                                        <a href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}">
-                                            <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button>
+                                        <a href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}" class="btn btn-secondary btn-sm">
+                                            Xem Chi Tiết
                                         </a>
                                     </td>
                                 </tr>
