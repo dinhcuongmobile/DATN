@@ -111,9 +111,8 @@
                             <td>
                                 <a href="{{route('don-hang.yeu-cau-lay-hang', $item->id)}}" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</a>
                                 <hr>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
-                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
-                                  </a>
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
+                                    Xem Chi Tiết
                             </td>
                         </tr>  
                     </tbody>  
