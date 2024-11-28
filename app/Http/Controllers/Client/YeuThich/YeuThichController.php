@@ -26,10 +26,9 @@ class YeuThichController extends Controller
         if (!Auth::check()) {
             return response()->json(['success' => false]);
         }
-
+        $user = Auth::user();
         // Thông tin sản phẩm
         $san_pham_id = $request->input('sanPhamId');
-        $user = Auth::user();
 
         // Kiểm tra tồn tại sản phẩm trong bảng yêu thích theo user chưa
         $soYeuThich = YeuThich::where('user_id', $user->id)->where('san_pham_id', $san_pham_id)->first();

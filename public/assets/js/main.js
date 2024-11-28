@@ -460,7 +460,11 @@ function yeuThich() {
                             }).showToast();
 
                         } else {
-                            window.location.href = "/tai-khoan/dang-nhap";
+                            Toastify({
+                                text: "Không thành công ! Sản phẩm đã tồn tại trong danh sách.!!",
+                                duration: 2500,
+                                close: true,
+                            }).showToast();
                         }
                     },
                     error: function (xhr, status, error) {

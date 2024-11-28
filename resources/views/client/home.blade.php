@@ -152,10 +152,26 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
+                                                            @if (Auth::check())
+                                                                <a class="wishlist-icon" href="javascript:void(0)"
+                                                                    tabindex="0" data-id="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon"
+                                                                    href="{{ route('tai-khoan.dang-nhap') }}"
+                                                                    tabindex="0">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @endif
                                                             <a class="wishlist-icon" href="javascript:void(0)"
                                                                 tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
+                                                                <i class="iconsax" data-icon="heart" aria-hidden="true"
+                                                                    data-bs-toggle="tooltip"
                                                                     data-bs-title="Add to Wishlist"></i>
                                                             </a>
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
@@ -229,12 +245,22 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            <a class="wishlist-icon" href="javascript:void(0)"
-                                                                tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Add to Wishlist"></i>
-                                                            </a>
+                                                            @if (Auth::check())
+                                                                <a class="wishlist-icon" href="javascript:void(0)"
+                                                                    tabindex="0" data-id="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon"
+                                                                    href="{{ route('tai-khoan.dang-nhap') }}"
+                                                                    tabindex="0">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @endif
                                                             <a href="compare.html" tabindex="0">
                                                                 <i class="iconsax" data-icon="arrow-up-down"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
@@ -311,12 +337,22 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            <a class="wishlist-icon" href="javascript:void(0)"
-                                                                tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Add to Wishlist"></i>
-                                                            </a>
+                                                            @if (Auth::check())
+                                                                <a class="wishlist-icon" href="javascript:void(0)"
+                                                                    tabindex="0" data-id="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon"
+                                                                    href="{{ route('tai-khoan.dang-nhap') }}"
+                                                                    tabindex="0">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"
+                                                                        data-bs-title="Add to Wishlist"></i>
+                                                                </a>
+                                                            @endif
                                                             <a href="compare.html" tabindex="0">
                                                                 <i class="iconsax" data-icon="arrow-up-down"
                                                                     aria-hidden="true" data-bs-toggle="tooltip"
