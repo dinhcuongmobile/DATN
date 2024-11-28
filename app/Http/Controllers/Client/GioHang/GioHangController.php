@@ -53,14 +53,7 @@ class GioHangController extends Controller
 
             $this->views['gio_hangs'] = $gioHangs;
         }
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
+
         //
         return view('client.gioHang.gioHang', $this->views);
     }
@@ -301,14 +294,6 @@ class GioHangController extends Controller
                                                 ->first();
         }
         $this->views['tongCoin'] = Coin::where('user_id', Auth::user()->id)->sum('coin');
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
         //
         return view('client.gioHang.chiTietThanhToan', $this->views);
     }

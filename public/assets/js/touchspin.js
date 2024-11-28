@@ -45,15 +45,15 @@ function soLuongMua() {
     });
 }
 
-function maxInputQuantity(soLuongTon){
+function maxInputQuantity(maxSL){
     plusMinus.forEach((element) => {
         const addButton = element.querySelector('.plus');
         const subButton = element.querySelector('.minus');
         const inputEl = element.querySelector("input[type='number']");
 
-        inputEl.setAttribute('data-max', soLuongTon);
-        inputEl.value = Math.min(inputEl.value, soLuongTon);
-        addButton.disabled = inputEl.value >= soLuongTon;
+        inputEl.setAttribute('data-max', maxSL);
+        inputEl.value = Math.min(inputEl.value, maxSL);
+        addButton.disabled = inputEl.value >= maxSL;
         subButton.disabled = inputEl.value <= 1;
     });
 }
@@ -74,6 +74,7 @@ function updateQuantity() {
             },
             success: function (response) {
                 var soLuongTon = response.quantity;
+                var maxSL = parseInt(response.quantity) - parseInt(response.gio_hang?response.gio_hang.so_luong:0);
                 if (soLuongTon > 0) {
                     document.getElementById('soLuongTon').textContent = soLuongTon;
                     document.getElementById('soLuongTon').style.color="rgba(118, 118, 118, 1)";
@@ -89,7 +90,7 @@ function updateQuantity() {
                     document.querySelector('.btn-mua-hang').innerHTML=`<button class="btn btn_black sm">Hết hàng</button>`;
                 }
                 // Cập nhật giá trị tối đa cho input
-                maxInputQuantity(soLuongTon);
+                maxInputQuantity(maxSL);
                 themGioHang();
                 muaNgay();
             },
@@ -154,42 +155,63 @@ function themGioHang(){
     if (btnThemGioHang) {
         btnThemGioHang.addEventListener('click', function () {
             if (selectedSize && selectedColor) {
-                let token= document.querySelector(".tokenThemGioHang").value;
-                let sanPhamID = btnThemGioHang.getAttribute('data-id');
-                let soLuong = document.getElementById('soLuong').value;
-                let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
-                let kichCo = ipSize.value;
-                let maMau = ipMauSac.value;
+                let dataMax = document.querySelector('.quantity input[type="number"]');
+                if(dataMax.getAttribute('data-max')>0){
+                    let token= document.querySelector(".tokenThemGioHang").value;
+                    let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                    let soLuong = document.getElementById('soLuong').value;
+                    let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
+                    let kichCo = ipSize.value;
+                    let maMau = ipMauSac.value;
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/gio-hang/them-gio-hang/',
-                    data: {
-                        _token: token,
-                        san_pham_id: sanPhamID,
-                        gia_khuyen_mai: Number(giaKhuyenMai),
-                        so_luong: Number(soLuong),
-                        kich_co: kichCo,
-                        ma_mau: maMau
-                    },
-                    success: function (response) {
-                        if (response.login == false) {
-                            window.location.href = '/tai-khoan/dang-nhap';
-                        } else {
-                            $('#addtocart').modal('show');
-                            var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
-                            document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
-                            document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
-                            document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                    $.ajax({
+                        type: 'POST',
+                        url: '/gio-hang/them-gio-hang/',
+                        data: {
+                            _token: token,
+                            san_pham_id: sanPhamID,
+                            gia_khuyen_mai: Number(giaKhuyenMai),
+                            so_luong: Number(soLuong),
+                            kich_co: kichCo,
+                            ma_mau: maMau
+                        },
+                        success: function (response) {
+                            if (response.login == false) {
+                                window.location.href = '/tai-khoan/dang-nhap';
+                            } else {
+                                $('#addtocart').modal('show');
+                                var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
+                                document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
+                                document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                                document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                            }
+                        },
+                        error: function (error) {
+                            console.error('Lỗi: ', error);
+                            alert('Có lỗi xảy ra');
                         }
-                    },
-                    error: function (error) {
-                        console.error('Lỗi: ', error);
-                        alert('Có lỗi xảy ra');
-                    }
-                });
+                    });
+                }else{
+                    let errSL = document.querySelector('#errSL');
+                    errSL.style.display='block';
+                    setTimeout(() => {
+                        errSL.style.transition = 'opacity 0.5s ease-out';
+                        errSL.style.opacity = '0';
+                        setTimeout(() => {
+                            errSL.style.display = 'none';
+                        }, 500); // Thời gian cho quá trình mờ dần
+                    }, 5000);
+                }
             } else {
-                document.querySelector('#errSelect').style.display = 'block';
+                let errSelect = document.querySelector('#errSelect');
+                errSelect.style.display='block';
+                setTimeout(() => {
+                    errSelect.style.transition = 'opacity 0.5s ease-out';
+                    errSelect.style.opacity = '0';
+                    setTimeout(() => {
+                        errSelect.style.display = 'none';
+                    }, 500); // Thời gian cho quá trình mờ dần
+                }, 5000);
             }
         });
     }

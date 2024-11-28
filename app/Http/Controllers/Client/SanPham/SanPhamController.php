@@ -11,6 +11,7 @@ use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\GioHang;
 use App\Models\User;
 use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
@@ -140,16 +141,6 @@ class SanPhamController extends Controller
         $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
             ->selectRaw('danh_muc_id, COUNT(*) as count')
             ->pluck('count', 'danh_muc_id');
-
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
-        //
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {
             $html = view('client.sanPham.filterSanPham', $this->views)->render();
@@ -238,15 +229,6 @@ class SanPhamController extends Controller
         $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
             ->selectRaw('danh_muc_id, COUNT(*) as count')
             ->pluck('count', 'danh_muc_id');
-
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
         //
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {
@@ -274,8 +256,14 @@ class SanPhamController extends Controller
             ->where('ma_mau', $mau_sac)
             ->first();
 
+        $gio_hang= GioHang::where('user_id',Auth::user()->id)
+                            ->where('san_pham_id',$san_pham_id)
+                            ->where('bien_the_id',$bienThe->id)->first();
         if ($bienThe) {
-            return response()->json(['quantity' => $bienThe->so_luong]);
+            return response()->json([
+                'quantity' => $bienThe->so_luong,
+                'gio_hang' => $gio_hang
+            ]);
         } else {
             return response()->json(['quantity' => 0]);
         }

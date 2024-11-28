@@ -29,15 +29,6 @@ class TinTucController extends Controller
         //phân trang
         $perPage = 5;
         $tin_tucs = TinTuc::paginate($perPage);
-
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
         //
 
         return view('client.tinTuc.tinTuc', $this->views);
@@ -49,14 +40,6 @@ class TinTucController extends Controller
         $this->views['tin_tucs'] = $this->tin_tucs->loadAllTinTuc();
         $this->views['danh_muc_tin_tucs'] = DanhMucTinTuc::all();
         $this->views['tin_tuc_gan_day'] = $this->tin_tucs->loadTinTucGanDay();
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
         //
         return view('client.tinTuc.chiTietTinTuc', $this->views);
     }
@@ -67,14 +50,6 @@ class TinTucController extends Controller
         $this->views['danh_muc'] = DanhMucTinTuc::find($danhMucId);
         $this->views['danh_muc_tin_tucs'] = DanhMucTinTuc::all();
         $this->views['tin_tuc_gan_day'] = $this->tin_tucs->loadTinTucGanDay();
-        // Tổng yêu thích
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
         //
         return view('client.tinTuc.tinTucDanhMuc', $this->views);
     }

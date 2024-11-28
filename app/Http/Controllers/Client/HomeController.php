@@ -27,14 +27,6 @@ class HomeController extends Controller
         $san_pham_khuyen_mai = SanPham::with('bienThes', 'danhGias')->where('khuyen_mai', ">", 0)->orderBy('id', 'desc')->take(8)->get();
 
         $tin_tucs = TinTuc::orderBy('created_at', 'desc')->take(3)->get();
-        // Tổng số yêu thích của người dùng
-        if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
 
         $this->views['san_pham_noi_bat'] = $san_pham_noi_bat;
         $this->views['san_pham_moi_nhat'] = $san_pham_moi_nhat;

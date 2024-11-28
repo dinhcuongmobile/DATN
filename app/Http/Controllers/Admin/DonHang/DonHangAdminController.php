@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\DiaChi;
+use App\Models\PhiShip;
 
 class DonHangAdminController extends Controller
 {
@@ -52,7 +54,7 @@ class DonHangAdminController extends Controller
         return view('admin.donHang.kiemDuyet', compact('donHangs'));
     }
 
-    
+
     // Hiển thị danh sách đơn hàng chờ lấy hàng
     public function showDSChoLayHang(Request $request)
     {
@@ -115,7 +117,7 @@ class DonHangAdminController extends Controller
         $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
-    
+
     // Hiển thị danh sách đơn hàng đã hủy
     public function showDSDaHuy(Request $request) {
         $donHangs = DonHang::where('trang_thai', 4)
@@ -129,7 +131,7 @@ class DonHangAdminController extends Controller
         $donHang = DonHang::findOrFail($id);
         $donHang->trang_thai = 1; // 1 là trạng thái chờ lấy hàng
         $donHang->save();
-    
+
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
     }
     // Duyệt nhiều đơn hàng đã chọn
@@ -182,19 +184,19 @@ class DonHangAdminController extends Controller
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
     }
 }
- 
+
     // Hiển thị chi tiết đơn hàng
     public function showChiTietDonHang($id)
     {
         $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($id);
-        $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
-
+        $diaChiNhanHang = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($donHang->dia_chi_id);
+        $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
+                            ->where('ma_quan_huyen', $diaChiNhanHang->ma_quan_huyen)
+                            ->first();
         return view('admin.donHang.chiTietDonHang', [
             'donHang' => $donHang,
-            'tongTienSanPham' => $tongTienSanPham,
-            'phiVanChuyen' => $donHang->giam_gia_van_chuyen,
-            'giamGiaDonHang' => $donHang->giam_gia_don_hang,
-            'tongThanhToan' => $donHang->tong_thanh_toan
+            'diaChiNhanHang' => $diaChiNhanHang,
+            'phiShip' => $phi_ships ? $phi_ships->phi_ship : 0
         ]);
     }
 
@@ -202,7 +204,7 @@ class DonHangAdminController extends Controller
     public function inHoaDon($id) {
         return view('admin.donHang.hoaDon');
     }
-    //In Hàng Loạt 
+    //In Hàng Loạt
     public function inHoaDonHangLoat()
     {
         return view('admin.donHang.inHoaDonHangLoat');
@@ -213,7 +215,7 @@ class DonHangAdminController extends Controller
         $donHang = DonHang::findOrFail($id);
         $donHang->trang_thai = 4; // 5 là trạng thái Đã Hủy
         $donHang->save();
-    
+
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được hủy thành công.');
     }
 
