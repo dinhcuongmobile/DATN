@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('client.layout.main', function ($view) {
             $gio_hangs = [];
             $count_gio_hang = 0;
+            $tong_yeu_thich = 0;
             $danh_mucs = DanhMuc::all();
             $userId = Auth::id();
 
@@ -49,8 +50,8 @@ class AppServiceProvider extends ServiceProvider
             }
             // Tổng yêu thích
             if (Auth::check()) {
-                $nguoi_dung_id = Auth::id();
-                $user = User::find($nguoi_dung_id);
+                $user_id = Auth::id();
+                $user = User::find($user_id);
                 $tong_yeu_thich = $user->yeuThich()->count();
             }
             //

@@ -29,8 +29,8 @@ class HomeController extends Controller
         $tin_tucs = TinTuc::orderBy('created_at', 'desc')->take(3)->get();
         // Tổng số yêu thích của người dùng
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
+            $user_id = Auth::id();
+            $user = User::find($user_id);
             $tongYeuThich = $user->yeuThich()->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;

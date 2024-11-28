@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
 
 class SanPhamController extends Controller
@@ -29,19 +28,22 @@ class SanPhamController extends Controller
         if (!$san_pham) {
             return redirect()->route('404');
         }
-        $luot_xem = $san_pham->luot_xem+1;
-        $san_pham->update(['luot_xem'=>$luot_xem]);
+        $luot_xem = $san_pham->luot_xem + 1;
+        $san_pham->update(['luot_xem' => $luot_xem]);
 
-        $danh_gias= DanhGia::with('user','sanPham','anhDanhGias')->where('san_pham_id',$san_pham->id)->orderBy('id','desc')->paginate(6);
+        $danh_gias = DanhGia::with('user', 'sanPham', 'anhDanhGias')->where('san_pham_id', $san_pham->id)->orderBy('id', 'desc')->paginate(6);
+
         // Số lượng đánh giá theo sao
         $saoCounts = DanhGia::where('san_pham_id', $id)
             ->select('so_sao', DB::raw('count(*) as total'))
             ->groupBy('so_sao')
             ->pluck('total', 'so_sao');
+
         // Số lượng đánh giá có bình luận
         $coBinhLuan = DanhGia::where('san_pham_id', $id)
             ->where('noi_dung', '!=', '')
             ->count();
+
         // Số lượng đánh giá có hình ảnh
         $coHinhAnh = DanhGia::where('san_pham_id', $id)
             ->whereHas('anhDanhGias')
@@ -50,18 +52,20 @@ class SanPhamController extends Controller
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
             ->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
-        $this->views['san_pham']=$san_pham;
-        $this->views['danh_gias']=$danh_gias;
-        $this->views['saoCounts']=$saoCounts;
-        $this->views['coBinhLuan']=$coBinhLuan;
-        $this->views['coHinhAnh']=$coHinhAnh;
+
+        $this->views['san_pham'] = $san_pham;
+        $this->views['danh_gias'] = $danh_gias;
+        $this->views['saoCounts'] = $saoCounts;
+        $this->views['coBinhLuan'] = $coBinhLuan;
+        $this->views['coHinhAnh'] = $coHinhAnh;
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
 
         // Tổng yêu thích
         if (Auth::check()) {
-            $yeuThich = YeuThich::where('user_id',Auth::id())->get();
-            $tongYeuThich = $yeuThich->count();
+            $user_id = Auth::id();
+            $user = User::find($user_id);
+            $tongYeuThich = $user->yeuThich()->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;
         }
@@ -143,8 +147,8 @@ class SanPhamController extends Controller
 
         // Tổng yêu thích
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
+            $user_id = Auth::id();
+            $user = User::find($user_id);
             $tongYeuThich = $user->yeuThich()->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;
@@ -241,8 +245,8 @@ class SanPhamController extends Controller
 
         // Tổng yêu thích
         if (Auth::check()) {
-            $nguoi_dung_id = Auth::id();
-            $user = User::find($nguoi_dung_id);
+            $user_id = Auth::id();
+            $user = User::find($user_id);
             $tongYeuThich = $user->yeuThich()->count();
             //
             $this->views['tong_yeu_thich'] = $tongYeuThich;

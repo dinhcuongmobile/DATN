@@ -66,8 +66,9 @@
                             </li>
                             <li>
                                 <button class="nav-link" id="wishlist-tab" data-bs-toggle="pill" data-bs-target="#wishlist"
-                                    role="tab" aria-controls="wishlist" aria-selected="false"> <i class="iconsax"
-                                        data-icon="heart"></i>Yêu Thích </button>
+                                    role="tab" aria-controls="wishlist" aria-selected="false">
+                                    <i class="iconsax" data-icon="heart"></i>Yêu Thích
+                                </button>
                             </li>
                             <li>
                                 <button class="nav-link" id="address-tab" data-bs-toggle="pill" data-bs-target="#address"

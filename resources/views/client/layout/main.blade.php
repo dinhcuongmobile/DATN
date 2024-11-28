@@ -292,14 +292,18 @@
                                 <li> <button href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
                                         aria-controls="offcanvasTop"><i class="iconsax"
                                             data-icon="search-normal-2"></i></button></li>
-                                <li> <a href="{{ route('tai-khoan.thong-tin-tai-khoan', Auth::id()) }}"><i
-                                            class="iconsax" data-icon="heart"></i><span class="cart_qty_cls">
+                                <li>
+                                    <a class="yeuThichMenu">
+                                        <i class="iconsax" data-icon="heart"></i>
+                                        <span class="cart_qty_cls">
                                             @if (Auth::check())
                                                 {{ $tong_yeu_thich }}
                                             @else
                                                 0
                                             @endif
-                                        </span></a></li>
+                                        </span>
+                                    </a>
+                                </li>
                                 <li class="onhover-div"><a href="#"><i class="iconsax"
                                             data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
@@ -904,11 +908,15 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'G-D79M039PCJ');
     </script>
+
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 

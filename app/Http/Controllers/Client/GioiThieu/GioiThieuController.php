@@ -18,8 +18,8 @@ class GioiThieuController extends Controller
   {
     // Tổng yêu thích
     if (Auth::check()) {
-      $nguoi_dung_id = Auth::id();
-      $user = User::find($nguoi_dung_id);
+      $user_id = Auth::id();
+      $user = User::find($user_id);
       $tongYeuThich = $user->yeuThich()->count();
       //
       $this->views['tong_yeu_thich'] = $tongYeuThich;
