@@ -18,6 +18,7 @@ class LienHeController extends Controller
         $this->views = [];
     }
     public function lienHe()
+    {
 
         //
         return view('client.lienHe.lienHe', $this->views);
