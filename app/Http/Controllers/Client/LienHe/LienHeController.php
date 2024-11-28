@@ -18,14 +18,7 @@ class LienHeController extends Controller
         $this->views = [];
     }
     public function lienHe()
-    { // Tổng yêu thích
-        if (Auth::check()) {
-            $user_id = Auth::id();
-            $user = User::find($user_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
-        }
+
         //
         return view('client.lienHe.lienHe', $this->views);
     }

@@ -121,6 +121,7 @@
                                 <td style="text-align: center; font-weight: 500; font-size: 14px;">{{ number_format($chiTiet->thanh_tien, 0, ',', '.') }}đ</td>
                             </tr>
                         </tbody>
+                        @endforeach
                     </table>
                     <table width="100%">
                         <tr style="display: flex; justify-content: space-between; gap: 80px;">
@@ -132,7 +133,7 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 16px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
-                                                Giá Vận Chuyển :</h5>
+                                                Giảm Giá Vận Chuyển :</h5>
                                             <h5
                                                 style="margin: 0%; font-size: 16px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
                                                 Khuyến Mại :
@@ -141,10 +142,10 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                {{ number_format($phiVanChuyen, 0, ',', '.') }}đ</h5>
+                                                -{{ number_format($giam_gia_van_chuyen, 0, ',', '.') }}đ</h5>
                                             <h5
                                                 style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                -{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</h5>
+                                                -{{ number_format($giam_gia_don_hang, 0, ',', '.') }}đ</h5>
                                         </td>
                                     </tr>
                                     <tr
@@ -158,14 +159,13 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 19px; text-align: start; line-height: 1; color: #fff;">
-                                                {{ number_format($donHang->tongThanhToan, 0, ',', '.') }}đ
+                                                {{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ
                                             </h5>
                                         </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
-                        @endforeach
                     </table>
                     <table width="100%" style="margin-top: 20px;">
                         <tr style="display: flex; align-items: center; justify-content: space-between; width: 100%;">

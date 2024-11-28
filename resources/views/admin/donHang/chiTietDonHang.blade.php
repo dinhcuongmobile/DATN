@@ -9,19 +9,25 @@
           <div class="row mb-3">
               <div class="col-lg-6">
                 <h5 class="mb-3"><strong>Thông Tin Khách Hàng</strong></h5>
-                <p><strong>Tên Khách Hàng:</strong> {{ $donHang->user->ho_va_ten }}</p>
+                <p><strong>Tên Khách Hàng:</strong> {{ $diaChiNhanHang->ho_va_ten_nhan }}</p>
                   <p><strong>Mã Đơn Hàng:</strong> <span style="color: red">{{ $donHang->ma_don_hang }}</span></p>
-                  <p><strong>Địa Chỉ Nhận Hàng:</strong> {{ $donHang->diaChi->dia_chi }}</p>
-                  <p><strong>Phương Thức Thanh Toán:</strong> 
+                  <p><strong>Địa Chỉ Nhận Hàng:</strong>
+                        @if ($diaChiNhanHang->dia_chi_chi_tiet)
+                            {{$diaChiNhanHang->dia_chi_chi_tiet}} ,
+                        @endif
+                        {{$diaChiNhanHang->phuongXa->ten_phuong_xa}} ,
+                        {{$diaChiNhanHang->quanHuyen->ten_quan_huyen}} ,
+                        {{$diaChiNhanHang->tinhThanhPho->ten_tinh_thanh_pho}}.
+                    </p>
+                  <p><strong>Phương Thức Thanh Toán:</strong>
                     <span style="background-color: #f0f0f0; color: green; padding: 5px; border-radius: 9px;">
                       {{ $donHang->phuong_thuc_thanh_toan == 0 ? 'Thanh Toán Khi Nhận Hàng' : 'Chuyển Khoản' }}
                     </span>
                   </p>
                   <p><strong>Tổng Sản Phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} Sản Phẩm</p>
-                  <p><strong>Ghi Chú : </strong>{{$donHang->ghi_chu}} </p>
-              </div>
-              <div class="col-lg-6 text-right">
-                  <button class="btn btn-primary btn-sm">💬Chat</button>
+                  @if ($donHang->ghi_chu)
+                    <p><strong>Ghi Chú : </strong>{{$donHang->ghi_chu}} </p>
+                  @endif
               </div>
           </div>
           <!-- Thông tin thanh toán -->
@@ -56,41 +62,55 @@
                   </tbody>
                   <tfoot>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Tổng Tiền Sản Phẩm:</strong></td>
-                          <td>{{ number_format($tongTienSanPham, 0, ',', '.') }}đ</td>
+                          <td colspan="4" class="text-right"><strong>Tổng Tiền ({{$donHang->chiTietDonHangs->count()}} Sản Phẩm):</strong></td>
+                          <td>{{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Giảm Giá Vận Chuyển:</strong></td>
-                          <td>-{{ number_format($phiVanChuyen, 0, ',', '.') }}đ</td>
-                      </tr>
+                            <td colspan="4" class="text-right"><strong>Phí vận chuyển:</strong></td>
+                            <td>{{ number_format($phiShip, 0, ',', '.') }}đ</td>
+                        </tr>
+                      @if ($donHang->giam_gia_van_chuyen>0)
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Giảm Giá Vận Chuyển:</strong></td>
+                            <td>-{{ number_format($donHang->giam_gia_van_chuyen, 0, ',', '.') }}đ</td>
+                        </tr>
+                      @endif
+                      @if ($donHang->giam_gia_don_hang>0)
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Giảm Giá Đơn Hàng:</strong></td>
+                            <td>-{{ number_format($donHang->giam_gia_don_hang, 0, ',', '.') }}đ</td>
+                        </tr>
+                      @endif
+                      @if ($donHang->namad_xu>0)
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Namad-xu:</strong></td>
+                            <td>-{{ number_format($donHang->namad_xu, 0, ',', '.') }}đ</td>
+                        </tr>
+                      @endif
                       <tr>
-                          <td colspan="4" class="text-right"><strong>Giảm Giá Đơn Hàng:</strong></td>
-                          <td>-{{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</td>
-                      </tr>
-                      <tr>
+                        @php
+                            $thanhTien = $donHang->tong_thanh_toan + $phiShip - $donHang->giam_gia_van_chuyen - $donHang->giam_gia_don_hang - $donHang->namad_xu;
+                        @endphp
                           <td colspan="4" class="text-right"><strong>Tổng Thanh Toán:</strong></td>
-                          <td class="text-danger"><strong>{{ number_format($tongThanhToan, 0, ',', '.') }}đ</strong></td>
+                          <td class="text-danger"><strong>{{ number_format($thanhTien, 0, ',', '.') }}đ</strong></td>
                       </tr>
                   </tfoot>
               </table>
               <div class="col-lg-13 text-right">
                 @if ($donHang->trang_thai == 0)
                     {{-- Trạng thái chờ xác nhận --}}
-                    <form action="{{ route('don-hang.duyet-don-hang', $donHang->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-success btn-sm">Duyệt</button>
-                    </form>
-                    <form action="{{ route('don-hang.huy-don-hang', $donHang->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
-                    </form>
+                    <a href="{{ route('don-hang.duyet-don-hang', $donHang->id) }}" class="btn btn-success btn-sm">
+                        Duyệt
+                    </a>
+                    <a href="{{ route('don-hang.huy-don-hang', $donHang->id) }}" class="btn btn-danger btn-sm"
+                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                        Hủy
+                    </a>
                 @elseif ($donHang->trang_thai == 1)
                     {{-- Trạng thái chờ lấy hàng --}}
-                    <form action="{{ route('don-hang.yeu-cau-lay-hang', $donHang->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy hàng</button>
-                    </form>
+                    <a href="{{ route('don-hang.yeu-cau-lay-hang', $donHang->id) }}" class="btn btn-primary btn-sm">
+                        Yêu cầu đến lấy hàng
+                    </a>
                 @endif
                 <a href="{{ url()->previous() }}">
                     <button class="btn btn-secondary btn-sm">Quay Lại</button>

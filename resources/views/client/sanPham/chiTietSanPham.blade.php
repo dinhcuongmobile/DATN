@@ -139,6 +139,7 @@
                                     <a class="btn btn_outline sm" id="muaNgay" href="javascript:void(0)">Mua ngay</a>
                             </div>
                         </div>
+                        <p class="text-danger" id="errSL">Vui lòng xóa bớt số lượng sản phẩm này trong giỏ hàng để tiếp tục thêm !</p>
 
                         <div class="buy-box border-buttom">
                             <ul>

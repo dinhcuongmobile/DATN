@@ -108,8 +108,8 @@
                             </td>
                             <td class="col-1">GHTK</td>
                             <td>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
-                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
+                                    Xem Chi Tiết
                                   </a>
                             </td>
                         </tr>  

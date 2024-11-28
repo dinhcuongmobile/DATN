@@ -84,15 +84,9 @@
                                 <ul class="justify-content-end">
                                     <li> <button class="search-icon"><i class="iconsax"
                                                 data-icon="search-normal-2"></i></button></li>
-                                    <li> <a href="{{ route('tai-khoan.thong-tin-tai-khoan') }}"><i class="iconsax"
-                                                data-icon="heart"></i><span class="cart_qty_cls">
-                                                @if (Auth::check())
-                                                    {{ $tong_yeu_thich }}
-                                                @else
-                                                    0
-                                                @endif
-                                            </span></a></li>
-                                    <li><a href="#"><i class="iconsax" data-icon="user-2"></i></a></li>
+                                    <li> <a href="wishlist.html"><i class="iconsax" data-icon="heart"></i><span
+                                        class="cart_qty_cls">2</span></a></li>
+                                    <li><a><i class="iconsax" data-icon="user-2"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -592,8 +586,7 @@
                                         <input type="hidden" id="size-quick-view" value="">
                                         <ul id="selectSize-quick-view"></ul>
                                     </div>
-                                    <p class="text-danger" id="errSelect-quick-view">Vui lòng chọn phân loại hàng !
-                                    </p>
+                                    <p class="text-danger" id="errSelect-quick-view">Vui lòng chọn phân loại hàng ! </p>
                                     <h6 class="product-title">Số lượng</h6>
                                     <div class="quantity">
                                         <button class="minus" type="button" disabled> <i
@@ -603,6 +596,7 @@
                                         <button class="plus" type="button" disabled> <i
                                                 class="fa-solid fa-plus"></i> </button>
                                     </div>
+                                    <p class="text-danger" id="errSL-quick-view">Vui lòng xóa bớt số lượng sản phẩm này trong giỏ hàng để tiếp tục thêm !</p>
                                 </div>
                                 <input class="tokenThemGioHang" type="hidden" name="_token"
                                     value="{{ csrf_token() }}" />
