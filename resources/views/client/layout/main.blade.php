@@ -431,9 +431,15 @@
                                 <div class="footer-title d-md-block">
                                     <h5>Tài Khoản Của Tôi</h5>
                                     <ul class="footer-details accordion-hidden">
-                                        <li> <a class="nav" href="dashboard.html">Tài khoản của tôi</a></li>
-                                        <li> <a class="nav" href="login.html">Đăng nhập / Đăng ký</a></li>
-                                        <li> <a class="nav" href="cart.html">Giỏ hàng</a></li>
+                                        <li> <a class="nav"
+                                                href="{{ route('tai-khoan.thong-tin-tai-khoan') }}">Tài khoản của
+                                                tôi</a></li>
+                                        @if (!Auth::check())
+                                            <li> <a class="nav" href="{{ route('tai-khoan.dang-nhap') }}">Đăng
+                                                    nhập / Đăng ký</a></li>
+                                        @endif
+                                        <li> <a class="nav" href="{{ route('gio-hang.gio-hang') }}">Giỏ hàng</a>
+                                        </li>
                                         <li> <a class="nav" href="order-success.html">Lịch sử đơn hàng</a></li>
                                         <li> <a class="nav" href="{{ route('chinh-sach-bao-mat') }}">Chính sách
                                                 bảo mật</a></li>
