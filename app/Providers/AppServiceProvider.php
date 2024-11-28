@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
         //admin
         View::composer('admin.layout.main', function ($view) {
             // Lấy dữ liệu từ model
-            $sub=DonHang::where('trang_thai',0)->count();
+            $sub=DonHang::where('trang_thai',0)->count(); 
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });
