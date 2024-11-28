@@ -202,21 +202,38 @@ class DonHangAdminController extends Controller
 
     // In hóa đơn
     public function inHoaDon($id) {
-        return view('admin.donHang.hoaDon');
+        $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($id);
+        $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
+
+        return view('admin.donHang.hoaDon', [
+            'donHang' => $donHang,
+            'tongTienSanPham' => $tongTienSanPham,
+            'giam_gia_van_chuyen' => $donHang->giam_gia_van_chuyen,
+            'giam_gia_don_hang' => $donHang->giam_gia_don_hang,
+            'tong_thanh_toan' => $donHang->tong_thanh_toan
+        ]);
     }
     //In Hàng Loạt
-    public function inHoaDonHangLoat()
-    {
-        return view('admin.donHang.inHoaDonHangLoat');
-    }
+    public function inHoaDonHangLoat() {
+        $donHangs = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('trang_thai', 1)
+            ->get();
 
-    // Hủy đơn hàng
-    public function huyDonHang(int $id) {
-        $donHang = DonHang::findOrFail($id);
-        $donHang->trang_thai = 4; // 5 là trạng thái Đã Hủy
-        $donHang->save();
+        $tongTienSanPham = $donHangs->reduce(function ($carry, $donHang) {
+            return $carry + $donHang->chiTietDonHangs->sum('thanh_tien');
+        }, 0);
 
-        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được hủy thành công.');
+        $giam_gia_van_chuyen = $donHangs->sum('giam_gia_van_chuyen');
+        $giam_gia_don_hang = $donHangs->sum('giam_gia_don_hang');
+        $tong_thanh_toan = $donHangs->sum('tong_thanh_toan');
+
+        return view('admin.donHang.inHoaDonHangLoat', [
+            'donHangs' => $donHangs,
+            'tongTienSanPham' => $tongTienSanPham,
+            'giam_gia_van_chuyen' => $giam_gia_van_chuyen,
+            'giam_gia_don_hang' => $giam_gia_don_hang,
+            'tong_thanh_toan' => $tong_thanh_toan
+        ]);
     }
 
 }

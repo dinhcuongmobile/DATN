@@ -106,8 +106,8 @@
                                 <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">Duyệt</a>
                                 <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn hủy đơn này')">Hủy</a>
                                 <hr>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}"> 
-                                    <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button> 
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
+                                    Xem Chi Tiết
                                   </a> 
                             </td>
                         </tr>  

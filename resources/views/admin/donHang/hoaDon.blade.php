@@ -141,10 +141,10 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                {{ number_format($phiVanChuyen, 0, ',', '.') }}đ</h5>
+                                                -{{ number_format($giam_gia_van_chuyen, 0, ',', '.') }}đ</h5>
                                             <h5
                                                 style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                {{ number_format($giamGiaDonHang, 0, ',', '.') }}đ</h5>
+                                                -{{ number_format($giam_gia_don_hang, 0, ',', '.') }}đ</h5>
                                         </td>
                                     </tr>
                                     <tr
@@ -158,7 +158,7 @@
                                         <td>
                                             <h5
                                                 style="margin: 0%; font-size: 19px; text-align: start; line-height: 1; color: #fff;">
-                                                {{ number_format($tongThanhToan, 0, ',', '.') }}đ
+                                                {{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ
                                             </h5>
                                         </td>
                                     </tr>
