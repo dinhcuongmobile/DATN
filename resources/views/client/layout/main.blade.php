@@ -292,14 +292,8 @@
                                 <li> <button href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
                                         aria-controls="offcanvasTop"><i class="iconsax"
                                             data-icon="search-normal-2"></i></button></li>
-                                <li> <a href="{{ route('tai-khoan.thong-tin-tai-khoan', Auth::id()) }}"><i
-                                            class="iconsax" data-icon="heart"></i><span class="cart_qty_cls">
-                                            @if (Auth::check())
-                                                {{ $tong_yeu_thich }}
-                                            @else
-                                                0
-                                            @endif
-                                        </span></a></li>
+                                <li> <a href="wishlist.html"><i class="iconsax" data-icon="heart"></i><span
+                                    class="cart_qty_cls">2</span></a></li>
                                 <li class="onhover-div"><a href="#"><i class="iconsax"
                                             data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
