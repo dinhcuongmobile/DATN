@@ -63,7 +63,7 @@
                   <tfoot>
                       <tr>
                           <td colspan="4" class="text-right"><strong>Tổng Tiền ({{$donHang->chiTietDonHangs->count()}} Sản Phẩm):</strong></td>
-                          <td>{{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ</td>
+                          <td>{{ number_format($chiTiet->thanh_tien, 0, ',', '.') }}đ</td>
                       </tr>
                       <tr>
                             <td colspan="4" class="text-right"><strong>Phí vận chuyển:</strong></td>
@@ -88,11 +88,8 @@
                         </tr>
                       @endif
                       <tr>
-                        @php
-                            $thanhTien = $donHang->tong_thanh_toan + $phiShip - $donHang->giam_gia_van_chuyen - $donHang->giam_gia_don_hang - $donHang->namad_xu;
-                        @endphp
                           <td colspan="4" class="text-right"><strong>Tổng Thanh Toán:</strong></td>
-                          <td class="text-danger"><strong>{{ number_format($thanhTien, 0, ',', '.') }}đ</strong></td>
+                          <td class="text-danger"><strong>{{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ</strong></td>
                       </tr>
                   </tfoot>
               </table>
