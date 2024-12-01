@@ -54,20 +54,26 @@
                                 <h4 style="margin: 0 0 10px; line-height: 1.3; color: #222; text-transform: uppercase;">Địa Chỉ :</h4>
                                 <h5
                                     style="margin: 0%; line-height: 1.3; letter-spacing: 0.3px; color: #222; font-size: 15px; font-weight: 500;">
-                                    11234 Elm Street,</h5>
+                                    @if ($diaChiNhanHang->dia_chi_chi_tiet)
+                                    {{$diaChiNhanHang->dia_chi_chi_tiet}} ,
+                                    @endif
+                                </h5>
                                 <h5
                                     style="margin: 0%; line-height: 1.3; letter-spacing: 0.3px; color: #222;
                                     font-size: 15px; font-weight: 500;">
-                                    Springfield, IL 62704,</h5>
+                                    {{$diaChiNhanHang->phuongXa->ten_phuong_xa}} ,
+                                    {{$diaChiNhanHang->quanHuyen->ten_quan_huyen}} ,
+                                    </h5>
                                 <h5
                                     style="margin: 0%; line-height: 1.3; letter-spacing: 0.3px; color: #222;
                                     font-size: 15px; font-weight: 500;">
-                                    OrUnited States 30576-9122</h5>
+                                    {{$diaChiNhanHang->tinhThanhPho->ten_tinh_thanh_pho}}.
+                                </h5>
                             </td>
                             <td style="width: 50%; padding:15px 20px; text-align: end;">
                                 <h6 style="margin: 0%; font-size: 17px; text-transform: capitalize; font-weight: 600; color: #222; line-height: 1.4;">Ngày Đặt :
                                     <span style=" line-height: 1.4; font-size: 15px; font-weight: 400; color: #222;">
-                                        {{ \Carbon\Carbon::parse($donHang->created_at)->format('d-m-Y')}}</span>
+                                        {{ \Carbon\Carbon::parse($donHang->ngay_cap_nhat)->format('d-m-Y')}}</span>
                                 </h6>
                                 <h6 style="margin: 0; font-size: 17px; text-transform: capitalize; font-weight: 600; color: #222; ">
                                     Tên : <span style="line-height: 1.4; font-size: 15px; font-weight: 400; color: #222; text-transform: uppercase;">{{$donHang->user->ho_va_ten}}</span>
@@ -131,33 +137,65 @@
                                     <tr style="display: flex; justify-content: space-between; text-align: end;">
                                         <td>
                                             <h5
-                                                style="margin: 0%; font-size: 16px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
-                                                Giá Vận Chuyển :</h5>
-                                            <h5
-                                                style="margin: 0%; font-size: 16px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
-                                                Khuyến Mại :
+                                                style="margin: 0%; font-size: 14px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
+                                                Phí Vận Chuyển:
                                             </h5>
+                                            @if ($donHang->giam_gia_van_chuyen>0)
+                                            <h5
+                                                style="margin: 0%; font-size: 14px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
+                                                Giảm Vận Chuyển:
+                                            </h5>
+                                            @endif
+                                            @if ($donHang->giam_gia_don_hang>0)
+                                            <h5
+                                                style="margin: 0%; font-size: 14px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
+                                                Khuyến Mại:
+                                            </h5>
+                                            @endif
+                                            @if ($donHang->giam_gia_don_hang>0)
+                                            <h5
+                                                style="margin: 0%; font-size: 14px; line-height: 1.5; color: #6e6d6d; text-transform: capitalize;">
+                                                Namad-Xu:
+                                            </h5>
+                                            @endif
                                         </td>
                                         <td>
                                             <h5
-                                                style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                -{{ number_format($giam_gia_van_chuyen, 0, ',', '.') }}đ</h5>
+                                                style="margin: 0%; font-size: 14px; text-align: start; line-height: 1.5;">
+                                                {{ number_format($phiShip, 0, ',', '.') }}đ
+                                            </h5>
+                                            @if ($donHang->giam_gia_van_chuyen>0)
                                             <h5
-                                                style="margin: 0%; font-size: 17px; text-align: start; line-height: 1.5;">
-                                                -{{ number_format($giam_gia_don_hang, 0, ',', '.') }}đ</h5>
+                                                style="margin: 0%; font-size: 14px; text-align: start; line-height: 1.5;">
+                                                -{{ number_format($donHang->giam_gia_van_chuyen, 0, ',', '.') }}đ
+                                            </h5>
+                                            @endif
+                                            @if ($donHang->giam_gia_don_hang>0)
+                                            <h5
+                                                style="margin: 0%; font-size: 14px; text-align: start; line-height: 1.5;">
+                                                -{{ number_format($donHang->giam_gia_don_hang, 0, ',', '.') }}đ
+                                            </h5>
+                                            @endif
+                                            @if ($donHang->namad_xu>0)
+                                            <h5
+                                                style="margin: 0%; font-size: 14px; text-align: start; line-height: 1.5;">
+                                                -{{ number_format($donHang->namad_xu, 0, ',', '.') }}đ
+                                            </h5>
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr
                                         style="display: flex; justify-content: space-between; background-color: #cca270; text-align: end; margin-top: 10px;">
                                         <td>
+                                            
                                             <h5
-                                                style="margin: 0%; font-size: 18px; line-height: 1; text-transform: capitalize; color: #fff;">
+                                                style="margin: 0%; font-size: 16px; line-height: 1; text-transform: capitalize; color: #fff;">
                                                 Thành Tiền:
                                             </h5>
                                         </td>
                                         <td>
                                             <h5
-                                                style="margin: 0%; font-size: 19px; text-align: start; line-height: 1; color: #fff;">
+                                                style="margin: 0%; font-size: 16px; text-align: start; line-height: 1; color: #fff;">
                                                 {{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ
                                             </h5>
                                         </td>

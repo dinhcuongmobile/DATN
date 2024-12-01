@@ -203,37 +203,50 @@ class DonHangAdminController extends Controller
     // In hóa đơn
     public function inHoaDon($id) {
         $donHang = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])->findOrFail($id);
-        $tongTienSanPham = $donHang->chiTietDonHangs->sum('thanh_tien');
-
+        $diaChiNhanHang = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($donHang->dia_chi_id);
+        $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
+                            ->where('ma_quan_huyen', $diaChiNhanHang->ma_quan_huyen)
+                            ->first();
         return view('admin.donHang.hoaDon', [
             'donHang' => $donHang,
-            'tongTienSanPham' => $tongTienSanPham,
-            'giam_gia_van_chuyen' => $donHang->giam_gia_van_chuyen,
-            'giam_gia_don_hang' => $donHang->giam_gia_don_hang,
-            'tong_thanh_toan' => $donHang->tong_thanh_toan
+            'diaChiNhanHang' => $diaChiNhanHang,
+            'phiShip' => $phi_ships ? $phi_ships->phi_ship : 0
         ]);
     }
     //In Hàng Loạt
-    public function inHoaDonHangLoat() {
-        $donHangs = DonHang::with(['chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+    public function inHoaDonHangLoat()
+    {
+        $donHangs = DonHang::with([
+            'chiTietDonHangs.sanPham',
+            'chiTietDonHangs.bienThe',
+            'diaChi.phuongXa',
+            'diaChi.quanHuyen',
+            'diaChi.tinhThanhPho',
+        ])
             ->where('trang_thai', 1)
+            ->orderBy('ngay_cap_nhat', 'desc')
             ->get();
 
-        $tongTienSanPham = $donHangs->reduce(function ($carry, $donHang) {
-            return $carry + $donHang->chiTietDonHangs->sum('thanh_tien');
-        }, 0);
-
-        $giam_gia_van_chuyen = $donHangs->sum('giam_gia_van_chuyen');
-        $giam_gia_don_hang = $donHangs->sum('giam_gia_don_hang');
-        $tong_thanh_toan = $donHangs->sum('tong_thanh_toan');
-
+        foreach ($donHangs as $donHang) {
+            $diaChiNhanHang = DiaChi::find($donHang->dia_chi_id);
+            $phiShip = PhiShip::where('ma_quan_huyen', $diaChiNhanHang->ma_quan_huyen)->first();
+            $donHang->phi_ship = $phiShip ? $phiShip->phi_ship : 0;
+        }
         return view('admin.donHang.inHoaDonHangLoat', [
             'donHangs' => $donHangs,
-            'tongTienSanPham' => $tongTienSanPham,
-            'giam_gia_van_chuyen' => $giam_gia_van_chuyen,
-            'giam_gia_don_hang' => $giam_gia_don_hang,
-            'tong_thanh_toan' => $tong_thanh_toan
         ]);
     }
-
+    // Hủy đơn hàng
+    public function huyDonHang(int $id)
+    {
+        try {
+            // Tìm đơn hàng và cập nhật trạng thái
+            $donHang = DonHang::findOrFail($id);
+            $donHang->trang_thai = 4;
+            $donHang->save();
+            return redirect(url()->previous())->with('success', 'Đơn hàng đã được hủy thành công.');
+        } catch (Exception $e) {
+            return redirect(url()->previous())->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+        }
+    }
 }

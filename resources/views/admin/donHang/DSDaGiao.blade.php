@@ -1,7 +1,6 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
 <div class="container-fluid">  
-    
     <h1 class="h3 mb-2 text-gray-800">Danh Sách Đã Giao ({{ $donHangs->count() }})</h1>  
     @if (session('success'))
             <div class="alert alert-success" id="error-alert">
@@ -106,7 +105,9 @@
                             <td class="col-2">
                                 {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
                             </td>
-                            <td class="col-1">GHTK</td>
+                            <td class="col-1">
+                                <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
+                            </td>
                             <td>
                                   <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
                                     Xem Chi Tiết
