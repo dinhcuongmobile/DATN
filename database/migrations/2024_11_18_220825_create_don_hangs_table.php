@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('namad_xu')->default(0);
             $table->double('tong_thanh_toan', 20, 2);
             $table->integer('phuong_thuc_thanh_toan')->default(0)->comment('0. ship cod, 1. Chuyển khoản');
-            $table->integer('trang_thai')->default(0)->comment('0. chưa duyệt 1.Đang chuẩn bị hàng 2. Đang giao 3. Đã giao 4. Đã hủy 5. Trả hàng/Hoàn tiền');
+            $table->integer('trang_thai')->default(0)->comment('0. chưa duyệt 1.Đang chuẩn bị hàng 2. Đang giao 3. Đã giao 4. Đã hủy');
             $table->integer('thanh_toan')->default(0)->comment('0. Chưa thanh toán, 1. Đã thanh toán');
             $table->text('ghi_chu')->nullable();
             $table->date('ngay_tao')->nullable();

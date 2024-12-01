@@ -22,6 +22,37 @@
     color: #999;
 }
 
+/* danh mục */
+.section-t-space {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.fashion-images-slide {
+    display: flex;
+    gap: 50px; /* Khoảng cách giữa các danh mục */
+}
+
+.fashion-box {
+    text-align: center; /* Đảm bảo căn giữa từng danh mục */
+}
+
+.category-img {
+    width: 250px; /* Tăng kích thước ảnh */
+    height: 250px;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    border-radius: 50%; /* Làm tròn ảnh */
+    margin-bottom: 15px;
+}
+
+.category-title {
+    font-size: 18px; /* Tăng kích thước chữ */
+    font-weight: bold;
+    color: #333; /* Màu chữ */
+}
+/* end danh mục */
+
 /* div chat */
 .chat-container {
     height: 400px;

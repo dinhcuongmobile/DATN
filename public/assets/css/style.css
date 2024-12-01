@@ -20,20 +20,6 @@
   --border: 238, 238, 238
 }
 
-/* Thống Kê Admin */
-.card {
-  border-radius: 10px;
-}
-
-.nav-pills .nav-link.active {
-  background-color: #4e73df;
-  color: white;
-}
-
-.table th, .table td {
-  vertical-align: middle;
-}
-/* End Thống Kê */
 :root .layout-2 {
   --theme-default: 238, 144, 81
 }

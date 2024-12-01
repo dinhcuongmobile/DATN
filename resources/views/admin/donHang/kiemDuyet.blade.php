@@ -32,7 +32,7 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
+                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Các Đơn Đã Chọn</button> 
                 </div>
         </div> 
     </div>

@@ -55,51 +55,21 @@
         <div class="container-fluid fashion-images">
             <div class="swiper fashion-images-slide">
                 <div class="swiper-wrapper ratio_square-2">
+                    @foreach ($danh_mucs as $item)
                     <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/1.png" alt=""></a></div>
-                        <h5>Top Wear</h5>
+                        <div class="fashion-box text-center">
+                            <a href="{{route('san-pham.san-pham-danh-muc', $item->id)}}" class="category-link">
+                                <img class="img-fluid category-img" src="{{Storage::url($item->hinh_anh)}}" alt="danhmuc">
+                                <h5 class="category-title">{{$item->ten_danh_muc}}</h5>
+                            </a>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/2.png" alt=""></a></div>
-                        <h5>dresses</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/3.png" alt=""></a></div>
-                        <h5>bottom</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/4.png" alt=""></a></div>
-                        <h5>inner/sleep</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/5.png" alt=""></a></div>
-                        <h5>footwear</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/6.png" alt=""></a></div>
-                        <h5>sports/active</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/7.png" alt=""></a></div>
-                        <h5>Mini dresses</h5>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="fashion-box"><a href="#"> <img class="img-fluid"
-                                    src="../assets/images/fashion/category/3.png" alt=""></a></div>
-                        <h5>footwear</h5>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
-
+    
     {{-- container --}}
     <section class="section-t-space">
         <div class="custom-container container product-contain">
@@ -385,8 +355,8 @@
                 <div class="col-xl-9">
                     <div class="row g-4">
                         <div class="col-md-5">
-                            <div class="best-seller-img ratio_square-3"><a href="collection-left-sidebar.html"> <img
-                                        class="bg-img" src="../assets/images/layout-4/main-category/1.png"
+                            <div class="best-seller-img ratio_square-3"><a href="{{route('san-pham.san-pham')}}"> <img
+                                        class="bg-img" src="{{asset('assets/images/layout-4/Bo-Suu-Tap1.png')}}"
                                         alt=""></a>
                             </div>
                         </div>
@@ -397,17 +367,17 @@
                                 <h4>Mua hàng trực tuyến</h4>
                                 <div class="link-hover-anim underline"><a
                                         class="btn btn_underline link-strong link-strong-unhovered"
-                                        href="collection-left-sidebar.html">Bộ sưu tập</a><a
+                                        href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a><a
                                         class="btn btn_underline link-strong link-strong-hovered"
-                                        href="collection-left-sidebar.html">Bộ sưu tập</a></div>
-                            </div><a href="collection-left-sidebar.html"> <img class="bg-img"
-                                    src="../assets/images/layout-4/main-category/2.jpg" alt=""></a>
+                                        href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a></div>
+                            </div><a href="{{route('san-pham.san-pham')}}"> <img class="bg-img"
+                                    src="{{asset('assets/images/layout-4/Bo-Suu-Tap2.png')}}" alt=""></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-3 d-none d-xl-block">
                     <div class="best-seller-box">
-                        <div class="offer-banner"><a href="collection-left-sidebar.html">
+                        <div class="offer-banner"><a href="{{route('san-pham.san-pham')}}">
                                 <h2>Giảm thêm 15%</h2><span> </span>
                                 <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.
                                 </p>
@@ -416,12 +386,12 @@
                                 </div>
                             </a></div>
                         <div class="best-seller-content">
-                            <h3>Làm bạn thoải mái và sang trọng</h3><span> </span>
+                            <h3>tinh tế và trẻ trung</h3><span> </span>
                             <div class="link-hover-anim underline"><a
                                     class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a>
+                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
                                 <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="collection-left-sidebar.html">Bộ sưu tập</a>
+                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
                             </div>
                         </div>
                     </div>
@@ -518,78 +488,25 @@
             </div>
             <div class="swiper blog-slide">
                 <div class="swiper-wrapper">
+                    @foreach ($tin_tucs as $item)
                     <div class="swiper-slide">
                         <div class="blog-main">
-                            <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                        class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a>
+                            <div class="blog-box ratio3_2"><a class="blog-img" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}"><img
+                                        class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt=""></a>
                             </div>
                             <div class="blog-txt">
-                                <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                    <h5>Many desktop publishing pack-ages abd page editor...</h5>
+                                <p>{{\Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</p><a href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">
+                                    <h5>{{$item->tieu_de}}</h5>
                                 </a>
-                                <div class="link-hover-anim underline"><a
-                                        class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                        More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                        More</a>
+                                <br>
+                                <div class="link-hover-anim underline">
+                                    <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm</a>
+                                    <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog-main">
-                            <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                        class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a>
-                            </div>
-                            <div class="blog-txt">
-                                <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                    <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                                </a>
-                                <div class="link-hover-anim underline"><a
-                                        class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                        More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                        More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog-main">
-                            <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                        class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a>
-                            </div>
-                            <div class="blog-txt">
-                                <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                    <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                                </a>
-                                <div class="link-hover-anim underline"><a
-                                        class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                        More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                        More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="blog-main">
-                            <div class="blog-box ratio3_2"><a class="blog-img" href="blog-details.html"><img
-                                        class="bg-img" src="../assets/images/blog/layout-4/1.jpg" alt=""></a>
-                            </div>
-                            <div class="blog-txt">
-                                <p>By: Admin / 26th aug 2020</p><a href="blog-details.html">
-                                    <h5>Many desktop publishing pack-ages abd page editor...</h5>
-                                </a>
-                                <div class="link-hover-anim underline"><a
-                                        class="btn btn_underline link-strong link-strong-unhovered" href="#">Read
-                                        More</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered" href="#">Read
-                                        More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                  
+                    @endforeach
                 </div>
             </div>
         </div>
