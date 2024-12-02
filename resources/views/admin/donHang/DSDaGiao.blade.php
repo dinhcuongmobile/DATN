@@ -97,8 +97,6 @@
                                         Đã Giao
                                     @elseif($item->trang_thai == 4)
                                         Đã Hủy
-                                    @else
-                                        Trả Hàng/Hoàn Tiền
                                     @endif
                                 </span></p>
                             </td>

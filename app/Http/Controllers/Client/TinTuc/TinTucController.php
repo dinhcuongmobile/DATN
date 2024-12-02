@@ -29,7 +29,6 @@ class TinTucController extends Controller
         //phân trang
         $perPage = 5;
         $tin_tucs = TinTuc::paginate($perPage);
-        //
 
         return view('client.tinTuc.tinTuc', $this->views);
     }
@@ -40,7 +39,7 @@ class TinTucController extends Controller
         $this->views['tin_tucs'] = $this->tin_tucs->loadAllTinTuc();
         $this->views['danh_muc_tin_tucs'] = DanhMucTinTuc::all();
         $this->views['tin_tuc_gan_day'] = $this->tin_tucs->loadTinTucGanDay();
-        //
+
         return view('client.tinTuc.chiTietTinTuc', $this->views);
     }
 
@@ -50,7 +49,7 @@ class TinTucController extends Controller
         $this->views['danh_muc'] = DanhMucTinTuc::find($danhMucId);
         $this->views['danh_muc_tin_tucs'] = DanhMucTinTuc::all();
         $this->views['tin_tuc_gan_day'] = $this->tin_tucs->loadTinTucGanDay();
-        //
+
         return view('client.tinTuc.tinTucDanhMuc', $this->views);
     }
 }
