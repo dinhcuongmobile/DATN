@@ -17,6 +17,8 @@ class DanhMucTinTuc extends Model
         'ten_danh_muc',
     ];
 
+    public $timestamp = false;
+    
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'

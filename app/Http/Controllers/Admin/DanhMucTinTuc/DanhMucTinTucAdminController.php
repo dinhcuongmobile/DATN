@@ -21,7 +21,7 @@ class DanhMucTinTucAdminController extends Controller
     public function showDanhSach(Request $request){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMucTinTuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMucTinTuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
             $this->views['DSDanhmuc'] = DanhMucTinTuc::orderBy('id', 'desc')->paginate(10);
         }
@@ -94,7 +94,7 @@ class DanhMucTinTucAdminController extends Controller
             $tin_tucs=TinTuc::where('danh_muc_id',$danh_muc_tin_tuc->id)->get();
             if($tin_tucs->isNotEmpty()){
                 foreach ($tin_tucs as $item) {
-                
+
                     $item->forceDelete();
                 }
             }
@@ -107,16 +107,15 @@ class DanhMucTinTucAdminController extends Controller
     public function xoaNhieuDanhMuc(Request $request){
         if($request->select){
             foreach($request->select as $id){
-                $danh_muc_tin_tuc=DanhMucTinTuc::find($id);
-                if($danh_muc_tin_tuc){
-                    $tin_tucs=TinTuc::where('danh_muc_id',$danh_muc_tin_tuc->id)->get();
+                $danh_muc=DanhMucTinTuc::find($id);
+                if($danh_muc){
+                    $tin_tucs=TinTuc::where('danh_muc_id',$danh_muc->id)->get();
                     if($tin_tucs->isNotEmpty()){
                         foreach ($tin_tucs as $item) {
-                            
-                            $item->forceDelete();
+                            $item->delete();
                         }
                     }
-                    $danh_muc_tin_tuc->delete();
+                    $danh_muc->delete();
                 }else{
                     return redirect()->route('danh-muc-tin-tuc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
                 }

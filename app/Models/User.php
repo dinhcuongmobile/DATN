@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(YeuThich::class, 'user_id');
     }
+
+    public function tinTuc()
+    {
+        return $this->hasMany(TinTuc::class, 'nguoi_dang');
+    }
 }

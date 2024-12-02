@@ -269,7 +269,7 @@
                                 <li> <a class="nav-link" href="{{ route('tin-tuc.tin-tuc') }}">Tin Tức<span> <i
                                                 class="fa-solid fa-angle-down"></i></span></a>
                                     <ul class="nav-submenu">
-                                        @foreach ($danh_muc_tin_tucs as $item)
+                                        @foreach ($danhMucTinTuc as $item)
                                             <li> <a
                                                     href="{{ route('tin-tuc.tin-tuc-danh-muc', $item->id) }}">{{ $item->ten_danh_muc }}</a>
                                             </li>

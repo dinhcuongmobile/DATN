@@ -339,7 +339,7 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
 
         //delete
         Route::get('delete/{id}', [DanhMucTinTucAdminController::class, 'delete'])->name('danh-muc-tin-tuc.delete');
-        Route::post('xoa-nhieu', [DanhMucTinTucAdminController::class, 'xoaNhieuTinTuc'])->name('danh-muc-tin-tuc.xoa-nhieu');
+        Route::post('xoa-nhieu', [DanhMucTinTucAdminController::class, 'xoaNhieuDanhMuc'])->name('danh-muc-tin-tuc.xoa-nhieu');
 
         Route::get('danh-sach-danh-muc-tin-tuc-da-xoa', [DanhMucTinTucAdminController::class, 'danhSachDanhMucDaXoa'])->name('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa');
 

@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded',function(){
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     tabDonMua();
     activeDonHang();
     activeTabDonMua("activeTabDaHuy", "tap6");
@@ -109,7 +111,8 @@ function chiTietDonMua(){
                     },
                     success: function (response) {
                         if(response.success){
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            document.documentElement.scrollTop = 0;
+                            document.body.scrollTop = 0;
 
                             let donHang = response.don_hang;
                             let diaChi = response.dia_chi;

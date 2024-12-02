@@ -45,8 +45,14 @@ document.querySelectorAll(".address-option #address-billing-0").forEach(function
                 document.querySelector('.tongPhiVanChuyen').textContent = "0đ";
                 document.querySelector('.giamTienVanChuyen').textContent = "0đ";
                 document.querySelector('.tongThanhToan').textContent = "0đ";
+                const namadXuActive = document.querySelector('.divTongCoin div.active');
+                let namadXu=0;
+                if(namadXuActive){
+                    namadXu = parseInt(document.querySelector('.divTongCoin .tongCoin').textContent);
+                }
+
                 const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
-                document.querySelectorAll('#popup-voucher input[name="ma_giam_gia_van_chuyen"]').forEach((input) => {
+                document.querySelectorAll('#popup-voucher input[type="radio"][name="ma_giam_gia_van_chuyen"]').forEach((input) => {
                     input.checked = false;
                 });
 
@@ -62,11 +68,11 @@ document.querySelectorAll(".address-option #address-billing-0").forEach(function
                     document.querySelector('.tongPhiVanChuyen').textContent = `${tongPhiVanChuyen.toLocaleString('vi-VN')}đ`;
 
                     // Cập nhật tổng tiền thanh toán
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen - namadXu).toLocaleString('vi-VN')}đ`;
 
                 } else {
                     const giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.]/g, '')) || 0;
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + giamTienDonHang).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + giamTienDonHang - namadXu).toLocaleString('vi-VN')}đ`;
                     document.querySelector('#tienPhiShip').textContent = "0đ";
                 }
             },
@@ -151,7 +157,11 @@ function chonMaKhuyenMai() {
                 if (response.success) {
                     const phiShipGoc = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
                     const thanhTienGoc = parseFloat(document.querySelector('.summary-total .thanhTien').textContent.replace(/[đ,.]/g, '')) || 0;
-
+                    const namadXuActive = document.querySelector('.divTongCoin div.active');
+                    let namadXu=0;
+                    if(namadXuActive){
+                        namadXu = parseInt(document.querySelector('.divTongCoin .tongCoin').textContent);
+                    }
                     // Cập nhật giảm giá vận chuyển
                     let tienGiamGiaVanChuyen = 0;
                     if (response.giamGiaVanChuyen) {
@@ -173,7 +183,7 @@ function chonMaKhuyenMai() {
                     // Cập nhật tổng tiền thanh toán
                     const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
                     const tongPhiVanChuyen = parseFloat(document.querySelector('.tongPhiVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen - namadXu).toLocaleString('vi-VN')}đ`;
 
                     // Đóng popup
                     $('#popup-voucher').modal('hide');

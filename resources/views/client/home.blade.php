@@ -54,7 +54,7 @@
     <section class="section-t-space">
         <div class="container-fluid fashion-images">
             <div class="swiper fashion-images-slide">
-                <div class="swiper-wrapper ratio_square-2">
+                <div class="swiper-wrapper ratio_square-2" style="justify-content: center;">
                     @foreach ($danh_mucs as $item)
                     <div class="swiper-slide">
                         <div class="fashion-box text-center">
@@ -69,7 +69,7 @@
             </div>
         </div>
     </section>
-    
+
     {{-- container --}}
     <section class="section-t-space">
         <div class="custom-container container product-contain">
@@ -481,6 +481,7 @@
             </div>
         </section>
     @endif
+    {{-- tin tuc  --}}
     <section class="section-t-space">
         <div class="custom-container container">
             <div class="title">
@@ -489,28 +490,29 @@
             <div class="swiper blog-slide">
                 <div class="swiper-wrapper">
                     @foreach ($tin_tucs as $item)
-                    <div class="swiper-slide">
-                        <div class="blog-main">
-                            <div class="blog-box ratio3_2"><a class="blog-img" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}"><img
-                                        class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt=""></a>
-                            </div>
-                            <div class="blog-txt">
-                                <p>{{\Carbon\Carbon::parse($item->created_at)->format('d-m-Y')}}</p><a href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">
-                                    <h5>{{$item->tieu_de}}</h5>
-                                </a>
-                                <br>
-                                <div class="link-hover-anim underline">
-                                    <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm</a>
-                                    <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.tin-tuc')}}">Xem Thêm</a>
-                                </div>
+                    <div class="swiper-slide blog-main">
+                        <div class="blog-box ratio3_2">
+                            <a class="blog-img" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">
+                                <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="err">
+                            </a>
+                        </div>
+                        <div class="blog-txt">
+                            <p>By: {{$item->user->ho_va_ten?$item->user->ho_va_ten:'Admin'}} / {{ \Carbon\Carbon::parse($item->ngay_dang)->format('F j, Y') }}</p>
+                            <a href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">
+                                <h5>{!! Str::limit(strip_tags($item->noi_dung), 60, '...') !!}</h5>
+                            </a>
+                            <div class="link-hover-anim underline">
+                                <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Read More</a>
+                                <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Read More</a>
                             </div>
                         </div>
-                    </div>                  
+                    </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </section>
+    {{-- end tin tuc  --}}
     <section class="section-t-space instashop-section mb-5">
         <div class="container-fluid">
             <div class="row row-cols-xl-5 row-cols-md-4 row-cols-2 ratio_square-1">
