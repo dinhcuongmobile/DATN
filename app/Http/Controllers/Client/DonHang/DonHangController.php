@@ -25,7 +25,7 @@ class DonHangController extends Controller
 
     public function showChiTietDonHang(Request $request){
         $donHangId = $request->input('donHangId');
-        $don_hang = DonHang::with('user','diaChi','chiTietDonHangs','donHangHoan')->find($donHangId);
+        $don_hang = DonHang::with('user','diaChi','chiTietDonHangs')->find($donHangId);
         $dia_chi = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($don_hang->dia_chi_id);
         $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHangId)->orderBy('id','desc')->get();
         $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
@@ -53,7 +53,7 @@ class DonHangController extends Controller
         DB::beginTransaction();
         try {
             $don_hang_id = $request->input('don_hang_id');
-            $don_hang = DonHang::with('user','diaChi','chiTietDonHangs','donHangHoan')->find($don_hang_id);
+            $don_hang = DonHang::with('user','diaChi','chiTietDonHangs')->find($don_hang_id);
             if($don_hang){
                 $don_hang->update([
                     'trang_thai' => 4,
@@ -72,7 +72,7 @@ class DonHangController extends Controller
 
     public function showModalDanhGia(Request $request){
         $don_hang_id = $request->input('don_hang_id');
-        $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs', 'donHangHoan')->find($don_hang_id);
+        $don_hang = DonHang::with('user', 'diaChi', 'chiTietDonHangs')->find($don_hang_id);
 
         $subQuery = ChiTietDonHang::selectRaw('MIN(id) as id')
             ->where('don_hang_id', $don_hang_id)

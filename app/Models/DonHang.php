@@ -56,8 +56,4 @@ class DonHang extends Model
         return $this->hasMany(DanhGia::class, 'don_hang_id');
     }
 
-    public function donHangHoan()
-    {
-        return $this->hasMany(DonHangHoan::class, 'don_hang_id');
-    }
 }
