@@ -432,28 +432,51 @@
     </footer>
 
     @if (Auth::check())
-        {{-- Chát trực tiếp --}}
-        <div class="chat-button" id="chatButton" onclick="toggleChat()">
-            <span class="chat-icon">💬</span>
-        </div>
-
-        <div class="chat-container" id="chatContainer">
-            <div class="chat-header">
-                <h3>Gửi tin nhắn</h3>
-                <button class="btn-close" type="button" onclick="closeChat()"></button>
+        @if (Auth::user()->vai_tro_id==3)
+            {{-- Chát trực tiếp --}}
+            <div class="chat-button" id="chatButton" onclick="toggleChat()">
+                <span class="chat-icon">💬</span>
             </div>
 
-            <div class="chat-messages" id="chatMessages">
-                <!-- Tin nhắn sẽ được load ở đây -->
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-header">
+                    <h3>Gửi tin nhắn</h3>
+                    <button class="btn-close" type="button" onclick="closeChat()"></button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Tin nhắn sẽ được load ở đây -->
+                </div>
+
+                <div class="chat-input" data-id="{{ Auth::user()->id }}">
+                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
+                    <button onclick="sendMessage()">Gửi</button>
+                </div>
+            </div>
+            <script src="{{ asset('assets/js/chat.js') }}"></script>
+            {{-- END Chát trực tiếp --}}
+        @else
+            <div class="chat-button" id="chatButton" onclick="toggleChat()">
+                <span class="chat-icon">💬</span>
             </div>
 
-            <div class="chat-input" data-id="{{ Auth::user()->id }}">
-                <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
-                <button onclick="sendMessage()">Gửi</button>
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-header">
+                    <h3>Nhắn tin với khách hàng</h3>
+                    <button class="btn-close" type="button" onclick="closeChat()"></button>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Tin nhắn sẽ được load ở đây -->
+                </div>
+
+                <div class="chat-input" data-id="{{ Auth::user()->id }}">
+                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
+                    <button onclick="sendMessage()">Gửi</button>
+                </div>
             </div>
-        </div>
-        <script src="{{ asset('assets/js/chat.js') }}"></script>
-        {{-- END Chát trực tiếp --}}
+            <script src="{{ asset('assets/js/chat.js') }}"></script>
+        @endif
 
         {{-- GIAO DIỆN NHẠN XU --}}
         <div class="reviews-modal modal theme-modal fade" id="daily-coin" data-id="{{ $userId }}"
