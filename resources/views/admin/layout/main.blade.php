@@ -274,70 +274,63 @@
                         </div>                        
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
+                                 aria-labelledby="messagesDropdown" style="width: 350px; max-height: 600px; overflow-y: auto;">
                                 <h6 class="dropdown-header">
                                     Message Center
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="#"
+                                   onclick="openChat('Emily Fowler', 'Hi there! I am wondering if you can help me with a problem I have been having.')">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me...</div>
                                         <div class="small text-gray-500">Emily Fowler · 58m</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="#"
+                                   onclick="openChat('Jae Chun', 'I have the photos that you ordered last month, how would you like them sent to you?')">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_2.svg') }}" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_2.svg') }}" alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
+                                        <div class="text-truncate">I have the photos that you ordered...</div>
                                         <div class="small text-gray-500">Jae Chun · 1d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="#"
+                                   onclick="openChat('Morgan Alvarez', 'Last month’s report looks great, I am very happy with the progress so far.')">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_3.svg') }}" alt="...">
+                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_3.svg') }}" alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy
-                                            with
-                                            the progress so far, keep up the good work!</div>
+                                        <div class="text-truncate">Last month’s report looks great...</div>
                                         <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More
-                                    Messages</a>
                             </div>
                         </li>
+                        
+                        <!-- Khu vực chat -->
+                        <div id="chatBox" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; height: 400px; background-color: #fff; border: 1px solid #ddd; z-index: 1000; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 10px;">
+                            <button type="button" class="btn btn-danger btn-sm" id="closeChatBtn">X</button>
+                            <h6 id="chatUserName" style="font-weight: bold; margin-bottom: 10px;">Chat với:</h6>
+                            <div id="chatMessages" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px; background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                                <!-- Tin nhắn sẽ hiển thị ở đây -->
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nhập tin nhắn..." onkeypress="sendMessage(event)">
+                        </div>
+                                             
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -606,9 +599,84 @@
                 updateNotifications();
             });
         });
+        // Biến toàn cục để lưu tên người chat
+        // Biến toàn cục để lưu tên người chat
+var currentChatUser = null;
+
+function openChat(userName, message) {
+    // Đảm bảo danh sách tin nhắn không bị ẩn
+    document.getElementById("messagesDropdown").classList.add("show");
+
+    // Cập nhật tên người chat và tin nhắn đầu tiên
+    document.getElementById("chatUserName").innerText = "Chat với: " + userName;
+    document.getElementById("chatMessages").innerHTML = `<div class="message">${message}</div>`;
+
+    // Hiển thị khu vực chat
+    document.getElementById("chatBox").style.display = 'block';
+
+    // Lưu tên người đang chat
+    currentChatUser = userName;
+}
+
+// Đóng màn hình chat khi bấm nút "X"
+document.getElementById("closeChatBtn").addEventListener("click", function() {
+    document.getElementById("chatBox").style.display = 'none';
+});
+
+// Gửi tin nhắn (nếu cần)
+function sendMessage(event) {
+    if (event.key === 'Enter') {
+        const message = event.target.value;
+        if (message.trim() !== "") {
+            const chatMessages = document.getElementById("chatMessages");
+            chatMessages.innerHTML += `<div class="message">${message}</div>`;
+            event.target.value = "";
+        }
+    }
+}
+
+
+
     </script>
     {{-- Css Modal Thông Báo --}}
         <style>
+         /* Điều chỉnh vị trí và kích thước của khu vực chat */
+       /* Khu vực chat khi hiển thị */
+        /* Khu vực chat khi hiển thị */
+        #chatBox {
+            display: none;
+            position: fixed; /* Cố định ở dưới cùng bên phải */
+            bottom: 20px;
+            right: 20px;
+            width: 350px; /* Điều chỉnh lại chiều rộng cho vừa với danh sách */
+            height: 400px; /* Điều chỉnh chiều cao */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        /* Nút X đóng chat */
+        #closeChatBtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        /* Khu vực tin nhắn */
+        #chatMessages {
+            background: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+            min-height: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+
         /* Hiệu ứng overlay */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.8);

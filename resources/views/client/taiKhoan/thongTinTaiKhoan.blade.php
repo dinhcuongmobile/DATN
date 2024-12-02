@@ -54,12 +54,6 @@
                                     aria-selected="true"><i class="iconsax" data-icon="home-1"></i> Tổng Quan</button>
                             </li>
                             <li>
-                                <button class="nav-link" id="notifications-tab" data-bs-toggle="pill"
-                                    data-bs-target="#notifications" role="tab" aria-controls="notifications"
-                                    aria-selected="false"><i class="iconsax" data-icon="lamp-2"></i>Thông Báo
-                                </button>
-                            </li>
-                            <li>
                                 <button class="nav-link" id="order-tab" data-bs-toggle="pill" data-bs-target="#order"
                                     role="tab" aria-controls="order" aria-selected="false"><i class="iconsax"
                                         data-icon="receipt-square"></i> Đơn Hàng</button>
@@ -97,33 +91,12 @@
                                     </div>
                                     <div class="dashboard-user-name">
                                         <h6>Chào, <b>{{ Auth::user()->ho_va_ten }}</b></h6>
-                                        <p>Trang tổng quan của tôi cung cấp cái nhìn tổng quan toàn diện về
-                                            các số liệu và dữ liệu chính liên quan đến hoạt động của bạn. Nó
-                                            cung cấp thông tin chi tiết theo thời gian thực về hiệu suất, bao
-                                            gồm số liệu bán hàng, lưu lượng truy cập trang web, mức độ tương
-                                            tác của khách hàng, v.v. Với các tiện ích có thể tùy chỉnh và hình
-                                            ảnh trực quan, nó tạo điều kiện cho việc ra quyết định nhanh chóng
-                                            và cho phép bạn theo dõi tiến trình hướng tới mục tiêu của mình một
-                                            cách hiệu quả.</p>
+                                        <p>Trang tài khoản Namad Store giúp bạn dễ dàng quản lý thông tin cá nhân, theo dõi đơn hàng và cập nhật trạng thái giao hàng.
+                                             Tại đây, bạn có thể chỉnh sửa thông tin liên lạc, thay đổi mật khẩu.</p>
                                     </div>
                                     <div class="total-box">
                                         <div class="row gy-4">
-                                            <div class="col-xl-4">
-                                                <div class="totle-contain">
-                                                    <div class="wallet-point">
-                                                        <img src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/wallet.svg"
-                                                            alt="">
-                                                        <img class="img-1"
-                                                            src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/wallet.svg"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="totle-detail">
-                                                        <h6>Số Dư Ví</h6>
-                                                        <h4>0đ </h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-6">
                                                 <div class="totle-contain">
                                                     <div class="wallet-point">
                                                         <img src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/coin.svg"
@@ -138,7 +111,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-4">
+                                            <div class="col-xl-6">
                                                 <div class="totle-contain">
                                                     <div class="wallet-point">
                                                         <img src="https://themes.pixelstrap.net/katie/assets/images/svg-icon/order.svg"
@@ -234,137 +207,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Thông báo --}}
-                        <div class="tab-pane fade" id="notifications" role="tabpanel"
-                            aria-labelledby="notifications-tab">
-                            <div class="dashboard-right-box">
-                                <div class="notification-tab">
-                                    <div class="sidebar-title">
-                                        <div class="loader-line"></div>
-                                        <h4>Notifications</h4>
-                                    </div>
-                                    <ul class="notification-body">
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/1.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Mint - is your budget ready for spring spending?<span>2:14PM</span>
-                                                </h6>
-                                                <p>A quick weekend trip, a staycation in your own town, or a weeklong
-                                                    vacay with the family—it’s your choice if it’s in the budget. No
-                                                    matter what you plan on doing during spring break, budget ahead for
-                                                    it.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/2.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Flipkart - Confirmed order<span>2:14PM</span></h6>
-                                                <p>Thanks for signing up for CodePen! We're happy you're here. Let's get
-                                                    your email address verified:</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/3.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Figma - Move work forward<span>2:14PM</span></h6>
-                                                <p>Hello, Everyone understands why a new language would be advantageous:
-                                                    one could refuse to pay for high-priced translators.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/4.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Trip Reminder.<span>2:14PM</span></h6>
-                                                <p>I'm sorry, but I have to disagree with Mr. Zingier. We are all aware
-                                                    that the title is the most crucial component of any article. Your
-                                                    reader won't even make it to the first sentence without an engaging
-                                                    title. </p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/5.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Flipkart - Confirmed order<span>2:14PM</span></h6>
-                                                <p>Thanks for signing up for CodePen! We're happy you're here. Let's get
-                                                    your email address verified:</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/6.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Flipkart - Confirmed order<span>2:14PM</span></h6>
-                                                <p>Thanks for signing up for CodePen! We're happy you're here. Let's get
-                                                    your email address verified:</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/7.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Figma - Move work forward<span>2:14PM</span></h6>
-                                                <p>Hello, Everyone understands why a new language would be advantageous:
-                                                    one could refuse to pay for high-priced translators.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/8.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Trip Reminder.<span>2:14PM</span></h6>
-                                                <p>I'm sorry, but I have to disagree with Mr. Zingier. We are all aware
-                                                    that the title is the most crucial component of any article. Your
-                                                    reader won't even make it to the first sentence without an engaging
-                                                    title.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/9.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Flipkart - Confirmed order<span>2:14PM</span></h6>
-                                                <p>Thanks for signing up for CodePen! We're happy you're here. Let's get
-                                                    your email address verified:</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/10.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Flipkart - Confirmed order<span>2:14PM</span></h6>
-                                                <p>Thanks for signing up for CodePen! We're happy you're here. Let's get
-                                                    your email address verified:</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/11.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Figma - Move work forward<span>2:14PM</span></h6>
-                                                <p>Hello, Everyone understands why a new language would be advantageous:
-                                                    one could refuse to pay for high-priced translators.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="user-img"> <img src="../assets/images/notification/12.jpg"
-                                                    alt=""></div>
-                                            <div class="user-contant">
-                                                <h6>Trip Reminder.<span>2:14PM</span></h6>
-                                                <p>I'm sorry, but I have to disagree with Mr. Zingier. We are all aware
-                                                    that the title is the most crucial component of any article. Your
-                                                    reader won't even make it to the first sentence without an engaging
-                                                    title. </p>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
