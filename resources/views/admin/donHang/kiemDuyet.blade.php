@@ -32,7 +32,7 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Hàng Loạt</button> 
+                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Các Đơn Đã Chọn</button> 
                 </div>
         </div> 
     </div>
@@ -101,7 +101,9 @@
                             <td class="col-2">
                                 {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
                             </td>
-                            <td class="col-1">GHTK</td>
+                            <td class="col-1">
+                                <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
+                            </td>
                             <td>
                                 <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">Duyệt</a>
                                 <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn hủy đơn này')">Hủy</a>

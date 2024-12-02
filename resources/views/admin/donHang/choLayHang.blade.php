@@ -1,7 +1,6 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
 <div class="container-fluid">  
-    
     <h1 class="h3 mb-2 text-gray-800">Chờ Lấy Hàng ({{ $donHangs->count() }})</h1>  
     @if (session('success'))
             <div class="alert alert-success" id="error-alert">
@@ -33,7 +32,7 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Yêu Cầu Lấy Hàng Loạt</button> 
+                    <button type="submit" class="btn btn-danger btn-sm">Yêu Cầu Lấy Các Đơn Đã Chọn</button> 
                     <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm" target="_blank">In Hóa Đơn Hàng Loạt</a>
                 </div>
         </div> 
@@ -107,7 +106,9 @@
                             <td class="col-2">
                                 {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
                             </td>
-                            <td class="col-1">GHTK</td>
+                            <td class="col-1">
+                                <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
+                            </td>
                             <td>
                                 <a href="{{route('don-hang.yeu-cau-lay-hang', $item->id)}}" class="btn btn-primary btn-sm">Yêu Cầu Đến Lấy</a>
                                 <hr>

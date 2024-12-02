@@ -3,7 +3,17 @@
     <div class="container-fluid">
 
         <h1 class="h3 mb-2 text-gray-800">Danh Sách Đơn Hàng ({{ $donHangs->count() }})</h1>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Các nút chức năng và thanh tìm kiếm -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -94,15 +104,15 @@
                                                     Đã Giao
                                                 @elseif($item->trang_thai == 4)
                                                     Đã Hủy
-                                                @else
-                                                    Trả Hàng/Hoàn Tiền
                                                 @endif
                                             </span></p>
                                     </td>
                                     <td class="col-2">
                                         {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
                                     </td>
-                                    <td class="col-1">GHTK</td>
+                                    <td class="col-1">
+                                        <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
+                                    </td>
                                     <td>
                                         @if ($item->trang_thai == 0 || $item->trang_thai == 1 )
                                             {{-- Các nút tùy thuộc trạng thái --}}
