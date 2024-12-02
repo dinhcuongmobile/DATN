@@ -208,7 +208,7 @@
                         <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lien-he.danh-sach') }}">Quản lý liên hệ</a>
-                        <a class="collapse-item" href="#">Quản lý đánh giá</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach') }}">Quản lý đánh giá</a>
                     </div>
                 </div>
             </li>
