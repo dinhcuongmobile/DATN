@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('thanh_toan')->default(0)->comment('0. Chưa thanh toán, 1. Đã thanh toán');
             $table->text('ghi_chu')->nullable();
             $table->date('ngay_tao')->nullable();
-            $table->dateTime('ngay_cap_nhat')->nullable();
+            $table->date('ngay_cap_nhat')->nullable();
         });
     }
 

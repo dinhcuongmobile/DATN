@@ -21,16 +21,16 @@ class ThongKeController extends Controller
         $sub30Ngay = Carbon::now()->subDays(30)->toDateString();
         $hienTai = Carbon::now()->toDateString();
 
-        $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-            ->whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+        $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+            ->whereBetween('ngay_cap_nhat', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
 
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
-        $soDonHang = DonHang::whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
+        $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_tao' => $val->ngay_tao,
+                'ngay_cap_nhat' => $val->ngay_cap_nhat,
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -52,16 +52,16 @@ class ThongKeController extends Controller
         $fromDate = $data['fromDate'];
         $toDate = $data['toDate'];
 
-        $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-            ->whereBetween('ngay_tao', [$fromDate, $toDate])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+        $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+            ->whereBetween('ngay_cap_nhat', [$fromDate, $toDate])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
 
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
-        $soDonHang = DonHang::whereBetween('ngay_tao', [$fromDate, $toDate])->where('trang_thai', 3)->count();
+        $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$fromDate, $toDate])->where('trang_thai', 3)->count();
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_tao' => $val->ngay_tao,
+                'ngay_cap_nhat' => $val->ngay_cap_nhat,
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -93,37 +93,37 @@ class ThongKeController extends Controller
 
 
         if ($data['dashboardValue'] == '30ngay') {
-            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-                ->whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_cap_nhat', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
 
-            $soDonHang = DonHang::whereBetween('ngay_tao', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
+            $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
         } elseif ($data['dashboardValue'] == '7ngay') {
-            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-                ->whereBetween('ngay_tao', [$sub7Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_cap_nhat', [$sub7Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
 
-            $soDonHang = DonHang::whereBetween('ngay_tao', [$sub7Ngay, $hienTai])->where('trang_thai', 3)->count();
+            $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub7Ngay, $hienTai])->where('trang_thai', 3)->count();
         } elseif ($data['dashboardValue'] == 'thangTruoc') {
-            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-                ->whereBetween('ngay_tao', [$dauThangTruoc, $cuoiThangTruoc])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_cap_nhat', [$dauThangTruoc, $cuoiThangTruoc])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
 
-            $soDonHang = DonHang::whereBetween('ngay_tao', [$dauThangTruoc, $cuoiThangTruoc])->where('trang_thai', 3)->count();
+            $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$dauThangTruoc, $cuoiThangTruoc])->where('trang_thai', 3)->count();
         } elseif ($data['dashboardValue'] == 'thangNay') {
-            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-                ->whereBetween('ngay_tao', [$dauThangNay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_cap_nhat', [$dauThangNay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
                 
-            $soDonHang = DonHang::whereBetween('ngay_tao', [$dauThangNay, $hienTai])->where('trang_thai', 3)->count();
+            $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$dauThangNay, $hienTai])->where('trang_thai', 3)->count();
         } else {
-            $donHang = DonHang::selectRaw('DATE(ngay_tao) as ngay_tao, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
-                ->whereBetween('ngay_tao', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_tao')->orderBy('ngay_tao', 'ASC')->get();
+            $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
+                ->whereBetween('ngay_cap_nhat', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
                 
-            $soDonHang = DonHang::whereBetween('ngay_tao', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->count();
+            $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->count();
         }
 
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_tao' => $val->ngay_tao,
+                'ngay_cap_nhat' => $val->ngay_cap_nhat,
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );

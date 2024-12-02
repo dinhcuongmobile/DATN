@@ -267,12 +267,14 @@
                                                                 @endforeach
                                                             </div>
                                                         </div>
-                                                        <div class="phan-hoi mt-3">
-                                                            <p>Phản hồi của shop</p>
-                                                            <div class="noi-dung-phan-hoi mt-2">
-                                                                <span>Shop cảm ơn bạn đã ủng hộ nha.</span>
+                                                        @if ($arrTraLoiDanhGia[$item->id])
+                                                            <div class="phan-hoi mt-3">
+                                                                <p>Phản hồi từ shop</p>
+                                                                <div class="noi-dung-phan-hoi mt-2">
+                                                                    <span>{{$arrTraLoiDanhGia[$item->id]->noi_dung}}</span>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     </div>
                                                 </div>
 
