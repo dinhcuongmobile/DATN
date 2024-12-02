@@ -21,7 +21,7 @@ class HomeController extends Controller
     }
 
     public function home()
-    {   
+    {
         $danh_mucs = DanhMuc::all();
 
         $san_pham_noi_bat = SanPham::with('bienThes', 'danhGias')->orderBy('luot_xem', 'desc')->take(8)->get();
@@ -29,17 +29,13 @@ class HomeController extends Controller
         $san_pham_ban_chay = SanPham::with('bienThes', 'danhGias')->orderBy('da_ban', 'desc')->take(8)->get();
         $san_pham_khuyen_mai = SanPham::with('bienThes', 'danhGias')->where('khuyen_mai', ">", 0)->orderBy('id', 'desc')->take(8)->get();
 
-        $tin_tucs = TinTuc::orderBy('created_at', 'desc')->take(3)->get();
-        
         $this->views['danh_mucs'] = $danh_mucs;
 
         $this->views['san_pham_noi_bat'] = $san_pham_noi_bat;
         $this->views['san_pham_moi_nhat'] = $san_pham_moi_nhat;
         $this->views['san_pham_ban_chay'] = $san_pham_ban_chay;
         $this->views['san_pham_khuyen_mai'] = $san_pham_khuyen_mai;
-
-        $this->views['tin_tucs'] = $tin_tucs;
-
+        $this->views['tin_tucs'] = TinTuc::with('danhMucTinTuc','user')->orderBy('id','desc')->take(8)->get();
         return view('client.home', $this->views);
     }
 

@@ -9,39 +9,46 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TinTuc\StoreTinTucRequest;
 use App\Http\Requests\TinTuc\UpdateTinTucRequest;
 use App\Models\DanhMucTinTuc;
+use Illuminate\Support\Facades\Auth;
 
 class TinTucAdminController extends Controller
 {
     protected $views;
-    protected $tin_tucs;
     public function __construct()
     {
         $this->views = [];
-        $this->tin_tucs = new TinTuc();
     }
 
     //SHOW
     public function showDanhSach(Request $request)
     {
+        $query = TinTuc::with('danhMucTinTuc', 'user');
         $keyword = $request->input('kyw');
+
         if ($keyword) {
-            $this->views['DSTinTuc'] = $this->tin_tucs->searchTinTuc($keyword);
-        } else {
-            $this->views['DSTinTuc'] = $this->tin_tucs->loadAllTinTuc();
+            $query->where('tieu_de', 'LIKE', "%$keyword%")
+                  ->orWhereHas('danhMucTinTuc', function($loc) use ($keyword) {
+                      $loc->where('ten_danh_muc', 'LIKE', "%$keyword%");
+                  })
+                  ->orWhereHas('user', function($loc) use ($keyword) {
+                    $loc->where('ho_va_ten', 'LIKE', "%$keyword%");
+                });
         }
+
+        $this->views['DSTinTuc'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+
         return view('admin.tinTuc.DSTinTuc', $this->views);
     }
 
     //add
     public function viewAdd()
     {
-        $dmTinTuc = DanhMucTinTuc::all();
-        return view('admin.tinTuc.add', compact('dmTinTuc'));
+        $this->views['dmTinTuc'] = DanhMucTinTuc::all();
+        return view('admin.tinTuc.add', $this->views);
     }
 
     public function add(StoreTinTucRequest $request)
     {
-        $tinTuc = TinTuc::all();
         $danh_muc = $request->input('danh_muc_id');
         if ($request->hasFile('hinh_anh')) {
             $fileName = $request->file('hinh_anh')->store('uploads/tinTuc', 'public');
@@ -50,31 +57,31 @@ class TinTucAdminController extends Controller
         }
         $dataInsert = [
             'danh_muc_id' => $danh_muc,
+            'nguoi_dang' => Auth::id(),
             'hinh_anh' => $fileName,
             'tieu_de' => $request->tieu_de,
             'noi_dung' => $request->noi_dung,
-            'created_at' => now()
+            'ngay_dang' => now()
         ];
-        $result = $this->tin_tucs->addTinTuc($dataInsert);
-        if (!$result) {
-            return redirect()->route(route: 'tin-tuc.danh-sach');
+        $result = TinTuc::create($dataInsert);
+        if ($result) {
+            return redirect()->route('tin-tuc.danh-sach')->with('success','Bạn đã thêm thành công tin tức!');
         } else {
-            return "<script>alert('Đã xảy ra lỗi !')</script>";
+            return redirect()->back()->with('error','Thêm thất bại');
         }
     }
 
     //update
     public function viewUpdate(int $id)
     {
-        $dmTinTuc = DanhMucTinTuc::all();
-        $this->views['tin_tuc'] = $this->tin_tucs->loadOneTinTuc($id);
-        return view('admin.tinTuc.update', $this->views, compact('dmTinTuc'));
+        $this->views['dmTinTuc'] = DanhMucTinTuc::all();
+        $this->views['tin_tuc'] = TinTuc::find($id);
+        return view('admin.tinTuc.update', $this->views);
     }
 
     public function update(UpdateTinTucRequest $request, int $id)
     {
-        $tin_tuc = $this->tin_tucs->loadOneTinTuc($id);
-        $danh_muc = $request->input('danh_muc_id');
+        $tin_tuc = TinTuc::find($id);
         if ($request->hasFile('hinh_anh')) {
             $fileName = $request->file('hinh_anh')->store('uploads/tintuc', 'public');
 
@@ -86,41 +93,41 @@ class TinTucAdminController extends Controller
         }
 
         $dataUpdate = [
-            'danh_muc_id' => $danh_muc,
+            'danh_muc_id' => $request->danh_muc_id,
             'hinh_anh' => $fileName,
             'tieu_de' => $request->tieu_de,
             'noi_dung' => $request->noi_dung,
-            'updated_at' => now()
+            'ngay_cap_nhat' => now()
         ];
 
-        $result = $this->tin_tucs->updateTinTuc($dataUpdate, $id);
-        if ($request) {
+        $result = $tin_tuc->update($dataUpdate);
+        if ($result) {
             return redirect()->route('tin-tuc.danh-sach')->with('success', 'Cập nhật tin tức thành công');
         } else {
-            return redirect()->route('tin-tuc.danh-sach')->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
         }
     }
 
     public function delete(int $id)
     {
-        $tin_tuc = $this->tin_tucs->loadOneTinTuc($id);
+        $tin_tuc = TinTuc::find($id);
         if ($tin_tuc) {
-            $this->tin_tucs->deleteTinTuc($id);
+            $tin_tuc->delete();
             if ($tin_tuc->hinh_anh) {
                 Storage::disk('public')->delete($tin_tuc->hinh_anh);
             }
-            return redirect()->route('tin-tuc.danh-sach');
+            return redirect()->route('tin-tuc.danh-sach')->with('success', 'Bạn đã xóa thành công 1 tin tức.');
         } else {
-            return redirect()->route('tin-tuc.danh-sach')->withErrors('Có lỗi xảy ra, vui lòng thử lại');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
         }
     }
 
     public function xoaNhieuTinTuc(Request $request)
     {
         foreach ($request->select as $id) {
-            $tin_tuc = $this->tin_tucs->loadOneTinTuc($id);
+            $tin_tuc = TinTuc::find($id);
             if ($tin_tuc) {
-                $this->tin_tucs->deleteTinTuc($id);
+                $tin_tuc->delete();
                 if ($tin_tuc->hinh_anh) {
                     Storage::disk('public')->delete($tin_tuc->hinh_anh);
                 }
@@ -128,6 +135,6 @@ class TinTucAdminController extends Controller
                 break;
             }
         }
-        return redirect()->route('tin-tuc.danh-sach');
+        return redirect()->route('tin-tuc.danh-sach')->with('success', 'Bạn đã xóa thành công nhiều tin tức.');
     }
 }

@@ -3,111 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Đánh Giá Sản Phẩm</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <title>Trang Chat Giống Shopee</title>
     <style>
-        body {
-            background-color: #f7f7f7;
+        .chat-container {
+            height: 85vh;
+            display: flex;
+            flex-direction: row;
         }
-        .review-container {
-            background-color: #ffffff;
-            border-radius: 8px;
+        .chat-list, .chat-window {
+            overflow-y: auto;
+        }
+        .chat-list {
+            width: 30%;
+            border-right: 1px solid #ddd;
+        }
+        .chat-window {
+            width: 70%;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            max-width: 600px;
         }
-        .rating {
-            color: #f39c12;
+        .message {
+            margin-bottom: 10px;
         }
-        .review-title {
-            margin-bottom: 15px;
+        .message.sent {
+            text-align: right;
         }
-        .btn-outline {
-            margin-right: 10px;
-        }
-        .review-item {
-            padding: 15px 0;
-            border-top: 1px solid #e9ecef;
-        }
-        .review-item:first-child {
-            border-top: none;
-        }
-        .review-item img {
-            width: 80px;
-            margin-right: 5px;
-            border-radius: 5px;
-        }
-        .username {
-            font-weight: bold;
-        }
-        .date {
-            color: #6c757d;
-            font-size: 0.9em;
-        }
-        .text-content {
-            margin-top: 5px;
-        }
-        .thumbs-up {
-            margin: 5px 0;
+        .message.received {
+            text-align: left;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="review-container">
-        <h4 class="review-title">ĐÁNH GIÁ SẢN PHẨM</h4>
-        <div class="d-flex align-items-center mb-3">
-            <h2 class="mr-3">4.5</h2>
-            <div class="rating">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
+    <div class="container">
+        <h1 class="mt-3">Chat</h1>
+        <div class="chat-container">
+            <div class="chat-list px-3">
+                <input type="text" class="form-control mb-3" placeholder="Tìm kiếm">
+                <ul class="list-group">
+                    <li class="list-group-item">linkkhieu2007</li>
+                    <li class="list-group-item">ngcngnguyenth123</li>
+                    <li class="list-group-item">naxinvn</li>
+                    <li class="list-group-item">cuongtiengu</li>
+                    <li class="list-group-item">phongcachnhat</li>
+                    <li class="list-group-item">simise.vn</li>
+                    <li class="list-group-item">moonstore.on</li>
+                </ul>
             </div>
-            <button class="btn btn-outline-danger ml-auto">Tất Cả</button>
-        </div>
-        <div class="btn-group mb-3">
-            <button class="btn btn-outline-secondary">5 Sao (2,1k)</button>
-            <button class="btn btn-outline-secondary">4 Sao (271)</button>
-            <button class="btn btn-outline-secondary">3 Sao (121)</button>
-            <button class="btn btn-outline-secondary">2 Sao (55)</button>
-            <button class="btn btn-outline-secondary">1 Sao (148)</button>
-            <button class="btn btn-outline-secondary">Có Bình Luận (535)</button>
-        </div>
-
-        <div class="review-item">
-            <div class="d-flex align-items-center">
-                <div class="mr-3">
-                    <span class="username">*****6</span>
-                    <span class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </span>
+            <div class="chat-window">
+                <h5>phongcachnhat</h5>
+                <div class="message received">
+                    <p>Chúc bạn có một ngày mới tốt lành, =>với tiêu chí "HÀNG CHẤT GIÁ THẬT-BẢO HÀNH UY TÍN" anh em yên tâm 100% về chất lượng.</p>
+                    <small>19:41</small>
                 </div>
-                <div>
-                    <div class="date">2024-10-29 19:06 | Phân loại hàng: HL012</div>
-                    <div>Chất liệu: <strong>đẹp</strong></div>
-                    <p class="text-content">Đơn hàng rất đẹp và ưng rất tốt rất muốn mua lại lần 2-3 vì hàng quá ngon</p>
-                    <div class="thumbs-up">👍 3</div>
-                    <div>
-                        <img src="image1.jpg" alt="Review Image 1">
-                        <img src="image2.jpg" alt="Review Image 2">
-                        <img src="image3.jpg" alt="Review Image 3">
-                    </div>
+                <div class="message alert alert-warning">
+                    <p>LUU Ý: Shopee KHÔNG cho phép các hành vi: Đặt cọc/Chuyển khoản riêng cho người bán/Giao dịch ngoài hệ thống Shopee...</p>
+                    <small><a href="#" class="alert-link">Tìm hiểu thêm</a></small>
+                </div>
+                <div class="message sent">
+                    <p>Oki anh có j đánh giá sp giúp e nha a</p>
+                    <small>05:54</small>
                 </div>
             </div>
         </div>
-
-        <!-- Bạn có thể thêm nhiều review-item ở đây -->
+        <div class="input-group mt-3">
+            <input type="text" class="form-control" placeholder="Nhập nội dung tin nhắn">
+            <button class="btn btn-primary" type="button">Gửi</button>
+        </div>
     </div>
-</div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>

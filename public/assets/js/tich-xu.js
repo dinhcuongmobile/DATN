@@ -77,7 +77,17 @@ document.addEventListener("DOMContentLoaded", function() {
                                 document.querySelector('#dashboard .tongCoin').innerText = dataCoin.tong_xu;
                             }
                             if(window.location.pathname === '/gio-hang/chi-tiet-thanh-toan'){
+                                let tongThanhToan = parseInt(document.querySelector('.tongThanhToan').textContent.replace(/[^\d]/g, ""));
                                 document.querySelector('.right-sidebar-checkout .tongCoin').innerText = dataCoin.tong_xu;
+                                const namadXuActive = document.querySelector('.divTongCoin div.active');
+                                let namadXu=0;
+                                if(namadXuActive){
+                                    namadXu = parseInt(document.querySelector('.divTongCoin .tongCoin').textContent);
+                                    tongThanhToan = tongThanhToan + namadXu - 100;
+                                }
+
+
+                                document.querySelector('.tongThanhToan').textContent = `${(tongThanhToan - namadXu).toLocaleString('vi-VN')}đ`;
                             }
                         })
                 }

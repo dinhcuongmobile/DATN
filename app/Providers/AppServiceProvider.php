@@ -39,6 +39,7 @@ class AppServiceProvider extends ServiceProvider
             $count_gio_hang = 0;
             $danh_mucs = DanhMuc::all();
             $userId = Auth::id();
+            $danhMucTinTuc = DanhMucTinTuc::all();
 
             if (Auth::check()) {
                 $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
@@ -48,16 +49,12 @@ class AppServiceProvider extends ServiceProvider
                 $count_gio_hang = $gio_hangs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
+            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId','danhMucTinTuc'));
         });
-
-        //danh mục tin tức
-        $danh_muc_tin_tucs = DanhMucTinTuc::all();
-        view()->share('danh_muc_tin_tucs', $danh_muc_tin_tucs);
         //admin
         View::composer('admin.layout.main', function ($view) {
             // Lấy dữ liệu từ model
-            $sub=DonHang::where('trang_thai',0)->count(); 
+            $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
             $view->with('sub', $sub);
         });

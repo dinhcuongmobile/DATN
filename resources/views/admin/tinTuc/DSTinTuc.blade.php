@@ -44,35 +44,36 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>STT</th>
                                 <th>Image</th>
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
                                 <th>Danh mục</th>
+                                <th>Người đăng</th>
                                 <th>Ngày đăng</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($DSTinTuc as $index => $item)
+                            @foreach ($DSTinTuc as $item)
                                 <tr>
                                     <td class="text-center align-middle"><input type="checkbox" name="select[]"
                                             value="{{ $item->id }}"></td>
-                                    <td class="align-middle">{{ $index + 1 }}</td>
-                                    <td class="col-1 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
-                                            alt="err" height=60px></td>
+                                    <td class="col-1 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px"></td>
                                     <td class="col-2 align-middle">{{ $item->tieu_de }}</td>
-                                    <td class="col-3 align-middle">{!! Str::limit(strip_tags($item->noi_dung), 100, '...') !!}</td>
+                                    <td class="col-3 align-middle">{!! Str::limit(strip_tags($item->noi_dung), 80, '...') !!}</td>
                                     <td class="col-2 align-middle">
-                                        {{ $item->tenDanhMuc }}
+                                        {{ $item->danhMucTinTuc->ten_danh_muc }}
                                     </td>
-                                    <td class="col-2 align-middle">{{ $item->created_at }}</td>
+                                    <td class="col-1 align-middle">
+                                        {{ $item->user->ho_va_ten?$item->user->ho_va_ten: $item->user->email }}
+                                    </td>
+                                    <td class="col-2 align-middle">{{ $item->ngay_dang }}</td>
                                     <td class="col-2 align-middle">
                                         <a href="{{ route('tin-tuc.sua-tin-tuc', $item->id) }}"
                                             class="btn btn-warning btn-sm">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Sửa
-                                        </a> |
+                                        </a> <i class="fa-solid fa-minus"></i>
                                         <a href="{{ route('tin-tuc.delete', $item->id) }}"
                                             class="btn btn-danger btn-sm">
                                             <i class="fa-solid fa-trash"></i>
@@ -91,14 +92,4 @@
         </div>
         </form>
     </div>
-    <script>
-        // Đoạn mã này sẽ ẩn thông báo sau 5 giây
-        setTimeout(function() {
-            var alert = document.getElementById('alert-message');
-            if (alert) {
-                alert.style.display = 'none';
-            }
-        }, 5000); // 5000 ms = 5 giây
-    </script>
-    <!-- /.container-fluid -->
 @endsection

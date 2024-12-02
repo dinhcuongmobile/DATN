@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 01, 2024 lúc 05:44 PM
+-- Thời gian đã tạo: Th12 02, 2024 lúc 09:38 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `namad_store`
+-- Cơ sở dữ liệu: `nama_store`
 --
 
 -- --------------------------------------------------------
@@ -241,7 +241,7 @@ INSERT INTO `coins` (`id`, `user_id`, `coin`, `ngay_nhan`, `so_ngay`, `created_a
 (21, 19, 200, '2024-11-17', 2, '2024-11-16 00:30:58', '2024-11-17 19:51:04'),
 (22, 1, 0, '2024-11-17', 1, '2024-11-17 16:47:20', '2024-11-18 10:19:20'),
 (23, 18, 0, '2024-11-29', 1, '2024-11-19 13:53:00', '2024-11-29 16:58:55'),
-(24, 20, 500, '2024-11-25', 1, '2024-11-21 16:11:42', '2024-11-25 14:24:10');
+(24, 20, 600, '2024-12-02', 2, '2024-11-21 16:11:42', '2024-12-02 03:19:13');
 
 -- --------------------------------------------------------
 
@@ -313,7 +313,6 @@ CREATE TABLE `danh_muc_tin_tucs` (
 
 INSERT INTO `danh_muc_tin_tucs` (`id`, `ten_danh_muc`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Áo Sơ Mi Cộc Tay', '2024-11-20 14:23:48', '2024-11-20 14:29:29', NULL),
-(2, 'Áo Phông Hot', '2024-11-20 14:26:13', '2024-11-20 14:31:44', '2024-11-20 14:31:44'),
 (3, 'Áo Phông', '2024-11-20 14:28:02', '2024-11-20 14:34:17', NULL),
 (4, 'Áo Sơ Mi Dài Tay', '2024-11-20 14:29:07', '2024-11-20 14:29:54', NULL);
 
@@ -555,10 +554,10 @@ CREATE TABLE `ma_khuyen_mais` (
 INSERT INTO `ma_khuyen_mais` (`id`, `ma_giam_gia`, `so_tien_giam`, `ngay_bat_dau`, `ngay_ket_thuc`, `gia_tri_toi_thieu`, `trang_thai`, `created_at`, `updated_at`) VALUES
 (5, 'X52X6CVFPN', 20000.00, '2024-11-07', '2024-11-30', 500000.00, 1, '2024-11-07 15:33:18', '2024-11-13 16:47:02'),
 (6, 'AX1N1I52R6', 25000.00, '2024-11-07', '2024-11-30', 100000.00, 2, '2024-11-07 15:34:00', '2024-11-13 16:47:27'),
-(7, 'YEJ8QTBDKP', 25000.00, '2024-11-07', '2024-11-14', 150000.00, 1, '2024-11-07 15:35:30', '2024-11-13 16:11:21'),
+(7, 'YEJ8QTBDKP', 25000.00, '2024-11-07', '2024-12-18', 150000.00, 1, '2024-11-07 15:35:30', '2024-12-02 02:22:42'),
 (8, '7GLU1LOHP0', 30000.00, '2024-11-08', '2024-11-14', 250000.00, 2, '2024-11-07 15:35:54', '2024-11-13 16:47:19'),
-(9, '3S6T9MCQJI', 30000.00, '2024-11-07', '2024-11-15', 200000.00, 2, '2024-11-07 15:36:27', '2024-11-13 16:47:13'),
-(10, 'HY3KZPM12D', 10000.00, '2024-11-07', '2024-11-15', 100000.00, 1, '2024-11-07 15:36:50', '2024-11-13 16:46:53');
+(9, '3S6T9MCQJI', 30000.00, '2024-11-07', '2024-12-18', 200000.00, 2, '2024-11-07 15:36:27', '2024-12-02 02:22:53'),
+(10, 'HY3KZPM12D', 10000.00, '2024-11-07', '2024-12-18', 100000.00, 1, '2024-11-07 15:36:50', '2024-12-02 02:22:31');
 
 -- --------------------------------------------------------
 
@@ -638,7 +637,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (67, '2024_11_22_005350_create_messages_table', 20),
 (68, '2024_11_23_200535_create_anh_danh_gias_table', 21),
 (69, '2024_11_26_221312_create_tra_loi_danh_gias_table', 22),
-(71, '2024_11_21_161130_create_yeu_thichs_table', 23);
+(71, '2024_11_21_161130_create_yeu_thichs_table', 23),
+(72, '2024_12_02_125813_create_tin_tucs_table', 24);
 
 -- --------------------------------------------------------
 
@@ -728,7 +728,7 @@ CREATE TABLE `san_phams` (
 --
 
 INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_san_pham`, `khuyen_mai`, `mo_ta`, `luot_xem`, `da_ban`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, 5, 'uploads/sanPham/oxGYQk7Qzb4ybY6bNjpRRz0VjkpIKlZJCX696l6W.webp', 'Áo Sơ Mi Denim Dài Tay Chất Jean Lụa', 240000.00, 0, '<p>⛔️ LƯU Ý:&nbsp;</p><p>- Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch.&nbsp;</p><p>- Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng.&nbsp;</p><p>&nbsp;</p><p>HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN:&nbsp;</p><p>- Giặt ở nhiệt độ bình thường, với đồ có màu tương tự.&nbsp;</p><p>- Không được dùng hóa chất tẩy.&nbsp;</p><p>- Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp.&nbsp;</p><p>- Lộn mặt trái khi phơi tránh bị phai màu&nbsp;</p><p>&nbsp;</p><p>CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM:&nbsp;</p><p>1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách.&nbsp;</p><p>2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng.&nbsp;</p><p>3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé!&nbsp;</p><p>&nbsp;</p><p>LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 16, 0, '2024-10-16 08:00:47', '2024-11-29 16:58:10', NULL),
+(7, 5, 'uploads/sanPham/oxGYQk7Qzb4ybY6bNjpRRz0VjkpIKlZJCX696l6W.webp', 'Áo Sơ Mi Denim Dài Tay Chất Jean Lụa', 240000.00, 0, '<p>⛔️ LƯU Ý:&nbsp;</p><p>- Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch.&nbsp;</p><p>- Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng.&nbsp;</p><p>&nbsp;</p><p>HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN:&nbsp;</p><p>- Giặt ở nhiệt độ bình thường, với đồ có màu tương tự.&nbsp;</p><p>- Không được dùng hóa chất tẩy.&nbsp;</p><p>- Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp.&nbsp;</p><p>- Lộn mặt trái khi phơi tránh bị phai màu&nbsp;</p><p>&nbsp;</p><p>CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM:&nbsp;</p><p>1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách.&nbsp;</p><p>2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng.&nbsp;</p><p>3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé!&nbsp;</p><p>&nbsp;</p><p>LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 17, 0, '2024-10-16 08:00:47', '2024-12-02 02:21:42', NULL),
 (8, 5, 'uploads/sanPham/paBzgx6idf6og7kdC4WXosT8DUhttIq7FTuBFmIJ.webp', 'Áo Sơ Mi Dài Tay Cổ Tàu', 199000.00, 0, '<p>Thông tin sản phẩm áo sơ mi nam dài tay cổ tàu Namad: - Sản phẩm: áo sơ mi nam cổ bẻ dài tay vải OXFORD cao cấp, phom dáng thoải mái thấm hút cực tốt - Chất liệu áo sơ mi: chất vải OXFORD ít nhăn. Đặc điểm: - Áo sơ mi nam là sự kết hợp hoàn hảo giữa áo thun và áo polo, là món đồ không thể thiếu trong tủ đồ của các chàng trai. - Thiết kế kiểu dáng cơ bản với cổ bẻ lịch lãm, sang trọng. - Sơ mi được thiết kế phong cách trơn mặc hằng ngày. - Chất vải Oxford dệt thoáng khí lớn thấm hút mồ hôi, co giãn tốt. - Áo sơ mi nam có thể phối với nhiều trang phục khác như áo vest, quần jean, quần short, quần Tây đen,... - Sơ mi dài tay phù hợp mặc đi làm, đi chơi, dã ngoại, du lịch,... Hướng dẫn bảo quản sơ mi nam cổ bẻ đúng cách: - Nên giặt bằng tay lần đầu để sơ mi có độ bền cao. - Khi giặt thì giặt với các sản phẩm cùng màu để giữ độ bền màu tốt nhất. - Giặt áo với nhiệt độ tối đa 30 độ C. - Sấy ở nhiệt độ thường. - Là ủi ở nhiệt độ thấp. * Quyền lợi và điều kiện đổi trả: - Chính sách đổi trả hàng miễn phí khi sản phẩm kém chất lượng, không giống hình, nhầm size, số lượng mà quý khách đã đặt. - Sản phẩm chỉ được đổi/ trả khi còn nguyên tem mác. - Sản phẩm bị lỗi khi vận chuyển. * Namad cam kết: - Sản phẩm áo sơ mi giống như mô tả và hình ảnh. - Tư vấn hỗ trợ khách hàng nhiệt tình, chu đáo. - Thời gian chuẩn bị hàng tối ưu nhất. - Đổi trả hàng theo đúng quy định của Shopee. - Bảo hành 1 đổi 1 nếu như sản phẩm lỗi sản xuất từ phía shop. #ao #so #mi #dai #tay #nam #nu #thun #cotton #tron #co #be #hanquoc #thoitrangnam #akuba #box #dep #taydai #sominam #aotrang #trang #somitrang #somitron #aosomi #aosominam #cong #so #congso</p>', 0, 0, '2024-10-16 08:12:48', '2024-10-16 08:12:48', NULL),
 (9, 5, 'uploads/sanPham/JqL2rtS5JzSrjjAxvEJ6c23L23jle0ZpESw5RL8d.webp', 'Áo Sơ Mi Bò Dài Tay Denim', 259000.00, 0, '<p>⛔️ LƯU Ý: - Bảng size chỉ mang tính chất tham khảo, tuỳ thuộc vào form dáng, chất liệu vải và số đo cơ thể khác nhau sẽ có sự chênh lệch. - Màu sắc của sản phẩm có thể chênh lệch so với ảnh một chút do ánh sáng, nhưng không đáng kể và vẫn đảm bảo chất lượng. HƯỚNG DẪN SỬ DỤNG VÀ BẢO QUẢN: - Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. - Không được dùng hóa chất tẩy. - Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. - Lộn mặt trái khi phơi tránh bị phai màu CHÍNH SÁCH ĐỔI TRẢ SẢN PHẨM: 1. Nếu sản phẩm bị lỗi (rách, hỏng..) hoặc sai khác (giao sai mẫu, sai phân loại trên đơn hàng) shop sẽ hỗ trợ đổi trả hàng cho khách. 2. Nếu sản phẩm nhận được đúng phân loại và mẫu mã đơn hàng, nhưng khách hàng sử dụng không vừa hoặc muốn đổi lại size hoặc sang mẫu khác, shop sẽ hỗ trợ đổi hàng 2 chiều cho khách hàng. 3. Trường hợp shop gửi thiếu sản phẩm: vui lòng giữ nguyên bao bì, có video quay khi unbox đơn hàng. Nếu bạn thấy sản phẩm chất lượng đúng mô tả và hài lòng với đơn hàng, hãy cho Shop biết nhé! Cảm ơn bạn vì đã tin tưởng và lựa chọn shop tớ. Chúc bạn một ngày mới tốt lành và có những trải nghiệm tuyệt nhé! LƯU Ý: Khi bạn gặp bất kỳ vấn đề gì về sản phẩm đừng vội đánh giá mà hãy liên hệ Shop để đc hỗ trợ 1 cách tốt nhất nhé.</p>', 3, 0, '2024-10-16 08:26:27', '2024-11-20 14:16:44', NULL),
 (10, 5, 'uploads/sanPham/SonAbJp3dhJQYUMDwIKm0WjEnmaLH0kYc97yCGg7.webp', 'Áo Sơ Mi Trơn Dài Tay Cổ Đức', 199000.00, 0, '<p>ÁO SƠ MI DÀI TAY OXFORD ÁO SƠ MI NAM NỮ --------------------------------------- THÔNG TIN SẢN PHẨM - Áo sơ mi dài tay oxford dày dặn sờ êm tay, có thể giặt máy thoải mãi - Áo sơ mi phối túi mang phong cách trẻ trung, sang trọng, mạnh mẽ và cá tính - Áo sơ mi dễ dàng phối cùng quần jean, kaki, hay đi cùng 1 đôi giày tây, giày sneaker đều tạo ấn tượng vô cùng - Đường may sắc sảo, đẹp mắt, tỉ mỉ trong từng chi tiết -------------------------------------- CHÍNH SÁCH: Cam kết chất lượng và mẫu mã sản phẩm giống với hình ảnh. Hoàn tiền nếu sản phẩm không giống với mô tả.</p>', 68, 0, '2024-10-16 08:31:01', '2024-11-26 15:26:37', NULL),
@@ -749,21 +749,23 @@ INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_s
 CREATE TABLE `tin_tucs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `danh_muc_id` bigint(20) UNSIGNED NOT NULL,
+  `nguoi_dang` bigint(20) UNSIGNED NOT NULL,
   `hinh_anh` varchar(255) DEFAULT NULL,
   `tieu_de` varchar(255) NOT NULL,
   `noi_dung` longtext NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `luot_xem` int(11) NOT NULL DEFAULT 0,
+  `ngay_dang` datetime DEFAULT NULL,
+  `ngay_cap_nhat` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tin_tucs`
 --
 
-INSERT INTO `tin_tucs` (`id`, `danh_muc_id`, `hinh_anh`, `tieu_de`, `noi_dung`, `created_at`, `updated_at`) VALUES
-(1, 3, 'uploads/tinTuc/HtZlsOL2PGVNjphsHRLaT48ocF1P5SgZt85qKaNX.png', 'Áo Phông', '<p><strong>Áo Phông: Sự Lựa Chọn Hoàn Hảo Cho Mọi Phong Cách</strong></p><p>Áo phông (T-shirt) là một trong những món đồ thời trang phổ biến nhất hiện nay nhờ sự thoải mái và linh hoạt trong phối đồ. Được làm từ chất liệu cotton, polyester hoặc vải thun co giãn, áo phông mang lại cảm giác dễ chịu, phù hợp với mọi điều kiện thời tiết.</p><h3><strong>Tại sao nên chọn áo phông?</strong></h3><ol><li><strong>Phong cách đa dạng</strong>: Dễ dàng kết hợp với quần jeans, quần short hay chân váy, áo phông phù hợp cho cả đi học, đi làm và đi chơi.</li><li><strong>Thoải mái và tiện lợi</strong>: Thiết kế đơn giản, thoáng mát, thích hợp cho mọi hoạt động hàng ngày.</li><li><strong>Nhiều mẫu mã</strong>: Từ áo phông trơn, áo phông in họa tiết đến áo phông oversize, người dùng có thể thoải mái lựa chọn theo sở thích.</li></ol><h3><strong>Cách bảo quản áo phông luôn bền đẹp</strong></h3><ul><li><strong>Giặt đúng cách</strong>: Hạn chế sử dụng nước nóng và chọn chế độ giặt nhẹ nhàng.</li><li><strong>Phơi đúng mặt vải</strong>: Lộn áo ngược khi phơi để tránh bay màu.</li><li><strong>Tránh sử dụng chất tẩy mạnh</strong>: Giữ áo phông không bị phai màu hay hư hỏng.</li></ul><p>Áo phông không chỉ là trang phục thường ngày mà còn là cách để bạn thể hiện cá tính riêng. Hãy chọn ngay cho mình những chiếc áo phông chất lượng để luôn tự tin và thoải mái!</p>', '2024-11-20 14:46:27', '2024-11-20 14:49:19'),
-(2, 1, 'uploads/tinTuc/1bsaqBq9mBFMW8Knx5EcPgZBdoEVlC13azCijLTR.png', 'Áo Sơ Mi Cộc Tay', '<p><strong>Áo Sơ Mi Cộc Tay: Sự Kết Hợp Hoàn Hảo Giữa Thanh Lịch Và Thoải Mái</strong></p><p>Áo sơ mi cộc tay là item thời trang không thể thiếu trong tủ đồ của phái mạnh và cả phái đẹp. Với thiết kế tay ngắn thoáng mát, áo sơ mi cộc tay mang lại vẻ ngoài năng động nhưng vẫn giữ được sự thanh lịch, phù hợp cho nhiều hoàn cảnh.</p><h3><strong>Điểm nổi bật của áo sơ mi cộc tay</strong></h3><ol><li><strong>Thoải mái, tiện dụng</strong>: Thiết kế tay ngắn giúp thoáng khí, đặc biệt thích hợp vào mùa hè.</li><li><strong>Dễ dàng phối đồ</strong>: Có thể kết hợp với quần âu, quần jeans hoặc quần short để tạo nên phong cách từ lịch sự đến năng động.</li><li><strong>Phù hợp mọi đối tượng</strong>: Dù bạn là học sinh, nhân viên văn phòng hay người yêu thích thời trang, áo sơ mi cộc tay luôn là lựa chọn hoàn hảo.</li></ol><h3><strong>Bí quyết chọn áo sơ mi cộc tay đẹp</strong></h3><ul><li><strong>Chất liệu</strong>: Ưu tiên các loại vải thoáng mát như cotton, linen hoặc vải pha sợi tự nhiên.</li><li><strong>Kiểu dáng</strong>: Chọn form áo vừa vặn, phù hợp với dáng người để tạo cảm giác cân đối.</li><li><strong>Họa tiết</strong>: Áo sơ mi cộc tay trơn phù hợp với môi trường công sở, trong khi các họa tiết kẻ sọc, hoa lá thích hợp cho các buổi dạo phố, du lịch.</li></ul><h3><strong>Cách bảo quản áo sơ mi cộc tay</strong></h3><ul><li><strong>Giặt tay hoặc giặt máy nhẹ nhàng</strong>: Tránh làm nhăn áo và giữ form dáng tốt hơn.</li><li><strong>Là (ủi) ở nhiệt độ thấp</strong>: Đặc biệt nếu áo làm từ chất liệu linen hoặc cotton.</li></ul><p>Áo sơ mi cộc tay không chỉ mang lại sự thoải mái mà còn giúp bạn luôn tự tin, nổi bật trong mọi hoàn cảnh. Hãy bổ sung ngay những mẫu áo sơ mi cộc tay vào bộ sưu tập của bạn để thêm phần lịch lãm và phong cách!</p>', '2024-11-20 14:57:27', NULL),
-(3, 4, 'uploads/tintuc/MwonAWE6p2ZDyeSDNWGNv4cvmMo5ltcnY1mjrsy4.png', 'Áo Sơ Mi Dài Tay', '<p><strong>Áo Sơ Mi Dài Tay: Biểu Tượng Thời Trang Thanh Lịch Và Đẳng Cấp</strong></p><p>Áo sơ mi dài tay là item thời trang kinh điển, phù hợp cho mọi lứa tuổi và mọi dịp. Với thiết kế lịch sự, áo sơ mi dài tay không chỉ dành cho môi trường công sở mà còn giúp bạn nổi bật trong những sự kiện quan trọng hoặc dạo phố thường ngày.</p><h3><strong>Ưu điểm nổi bật của áo sơ mi dài tay</strong></h3><ol><li><strong>Đa năng trong mọi hoàn cảnh</strong>: Dễ dàng phối với quần âu, chân váy hoặc quần jeans, áo sơ mi dài tay phù hợp từ môi trường công sở đến các buổi họp mặt hay tiệc tùng.</li><li><strong>Phong cách thanh lịch</strong>: Thiết kế tay dài giúp tôn lên vẻ ngoài chỉnh chu, chuyên nghiệp nhưng vẫn thoải mái.</li><li><strong>Bảo vệ da</strong>: Tay dài giúp che chắn da khỏi ánh nắng mặt trời hoặc gió lạnh, thích hợp cho cả mùa hè và mùa đông.</li></ol><h3><strong>Cách chọn áo sơ mi dài tay phù hợp</strong></h3><ul><li><strong>Kiểu dáng</strong>: Chọn áo vừa vặn với cơ thể để tạo sự gọn gàng. Áo oversize cũng là lựa chọn thú vị cho phong cách năng động.</li><li><strong>Chất liệu</strong>: Cotton, lụa, linen hoặc vải pha sợi tự nhiên là những lựa chọn lý tưởng, vừa thoáng mát vừa mềm mại.</li><li><strong>Màu sắc và họa tiết</strong>: Màu trắng hoặc pastel tạo cảm giác tinh tế, trong khi họa tiết kẻ sọc hoặc caro giúp bạn thêm nổi bật.</li></ul><h3><strong>Bí quyết bảo quản áo sơ mi dài tay bền đẹp</strong></h3><ul><li><strong>Giặt đúng cách</strong>: Sử dụng nước lạnh và không ngâm áo quá lâu để tránh phai màu.</li><li><strong>Là (ủi) cẩn thận</strong>: Là áo ở nhiệt độ phù hợp, chú ý phần cổ áo và cổ tay để giữ phom dáng đẹp.</li><li><strong>Treo áo thay vì gấp</strong>: Giúp áo không bị nhăn và luôn sẵn sàng cho những lần sử dụng tiếp theo.</li></ul><p>Áo sơ mi dài tay không chỉ là trang phục mà còn là cách thể hiện phong cách và cá tính riêng. Hãy sở hữu ngay những chiếc áo sơ mi dài tay chất lượng để luôn tự tin trong mọi tình huống!</p>', '2024-11-20 15:01:04', '2024-11-20 15:01:34');
+INSERT INTO `tin_tucs` (`id`, `danh_muc_id`, `nguoi_dang`, `hinh_anh`, `tieu_de`, `noi_dung`, `luot_xem`, `ngay_dang`, `ngay_cap_nhat`) VALUES
+(1, 3, 1, 'uploads/tinTuc/HtZlsOL2PGVNjphsHRLaT48ocF1P5SgZt85qKaNX.png', 'Áo Phông', '<p><strong>Áo Phông: Sự Lựa Chọn Hoàn Hảo Cho Mọi Phong Cách </strong></p><p>Áo phông (T-shirt) là một trong những món đồ thời trang phổ biến nhất hiện nay nhờ sự thoải mái và linh hoạt trong phối đồ. Được làm từ chất liệu cotton, polyester hoặc vải thun co giãn, áo phông mang lại cảm giác dễ chịu, phù hợp với mọi điều kiện thời tiết.</p><h3><strong>Tại sao nên chọn áo phông?</strong></h3><ol><li><strong>Phong cách đa dạng</strong>: Dễ dàng kết hợp với quần jeans, quần short hay chân váy, áo phông phù hợp cho cả đi học, đi làm và đi chơi.</li><li><strong>Thoải mái và tiện lợi</strong>: Thiết kế đơn giản, thoáng mát, thích hợp cho mọi hoạt động hàng ngày.</li><li><strong>Nhiều mẫu mã</strong>: Từ áo phông trơn, áo phông in họa tiết đến áo phông oversize, người dùng có thể thoải mái lựa chọn theo sở thích.</li></ol><h3><strong>Cách bảo quản áo phông luôn bền đẹp</strong></h3><ul><li><strong>Giặt đúng cách</strong>: Hạn chế sử dụng nước nóng và chọn chế độ giặt nhẹ nhàng.</li><li><strong>Phơi đúng mặt vải</strong>: Lộn áo ngược khi phơi để tránh bay màu.</li><li><strong>Tránh sử dụng chất tẩy mạnh</strong>: Giữ áo phông không bị phai màu hay hư hỏng.</li></ul><p>Áo phông không chỉ là trang phục thường ngày mà còn là cách để bạn thể hiện cá tính riêng. Hãy chọn ngay cho mình những chiếc áo phông chất lượng để luôn tự tin và thoải mái!</p>', 0, '2024-11-20 14:46:27', NULL),
+(2, 1, 18, 'uploads/tinTuc/1bsaqBq9mBFMW8Knx5EcPgZBdoEVlC13azCijLTR.png', 'Áo Sơ Mi Cộc Tay', '<p><strong>Áo Sơ Mi Cộc Tay: Sự Kết Hợp Hoàn Hảo Giữa Thanh Lịch Và Thoải Mái</strong></p><p>Áo sơ mi cộc tay là item thời trang không thể thiếu trong tủ đồ của phái mạnh và cả phái đẹp. Với thiết kế tay ngắn thoáng mát, áo sơ mi cộc tay mang lại vẻ ngoài năng động nhưng vẫn giữ được sự thanh lịch, phù hợp cho nhiều hoàn cảnh.</p><h3><strong>Điểm nổi bật của áo sơ mi cộc tay</strong></h3><ol><li><strong>Thoải mái, tiện dụng</strong>: Thiết kế tay ngắn giúp thoáng khí, đặc biệt thích hợp vào mùa hè.</li><li><strong>Dễ dàng phối đồ</strong>: Có thể kết hợp với quần âu, quần jeans hoặc quần short để tạo nên phong cách từ lịch sự đến năng động.</li><li><strong>Phù hợp mọi đối tượng</strong>: Dù bạn là học sinh, nhân viên văn phòng hay người yêu thích thời trang, áo sơ mi cộc tay luôn là lựa chọn hoàn hảo.</li></ol><h3><strong>Bí quyết chọn áo sơ mi cộc tay đẹp</strong></h3><ul><li><strong>Chất liệu</strong>: Ưu tiên các loại vải thoáng mát như cotton, linen hoặc vải pha sợi tự nhiên.</li><li><strong>Kiểu dáng</strong>: Chọn form áo vừa vặn, phù hợp với dáng người để tạo cảm giác cân đối.</li><li><strong>Họa tiết</strong>: Áo sơ mi cộc tay trơn phù hợp với môi trường công sở, trong khi các họa tiết kẻ sọc, hoa lá thích hợp cho các buổi dạo phố, du lịch.</li></ul><h3><strong>Cách bảo quản áo sơ mi cộc tay</strong></h3><ul><li><strong>Giặt tay hoặc giặt máy nhẹ nhàng</strong>: Tránh làm nhăn áo và giữ form dáng tốt hơn.</li><li><strong>Là (ủi) ở nhiệt độ thấp</strong>: Đặc biệt nếu áo làm từ chất liệu linen hoặc cotton.</li></ul><p>Áo sơ mi cộc tay không chỉ mang lại sự thoải mái mà còn giúp bạn luôn tự tin, nổi bật trong mọi hoàn cảnh. Hãy bổ sung ngay những mẫu áo sơ mi cộc tay vào bộ sưu tập của bạn để thêm phần lịch lãm và phong cách!</p>', 0, '2024-11-20 14:57:27', NULL),
+(3, 4, 19, 'uploads/tintuc/MwonAWE6p2ZDyeSDNWGNv4cvmMo5ltcnY1mjrsy4.png', 'Áo Sơ Mi Dài Tay', '<p><strong>Áo Sơ Mi Dài Tay: Biểu Tượng Thời Trang Thanh Lịch Và Đẳng Cấp</strong></p><p>Áo sơ mi dài tay là item thời trang kinh điển, phù hợp cho mọi lứa tuổi và mọi dịp. Với thiết kế lịch sự, áo sơ mi dài tay không chỉ dành cho môi trường công sở mà còn giúp bạn nổi bật trong những sự kiện quan trọng hoặc dạo phố thường ngày.</p><h3><strong>Ưu điểm nổi bật của áo sơ mi dài tay</strong></h3><ol><li><strong>Đa năng trong mọi hoàn cảnh</strong>: Dễ dàng phối với quần âu, chân váy hoặc quần jeans, áo sơ mi dài tay phù hợp từ môi trường công sở đến các buổi họp mặt hay tiệc tùng.</li><li><strong>Phong cách thanh lịch</strong>: Thiết kế tay dài giúp tôn lên vẻ ngoài chỉnh chu, chuyên nghiệp nhưng vẫn thoải mái.</li><li><strong>Bảo vệ da</strong>: Tay dài giúp che chắn da khỏi ánh nắng mặt trời hoặc gió lạnh, thích hợp cho cả mùa hè và mùa đông.</li></ol><h3><strong>Cách chọn áo sơ mi dài tay phù hợp</strong></h3><ul><li><strong>Kiểu dáng</strong>: Chọn áo vừa vặn với cơ thể để tạo sự gọn gàng. Áo oversize cũng là lựa chọn thú vị cho phong cách năng động.</li><li><strong>Chất liệu</strong>: Cotton, lụa, linen hoặc vải pha sợi tự nhiên là những lựa chọn lý tưởng, vừa thoáng mát vừa mềm mại.</li><li><strong>Màu sắc và họa tiết</strong>: Màu trắng hoặc pastel tạo cảm giác tinh tế, trong khi họa tiết kẻ sọc hoặc caro giúp bạn thêm nổi bật.</li></ul><h3><strong>Bí quyết bảo quản áo sơ mi dài tay bền đẹp</strong></h3><ul><li><strong>Giặt đúng cách</strong>: Sử dụng nước lạnh và không ngâm áo quá lâu để tránh phai màu.</li><li><strong>Là (ủi) cẩn thận</strong>: Là áo ở nhiệt độ phù hợp, chú ý phần cổ áo và cổ tay để giữ phom dáng đẹp.</li><li><strong>Treo áo thay vì gấp</strong>: Giúp áo không bị nhăn và luôn sẵn sàng cho những lần sử dụng tiếp theo.</li></ul><p>Áo sơ mi dài tay không chỉ là trang phục mà còn là cách thể hiện phong cách và cá tính riêng. Hãy sở hữu ngay những chiếc áo sơ mi dài tay chất lượng để luôn tự tin trong mọi tình huống!</p>', 0, '2024-11-20 15:01:04', NULL);
 
 -- --------------------------------------------------------
 
@@ -13026,7 +13028,8 @@ ALTER TABLE `san_phams`
 --
 ALTER TABLE `tin_tucs`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tin_tucs_danh_muc_id_foreign` (`danh_muc_id`);
+  ADD KEY `tin_tucs_danh_muc_id_foreign` (`danh_muc_id`),
+  ADD KEY `tin_tucs_nguoi_dang_foreign` (`nguoi_dang`);
 
 --
 -- Chỉ mục cho bảng `tra_loi_danh_gias`
@@ -13128,7 +13131,7 @@ ALTER TABLE `danh_mucs`
 -- AUTO_INCREMENT cho bảng `danh_muc_tin_tucs`
 --
 ALTER TABLE `danh_muc_tin_tucs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `dia_chis`
@@ -13194,7 +13197,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -13218,7 +13221,7 @@ ALTER TABLE `san_phams`
 -- AUTO_INCREMENT cho bảng `tin_tucs`
 --
 ALTER TABLE `tin_tucs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT cho bảng `tra_loi_danh_gias`
@@ -13330,7 +13333,8 @@ ALTER TABLE `san_phams`
 -- Các ràng buộc cho bảng `tin_tucs`
 --
 ALTER TABLE `tin_tucs`
-  ADD CONSTRAINT `tin_tucs_danh_muc_id_foreign` FOREIGN KEY (`danh_muc_id`) REFERENCES `danh_muc_tin_tucs` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `tin_tucs_danh_muc_id_foreign` FOREIGN KEY (`danh_muc_id`) REFERENCES `danh_muc_tin_tucs` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tin_tucs_nguoi_dang_foreign` FOREIGN KEY (`nguoi_dang`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `tra_loi_danh_gias`
