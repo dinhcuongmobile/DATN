@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\GioHang;
+use App\Models\TraLoiDanhGia;
 use App\Models\User;
 use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,12 @@ class SanPhamController extends Controller
             ->whereHas('anhDanhGias')
             ->count();
 
+        $arrTraLoiDanhGia = [];
+
+        foreach ($danh_gias as $key => $itemDanhGia) {
+            $arrTraLoiDanhGia[$itemDanhGia->id] = TraLoiDanhGia::with('user')->where('danh_gia_id',$itemDanhGia->id)->orderBy('id','desc')->first();
+        }   
+
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
             ->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
@@ -58,6 +65,7 @@ class SanPhamController extends Controller
         $this->views['coHinhAnh']=$coHinhAnh;
         $this->views['kich_cos'] = KichCo::all();
         $this->views['mau_sacs'] = MauSac::all();
+        $this->views['arrTraLoiDanhGia'] = $arrTraLoiDanhGia;
 
         // Tổng yêu thích
         if (Auth::check()) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Location\LocationController;
 use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\DanhGia\DanhGiaController;
 use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
@@ -412,6 +413,13 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
 
     });
     Route::get('thong-bao', [ThongBaoAdminController::class,'layThongBao'])->name('thong-bao.thong-bao-admin');
+
+    //Danh gia
+    Route::prefix('/danh-gia')->group(function() {
+        Route::get('/danh-sach-danh-gia', [DanhGiaController::class, 'showDanhGia'])->name('danh-gia.danh-sach');
+        Route::get('/chi-tiet-danh-gia/{id}', [DanhGiaController::class, 'chiTietDanhGia'])->name('danh-gia.chi-tiet');
+        Route::post('/tra-loi-danh-gia', [DanhGiaController::class, 'guiPhanHoi'])->name('danh-gia.tra-loi');
+    });
 });
 
 // dia chỉ

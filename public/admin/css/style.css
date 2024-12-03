@@ -95,3 +95,8 @@
 .hienThiMauSac{
     display: none;
 }
+
+/* Danh gia sao */
+.fa-star{
+    color: rgba(255, 196, 0, 1);
+}
