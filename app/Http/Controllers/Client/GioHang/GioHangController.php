@@ -110,10 +110,6 @@ class GioHangController extends Controller
         $ma_mau = $request->input('ma_mau');
 
         $san_pham = SanPham::find($san_pham_id);
-        $bien_the = BienThe::where('san_pham_id', $san_pham_id)
-                            ->where('kich_co', $kich_co)
-                            ->where('ma_mau', $ma_mau)
-                            ->first();
 
         // Tính thành tiền
         $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai / 100);
@@ -393,6 +389,7 @@ class GioHangController extends Controller
                 'thanh_toan' => $thanh_toan,
                 'ghi_chu' => $request->input('ghi_chu'),
                 'ngay_tao' => now(),
+                'ngay_cap_nhat' => now()
             ];
 
             $result = DonHang::create($dataInsertDonHang);

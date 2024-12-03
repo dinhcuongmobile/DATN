@@ -884,9 +884,7 @@
                                     </div>
 
                                     <div class="action-button">
-                                        <button class="btn btn-danger btnMuaLai">Mua Lại</button>
-                                        <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên
-                                            Hệ Shop</a>
+                                        
                                     </div>
                                 </div>
                             </div>

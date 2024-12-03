@@ -28,19 +28,30 @@ class DonHangController extends Controller
     public function showChiTietDonHang(Request $request){
         $donHangId = $request->input('donHangId');
         $don_hang = DonHang::with('user','diaChi','chiTietDonHangs')->find($donHangId);
-        $dia_chi = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($don_hang->dia_chi_id);
-        $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHangId)->orderBy('id','desc')->get();
-        $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
-                            ->where('ma_quan_huyen', $dia_chi->ma_quan_huyen)
-                            ->first();
+
         if($don_hang){
+            $dia_chi = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($don_hang->dia_chi_id);
+            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHangId)->orderBy('id','desc')->get();
+            $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
+                                ->where('ma_quan_huyen', $dia_chi->ma_quan_huyen)
+                                ->first();
+
+            // Kiểm tra sản phẩm đã được đánh giá chưa
+            $san_pham_ids = $chi_tiet_don_hangs->pluck('san_pham_id');
+            $danh_gias = DanhGia::whereIn('san_pham_id', $san_pham_ids)
+                                ->where('user_id', Auth::id())
+                                ->where('don_hang_id',$donHangId)
+                                ->pluck('san_pham_id');
+
+            $chuaDanhGia = $san_pham_ids->diff($danh_gias);
 
             return response()->json([
                 'success' => true,
                 'don_hang' => $don_hang,
                 'dia_chi' => $dia_chi,
                 'chi_tiet_don_hangs' => $chi_tiet_don_hangs,
-                'phi_ships' => $phi_ships
+                'phi_ships' => $phi_ships,
+                'chuaDanhGia' => $chuaDanhGia->values()
             ]);
         }
         else{
