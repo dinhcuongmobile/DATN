@@ -91,8 +91,9 @@
                                     </div>
                                     <div class="dashboard-user-name">
                                         <h6>Chào, <b>{{ Auth::user()->ho_va_ten }}</b></h6>
-                                        <p>Trang tài khoản Namad Store giúp bạn dễ dàng quản lý thông tin cá nhân, theo dõi đơn hàng và cập nhật trạng thái giao hàng.
-                                             Tại đây, bạn có thể chỉnh sửa thông tin liên lạc, thay đổi mật khẩu.</p>
+                                        <p>Trang tài khoản Namad Store giúp bạn dễ dàng quản lý thông tin cá nhân, theo dõi
+                                            đơn hàng và cập nhật trạng thái giao hàng.
+                                            Tại đây, bạn có thể chỉnh sửa thông tin liên lạc, thay đổi mật khẩu.</p>
                                     </div>
                                     <div class="total-box">
                                         <div class="row gy-4">
@@ -350,7 +351,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]" value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -359,20 +359,27 @@
                                                                         </p>
                                                                         <div class="btnDonMua">
                                                                             @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai == 1)
-                                                                                <button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
+                                                                                <button style="margin-right:15px;"
+                                                                                    class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
-                                                                                <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
-                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                                <button
+                                                                                    class="btn btn-success daNhanHang">Đã nhận hàng</button>
+                                                                                <button
+                                                                                    class="btn btn-primary muaLai">Mua lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 3)
                                                                                 @if (isset($chua_danh_gia[$itemDonHang->id]) && $chua_danh_gia[$itemDonHang->id])
                                                                                     <button class="btn btn-warning btnDanhGia">Đánh giá</button>
                                                                                 @endif
-                                                                                <button class="btn btn-primary">Mua lại</button>
+                                                                                <button class="btn btn-primary muaLai">Mua
+                                                                                    lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 4)
-                                                                                <button class="btn btn-primary">Mua lại</button>
-                                                                                <a href="" class="btn btn-outline-secondary">Xem chi tiết hủy đơn</a>
+                                                                                <button class="btn btn-primary muaLai">Mua
+                                                                                    lại</button>
+                                                                                <a class="btn btn-outline-secondary">Xem
+                                                                                    chi tiết hủy đơn</a>
                                                                             @endif
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -434,8 +441,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]"
-                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -509,8 +514,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]"
-                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -586,8 +589,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]"
-                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -597,7 +598,7 @@
                                                                         <div class="btnDonMua">
                                                                             <button class="btn btn-success daNhanHang">Đã
                                                                                 nhận hàng</button>
-                                                                            <button class="btn btn-primary">Mua
+                                                                            <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ
@@ -664,8 +665,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]"
-                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -674,10 +673,15 @@
                                                                         </p>
                                                                         <div class="btnDonMua">
                                                                             @if (isset($chua_danh_gia[$itemDonHang->id]) && $chua_danh_gia[$itemDonHang->id])
-                                                                                <button class="btn btn-warning btnDanhGia">Đánh giá</button>
+                                                                                <button
+                                                                                    class="btn btn-warning btnDanhGia">Đánh
+                                                                                    giá</button>
                                                                             @endif
-                                                                            <button class="btn btn-primary">Mua lại</button>
-                                                                            <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                                                            <button class="btn btn-primary muaLai">Mua
+                                                                                lại</button>
+                                                                            <a href="{{ route('lien-he.lien-he') }}"
+                                                                                class="btn btn-outline-secondary">Liên hệ
+                                                                                Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -739,8 +743,6 @@
                                                                                             <span><del>{{ number_format($item->sanPham->gia_san_pham * $item->so_luong, 0, ',', '.') }}đ</del></span>
                                                                                         </td>
                                                                                     </tr>
-                                                                                    <input type="hidden" name="ids[]"
-                                                                                        value="{{ $item->san_pham_id }}">
                                                                                 @endforeach
                                                                             </tbody>
                                                                         </table>
@@ -748,7 +750,7 @@
                                                                             <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
                                                                         </p>
                                                                         <div class="btnDonMua">
-                                                                            <button class="btn btn-primary">Mua
+                                                                            <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
                                                                             <a href=""
                                                                                 class="btn btn-outline-secondary">Xem chi
@@ -873,9 +875,7 @@
                                     </div>
 
                                     <div class="action-button">
-                                        <button class="btn btn-danger btnMuaLai">Mua Lại</button>
-                                        <a href="{{ route('lien-he.lien-he') }}" class="btn btn-outline-secondary">Liên
-                                            Hệ Shop</a>
+
                                     </div>
                                 </div>
                             </div>

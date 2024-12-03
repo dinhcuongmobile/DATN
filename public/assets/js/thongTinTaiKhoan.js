@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded',function(){
     chiTietDonMua();
     huyDonHang();
     reviews();
+    daNhanHang();
+    muaLai();
 });
 
 //active don hang
@@ -132,7 +134,7 @@ function chiTietDonMua(){
                             document.querySelector('#order-details .list-san-pham').innerHTML="";
                             chiTietDonHang.forEach((item)=>{
                                 $('#order-details .list-san-pham').prepend(
-                                    `<a class="product-list-a" href="">
+                                    `<a class="product-list-a" href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
                                         <div class="product-list">
                                             <img src="/storage/${item.bien_the.hinh_anh}" alt="err">
                                             <div class="product-details">
@@ -177,6 +179,8 @@ function chiTietDonMua(){
 
                             const timeline = document.querySelector('#order-details .timeline');
                             const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
+                            const actionButtons = document.querySelector('#order-details .action-button');
+                            actionButtons.innerHTML="";
                             timeline.querySelectorAll('i').forEach((el)=>{
                                 el.classList.remove('change','next-change');
                             });
@@ -193,6 +197,9 @@ function chiTietDonMua(){
                                     timeline.querySelector('.zezo i').classList.add('change');
                                     timeline.querySelector('.one i').classList.add('next-change');
                                     deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
+                                    actionButtons.innerHTML=
+                                    `<button class="btn btn-outline-danger huyDonHangChiTiet">Hủy đơn hàng</button>
+                                    <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
 
                                     break;
                                 case 1:
@@ -207,6 +214,9 @@ function chiTietDonMua(){
                                         <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
                                         <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
                                     `;
+                                    actionButtons.innerHTML=
+                                    `<button class="btn btn-outline-danger huyDonHangChiTiet">Hủy đơn hàng</button>
+                                    <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
                                 break;
                                 case 2:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
@@ -222,6 +232,10 @@ function chiTietDonMua(){
                                         <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
                                         <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
                                     `;
+                                    actionButtons.innerHTML=
+                                    `<button class="btn btn-success daNhanHangChiTiet">Đã nhận hàng</button>
+                                    <button class="btn btn-primary muaLaiChiTiet">Mua lại</button>
+                                    <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
                                 break;
                                 case 3:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
@@ -240,16 +254,38 @@ function chiTietDonMua(){
                                         <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
                                         <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
                                     `;
+
+                                    let btnDanhGiaChiTiet = "";
+                                    if (response.chuaDanhGia.length > 0) {
+                                        btnDanhGiaChiTiet = `<button class="btn btn-warning danhGiaChiTiet">Đánh giá</button>`;
+                                    }
+                                    actionButtons.innerHTML=
+                                    `${btnDanhGiaChiTiet}
+                                      <button class="btn btn-primary muaLaiChiTiet">Mua lại</button>
+                                    <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
                                 break;
                                 case 4:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
                                     "<span class='text-danger'>Đã hủy</span>";
+                                    // timeline.remove();
+                                    // document.querySelector('#order-details .delivery-status h3').textContent = "Trạng thái";
+                                    // deliveryStatus.innerHTML=`
+                                    //     <p class="active">
+                                    //         <i class="fa-solid fa-circle"></i>
+                                    //         <span>Đơn hàng đã được hủy vào lúc </span>
+                                    //     </p>
+                                    // `;
                                 break;
                             }
 
                             //show
                             donHangContent.classList.remove('active','show');
                             chiTietDonHangContent.classList.add('active','show');
+
+                            huyDonHangChiTiet(donHang.id);
+                            daNhanHangChiTiet(donHang.id);
+                            muaLaiChiTiet(donHang.id);
+                            danhGiaChiTiet(donHang.id);
                         }
                     },
                     error: function (error) {
@@ -302,6 +338,36 @@ function huyDonHang(){
                 });
 
             });
+        });
+    }
+}
+
+function huyDonHangChiTiet(id){
+    let huyDonHangChiTiet = document.querySelector('#order-details .action-button .huyDonHangChiTiet');
+
+    if(huyDonHangChiTiet){
+        huyDonHangChiTiet.addEventListener('click',function(){
+
+            $.ajax({
+                type: 'POST',
+                url: '/don-hang/huy-don-hang/',
+                data: {
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    don_hang_id: id
+                },
+                success: function (response) {
+                    if(response.success){
+                        sessionStorage.setItem("activeTab", "order");
+                        sessionStorage.setItem("activeTabDaHuy", "tap6");
+                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
         });
     }
 }
@@ -403,7 +469,6 @@ function reviews(){
                     },
                     success: function (response) {
                         if(response.success){
-                            let donHang = response.don_hang;
                             let chiTietDonHang = response.chi_tiet_don_hangs;
 
                             document.querySelector('#reviews .main').innerHTML="";
@@ -472,6 +537,91 @@ function reviews(){
                 });
 
             });
+        });
+    }
+}
+
+function danhGiaChiTiet(id){
+    let danhGiaChiTiet = document.querySelector('#order-details .action-button .danhGiaChiTiet');
+
+    if(danhGiaChiTiet){
+        danhGiaChiTiet.addEventListener('click',function(){
+
+            $.ajax({
+                type: 'GET',
+                url: '/don-hang/show-modal-danh-gia/',
+                data: {
+                    don_hang_id: id
+                },
+                success: function (response) {
+                    if(response.success){
+                        let chiTietDonHang = response.chi_tiet_don_hangs;
+
+                        document.querySelector('#reviews .main').innerHTML="";
+                        if(chiTietDonHang.length>0){
+                            $('#reviews').modal('show');
+                            chiTietDonHang.forEach((item, index)=>{
+                                $('#reviews .main').prepend(
+                                    `<div class="row g-3 mt-1" data-idSp="${item.san_pham_id}" data-idDH="${item.don_hang_id}">
+                                        <div class="boder"></div>
+                                        <div class="popup-content"></div>
+                                        <div class="row-item">
+                                            <div class="product">
+                                                <div class="product-list">
+                                                    <img src="/storage/${item.san_pham.hinh_anh}" alt="err">
+                                                    <div class="product-details" style="padding-top:10px;">
+                                                        <p class="tenSanPham">${item.san_pham.ten_san_pham}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="star-rating mt-2" data-rating="0">
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </div>
+                                                <p class="starRatingErr text-danger"></p>
+                                            </div>
+
+                                            <div class="rating-btns">
+                                                <button>Chất lượng sản phẩm tuyệt vời</button>
+                                                <button>Đóng gói sản phẩm đẹp và chắc chắn</button>
+                                                <button>Shop phục vụ rất tốt</button>
+                                                <button>Rất đáng tiền</button>
+                                                <button>Thời gian giao hàng nhanh</button>
+                                            </div>
+                                            <div class="noi-dung mt-3">
+                                                <textarea class="form-control mb-3" rows="4" placeholder="Hãy chia sẻ những điều bạn thích về sản phẩm này nhé..."></textarea>
+                                                <div class="img mt-2">
+                                                    <p>Tải ảnh lên:</p>
+                                                    <div class="image-upload">
+                                                        <input type="file" id="fileUpload${index}" accept="image/*" multiple>
+                                                        <label for="fileUpload${index}"><i class="fa-solid fa-plus"></i></label>
+                                                    </div>
+                                                    <p class="soLuongAnh"><span>0</span>/<span>6</span></p>
+                                                    <p class="soLuongAnhErr text-danger"></p>
+                                                    <div class="image-preview mt-3"></div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-info mb-3 mt-3 guiDanhGia">Gửi Đánh Giá</button>
+                                        </div>
+                                    </div>`
+                                );
+                            });
+                        }
+
+                        previewImages();
+                        starRating();
+                        guiDanhGia();
+                        ratingBtns();
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
         });
     }
 }
@@ -618,5 +768,125 @@ function guiDanhGia(){
         });
 
 
+    }
+}
+
+function daNhanHang(){
+    const btnDaNhan = document.querySelectorAll('.btnDonMua .daNhanHang');
+    if(btnDaNhan){
+        btnDaNhan.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let donHangId = el.closest('.card').getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/don-hang/da-nhan-hang/',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        don_hang_id: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            sessionStorage.setItem("activeTab", "order");
+                            sessionStorage.setItem("activeTabHoanThanh", "tap5");
+                            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
+    }
+}
+
+function daNhanHangChiTiet(id){
+    let daNhanHangChiTiet = document.querySelector('#order-details .action-button .daNhanHangChiTiet');
+
+    if(daNhanHangChiTiet){
+        daNhanHangChiTiet.addEventListener('click',function(){
+
+            $.ajax({
+                type: 'POST',
+                url: '/don-hang/da-nhan-hang/',
+                data: {
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    don_hang_id: id
+                },
+                success: function (response) {
+                    if(response.success){
+                        sessionStorage.setItem("activeTab", "order");
+                        sessionStorage.setItem("activeTabHoanThanh", "tap5");
+                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
+        });
+    }
+}
+
+function muaLai(){
+    const btnMuaLai = document.querySelectorAll('.btnDonMua .muaLai');
+    if(btnMuaLai){
+        btnMuaLai.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let donHangId = el.closest('.card').getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/don-hang/mua-lai/',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        don_hang_id: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            window.location.href="/gio-hang/";
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
+    }
+}
+
+function muaLaiChiTiet(id){
+    let muaLaiChiTiet = document.querySelector('#order-details .action-button .muaLaiChiTiet');
+
+    if(muaLaiChiTiet){
+        muaLaiChiTiet.addEventListener('click',function(){
+
+            $.ajax({
+                type: 'POST',
+                url: '/don-hang/mua-lai/',
+                data: {
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    don_hang_id: id
+                },
+                success: function (response) {
+                    if(response.success){
+                        window.location.href="/gio-hang/";
+                    }
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                    alert('Có lỗi xảy ra');
+                }
+            });
+
+        });
     }
 }

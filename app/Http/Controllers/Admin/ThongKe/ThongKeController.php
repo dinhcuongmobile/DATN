@@ -30,7 +30,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => $val->ngay_cap_nhat,
+                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -61,7 +61,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => $val->ngay_cap_nhat,
+                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -110,12 +110,12 @@ class ThongKeController extends Controller
         } elseif ($data['dashboardValue'] == 'thangNay') {
             $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
                 ->whereBetween('ngay_cap_nhat', [$dauThangNay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
-                
+
             $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$dauThangNay, $hienTai])->where('trang_thai', 3)->count();
         } else {
             $donHang = DonHang::selectRaw('DATE(ngay_cap_nhat) as ngay_cap_nhat, SUM(tong_thanh_toan) as tong_thanh_toan, COUNT(*) as tong_don_hang')
                 ->whereBetween('ngay_cap_nhat', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->groupBy('ngay_cap_nhat')->orderBy('ngay_cap_nhat', 'ASC')->get();
-                
+
             $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub365Ngay, $hienTai])->where('trang_thai', 3)->count();
         }
 
@@ -123,7 +123,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => $val->ngay_cap_nhat,
+                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );

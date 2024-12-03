@@ -71,17 +71,17 @@ class ThongTinTaiKhoanController extends Controller
         }
         //
         $don_hangs = [
-            'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get(),
+            'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //chua duyet
-            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('id', 'desc')->get(),
+            'trang_thai_0' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 0)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //dang chuan bi hang
-            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('id', 'desc')->get(),
+            'trang_thai_1' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 1)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //dang giao
-            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('id', 'desc')->get(),
+            'trang_thai_2' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 2)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //da giao
-            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id', 'desc')->get(),
+            'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //da huy
-            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id', 'desc')->get(),
+            'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('ngay_cap_nhat', 'desc')->get(),
         ];
 
         $chi_tiet_don_hangs = [];
@@ -92,7 +92,8 @@ class ThongTinTaiKhoanController extends Controller
                 $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $item->id)->get();
 
                 // Kiểm tra xem đơn hàng đã được đánh giá hết chưa
-                $danh_gia = DanhGia::whereIn('san_pham_id', $chi_tiet_don_hangs[$item->id]->pluck('san_pham_id'))->where('user_id', Auth::id())->get();
+                $danh_gia = DanhGia::whereIn('san_pham_id', $chi_tiet_don_hangs[$item->id]
+                                    ->pluck('san_pham_id'))->where('user_id', Auth::id())->where('don_hang_id',$item->id)->get();
 
                 // Nếu có ít nhất một sản phẩm chưa được đánh giá, thì lưu lại
                 $chua_danh_gia[$item->id] = $chi_tiet_don_hangs[$item->id]->count() > $danh_gia->count();

@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\BienThe;
 use App\Models\Coin;
+use App\Models\GioHang;
 use Illuminate\Support\Facades\Auth;
 
 class DonHangController extends Controller
@@ -26,19 +28,30 @@ class DonHangController extends Controller
     public function showChiTietDonHang(Request $request){
         $donHangId = $request->input('donHangId');
         $don_hang = DonHang::with('user','diaChi','chiTietDonHangs')->find($donHangId);
-        $dia_chi = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($don_hang->dia_chi_id);
-        $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHangId)->orderBy('id','desc')->get();
-        $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
-                            ->where('ma_quan_huyen', $dia_chi->ma_quan_huyen)
-                            ->first();
+
         if($don_hang){
+            $dia_chi = DiaChi::with('phuongXa','quanHuyen','tinhThanhPho')->find($don_hang->dia_chi_id);
+            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','bienThe')->where('don_hang_id',$donHangId)->orderBy('id','desc')->get();
+            $phi_ships = PhiShip::with('tinhThanhPho', 'quanHuyen')
+                                ->where('ma_quan_huyen', $dia_chi->ma_quan_huyen)
+                                ->first();
+
+            // Kiểm tra sản phẩm đã được đánh giá chưa
+            $san_pham_ids = $chi_tiet_don_hangs->pluck('san_pham_id');
+            $danh_gias = DanhGia::whereIn('san_pham_id', $san_pham_ids)
+                                ->where('user_id', Auth::id())
+                                ->where('don_hang_id',$donHangId)
+                                ->pluck('san_pham_id');
+
+            $chuaDanhGia = $san_pham_ids->diff($danh_gias);
 
             return response()->json([
                 'success' => true,
                 'don_hang' => $don_hang,
                 'dia_chi' => $dia_chi,
                 'chi_tiet_don_hangs' => $chi_tiet_don_hangs,
-                'phi_ships' => $phi_ships
+                'phi_ships' => $phi_ships,
+                'chuaDanhGia' => $chuaDanhGia->values()
             ]);
         }
         else{
@@ -180,6 +193,85 @@ class DonHangController extends Controller
             return response()->json([
                 'success' => true
             ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function daNhanHang(Request $request){
+        DB::beginTransaction();
+        try {
+            $don_hang_id = $request->input('don_hang_id');
+            $don_hang = DonHang::find($don_hang_id);
+            if($don_hang){
+                $don_hang->update([
+                    'trang_thai' => 3,
+                    'thanh_toan' => 1,
+                    'ngay_cap_nhat'=>now()
+                ]);
+            }
+            DB::commit();
+            return response()->json([
+                'success' => true
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function muaLai(Request $request){
+        DB::beginTransaction();
+        try {
+            $don_hang_id = $request->input('don_hang_id');
+            $don_hang = DonHang::find($don_hang_id);
+
+            if (!$don_hang || $don_hang->user_id != Auth::id()) {
+                return response()->json([
+                    'success' => false
+                ]);
+            }
+
+            $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham','donHang','bienThe')
+                                                ->where('don_hang_id',$don_hang->id)->get();
+
+            foreach ($chi_tiet_don_hangs as $key => $itemChiTiet) {
+
+                $bien_the = BienThe::with('sanPham')->where('id',$itemChiTiet->bien_the_id)
+                                    ->where('san_pham_id',$itemChiTiet->san_pham_id)->first();
+                if (!$bien_the) {
+                    continue; // Bỏ qua nếu biến thể không tồn tại
+                }
+
+                $san_pham = SanPham::find($bien_the->san_pham_id);
+                $gia_khuyen_mai = $san_pham->gia_san_pham - ($san_pham->gia_san_pham * $san_pham->khuyen_mai) / 100;
+
+                if($bien_the->so_luong >= $itemChiTiet->so_luong){
+                    $gio_hang = GioHang::where('user_id', Auth::id())
+                                        ->where('san_pham_id', $bien_the->san_pham_id)
+                                        ->where('bien_the_id', $bien_the->id)->first();
+                    if(!$gio_hang){
+                        GioHang::create([
+                            'user_id' => Auth::id(),
+                            'san_pham_id' => $bien_the->san_pham_id,
+                            'bien_the_id' => $bien_the->id,
+                            'so_luong' => $itemChiTiet->so_luong,
+                            'thanh_tien' => $gia_khuyen_mai * $itemChiTiet->so_luong,
+                            'created_at' => now(),
+                        ]);
+                    }else{
+                        $gio_hang->update([
+                            'so_luong' => $gio_hang->so_luong + $itemChiTiet->so_luong,
+                            'thanh_tien' => $gia_khuyen_mai * ($gio_hang->so_luong + $itemChiTiet->so_luong),
+                        ]);
+                    }
+
+                }
+
+            }
+            DB::commit();
+            return response()->json(['success' => true]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'error' => $e->getMessage()]);
