@@ -117,6 +117,8 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('chi-tiet-don-hang',[DonHangController::class,'showChiTietDonHang']);
         Route::get('show-modal-danh-gia',[DonHangController::class,'showModalDanhGia']);
         Route::post('huy-don-hang',[DonHangController::class,'huyDonHang']);
+        Route::post('da-nhan-hang',[DonHangController::class,'daNhanHang']);
+        Route::post('mua-lai',[DonHangController::class,'muaLai']);
         Route::post('danh-gia',[DonHangController::class,'danhGia']);
         Route::post('cong-namad-xu-danh-gia',[DonHangController::class,'congNamadXuDanhGia']);
         Route::post('cap-nhat-trang-thai-da-giao',[DonHangController::class,'capNhatTrangThaiDaGiao']);

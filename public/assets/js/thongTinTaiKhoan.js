@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded',function(){
     chiTietDonMua();
     huyDonHang();
     reviews();
+    daNhanHang();
+    muaLai();
 });
 
 //active don hang
@@ -407,7 +409,6 @@ function reviews(){
                     },
                     success: function (response) {
                         if(response.success){
-                            let donHang = response.don_hang;
                             let chiTietDonHang = response.chi_tiet_don_hangs;
 
                             document.querySelector('#reviews .main').innerHTML="";
@@ -622,5 +623,67 @@ function guiDanhGia(){
         });
 
 
+    }
+}
+
+function daNhanHang(){
+    const btnDaNhan = document.querySelectorAll('.btnDonMua .daNhanHang');
+    if(btnDaNhan){
+        btnDaNhan.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let donHangId = el.closest('.card').getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/don-hang/da-nhan-hang/',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        don_hang_id: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            sessionStorage.setItem("activeTab", "order");
+                            sessionStorage.setItem("activeTabHoanThanh", "tap5");
+                            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
+    }
+}
+
+function muaLai(){
+    const btnMuaLai = document.querySelectorAll('.btnDonMua .muaLai');
+    if(btnMuaLai){
+        btnMuaLai.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let donHangId = el.closest('.card').getAttribute('data-donHangId');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/don-hang/mua-lai/',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        don_hang_id: donHangId
+                    },
+                    success: function (response) {
+                        if(response.success){
+                            window.location.href="/gio-hang/";
+                        }
+                    },
+                    error: function (error) {
+                        console.error('Lỗi: ', error);
+                        alert('Có lỗi xảy ra');
+                    }
+                });
+
+            });
+        });
     }
 }
