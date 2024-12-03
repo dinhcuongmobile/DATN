@@ -393,9 +393,9 @@ function ratingBtns(){
 }
 
 function reviews(){
-    let btnDaNhanHang = document.querySelectorAll('.btnDonMua .daNhanHang');
-    if(btnDaNhanHang){
-        btnDaNhanHang.forEach((el)=>{
+    let btnDanhGia = document.querySelectorAll('.btnDonMua .btnDanhGia');
+    if(btnDanhGia){
+        btnDanhGia.forEach((el)=>{
             el.addEventListener('click',function(){
                 let donHangId = el.closest('.card').getAttribute('data-donHangId');
 

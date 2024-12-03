@@ -502,8 +502,8 @@
                                 <h5>{!! Str::limit(strip_tags($item->noi_dung), 60, '...') !!}</h5>
                             </a>
                             <div class="link-hover-anim underline">
-                                <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Read More</a>
-                                <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Read More</a>
+                                <a class="btn btn_underline link-strong link-strong-unhovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Xem thêm</a>
+                                <a class="btn btn_underline link-strong link-strong-hovered" href="{{route('tin-tuc.chi-tiet-tin-tuc',$item->id)}}">Xem thêm</a>
                             </div>
                         </div>
                     </div>

@@ -226,9 +226,9 @@ class SanPhamController extends Controller
         $this->views['san_phams'] = $sanPhams->where('danh_muc_id', $id)->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
         $this->views['danh_mucs'] = DanhMuc::all();
         $this->views['danh_muc'] = DanhMuc::where('id', $id)->first();
-        $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
-            ->selectRaw('danh_muc_id, COUNT(*) as count')
-            ->pluck('count', 'danh_muc_id');
+        $this->views['count_sp_danh_muc'] = SanPham::selectRaw('danh_muc_id, COUNT(*) as count')
+                                                ->groupBy('danh_muc_id')
+                                                ->pluck('count', 'danh_muc_id');
         //
         // Kiểm tra nếu yêu cầu AJAX
         if ($request->ajax()) {

@@ -18,7 +18,7 @@
             <div class="custom-container container">
                 <div class="row align-items-center">
                     <div class="col-sm-6">
-                        <h4>{{ $danh_muc->ten_danh_muc }} </h4>
+                        <h4>Danh mục ({{ $danh_muc->ten_danh_muc }}) </h4>
                     </div>
                 </div>
             </div>

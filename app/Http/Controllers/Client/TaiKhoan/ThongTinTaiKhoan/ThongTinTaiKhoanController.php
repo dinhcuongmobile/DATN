@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan;
 use App\Models\Coin;
 use App\Models\User;
 use App\Models\DiaChi;
+use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\PhuongXa;
+use App\Models\YeuThich;
 use App\Models\QuanHuyen;
 use App\Models\TinhThanhPho;
-use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use App\Http\Controllers\Controller;
@@ -81,19 +82,25 @@ class ThongTinTaiKhoanController extends Controller
             'trang_thai_3' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 3)->orderBy('id', 'desc')->get(),
             //da huy
             'trang_thai_4' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 4)->orderBy('id', 'desc')->get(),
-            //tra hang/ hoan tien
-            'trang_thai_5' => DonHang::where('user_id', Auth::user()->id)->where('trang_thai', 5)->orderBy('id', 'desc')->get(),
         ];
 
         $chi_tiet_don_hangs = [];
+        $chua_danh_gia = [];
 
-        foreach ($don_hangs as $key => $items) {
+        foreach ($don_hangs as $items) {
             foreach ($items as $item) {
                 $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $item->id)->get();
+
+                // Kiểm tra xem đơn hàng đã được đánh giá hết chưa
+                $danh_gia = DanhGia::whereIn('san_pham_id', $chi_tiet_don_hangs[$item->id]->pluck('san_pham_id'))->where('user_id', Auth::id())->get();
+
+                // Nếu có ít nhất một sản phẩm chưa được đánh giá, thì lưu lại
+                $chua_danh_gia[$item->id] = $chi_tiet_don_hangs[$item->id]->count() > $danh_gia->count();
             }
         }
         $this->views['don_hangs'] = $don_hangs;
         $this->views['chi_tiet_don_hangs'] = $chi_tiet_don_hangs;
+        $this->views['chua_danh_gia'] = $chua_danh_gia;
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
     }
 
