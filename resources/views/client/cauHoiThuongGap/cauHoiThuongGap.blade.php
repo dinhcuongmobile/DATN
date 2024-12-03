@@ -69,16 +69,6 @@
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#collapseFive"><span>5.Tôi có thể đổi hoặc trả hàng không?</span></button></h2>
-                                <div class="accordion-collapse collapse" id="collapseFive"
-                                    data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <p>Có, chúng tôi hỗ trợ đổi hoặc trả hàng trong vòng 7 ngày nếu sản phẩm bị lỗi hoặc không đúng với đơn đặt hàng.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
                                         data-bs-toggle="collapse" data-bs-target="#collapseSix"><span>6.Tôi cần làm gì nếu nhận được sản phẩm bị lỗi hoặc sai kích thước?</span></button></h2>
                                 <div class="accordion-collapse collapse" id="collapseSix"
                                     data-bs-parent="#accordionExample">
