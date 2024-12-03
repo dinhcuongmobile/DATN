@@ -152,83 +152,159 @@
             <!-- Thứ hạng sản phẩm -->
             <div class="col-lg-6">
                 <div class="card shadow mb-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Sản Phẩm</h6>
+                        <button class="btn view-more-btn" data-toggle="modal" data-target="#viewMoreModalSanPham">Xem thêm</button>
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-pills mb-3" id="product-ranking-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="by-sales-tab" data-toggle="pill" href="#by-sales"
-                                    role="tab">Theo Doanh Số</a>
+                                <a class="nav-link active" id="by-sales-tab" data-toggle="pill" href="#by-sales" role="tab">Theo Doanh Số</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="product-ranking-tabContent">
                             <div class="tab-pane fade show active" id="by-sales" role="tabpanel">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Thứ Hạng</th>
-                                            <th>Thông Tin Sản Phẩm</th>
-                                            <th>Doanh Thu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($thongKeSanPhams as $index => $item)
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"> {{ $item->ten_san_pham }}</td>
-                                                <td> {{$item->tong_doanh_thu}} VND</td>
+                                                <th>Thứ Hạng</th>
+                                                <th>Thông Tin Sản Phẩm</th>
+                                                <th>Doanh Thu</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($thongKeSanPhams as $index => $item)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>
+                                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px">
+                                                        {{ $item->ten_san_pham }}
+                                                    </td>
+                                                    <td>{{ $item->tong_doanh_thu }} VND</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- Các tab khác có thể thêm vào đây -->
                         </div>
                     </div>
                 </div>
             </div>
-
+        
             <!-- Thứ hạng ngành hàng -->
             <div class="col-lg-6">
                 <div class="card shadow mb-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Danh Mục</h6>
+                        <button class="btn view-more-btn" data-toggle="modal" data-target="#viewMoreModalDanhMuc">Xem thêm</button>
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-pills mb-3" id="industry-ranking-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="by-sales-industry-tab" data-toggle="pill"
-                                    href="#by-sales-industry" role="tab">Theo Doanh Số</a>
+                                <a class="nav-link active" id="by-sales-industry-tab" data-toggle="pill" href="#by-sales-industry" role="tab">Theo Doanh Số</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="industry-ranking-tabContent">
                             <div class="tab-pane fade show active" id="by-sales-industry" role="tabpanel">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Thứ Hạng</th>
-                                            <th>Danh Mục</th>
-                                            <th>Doanh Thu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($thongKeDanhMucs as $index => $item)
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"> {{ $item->ten_danh_muc }}</td>
-                                                <td>{{$item->tong_doanh_thu}} VND</td>
+                                                <th>Thứ Hạng</th>
+                                                <th>Danh Mục</th>
+                                                <th>Doanh Thu</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($thongKeDanhMucs as $index => $item)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>
+                                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px">
+                                                        {{ $item->ten_danh_muc }}
+                                                    </td>
+                                                    <td>{{ $item->tong_doanh_thu }} VND</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.container-fluid -->
+        
+        <!-- Modal Xem Thêm Sản Phẩm -->
+        <div class="modal fade" id="viewMoreModalSanPham" tabindex="-1" role="dialog" aria-labelledby="viewMoreModalLabelSanPham" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewMoreModalLabelSanPham">Thứ Hạng Sản Phẩm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nội dung động sẽ được nạp qua AJAX vào đây -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Thông tin sản phẩm</th>
+                                        <th>Xem sản phẩm</th>
+                                        <th>Sản phẩm (Thêm vào giỏ hàng)</th>
+                                        <th>Sản phẩm (Đơn đã đã giao)</th>
+                                        <th>Doanh thu (Đơn đã đã giao)</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="product-detail-tbody-san-pham">
+                                    <!-- Dữ liệu sản phẩm sẽ được nạp qua AJAX -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Xem Thêm Danh Mục -->
+        <div class="modal fade" id="viewMoreModalDanhMuc" tabindex="-1" role="dialog" aria-labelledby="viewMoreModalLabelDanhMuc" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewMoreModalLabelDanhMuc">Thứ Hạng Danh Mục</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nội dung động sẽ được nạp qua AJAX vào đây -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Thông tin danh mục</th>
+                                        <th>Xem danh mục</th>
+                                        <th>Sản phẩm (Thêm vào giỏ hàng)</th>
+                                        <th>Sản phẩm (Đơn đã đã giao)</th>
+                                        <th>Doanh thu (Đơn đã đã giao)</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="product-detail-tbody-danh-muc">
+                                    <!-- Dữ liệu danh mục sẽ được nạp qua AJAX -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                                       
     </div>
 @endsection
 
@@ -348,5 +424,88 @@
                 });
             })
         })
+        $(document).on('click', '#btn-xem-them-danh-muc', function () {
+        let offset = $(this).data('offset');
+        let limit = $(this).data('limit');
+
+        // Gửi request lấy thông tin thứ hạng danh mục
+        $.ajax({
+            url: '/admin/xem-them-thu-hang/danh-muc',
+            method: 'GET',
+            data: { offset: offset, limit: limit },
+            success: function (response) {
+                let htmlDanhMuc = '';
+
+                // Hiển thị dữ liệu danh mục
+                response.danhMucs.forEach(item => {
+                    htmlDanhMuc += `
+                        <tr>
+                            <td>
+                                <img src="${item.hinh_anh}" alt="${item.ten_danh_muc}" height="60px">
+                                ${item.ten_danh_muc}
+                            </td>
+                            <td><a href="/san-pham/${item.id}">Xem</a></td>
+                            <td><button class="btn btn-primary">Thêm vào giỏ hàng</button></td>
+                            <td><button class="btn btn-success">Xác nhận</button></td>
+                            <td>${item.tong_doanh_thu} VNĐ</td>
+                            <td><button class="btn btn-info">Chi tiết</button></td>
+                        </tr>
+                    `;
+                });
+
+                // Thêm dữ liệu vào bảng trong modal
+                $('#product-detail-tbody').html(htmlDanhMuc);
+
+                // Cập nhật offset cho lần gọi tiếp theo
+                $('#btn-xem-them-danh-muc').data('offset', offset + limit);
+                $('#viewMoreModal').modal('show'); // Hiển thị modal
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi khi tải dữ liệu.');
+            }
+        });
+    });
+
+    $(document).on('click', '#btn-xem-them-san-pham', function () {
+        let offset = $(this).data('offset');
+        let limit = $(this).data('limit');
+
+        // Gửi request lấy thông tin thứ hạng sản phẩm
+        $.ajax({
+            url: '/admin/xem-them-thu-hang/san-pham',
+            method: 'GET',
+            data: { offset: offset, limit: limit },
+            success: function (response) {
+                let htmlSanPham = '';
+
+                // Hiển thị dữ liệu sản phẩm
+                response.sanPhams.forEach(item => {
+                    htmlSanPham += `
+                        <tr>
+                            <td>
+                                <img src="${item.hinh_anh}" alt="${item.ten_san_pham}" height="60px">
+                                ${item.ten_san_pham}
+                            </td>
+                            <td><a href="/san-pham/${item.id}">Xem</a></td>
+                            <td><button class="btn btn-primary">Thêm vào giỏ hàng</button></td>
+                            <td><button class="btn btn-success">Xác nhận</button></td>
+                            <td>${item.tong_doanh_thu} VNĐ</td>
+                            <td><button class="btn btn-info">Chi tiết</button></td>
+                        </tr>
+                    `;
+                });
+
+                // Thêm dữ liệu vào bảng trong modal
+                $('#product-detail-tbody-san-pham').html(htmlSanPham);
+
+                // Cập nhật offset cho lần gọi tiếp theo
+                $('#btn-xem-them-san-pham').data('offset', offset + limit);
+                $('#viewMoreModal').modal('show'); // Hiển thị modal
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi khi tải dữ liệu.');
+            }
+        });
+    });
     </script>
 @endsection

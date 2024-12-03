@@ -68,6 +68,67 @@ class HomeAdminController extends Controller
 
         return $thongKeDanhMucs;
     }
+    // Xem thêm thứ hạng danh mục
+    public function xemThemThuHangDanhMuc(Request $request) {
+        $offset = $request->input('offset', 0); // Vị trí bắt đầu
+        $limit = $request->input('limit', 3); // Số lượng cần lấy thêm
+        
+        $danhMucs = DonHang::where('trang_thai', 3)
+            ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
+            ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
+            ->join('danh_mucs', 'san_phams.danh_muc_id', '=', 'danh_mucs.id')
+            ->selectRaw(
+                'danh_mucs.id, 
+                danh_mucs.ten_danh_muc, 
+                danh_mucs.hinh_anh, 
+                SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu'
+            )
+            ->groupBy('danh_mucs.id', 'danh_mucs.ten_danh_muc', 'danh_mucs.hinh_anh')
+            ->orderByDesc('tong_doanh_thu')
+            ->skip($offset)
+            ->take($limit)
+            ->get();
+
+        // Định dạng lại doanh thu
+        foreach ($danhMucs as $item) {
+            $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
+        }
+
+        return response()->json([
+            'danhMucs' => $danhMucs
+        ]);
+    }
+
+    // Xem thêm thứ hạng sản phẩm
+    public function xemThemThuHangSanPham(Request $request) {
+        $offset = $request->input('offset', 0); // Vị trí bắt đầu
+        $limit = $request->input('limit', 3); // Số lượng cần lấy thêm
+        
+        $sanPhams = DonHang::where('trang_thai', 3)
+            ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
+            ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
+            ->selectRaw(
+                'san_phams.id, 
+                san_phams.ten_san_pham, 
+                san_phams.hinh_anh, 
+                SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu'
+            )
+            ->groupBy('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.hinh_anh')
+            ->orderByDesc('tong_doanh_thu')
+            ->skip($offset)
+            ->take($limit)
+            ->get();
+
+        // Định dạng lại doanh thu
+        foreach ($sanPhams as $item) {
+            $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
+        }
+
+        return response()->json([
+            'sanPhams' => $sanPhams
+        ]);
+    }
+  
 
     public function thongKeTaiKhoan() {
         return User::count();

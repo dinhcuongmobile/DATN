@@ -245,10 +245,6 @@ function chiTietDonMua(){
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
                                     "<span class='text-danger'>Đã hủy</span>";
                                 break;
-                                case 5:
-                                    document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
-                                    "<span class='text-warning'>Đang chờ xử lý trả hàng</span>";
-                                break;
                             }
 
                             //show

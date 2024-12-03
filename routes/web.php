@@ -188,6 +188,8 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
     Route::get('thong-ke-tai-khoan', [HomeAdminController::class, 'thongKeTaiKhoan'])->name('admin.thong-ke-tai-khoan');
     Route::get('thong-ke-don-hang', [HomeAdminController::class, 'thongKeDonHang'])->name('admin.thong-ke-don-hang');
     Route::get('thong-ke-luot-xem', [HomeAdminController::class, 'thongKeLuotXem'])->name('admin.thong-ke-luot-xem');
+    Route::get('xem-them-thu-hang', [HomeAdminController::class, 'xemThemThuHang'])->name('admin.xem-them-thu-hang');
+
 
     Route::prefix('/thong-ke')->group(function() {
         Route::post('/load-30-ngay', [ThongKeController::class, 'load30Ngay'])->name('thong-ke.load-30-ngay');
