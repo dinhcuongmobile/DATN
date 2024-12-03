@@ -80,7 +80,8 @@
                                                     <button type="button" class="btn btn-primary btn-sm">Chi tiết</button>
                                                 </a>
                                                 <a href="{{ route('danh-gia.an', $item->id) }}">
-                                                    <button type="button" class="btn btn-danger btn-sm">Ẩn</button>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Xác nhận ẩn đánh giá !')">Ẩn</button>
                                                 </a>
                                             </td>
                                         </tr>

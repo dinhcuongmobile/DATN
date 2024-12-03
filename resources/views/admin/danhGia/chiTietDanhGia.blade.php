@@ -132,7 +132,8 @@
                                                 <br>
                                                 </br>
                                                 @if ($danhGia->trang_thai == 0)
-                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                    <button type="submit" class="btn btn-success btn-sm"
+                                                        onclick="return confirm('Xác nhận phản hồi đánh giá !')">
                                                         Phản hồi
                                                     </button>
                                                 @endif

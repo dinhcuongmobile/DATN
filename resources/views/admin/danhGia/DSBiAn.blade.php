@@ -77,7 +77,8 @@
                                             <td class="col-1 align-middle">{{ $item->created_at }}</td>
                                             <td class="col-2 align-middle">
                                                 <a href="{{ route('danh-gia.khoi-phuc', $item->id) }}">
-                                                    <button type="button" class="btn btn-success btn-sm">Khôi phục</button>
+                                                    <button type="button" class="btn btn-success btn-sm"
+                                                        onclick="return confirm('Xác nhận khôi phục đánh giá !')">Khôi phục</button>
                                                 </a>
                                             </td>
                                         </tr>
