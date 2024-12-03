@@ -607,7 +607,7 @@
                                                                         <div class="btnDonMua">
                                                                             <button class="btn btn-success daNhanHang">Đã
                                                                                 nhận hàng</button>
-                                                                            <button class="btn btn-primary">Mua
+                                                                            <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ
@@ -686,7 +686,7 @@
                                                                                     class="btn btn-warning btnDanhGia">Đánh
                                                                                     giá</button>
                                                                             @endif
-                                                                            <button class="btn btn-primary">Mua
+                                                                            <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ
@@ -759,7 +759,7 @@
                                                                             <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
                                                                         </p>
                                                                         <div class="btnDonMua">
-                                                                            <button class="btn btn-primary">Mua
+                                                                            <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
                                                                             <a href=""
                                                                                 class="btn btn-outline-secondary">Xem chi
