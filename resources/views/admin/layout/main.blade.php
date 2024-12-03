@@ -175,14 +175,31 @@
                 </div>
             </li>
 
-            <!-- quan ly tin tuc -->
+            <!-- quan ly danh gia -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
                     aria-expanded="true" aria-controls="collapseSix">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Quản lý đánh giá</span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.chua-phan-hoi') }}">Danh sách chưa phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.da-phan-hoi') }}">Danh sách đã phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach-bi-an') }}">Danh sách bị ẩn</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- quan ly tin tuc -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
+                    aria-expanded="true" aria-controls="collapseSevent">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Quản lý tin tức</span>
                 </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                <div id="collapseSevent" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach') }}">Danh mục tin
                             tức</a>
@@ -196,18 +213,17 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item  mb-3">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
-                    aria-expanded="true" aria-controls="collapseSevent">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
+                    aria-expanded="true" aria-controls="collapseNine">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
+                <div id="collapseNine" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lien-he.danh-sach') }}">Quản lý liên hệ</a>
-                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach') }}">Quản lý đánh giá</a>
                     </div>
                 </div>
             </li>

@@ -419,8 +419,18 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
     //Danh gia
     Route::prefix('/danh-gia')->group(function() {
         Route::get('/danh-sach-danh-gia', [DanhGiaController::class, 'showDanhGia'])->name('danh-gia.danh-sach');
+        Route::get('/danh-sach-chua-phan-hoi', [DanhGiaController::class, 'showDanhGiaChuaPhanHoi'])->name('danh-gia.chua-phan-hoi');
+        Route::get('/danh-sach-da-phan-hoi', [DanhGiaController::class, 'showDanhGiaDaPhanHoi'])->name('danh-gia.da-phan-hoi');
+        Route::get('/danh-sach-danh-gia-bi-an', [DanhGiaController::class, 'showDanhGiaDaAn'])->name('danh-gia.danh-sach-bi-an');
+
         Route::get('/chi-tiet-danh-gia/{id}', [DanhGiaController::class, 'chiTietDanhGia'])->name('danh-gia.chi-tiet');
         Route::post('/tra-loi-danh-gia', [DanhGiaController::class, 'guiPhanHoi'])->name('danh-gia.tra-loi');
+
+        Route::get('/an-danh-gia/{id}', [DanhGiaController::class, 'anDanhGia'])->name('danh-gia.an');
+        Route::post('/an-nhieu-danh-gia', [DanhGiaController::class, 'anNhieuDanhGia'])->name('danh-gia.an-nhieu');
+
+        Route::get('/khoi-phuc-danh-gia/{id}', [DanhGiaController::class, 'khoiPhucDanhGia'])->name('danh-gia.khoi-phuc');
+        Route::post('/khoi-phuc-nhieu-danh-gia', [DanhGiaController::class, 'khoiPhucNhieuDanhGia'])->name('danh-gia.khoi-phuc-nhieu');
     });
 });
 
