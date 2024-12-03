@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá chưa phản hồi</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -66,8 +66,8 @@
                                                     value="{{ $item->id }}"></td>
                                             <td class="col-2 align-middle">{{ $item->user->ho_va_ten }}</td>
                                             <td class="col-3 align-middle">
-                                                <a href="{{ route('san-pham.san-pham-bien-the', $item->san_pham_id) }}">
-                                                    {{ $item->sanPham->ten_san_pham }}</a>
+                                                <a
+                                                    href="{{ route('san-pham.san-pham-bien-the', $item->san_pham_id) }}">{{ $item->sanPham->ten_san_pham }}</a>
                                             </td>
                                             <td class="col-3 align-middle">{{ $item->noi_dung }}</td>
                                             <td class="col-1 align-middle">{!! $ratingStars !!}</td>

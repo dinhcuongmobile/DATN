@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá bị ẩn</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -27,14 +27,14 @@
                         </div>
                     </form>
                 </div>
-                <form action="{{ route('danh-gia.an-nhieu') }}" method="post">
+                <form action="{{ route('danh-gia.khoi-phuc-nhieu') }}" method="post">
                     @csrf
                     <div class="float-left">
                         <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                         <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
                             cả</button>
-                        <button onclick="return confirm('Bạn chắc chắn muốn ẩn các mục đã chọn?')" type="submit"
-                            class="btn btn-secondary btn-sm">Ẩn các mục đã chọn</button>
+                        <button onclick="return confirm('Bạn chắc chắn muốn khôi phục các mục đã chọn?')" type="submit"
+                            class="btn btn-secondary btn-sm">Khôi phục các mục đã chọn</button>
                     </div>
             </div>
             <div class="card-body">
@@ -66,8 +66,8 @@
                                                     value="{{ $item->id }}"></td>
                                             <td class="col-2 align-middle">{{ $item->user->ho_va_ten }}</td>
                                             <td class="col-3 align-middle">
-                                                <a href="{{ route('san-pham.san-pham-bien-the', $item->san_pham_id) }}">
-                                                    {{ $item->sanPham->ten_san_pham }}</a>
+                                                <a
+                                                    href="{{ route('san-pham.san-pham-bien-the', $item->san_pham_id) }}">{{ $item->sanPham->ten_san_pham }}</a>
                                             </td>
                                             <td class="col-3 align-middle">{{ $item->noi_dung }}</td>
                                             <td class="col-1 align-middle">{!! $ratingStars !!}</td>
@@ -76,11 +76,8 @@
                                                 {{ $item->trang_thai == 0 ? 'Chưa trả lời' : 'Đã trả lời' }}</td>
                                             <td class="col-1 align-middle">{{ $item->created_at }}</td>
                                             <td class="col-2 align-middle">
-                                                <a href="{{ route('danh-gia.chi-tiet', $item->id) }}">
-                                                    <button type="button" class="btn btn-primary btn-sm">Chi tiết</button>
-                                                </a>
-                                                <a href="{{ route('danh-gia.an', $item->id) }}">
-                                                    <button type="button" class="btn btn-danger btn-sm">Ẩn</button>
+                                                <a href="{{ route('danh-gia.khoi-phuc', $item->id) }}">
+                                                    <button type="button" class="btn btn-success btn-sm">Khôi phục</button>
                                                 </a>
                                             </td>
                                         </tr>
