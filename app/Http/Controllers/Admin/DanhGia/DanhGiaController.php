@@ -33,9 +33,61 @@ class DanhGiaController extends Controller
         return view('admin.danhGia.DSDanhGia', $this->views);
     }
 
+    public function showDanhGiaChuaPhanHoi(Request $request)
+    {
+        $danhGias = DanhGia::with('user')->where('trang_thai', 0); // 0 là chưa phản hồi
+
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $danhGias->whereHas('user', function ($loc) use ($keyword) {
+                $loc->where('ho_va_ten', 'LIKE', "%$keyword%");
+            });
+        }
+
+        $this->views['danhGias'] = $danhGias->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+
+        return view('admin.danhGia.DSChuaPhanHoi', $this->views);
+    }
+
+    public function showDanhGiaDaPhanHoi(Request $request)
+    {
+        $danhGias = DanhGia::with('user')->where('trang_thai', 1); // 1 là đã phản hồi
+
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $danhGias->whereHas('user', function ($loc) use ($keyword) {
+                $loc->where('ho_va_ten', 'LIKE', "%$keyword%");
+            });
+        }
+
+        $this->views['danhGias'] = $danhGias->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+
+        return view('admin.danhGia.DSDaPhanHoi', $this->views);
+    }
+
+    public function showDanhGiaDaAn(Request $request)
+    {
+        $danhGias = DanhGia::with('user')->onlyTrashed();
+
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $danhGias->whereHas('user', function ($loc) use ($keyword) {
+                $loc->where('ho_va_ten', 'LIKE', "%$keyword%");
+            });
+        }
+
+        $this->views['danhGias'] = $danhGias->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+
+        return view('admin.danhGia.DSBiAn', $this->views);
+    }
+
     public function chiTietDanhGia(int $id)
     {
-        $this->views['danhGia'] = DanhGia::query()->findOrFail($id);
+        $danhGia = DanhGia::query()->findOrFail($id);
+        $traLoiDanhGia = TraLoiDanhGia::where('danh_gia_id', $danhGia->id)->first();
+
+        $this->views['danhGia'] = $danhGia;
+        $this->views['traLoiDanhGia'] = $traLoiDanhGia;
 
         return view('admin.danhGia.chiTietDanhGia', $this->views);
     }
@@ -47,7 +99,7 @@ class DanhGiaController extends Controller
                 'noi_dung' => 'required|string|max:255'
             ],
             [
-                'noi_dung.required' => 'Vui lòng nhận câu trả lời !'
+                'noi_dung.required' => 'Vui lòng nhập câu trả lời !'
             ]
         );
 
@@ -61,6 +113,55 @@ class DanhGiaController extends Controller
         $danhGia->trang_thai = 1; // 1 là đã phản hồi
         $danhGia->save();
 
-        return redirect()->back()->with('success', 'Phản hồi đã được gửi.');
+        return redirect()->route('danh-gia.da-phan-hoi')->with('success', 'Phản hồi đã được gửi.');
+    }
+
+    public function anDanhGia(int $id)
+    {
+        $danhGia = DanhGia::query()->findOrFail($id);
+        $danhGia->delete();
+
+        return redirect()->back()->with('success', 'Ẩn đánh giá thành công');
+    }
+
+    public function anNhieuDanhGia(Request $request)
+    {
+        if ($request->select) {
+            foreach ($request->select as $id) {
+                $danhGia = DanhGia::query()->findOrFail($id);
+                $danhGia->delete();
+            }
+
+            return redirect()->back()->with('success', 'Ẩn đánh giá thành công');
+        } else {
+            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn ẩn');
+        }
+    }
+
+    public function khoiPhucDanhGia(int $id)
+    {
+        $danhGia = DanhGia::onlyTrashed()->findOrFail($id);
+
+        if ($danhGia) {
+            $danhGia->restore();
+        } else {
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thử lại');
+        }
+
+        return redirect()->route('danh-gia.danh-sach')->with('success', 'Khôi phục đánh giá thành công');
+    }
+
+    public function khoiPhucNhieuDanhGia(Request $request)
+    {
+        if ($request->select) {
+            foreach ($request->select as $id) {
+                $danhGia = DanhGia::onlyTrashed()->findOrFail($id);
+                $danhGia->restore();
+            }
+
+            return redirect()->route('danh-gia.danh-sach')->with('success', 'Khôi phục đánh giá thành công');
+        } else {
+            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn khôi phục');
+        }
     }
 }

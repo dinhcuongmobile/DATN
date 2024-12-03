@@ -34,14 +34,6 @@
     <div class="container-fluid">
         <h1 class="h3 mb-2 text-gray-800 mb-5">Chi tiết đánh giá</h1>
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <div class="float-left">
-                    <a href="" class="btn btn-secondary btn-sm">Danh Sách Đã
-                        Phản Hồi</a>
-                    <a href="" class="btn btn-secondary btn-sm">Danh Sách
-                        Chưa Phản Hồi</a>
-                </div>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     @if (session('error'))
@@ -69,7 +61,10 @@
                                     </tr>
                                     <tr>
                                         <th>Mã đơn hàng</th>
-                                        <td>{{ $danhGia->donHang->ma_don_hang }}</td>
+                                        <td>
+                                            <a href="{{ route('don-hang.chi-tiet-don-hang', $danhGia->don_hang_id) }}">
+                                                {{ $danhGia->donHang->ma_don_hang }}</a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Thông tin sản phẩm</th>
@@ -112,16 +107,25 @@
                                             <th>Ngày Phản Hồi</th>
                                             <td>{{ $danhGia->updated_at }}</td>
                                         </tr>
+                                        <tr>
+                                            <th>Tài khoản phản hồi</th>
+                                            <td>{{ $traLoiDanhGia->user->ho_va_ten }}</td>
+                                        </tr>
                                     @endif
 
                                     <tr>
-                                        <th>Trả lời</th>
+                                        <th>Phản hồi từ người bán</th>
                                         <td>
                                             <form action="{{ route('danh-gia.tra-loi') }}" method="POST"
                                                 style="display: inline;" enctype="multipart/form-data">
                                                 @csrf
                                                 <input type="hidden" name="danh_gia_id", value="{{ $danhGia->id }}">
-                                                <textarea name="noi_dung" cols="170" rows="3" placeholder="Nhập câu trả lời..."></textarea>
+                                                @if ($traLoiDanhGia)
+                                                    <textarea name="noi_dung" cols="170" rows="3" 
+                                                        placeholder="Nhập câu trả lời..." disabled>{{ $traLoiDanhGia->noi_dung }}</textarea>
+                                                @else
+                                                    <textarea name="noi_dung" cols="170" rows="3" placeholder="Nhập phản hồi..."></textarea>
+                                                @endif
                                                 @error('noi_dung')
                                                     <p class="text-danger mt-1">{{ $message }}</p>
                                                 @enderror
@@ -129,7 +133,7 @@
                                                 </br>
                                                 @if ($danhGia->trang_thai == 0)
                                                     <button type="submit" class="btn btn-success btn-sm">
-                                                        Trả lời
+                                                        Phản hồi
                                                     </button>
                                                 @endif
                                             </form>
