@@ -360,35 +360,26 @@
                                                                         <div class="btnDonMua">
                                                                             @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai == 1)
                                                                                 <button style="margin-right:15px;"
-                                                                                    class="btn btn-outline-danger huyDonHang">Hủy
-                                                                                    đơn hàng</button>
+                                                                                    class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
                                                                                 <button
-                                                                                    class="btn btn-success daNhanHang">Đã
-                                                                                    nhận hàng</button>
+                                                                                    class="btn btn-success daNhanHang">Đã nhận hàng</button>
                                                                                 <button
-                                                                                    class="btn btn-primary muaLai">Mua
-                                                                                    lại</button>
+                                                                                    class="btn btn-primary muaLai">Mua lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 3)
                                                                                 @if (isset($chua_danh_gia[$itemDonHang->id]) && $chua_danh_gia[$itemDonHang->id])
-                                                                                    <button
-                                                                                        class="btn btn-warning btnDanhGia">Đánh
-                                                                                        giá</button>
+                                                                                    <button class="btn btn-warning btnDanhGia">Đánh giá</button>
                                                                                 @endif
-                                                                                <button
-                                                                                    class="btn btn-primary muaLai">Mua
+                                                                                <button class="btn btn-primary muaLai">Mua
                                                                                     lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 4)
-                                                                                <button
-                                                                                    class="btn btn-primary muaLai">Mua
+                                                                                <button class="btn btn-primary muaLai">Mua
                                                                                     lại</button>
-                                                                                <a href=""
-                                                                                    class="btn btn-outline-secondary">Xem
+                                                                                <a class="btn btn-outline-secondary">Xem
                                                                                     chi tiết hủy đơn</a>
                                                                             @endif
                                                                             <a href="{{ route('lien-he.lien-he') }}"
-                                                                                class="btn btn-outline-secondary">Liên hệ
-                                                                                Shop</a>
+                                                                                class="btn btn-outline-secondary">Liên hệ Shop</a>
                                                                         </div>
                                                                     </div><!-- End .cart-table-container -->
                                                                 </div><!-- End .col-lg-8 -->
@@ -884,7 +875,7 @@
                                     </div>
 
                                     <div class="action-button">
-                                        
+
                                     </div>
                                 </div>
                             </div>

@@ -267,6 +267,14 @@ function chiTietDonMua(){
                                 case 4:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
                                     "<span class='text-danger'>Đã hủy</span>";
+                                    // timeline.remove();
+                                    // document.querySelector('#order-details .delivery-status h3').textContent = "Trạng thái";
+                                    // deliveryStatus.innerHTML=`
+                                    //     <p class="active">
+                                    //         <i class="fa-solid fa-circle"></i>
+                                    //         <span>Đơn hàng đã được hủy vào lúc </span>
+                                    //     </p>
+                                    // `;
                                 break;
                             }
 
