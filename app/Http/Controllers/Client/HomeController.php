@@ -9,6 +9,7 @@ use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Algolia\AlgoliaSearch\Algolia;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,6 +63,23 @@ class HomeController extends Controller
             'mau_sacs' => $mau_sacs
         ]);
     }
+    public function search(Request $request)
+    {
+        $searchText = $request->input('search_text');
+        $results = SanPham::search($searchText)->get();
+        // Trả về kết quả dưới dạng JSON để sử dụng AJAX
+        if ($request->ajax()) {
+            return response()->json([
+                'results' => $results
+            ]);
+        }
+
+        // Nếu không phải AJAX request, render bình thường
+        return view('client.layout.main', [
+            'san_pham_tim_kiem' => $results,
+        ]);
+    }
+
 
     public function error404()
     {

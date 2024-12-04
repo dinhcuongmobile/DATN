@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SanPham extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes ,Searchable;
 
     protected $table = 'san_phams';
 
@@ -53,6 +54,23 @@ class SanPham extends Model
     public function yeuThich()
     {
         return $this->hasMany(YeuThich::class, 'san_pham_id');
+    }
+
+    public function searchableAs()
+    {
+        return 'san_phams_index';
+    }
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Bạn có thể tùy chỉnh dữ liệu để được lập chỉ mục
+        return [
+            'ten_san_pham' => $this->ten_san_pham,
+            'gia_san_pham' => $this->gia_san_pham,
+            'mo_ta' => $this->mo_ta,
+            // thêm các trường khác nếu cần
+        ];
     }
 
 }

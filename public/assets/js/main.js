@@ -610,6 +610,56 @@ function xoaYeuThich(){
         });
     }
 }
+$(document).ready(function() {
+    // Khi người dùng gõ trong ô tìm kiếm
+    $('input[name="search_text"]').on('keyup', function() {
+        let searchText = $(this).val();
+
+        // Kiểm tra nếu có nội dung tìm kiếm
+        if (searchText.length >= 1) {  // Thực hiện khi người dùng gõ ít nhất 1 ký tự
+            $.ajax({
+                url: '/home/search/',
+                method: 'GET',
+                data: { search_text: searchText },
+                success: function(response) {
+                    // Xử lý kết quả trả về (JSON)
+                    let results = response.results;
+                    let html = '';
+                    
+                    // Tạo HTML kết quả tìm kiếm
+                    results.forEach(function(san_pham) {
+                        html += `
+                            <div class="col-xl-2 col-sm-4 col-6">
+                                <div class="product-box-6">
+                                    <div class="img-wrapper">
+                                        <div class="product-image">
+                                            <a href="">
+                                                <img class="bg-img" src="/storage/${san_pham.hinh_anh}" alt="product">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="product-detail">
+                                        <div>
+                                            <a href="">
+                                                <h6>kkk</h6>
+                                            </a>
+                                            <p>1 VNĐ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Cập nhật kết quả tìm kiếm
+                    $('.preemptive-search').html(html);
+                }
+            });
+        }
+    });
+});
+
+
 //time
 // function flashSaleTime(){
 //     // Lấy ngày bắt đầu (hiện tại)

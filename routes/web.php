@@ -60,8 +60,10 @@ Route::controller(FaceBookController::class)->group(function(){
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
+    
     Route::prefix('home')->group(function(){
         Route::get('quick-view', [HomeController::class, 'quickView']);
+        Route::get('search', [HomeController::class, 'search']);
     });
     Route::middleware('auth')->prefix('/coin')->group(function() {
         Route::post('/nhan-xu', [CoinController::class, 'addDailyCoin'])->name('coin.nhan-xu');
