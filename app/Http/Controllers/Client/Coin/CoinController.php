@@ -27,13 +27,14 @@ class CoinController extends Controller
         $check = Coin::where('user_id', $user->id)
             ->latest('ngay_nhan')->first();
 
-        if ($check && $check->ngay_nhan == $ngayNhan) {
-            // Người dùng đã nhận xu hôm nay
-            return response()->json([
-                'message' => 'Bạn đã nhận xu hôm nay rồi!',
-                'userId' => $user->id
-            ], 200);
-        }
+            if ($check && $check->ngay_nhan == $ngayNhan) {
+                // Người dùng đã nhận xu hôm nay
+                return response()->json([
+                    'message' => 'Bạn đã nhận xu hôm nay rồi!',
+                    'userId' => $user->id,
+                    'alreadyReceived' => true // Thêm cờ cho frontend kiểm tra
+                ], 200);
+            }
 
         // Chuỗi nhận xu là 7 ngày
         if ($check && $check->ngay_nhan == Carbon::yesterday()->toDateString()) {
@@ -48,6 +49,9 @@ class CoinController extends Controller
         if ($soNgay > 7) {
             $soNgay = 1;
         }
+        
+        //random xu
+        $coins = rand(100, 300); 
 
         // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
         $coins = ($soNgay == 7) ? 300 : 100;

@@ -479,6 +479,60 @@ function yeuThich(){
         });
     }
 }
+function openGift() {
+    const giftBox = document.querySelector(".gift-box");
+    const popup = document.querySelector(".popup");
+    const fireworks = document.querySelector(".fireworks");
+    const tapToOpenText = document.querySelector(".tap-to-open");
+
+    // Gọi API để nhận xu
+    fetch('/coin/nhan-xu', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF token
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.alreadyReceived) {
+            // Nếu người dùng đã mở hộp quà hôm nay, hiển thị thông báo
+            popup.querySelector('h4').textContent = "Bạn đã mở hộp quà hôm nay rồi!";
+            popup.querySelector('.coin-amount').textContent = '';
+        } else {
+            // Nếu chưa mở, hiển thị thông tin xu nhận được
+            popup.querySelector('h4').textContent = "Chúc mừng bạn!";
+            popup.querySelector('.coin-amount').textContent = `Bạn nhận được: ${data.coin} xu!`;
+        }
+
+        // Hiển thị popup sau 1 giây
+        setTimeout(() => {
+            popup.style.display = "block";
+        }, 1000);
+
+        // Hiển thị pháo hoa
+        fireworks.classList.remove("hidden");
+
+        // Thêm sự kiện để đóng popup khi nhấp ngoài
+        document.addEventListener("click", closePopupOnOutsideClick);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
+    // Thêm class "opened" để kích hoạt hiệu ứng
+    giftBox.classList.add("opened");
+}
+
+function closePopupOnOutsideClick(event) {
+    const popup = document.querySelector(".popup");
+    
+    // Kiểm tra nếu nhấp ra ngoài popup (không phải bên trong popup)
+    if (!popup.contains(event.target)) {
+        popup.style.display = "none"; // Đóng popup
+        document.removeEventListener("click", closePopupOnOutsideClick); // Hủy sự kiện click
+    }
+}
 
 function yeuThichChiTiet(){
     const wishlistChiTiet = document.querySelector('.wishlist-chi-tiet');

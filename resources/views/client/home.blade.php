@@ -385,26 +385,35 @@
                     </div>
                 </div>
                 <div class="col-3 d-none d-xl-block">
-                    <div class="best-seller-box">
-                        <div class="offer-banner"><a href="{{route('san-pham.san-pham')}}">
-                                <h2>Giảm thêm 15%</h2><span> </span>
-                                <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.
-                                </p>
-                                <div class="btn">
-                                    <h6>Use Code: <span>KHUTRD***</span></h6>
+                    <div class="col-3 d-none d-xl-block">
+                        <div class="col-3 d-none d-xl-block">
+                            <div class="best-seller-box">
+                                <div class="offer-container">
+                                    <!-- Hộp quà -->
+                                    <div class="gift-box" onclick="openGift()">
+                                        <p class="tap-to-open">Chạm để mở quà!</p>
+                                        <div class="box-lid"></div>
+                                        <div class="box-body"></div>
+                                        <div class="ribbon"></div>
+                                    </div>
+                                    <!-- Pháo hoa -->
+                                    <div class="fireworks hidden">
+                                        <div class="firework"></div>
+                                        <div class="firework"></div>
+                                        <div class="firework"></div>
+                                    </div>
+                                    <!-- Popup thông báo -->
+                                    <div class="popup hidden">
+                                        <div class="popup-content">
+                                            <h4>Chúc mừng bạn!</h4>
+                                            <p><span class="coin-amount">0 xu</span></p>
+                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Mua ngay</a>
+                                        </div>                                        
+                                    </div>
                                 </div>
-                            </a></div>
-                        <div class="best-seller-content">
-                            <h3>tinh tế và trẻ trung</h3><span> </span>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
-                                <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>                                           
+                </div>                
             </div>
         </div>
     </section>
