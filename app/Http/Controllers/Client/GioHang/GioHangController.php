@@ -382,7 +382,19 @@ class GioHangController extends Controller
                 $trang_thai = 1;
                 $thanh_toan = 1;
             }
-
+            foreach ($gio_hangs as $item) {
+                $checkSoLuongSp = BienThe::where('san_pham_id', $item['san_pham_id'])
+                                        ->where('kich_co', $item['kich_co'])
+                                        ->where('ma_mau', $item['ma_mau'])
+                                        ->lockForUpdate()
+                                        ->first();
+                if($checkSoLuongSp && $checkSoLuongSp->so_luong < $item['so_luong']){
+                    return response()->json([
+                        'success' => false,
+                        'message' => "một trong số sản phẩm bạn mua không đủ số lượng trong kho !"
+                    ]);
+                }
+            }
             // Tạo đơn hàng mới
             $dataInsertDonHang = [
                 'ma_don_hang' => 'DH' . strtoupper(Str::random(8)),
@@ -432,19 +444,6 @@ class GioHangController extends Controller
                         ->where('san_pham_id', $item['san_pham_id'])
                         ->where('bien_the_id', $bien_the->id)
                         ->delete();
-
-                    $checkSoLuongSp = BienThe::where('san_pham_id', $item['san_pham_id'])
-                                            ->where('kich_co', $item['kich_co'])
-                                            ->where('ma_mau', $item['ma_mau'])
-                                            ->lockForUpdate()
-                                            ->first();
-                    if($checkSoLuongSp && $checkSoLuongSp->so_luong < $item['so_luong']){
-                        DB::rollBack();
-                        return response()->json([
-                            'success' => false,
-                            'message' => "một trong số sản phẩm bạn mua không đủ số lượng trong kho !"
-                        ]);
-                    }
                 }
                 // Kiểm tra xem có bản ghi Coin và số coin sử dụng có hợp lệ hay không
                 if ($coin && $soCoin > 0) {
