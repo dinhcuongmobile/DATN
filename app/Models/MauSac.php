@@ -16,8 +16,5 @@ class MauSac extends Model
         'ma_mau'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 }

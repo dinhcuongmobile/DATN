@@ -19,10 +19,7 @@ class GioHang extends Model
         'thanh_tien',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function user()
     {

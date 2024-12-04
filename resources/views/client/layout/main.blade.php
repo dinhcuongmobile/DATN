@@ -231,10 +231,14 @@
                                         data-icon="home-1"></i>Trang chủ</a></li>
                             <li><a href="search.html"><i class="iconsax" data-icon="search-normal-2"></i>Tìm kiếm</a>
                             </li>
-                            <li class="shopping-cart"> <a href="cart.html"><i class="iconsax"
+                            <li class="shopping-cart"> <a href="{{route('gio-hang.gio-hang')}}"><i class="iconsax"
                                         data-icon="shopping-cart"></i>Giỏ hàng</a></li>
-                            <li><a href="wishlist.html"><i class="iconsax" data-icon="heart"></i>Yêu thích</a></li>
-                            <li> <a href="dashboard.html"><i class="iconsax" data-icon="user-2"></i>Tài khoản</a>
+                            <li><a href="{{route('yeu-thich.yeu-thich')}}"><i class="iconsax" data-icon="heart"></i>Yêu thích</a></li>
+                            @if (Auth::check())
+                                <li> <a href="{{route('tai-khoan.thong-tin-tai-khoan')}}"><i class="iconsax" data-icon="user-2"></i>Tài khoản</a>
+                            @else
+                                <li> <a href="{{route('tai-khoan.dang-nhap')}}"><i class="iconsax" data-icon="user-2"></i>Tài khoản</a>
+                            @endif
                             </li>
                         </ul>
                     </div>
@@ -286,8 +290,12 @@
                                 <li> <button href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop"
                                         aria-controls="offcanvasTop"><i class="iconsax"
                                             data-icon="search-normal-2"></i></button></li>
-                                <li> <a href="wishlist.html"><i class="iconsax" data-icon="heart"></i><span
-                                    class="cart_qty_cls">2</span></a></li>
+                                <li>
+                                    <a href="{{route('yeu-thich.yeu-thich')}}">
+                                        <i class="iconsax" data-icon="heart"></i>
+                                        <span class="cart_qty_cls soLuongYeuThich">{{$count_yeu_thich}}</span>
+                                    </a>
+                                </li>
                                 <li class="onhover-div"><a href="#"><i class="iconsax"
                                             data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
@@ -327,8 +335,6 @@
         <div id="cart-message"></div>
     </div>
     {{-- end popup thông báo --}}
-
-    {{-- END GIAO DIỆN NHẬN XU --}}
     @yield('container')
 
     {{-- footer --}}
@@ -431,7 +437,8 @@
     </footer>
 
     @if (Auth::check())
-        @if (Auth::user()->vai_tro_id==3)
+
+        @if (Auth::user()->id == 3)
             {{-- Chát trực tiếp --}}
             <div class="chat-button" id="chatButton" onclick="toggleChat()">
                 <span class="chat-icon">💬</span>
@@ -454,27 +461,6 @@
             </div>
             <script src="{{ asset('assets/js/chat.js') }}"></script>
             {{-- END Chát trực tiếp --}}
-        @else
-            <div class="chat-button" id="chatButton" onclick="toggleChat()">
-                <span class="chat-icon">💬</span>
-            </div>
-
-            <div class="chat-container" id="chatContainer">
-                <div class="chat-header">
-                    <h3>Nhắn tin với khách hàng</h3>
-                    <button class="btn-close" type="button" onclick="closeChat()"></button>
-                </div>
-
-                <div class="chat-messages" id="chatMessages">
-                    <!-- Tin nhắn sẽ được load ở đây -->
-                </div>
-
-                <div class="chat-input" data-id="{{ Auth::user()->id }}">
-                    <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
-                    <button onclick="sendMessage()">Gửi</button>
-                </div>
-            </div>
-            <script src="{{ asset('assets/js/chat.js') }}"></script>
         @endif
 
         {{-- GIAO DIỆN NHẠN XU --}}

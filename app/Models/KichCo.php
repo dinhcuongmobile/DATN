@@ -15,8 +15,5 @@ class KichCo extends Model
         'kich_co',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 }

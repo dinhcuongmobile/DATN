@@ -122,17 +122,23 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            <a class="wishlist-icon" href="javascript:void(0)"
-                                                                tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Add to Wishlist"></i>
-                                                            </a>
+                                                            @if ($item->yeuThich->isNotEmpty())
+                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
+                                                                 data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @endif
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
                                                                 href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
                                                                     data-bs-toggle="tooltip"
-                                                                    data-bs-title="Quick View"></i>
+                                                                    data-bs-title="Xem nhanh"></i>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -199,22 +205,23 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            <a class="wishlist-icon" href="javascript:void(0)"
-                                                                tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Add to Wishlist"></i>
-                                                            </a>
-                                                            <a href="compare.html" tabindex="0">
-                                                                <i class="iconsax" data-icon="arrow-up-down"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Compare"></i>
-                                                            </a>
-                                                            <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view" tabindex="0">
+                                                            @if ($item->yeuThich->isNotEmpty())
+                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
+                                                                data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @endif
+                                                            <a class="quickViewClick" data-id="{{ $item->id }}"
+                                                                href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
                                                                     data-bs-toggle="tooltip"
-                                                                    data-bs-title="Quick View"></i>
+                                                                    data-bs-title="Xem nhanh"></i>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -281,21 +288,23 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            <a class="wishlist-icon" href="javascript:void(0)"
-                                                                tabindex="0" data-id="{{ $item->id }}">
-                                                                <i class="iconsax" data-icon="heart"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Add to Wishlist"></i>
-                                                            </a>
-                                                            <a href="compare.html" tabindex="0">
-                                                                <i class="iconsax" data-icon="arrow-up-down"
-                                                                    aria-hidden="true" data-bs-toggle="tooltip"
-                                                                    data-bs-title="Compare"></i></a>
-                                                            <a href="#" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view" tabindex="0">
+                                                            @if ($item->yeuThich->isNotEmpty())
+                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
+                                                                data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                    <i class="iconsax" data-icon="heart"
+                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                                </a>
+                                                            @endif
+                                                            <a class="quickViewClick" data-id="{{ $item->id }}"
+                                                                href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
                                                                     data-bs-toggle="tooltip"
-                                                                    data-bs-title="Quick View"></i>
+                                                                    data-bs-title="Xem nhanh"></i>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -376,26 +385,35 @@
                     </div>
                 </div>
                 <div class="col-3 d-none d-xl-block">
-                    <div class="best-seller-box">
-                        <div class="offer-banner"><a href="{{route('san-pham.san-pham')}}">
-                                <h2>Giảm thêm 15%</h2><span> </span>
-                                <p>Mùa giảm giá của thương hiệu thiết kế tại cửa hàng và trực tuyến trong thời gian có hạn.
-                                </p>
-                                <div class="btn">
-                                    <h6>Use Code: <span>KHUTRD***</span></h6>
+                    <div class="col-3 d-none d-xl-block">
+                        <div class="col-3 d-none d-xl-block">
+                            <div class="best-seller-box">
+                                <div class="offer-container">
+                                    <!-- Hộp quà -->
+                                    <div class="gift-box" onclick="openGift()">
+                                        <p class="tap-to-open">Chạm để mở quà!</p>
+                                        <div class="box-lid"></div>
+                                        <div class="box-body"></div>
+                                        <div class="ribbon"></div>
+                                    </div>
+                                    <!-- Pháo hoa -->
+                                    <div class="fireworks hidden">
+                                        <div class="firework"></div>
+                                        <div class="firework"></div>
+                                        <div class="firework"></div>
+                                    </div>
+                                    <!-- Popup thông báo -->
+                                    <div class="popup hidden">
+                                        <div class="popup-content">
+                                            <h4>Chúc mừng bạn!</h4>
+                                            <p><span class="coin-amount">0 xu</span></p>
+                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Mua ngay</a>
+                                        </div>                                        
+                                    </div>
                                 </div>
-                            </a></div>
-                        <div class="best-seller-content">
-                            <h3>tinh tế và trẻ trung</h3><span> </span>
-                            <div class="link-hover-anim underline"><a
-                                    class="btn btn_underline link-strong link-strong-unhovered"
-                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
-                                <a class="btn btn_underline link-strong link-strong-hovered"
-                                    href="{{route('san-pham.san-pham')}}">Bộ sưu tập</a>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>                                           
+                </div>                
             </div>
         </div>
     </section>
@@ -423,18 +441,23 @@
                                                 alt="sản phẩm"></a>
                                     </div>
                                     <div class="cart-info-icon">
-                                        <a class="wishlist-icon" href="javascript:void(0)" tabindex="0"
-                                            data-id="{{ $item->id }}">
-                                            <i class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Add to Wishlist"></i>
-                                        </a>
-                                        <a href="compare.html" tabindex="0">
-                                            <i class="iconsax" data-icon="arrow-up-down" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Compare"></i></a>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
-                                            tabindex="0">
+                                        @if ($item->yeuThich->isNotEmpty())
+                                            <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
+                                            data-wishlistIdSanPham="{{ $item->id }}">
+                                                <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
+                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                            </a>
+                                        @else
+                                            <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                <i class="iconsax" data-icon="heart"
+                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                            </a>
+                                        @endif
+                                        <a class="quickViewClick" data-id="{{ $item->id }}"
+                                            href="javascript:void(0)" tabindex="0">
                                             <i class="iconsax" data-icon="eye" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Quick View"></i>
+                                                data-bs-toggle="tooltip"
+                                                data-bs-title="Xem nhanh"></i>
                                         </a>
                                     </div>
                                 </div>

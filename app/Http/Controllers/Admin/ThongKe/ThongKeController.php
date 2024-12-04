@@ -31,7 +31,6 @@ class ThongKeController extends Controller
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
         $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$sub30Ngay, $hienTai])->where('trang_thai', 3)->count();
-
         $groupedData = [];
         foreach ($donHang as $val) {
             $ngay = Carbon::parse($val->ngay_cap_nhat)->toDateString();
@@ -78,7 +77,6 @@ class ThongKeController extends Controller
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
 
         $soDonHang = DonHang::whereBetween('ngay_cap_nhat', [$fromDate, $toDate])->where('trang_thai', 3)->count();
-
         $groupedData = [];
         foreach ($donHang as $val) {
             $ngay = Carbon::parse($val->ngay_cap_nhat)->toDateString();
@@ -156,7 +154,6 @@ class ThongKeController extends Controller
         }
 
         $tongDoanhThu = $donHang->sum('tong_thanh_toan');
-
         $groupedData = [];
         foreach ($donHang as $val) {
             $ngay = Carbon::parse($val->ngay_cap_nhat)->toDateString();

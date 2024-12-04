@@ -21,6 +21,189 @@
     cursor: pointer;
     color: #999;
 }
+/* Hộp quà */
+.gift-box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    perspective: 1000px;
+    cursor: pointer;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.box-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #ff4747, #ff8585);
+    transform-origin: bottom;
+    transform: rotateX(0);
+    transition: transform 0.5s ease;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.box-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ffe74c;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 100%;
+    background: red;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Hiệu ứng khi mở hộp */
+.gift-box.opened .ribbon {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+}
+
+.gift-box.opened .box-lid {
+    transform: rotateX(-120deg);
+}
+
+/* Text "Chạm để mở quà" */
+.tap-to-open {
+    position: absolute;
+    top: -60px; /* Đẩy chữ lên trên */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px; /* Tăng kích thước chữ */
+    color: #333;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    transition: opacity 0.5s ease;
+    z-index: 2; /* Đảm bảo chữ luôn hiển thị phía trên hộp quà */
+}
+
+.gift-box.opened .tap-to-open {
+    opacity: 0; /* Ẩn chữ khi hộp được mở */
+}
+
+/* Pháo hoa */
+.fireworks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+}
+
+.firework {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #fff, transparent);
+    border-radius: 50%;
+    animation: firework 1.5s ease-out infinite;
+    opacity: 0;
+}
+
+.firework:nth-child(1) {
+    animation-delay: 0s;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+.firework:nth-child(2) {
+    animation-delay: 0.2s;
+    transform: translate(-50%, -50%) rotate(120deg);
+}
+.firework:nth-child(3) {
+    animation-delay: 0.4s;
+    transform: translate(-50%, -50%) rotate(240deg);
+}
+
+@keyframes firework {
+    0% {
+        transform: scale(0) translate(-50%, -50%);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(3) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 9999;
+    display: none;
+}
+
+.popup-content {
+    position: relative;
+    text-align: center;
+    padding-bottom: 20px; /* Tạo khoảng cách cho nút Đóng */
+}
+
+.popup .btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff4747, #ff8585);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.close-btn {
+    margin-top: 10px;
+    background: #ccc;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
 
 /* div chat */
 .chat-container {

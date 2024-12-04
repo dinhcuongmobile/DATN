@@ -151,7 +151,7 @@
                                     <div class="product-box-3">
                                         <div class="img-wrapper">
                                             <div class="label-block">
-                                                <a class="label-2 wishlist-icon" href="#" tabindex="0">
+                                                <a class="label-2 wishlist-icon" data-wishlistIdSanPham="{{ $item->id }}" tabindex="0">
                                                     <i class="iconsax" data-icon="heart" title="Wishlist">
                                                         <svg width="24" height="24" viewBox="0 0 24 24"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">

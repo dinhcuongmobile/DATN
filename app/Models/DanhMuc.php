@@ -19,10 +19,7 @@ class DanhMuc extends Model
         'ten_danh_muc',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function sanPhams()
     {

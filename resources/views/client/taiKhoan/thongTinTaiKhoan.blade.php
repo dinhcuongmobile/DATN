@@ -330,7 +330,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -362,21 +362,15 @@
                                                                                 <button style="margin-right:15px;"
                                                                                     class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
-                                                                                <button
-                                                                                    class="btn btn-success daNhanHang">Đã nhận hàng</button>
-                                                                                <button
-                                                                                    class="btn btn-primary muaLai">Mua lại</button>
+                                                                                <button class="btn btn-success daNhanHang">Đã nhận hàng</button>
+                                                                                <button class="btn btn-primary muaLai">Mua lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 3)
                                                                                 @if (isset($chua_danh_gia[$itemDonHang->id]) && $chua_danh_gia[$itemDonHang->id])
                                                                                     <button class="btn btn-warning btnDanhGia">Đánh giá</button>
                                                                                 @endif
-                                                                                <button class="btn btn-primary muaLai">Mua
-                                                                                    lại</button>
+                                                                                <button class="btn btn-primary muaLai">Mua lại</button>
                                                                             @elseif ($itemDonHang->trang_thai == 4)
-                                                                                <button class="btn btn-primary muaLai">Mua
-                                                                                    lại</button>
-                                                                                <a class="btn btn-outline-secondary">Xem
-                                                                                    chi tiết hủy đơn</a>
+                                                                                <button class="btn btn-primary muaLai">Mua lại</button>
                                                                             @endif
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ Shop</a>
@@ -420,7 +414,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -493,7 +487,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -568,7 +562,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -644,7 +638,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -722,7 +716,7 @@
                                                                                     </td>
                                                                                 </tr>
                                                                                 @foreach ($chi_tiet_don_hangs[$itemDonHang->id] as $item)
-                                                                                    <tr class="product-row">
+                                                                                    <tr class="product-row" title="Xem chi tiết">
                                                                                         <td class="img">
                                                                                             <img src="{{ Storage::url($item->bienThe->hinh_anh) }}"
                                                                                                 alt="product">
@@ -752,9 +746,6 @@
                                                                         <div class="btnDonMua">
                                                                             <button class="btn btn-primary muaLai">Mua
                                                                                 lại</button>
-                                                                            <a href=""
-                                                                                class="btn btn-outline-secondary">Xem chi
-                                                                                tiết hủy đơn</a>
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ
                                                                                 Shop</a>
@@ -824,7 +815,7 @@
                                         </div>
 
                                         <div class="delivery-status">
-                                            <h3>Trạng Thái Giao Hàng</h3>
+                                            <h3>Trạng Thái</h3>
                                             <div class="trang-thai">
 
                                             </div>

@@ -17,10 +17,7 @@ class PhiShip extends Model
         'phi_ship'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function quanHuyen()
     {

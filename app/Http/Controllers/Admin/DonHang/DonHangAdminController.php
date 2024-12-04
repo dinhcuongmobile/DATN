@@ -120,9 +120,17 @@ class DonHangAdminController extends Controller
 
     // Hiển thị danh sách đơn hàng đã hủy
     public function showDSDaHuy(Request $request) {
-        $donHangs = DonHang::where('trang_thai', 4)
-        ->MoiNhat()
-        ->get(); // 4 là trạng thái "Đã Hủy"
+        $query = DonHang::where('trang_thai', 4);
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+        $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
     }
 

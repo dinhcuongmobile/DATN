@@ -20,12 +20,7 @@ class DanhGia extends Model
         'so_sao',
     ];
 
-    public $timestamp = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function donHang()
     {

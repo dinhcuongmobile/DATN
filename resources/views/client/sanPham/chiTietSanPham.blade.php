@@ -143,7 +143,13 @@
 
                         <div class="buy-box border-buttom">
                             <ul>
-                                <li> <a href="wishlist.html"> <i class="fa-regular fa-heart me-2"></i>Thêm vào yêu thích</a></li>
+                                <li class="wishlist-chi-tiet" data-wishlistIdSanPham="{{$san_pham->id}}">
+                                    @if ($san_pham->yeuThich->isNotEmpty())
+                                        <a class='text-danger'> <i class='fa-regular fa-heart me-2 text-danger'></i>Xóa khỏi yêu thích</a>
+                                    @else
+                                        <a> <i class="fa-regular fa-heart me-2"></i>Thêm vào yêu thích</a>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
                         <div class="dz-info">
