@@ -439,7 +439,7 @@
 
     @if (Auth::check())
 
-        @if (Auth::user()->id == 3)
+        @if (Auth::user()->vai_tro_id == 3)
             {{-- Chát trực tiếp --}}
             <div class="chat-button" id="chatButton" onclick="toggleChat()">
                 <span class="chat-icon">💬</span>

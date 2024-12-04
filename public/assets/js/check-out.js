@@ -230,6 +230,17 @@ function datHang(){
                 if(response.success){
                     sessionStorage.setItem("activeTab", "order");
                     window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                }else{
+                    if(response.message){
+                        document.querySelector('#thongbaothemgiohang').style.display='block';
+                        document.querySelector('#thongbaothemgiohang #cart-message').textContent= `${response.message}`;
+                        setTimeout(() => {
+                            document.querySelector('#thongbaothemgiohang').style.display = 'none';
+                        }, 1400);
+                    }
+                    setTimeout(() => {
+                        window.location.href="/gio-hang/";
+                    }, 1800);
                 }
 
             },

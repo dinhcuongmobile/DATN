@@ -260,7 +260,8 @@ function maxInputQuantity(maxSL){
         const inputEl = element.querySelector("input[type='number']");
 
         inputEl.setAttribute('data-max', maxSL);
-        inputEl.value = Math.min(inputEl.value, maxSL);
+        if(maxSL==0) inputEl.value = 1;
+        else inputEl.value = Math.min(inputEl.value, maxSL);
         addButton.disabled = inputEl.value >= maxSL;
         subButton.disabled = inputEl.value <= 1;
     });
@@ -281,7 +282,7 @@ function updateQuantity() {
             },
             success: function (response) {
                 var soLuongTon = response.quantity;
-                var maxSL = parseInt(response.quantity) - parseInt(response.gio_hang?response.gio_hang.so_luong:0);
+                var maxSL = parseInt(response.quantity) - parseInt(response.gio_hang);
                 if (soLuongTon > 0) {
                     document.querySelector('#quick-view .product-buttons').innerHTML = `
                         <a class="btn btn-solid" id="themGioHang-quick-view" data-id="${san_pham_id}" href="javascript:void(0);">Thêm vào giỏ hàng</a>
@@ -311,6 +312,7 @@ function updateQuantity() {
 function selectSize(){
     document.querySelectorAll('#selectSize-quick-view li').forEach(function (sizeElement) {
         sizeElement.addEventListener('click', function () {
+            document.querySelector('#soLuong-quick-view').value = 1;
             if (this.classList.contains('active')) {
                 this.classList.remove('active');
                 selectedSizeQuickView = null;
@@ -331,6 +333,7 @@ function selectSize(){
 function selectColor(){
     document.querySelectorAll('#selectMauSac-quick-view li').forEach(function (colorElement) {
         colorElement.addEventListener('click', function () {
+            document.querySelector('#soLuong-quick-view').value = 1;
             if (this.classList.contains('activ')) {
                 this.classList.remove('activ');
                 selectedColorQuickView = null;
@@ -395,22 +398,14 @@ function themGioHang(){
                     let errSL = document.querySelector('#errSL-quick-view');
                     errSL.style.display='block';
                     setTimeout(() => {
-                        errSL.style.transition = 'opacity 0.5s ease-out';
-                        errSL.style.opacity = '0';
-                        setTimeout(() => {
-                            errSL.style.display = 'none';
-                        }, 500); // Thời gian cho quá trình mờ dần
+                        errSL.style.display = 'none';
                     }, 5000);
                 }
             } else {
                 let errSelect = document.querySelector('#errSelect-quick-view');
                 errSelect.style.display='block';
                 setTimeout(() => {
-                    errSelect.style.transition = 'opacity 0.5s ease-out';
-                    errSelect.style.opacity = '0';
-                    setTimeout(() => {
-                        errSelect.style.display = 'none';
-                    }, 500); // Thời gian cho quá trình mờ dần
+                    errSelect.style.display = 'none';
                 }, 5000);
             }
         });
@@ -526,7 +521,7 @@ function openGift() {
 
 function closePopupOnOutsideClick(event) {
     const popup = document.querySelector(".popup");
-    
+
     // Kiểm tra nếu nhấp ra ngoài popup (không phải bên trong popup)
     if (!popup.contains(event.target)) {
         popup.style.display = "none"; // Đóng popup

@@ -18,6 +18,11 @@ class AnhDanhGia extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     public function danhGia()
     {
         return $this->belongsTo(DanhGia::class, 'danh_gia_id');
