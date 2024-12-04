@@ -83,6 +83,7 @@ class SanPhamController extends Controller
 
     public function sanPham(Request $request)
     {
+        $userId = Auth::id();
         // Lấy giá tối đa của sản phẩm từ cơ sở dữ liệu
         $maxPrice = SanPham::max('gia_san_pham'); // Lấy giá cao nhất của sản phẩm
 
@@ -90,8 +91,9 @@ class SanPhamController extends Controller
         $minPrice = 0;
 
         // Lọc sản phẩm dựa trên các tham số được gửi lên
-        $sanPhams = SanPham::query();
-
+        $sanPhams = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }]);
         // Xử lý lọc theo điều kiện sắp xếp
         if ($request->has('orderby')) {
             switch ($request->orderby) {
@@ -134,7 +136,7 @@ class SanPhamController extends Controller
         $this->views['maxPrice'] = $maxPrice;
 
         // Lấy tất cả sản phẩm
-        $allSanPham = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->get();
+        $allSanPham = $sanPhams->orderBy('id', 'desc')->get();
 
         // Lấy số trang có sản phẩm
         $pages = [];
@@ -147,7 +149,7 @@ class SanPhamController extends Controller
             }
         }
 
-        $this->views['san_phams'] = $sanPhams->with('danhMuc', 'bienThes', 'danhGias')->orderBy('id', 'desc')->paginate(8);
+        $this->views['san_phams'] = $sanPhams->orderBy('id', 'desc')->paginate(8);
         $this->views['danh_mucs'] = DanhMuc::all();
         $this->views['count_sp_danh_muc'] = $sanPhams->groupBy('danh_muc_id')
             ->selectRaw('danh_muc_id, COUNT(*) as count')
@@ -163,12 +165,12 @@ class SanPhamController extends Controller
                 'pages' => $pages,
             ]);
         }
-
         return view('client.sanPham.sanPham', $this->views);
     }
 
     public function sanPhamDanhMuc(Request $request, int $id)
     {
+        $userId = Auth::id();
         // Lấy giá tối đa của sản phẩm từ cơ sở dữ liệu trong danh mục đó
         $maxPrice = SanPham::where('danh_muc_id', $id)->max('gia_san_pham'); // Lấy giá cao nhất trong danh mục
 
@@ -176,7 +178,9 @@ class SanPhamController extends Controller
         $minPrice = 0;
 
         // Lọc sản phẩm dựa trên các tham số được gửi lên, chỉ lọc sản phẩm trong danh mục đó
-        $sanPhams = SanPham::where('danh_muc_id', $id);
+        $sanPhams = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->where('danh_muc_id',$id);
 
 
         // Xử lý lọc theo điều kiện sắp xếp

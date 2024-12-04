@@ -198,12 +198,16 @@
                             <div id="productList"
                                 class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
                                 @foreach ($san_phams as $item)
+                                    @php
+                                        $isWishlist = $item->yeuThich->isNotEmpty(); // Kiểm tra trạng thái yêu thích
+                                    @endphp
                                     <div>
                                         <div class="product-box-3">
                                             <div class="img-wrapper">
                                                 <div class="label-block">
-                                                    <a class="label-2 wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
-                                                        <i class="iconsax" data-icon="heart">
+                                                    <a class="label-2 wishlist-icon" style="background-color: {{ $isWishlist ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                    tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                        <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $isWishlist ? '#fff' : 'rgba(38,40,52,1)' }}">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path

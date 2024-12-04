@@ -53,22 +53,16 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
-        // Danh sách yêu thích
-        $this->views['yeuThichs'] = YeuThich::where('user_id', $tai_khoan->id)
-            ->join('san_phams', 'yeu_thichs.san_pham_id', '=', 'san_phams.id')
-            ->select('san_phams.*')
-            ->get();
+        $this->views['yeu_thichs'] = [];
 
-        //
-
-        // Tổng yêu thích
         if (Auth::check()) {
-            $user_id = Auth::id();
-            $user = User::find($user_id);
-            $tongYeuThich = $user->yeuThich()->count();
-            //
-            $this->views['tong_yeu_thich'] = $tongYeuThich;
+            $yeu_thichs = YeuThich::with('user', 'sanPham')->where('user_id', Auth::user()->id)
+                                ->orderBy('id', 'desc')
+                                ->get();
+
+            $this->views['yeu_thichs'] = $yeu_thichs;
         }
+        
         //
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),

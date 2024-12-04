@@ -122,18 +122,11 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if ($item->yeuThich->isNotEmpty())
-                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
-                                                                 data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @else
-                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" style="background-color: {{  $item->yeuThich->isNotEmpty() ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                                tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                            </a>
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
                                                                 href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
@@ -205,18 +198,11 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if ($item->yeuThich->isNotEmpty())
-                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
-                                                                data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @else
-                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" style="background-color: {{  $item->yeuThich->isNotEmpty() ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                                tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                            </a>
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
                                                                 href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
@@ -288,18 +274,11 @@
                                                                     alt="sản phẩm"></a>
                                                         </div>
                                                         <div class="cart-info-icon">
-                                                            @if ($item->yeuThich->isNotEmpty())
-                                                                <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
-                                                                data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @else
-                                                                <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
-                                                                    <i class="iconsax" data-icon="heart"
-                                                                        aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                                                </a>
-                                                            @endif
+                                                            <a class="wishlist-icon" style="background-color: {{  $item->yeuThich->isNotEmpty() ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                                tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                                <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
+                                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                                            </a>
                                                             <a class="quickViewClick" data-id="{{ $item->id }}"
                                                                 href="javascript:void(0)" tabindex="0">
                                                                 <i class="iconsax" data-icon="eye" aria-hidden="true"
@@ -408,12 +387,12 @@
                                             <h4>Chúc mừng bạn!</h4>
                                             <p><span class="coin-amount">0 xu</span></p>
                                             <a href="{{route('san-pham.san-pham')}}" class="btn">Mua ngay</a>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>                                           
-                </div>                
+                        </div>
+                </div>
             </div>
         </div>
     </section>
@@ -441,18 +420,11 @@
                                                 alt="sản phẩm"></a>
                                     </div>
                                     <div class="cart-info-icon">
-                                        @if ($item->yeuThich->isNotEmpty())
-                                            <a class="wishlist-icon" tabindex="0" style="background-color: #e67e22"
-                                            data-wishlistIdSanPham="{{ $item->id }}">
-                                                <i class="iconsax" data-icon="heart" style="--Iconsax-Color: #fff"
-                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                            </a>
-                                        @else
-                                            <a class="wishlist-icon" tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
-                                                <i class="iconsax" data-icon="heart"
-                                                    aria-hidden="true" data-bs-toggle="tooltip"></i>
-                                            </a>
-                                        @endif
+                                        <a class="wishlist-icon" style="background-color: {{  $item->yeuThich->isNotEmpty() ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                        tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                            <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
+                                                aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                        </a>
                                         <a class="quickViewClick" data-id="{{ $item->id }}"
                                             href="javascript:void(0)" tabindex="0">
                                             <i class="iconsax" data-icon="eye" aria-hidden="true"

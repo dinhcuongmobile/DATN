@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $san_pham_noi_bat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->orderBy('luot_xem', 'desc')->take(8)->get();
+        }])->orderBy('luot_xem', 'desc')->take(8)->get(); 
 
         $san_pham_moi_nhat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);

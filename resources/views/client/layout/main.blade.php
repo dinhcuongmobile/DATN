@@ -85,7 +85,7 @@
                                     <li> <button class="search-icon"><i class="iconsax"
                                                 data-icon="search-normal-2"></i></button></li>
                                     <li> <a href="wishlist.html"><i class="iconsax" data-icon="heart"></i><span
-                                        class="cart_qty_cls">2</span></a></li>
+                                        class="cart_qty_cls">{{$count_yeu_thich}}</span></a></li>
                                     <li><a><i class="iconsax" data-icon="user-2"></i></a></li>
                                 </ul>
                             </div>
@@ -296,7 +296,7 @@
                                         <span class="cart_qty_cls soLuongYeuThich">{{$count_yeu_thich}}</span>
                                     </a>
                                 </li>
-                                <li class="onhover-div"><a href="#"><i class="iconsax"
+                                <li class="onhover-div"><a href="{{route('tai-khoan.thong-tin-tai-khoan')}}"><i class="iconsax"
                                             data-icon="user-2"></i></a>
                                     <div class="onhover-show-div user">
                                         <ul>
