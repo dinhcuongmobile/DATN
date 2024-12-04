@@ -30,7 +30,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
+                'ngay_cap_nhat' => substr($val->ngay_cap_nhat, 0, 10),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -61,7 +61,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
+                'ngay_cap_nhat' => substr($val->ngay_cap_nhat, 0, 10),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );
@@ -123,7 +123,7 @@ class ThongKeController extends Controller
 
         foreach ($donHang as $key => $val) {
             $chart_data[] = array(
-                'ngay_cap_nhat' => date('Y-m-d', strtotime($val->ngay_cap_nhat)),
+                'ngay_cap_nhat' => substr($val->ngay_cap_nhat, 0, 10),
                 'tong_don_hang' => $val->tong_don_hang,
                 'tong_thanh_toan' => $val->tong_thanh_toan
             );

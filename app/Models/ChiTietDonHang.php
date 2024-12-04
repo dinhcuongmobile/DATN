@@ -24,12 +24,8 @@ class ChiTietDonHang extends Model
         'thanh_tien',
     ];
 
-    public $timestamp = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
+    
     public function donHang()
     {
         return $this->belongsTo(DonHang::class, 'don_hang_id');

@@ -23,10 +23,7 @@ class SanPham extends Model
         'da_ban',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function danhMuc()
     {

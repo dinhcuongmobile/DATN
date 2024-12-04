@@ -12,9 +12,10 @@ class YeuThich extends Model
 
     protected $fillable =
     [
-        'user',
+        'user_id',
         'san_pham_id'
     ];
+    public $timestamp = false;
 
     public function user()
     {

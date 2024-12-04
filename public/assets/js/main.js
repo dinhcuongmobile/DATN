@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     togglePassword();
     donMuaMenu();
     yeuThich();
+    yeuThichChiTiet();
+    xoaYeuThich();
 });
 function togglePassword(){
     const togglePassword = document.querySelectorAll('.toggle-password');
@@ -421,8 +423,7 @@ function yeuThich(){
     if(wishlistIcon){
         wishlistIcon.forEach((el)=>{
             el.addEventListener('click',function(){
-                let sanPhamId= el.getAttribute('data-id');
-
+                let sanPhamId= el.getAttribute('data-wishlistIdSanPham');
                 $.ajax({
                     url: '/yeu-thich/them-yeu-thich',
                     type: 'POST',
@@ -432,14 +433,41 @@ function yeuThich(){
                     },
                     success: function(response) {
                         if(response.success){
-                            console.log(response.id);
+                            if(response.exist){
+                                const a = document.querySelectorAll(`a[data-wishlistIdSanPham="${sanPhamId}"]`);
+                                a.forEach((el)=>{
+                                    el.style.backgroundColor = "rgba(255,255,255,1)";
+                                });
+
+                                const i = document.querySelectorAll(`a[data-wishlistIdSanPham="${sanPhamId}"] i`);
+                                i.forEach((el)=>{
+                                    el.setAttribute('style','--Iconsax-Color: rgba(38,40,52,1)');
+                                });
+
+
+                            }else{
+                                const a = document.querySelectorAll(`a[data-wishlistIdSanPham="${sanPhamId}"]`);
+                                a.forEach((el)=>{
+                                    el.style.backgroundColor = "#e67e22";
+                                });
+
+                                const i = document.querySelectorAll(`a[data-wishlistIdSanPham="${sanPhamId}"] i`);
+                                i.forEach((el)=>{
+                                    el.setAttribute('style','--Iconsax-Color: #fff');
+                                });
+                            }
+
+                            document.querySelector('.soLuongYeuThich').textContent = response.count_yeu_thich;
+
                             Toastify({
-                                text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
+                                text: `${response.message}`,
                                 duration: 2500,
                                 close: true,
                             }).showToast();
 
                         }else{
+                            console.log(response.error);
+
                             window.location.href="/tai-khoan/dang-nhap";
                         }
                     },
@@ -452,6 +480,82 @@ function yeuThich(){
     }
 }
 
+function yeuThichChiTiet(){
+    const wishlistChiTiet = document.querySelector('.wishlist-chi-tiet');
+    if(wishlistChiTiet){
+        wishlistChiTiet.addEventListener('click',function(){
+            let sanPhamId= wishlistChiTiet.getAttribute('data-wishlistIdSanPham');
+
+            $.ajax({
+                url: '/yeu-thich/them-yeu-thich',
+                type: 'POST',
+                data: {
+                    _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    sanPhamId: sanPhamId,
+                },
+                success: function(response) {
+                    if(response.success){
+                        if(response.exist){
+                            wishlistChiTiet.innerHTML="<a> <i class='fa-regular fa-heart me-2'></i>Thêm vào yêu thích</a>";
+
+                        }else{
+                            wishlistChiTiet.innerHTML="<a class='text-danger'> <i class='fa-regular fa-heart me-2 text-danger'></i>Xóa khỏi yêu thích</a>";
+                        }
+                        Toastify({
+                            text: `${response.message}`,
+                            duration: 2500,
+                            close: true,
+                        }).showToast();
+                        document.querySelector('.soLuongYeuThich').textContent = response.count_yeu_thich;
+                    }else{
+                        console.log(response.error);
+
+                        window.location.href="/tai-khoan/dang-nhap";
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Có lỗi xảy ra: ", error);
+                }
+            });
+        });
+    }
+}
+function xoaYeuThich(){
+    const xoaYeuThich =document.querySelectorAll('.wishlist-box .deleteYeuThich');
+    if(xoaYeuThich){
+        xoaYeuThich.forEach((el)=>{
+            el.addEventListener('click',function(){
+                let yeuThichId = el.getAttribute('data-id');
+
+                $.ajax({
+                    url: '/yeu-thich/xoa-yeu-thich',
+                    type: 'POST',
+                    data: {
+                        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        yeuThichId: yeuThichId,
+                    },
+                    success: function(response) {
+                        if(response.success){
+                            el.closest('.col').remove();
+                            if (response.count_yeu_thich === 0) {
+                                document.querySelector('.wishlist-box #data-show').style.display= 'block';
+                            }
+                            Toastify({
+                                text: `${response.message}`,
+                                duration: 2500,
+                                close: true,
+                            }).showToast();
+                            document.querySelector('.soLuongYeuThich').textContent = response.count_yeu_thich;
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Có lỗi xảy ra: ", error);
+                    }
+                });
+            });
+        });
+    }
+}
 //time
 // function flashSaleTime(){
 //     // Lấy ngày bắt đầu (hiện tại)

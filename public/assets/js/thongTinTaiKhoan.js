@@ -181,6 +181,7 @@ function chiTietDonMua(){
                             const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
                             const actionButtons = document.querySelector('#order-details .action-button');
                             actionButtons.innerHTML="";
+                            timeline.style.display="flex";
                             timeline.querySelectorAll('i').forEach((el)=>{
                                 el.classList.remove('change','next-change');
                             });
@@ -267,14 +268,13 @@ function chiTietDonMua(){
                                 case 4:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
                                     "<span class='text-danger'>Đã hủy</span>";
-                                    // timeline.remove();
-                                    // document.querySelector('#order-details .delivery-status h3').textContent = "Trạng thái";
-                                    // deliveryStatus.innerHTML=`
-                                    //     <p class="active">
-                                    //         <i class="fa-solid fa-circle"></i>
-                                    //         <span>Đơn hàng đã được hủy vào lúc </span>
-                                    //     </p>
-                                    // `;
+                                    timeline.style.display="none";
+                                    deliveryStatus.innerHTML=`
+                                        <p class="active">
+                                            <i class="fa-solid fa-circle"></i>
+                                            <span>Đơn hàng đã được hủy vào lúc: ${donHang.ngay_cap_nhat}</span>
+                                        </p>
+                                    `;
                                 break;
                             }
 

@@ -20,10 +20,7 @@ class BienThe extends Model
         'so_luong',
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    public $timestamps = false;
 
     public function sanPham()
     {

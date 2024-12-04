@@ -27,7 +27,10 @@ class SanPhamController extends Controller
 
     public function chiTietSanPham(int $id)
     {
-        $san_pham = SanPham::with('danhMuc', 'bienThes', 'danhGias')->find($id);
+        $userId = Auth::id();
+        $san_pham = SanPham::with(['danhMuc','bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+                    $query->where('user_id', $userId); }])->find($id);
+
         if (!$san_pham) {
             return redirect()->route('404');
         }
@@ -53,7 +56,7 @@ class SanPhamController extends Controller
 
         foreach ($danh_gias as $key => $itemDanhGia) {
             $arrTraLoiDanhGia[$itemDanhGia->id] = TraLoiDanhGia::with('user')->where('danh_gia_id',$itemDanhGia->id)->orderBy('id','desc')->first();
-        }   
+        }
 
         $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
             ->where('danh_muc_id', $san_pham->danh_muc_id)

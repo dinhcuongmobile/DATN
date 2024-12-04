@@ -156,7 +156,9 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     });
 
     Route::prefix('/yeu-thich')->group(function () {
-        Route::post('/them-yeu-thich', [YeuThichController::class, 'themYeuThich'])->name('yeu-thich.them-yeu-thich');
+        Route::get('/', [YeuThichController::class, 'yeuThich'])->name('yeu-thich.yeu-thich');
+        Route::post('/them-yeu-thich', [YeuThichController::class, 'themYeuThich']);
+        Route::post('/xoa-yeu-thich', [YeuThichController::class, 'xoaYeuThich']);
     });
 
 

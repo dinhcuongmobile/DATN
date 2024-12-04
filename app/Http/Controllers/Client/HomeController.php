@@ -22,12 +22,24 @@ class HomeController extends Controller
 
     public function home()
     {
+        $userId = Auth::id();
         $danh_mucs = DanhMuc::all();
 
-        $san_pham_noi_bat = SanPham::with('bienThes', 'danhGias')->orderBy('luot_xem', 'desc')->take(8)->get();
-        $san_pham_moi_nhat = SanPham::with('bienThes', 'danhGias')->orderBy('id', 'desc')->take(8)->get();
-        $san_pham_ban_chay = SanPham::with('bienThes', 'danhGias')->orderBy('da_ban', 'desc')->take(8)->get();
-        $san_pham_khuyen_mai = SanPham::with('bienThes', 'danhGias')->where('khuyen_mai', ">", 0)->orderBy('id', 'desc')->take(8)->get();
+        $san_pham_noi_bat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->orderBy('luot_xem', 'desc')->take(8)->get();
+
+        $san_pham_moi_nhat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->orderBy('id', 'desc')->take(8)->get();
+
+        $san_pham_ban_chay = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->orderBy('da_ban', 'desc')->take(8)->get();
+
+        $san_pham_khuyen_mai = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->where('khuyen_mai', '>', 0)->orderBy('id', 'desc')->take(8)->get();
 
         $this->views['danh_mucs'] = $danh_mucs;
 
