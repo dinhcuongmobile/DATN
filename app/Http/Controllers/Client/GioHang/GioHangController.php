@@ -39,18 +39,24 @@ class GioHangController extends Controller
         $this->views['san_pham_moi_nhat']= SanPham::with('bienThes','danhGias')->orderBy('id','desc')->take(8)->get();
 
         if (Auth::check()) {
-            $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
-                                ->where('user_id', Auth::user()->id)
-                                ->whereHas('bienThe', function($query) {
-                                    $query->where('so_luong', '>', 0);
-                                })
-                                ->orderBy('id', 'desc')
-                                ->get();
+            $checkGioHang = GioHang::with('user', 'sanPham', 'bienThe')->where('user_id', Auth::user()->id)->get();
 
-            foreach ($gioHangs as $item) {
+            foreach ($checkGioHang as $item) {
+                $checkSL = BienThe::find($item->bien_the_id);
+                if($checkSL->so_luong==0){
+                    GioHang::with('user', 'sanPham', 'bienThe')
+                            ->where('user_id', Auth::user()->id)
+                            ->where('san_pham_id',$checkSL->san_pham_id)
+                            ->where('bien_the_id',$checkSL->id)
+                            ->delete();
+                }
                 $item->sanPham->load('danhMuc', 'bienThes', 'danhGias');
-            }
 
+            }
+            $gioHangs = GioHang::with('user', 'sanPham', 'bienThe')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('id', 'desc')
+            ->get();
             $this->views['gio_hangs'] = $gioHangs;
         }
 
@@ -130,7 +136,9 @@ class GioHangController extends Controller
         // Lưu lại giỏ hàng vào session
         session()->put('gio_hangs', $gio_hangs);
 
-        return response()->json(['login' => true]);
+        return response()->json([
+            'login' => true,
+        ]);
     }
 
 
@@ -355,9 +363,22 @@ class GioHangController extends Controller
     }
 
     public function datHang(Request $request){
+        $gio_hangs = session()->get('gio_hangs', []);
+        foreach ($gio_hangs as $item) {
+            $checkSoLuongSp = BienThe::where('san_pham_id', $item['san_pham_id'])
+                                    ->where('kich_co', $item['kich_co'])
+                                    ->where('ma_mau', $item['ma_mau'])
+                                    ->lockForUpdate()
+                                    ->first();
+            if($checkSoLuongSp && $checkSoLuongSp->so_luong < $item['so_luong']){
+                return response()->json([
+                    'success' => false,
+                    'message' => "một trong số sản phẩm bạn mua không đủ số lượng trong kho !"
+                ]);
+            }
+        }
         DB::beginTransaction();
         try {
-            $gio_hangs = session()->get('gio_hangs', []);
             $phi_ships = $request->input('phiShip');
             $giamGiaVanChuyen = $request->input('giamTienVanChuyen');
             $giamGiaDonHang = $request->input('giamTienDonHang');
@@ -398,7 +419,6 @@ class GioHangController extends Controller
                 $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
 
                 foreach ($gio_hangs as $item) {
-                    $san_pham = SanPham::find($item['san_pham_id']);
                     $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
                                         ->where('kich_co', $item['kich_co'])
                                         ->where('ma_mau', $item['ma_mau'])

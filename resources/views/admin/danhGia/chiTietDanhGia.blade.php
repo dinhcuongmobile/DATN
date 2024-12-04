@@ -105,7 +105,7 @@
                                     @if ($danhGia->trang_thai == 1)
                                         <tr>
                                             <th>Ngày Phản Hồi</th>
-                                            <td>{{ $danhGia->updated_at }}</td>
+                                            <td>{{ $traLoiDanhGia->updated_at }}</td>
                                         </tr>
                                         <tr>
                                             <th>Tài khoản phản hồi</th>
@@ -121,7 +121,7 @@
                                                 @csrf
                                                 <input type="hidden" name="danh_gia_id", value="{{ $danhGia->id }}">
                                                 @if ($traLoiDanhGia)
-                                                    <textarea name="noi_dung" cols="170" rows="3" 
+                                                    <textarea name="noi_dung" cols="170" rows="3"
                                                         placeholder="Nhập câu trả lời..." disabled>{{ $traLoiDanhGia->noi_dung }}</textarea>
                                                 @else
                                                     <textarea name="noi_dung" cols="170" rows="3" placeholder="Nhập phản hồi..."></textarea>

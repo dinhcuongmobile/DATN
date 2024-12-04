@@ -271,16 +271,17 @@ class SanPhamController extends Controller
             ->where('ma_mau', $mau_sac)
             ->first();
 
-        $gio_hang= GioHang::where('user_id',Auth::user()->id)
-                            ->where('san_pham_id',$san_pham_id)
-                            ->where('bien_the_id',$bienThe->id)->first();
-        if ($bienThe) {
-            return response()->json([
-                'quantity' => $bienThe->so_luong,
-                'gio_hang' => $gio_hang
-            ]);
-        } else {
-            return response()->json(['quantity' => 0]);
+        $gio_hang = [];
+
+        if(Auth::check()){
+            $gio_hang = GioHang::where('user_id',Auth::user()->id)
+            ->where('san_pham_id',$san_pham_id)
+            ->where('bien_the_id',$bienThe->id)->first();
         }
+
+        return response()->json([
+            'quantity' => $bienThe ? $bienThe->so_luong : 0,
+            'gio_hang' => $gio_hang ? $gio_hang->so_luong : 0
+        ]);
     }
 }

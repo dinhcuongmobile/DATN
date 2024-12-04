@@ -22,6 +22,11 @@ class BienThe extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
     public function sanPham()
     {
         return $this->belongsTo(SanPham::class, 'san_pham_id');

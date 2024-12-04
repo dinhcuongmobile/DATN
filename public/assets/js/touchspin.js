@@ -52,7 +52,8 @@ function maxInputQuantity(maxSL){
         const inputEl = element.querySelector("input[type='number']");
 
         inputEl.setAttribute('data-max', maxSL);
-        inputEl.value = Math.min(inputEl.value, maxSL);
+        if(maxSL==0) inputEl.value = 1;
+        else inputEl.value = Math.min(inputEl.value, maxSL);
         addButton.disabled = inputEl.value >= maxSL;
         subButton.disabled = inputEl.value <= 1;
     });
@@ -74,7 +75,8 @@ function updateQuantity() {
             },
             success: function (response) {
                 var soLuongTon = response.quantity;
-                var maxSL = parseInt(response.quantity) - parseInt(response.gio_hang?response.gio_hang.so_luong:0);
+                var maxSL = parseInt(response.quantity) - parseInt(response.gio_hang);
+
                 if (soLuongTon > 0) {
                     document.getElementById('soLuongTon').textContent = soLuongTon;
                     document.getElementById('soLuongTon').style.color="rgba(118, 118, 118, 1)";
@@ -83,7 +85,6 @@ function updateQuantity() {
                             data-id="${san_pham_id}">Thêm giỏ hàng</a>
                             <a class="btn btn_outline sm" id="muaNgay" href="javascript:void(0)">Mua ngay</a>
                         `;
-                    document.querySelector(".quantity input[type='number']").value=1;
                 } else {
                     document.getElementById('soLuongTon').textContent = 'Tạm thời hết hàng';
                     document.getElementById('soLuongTon').style.color="red";
@@ -112,6 +113,7 @@ function updateQuantity() {
 function selectSize(){
     document.querySelectorAll('#selectSize li').forEach(function (sizeElement) {
         sizeElement.addEventListener('click', function () {
+            document.querySelector('#soLuong').value=1;
             if (this.classList.contains('active')) {
                 this.classList.remove('active');
                 selectedSize = null;
@@ -132,6 +134,7 @@ function selectSize(){
 function selectColor(){
     document.querySelectorAll('#selectMauSac li').forEach(function (colorElement) {
         colorElement.addEventListener('click', function () {
+            document.querySelector('#soLuong').value=1;
             if (this.classList.contains('activ')) {
                 this.classList.remove('activ');
                 selectedColor = null;
@@ -155,8 +158,8 @@ function themGioHang(){
     if (btnThemGioHang) {
         btnThemGioHang.addEventListener('click', function () {
             if (selectedSize && selectedColor) {
-                let dataMax = document.querySelector('.quantity input[type="number"]');
-                if(dataMax.getAttribute('data-max')>0){
+                let dataMax = document.querySelector('.quantity input[type="number"]').getAttribute('data-max');
+                if(dataMax>0){
                     let token= document.querySelector(".tokenThemGioHang").value;
                     let sanPhamID = btnThemGioHang.getAttribute('data-id');
                     let soLuong = document.getElementById('soLuong').value;
@@ -184,6 +187,9 @@ function themGioHang(){
                                 document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
                                 document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
                                 document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+
+                                let dataMaxNew = parseInt(dataMax)-1;
+                                document.querySelector('.quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
                             }
                         },
                         error: function (error) {
@@ -195,22 +201,14 @@ function themGioHang(){
                     let errSL = document.querySelector('#errSL');
                     errSL.style.display='block';
                     setTimeout(() => {
-                        errSL.style.transition = 'opacity 0.5s ease-out';
-                        errSL.style.opacity = '0';
-                        setTimeout(() => {
-                            errSL.style.display = 'none';
-                        }, 500); // Thời gian cho quá trình mờ dần
+                        errSL.style.display = 'none';
                     }, 5000);
                 }
             } else {
                 let errSelect = document.querySelector('#errSelect');
                 errSelect.style.display='block';
                 setTimeout(() => {
-                    errSelect.style.transition = 'opacity 0.5s ease-out';
-                    errSelect.style.opacity = '0';
-                    setTimeout(() => {
-                        errSelect.style.display = 'none';
-                    }, 500); // Thời gian cho quá trình mờ dần
+                    errSelect.style.display = 'none';
                 }, 5000);
             }
         });
