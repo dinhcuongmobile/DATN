@@ -93,7 +93,9 @@ class ThongTinTaiKhoanController extends Controller
 
                 // Kiểm tra xem đơn hàng đã được đánh giá hết chưa
                 $danh_gia = DanhGia::whereIn('san_pham_id', $chi_tiet_don_hangs[$item->id]
-                                    ->pluck('san_pham_id'))->where('user_id', Auth::id())->where('don_hang_id',$item->id)->get();
+                                    ->pluck('san_pham_id'))->where('user_id', Auth::id())->where('don_hang_id',$item->id)
+                                    ->withTrashed()
+                                    ->get();
 
                 // Nếu có ít nhất một sản phẩm chưa được đánh giá, thì lưu lại
                 $chua_danh_gia[$item->id] = $chi_tiet_don_hangs[$item->id]->count() > $danh_gia->count();

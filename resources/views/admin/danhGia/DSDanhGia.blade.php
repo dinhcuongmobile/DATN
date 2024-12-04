@@ -77,11 +77,11 @@
                                             <td class="col-1 align-middle">{{ $item->created_at }}</td>
                                             <td class="col-2 align-middle">
                                                 <a href="{{ route('danh-gia.chi-tiet', $item->id) }}">
-                                                    <button type="button" class="btn btn-primary btn-sm">Chi tiết</button>
+                                                    <button type="button" class="btn btn-primary btn-sm mb-3">Chi tiết</button>
                                                 </a>
                                                 <a href="{{ route('danh-gia.an', $item->id) }}">
                                                     <button type="button" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Xác nhận ẩn đánh giá !')">Ẩn</button>
+                                                        onclick="return confirm('Xác nhận ẩn đánh giá !')">Ẩn ngay</button>
                                                 </a>
                                             </td>
                                         </tr>
