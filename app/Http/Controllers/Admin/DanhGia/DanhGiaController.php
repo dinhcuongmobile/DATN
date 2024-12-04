@@ -83,7 +83,7 @@ class DanhGiaController extends Controller
 
     public function chiTietDanhGia(int $id)
     {
-        $danhGia = DanhGia::query()->findOrFail($id);
+        $danhGia = DanhGia::withTrashed()->findOrFail($id);
         $traLoiDanhGia = TraLoiDanhGia::where('danh_gia_id', $danhGia->id)->first();
 
         $this->views['danhGia'] = $danhGia;
@@ -113,7 +113,7 @@ class DanhGiaController extends Controller
         $danhGia->trang_thai = 1; // 1 là đã phản hồi
         $danhGia->save();
 
-        return redirect()->route('danh-gia.da-phan-hoi')->with('success', 'Phản hồi đã được gửi.');
+        return redirect()->back()->with('success', 'Phản hồi đã được gửi.');
     }
 
     public function anDanhGia(int $id)
