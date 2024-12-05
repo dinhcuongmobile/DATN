@@ -8,8 +8,9 @@ use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
-use App\Models\DanhMucTinTuc;
+use App\Models\SanPham;
 use App\Models\YeuThich;
+use App\Models\DanhMucTinTuc;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $danh_mucs = DanhMuc::all();
             $userId = Auth::id();
             $danhMucTinTuc = DanhMucTinTuc::all();
-
+            $sanPhamThich = SanPham::orderBy('luot_xem','desc')->take(6)->get();
             if (Auth::check()) {
                 $gio_hangs = GioHang::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
 
@@ -52,7 +53,15 @@ class AppServiceProvider extends ServiceProvider
                 $count_yeu_thich = $yeu_thichs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang','count_yeu_thich','danh_mucs', 'userId','danhMucTinTuc'));
+            $view->with(compact(
+                'gio_hangs', 
+                'count_gio_hang',
+                'count_yeu_thich',
+                'danh_mucs', 
+                'userId',
+                'danhMucTinTuc',
+                'sanPhamThich'
+            ));
         });
         //admin
         View::composer('admin.layout.main', function ($view) {
