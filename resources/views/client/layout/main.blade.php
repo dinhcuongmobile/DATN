@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/toastify.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="{{ asset('assets/css/landing_page.js') }}"></script>
     <script defer src="{{ asset('assets/css/style.js') }}"></script>
     <link href="{{ asset('assets/css/landing_page.css') }}" rel="stylesheet">
@@ -687,8 +688,15 @@
         <div class="offcanvas-body theme-scrollbar">
             <div class="container">
                 <h3>Tìm Kiếm</h3>
-                <div class="search-box"> <input type="search" name="text" placeholder="..."><i class="iconsax"
-                        data-icon="search-normal-2"></i></div>
+                    <div class="search-box"> 
+                        <input type="search" name="search_text" placeholder="..." required>
+                        <i class="iconsax"
+                            data-icon="search-normal-2">
+                        </i>
+                    </div>
+                <div class="row gy-4 ratio_square-2 preemptive-search">
+                    
+                </div>                                
                 <h4>Có Thể Bạn Sẽ Thích</h4>
                 <div class="row gy-4 ratio_square-2 preemptive-search">
                     <div class="col-xl-2 col-sm-4 col-6">
