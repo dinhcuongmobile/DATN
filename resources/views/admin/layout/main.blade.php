@@ -479,7 +479,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">${item.ngay_tao}</div>
+                                    <div class="small text-gray-500">${formatDate(item.ngay_tao)}</div>
                                     <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</span>
                                 </div>
                             </a>
