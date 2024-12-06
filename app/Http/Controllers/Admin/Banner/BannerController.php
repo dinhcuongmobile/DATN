@@ -45,7 +45,7 @@ class BannerController extends Controller
         $oldBanner = Banner::all();
         $request->validate([
             'ten_anh' => 'required | string | min:6 | max:255 ',
-            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:8000',
             'trang_thai' => 'required',
             'ngay_bat_dau' => 'required|date',
             'ngay_ket_thuc' => 'required|date|after:ngay_bat_dau'
