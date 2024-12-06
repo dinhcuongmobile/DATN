@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\User;
+use App\Models\Banner;
 use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\TinTuc;
@@ -42,6 +43,8 @@ class HomeController extends Controller
             $query->where('user_id', $userId);
         }])->where('khuyen_mai', '>', 0)->orderBy('id', 'desc')->take(8)->get();
 
+        $banner = Banner::all();
+        $this->views['banner'] = $banner;
         $this->views['danh_mucs'] = $danh_mucs;
 
         $this->views['san_pham_noi_bat'] = $san_pham_noi_bat;

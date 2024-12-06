@@ -204,7 +204,7 @@
     left: 50%;
     transform: translateX(-50%);
 }
-/* Đảm bảo rằng tất cả các ô sản phẩm có chiều rộng và chiều cao đồng nhất */
+/* seach */
 .preemptive-search {
     display: flex;
     flex-wrap: wrap; /* Đảm bảo các sản phẩm xếp hàng nếu không đủ không gian */
@@ -299,7 +299,24 @@
     font-weight: bold;
     font-size: 16px;
 }
+/* end seach */
 
+/* banner */
+.home-section-4 .home-images {
+    width: 100%;
+    height: 100%; /* Đảm bảo chiều cao full */
+    overflow: hidden; /* Loại bỏ bất kỳ phần nào tràn ra ngoài */
+}
+
+.home-section-4 .home-images img {
+    width: 100%; /* Hình ảnh trải rộng toàn bộ chiều ngang */
+    height: auto; /* Giữ tỷ lệ ảnh gốc */
+    position: absolute;
+    left: 0; /* Đưa về mép trái */
+    top: 0%; /* Căn giữa theo chiều dọc */
+    transform: translateY(-50%); /* Căn chỉnh đúng giữa theo chiều dọc */
+}
+/* end banner */
 
 /* div chat */
 .chat-container {

@@ -3,53 +3,17 @@
     {{-- banner --}}
     <section class="section-space home-section-4">
         <div class="custom-container container">
-            <div class="row">
+            <div class="row no-gutters">
                 <div class="col-12">
-                    <div class="home-content">
-                        <p>Nâng tầm phong cách phái mạnh - Tự tin, lịch lãm mỗi ngày!<span></span></p>
-                        <h2></h2>
-                        <h1>Mùa Thu & Mùa Hè</h1>
-                        <h6>Diện mạo hoàn hảo cho phái mạnh - Phong cách không thể bỏ qua! </h6><a class="btn btn_outline"
-                            href="{{ route('san-pham.san-pham') }}">Khám Phá Ngay</a>
-                    </div>
-                    <div class="product-1">
-                        <div class="product"> <img class="img-fluid" src="../assets/images/layout-4/p-1.jpg" alt="">
-                            <div class="product-details">
-                                <h6>Black Women Top</h6>
-                                <p>Women's Style</p>
-                                <ul class="rating">
-                                    <li><i class="fa-solid fa-star"></i></li>
-                                    <li><i class="fa-solid fa-star"></i></li>
-                                    <li><i class="fa-solid fa-star"></i></li>
-                                    <li><i class="fa-solid fa-star-half-stroke"></i></li>
-                                    <li><i class="fa-regular fa-star"></i></li>
-                                </ul>
-                                <h5>$48<del>$68 </del><span>-40%</span></h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-2">
-                        <div class="product"><img class="img-fluid" src="../assets/images/layout-4/p-2.png" alt="">
-                            <div class="product-details">
-                                <div>
-                                    <h6>Pursesess</h6>
-                                    <h5>Best Women Bag</h5>
-                                </div><span>$65</span>
-                            </div>
-                        </div>
-                    </div>
+                    @foreach ($banner as $item)
                     <div class="home-images">
-                        <div class="main-images"></div><img class="img-fluid" src="../assets/images/layout-4/bner.png"
-                            alt="">
-                    </div>
-                    <div class="shape-images"> <img class="img-1 img-fluid" src="../assets/images/layout-4/s-1.png"
-                            alt=""><img class="img-2 img-fluid" src="../assets/images/layout-4/s-2.png"
-                            alt=""></div>
+                        <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="">
+                    </div>                
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
-
     {{-- danh muc --}}
     <section class="section-t-space">
         <div class="container-fluid fashion-images">
