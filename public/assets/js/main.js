@@ -610,12 +610,17 @@ function xoaYeuThich(){
     }
 }
 $(document).ready(function() {
+    // Hàm định dạng giá tiền theo VND
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    }
+
     // Khi người dùng gõ trong ô tìm kiếm
     $('input[name="search_text"]').on('keyup', function() {
         let searchText = $(this).val();
 
         // Kiểm tra nếu có nội dung tìm kiếm
-        if (searchText.length >= 1) {  // Thực hiện khi người dùng gõ ít nhất 1 ký tự
+        if (searchText.length >= 1) { // Thực hiện khi người dùng gõ ít nhất 1 ký tự
             $.ajax({
                 url: '/home/search/',
                 method: 'GET',
@@ -627,37 +632,88 @@ $(document).ready(function() {
 
                     // Tạo HTML kết quả tìm kiếm
                     results.forEach(function(san_pham) {
-                        html += `
-                            <div class="col-xl-2 col-sm-4 col-6">
-                                <div class="product-box-6">
-                                    <div class="img-wrapper">
-                                        <div class="product-image">
-                                            <a href="">
-                                                <img class="bg-img" src="/storage/${san_pham.hinh_anh}" alt="product">
-                                            </a>
+                        let avgRating = san_pham.avg_rating || 0; // Số sao trung bình (mặc định 0)
+                        let fullStars = Math.floor(avgRating); // Số sao đầy
+                        let halfStar = (avgRating - fullStars) >= 0.5 ? 1 : 0; // Sao nửa
+                        let emptyStars = 5 - (fullStars + halfStar); // Sao rỗng
+
+                        let ratingHtml = '<ul class="rating">';
+                        for (let i = 0; i < fullStars; i++) {
+                            ratingHtml += '<li><i class="fa-solid fa-star"></i></li>';
+                        }
+                        if (halfStar) {
+                            ratingHtml += '<li><i class="fa-solid fa-star-half-stroke"></i></li>';
+                        }
+                        for (let i = 0; i < emptyStars; i++) {
+                            ratingHtml += '<li><i class="fa-regular fa-star"></i></li>';
+                        }
+                        ratingHtml += `<li>(${avgRating.toFixed(1)})</li></ul>`;
+
+                        // Tính giá khuyến mại nếu có giảm giá
+                        if (san_pham.khuyen_mai > 0) {
+                            let gia_khuyen_mai = san_pham.gia_san_pham - 
+                                (san_pham.gia_san_pham * san_pham.khuyen_mai / 100);
+
+                            html += `
+                                <div class="col-xl-2 col-sm-4 col-6">
+                                    <div class="product-box-6">
+                                        <div class="img-wrapper">
+                                            <div class="product-image">
+                                                <a href="/san-pham/chi-tiet-san-pham/${san_pham.id}">
+                                                    <img class="bg-img" src="/storage/${san_pham.hinh_anh}" alt="product">
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="product-detail">
-                                        <div>
-                                            <a href="">
-                                                <h6>kkk</h6>
-                                            </a>
-                                            <p>1 VNĐ</p>
+                                        <div class="product-detail">
+                                            <div>
+                                                <a href="/san-pham/chi-tiet-san-pham/${san_pham.id}">
+                                                    <h6>${san_pham.ten_san_pham}</h6>
+                                                </a>
+                                                <p class="original-price">${formatCurrency(san_pham.gia_san_pham)}</p>
+                                                <p class="discounted-price">${formatCurrency(gia_khuyen_mai)}</p>
+                                                ${ratingHtml}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
+                        } else {
+                            // Không có khuyến mại, chỉ hiển thị giá gốc
+                            html += `
+                                <div class="col-xl-2 col-sm-4 col-6">
+                                    <div class="product-box-6">
+                                        <div class="img-wrapper">
+                                            <div class="product-image">
+                                                <a href="/san-pham/chi-tiet-san-pham/${san_pham.id}">
+                                                    <img class="bg-img" src="/storage/${san_pham.hinh_anh}" alt="product">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-detail">
+                                            <div>
+                                                <a href="/san-pham/chi-tiet-san-pham/${san_pham.id}">
+                                                    <h6>${san_pham.ten_san_pham}</h6>
+                                                </a>
+                                                <p class="price">${formatCurrency(san_pham.gia_san_pham)}</p>
+                                                ${ratingHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
                     });
 
                     // Cập nhật kết quả tìm kiếm
                     $('.preemptive-search').html(html);
                 }
             });
+        } else {
+            // Nếu ô tìm kiếm rỗng, ẩn kết quả tìm kiếm
+            $('.preemptive-search').html('');
         }
     });
 });
-
 
 //time
 // function flashSaleTime(){

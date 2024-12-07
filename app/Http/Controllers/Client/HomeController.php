@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Models\User;
+use App\Models\Banner;
 use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\TinTuc;
@@ -42,6 +43,8 @@ class HomeController extends Controller
             $query->where('user_id', $userId);
         }])->where('khuyen_mai', '>', 0)->orderBy('id', 'desc')->take(8)->get();
 
+        $banner = Banner::all();
+        $this->views['banner'] = $banner;
         $this->views['danh_mucs'] = $danh_mucs;
 
         $this->views['san_pham_noi_bat'] = $san_pham_noi_bat;
@@ -67,6 +70,16 @@ class HomeController extends Controller
     {
         $searchText = $request->input('search_text');
         $results = SanPham::search($searchText)->get();
+        // Lấy danh sách sản phẩm có liên kết với bảng 'danhGias' để tính số sao trung bình
+        $results = SanPham::with('danhGias')
+        ->where('ten_san_pham', 'LIKE', '%' . $searchText . '%') // Tìm kiếm theo tên sản phẩm
+        ->get()
+        ->map(function ($san_pham) {
+            $san_pham->avg_rating = $san_pham->danhGias->avg('so_sao') ?? 0; // Tính trung bình số sao
+            return $san_pham;
+        })
+        ->sortByDesc('avg_rating') // Sắp xếp sản phẩm theo số sao giảm dần
+        ->values(); // Reset lại chỉ số mảng
         // Trả về kết quả dưới dạng JSON để sử dụng AJAX
         if ($request->ajax()) {
             return response()->json([
