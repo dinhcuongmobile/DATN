@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     thongBaoLoi();
     checkSession();
     togglePassword();
@@ -148,6 +147,7 @@ let selectedColorQuickView = null;
 var ipSize = document.getElementById('size-quick-view');
 var ipMauSac = document.getElementById('mauSac-quick-view');
 const soLuong = document.querySelectorAll('#quick-view .quantity');
+
 document.querySelectorAll('.quickViewClick').forEach((el) => {
     el.addEventListener('click', function () {
         document.querySelector('#quick-view .product-right h3').textContent="";
@@ -156,8 +156,12 @@ document.querySelectorAll('.quickViewClick').forEach((el) => {
         document.querySelector('#quick-view .product-buttons').innerHTM="";
         document.querySelector('#selectSize-quick-view').innerHTML="";
         document.querySelector('#selectMauSac-quick-view').innerHTML="";
-        $('#quick-view').modal('show');
         document.querySelector('#errSelect-quick-view').style.display = 'none';
+        document.querySelector('#mauSac-quick-view').value="";
+        document.querySelector('#size-quick-view').value="";
+        selectedSizeQuickView = null;
+        selectedColorQuickView = null;
+        $('#quick-view').modal('show');
         let sanPhamID = el.getAttribute('data-id');
         document.querySelector('#quick-view').setAttribute('data-id',sanPhamID);
 
@@ -625,7 +629,6 @@ $(document).ready(function() {
                     // Xử lý kết quả trả về (JSON)
                     let results = response.results;
                     let html = '';
-                    
                     if (results.length === 0) {
                         // Nếu không có kết quả, hiển thị thông báo
                         html = '<p class="text-center text-danger">Không có sản phẩm bạn muốn tìm.</p>';

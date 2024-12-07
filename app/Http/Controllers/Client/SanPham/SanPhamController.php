@@ -274,7 +274,7 @@ class SanPhamController extends Controller
         $gio_hang = [];
 
         if(Auth::check()){
-            $gio_hang = GioHang::where('user_id',Auth::user()->id)
+            $gio_hang = GioHang::where('user_id',Auth::id())
             ->where('san_pham_id',$san_pham_id)
             ->where('bien_the_id',$bienThe->id)->first();
         }

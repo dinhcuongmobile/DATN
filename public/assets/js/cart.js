@@ -417,9 +417,26 @@ document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-danger').forEach(fun
                     ma_mau: maMau
                 },
                 success: function (response) {
-                    tr.querySelector('.phanLoaiHang').textContent= `${response.bien_the.kich_co}, ${response.bien_the.ten_mau}`;
-                    const popup = tr.querySelector('.thayDoiBienThe');
-                    popup.style.display = 'none';
+                    if(response.success){
+                        tr.querySelector('.phanLoaiHang').textContent= `${response.bien_the.kich_co}, ${response.bien_the.ten_mau}`;
+                        tr.querySelector('.quantity input[type="number"]').setAttribute('data-max',response.bien_the.so_luong);
+                        const popup = tr.querySelector('.thayDoiBienThe');
+                        popup.style.display = 'none';
+                        tr.querySelector('.quantity input[type="number"]').value = 1;
+                        tr.querySelector('.quantity .plus').disabled=false;
+                    }else{
+                        if(response.message){
+                            document.querySelector('#thongbaothemgiohang').style.display='block';
+                            document.querySelector('#thongbaothemgiohang #cart-message').textContent= `${response.message}`;
+                            setTimeout(() => {
+                                document.querySelector('#thongbaothemgiohang').style.display = 'none';
+                            }, 1700);
+                        }
+                        setTimeout(() => {
+                            const popup = tr.querySelector('.thayDoiBienThe');
+                            popup.style.display = 'none';
+                        }, 2000);
+                    }
                 },
                 error: function () {
                     alert("Có lỗi xảy ra. Vui lòng thử lại.");
