@@ -47,7 +47,7 @@
                             <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab"
                                     data-bs-target="#features-products" role="tab" aria-controls="features-products"
                                     aria-selected="true">
-                                    <h6>Sản Phẩm nổi bật</h6>
+                                    <h6>Sản Phẩm Nổi Bật</h6>
                                 </a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab"
                                     data-bs-target="#latest-products" role="tab" aria-controls="latest-products"
