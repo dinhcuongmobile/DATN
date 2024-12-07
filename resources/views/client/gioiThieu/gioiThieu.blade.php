@@ -9,8 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="breadcrumb float-end">
-                        <li class="breadcrumb-item"> <a href="index.html">Trang Chủ</a></li>
-                        <li class="breadcrumb-item active"> <a href="#">Về Chúng Tôi</a></li>
+                        <li class="breadcrumb-item"> <a href="{{route('trang-chu.home')}}">Trang Chủ</a></li>
                     </ul>
                 </div>
             </div>
@@ -110,35 +109,6 @@
                 <div class="about-icon"> <i class="iconsax" data-icon="media-sliders-3"></i>
                     <h5>Kích Thước Đa Dạng</h5>
                     <p>Với sự đa dạng về kích thước và hình dáng, đồ thể thao của chúng tôi khuyến khích sự đa dạng và tôn vinh vẻ đẹp của cá nhân, phục vụ mọi vóc dáng.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section-b-space pb-0 fashion-girl">
-    <div class="custom-container container">
-        <div class="row gy-4 align-items-end">
-            <div class="col-12">
-                <div class="title-1 mb-0">
-                    <p>Phong Cách Thời Trang Của Chúng Tôi<span></span></p>
-                    <h3>Sản phẩm hot trend dẫn đầu xu hướng</h3>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="fashion-box-1">
-                    <p>Những lớp trang phục dễ dàng kết hợp tạo nên phong cách tinh tế. Từ chiếc áo sơ mi đến những chiếc áo phông bạn sẽ luôn nổi bật dù ngày hay đêm. </p>
-                    <a href="product.html">Khám Phá Ngay <i class="fa-solid fa-arrow-right-long"></i></a><img
-                        class="img-fluid" src="../assets/images/about/fashion-1.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-md-4 d-none d-md-block">
-                <div class="product-img"><img class="img-fluid" src="../assets/images/about/1.png" alt=""></div>
-            </div>
-            <div class="col-md-4">
-                <div class="fashion-box-1 fashion-item"> <img class="img-fluid"
-                        src="../assets/images/about/fashion-2.jpg" alt=""><a href="product.html">Khám Phá Ngay
-                        <i class="fa-solid fa-arrow-right-long"></i></a>
-                    <p>Namad Store không chỉ là nơi để mua sắm thời trang nam giới mà còn là nền tảng giao lưu và chia sẻ xu hướng phong cách. Chúng tôi luôn cập nhật những bộ sưu tập mới và hợp thời để giúp khách hàng thể hiện cá tính và phong cách riêng của mình. Với phương châm "Chất lượng - Phong cách - Tiện lợi", Namad Store cam kết mang đến cho khách hàng những sản phẩm tốt nhất cùng với dịch vụ chăm sóc khách hàng chuyên nghiệp và tận tâm.</p>
                 </div>
             </div>
         </div>

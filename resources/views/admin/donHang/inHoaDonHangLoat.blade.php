@@ -196,7 +196,7 @@
                                             
                                             <h5
                                                 style="margin: 0%; font-size: 16px; line-height: 1; text-transform: capitalize; color: #fff;">
-                                                Thành Tiền:
+                                                Thanh toán:
                                             </h5>
                                         </td>
                                         <td>

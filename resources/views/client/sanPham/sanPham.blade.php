@@ -90,21 +90,6 @@
                             <div class="search-box"><input type="search" name="text" placeholder="Tìm kiếm..."><i
                                     class="iconsax" data-icon="search-normal-2"></i></div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Từ
-                                            khóa</span><span>Xem tất cả</span></button></h2>
-                                <div class="accordion-collapse collapse show" id="panelsStayOpen-collapse">
-                                    <div class="accordion-body">
-                                        <ul class="tags">
-                                            <li> <a href="#">T-Shirt <i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Handbags<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Trends<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Minimog<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Denim<i class="iconsax" data-icon="add"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
                                 <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button>
                                 </h2>
@@ -142,7 +127,7 @@
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>vận chuyển
+                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Vận Chuyển
                                             & Giao hàng</span><span></span></button></h2>
                                 <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseSeven">
                                     <div class="accordion-body">
