@@ -21,7 +21,13 @@
                     </p>
                   <p><strong>Phương Thức Thanh Toán:</strong>
                     <span style="background-color: #f0f0f0; color: green; padding: 5px; border-radius: 9px;">
-                      {{ $donHang->phuong_thuc_thanh_toan == 0 ? 'Thanh Toán Khi Nhận Hàng' : 'Chuyển Khoản' }}
+                        @if($donHang->phuong_thuc_thanh_toan == 0)
+                        Thanh toán khi nhận hàng
+                    @else
+                        <a href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}" style="color: #007bff;">
+                            Chuyển khoản
+                        </a>
+                    @endif
                     </span>
                   </p>
                   <p><strong>Tổng Sản Phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} Sản Phẩm</p>

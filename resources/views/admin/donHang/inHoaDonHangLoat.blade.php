@@ -82,6 +82,11 @@
                                 <h6 style="margin: 0; font-size: 17px; font-weight: 600; color: #222;  line-height: 1.4;">
                                     Email : <span style="line-height: 1; font-size: 13px; font-weight: 400; color: #222;">{{$donHang->user->email}}</span>
                                 </h6>
+                                <h6 style="margin: 10px 0; font-size: 17px; font-weight: 600; color: #222; line-height: 1.4;">
+                                    Phương Thức Thanh Toán : <span style="font-size: 15px; font-weight: 400; color: #222;">
+                                        {{ $donHang->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
+                                    </span>
+                                </h6>
                             </td>
                         </tr>
                     </table>
@@ -195,9 +200,8 @@
                                             </h5>
                                         </td>
                                         <td>
-                                            <h5
-                                                style="margin: 0%; font-size: 16px; text-align: start; line-height: 1; color: #fff;">
-                                                {{ number_format($donHang->tong_thanh_toan, 0, ',', '.') }}đ
+                                            <h5 style="margin: 0%; font-size: 16px; text-align: start; line-height: 1; color: #fff;">
+                                                {{ $donHang->phuong_thuc_thanh_toan == 1 ? '0đ' : number_format($donHang->tong_thanh_toan, 0, ',', '.') . 'đ' }}
                                             </h5>
                                         </td>
                                     </tr>

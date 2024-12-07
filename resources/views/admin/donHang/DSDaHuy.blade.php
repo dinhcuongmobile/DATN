@@ -92,7 +92,13 @@
                                 </span></p>
                             </td>
                             <td class="col-2">
-                                {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
+                                @if($item->phuong_thuc_thanh_toan == 0)
+                                Thanh toán khi nhận hàng
+                            @else
+                                <a href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}" style="color: #007bff;">
+                                    Chuyển khoản
+                                </a>
+                            @endif
                             </td>
                             <td class="col-1">
                                 <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">

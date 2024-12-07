@@ -420,6 +420,8 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
         Route::get('in-hoa-don/{id}', [DonHangAdminController::class,'inHoaDon'])->name('don-hang.in-hoa-don');
         Route::get('in-hoa-don-hang-loat', [DonHangAdminController::class,'inHoaDonHangLoat'])->name('don-hang.in-hoa-don-hang-loat');
 
+        Route::get('danh-sach-da-chuyen-khoan', [DonHangAdminController::class, 'showDSDaChuyenKhoan'])->name('don-hang.danh-sach-da-chuyen-khoan');
+        
         Route::get('tim-kiem', [DonHangAdminController::class,'timKiem'])->name('don-hang.tim-kiem');
 
     });
