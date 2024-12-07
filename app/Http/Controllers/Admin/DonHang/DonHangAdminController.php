@@ -133,6 +133,27 @@ class DonHangAdminController extends Controller
         $donHangs = $query->MoiNhat()->get();
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
     }
+    // Hiển thị danh sách đơn hàng đã chuyển khoản
+    public function showDSDaChuyenKhoan(Request $request)
+    {
+        $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->where('phuong_thuc_thanh_toan', 1) // Chuyển khoản
+            ->where('thanh_toan', 1); // Đã thanh toán
+
+        // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                ->orWhereHas('user', function ($q) use ($search) {
+                    $q->where('ho_va_ten', 'LIKE', "%$search%");
+                });
+            });
+        }
+
+        $donHangs = $query->MoiNhat()->get();
+        return view('admin.donHang.DSDaChuyenKhoan', compact('donHangs'));
+    }
 
     // Duyệt đơn hàng - Chuyển trạng thái đơn hàng sang chờ lấy hàng
     public function duyetDonHang(int $id) {

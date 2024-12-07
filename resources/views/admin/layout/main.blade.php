@@ -170,6 +170,8 @@
                             Giao </a>
                         <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-giao') }}">Danh Sách Đã
                             Giao</a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}">Danh Sách
+                            Chuyển Khoản</a>
                         <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-huy') }}">Danh Sách Đã Hủy</a>
                     </div>
                 </div>
