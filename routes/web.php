@@ -60,7 +60,7 @@ Route::controller(FaceBookController::class)->group(function(){
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
-    
+
     Route::prefix('home')->group(function(){
         Route::get('quick-view', [HomeController::class, 'quickView']);
         Route::get('search', [HomeController::class, 'search']);
@@ -142,8 +142,12 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('chi-tiet-thanh-toan', [GioHangController::class, 'chiTietThanhToan'])->name('gio-hang.chi-tiet-thanh-toan')->middleware('auth');
         Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
         Route::get('chon-ma-giam-gia', [GioHangController::class, 'chonMaGiamGia']);
-        Route::post('dat-hang', [GioHangController::class, 'datHang']);
+        Route::post('dat-hang-cod', [GioHangController::class, 'datHangCod']);
+        Route::post('dat-hang-chuyen-khoan', [GioHangController::class, 'datHangChuyenKhoan']);
         Route::post('mua-ngay', [GioHangController::class, 'muaNgay']);
+
+        //thanh toan onlien
+        
     });
 
     Route::prefix('tin-tuc')->group(function () {

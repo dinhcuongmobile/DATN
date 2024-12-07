@@ -204,51 +204,80 @@ function datHang(){
             $('#add-address-checkout').modal('show');
             return;
         }
+
+        let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let tongThanhToan = parseFloat(document.querySelector('.tongThanhToan').textContent.replace(/[đ,.]/g, '')) || 0;
         let giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.-]/g, '')) || 0;
         let giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.-]/g, '')) || 0;
-        let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
         let ghiChu = document.querySelector('.ghi-chu input').value || "";
         let soCoin = document.querySelector('.summary-total .divTongCoin .active') ? parseInt(document.querySelector('.summary-total .tongCoin').textContent) || 0 : 0;
 
-        $.ajax({
-            type: 'POST',
-            url: '/gio-hang/dat-hang',
-            data: {
-                _token: document.querySelector('.tokenDatHang').value,
-                dia_chi_id: diaChiId.getAttribute('data-id'),
-                tong_thanh_toan: tongThanhToan,
-                phuong_thuc_thanh_toan: phuongThucThanhToan,
-                ghi_chu: ghiChu,
-                giamTienVanChuyen: giamTienVanChuyen,
-                giamTienDonHang: giamTienDonHang,
-                phiShip: phiShip,
-                soCoin: soCoin
-            },
-            success: function(response) {
-                if(response.success){
-                    sessionStorage.setItem("activeTab", "order");
-                    window.location.href="/tai-khoan/thong-tin-tai-khoan";
-                }else{
-                    if(response.message){
-                        document.querySelector('#thongbaothemgiohang').style.display='block';
-                        document.querySelector('#thongbaothemgiohang #cart-message').textContent= `${response.message}`;
+        if(phuongThucThanhToan==0){
+            $.ajax({
+                type: 'POST',
+                url: '/gio-hang/dat-hang-cod',
+                data: {
+                    _token: document.querySelector('.tokenDatHang').value,
+                    dia_chi_id: diaChiId.getAttribute('data-id'),
+                    tong_thanh_toan: tongThanhToan,
+                    phuong_thuc_thanh_toan: phuongThucThanhToan,
+                    ghi_chu: ghiChu,
+                    giamTienVanChuyen: giamTienVanChuyen,
+                    giamTienDonHang: giamTienDonHang,
+                    phiShip: phiShip,
+                    soCoin: soCoin
+                },
+                success: function(response) {
+                    if(response.success){
+                        sessionStorage.setItem("activeTab", "order");
+                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                    }else{
+                        if(response.message){
+                            document.querySelector('#thongbaothemgiohang').style.display='block';
+                            document.querySelector('#thongbaothemgiohang #cart-message').textContent= `${response.message}`;
+                            setTimeout(() => {
+                                document.querySelector('#thongbaothemgiohang').style.display = 'none';
+                            }, 1400);
+                        }
                         setTimeout(() => {
-                            document.querySelector('#thongbaothemgiohang').style.display = 'none';
-                        }, 1400);
+                            window.location.href="/gio-hang/";
+                        }, 1800);
                     }
-                    setTimeout(() => {
-                        window.location.href="/gio-hang/";
-                    }, 1800);
-                }
 
-            },
-            error: function(error) {
-                console.log(error);
-                alert("Có lỗi xảy ra khi gửi yêu cầu.");
-            }
-        });
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Có lỗi xảy ra khi gửi yêu cầu.");
+                }
+            });
+        }else{
+            $.ajax({
+                type: 'POST',
+                url: '/gio-hang/dat-hang-cod',
+                data: {
+                    _token: document.querySelector('.tokenDatHang').value,
+                    dia_chi_id: diaChiId.getAttribute('data-id'),
+                    tong_thanh_toan: tongThanhToan,
+                    phuong_thuc_thanh_toan: phuongThucThanhToan,
+                    ghi_chu: ghiChu,
+                    giamTienVanChuyen: giamTienVanChuyen,
+                    giamTienDonHang: giamTienDonHang,
+                    phiShip: phiShip,
+                    soCoin: soCoin
+                },
+                success: function(response) {
+                    if(response.success){
+
+                    }
+
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Có lỗi xảy ra khi gửi yêu cầu.");
+                }
+            });
+        }
 
     });
 }

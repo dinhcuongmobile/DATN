@@ -203,8 +203,9 @@ class GioHangController extends Controller
 
         if ($gio_hang) {
             $bienTheProducts = GioHang::with('bienThe')
-                ->where('san_pham_id', $gio_hang->san_pham_id)
                 ->where('id', '!=', $gio_hang->id)
+                ->where('user_id', Auth::id())
+                ->where('san_pham_id', $gio_hang->san_pham_id)
                 ->get();
 
             foreach ($bienTheProducts as $item) {
@@ -223,9 +224,10 @@ class GioHangController extends Controller
 
         if ($gio_hang) {
             $bienTheProducts = GioHang::with('bienThe')
-                ->where('san_pham_id', $gio_hang->san_pham_id)
-                ->where('id', '!=', $gio_hang->id)
-                ->get();
+                            ->where('id', '!=', $gio_hang->id)
+                            ->where('user_id', Auth::id())
+                            ->where('san_pham_id', $gio_hang->san_pham_id)
+                            ->get();
 
             foreach ($bienTheProducts as $item) {
                 if ($item->bienThe && $item->bienThe->ma_mau == $request->input('ma_mau')) {
@@ -245,11 +247,19 @@ class GioHangController extends Controller
                             ->where('kich_co',$request->input('kich_co'))
                             ->where('ma_mau',$request->input('ma_mau'))->first();
 
-        if ($bien_the) {
+        if ($bien_the && $bien_the->so_luong>0) {
             $gio_hang->update(['bien_the_id'=>$bien_the->id]);
+            return response()->json([
+                'success' => true,
+                'gio_hang'=>$gio_hang,
+                'bien_the'=>$bien_the
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+                'message'=> 'Sản phẩm với biến thể bạn chọn không đủ số lượng trong kho !',
+            ]);
         }
-
-        return response()->json(['gio_hang'=>$gio_hang,'bien_the'=>$bien_the]);
     }
 
     public function chiTietThanhToan(){
@@ -362,7 +372,7 @@ class GioHangController extends Controller
         ]);
     }
 
-    public function datHang(Request $request){
+    public function datHangCod(Request $request){
         DB::beginTransaction();
         try {
             $gio_hangs = session()->get('gio_hangs', []);
@@ -372,16 +382,6 @@ class GioHangController extends Controller
             $soCoin = $request->input('soCoin');
             $check=false;
 
-            // Kiểm tra phương thức thanh toán
-            if ($request->input('phuong_thuc_thanh_toan') == 0) { // COD
-                $phuong_thuc_thanh_toan = 0;
-                $trang_thai = 0;
-                $thanh_toan = 0;
-            } else { // Chuyển khoản
-                $phuong_thuc_thanh_toan = 1;
-                $trang_thai = 1;
-                $thanh_toan = 1;
-            }
             foreach ($gio_hangs as $item) {
                 $checkSoLuongSp = BienThe::where('san_pham_id', $item['san_pham_id'])
                                         ->where('kich_co', $item['kich_co'])
@@ -404,9 +404,9 @@ class GioHangController extends Controller
                 'giam_gia_don_hang' => $giamGiaDonHang,
                 'namad_xu' => $soCoin,
                 'tong_thanh_toan' => $request->input('tong_thanh_toan'),
-                'phuong_thuc_thanh_toan' => $phuong_thuc_thanh_toan,
-                'trang_thai' => $trang_thai,
-                'thanh_toan' => $thanh_toan,
+                'phuong_thuc_thanh_toan' => 0,
+                'trang_thai' => 0,
+                'thanh_toan' => 0,
                 'ghi_chu' => $request->input('ghi_chu'),
                 'ngay_tao' => now(),
                 'ngay_cap_nhat' => now()
@@ -475,5 +475,10 @@ class GioHangController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function datHangChuyenKhoan(Request $request){
+        $gio_hangs = session()->get('gio_hangs', []);
+    }
+
 
 }

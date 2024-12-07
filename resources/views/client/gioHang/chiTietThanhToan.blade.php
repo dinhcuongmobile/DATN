@@ -86,6 +86,10 @@
                                     <label for="paypal">Chuyển khoản</label>
                                 </div>
                             </div>
+                            <form action="{{ route('gio-hang.create-payment') }}" method="POST">
+                                @csrf
+                                <button type="submit">Thanh toán với VNPay</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -119,7 +123,7 @@
                             @endforeach
                         </ul>
                         <div class="summary-total">
-                            <ul> 
+                            <ul>
                                 <li>
                                     <p>Tổng số tiền ({{$count_gio_hang?$count_gio_hang:0}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>
