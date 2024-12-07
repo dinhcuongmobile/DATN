@@ -86,10 +86,6 @@
                                     <label for="paypal">Chuyển khoản</label>
                                 </div>
                             </div>
-                            <form action="{{ route('gio-hang.create-payment') }}" method="POST">
-                                @csrf
-                                <button type="submit">Thanh toán với VNPay</button>
-                            </form>
                         </div>
                     </div>
                 </div>

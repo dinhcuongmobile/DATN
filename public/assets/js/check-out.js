@@ -221,7 +221,6 @@ function datHang(){
                     _token: document.querySelector('.tokenDatHang').value,
                     dia_chi_id: diaChiId.getAttribute('data-id'),
                     tong_thanh_toan: tongThanhToan,
-                    phuong_thuc_thanh_toan: phuongThucThanhToan,
                     ghi_chu: ghiChu,
                     giamTienVanChuyen: giamTienVanChuyen,
                     giamTienDonHang: giamTienDonHang,
@@ -253,13 +252,11 @@ function datHang(){
             });
         }else{
             $.ajax({
-                type: 'POST',
-                url: '/gio-hang/dat-hang-cod',
+                type: 'GET',
+                url: '/gio-hang/dat-hang-chuyen-khoan',
                 data: {
-                    _token: document.querySelector('.tokenDatHang').value,
                     dia_chi_id: diaChiId.getAttribute('data-id'),
                     tong_thanh_toan: tongThanhToan,
-                    phuong_thuc_thanh_toan: phuongThucThanhToan,
                     ghi_chu: ghiChu,
                     giamTienVanChuyen: giamTienVanChuyen,
                     giamTienDonHang: giamTienDonHang,
@@ -268,7 +265,7 @@ function datHang(){
                 },
                 success: function(response) {
                     if(response.success){
-
+                        window.location.href='/gio-hang/create-payment/';
                     }
 
                 },

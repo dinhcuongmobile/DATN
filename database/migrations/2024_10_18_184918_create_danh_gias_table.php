@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('noi_dung')->nullable();
             $table->integer('so_sao');
+            $table->integer('trang_thai')->default(0)->comment('0 chưa phản hồi, 1 đã phản hồi, 2 bị ẩn');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

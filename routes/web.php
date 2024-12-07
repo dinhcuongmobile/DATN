@@ -143,11 +143,12 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::get('tinh-phi-ship-dia-chi', [GioHangController::class, 'tinhPhiShipDiaChi']);
         Route::get('chon-ma-giam-gia', [GioHangController::class, 'chonMaGiamGia']);
         Route::post('dat-hang-cod', [GioHangController::class, 'datHangCod']);
-        Route::post('dat-hang-chuyen-khoan', [GioHangController::class, 'datHangChuyenKhoan']);
+        Route::get('dat-hang-chuyen-khoan', [GioHangController::class, 'datHangChuyenKhoan']);
         Route::post('mua-ngay', [GioHangController::class, 'muaNgay']);
 
         //thanh toan onlien
-        
+        Route::get('create-payment', [GioHangController::class, 'createPayment'])->name('gio-hang.create-payment');
+        Route::get('hoan-tat-chuyen-khoan-don-hang', [GioHangController::class, 'hoanTatChuyenKhoanDonHang'])->name('gio-hang.hoan-tat-chuyen-khoan-don-hang');
     });
 
     Route::prefix('tin-tuc')->group(function () {

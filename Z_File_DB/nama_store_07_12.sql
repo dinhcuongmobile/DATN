@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 06, 2024 lúc 12:56 PM
+-- Thời gian đã tạo: Th12 07, 2024 lúc 07:54 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `namad_store`
+-- Cơ sở dữ liệu: `nama_store`
 --
 
 -- --------------------------------------------------------
@@ -34,15 +34,6 @@ CREATE TABLE `anh_danh_gias` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `anh_danh_gias`
---
-
-INSERT INTO `anh_danh_gias` (`id`, `danh_gia_id`, `hinh_anh`, `created_at`, `updated_at`) VALUES
-(43, 52, 'uploads/anhDanhGia/jtlK4krz6GtemqcTiE6dFs2Ws6Zsr4kgageG6IIl.jpg', '2024-12-04 02:30:21', '2024-12-04 02:30:21'),
-(44, 52, 'uploads/anhDanhGia/XSdU4PLxZ5eZNvTd9LbDwcPElUKK9XH6TZcGoPic.jpg', '2024-12-04 02:30:21', '2024-12-04 02:30:21'),
-(45, 52, 'uploads/anhDanhGia/BBuX4aPrhjkZlEwqykIt1tcqhIcg3Kwcqt9FOzwd.jpg', '2024-12-04 02:30:21', '2024-12-04 02:30:21');
 
 -- --------------------------------------------------------
 
@@ -91,7 +82,7 @@ CREATE TABLE `bien_thes` (
 --
 
 INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, `ma_mau`, `so_luong`, `created_at`, `updated_at`) VALUES
-(8, 7, 'uploads/sanPham/Nunm2vjiPTw7LF2NKSH1zS6gj2o6SvaYKEm9oJki.webp', 'M', 'Xanh Than', '#003366', 383, '2024-10-16 08:03:23', '2024-11-29 16:58:55'),
+(8, 7, 'uploads/sanPham/Nunm2vjiPTw7LF2NKSH1zS6gj2o6SvaYKEm9oJki.webp', 'M', 'Xanh Than', '#003366', 381, '2024-10-16 08:03:23', '2024-11-29 16:58:55'),
 (9, 8, 'uploads/sanPham/0ibBfNsQGY3it5vAPdK5pTZiUbU5Qx1bRNekwCAL.webp', 'M', 'Đen', '#000000', 346, '2024-10-16 08:14:48', '2024-11-11 16:41:55'),
 (10, 8, 'uploads/sanPham/jNfOEA4DPljchdkDdnJNw1k45x9Hmr7h8VC7QmCo.webp', 'L', 'Đen', '#000000', 398, '2024-10-16 08:15:22', '2024-11-11 16:41:55'),
 (11, 8, 'uploads/sanPham/n4z0Pz9JxvCq8HQPZFbafWK1X7oqZqJJ2LPGQpGn.webp', 'XL', 'Đen', '#000000', 400, '2024-10-16 08:15:40', '2024-10-16 08:15:40'),
@@ -127,10 +118,10 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (41, 10, 'uploads/sanPham/0hNJWf5GZRb2qr40EZUxKFfWuCnjU0nt9A0gcyvw.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:35:53', '2024-10-16 08:35:53'),
 (42, 10, 'uploads/sanPham/HAbLfzR0s9hZq6OlQr3WV0LZfb4uEFim0CCm0cRO.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:09', '2024-10-16 08:36:09'),
 (43, 10, 'uploads/sanPham/UNhUxNAsSuaFpPX0lmK4BBCaZzZmZkeCMle1TUm2.webp', 'XL', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:20', '2024-10-16 08:36:20'),
-(44, 10, 'uploads/sanPham/lgVu0WH59E69R3tvjwWzcp2JDWqj0L6zMf7asdo9.webp', 'XXL', 'Xanh Than', '#003366', 400, '2024-10-16 08:36:33', '2024-10-16 08:36:33'),
-(45, 11, 'uploads/sanPham/UYnAlLSGsLe0B68Du8gP2to3EGXeRRsChQD0KWgj.webp', 'M', 'Đen', '#000000', 399, '2024-10-16 08:41:07', '2024-11-20 16:57:59'),
+(44, 10, 'uploads/sanPham/lgVu0WH59E69R3tvjwWzcp2JDWqj0L6zMf7asdo9.webp', 'XXL', 'Xanh Than', '#003366', 396, '2024-10-16 08:36:33', '2024-10-16 08:36:33'),
+(45, 11, 'uploads/sanPham/UYnAlLSGsLe0B68Du8gP2to3EGXeRRsChQD0KWgj.webp', 'M', 'Đen', '#000000', 398, '2024-10-16 08:41:07', '2024-11-20 16:57:59'),
 (46, 11, 'uploads/sanPham/Tsxbbw86pGnqueUwRwtNSG7gS3smlBuCpFrkdBD3.webp', 'L', 'Đen', '#000000', 399, '2024-10-16 08:41:19', '2024-11-20 14:19:37'),
-(47, 11, 'uploads/sanPham/XVU1DY0msBzPYLLbWjxqXjosj8kTnTIpM63jL06Q.webp', 'XL', 'Đen', '#000000', 397, '2024-10-16 08:41:34', '2024-11-20 16:57:59'),
+(47, 11, 'uploads/sanPham/XVU1DY0msBzPYLLbWjxqXjosj8kTnTIpM63jL06Q.webp', 'XL', 'Đen', '#000000', 394, '2024-10-16 08:41:34', '2024-11-20 16:57:59'),
 (48, 11, 'uploads/sanPham/AgXpzyDUfgrSk9wOGJFWsioT7KtE2lWhlYq8BpBZ.webp', 'XXL', 'Đen', '#000000', 400, '2024-10-16 08:41:46', '2024-10-16 08:41:46'),
 (49, 11, 'uploads/sanPham/vbxObYmDLfPjQbD4cLCAaTGtLdFERLxew0Z9uUBG.webp', 'M', 'Xanh Than', '#003366', 400, '2024-10-16 08:42:36', '2024-10-16 08:42:36'),
 (50, 11, 'uploads/sanPham/obFxA1ixBett26mT5iWPvJytGT6VcyIVtJJVUkCp.webp', 'L', 'Xanh Than', '#003366', 400, '2024-10-16 08:42:49', '2024-10-16 08:42:49'),
@@ -175,7 +166,7 @@ INSERT INTO `bien_thes` (`id`, `san_pham_id`, `hinh_anh`, `kich_co`, `ten_mau`, 
 (89, 15, 'uploads/sanPham/Bg24TdpUWQZu8lv9lLvp4j6449mrasBf7uTZqYKo.webp', 'L', 'Đen', '#000000', 10, '2024-10-17 00:21:58', '2024-11-19 14:39:04'),
 (90, 15, 'uploads/sanPham/sr8q8h43dDo4zjixu89W1ROGtr2V0SwDvs0Mw1Ih.webp', 'XL', 'Đen', '#000000', 2997, '2024-10-17 00:22:12', '2024-11-27 15:18:59'),
 (91, 16, 'uploads/sanPham/MUiPEHlRA0EBxP16tJ1Z7APlJqJpWIANf7ram4OY.webp', 'L', 'Đen', '#000000', 0, '2024-10-17 00:28:15', '2024-11-13 15:17:13'),
-(92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2981, '2024-10-17 00:28:45', '2024-12-03 10:17:53'),
+(92, 16, 'uploads/sanPham/w3DxKZX6guhE7GUSWO3UTGQSKXVWIlRtPHmQ3vz5.webp', 'XL', 'Đen', '#000000', 2980, '2024-10-17 00:28:45', '2024-12-03 10:17:53'),
 (93, 17, 'uploads/sanPham/h0pKJmbuA0Ro8YITIRYHnOB5OdDsyVrGe2tP8Z1G.webp', 'L', 'Đen', '#000000', 999, '2024-10-17 00:32:15', '2024-10-17 00:32:15'),
 (94, 17, 'uploads/sanPham/tGxFHsSyPDelh0nwYHCqDXeF4dJeV8uP9Qa7Yel1.webp', 'XL', 'Đen', '#000000', 999, '2024-10-17 00:32:36', '2024-10-17 00:32:36'),
 (95, 17, 'uploads/sanPham/v1fDjelaMl5qW3YXcrWOSB0Q6U1LxSr95cRvK111.webp', 'L', 'Nâu', '#8B4513', 997, '2024-10-17 00:33:09', '2024-11-11 10:38:39'),
@@ -204,21 +195,9 @@ CREATE TABLE `chi_tiet_don_hangs` (
 --
 
 INSERT INTO `chi_tiet_don_hangs` (`id`, `don_hang_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `don_gia`, `thanh_tien`, `created_at`, `updated_at`) VALUES
-(27, 27, 16, 92, 1, 286000.00, 286000.00, '2024-11-20 15:36:21', '2024-11-20 15:36:21'),
-(28, 28, 7, 8, 1, 240000.00, 240000.00, '2024-11-20 15:36:51', '2024-11-20 15:36:51'),
-(29, 29, 7, 8, 1, 240000.00, 240000.00, '2024-11-20 15:37:15', '2024-11-20 15:37:15'),
-(30, 30, 11, 52, 1, 199000.00, 199000.00, '2024-11-20 15:37:48', '2024-11-20 15:37:48'),
-(31, 31, 11, 45, 1, 199000.00, 199000.00, '2024-11-20 16:57:59', '2024-11-20 16:57:59'),
-(32, 31, 11, 47, 3, 199000.00, 597000.00, '2024-11-20 16:57:59', '2024-11-20 16:57:59'),
-(33, 31, 10, 44, 4, 199000.00, 796000.00, '2024-11-20 16:57:59', '2024-11-20 16:57:59'),
-(34, 32, 16, 92, 4, 286000.00, 1144000.00, '2024-11-21 16:12:32', '2024-11-21 16:12:32'),
-(35, 33, 7, 8, 2, 240000.00, 480000.00, '2024-11-26 14:37:33', '2024-11-26 14:37:33'),
-(36, 34, 16, 92, 1, 286000.00, 286000.00, '2024-11-26 14:38:28', '2024-11-26 14:38:28'),
-(37, 35, 15, 90, 1, 300000.00, 300000.00, '2024-11-27 15:18:59', '2024-11-27 15:18:59'),
-(38, 36, 13, 80, 8, 199000.00, 1592000.00, '2024-11-29 15:26:08', '2024-11-29 15:26:08'),
-(39, 37, 11, 52, 2, 199000.00, 398000.00, '2024-11-29 16:57:39', '2024-11-29 16:57:39'),
-(40, 38, 7, 8, 4, 240000.00, 960000.00, '2024-11-29 16:58:55', '2024-11-29 16:58:55'),
-(41, 39, 16, 92, 1, 286000.00, 286000.00, '2024-12-03 10:17:53', '2024-12-03 10:17:53');
+(47, 42, 11, 45, 1, 199000.00, 199000.00, NULL, NULL),
+(48, 42, 11, 47, 3, 199000.00, 597000.00, NULL, NULL),
+(49, 42, 10, 44, 4, 199000.00, 796000.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -244,7 +223,7 @@ INSERT INTO `coins` (`id`, `user_id`, `coin`, `ngay_nhan`, `so_ngay`, `created_a
 (21, 19, 200, '2024-11-17', 2, '2024-11-16 00:30:58', '2024-11-17 19:51:04'),
 (22, 1, 0, '2024-11-17', 1, '2024-11-17 16:47:20', '2024-11-18 10:19:20'),
 (23, 18, 0, '2024-11-29', 1, '2024-11-19 13:53:00', '2024-11-29 16:58:55'),
-(24, 20, 900, '2024-12-04', 1, '2024-11-21 16:11:42', '2024-12-04 09:09:58');
+(24, 20, 0, '2024-12-07', 1, '2024-11-21 16:11:42', '2024-12-07 06:52:49');
 
 -- --------------------------------------------------------
 
@@ -264,15 +243,6 @@ CREATE TABLE `danh_gias` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `danh_gias`
---
-
-INSERT INTO `danh_gias` (`id`, `don_hang_id`, `san_pham_id`, `user_id`, `noi_dung`, `so_sao`, `trang_thai`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(50, 34, 16, 20, NULL, 5, 0, '2024-12-03 11:12:57', '2024-12-03 11:12:57', NULL),
-(51, 33, 7, 20, 'Đóng gói sản phẩm đẹp và chắc chắn', 5, 0, '2024-12-03 11:40:45', '2024-12-03 11:40:45', NULL),
-(52, 30, 11, 20, 'Đóng gói sản phẩm đẹp và chắc chắn. Lần sau sẽ ủng hộ tiếp nha shop.', 5, 0, '2024-12-04 02:30:21', '2024-12-04 02:30:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -381,19 +351,7 @@ CREATE TABLE `don_hangs` (
 --
 
 INSERT INTO `don_hangs` (`id`, `ma_don_hang`, `user_id`, `dia_chi_id`, `giam_gia_van_chuyen`, `giam_gia_don_hang`, `namad_xu`, `tong_thanh_toan`, `phuong_thuc_thanh_toan`, `trang_thai`, `thanh_toan`, `ghi_chu`, `ngay_tao`, `ngay_cap_nhat`) VALUES
-(27, 'DH3GBE3XYN', 20, 115, 25000.00, 30000.00, 1000, 296000.00, 0, 0, 0, NULL, '2024-11-20 06:00:00', '2024-12-03 00:00:00'),
-(28, 'DHDLYE2YI5', 20, 115, 0.00, 0.00, 0, 275000.00, 0, 4, 0, NULL, '2024-11-20 07:59:00', '2024-12-03 00:00:00'),
-(29, 'DHBILXKQDG', 20, 115, 0.00, 0.00, 0, 275000.00, 0, 2, 1, 'okkk', '2024-11-20 08:00:00', '2024-12-03 00:00:00'),
-(30, 'DH8BLT8TTP', 20, 115, 0.00, 0.00, 0, 234000.00, 0, 3, 1, NULL, '2024-11-20 09:00:00', '2024-12-04 09:30:22'),
-(31, 'DHQTB3JCC2', 20, 115, 0.00, 0.00, 0, 1627000.00, 0, 4, 0, NULL, '2024-11-20 07:00:00', '2024-12-03 00:00:00'),
-(32, 'DH2EMRUIE2', 20, 120, 0.00, 20000.00, 100, 1123900.00, 0, 1, 0, 'shop oi', '2024-11-21 00:00:00', '2024-12-03 00:00:00'),
-(33, 'DHJFH9DGCU', 20, 115, 0.00, 0.00, 0, 515000.00, 0, 3, 1, NULL, '2024-11-26 04:00:00', '2024-12-03 00:00:00'),
-(34, 'DH68WKEZOH', 20, 115, 0.00, 0.00, 0, 321000.00, 0, 3, 1, NULL, '2024-11-26 06:00:00', '2024-12-03 00:00:00'),
-(35, 'DHAOP4Q62G', 18, 113, 0.00, 0.00, 0, 300000.00, 0, 3, 1, NULL, '2024-11-27 06:00:00', '2024-11-27 00:00:00'),
-(36, 'DHKIFGXQSU', 18, 113, 0.00, 20000.00, 200, 1572000.00, 0, 4, 0, 'hi', '2024-11-29 05:00:00', '2024-12-03 00:00:00'),
-(37, 'DHSESFJJAU', 18, 121, 0.00, 0.00, 0, 398000.00, 0, 4, 0, NULL, '2024-11-29 05:00:00', '2024-12-03 00:00:00'),
-(38, 'DHUZZVABMD', 18, 121, 0.00, 20000.00, 100, 939900.00, 0, 3, 1, NULL, '2024-11-29 09:00:00', '2024-12-03 00:00:00'),
-(39, 'DHLPG0B84H', 20, 115, 0.00, 0.00, 0, 321000.00, 0, 4, 0, NULL, '2024-12-03 00:00:00', '2024-12-03 00:00:00');
+(42, 'DHEMWAVWPA', 20, 115, 30000.00, 10000.00, 100, 1586900.00, 1, 1, 1, NULL, '2024-12-07 13:52:49', '2024-12-07 13:52:49');
 
 -- --------------------------------------------------------
 
@@ -428,13 +386,6 @@ CREATE TABLE `gio_hangs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `gio_hangs`
---
-
-INSERT INTO `gio_hangs` (`id`, `user_id`, `san_pham_id`, `bien_the_id`, `so_luong`, `thanh_tien`, `created_at`, `updated_at`) VALUES
-(74, 20, 7, 8, 3, 720000.00, '2024-12-03 11:37:12', '2024-12-04 01:17:43');
-
 -- --------------------------------------------------------
 
 --
@@ -456,7 +407,9 @@ CREATE TABLE `jobs` (
 --
 
 INSERT INTO `jobs` (`id`, `queue`, `payload`, `attempts`, `reserved_at`, `available_at`, `created_at`) VALUES
-(14, 'default', '{\"uuid\":\"e43f1418-0ac2-4451-907b-f1a0979f5f85\",\"displayName\":\"App\\\\Mail\\\\SendHoaDon\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\SendHoaDon\\\":10:{s:4:\\\"user\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:20;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:7:\\\"dia_chi\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:17:\\\"App\\\\Models\\\\DiaChi\\\";s:2:\\\"id\\\";i:115;s:9:\\\"relations\\\";a:3:{i:0;s:12:\\\"tinhThanhPho\\\";i:1;s:9:\\\"quanHuyen\\\";i:2;s:8:\\\"phuongXa\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:8:\\\"don_hang\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:18:\\\"App\\\\Models\\\\DonHang\\\";s:2:\\\"id\\\";i:39;s:9:\\\"relations\\\";a:2:{i:0;s:4:\\\"user\\\";i:1;s:6:\\\"diaChi\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:18:\\\"chi_tiet_don_hangs\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:25:\\\"App\\\\Models\\\\ChiTietDonHang\\\";s:2:\\\"id\\\";a:1:{i:0;i:41;}s:9:\\\"relations\\\";a:2:{i:0;s:7:\\\"sanPham\\\";i:1;s:7:\\\"bienThe\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:9:\\\"phi_ships\\\";s:5:\\\"35000\\\";s:16:\\\"giamGiaVanChuyen\\\";s:1:\\\"0\\\";s:14:\\\"giamGiaDonHang\\\";s:1:\\\"0\\\";s:6:\\\"soCoin\\\";s:1:\\\"0\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tngoclee@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"}}', 0, NULL, 1733221075, 1733221075);
+(14, 'default', '{\"uuid\":\"e43f1418-0ac2-4451-907b-f1a0979f5f85\",\"displayName\":\"App\\\\Mail\\\\SendHoaDon\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\SendHoaDon\\\":10:{s:4:\\\"user\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:20;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:7:\\\"dia_chi\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:17:\\\"App\\\\Models\\\\DiaChi\\\";s:2:\\\"id\\\";i:115;s:9:\\\"relations\\\";a:3:{i:0;s:12:\\\"tinhThanhPho\\\";i:1;s:9:\\\"quanHuyen\\\";i:2;s:8:\\\"phuongXa\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:8:\\\"don_hang\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:18:\\\"App\\\\Models\\\\DonHang\\\";s:2:\\\"id\\\";i:39;s:9:\\\"relations\\\";a:2:{i:0;s:4:\\\"user\\\";i:1;s:6:\\\"diaChi\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:18:\\\"chi_tiet_don_hangs\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:25:\\\"App\\\\Models\\\\ChiTietDonHang\\\";s:2:\\\"id\\\";a:1:{i:0;i:41;}s:9:\\\"relations\\\";a:2:{i:0;s:7:\\\"sanPham\\\";i:1;s:7:\\\"bienThe\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:9:\\\"phi_ships\\\";s:5:\\\"35000\\\";s:16:\\\"giamGiaVanChuyen\\\";s:1:\\\"0\\\";s:14:\\\"giamGiaDonHang\\\";s:1:\\\"0\\\";s:6:\\\"soCoin\\\";s:1:\\\"0\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tngoclee@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"}}', 0, NULL, 1733221075, 1733221075),
+(15, 'default', '{\"uuid\":\"089d7a99-b09c-4f30-8aa9-b92dce67eaf0\",\"displayName\":\"App\\\\Mail\\\\SendHoaDon\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\SendHoaDon\\\":10:{s:4:\\\"user\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:20;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:7:\\\"dia_chi\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:17:\\\"App\\\\Models\\\\DiaChi\\\";s:2:\\\"id\\\";i:115;s:9:\\\"relations\\\";a:3:{i:0;s:12:\\\"tinhThanhPho\\\";i:1;s:9:\\\"quanHuyen\\\";i:2;s:8:\\\"phuongXa\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:8:\\\"don_hang\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:18:\\\"App\\\\Models\\\\DonHang\\\";s:2:\\\"id\\\";i:40;s:9:\\\"relations\\\";a:2:{i:0;s:4:\\\"user\\\";i:1;s:6:\\\"diaChi\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:18:\\\"chi_tiet_don_hangs\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:25:\\\"App\\\\Models\\\\ChiTietDonHang\\\";s:2:\\\"id\\\";a:2:{i:0;i:42;i:1;i:43;}s:9:\\\"relations\\\";a:2:{i:0;s:7:\\\"sanPham\\\";i:1;s:7:\\\"bienThe\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:9:\\\"phi_ships\\\";s:5:\\\"35000\\\";s:16:\\\"giamGiaVanChuyen\\\";s:5:\\\"30000\\\";s:14:\\\"giamGiaDonHang\\\";s:5:\\\"10000\\\";s:6:\\\"soCoin\\\";s:3:\\\"900\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tngoclee@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"}}', 0, NULL, 1733552727, 1733552727),
+(16, 'default', '{\"uuid\":\"33fb016a-7303-4873-b77e-b1067fa78909\",\"displayName\":\"App\\\\Mail\\\\SendHoaDon\",\"job\":\"Illuminate\\\\Queue\\\\CallQueuedHandler@call\",\"maxTries\":null,\"maxExceptions\":null,\"failOnTimeout\":false,\"backoff\":null,\"timeout\":null,\"retryUntil\":null,\"data\":{\"commandName\":\"Illuminate\\\\Mail\\\\SendQueuedMailable\",\"command\":\"O:34:\\\"Illuminate\\\\Mail\\\\SendQueuedMailable\\\":15:{s:8:\\\"mailable\\\";O:19:\\\"App\\\\Mail\\\\SendHoaDon\\\":10:{s:4:\\\"user\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:15:\\\"App\\\\Models\\\\User\\\";s:2:\\\"id\\\";i:20;s:9:\\\"relations\\\";a:0:{}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:7:\\\"dia_chi\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:17:\\\"App\\\\Models\\\\DiaChi\\\";s:2:\\\"id\\\";i:115;s:9:\\\"relations\\\";a:3:{i:0;s:12:\\\"tinhThanhPho\\\";i:1;s:9:\\\"quanHuyen\\\";i:2;s:8:\\\"phuongXa\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:8:\\\"don_hang\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:18:\\\"App\\\\Models\\\\DonHang\\\";s:2:\\\"id\\\";i:42;s:9:\\\"relations\\\";a:2:{i:0;s:4:\\\"user\\\";i:1;s:6:\\\"diaChi\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:18:\\\"chi_tiet_don_hangs\\\";O:45:\\\"Illuminate\\\\Contracts\\\\Database\\\\ModelIdentifier\\\":5:{s:5:\\\"class\\\";s:25:\\\"App\\\\Models\\\\ChiTietDonHang\\\";s:2:\\\"id\\\";a:3:{i:0;i:47;i:1;i:48;i:2;i:49;}s:9:\\\"relations\\\";a:2:{i:0;s:7:\\\"sanPham\\\";i:1;s:7:\\\"bienThe\\\";}s:10:\\\"connection\\\";s:5:\\\"mysql\\\";s:15:\\\"collectionClass\\\";N;}s:9:\\\"phi_ships\\\";s:5:\\\"35000\\\";s:16:\\\"giamGiaVanChuyen\\\";s:5:\\\"30000\\\";s:14:\\\"giamGiaDonHang\\\";s:5:\\\"10000\\\";s:6:\\\"soCoin\\\";s:3:\\\"100\\\";s:2:\\\"to\\\";a:1:{i:0;a:2:{s:4:\\\"name\\\";N;s:7:\\\"address\\\";s:18:\\\"tngoclee@gmail.com\\\";}}s:6:\\\"mailer\\\";s:4:\\\"smtp\\\";}s:5:\\\"tries\\\";N;s:7:\\\"timeout\\\";N;s:13:\\\"maxExceptions\\\";N;s:17:\\\"shouldBeEncrypted\\\";b:0;s:10:\\\"connection\\\";N;s:5:\\\"queue\\\";N;s:15:\\\"chainConnection\\\";N;s:10:\\\"chainQueue\\\";N;s:19:\\\"chainCatchCallbacks\\\";N;s:5:\\\"delay\\\";N;s:11:\\\"afterCommit\\\";N;s:10:\\\"middleware\\\";a:0:{}s:7:\\\"chained\\\";a:0:{}s:3:\\\"job\\\";N;}\"}}', 0, NULL, 1733554369, 1733554369);
 
 -- --------------------------------------------------------
 
@@ -647,7 +600,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (71, '2024_11_21_161130_create_yeu_thichs_table', 23),
 (72, '2024_12_02_125813_create_tin_tucs_table', 24),
 (73, '2024_12_02_205552_update_danh_gias_table', 25),
-(74, '2024_12_03_101805_update_danh_gias_table', 26);
+(74, '2024_12_03_101805_update_danh_gias_table', 26),
+(75, '2024_12_07_112042_create_thong_tin_chuyen_khoans_table', 27);
 
 -- --------------------------------------------------------
 
@@ -746,8 +700,37 @@ INSERT INTO `san_phams` (`id`, `danh_muc_id`, `hinh_anh`, `ten_san_pham`, `gia_s
 (13, 6, 'uploads/sanPham/GS6wvUb9xGaY6qSiguDHTWxNmKmXF1OVLLqgtk1r.webp', 'Áo Sơ Mi Đũi Gân Nam Ngắn Tay', 199000.00, 0, '<p>ÁO SƠ MI NAM CỔ VEST NAMAD CHẤT ĐŨI GÂN THOÁNG MÁT, PHONG CÁCH TRẺ TRUNG NAMAD là thương hiệu chuyên bán buôn, bán sỉ, các mặt hàng thời trang áo phông từ lâu. Trong 5 năm làm nghề, chúng tôi luôn đem đến cho quý khách hàng những mẫu mới nhất, chất lượng nhất đến với Quý khách hàng 🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo sơ mi ngắn tay - Thương hiệu: NAMAD - Màu sắc: Đen , trắng, be, nâu rêu - Size: M / L / XL/ XXL - Kiểu dáng: xuông - Chất liệu: đũi gân. ✅ ĐẶC ĐIỂM: - Chất vải 100% dệt tự nhiên an toàn với da. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 1, 0, '2024-10-16 08:50:51', '2024-11-29 15:25:37', NULL),
 (14, 7, 'uploads/sanPham/LgVjNJuNWmHTgl1jDdccpG8S6wAVJogrS4mZ6B8c.webp', 'Áo Phông UANCAR', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - Màu sắc: Đen , nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 1, 0, '2024-10-17 00:17:31', '2024-11-29 15:37:17', NULL),
 (15, 7, 'uploads/sanPham/pQhuW0Wf6CyDEnc53zNTp9YKmvFKkzj2Feyc5fTK.webp', 'Áo Phông Don\'t Care', 300000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo thun nam rộng tay lỡ - Thương hiệu: NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️&nbsp;<br>&nbsp;</p>', 6, 0, '2024-10-17 00:21:30', '2024-11-27 15:18:42', NULL),
-(16, 7, 'uploads/sanPham/Hpx1kR8A4I1ZJ8CJ43zaAjSQHs6EJn9cKNhYrGoI.webp', 'Áo Phông Young Rich', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Phông Unisex - Thương hiệu:NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,.... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 17, 0, '2024-10-17 00:27:20', '2024-12-03 14:37:32', NULL),
+(16, 7, 'uploads/sanPham/Hpx1kR8A4I1ZJ8CJ43zaAjSQHs6EJn9cKNhYrGoI.webp', 'Áo Phông Young Rich', 286000.00, 0, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Phông Unisex - Thương hiệu:NAMAD - Màu sắc: Đen - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,.... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 18, 0, '2024-10-17 00:27:20', '2024-12-03 14:37:32', NULL),
 (17, 7, 'uploads/sanPham/iUcdm273OgyXGnA6AmjaiX5cSizX6EcSqskbr7Dv.webp', 'Áo Phông DualMatch', 286000.00, 25, '<p>🔶 THÔNG TIN SẢN PHẨM: - Tên sản phẩm: Áo phông Unisex - Thương hiệu: NAMAD - - Màu sắc: Đen, nâu - Size: M / L / XL. - Kiểu dáng: Oversized. - Chất liệu: Cotton co giãn hai chiều. - Hình in sắc nét, màu sắc chân thực, không phai màu, độ bền cao, không bị nứt vỡ bởi những tác động bên ngoài (đã kiểm tra kéo và giặt tẩy). ✅ ĐẶC ĐIỂM: - Chất vải 100% Cotton, dày dặn,co giãn tốt, độ bền màu cao. - Giặt ko đổ lông hay bay màu, thấm hút mồ hôi và thoải mái ko gò bó khi vận động. - Thiết kế cấu trúc lỗ thoáng, mắt vải to tạo sự thoáng mát cho người mặc. - Màu sắc &amp; kích cỡ thoải mái ko gò bó khi vận động tạo nên sự nặng động,trẻ trung.. 🔸HƯỚNG DẪN SỬ DỤNG: + Giặt ở nhiệt độ bình thường, với đồ có màu tương tự. + Không được dùng hóa chất tẩy. + Hạn chế sử dụng máy sấy và ủi ở nhiệt độ thích hợp. + Lộn mặt trái khi phơi tránh bị phai màu ❌SHOP CAM KẾT: - Không bán hàng giả, hàng nhái, chất lượng luôn là hàng đầu để shop có thể phát triển thương hiệu và vươn xa. - Hàng 100% giống mô tả - Tư vấn nhiệt tình, chu đáo luôn lắng nghe khách hàng để phục vụ tốt. - Giao hàng nhanh đúng tiến độ không phải để quý khách chờ đợi lâu để nhận hàng. ⛔QUY ĐỊNH TRẢ HÀNG HOÀN TIỀN CỦA SHOP Điều kiện áp dụng (trong vòng 03 ngày kể từ khi nhận sản phẩm) Trường hợp đủ điều kiện đổi trả hàng hóa: • Hàng hoá vẫn còn mới, nguyên tem nhãn, chưa qua sử dụng • Hàng hóa bị lỗi hoặc hư hỏng do vận chuyển hoặc do nhà sản xuất • Hàng không đúng size, chủng loại, mẫu mã như đơn đặt hàng • Không đủ số lượng, không đủ bộ như trong mô tả Trường hợp không đủ điều kiện áp dụng chính sách: • Quá 03 ngày kể từ khi Quý khách nhận hàng • Gửi lại hàng không đúng mẫu mã, không phải hàng của SHOP • Đặt nhầm sản phẩm, nhầm chủng loại, cảm thấy không thích, không hợp,... ❤️Cảm ơn các quý khách hàng đã ghé thăm gian hàng của SHOP ❤️</p>', 5, 0, '2024-10-17 00:31:15', '2024-12-03 03:21:42', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thong_tin_chuyen_khoans`
+--
+
+CREATE TABLE `thong_tin_chuyen_khoans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `ma_don_hang` varchar(255) NOT NULL,
+  `so_tien` bigint(20) NOT NULL,
+  `mo_ta_don_hang` varchar(255) DEFAULT NULL,
+  `ma_giao_dich_vnpay` varchar(255) DEFAULT NULL,
+  `ma_ngan_hang` varchar(255) DEFAULT NULL,
+  `ma_giao_dich_ngan_hang` varchar(255) DEFAULT NULL,
+  `ma_phan_hoi` varchar(255) DEFAULT NULL,
+  `trang_thai_giao_dich` varchar(255) DEFAULT NULL,
+  `thoi_gian_thanh_toan` datetime DEFAULT NULL,
+  `chu_ky_vnpay` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `thong_tin_chuyen_khoans`
+--
+
+INSERT INTO `thong_tin_chuyen_khoans` (`id`, `ma_don_hang`, `so_tien`, `mo_ta_don_hang`, `ma_giao_dich_vnpay`, `ma_ngan_hang`, `ma_giao_dich_ngan_hang`, `ma_phan_hoi`, `trang_thai_giao_dich`, `thoi_gian_thanh_toan`, `chu_ky_vnpay`, `created_at`, `updated_at`) VALUES
+(2, 'DHEMWAVWPA', 158690000, 'Thanh toán cho đơn hàng: DHEMWAVWPA', '14726975', 'NCB', 'VNP14726975', '00', '00', '2024-12-07 13:52:32', 'bbc9d94cc2b2c939ee05982b910ad1cb9aab7581470d0b276af58ba7adb15b2753da6ebc9a88b7645f16b57b9dd57fe56ba09a45b423b388d4185e83b28819fd', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -823,7 +806,7 @@ INSERT INTO `users` (`id`, `google_id`, `facebook_id`, `ho_va_ten`, `email`, `em
 (1, '112158713502204375107', NULL, 'Nguyễn Đình Cường', 'nguyendinhcuong27072004@gmail.com', NULL, NULL, '$2y$10$KWVBCd6txEck8IvLT4dn0OxrK.XEjQHOsfXIrotT7LsrkXaoQ0eS6', '0964426518', 1, 'fKXpJwzkP2qzUAkmQjzsq8QDdOeK61sDHHyvT0pVHAfrczGtD3qqDz9dYuzm', NULL, 0, '2024-11-15 17:07:28', '2024-11-15 17:22:12'),
 (18, NULL, NULL, 'Tống Hoàng Bách', 'hoangbach25102004@gmail.com', NULL, NULL, '$2y$10$K33cM1B7/7NAiuT8aO7Yke.CpClvYuxKWYe2l3uYDfTRZUzyyVPcy', '0917261473', 1, 'lOuu7Qoo9B8enFaOG5zaFEmpuFbY9DmV55lI4K1SK9rc0PFtFH2Rz7XVp9t6', NULL, 0, '2024-11-15 16:37:09', '2024-11-15 16:37:09'),
 (19, '106811243630953424612', '1103423614584725', NULL, 'thiengiapnguyen04@gmail.com', NULL, NULL, '$2y$10$3GyyMF9NSSKc8p9fMZVwSONnINk9mz.0cUG5U0nsHa5Un.9T7pIcu', '0357864779', 1, NULL, NULL, 0, '2024-11-15 16:38:50', '2024-11-17 21:03:41'),
-(20, NULL, NULL, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$dp46V5swGf3c64qorVR7Iu4kThmJg1phlHAHWU/hGj65YmCPo9zmO', '0917261473', 2, 'zk4L4fYLj9VXE6aIYjb6QAWQpxhMrMeUtVdBG3QCBqqCDEU3DwCQkC7ecWJh', NULL, 0, '2024-11-15 16:40:08', '2024-11-19 14:48:24'),
+(20, NULL, NULL, 'Trương Thị Hồng Ngọc', 'tngoclee@gmail.com', NULL, NULL, '$2y$10$dp46V5swGf3c64qorVR7Iu4kThmJg1phlHAHWU/hGj65YmCPo9zmO', '0917261473', 2, '7cSSpAzEYXoQtbzOdMnYWY5oVqQRZRNNUqTHmNuJNkX8xlLW8T9CZkTSab6P', NULL, 0, '2024-11-15 16:40:08', '2024-11-19 14:48:24'),
 (24, NULL, NULL, 'Nguyễn Đình Cường', 'cuongndph38237@fpt.edu.vn', NULL, NULL, '$2y$10$V/atpYcFM5QVKpUVEBYA7upwizydQC.qughU6Fq8L8ezqzsz1Dw/2', '0964426517', 3, NULL, NULL, 0, '2024-11-15 17:18:02', '2024-11-15 17:18:02');
 
 -- --------------------------------------------------------
@@ -13040,6 +13023,13 @@ ALTER TABLE `san_phams`
   ADD KEY `san_phams_danh_muc_id_foreign` (`danh_muc_id`);
 
 --
+-- Chỉ mục cho bảng `thong_tin_chuyen_khoans`
+--
+ALTER TABLE `thong_tin_chuyen_khoans`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `thong_tin_chuyen_khoans_ma_don_hang_unique` (`ma_don_hang`);
+
+--
 -- Chỉ mục cho bảng `tin_tucs`
 --
 ALTER TABLE `tin_tucs`
@@ -13123,7 +13113,7 @@ ALTER TABLE `bien_thes`
 -- AUTO_INCREMENT cho bảng `chi_tiet_don_hangs`
 --
 ALTER TABLE `chi_tiet_don_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT cho bảng `coins`
@@ -13159,7 +13149,7 @@ ALTER TABLE `dia_chis`
 -- AUTO_INCREMENT cho bảng `don_hangs`
 --
 ALTER TABLE `don_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
@@ -13171,13 +13161,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT cho bảng `gio_hangs`
 --
 ALTER TABLE `gio_hangs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT cho bảng `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `kich_cos`
@@ -13213,7 +13203,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -13232,6 +13222,12 @@ ALTER TABLE `phi_ships`
 --
 ALTER TABLE `san_phams`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT cho bảng `thong_tin_chuyen_khoans`
+--
+ALTER TABLE `thong_tin_chuyen_khoans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `tin_tucs`

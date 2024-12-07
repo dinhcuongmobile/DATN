@@ -30,7 +30,6 @@ class DonHang extends Model
     public $timestamps = false;
 
     protected $dates = ['ngay_tao', 'ngay_cap_nhat'];
-    //Đơn Hàng Mới Nhất Lên Đầu
     public function scopeMoiNhat($query)
     {
         return $query->orderBy('id', 'desc');

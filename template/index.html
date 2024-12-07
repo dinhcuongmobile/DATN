@@ -3,75 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <title>Trang Chat Giống Shopee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Thông Báo Chuyển Khoản Thành Công</title>
     <style>
-        .chat-container {
-            height: 85vh;
-            display: flex;
-            flex-direction: row;
-        }
-        .chat-list, .chat-window {
-            overflow-y: auto;
-        }
-        .chat-list {
-            width: 30%;
-            border-right: 1px solid #ddd;
-        }
-        .chat-window {
-            width: 70%;
-            padding: 20px;
-        }
-        .message {
-            margin-bottom: 10px;
-        }
-        .message.sent {
-            text-align: right;
-        }
-        .message.received {
-            text-align: left;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 400px;
+}
+
+.success-message i {
+    color: #4CAF50;
+    font-size: 50px;
+}
+
+.success-message h2 {
+    color: #333;
+    margin-top: 10px;
+}
+
+.success-message p {
+    color: #666;
+    margin: 15px 0;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="mt-3">Chat</h1>
-        <div class="chat-container">
-            <div class="chat-list px-3">
-                <input type="text" class="form-control mb-3" placeholder="Tìm kiếm">
-                <ul class="list-group">
-                    <li class="list-group-item">linkkhieu2007</li>
-                    <li class="list-group-item">ngcngnguyenth123</li>
-                    <li class="list-group-item">naxinvn</li>
-                    <li class="list-group-item">cuongtiengu</li>
-                    <li class="list-group-item">phongcachnhat</li>
-                    <li class="list-group-item">simise.vn</li>
-                    <li class="list-group-item">moonstore.on</li>
-                </ul>
-            </div>
-            <div class="chat-window">
-                <h5>phongcachnhat</h5>
-                <div class="message received">
-                    <p>Chúc bạn có một ngày mới tốt lành, =>với tiêu chí "HÀNG CHẤT GIÁ THẬT-BẢO HÀNH UY TÍN" anh em yên tâm 100% về chất lượng.</p>
-                    <small>19:41</small>
-                </div>
-                <div class="message alert alert-warning">
-                    <p>LUU Ý: Shopee KHÔNG cho phép các hành vi: Đặt cọc/Chuyển khoản riêng cho người bán/Giao dịch ngoài hệ thống Shopee...</p>
-                    <small><a href="#" class="alert-link">Tìm hiểu thêm</a></small>
-                </div>
-                <div class="message sent">
-                    <p>Oki anh có j đánh giá sp giúp e nha a</p>
-                    <small>05:54</small>
-                </div>
-            </div>
-        </div>
-        <div class="input-group mt-3">
-            <input type="text" class="form-control" placeholder="Nhập nội dung tin nhắn">
-            <button class="btn btn-primary" type="button">Gửi</button>
+        <div class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <h2>Chuyển Khoản Thành Công!</h2>
+            <p>Khoản tiền của bạn đã được chuyển đi thành công. Cảm ơn bạn đã sử dụng dịch vụ.</p>
+            <a href="#" class="btn">Quay lại Trang Chủ</a>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
