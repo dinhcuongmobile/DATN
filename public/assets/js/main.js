@@ -655,7 +655,7 @@ $(document).ready(function() {
 
                             // Tính giá khuyến mại nếu có giảm giá
                             if (san_pham.khuyen_mai > 0) {
-                                let gia_khuyen_mai = san_pham.gia_san_pham - 
+                                let gia_khuyen_mai = san_pham.gia_san_pham -
                                     (san_pham.gia_san_pham * san_pham.khuyen_mai / 100);
 
                                 html += `
@@ -723,7 +723,10 @@ $(document).ready(function() {
     });
 });
 
-
+function hoanThanhTTOnline(){
+    sessionStorage.setItem("activeTab", "order");
+    window.location.href="/tai-khoan/thong-tin-tai-khoan";
+}
 //time
 // function flashSaleTime(){
 //     // Lấy ngày bắt đầu (hiện tại)

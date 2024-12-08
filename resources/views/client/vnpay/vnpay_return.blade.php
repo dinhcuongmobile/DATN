@@ -48,7 +48,7 @@
                         @endif
                     </label>
                     @if ($_GET['vnp_ResponseCode'] == '00')
-                        <a style="display: block;" class="btn btn-success mt-3"  href="{{route('tai-khoan.thong-tin-tai-khoan')}}">Tiếp tục</a>
+                        <a style="display: block;" class="btn btn-success mt-3" onclick="hoanThanhTTOnline()">Tiếp tục</a>
                     @else
                         <a style="display: block;" class="btn btn-success mt-3" href="{{route('gio-hang.gio-hang')}}">Quay lại</a>
                     @endif
