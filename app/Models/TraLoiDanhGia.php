@@ -17,8 +17,6 @@ class TraLoiDanhGia extends Model
         'noi_dung'
     ];
 
-    public $timestamps = false;
-
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

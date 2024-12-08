@@ -33,8 +33,6 @@
                             <h5>Thoát </h5><i class="back-button fa-solid fa-xmark"></i>
                         </div>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="search-box"><input type="search" name="text" placeholder="Tìm kiếm..."><i
-                                    class="iconsax" data-icon="search-normal-2"></i></div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button>
