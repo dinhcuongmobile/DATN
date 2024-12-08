@@ -49,9 +49,9 @@ class CoinController extends Controller
         if ($soNgay > 7) {
             $soNgay = 1;
         }
-        
+
         //random xu
-        $coins = rand(100, 300); 
+        $coins = rand(100, 300);
 
         // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
         $coins = ($soNgay == 7) ? 300 : 100;

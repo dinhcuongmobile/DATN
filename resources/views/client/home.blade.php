@@ -346,11 +346,11 @@
                                         <div class="firework"></div>
                                     </div>
                                     <!-- Popup thông báo -->
-                                    <div class="popup hidden">
+                                    <div class="popup hidden popup-mo-qua">
                                         <div class="popup-content">
                                             <h4>Chúc mừng bạn!</h4>
                                             <p><span class="coin-amount">0 xu</span></p>
-                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Mua ngay</a>
+                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Đến cửa hàng</a>
                                         </div>
                                     </div>
                                 </div>
