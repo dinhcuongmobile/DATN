@@ -62,26 +62,28 @@
             </div>
 
             <!-- quan ly tai khoan -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
-                            viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
-                            style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
+            @if (Auth::user()->vai_tro_id == 1)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
+                                viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
+                                style="background-color: #48dbfb;">
+                                <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                                <span>Thêm mới</span></a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            @endif
 
             <!-- quan ly danh muc -->
             <li class="nav-item">
