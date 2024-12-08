@@ -8,7 +8,7 @@
                     @foreach ($banner as $item)
                     <div class="home-images">
                         <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="">
-                    </div>                
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -389,8 +389,7 @@
                                             <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
                                                 aria-hidden="true" data-bs-toggle="tooltip"></i>
                                         </a>
-                                        <a class="quickViewClick" data-id="{{ $item->id }}"
-                                            href="javascript:void(0)" tabindex="0">
+                                        <a class="quickViewClick" data-id="{{ $item->id }}" tabindex="0">
                                             <i class="iconsax" data-icon="eye" aria-hidden="true"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-title="Xem nhanh"></i>

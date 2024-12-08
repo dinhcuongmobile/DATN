@@ -439,7 +439,7 @@
 
     @if (Auth::check())
 
-        @if (Auth::user()->vai_tro_id == 3)
+        @if (Auth::user()->vai_tro_id == 3) {{-- khach hang --}}
             {{-- Chát trực tiếp --}}
             <div class="chat-button" id="chatButton" onclick="toggleChat()">
                 <span class="chat-icon">💬</span>
@@ -638,42 +638,6 @@
                                     <h5>Sản phẩm được khách hàng yêu thích</h5>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/1.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Woven Jacket</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/2.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Printed Dresses</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/3.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Woven Jacket</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/4.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Printed Dresses</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/5.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Woven Jacket</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                                <div class="card-img"> <img src="{{ asset('assets/images/modal/6.jpg') }}"
-                                        alt="user"><a href="#">
-                                        <h6>Printed Dresses</h6>
-                                        <p>$25</p>
-                                    </a></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -688,15 +652,15 @@
         <div class="offcanvas-body theme-scrollbar">
             <div class="container">
                 <h3>Tìm Kiếm</h3>
-                    <div class="search-box"> 
+                    <div class="search-box">
                         <input type="search" name="search_text" placeholder="..." required>
                         <i class="iconsax"
                             data-icon="search-normal-2">
                         </i>
                     </div>
                 <div class="row gy-4 ratio_square-2 preemptive-search">
-                    
-                </div> 
+
+                </div>
             </div>
         </div>
     </div>

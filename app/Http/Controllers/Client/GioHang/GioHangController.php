@@ -21,6 +21,7 @@ use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\ThongTinChuyenKhoan;
+use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -100,8 +101,14 @@ class GioHangController extends Controller
                     ->get();
             $san_pham= SanPham::find($san_pham_id);
             $count_gio_hang = $gio_hangs->count();
+            $sp_yeu_thichs = YeuThich::with('user','sanPham')->where('san_pham_id','!=',$san_pham_id)->orderBy('id','desc')->take(6)->get();
             if($result){
-                return response()->json(['login' => true, 'count_gio_hang' => $count_gio_hang, 'san_pham' => $san_pham]);
+                return response()->json([
+                    'login' => true,
+                    'count_gio_hang' => $count_gio_hang,
+                    'san_pham' => $san_pham,
+                    'spYeuThich' => $sp_yeu_thichs
+                ]);
             }
         }
     }

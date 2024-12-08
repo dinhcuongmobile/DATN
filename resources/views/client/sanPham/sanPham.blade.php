@@ -185,7 +185,7 @@
                                 @foreach ($san_phams as $item)
                                     @php
                                         $isWishlist = $item->yeuThich->isNotEmpty(); // Kiểm tra trạng thái yêu thích
-                                    @endphp
+                                    @endphp 
                                     <div>
                                         <div class="product-box-3">
                                             <div class="img-wrapper">
