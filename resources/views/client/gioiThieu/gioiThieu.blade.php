@@ -7,11 +7,6 @@
                 <div class="col-sm-6">
                     <h4>Về chúng tôi</h4>
                 </div>
-                <div class="col-sm-6">
-                    <ul class="breadcrumb float-end">
-                        <li class="breadcrumb-item"> <a href="{{route('trang-chu.home')}}">Trang Chủ</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
@@ -20,8 +15,8 @@
     <div class="custom-container container">
         <div class="row align-items-center gy-4">
             <div class="col-lg-6 order-1 order-lg-1 ratio_55">
-                <div class="about-img"> <img class="bg-img img-fluid" src="../assets/images/about/7.jpg" alt="">
-                    <div class="about-tag"> <a href="collection-left-sidebar.html">
+                <div class="about-img"> <img class="bg-img img-fluid" src="../assets/images/layout-4/gt-1.png" alt="">
+                    <div class="about-tag"> <a href="{{ route('san-pham.san-pham') }}">
                             <h5>Giới thiệu</h5><i class="fa-solid fa-arrow-right"></i>
                         </a></div>
                 </div>
@@ -74,9 +69,9 @@
                 </div>
             </div>
             <div class="col-lg-6 order-3 order-lg-4 ratio_55">
-                <div class="about-img about-img-1"> <img class="bg-img img-fluid" src="../assets/images/about/8.jpg"
+                <div class="about-img about-img-1"> <img class="bg-img img-fluid" src="../assets/images/layout-4/gt-2.png"
                         alt="">
-                    <div class="about-tag"> <a href="collection-left-sidebar.html">
+                    <div class="about-tag"> <a href="{{ route('san-pham.san-pham') }}">
                             <h5>Chất lượng</h5><i class="fa-solid fa-arrow-right"></i>
                         </a></div>
                 </div>

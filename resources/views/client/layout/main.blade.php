@@ -403,7 +403,7 @@
                         <div class="footer-content">
                             <div>
                                 <div class="footer-title d-md-block">
-                                    <h5>Hỗ Trợ</h5>
+                                    <h5>Chính sách</h5>
                                     <ul class="footer-details accordion-hidden">
                                         <li> <a class="nav" href="{{ route('chinh-sach-bao-mat') }}">Chính sách
                                             bảo mật</a></li>
