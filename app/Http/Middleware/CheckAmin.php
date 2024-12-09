@@ -24,14 +24,14 @@ class CheckAmin
                 Auth::logout();
 
                 // Chuyển hướng đến trang đăng nhập hoặc thông báo
-                return redirect()->route('tai-khoan.dang-nhap')->with('error', 'Tài khoản của bạn đã bị khóa !');
+                return redirect()->route('auth.dang-nhap-admin')->with('error', 'Tài khoản của bạn đã bị khóa !');
             } elseif ($user->trang_thai == 2) {
 
                 // Đăng xuất người dùng
                 Auth::logout();
 
                 // Chuyển hướng đến trang đăng nhập hoặc thông báo
-                return redirect()->route('tai-khoan.dang-nhap')->with('error', 'Phiên đăng nhập đã hết hạn !');
+                return redirect()->route('auth.dang-nhap-admin')->with('error', 'Phiên đăng nhập đã hết hạn !');
             }
         }
 
