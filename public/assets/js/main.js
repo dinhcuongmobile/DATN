@@ -503,7 +503,11 @@ document.addEventListener('click', function(event) {
 
     // Nếu không click vào popup hoặc nút "Thay đổi" thì ẩn tất cả popup
     if (!popup) {
-        document.querySelector(".popup-mo-qua").style.display = 'none';
+        const popupMoQua = document.querySelector(".popup-mo-qua");
+        if(popupMoQua){
+            popupMoQua.style.display = 'none';
+        }
+
     }
 });
 
