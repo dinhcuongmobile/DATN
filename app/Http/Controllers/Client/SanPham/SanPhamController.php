@@ -58,8 +58,9 @@ class SanPhamController extends Controller
             $arrTraLoiDanhGia[$itemDanhGia->id] = TraLoiDanhGia::with('user')->where('danh_gia_id',$itemDanhGia->id)->orderBy('id','desc')->first();
         }
 
-        $this->views['san_pham_lien_quan'] = SanPham::with('danhMuc', 'bienThes', 'danhGias')
-            ->where('danh_muc_id', $san_pham->danh_muc_id)
+        $this->views['san_pham_lien_quan'] = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        }])->where('danh_muc_id', $san_pham->danh_muc_id)
             ->take(8)->get();
         $this->views['san_pham']=$san_pham;
         $this->views['danh_gias']=$danh_gias;

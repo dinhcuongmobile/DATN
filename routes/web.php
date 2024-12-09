@@ -33,7 +33,6 @@ use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
 use App\Http\Controllers\Admin\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanAdminController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -421,7 +420,7 @@ Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
         Route::get('in-hoa-don-hang-loat', [DonHangAdminController::class,'inHoaDonHangLoat'])->name('don-hang.in-hoa-don-hang-loat');
 
         Route::get('danh-sach-da-chuyen-khoan', [DonHangAdminController::class, 'showDSDaChuyenKhoan'])->name('don-hang.danh-sach-da-chuyen-khoan');
-        
+
         Route::get('tim-kiem', [DonHangAdminController::class,'timKiem'])->name('don-hang.tim-kiem');
 
     });

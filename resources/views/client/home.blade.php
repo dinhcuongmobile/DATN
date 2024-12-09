@@ -366,11 +366,11 @@
                                         <div class="firework"></div>
                                     </div>
                                     <!-- Popup thông báo -->
-                                    <div class="popup hidden">
+                                    <div class="popup hidden popup-mo-qua">
                                         <div class="popup-content">
                                             <h4>Chúc mừng bạn!</h4>
                                             <p><span class="coin-amount">0 xu</span></p>
-                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Mua ngay</a>
+                                            <a href="{{route('san-pham.san-pham')}}" class="btn">Đến cửa hàng</a>
                                         </div>
                                     </div>
                                 </div>
@@ -409,8 +409,7 @@
                                             <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $item->yeuThich->isNotEmpty() ? '#fff' : 'rgba(38,40,52,1)' }}"
                                                 aria-hidden="true" data-bs-toggle="tooltip"></i>
                                         </a>
-                                        <a class="quickViewClick" data-id="{{ $item->id }}"
-                                            href="javascript:void(0)" tabindex="0">
+                                        <a class="quickViewClick" data-id="{{ $item->id }}" tabindex="0">
                                             <i class="iconsax" data-icon="eye" aria-hidden="true"
                                                 data-bs-toggle="tooltip"
                                                 data-bs-title="Xem nhanh"></i>

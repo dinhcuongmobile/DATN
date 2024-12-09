@@ -185,11 +185,26 @@ function themGioHang(){
                                 $('#addtocart').modal('show');
                                 var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
                                 document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
-                                document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                                document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="style-border img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
                                 document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
 
                                 let dataMaxNew = parseInt(dataMax)-1;
                                 document.querySelector('.quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
+
+                                response.spYeuThich.forEach((item, index)=>{
+                                    let giaKM = item.san_pham.gia_san_pham - (item.san_pham.gia_san_pham * item.san_pham.khuyen_mai / 100);
+                                    $('#addtocart .row').append(`
+                                        <div class="col-lg-4 col-md-6 col-12">
+                                            <div class="card-img" style="padding-top: 10px;">
+                                                <img class="style-border" src="/storage/${item.san_pham.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
+                                                <a href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
+                                                    <h6>${item.san_pham.ten_san_pham}</h6>
+                                                    <p>${giaKM.toLocaleString('vi-VN')}đ</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    `);
+                                });
                             }
                         },
                         error: function (error) {

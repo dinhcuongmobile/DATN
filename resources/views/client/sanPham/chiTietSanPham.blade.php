@@ -312,13 +312,19 @@
             <div class="swiper-wrapper ratio1_3">
                 @foreach ($san_pham_lien_quan as $item)
                     @if ($item->id!=$san_pham->id)
+                        @php
+                            $isWishlist = $item->yeuThich->isNotEmpty(); // Kiểm tra trạng thái yêu thích
+                        @endphp
                         <div class="swiper-slide">
                             <div class="product-box-3">
                                 <div class="img-wrapper">
-                                    <div class="label-block"><span class="lable-1">NEW</span><a
-                                            class="label-2 wishlist-icon" href="javascript:void(0)" tabindex="0"><i
-                                                class="iconsax" data-icon="heart" aria-hidden="true"
-                                                data-bs-toggle="tooltip" data-bs-title="Thêm vào yêu thích"></i></a></div>
+                                    <div class="label-block">
+                                        <a class="label-2 wishlist-icon" style="background-color: {{ $isWishlist ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                    tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                            <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $isWishlist ? '#fff' : 'rgba(38,40,52,1)' }}"
+                                            aria-hidden="true" data-bs-toggle="tooltip"></i>
+                                        </a>
+                                    </div>
                                     <div class="product-image style-border">
                                         <a class="pro-first" href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
                                             <img class="bg-img" src="{{Storage::url($item->hinh_anh)}}" alt="Sản phẩm">
@@ -327,14 +333,6 @@
                                             <img class="bg-img" src="{{Storage::url($item->bienThes->first()->hinh_anh)}}" alt="Sản phẩm">
                                         </a>
                                     </div>
-                                    <div class="cart-info-icon"> <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#addtocart" tabindex="0"><i class="iconsax" data-icon="basket-2"
-                                                aria-hidden="true" data-bs-toggle="tooltip" data-bs-title="Thêm giỏ hàng">
-                                            </i></a>
-                                            <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#quick-view" tabindex="0"><i class="iconsax" data-icon="eye"
-                                                aria-hidden="true" data-bs-toggle="tooltip"
-                                                data-bs-title="Quick View"></i></a></div>
                                 </div>
                                 <div class="product-detail">
                                     <ul class="rating">
