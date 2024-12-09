@@ -32,24 +32,24 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
-                            <tr class="text-center">
+                            <tr>
                                 <th>MTK</th>
                                 <th>Họ và Tên</th>
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
                                 <th>Vai trò</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($DSTKK)>0)
                                 @foreach($DSTKK as $item)
                                     <tr>
-                                        <td class="align-middle text-center">{{ $item->id }}</td>
+                                        <td class="align-middle col-1">{{ $item->id }}</td>
                                         <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
                                         <td class="col-1 align-middle">{{ $item->email }}</td>
                                         <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
-                                        <td class="align-middle text-center">{{$item->vaiTro->vai_tro}}</td>
+                                        <td class="align-middle col-1">{{$item->vaiTro->vai_tro}}</td>
                                         <td class="col-2 align-middle text-center">
                                             <a onclick="return confirm('Bạn chắc chắn muốn mở khóa tài khoản này?')"
                                                 href="{{ route('tai-khoan.mo-khoa-tai-khoan', $item->id) }}"

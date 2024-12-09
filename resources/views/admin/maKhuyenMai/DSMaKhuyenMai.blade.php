@@ -43,7 +43,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered danhSachMaKhuyenMai" width="100%" cellspacing="0">
                         <thead class="thead-light">
-                            <tr class="text-center">
+                            <tr>
                                 <th></th>
                                 <th>Mã giảm giá</th>
                                 <th>Số tiền giảm</th>
@@ -51,7 +51,7 @@
                                 <th>Ngày kết thúc</th>
                                 <th>Giá trị tối thiểu</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>

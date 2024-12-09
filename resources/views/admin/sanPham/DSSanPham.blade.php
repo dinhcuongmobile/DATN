@@ -43,7 +43,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
-                            <tr class="text-center">
+                            <tr>
                                 <th></th>
                                 <th>Mã loại</th>
                                 <th>Ảnh</th>
@@ -52,7 +52,7 @@
                                 <th>Số lượng</th>
                                 <th>Khuyến mãi</th>
                                 <th>Danh mục</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +60,7 @@
                                 @foreach ($san_phams as $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
-                                        <td class="col-1 align-middle text-center">SP-{{$item->id}}</td>
+                                        <td class="col-1 align-middle">SP-{{$item->id}}</td>
                                         <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
                                         <td class="col-2 align-middle">
                                             <a href="{{route('san-pham.bien-the-san-pham',$item->id)}}">{{$item->ten_san_pham}}</a>
