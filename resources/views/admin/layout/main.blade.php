@@ -291,7 +291,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -340,7 +340,7 @@
                                 </a>
                             </div>
                         </li>
-                        
+
                         <!-- Khu vực chat -->
                         <div id="chatBox" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; height: 400px; background-color: #fff; border: 1px solid #ddd; z-index: 1000; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 10px;">
                             <button type="button" class="btn btn-danger btn-sm" id="closeChatBtn">X</button>
@@ -350,7 +350,7 @@
                             </div>
                             <input type="text" class="form-control" placeholder="Nhập tin nhắn..." onkeypress="sendMessage(event)">
                         </div>
-                                             
+
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -449,304 +449,39 @@
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
     <script>
-        $(document).ready(function() {
-            // Hàm định dạng ngày giờ
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleString('vi-VN', { 
-                    day: '2-digit', 
-                    month: '2-digit', 
-                    year: 'numeric', 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
-                });
-            }
-    
-            // Hàm cập nhật thông báo
-            function updateNotifications() {
-                $.ajax({
-                    url: '{{ route('thong-bao.thong-bao-admin') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        // Cập nhật số lượng thông báo
-                        $('#notificationCounter').text(response.tongSoLuongTB);
-    
-                        // Render nội dung thông báo (ban đầu chỉ lấy 2 thông báo)
-                        let content = '';
-                        response.donHangMoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="don-hang/chi-tiet-don-hang/${item.id}">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-box text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.ngay_tao)}</div>
-                                    <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.donHangDaGiao.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="don-hang/chi-tiet-don-hang/${item.id}">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-truck text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.ngay_cap_nhat)}</div>
-                                    <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Đã giao thành công!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.lienHeMoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-chua-phan-hoi">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-comments text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.created_at)}</div>
-                                    <span class="font-weight-bold">Bạn có liên hệ mới từ ${item.ho_va_ten}!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.lienHeDaPhanHoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-da-phan-hoi">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-info">
-                                        <i class="fas fa-check-circle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.created_at)}</div>
-                                    <span class="font-weight-bold">Liên hệ từ ${item.email} đã được phản hồi!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        if (content === '') {
-                            content = '<p class="text-center text-gray-500">Không có thông báo mới</p>';
-                        }
-    
-                        $('#notificationContent').html(content);
-                    },
-                    error: function() {
-                        $('#notificationContent').html('<p class="text-center text-danger">Không thể tải thông báo</p>');
-                    }
-                });
-            }
-    
-            // Gọi hàm cập nhật thông báo khi bấm vào "Hiển Thị Thông Báo"
-            $('#alertsDropdown').on('click', function() {
-                $.ajax({
-                    url: '{{ route('thong-bao.thong-bao-admin') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let modalContent = '';
-                        
-                        // Render tất cả thông báo khi mở modal
-                        response.donHangMoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</h5>
-                                    <p>Ngày tạo: ${item.ngay_tao}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.donHangDaGiaoFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Đơn hàng: ${item.ma_don_hang} - Đã giao thành công!</h5>
-                                    <p>Ngày cập nhật: ${formatDate(item.ngay_cap_nhat)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.lienHeMoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Liên hệ từ ${item.ho_va_ten}!</h5>
-                                    <p>Ngày tạo: ${formatDate(item.created_at)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.lienHeDaPhanHoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Liên hệ từ ${item.email} đã được phản hồi!</h5>
-                                    <p>Ngày phản hồi: ${formatDate(item.created_at)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        $('#modalNotificationContent').html(modalContent); // Thêm nội dung vào modal
-                    },
-                    error: function() {
-                        $('#modalNotificationContent').html('<p class="text-center text-danger">Không thể tải thông báo</p>');
-                    }
-                });
-            });
-            // Gọi hàm cập nhật thông báo mỗi 3 giây (3000ms)
-            setInterval(updateNotifications, 3000);
-            // Gọi ngay khi trang load để hiển thị thông báo ban đầu
-            updateNotifications();
-            Echo.channel('notifications')
-            .listen('NotificationUpdated', (e) => {
-                updateNotifications();
-            });
-        });
-        // Biến toàn cục để lưu tên người chat
-        // Biến toàn cục để lưu tên người chat
-var currentChatUser = null;
+        function openChat(userName, message) {
+            // Đảm bảo danh sách tin nhắn không bị ẩn
+            document.getElementById("messagesDropdown").classList.add("show");
 
-function openChat(userName, message) {
-    // Đảm bảo danh sách tin nhắn không bị ẩn
-    document.getElementById("messagesDropdown").classList.add("show");
+            // Cập nhật tên người chat và tin nhắn đầu tiên
+            document.getElementById("chatUserName").innerText = "Chat với: " + userName;
+            document.getElementById("chatMessages").innerHTML = `<div class="message">${message}</div>`;
 
-    // Cập nhật tên người chat và tin nhắn đầu tiên
-    document.getElementById("chatUserName").innerText = "Chat với: " + userName;
-    document.getElementById("chatMessages").innerHTML = `<div class="message">${message}</div>`;
+            // Hiển thị khu vực chat
+            document.getElementById("chatBox").style.display = 'block';
 
-    // Hiển thị khu vực chat
-    document.getElementById("chatBox").style.display = 'block';
-
-    // Lưu tên người đang chat
-    currentChatUser = userName;
-}
-
-// Đóng màn hình chat khi bấm nút "X"
-document.getElementById("closeChatBtn").addEventListener("click", function() {
-    document.getElementById("chatBox").style.display = 'none';
-});
-
-// Gửi tin nhắn (nếu cần)
-function sendMessage(event) {
-    if (event.key === 'Enter') {
-        const message = event.target.value;
-        if (message.trim() !== "") {
-            const chatMessages = document.getElementById("chatMessages");
-            chatMessages.innerHTML += `<div class="message">${message}</div>`;
-            event.target.value = "";
+            // Lưu tên người đang chat
+            currentChatUser = userName;
         }
-    }
-}
 
+        // Đóng màn hình chat khi bấm nút "X"
+        document.getElementById("closeChatBtn").addEventListener("click", function() {
+            document.getElementById("chatBox").style.display = 'none';
+        });
 
-
+        // Gửi tin nhắn (nếu cần)
+        function sendMessage(event) {
+            if (event.key === 'Enter') {
+                const message = event.target.value;
+                if (message.trim() !== "") {
+                    const chatMessages = document.getElementById("chatMessages");
+                    chatMessages.innerHTML += `<div class="message">${message}</div>`;
+                    event.target.value = "";
+                }
+            }
+        }
     </script>
     {{-- Css Modal Thông Báo --}}
-        <style>
-         /* Điều chỉnh vị trí và kích thước của khu vực chat */
-       /* Khu vực chat khi hiển thị */
-        /* Khu vực chat khi hiển thị */
-        #chatBox {
-            display: none;
-            position: fixed; /* Cố định ở dưới cùng bên phải */
-            bottom: 20px;
-            right: 20px;
-            width: 350px; /* Điều chỉnh lại chiều rộng cho vừa với danh sách */
-            height: 400px; /* Điều chỉnh chiều cao */
-            background-color: #fff;
-            border: 1px solid #ddd;
-            z-index: 1000;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 10px;
-        }
-
-        /* Nút X đóng chat */
-        #closeChatBtn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-        }
-
-        /* Khu vực tin nhắn */
-        #chatMessages {
-            background: #f9f9f9;
-            border-radius: 5px;
-            padding: 10px;
-            min-height: 300px;
-            max-height: 300px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
-
-
-        /* Hiệu ứng overlay */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Tiêu đề modal */
-        .modal-title {
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: #4e73df; /* Màu xanh của SB Admin */
-        }
-
-        /* Nền của nội dung thông báo */
-        .notification-item {
-            border-bottom: 1px solid #ddd;
-            padding: 15px 10px;
-            transition: background-color 0.2s;
-        }
-        .notification-item:hover {
-            background-color: #f8f9fc; /* Màu nền khi hover */
-        }
-
-        /* Tiêu đề thông báo */
-        .notification-item h5 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        /* Chi tiết thông báo */
-        .notification-item p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        /* Scrollable modal */
-        .modal-body {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        /* Nút đóng */
-        .modal-header .close {
-            color: #aaa;
-        }
-        .modal-header .close:hover {
-            color: #333;
-        }
-        </style>
 
 </body>
 

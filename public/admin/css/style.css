@@ -100,3 +100,88 @@
 .fa-star{
     color: rgba(255, 196, 0, 1);
 }
+
+/* Khu vực chat khi hiển thị */
+#chatBox {
+    display: none;
+    position: fixed; /* Cố định ở dưới cùng bên phải */
+    bottom: 20px;
+    right: 20px;
+    width: 350px; /* Điều chỉnh lại chiều rộng cho vừa với danh sách */
+    height: 400px; /* Điều chỉnh chiều cao */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Nút X đóng chat */
+#closeChatBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+/* Khu vực tin nhắn */
+#chatMessages {
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+
+/* Hiệu ứng overlay */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Tiêu đề modal */
+.modal-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #4e73df; /* Màu xanh của SB Admin */
+}
+
+/* Nền của nội dung thông báo */
+.notification-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 10px;
+    transition: background-color 0.2s;
+}
+.notification-item:hover {
+    background-color: #f8f9fc; /* Màu nền khi hover */
+}
+
+/* Tiêu đề thông báo */
+.notification-item h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Chi tiết thông báo */
+.notification-item p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Scrollable modal */
+.modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Nút đóng */
+.modal-header .close {
+    color: #aaa;
+}
+.modal-header .close:hover {
+    color: #333;
+}
