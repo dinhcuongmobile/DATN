@@ -3,13 +3,33 @@
     {{-- banner --}}
     <section class="section-space home-section-4">
         <div class="custom-container container">
-            <div class="row no-gutters">
+            <div class="row">
                 <div class="col-12">
+                    <div class="home-content">
+                        <p>Nâng tầm phong cách phái mạnh - Tự tin lịch lãm mỗi ngày</p>
+                        <h2> </h2>
+                        <h1>Namad Store</h1>
+                        <h6>Diện mạo hoàn hảo cho phái mạnh - Phong cách không thể bỏ qua</h6>
+                    </div>
                     @foreach ($banner as $item)
-                    <div class="home-images">
-                        <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="">
-                    </div>                
+                        <div class="home-images">
+                            <img class="img-fluid" src="{{Storage::url($item->hinh_anh)}}" alt="Lỗi">
+                        </div>                
                     @endforeach
+                    <div class="marquee">
+                        <div class="marquee__item">
+                            <h4 class="animation-text">Namad</h4>
+                        </div>
+                        <div class="marquee__item">
+                            <h4 class="animation-text">Namad</h4>
+                        </div>
+                        <div class="marquee__item">
+                            <h4 class="animation-text">Namad</h4>
+                        </div>
+                        <div class="marquee__item">
+                            <h4 class="animation-text">Namad</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
