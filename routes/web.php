@@ -193,7 +193,7 @@ Route::prefix('/auth-admin')->group(function(){
 
 
 // admin
-Route::middleware('adminAuth:admin')->prefix('/admin')->group(function () {
+Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->group(function () {
     Route::get('index', [HomeAdminController::class, 'homeAdmin'])->name('admin.index');
     Route::get('thong-ke-tai-khoan', [HomeAdminController::class, 'thongKeTaiKhoan'])->name('admin.thong-ke-tai-khoan');
     Route::get('thong-ke-don-hang', [HomeAdminController::class, 'thongKeDonHang'])->name('admin.thong-ke-don-hang');
