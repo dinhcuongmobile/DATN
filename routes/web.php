@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Client\HomeController;
@@ -12,8 +13,8 @@ use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
-use App\Http\Controllers\Admin\DanhGia\DanhGiaController;
 
+use App\Http\Controllers\Admin\DanhGia\DanhGiaController;
 use App\Http\Controllers\Admin\ThongKe\ThongKeController;
 use App\Http\Controllers\Client\DonHang\DonHangController;
 use App\Http\Controllers\Client\GioHang\GioHangController;
@@ -62,6 +63,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/404', [HomeController::class, 'error404'])->name('404');
 
     Route::prefix('home')->group(function(){
+        Route::get('/chat/{user_id}', [HomeController::class, 'fetchMessages']);
         Route::get('quick-view', [HomeController::class, 'quickView']);
         Route::get('search', [HomeController::class, 'search']);
     });
@@ -443,6 +445,8 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
         Route::get('/khoi-phuc-danh-gia/{id}', [DanhGiaController::class, 'khoiPhucDanhGia'])->name('danh-gia.khoi-phuc');
         Route::post('/khoi-phuc-nhieu-danh-gia', [DanhGiaController::class, 'khoiPhucNhieuDanhGia'])->name('danh-gia.khoi-phuc-nhieu');
     });
+
+    Route::get('/chat/{receiver_id}', [HomeAdminController::class, 'fetchMessages']);
 });
 
 // dia chỉ

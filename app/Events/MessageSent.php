@@ -24,18 +24,8 @@ class MessageSent implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        // Phát tin nhắn đến channel của người nhận
+        // Phát sóng tin nhắn cho kênh của người dùng bình thường
         return new PrivateChannel('chat.' . $this->message->receiver_id);
-    }
-
-    public function broadcastWith()
-    {
-        return [
-            'message' => $this->message->message,
-            'sender' => $this->message->sender->name,
-            'sender_role' => $this->message->sender_role,
-            'created_at' => $this->message->created_at,
-        ];
     }
 }
 

@@ -8,6 +8,7 @@ use App\Models\KichCo;
 use App\Models\MauSac;
 use App\Models\TinTuc;
 use App\Models\DanhMuc;
+use App\Models\Message;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Algolia\AlgoliaSearch\Algolia;
@@ -29,7 +30,7 @@ class HomeController extends Controller
 
         $san_pham_noi_bat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->orderBy('luot_xem', 'desc')->take(8)->get(); 
+        }])->orderBy('luot_xem', 'desc')->take(8)->get();
 
         $san_pham_moi_nhat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
@@ -55,6 +56,18 @@ class HomeController extends Controller
         return view('client.home', $this->views);
     }
 
+    public function fetchMessages($userId)
+    {
+        // Lấy tin nhắn giữa người dùng hiện tại và receiver_id
+        $messages = Message::with('sender')->where('user_id', $userId)
+                ->orWhere('receiver_id', $userId)->get();
+
+        // Trả về tin nhắn dưới dạng JSON
+        return response()->json([
+            'messages' => $messages
+        ]);
+    }
+
     public function quickView(Request $request)
     {
         $san_pham = SanPham::with('bienThes', 'danhGias')->find($request->input('san_pham_id'));
@@ -70,16 +83,11 @@ class HomeController extends Controller
     {
         $searchText = $request->input('search_text');
         $results = SanPham::search($searchText)->get();
+
         // Lấy danh sách sản phẩm có liên kết với bảng 'danhGias' để tính số sao trung bình
         $results = SanPham::with('danhGias')
         ->where('ten_san_pham', 'LIKE', '%' . $searchText . '%') // Tìm kiếm theo tên sản phẩm
-        ->get()
-        ->map(function ($san_pham) {
-            $san_pham->avg_rating = $san_pham->danhGias->avg('so_sao') ?? 0; // Tính trung bình số sao
-            return $san_pham;
-        })
-        ->sortByDesc('avg_rating') // Sắp xếp sản phẩm theo số sao giảm dần
-        ->values(); // Reset lại chỉ số mảng
+        ->get(); // Reset lại chỉ số mảng
         // Trả về kết quả dưới dạng JSON để sử dụng AJAX
         if ($request->ajax()) {
             return response()->json([

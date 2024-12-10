@@ -82,4 +82,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(TinTuc::class, 'nguoi_dang');
     }
+
+    public function messageSender()
+    {
+        return $this->hasMany(Message::class, 'user_id');
+    }
+
+    public function messageReceiver()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
 }

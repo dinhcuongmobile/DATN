@@ -441,7 +441,7 @@
 
         @if (Auth::user()->vai_tro_id == 3) {{-- khach hang --}}
             {{-- Chát trực tiếp --}}
-            <div class="chat-button" id="chatButton" onclick="toggleChat()">
+            <div class="chat-button" id="chatButton" onclick="toggleChat({{Auth::id()}})">
                 <span class="chat-icon">💬</span>
             </div>
 
@@ -457,7 +457,7 @@
 
                 <div class="chat-input">
                     <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
-                    <button onclick="sendMessage()">Gửi</button>
+                    <button onclick="sendMessage()" data-userid="{{Auth::id()}}">Gửi</button>
                 </div>
             </div>
             @vite(['resources/js/app.js'])
@@ -469,7 +469,7 @@
                         const chatMessages = document.getElementById('chatMessages');
                         const adminMessage = document.createElement('div');
                         adminMessage.classList.add('message', 'admin');
-                        adminMessage.innerText = e.message + ` (${e.created_at})`;
+                        adminMessage.innerText = e.message.message;
                         chatMessages.appendChild(adminMessage);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     });

@@ -27,7 +27,19 @@ function chatLS(){
         });
     }
 }
-function toggleChat() {
+
+function closeChat() {
+    const chatContainer = document.getElementById('chatContainer');
+    const chatButton = document.getElementById('chatButton');
+
+    chatContainer.classList.remove('show'); // Xóa lớp 'show' để ẩn đi
+    setTimeout(() => {
+        chatContainer.style.display = 'none'; // Ẩn cửa sổ sau khi ẩn hiệu ứng
+        chatButton.style.display = 'flex'; // Hiện lại nút chat
+    }, 300); // Thời gian trễ phù hợp với hiệu ứng
+}
+
+function toggleChat(idHienTai) {
     const chatContainer = document.getElementById('chatContainer');
     const chatButton = document.getElementById('chatButton');
 
@@ -45,17 +57,36 @@ function toggleChat() {
             chatButton.style.display = 'flex'; // Hiện lại nút chat
         }, 300); // Thời gian trễ phù hợp với hiệu ứng
     }
+
+    fetchMessages(idHienTai);
 }
+function fetchMessages(idHienTai) {
+    // Gửi request AJAX để lấy các tin nhắn giữa người dùng hiện tại và receiverId
+    fetch(`/home/chat/${idHienTai}`)
+        .then(response => response.json())
+        .then(data => {
+            // Xử lý dữ liệu tin nhắn
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = ''; // Xóa các tin nhắn cũ
 
-function closeChat() {
-    const chatContainer = document.getElementById('chatContainer');
-    const chatButton = document.getElementById('chatButton');
+            data.messages.forEach(message => {
+                const userMessage = document.createElement('div');
 
-    chatContainer.classList.remove('show'); // Xóa lớp 'show' để ẩn đi
-    setTimeout(() => {
-        chatContainer.style.display = 'none'; // Ẩn cửa sổ sau khi ẩn hiệu ứng
-        chatButton.style.display = 'flex'; // Hiện lại nút chat
-    }, 300); // Thời gian trễ phù hợp với hiệu ứng
+                if (message.sender_role === "nhanVien" || message.sender_role === "quanTriVien") {
+
+                    userMessage.classList.add('message', 'admin');
+                    userMessage.innerText = message.message;
+
+                } else {
+
+                    userMessage.classList.add('message', 'user');
+                    userMessage.innerText = message.message;
+
+                }
+
+                chatMessages.appendChild(userMessage);
+            });
+        });
 }
 
 
@@ -64,6 +95,7 @@ function sendMessage() {
     const messageInput = document.getElementById('messageInput');
     const chatMessages = document.getElementById('chatMessages');
     const messageText = messageInput.value;
+    const userId = document.querySelector('#chatContainer .chat-input button').getAttribute('data-userid');
     const receiverId = 1; // ID admin hoặc người nhận
 
     if (messageText.trim() !== "") {
@@ -75,7 +107,8 @@ function sendMessage() {
             },
             body: JSON.stringify({
                 receiver_id: receiverId,
-                message: messageText
+                message: messageText,
+                user_id: userId
             })
         }).then(response => response.json()).then(data => {
             const userMessage = document.createElement('div');
@@ -87,3 +120,4 @@ function sendMessage() {
         });
     }
 }
+

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
     <title>Admin</title>
@@ -62,7 +63,7 @@
             </div>
 
             <!-- quan ly tai khoan -->
-            @if (Auth::user()->vai_tro_id == 1)
+            @if (Auth::guard('admin')->user()->vai_tro_id == 1)
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
@@ -293,11 +294,13 @@
                             </div>
                         </div>
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" id="messagesDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                @if ($latestMessages->count() > 0)
+                                    <span class="badge badge-danger badge-counter">{{ $latestMessages->count() }}</span>
+                                @endif
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -305,57 +308,61 @@
                                 <h6 class="dropdown-header">
                                     Tin nhắn
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#"
-                                   onclick="openChat('Emily Fowler', 'Hi there! I am wondering if you can help me with a problem I have been having.')">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
-                                        <div class="status-indicator bg-success"></div>
+
+                                @foreach ($latestMessages as $message)
+                                    <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
+                                       onclick="openChat('{{ $message->sender->ho_va_ten }}', '{{ $message->user_id }}','{{Auth::guard('admin')->user()->id}}')">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">{{ Str::limit($message->message, 30) }}</div>
+                                            <div class="small text-gray-500">{{ $message->sender->ho_va_ten }} · {{ $message->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+
+                                @if ($latestMessages->isEmpty())
+                                    <div class="text-center p-3">
+                                        <span class="text-gray-500">Không có tin nhắn mới</span>
                                     </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me...</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#"
-                                   onclick="openChat('Jae Chun', 'I have the photos that you ordered last month, how would you like them sent to you?')">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_2.svg') }}" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered...</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#"
-                                   onclick="openChat('Morgan Alvarez', 'Last month’s report looks great, I am very happy with the progress so far.')">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_3.svg') }}" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month’s report looks great...</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
+                                @endif
                             </div>
                         </li>
 
                         <!-- Khu vực chat -->
-                        <div id="chatBox">
+                        <div id="chatBox" style="display: none;">
                             <button type="button" class="btn btn-danger btn-sm" id="closeChatBtn">X</button>
                             <h6 id="chatUserName">Chat với:</h6>
-                            <div id="chatMessages" style="">
-                                <!-- Tin nhắn sẽ hiển thị ở đây -->
+                            <div id="chatMessages" style="max-height: 400px; overflow-y: auto;">
+                                <!-- Tin nhắn sẽ được load qua JavaScript -->
                             </div>
-                            <input type="text" class="form-control" placeholder="Nhập tin nhắn..." onkeypress="sendMessage(event)">
+                            <div class="form-chat">
+                                <input type="text" class="form-control" placeholder="Nhập tin nhắn..." id="messageInput">
+                                <button class="btn btn-info" data-userid="{{Auth::guard('admin')->user()->id}}">Gửi</button>
+                            </div>
+
                         </div>
+                        @vite(['resources/js/app.js'])
+                        <script src="{{ asset('admin/js/chat.js') }}"></script>
+                        <script type="module">
+                            window.Echo.private('chat.{{ Auth::guard("admin")->user()->id }}')
+                                .listen('MessageSent', (e) => {
+                                    const chatMessages = document.getElementById('chatMessages');
+                                    let messageDiv = document.createElement('div');
+                                    messageDiv.classList.add('chat-message');
+                                    messageDiv.innerHTML = `<div class="other-message"><strong>:</strong> ${e.message.message}</div>`;
+                                    chatMessages.appendChild(messageDiv);
+                                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                                });
+                        </script>
 
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->ho_va_ten }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->ho_va_ten }}</span>
                                 <i class="fas fa-fw fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -439,7 +446,6 @@
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('assets/js/ajax.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
-    <script src="{{ asset('admin/js/chat.js') }}"></script>
     @yield('scripts')
 
     <!-- Page level plugins -->
@@ -450,7 +456,6 @@
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
     {{-- Css Modal Thông Báo --}}
-
 </body>
 
 </html>

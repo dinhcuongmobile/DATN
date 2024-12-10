@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\DonHang;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
@@ -23,14 +25,35 @@ class HomeAdminController extends Controller
         $tongDonHang = $this->thongKeDonHang();
         $tongLuotXem = $this->thongKeLuotXem();
 
+        $latestMessages = Message::with('sender')
+        ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
+        ->groupBy('user_id')
+        ->latest('created_at') // Sắp xếp theo thời gian mới nhất
+        ->get();
+
         return view('admin.homeAdmin', [
             'thongKeSanPhams' => $thongKeSanPhams,
             'thongKeDanhMucs' => $thongKeDanhMucs,
             'tongTaiKhoan' => $tongTaiKhoan,
             'tongDonHang' => $tongDonHang,
             'tongLuotXem' => $tongLuotXem,
+            'latestMessages' => $latestMessages
         ]);
     }
+
+    public function fetchMessages($receiver_id)
+    {
+        // Lấy tin nhắn giữa người dùng hiện tại và receiver_id
+        $messages = Message::with('sender')->where('user_id', $receiver_id)
+                ->orWhere('receiver_id', $receiver_id)->get();
+
+        // Trả về tin nhắn dưới dạng JSON
+        return response()->json([
+
+            'messages' => $messages
+        ]);
+    }
+
 
     public function thongKeSanPham() {
         // Thống kê sản phẩm theo tổng doanh thu

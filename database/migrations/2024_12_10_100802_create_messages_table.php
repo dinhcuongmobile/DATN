@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Người gửi
             $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade'); // Người nhận
             $table->text('message'); // Nội dung tin nhắn
-            $table->enum('sender_role', ['customer', 'admin', 'staff']); // Vai trò người gửi
+            $table->enum('sender_role', ['thanhVien', 'nhanVien', 'quanTriVien']); // Vai trò người gửi
             $table->timestamps();
         });
     }

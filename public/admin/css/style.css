@@ -215,3 +215,26 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
+#chatBox .chat-message {
+    margin-bottom: 10px;
+}
+
+#chatBox .my-message {
+    text-align: right;
+    background-color: #f1f1f1;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#chatBox .other-message {
+    text-align: left;
+    background-color: #e1f7d5;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+#chatBox .form-chat{
+    display: flex;
+    justify-content: space-between;
+}
