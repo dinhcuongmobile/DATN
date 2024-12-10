@@ -455,12 +455,25 @@
                     <!-- Tin nhắn sẽ được load ở đây -->
                 </div>
 
-                <div class="chat-input" data-id="{{ Auth::user()->id }}">
+                <div class="chat-input">
                     <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
                     <button onclick="sendMessage()">Gửi</button>
                 </div>
             </div>
+            @vite(['resources/js/app.js'])
             <script src="{{ asset('assets/js/chat.js') }}"></script>
+            <script type="module">
+                // Lắng nghe tin nhắn realtime
+                window.Echo.private('chat.{{ auth()->id() }}')
+                    .listen('MessageSent', (e) => {
+                        const chatMessages = document.getElementById('chatMessages');
+                        const adminMessage = document.createElement('div');
+                        adminMessage.classList.add('message', 'admin');
+                        adminMessage.innerText = e.message + ` (${e.created_at})`;
+                        chatMessages.appendChild(adminMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
+            </script>
             {{-- END Chát trực tiếp --}}
         @endif
 

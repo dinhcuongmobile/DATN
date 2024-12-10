@@ -22,9 +22,9 @@ class MessageSent implements ShouldBroadcast
         $this->message = $message;
     }
 
-    // Tạo channel riêng cho user và admin
     public function broadcastOn()
     {
+        // Phát tin nhắn đến channel của người nhận
         return new PrivateChannel('chat.' . $this->message->receiver_id);
     }
 
@@ -32,9 +32,10 @@ class MessageSent implements ShouldBroadcast
     {
         return [
             'message' => $this->message->message,
-            'sender_id' => $this->message->user_id,
-            'receiver_id' => $this->message->receiver_id,
-            'created_at' => $this->message->created_at->format('H:i d/m/Y'),
+            'sender' => $this->message->sender->name,
+            'sender_role' => $this->message->sender_role,
+            'created_at' => $this->message->created_at,
         ];
     }
 }
+

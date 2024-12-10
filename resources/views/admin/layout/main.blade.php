@@ -303,7 +303,7 @@
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="messagesDropdown" style="width: 350px; max-height: 600px; overflow-y: auto;">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Tin nhắn
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#"
                                    onclick="openChat('Emily Fowler', 'Hi there! I am wondering if you can help me with a problem I have been having.')">
@@ -342,10 +342,10 @@
                         </li>
 
                         <!-- Khu vực chat -->
-                        <div id="chatBox" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 350px; height: 400px; background-color: #fff; border: 1px solid #ddd; z-index: 1000; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 10px;">
+                        <div id="chatBox">
                             <button type="button" class="btn btn-danger btn-sm" id="closeChatBtn">X</button>
-                            <h6 id="chatUserName" style="font-weight: bold; margin-bottom: 10px;">Chat với:</h6>
-                            <div id="chatMessages" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px; background: #fff; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                            <h6 id="chatUserName">Chat với:</h6>
+                            <div id="chatMessages" style="">
                                 <!-- Tin nhắn sẽ hiển thị ở đây -->
                             </div>
                             <input type="text" class="form-control" placeholder="Nhập tin nhắn..." onkeypress="sendMessage(event)">
@@ -439,6 +439,7 @@
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
     <script src="{{ asset('assets/js/ajax.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
+    <script src="{{ asset('admin/js/chat.js') }}"></script>
     @yield('scripts')
 
     <!-- Page level plugins -->
@@ -448,39 +449,6 @@
 
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
-    <script>
-        function openChat(userName, message) {
-            // Đảm bảo danh sách tin nhắn không bị ẩn
-            document.getElementById("messagesDropdown").classList.add("show");
-
-            // Cập nhật tên người chat và tin nhắn đầu tiên
-            document.getElementById("chatUserName").innerText = "Chat với: " + userName;
-            document.getElementById("chatMessages").innerHTML = `<div class="message">${message}</div>`;
-
-            // Hiển thị khu vực chat
-            document.getElementById("chatBox").style.display = 'block';
-
-            // Lưu tên người đang chat
-            currentChatUser = userName;
-        }
-
-        // Đóng màn hình chat khi bấm nút "X"
-        document.getElementById("closeChatBtn").addEventListener("click", function() {
-            document.getElementById("chatBox").style.display = 'none';
-        });
-
-        // Gửi tin nhắn (nếu cần)
-        function sendMessage(event) {
-            if (event.key === 'Enter') {
-                const message = event.target.value;
-                if (message.trim() !== "") {
-                    const chatMessages = document.getElementById("chatMessages");
-                    chatMessages.innerHTML += `<div class="message">${message}</div>`;
-                    event.target.value = "";
-                }
-            }
-        }
-    </script>
     {{-- Css Modal Thông Báo --}}
 
 </body>

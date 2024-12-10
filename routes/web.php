@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Client\YeuThich\YeuThichController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Auth\FaceBookController;
@@ -9,10 +9,10 @@ use App\Http\Controllers\Admin\HomeAdminController;
 use App\Http\Controllers\Client\Coin\CoinController;
 use App\Http\Controllers\Location\LocationController;
 use App\Http\Controllers\Admin\Banner\BannerController;
-use App\Http\Controllers\Admin\DanhGia\DanhGiaController;
 use App\Http\Controllers\Auth\Admin\AuthAdminController;
 use App\Http\Controllers\Client\LienHe\LienHeController;
 use App\Http\Controllers\Client\TinTuc\TinTucController;
+use App\Http\Controllers\Admin\DanhGia\DanhGiaController;
 
 use App\Http\Controllers\Admin\ThongKe\ThongKeController;
 use App\Http\Controllers\Client\DonHang\DonHangController;
@@ -21,6 +21,7 @@ use App\Http\Controllers\Client\SanPham\SanPhamController;
 use App\Http\Controllers\Admin\LienHe\LienHeAdminController;
 use App\Http\Controllers\Admin\TinTuc\TinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\TaiKhoanController;
+use App\Http\Controllers\Client\YeuThich\YeuThichController;
 use App\Http\Controllers\Admin\DanhMuc\DanhMucAdminController;
 use App\Http\Controllers\Admin\DonHang\DonHangAdminController;
 use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
@@ -54,7 +55,7 @@ Route::controller(FaceBookController::class)->group(function(){
     Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
     Route::get('auth/facebook/callback', 'handleFacebookCallback');
 });
-
+Route::post('/send-message', [ChatController::class, 'sendMessage']);
 // Client
 Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('trang-chu.home');

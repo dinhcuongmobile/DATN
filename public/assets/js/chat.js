@@ -58,29 +58,32 @@ function closeChat() {
     }, 300); // Thời gian trễ phù hợp với hiệu ứng
 }
 
+
+// Hàm gửi tin nhắn
 function sendMessage() {
     const messageInput = document.getElementById('messageInput');
     const chatMessages = document.getElementById('chatMessages');
     const messageText = messageInput.value;
+    const receiverId = 1; // ID admin hoặc người nhận
 
     if (messageText.trim() !== "") {
-        // Tạo phần tử tin nhắn của người dùng
-        const userMessage = document.createElement('div');
-        userMessage.classList.add('message', 'user');
-        userMessage.innerText = messageText;
-        chatMessages.appendChild(userMessage);
-
-        // Tạo phần tử tin nhắn của admin (mô phỏng)
-        setTimeout(() => {
-            const adminMessage = document.createElement('div');
-            adminMessage.classList.add('message', 'admin');
-            adminMessage.innerText = "Cảm ơn bạn đã nhắn tin! Chúng tôi sẽ trả lời sớm.";
-            chatMessages.appendChild(adminMessage);
+        fetch("/send-message", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                receiver_id: receiverId,
+                message: messageText
+            })
+        }).then(response => response.json()).then(data => {
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('message', 'user');
+            userMessage.innerText = messageText;
+            chatMessages.appendChild(userMessage);
+            messageInput.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-
-        // Cuộn xuống dưới cùng và xóa ô nhập
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        messageInput.value = '';
+        });
     }
 }

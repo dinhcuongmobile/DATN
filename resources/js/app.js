@@ -3,3 +3,4 @@ import './bootstrap';
 window.$ = $;
 window.jQuery = $;
 
+

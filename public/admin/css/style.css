@@ -185,3 +185,33 @@
 .modal-header .close:hover {
     color: #333;
 }
+
+
+#chatBox{
+    display: none;
+    position: fixed;
+    bottom: 20px; right:
+    20px; width: 350px;
+    height: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+#chatBox #chatUserName{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#chatBox #chatMessages{
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
