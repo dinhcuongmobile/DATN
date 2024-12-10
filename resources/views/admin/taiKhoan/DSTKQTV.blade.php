@@ -50,38 +50,40 @@
                                 <th>Email</th>
                                 <th>Số điện thoại</th>
                                 <th>Vai trò</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if (count($DSTKQTV)>0)
                                 @foreach ($DSTKQTV as $item)
                                     <tr>
-                                        <td class="align-middle text-center"><input type="checkbox" name="select[]"
+                                        <td class="align-middle text-center col-1"><input type="checkbox" name="select[]"
                                                 value="{{ $item->id }}"></td>
-                                        <td class="align-middle text-center">{{ $item->id }}</td>
+                                        <td class="align-middle col-1">{{ $item->id }}</td>
                                         <td class="col-2 align-middle">{{ $item->ho_va_ten }}</td>
                                         <td class="col-1 align-middle">{{ $item->email }}</td>
                                         <td class="col-1 align-middle">{{ $item->so_dien_thoai }}</td>
                                         <td class="col-1 align-middle"> {{ $item->vaiTro->vai_tro }}</td>
-                                        <td class="col-2 align-middle text-center"><a
-                                                href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"
-                                                class="btn btn-warning btn-icon-split btn-sm">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="text">Sửa</span>
-
-                                            </a> |
-                                            <a onclick="return confirm('Bạn chắc chắn muốn khóa tài khoản này?')"
-                                                href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}"
-                                                class="btn btn-danger btn-icon-split btn-sm">
-                                                
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-lock"></i>
-                                            </span>
-                                            <span class="text">Khóa</span>
-                                            </a>
+                                        <td class="col-2 align-middle text-center">
+                                            @if ($item->id != 1) {{-- id 1 là tài khoản mặc định --}}
+                                                <a href="{{ route('tai-khoan.sua-tai-khoan', $item->id) }}"
+                                                    class="btn btn-warning btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-edit"></i>
+                                                    </span>
+                                                    <span class="text">Sửa</span>
+                                                </a> |
+                                                <a onclick="return confirm('Bạn chắc chắn muốn khóa tài khoản này?')"
+                                                    href="{{ route('tai-khoan.khoa-tai-khoan', $item->id) }}"
+                                                    class="btn btn-danger btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-lock"></i>
+                                                    </span>
+                                                    <span class="text">Khóa</span>
+                                                </a>
+                                            @else
+                                                <span>Tài khoản này không thể chỉnh sửa</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
