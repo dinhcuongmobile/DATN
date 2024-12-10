@@ -10,6 +10,7 @@
     <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="google-site-verification" content="UyRAaausx7o6Lm-UGCU7ydWTZOdU1ugGbgYzSeMFV-Y" />
     <link rel="icon" href="{{ asset('assets/images/icon_web.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/icon_web.png') }}" type="image/x-icon">
     <title>Namad Store </title><!-- icon_web icon-->
@@ -35,6 +36,15 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @yield('css')
     <link rel="stylesheet" href="{{ asset('assets/css/coin.css') }}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-D79M039PCJ');
+    </script>
 </head>
 
 <body class="layout-4 skeleton_body">
@@ -717,15 +727,6 @@
     <script src="{{ asset('assets/js/tich-xu.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('js')
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-D79M039PCJ');
-    </script>
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 
