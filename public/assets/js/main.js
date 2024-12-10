@@ -606,6 +606,7 @@ $(document).ready(function() {
                 success: function(response) {
                     // Xử lý kết quả trả về (JSON)
                     let results = response.results;
+
                     let html = '';
                     if (results.length === 0) {
                         // Nếu không có kết quả, hiển thị thông báo
@@ -614,11 +615,24 @@ $(document).ready(function() {
 
                         // HTML kết quả tìm kiếm
                         results.forEach(function(san_pham) {
-                            let avgRating = san_pham.avg_rating || 0; // Số sao trung bình (mặc định 0)
-                            let fullStars = Math.floor(avgRating); // Số sao đầy
+                            let danhGias = san_pham.danh_gias || []; // Lấy danh sách đánh giá
+                            let totalRating = 0; // Tổng số sao
+                            let totalReviews = danhGias.length; // Số lượng đánh giá
+
+                            // Tính tổng số sao từ danh_gias
+                            danhGias.forEach(function(danhGia) {
+                                totalRating += danhGia.so_sao;
+                            });
+
+                            // Tính trung bình số sao (nếu có đánh giá)
+                            let avgRating = totalReviews > 0 ? (totalRating / totalReviews) : 0;
+
+                            // Làm tròn và chuẩn bị dữ liệu cho giao diện
+                            let fullStars = Math.floor(avgRating); // Sao đầy
                             let halfStar = (avgRating - fullStars) >= 0.5 ? 1 : 0; // Sao nửa
                             let emptyStars = 5 - (fullStars + halfStar); // Sao rỗng
 
+                            // Tạo HTML cho rating
                             let ratingHtml = '<ul class="rating">';
                             for (let i = 0; i < fullStars; i++) {
                                 ratingHtml += '<li><i class="fa-solid fa-star"></i></li>';

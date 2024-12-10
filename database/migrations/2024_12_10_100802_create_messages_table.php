@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Người gửi
-            $table->foreignId('receiver_id')->nullable()->constrained('users')->onDelete('cascade'); // Người nhận (admin)
+            $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade'); // Người nhận
             $table->text('message'); // Nội dung tin nhắn
-            $table->boolean('is_admin')->default(false); // Xác định admin hay user gửi
+            $table->enum('sender_role', ['thanhVien', 'nhanVien', 'quanTriVien']); // Vai trò người gửi
             $table->timestamps();
         });
     }

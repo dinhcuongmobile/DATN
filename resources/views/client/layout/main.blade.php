@@ -10,6 +10,7 @@
     <meta name="keywords" content="Namad">
     <meta name="author" content="pixelstrap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="google-site-verification" content="UyRAaausx7o6Lm-UGCU7ydWTZOdU1ugGbgYzSeMFV-Y" />
     <link rel="icon" href="{{ asset('assets/images/icon_web.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('assets/images/icon_web.png') }}" type="image/x-icon">
     <title>Namad Store </title><!-- icon_web icon-->
@@ -35,6 +36,15 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @yield('css')
     <link rel="stylesheet" href="{{ asset('assets/css/coin.css') }}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-D79M039PCJ');
+    </script>
 </head>
 
 <body class="layout-4 skeleton_body">
@@ -441,7 +451,7 @@
 
         @if (Auth::user()->vai_tro_id == 3) {{-- khach hang --}}
             {{-- Chát trực tiếp --}}
-            <div class="chat-button" id="chatButton" onclick="toggleChat()">
+            <div class="chat-button" id="chatButton" onclick="toggleChat({{Auth::id()}})">
                 <span class="chat-icon">💬</span>
             </div>
 
@@ -455,12 +465,25 @@
                     <!-- Tin nhắn sẽ được load ở đây -->
                 </div>
 
-                <div class="chat-input" data-id="{{ Auth::user()->id }}">
+                <div class="chat-input">
                     <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
-                    <button onclick="sendMessage()">Gửi</button>
+                    <button onclick="sendMessage()" data-userid="{{Auth::id()}}">Gửi</button>
                 </div>
             </div>
+            @vite(['resources/js/app.js'])
             <script src="{{ asset('assets/js/chat.js') }}"></script>
+            <script type="module">
+                // Lắng nghe tin nhắn realtime
+                window.Echo.private('chat.{{ auth()->id() }}')
+                    .listen('MessageSent', (e) => {
+                        const chatMessages = document.getElementById('chatMessages');
+                        const adminMessage = document.createElement('div');
+                        adminMessage.classList.add('message', 'admin');
+                        adminMessage.innerText = e.message.message;
+                        chatMessages.appendChild(adminMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
+            </script>
             {{-- END Chát trực tiếp --}}
         @endif
 
@@ -717,15 +740,6 @@
     <script src="{{ asset('assets/js/tich-xu.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     @yield('js')
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D79M039PCJ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-D79M039PCJ');
-    </script>
 </body>
 <!-- Mirrored from themes.pixelstrap.net/katie/template/layout-4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 14:56:02 GMT -->
 
