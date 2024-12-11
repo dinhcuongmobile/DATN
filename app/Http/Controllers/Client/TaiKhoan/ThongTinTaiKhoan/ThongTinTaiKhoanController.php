@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan;
 
+use Carbon\Carbon;
 use App\Models\Coin;
 use App\Models\User;
 use App\Models\DiaChi;
@@ -62,7 +63,7 @@ class ThongTinTaiKhoanController extends Controller
 
             $this->views['yeu_thichs'] = $yeu_thichs;
         }
-        
+
         //
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),
@@ -80,19 +81,27 @@ class ThongTinTaiKhoanController extends Controller
 
         $chi_tiet_don_hangs = [];
         $chua_danh_gia = [];
+        $checkChiTietDanhGia = [];
+        $ngayQuyDinh = Carbon::now()->subDays(3);
 
         foreach ($don_hangs as $items) {
             foreach ($items as $item) {
-                $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $item->id)->get();
+                $chi_tiet_don_hangs[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')
+                                                ->where('don_hang_id', $item->id)
+                                                ->get();
 
                 // Kiểm tra xem đơn hàng đã được đánh giá hết chưa
-                $danh_gia = DanhGia::whereIn('san_pham_id', $chi_tiet_don_hangs[$item->id]
+                $checkChiTietDanhGia[$item->id] = ChiTietDonHang::with('sanPham', 'bienThe')
+                                                ->where('don_hang_id', $item->id)
+                                                ->where('updated_at', '>=', $ngayQuyDinh)
+                                                ->get();
+                $danh_gia = DanhGia::whereIn('san_pham_id', $checkChiTietDanhGia[$item->id]
                                     ->pluck('san_pham_id'))->where('user_id', Auth::id())->where('don_hang_id',$item->id)
                                     ->withTrashed()
                                     ->get();
 
                 // Nếu có ít nhất một sản phẩm chưa được đánh giá, thì lưu lại
-                $chua_danh_gia[$item->id] = $chi_tiet_don_hangs[$item->id]->count() > $danh_gia->count();
+                $chua_danh_gia[$item->id] = $checkChiTietDanhGia[$item->id]->count() > $danh_gia->count();
             }
         }
         $this->views['don_hangs'] = $don_hangs;

@@ -215,9 +215,7 @@ function chiTietDonMua(){
                                         <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
                                         <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
                                     `;
-                                    actionButtons.innerHTML=
-                                    `<button class="btn btn-outline-danger huyDonHangChiTiet">Hủy đơn hàng</button>
-                                    <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
+                                    actionButtons.innerHTML=`<a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
                                 break;
                                 case 2:
                                     document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =

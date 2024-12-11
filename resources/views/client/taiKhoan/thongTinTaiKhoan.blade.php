@@ -398,7 +398,7 @@
                                                                             <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
                                                                         </p>
                                                                         <div class="btnDonMua">
-                                                                            @if ($itemDonHang->trang_thai == 0 || $itemDonHang->trang_thai == 1)
+                                                                            @if ($itemDonHang->trang_thai == 0)
                                                                                 <button style="margin-right:15px;"
                                                                                     class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>
                                                                             @elseif ($itemDonHang->trang_thai == 2)
@@ -555,9 +555,6 @@
                                                                             <span>{{ number_format($itemDonHang->tong_thanh_toan, 0, ',', '.') }}đ</span>
                                                                         </p>
                                                                         <div class="btnDonMua">
-                                                                            <button style="margin-right:15px;"
-                                                                                class="btn btn-outline-danger huyDonHang">Hủy
-                                                                                đơn hàng</button>
                                                                             <a href="{{ route('lien-he.lien-he') }}"
                                                                                 class="btn btn-outline-secondary">Liên hệ
                                                                                 Shop</a>

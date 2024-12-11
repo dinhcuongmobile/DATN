@@ -1,10 +1,24 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll("ul#product nav-link").forEach((el)=>{
+        el.classList.remove('active');
+        el.setAttribute('aria-selected','false');
+        el.setAttribute('tabindex',"-1");
+    });
+    document.querySelector("#Reviews-tab").classList.add('active');
+    document.querySelector("#Reviews-tab").setAttribute('aria-selected','true')
+    document.querySelector("#Reviews-tab").removeAttribute('tabindex');
+    document.querySelectorAll("#ProductContent .tab-pane").forEach((el)=>{
+        el.classList.remove('active','show');
+    });
+    document.querySelector("#Reviews-tab-pane").classList.add('active','show');
     soLuongMua();
     selectSize();
     selectColor();
     themGioHang();
     muaNgay();
+    btnDanhGiaSoSao();
+    paginationEvent();
 });
 let selectedSize = null;
 let selectedColor = null;
@@ -269,4 +283,253 @@ function muaNgay(){
         });
     }
 }
+
+function btnDanhGiaSoSao(){
+    const btnSelect = document.querySelectorAll('#Reviews-tab-pane .box-button button');
+    if(btnSelect){
+        btnSelect.forEach((el)=>{
+            el.addEventListener('click',function(){
+
+                //xoa class active cua cac button
+                btnSelect.forEach((item)=>{
+                    item.classList.remove("active");
+                })
+                // them active cho button hien tai
+                el.classList.add('active');
+
+                //lay dieu kien
+                let dataFilter = el.getAttribute('data-filter');
+                let sanPhamID = document.querySelector('#Reviews-tab-pane').getAttribute('data-spid');
+                $.ajax({
+                    url: '/san-pham/loc-danh-gia',
+                    method: 'GET',
+                    data: {
+                        san_pham_id: sanPhamID,
+                        dataFilter: dataFilter
+                    },
+                    success: function (response) {
+                        if (response.success) {
+
+                            const ReviewsTabPane = document.querySelector('#Reviews-tab-pane');
+                            const row = ReviewsTabPane.querySelector('.row');
+                            const reviewContent = row.querySelector('.review-content');
+                            const paginationWrap = ReviewsTabPane.querySelector('.pagination-wrap');
+                            reviewContent.innerHTML="";
+
+                            if(response.danh_gias.data.length > 0){
+                                response.danh_gias.data.forEach((item)=>{
+
+                                    let ratingStars = '';
+                                    for (let i = 1; i <= 5; i++) {
+                                        if (i <= item.so_sao) {
+                                            ratingStars += '<li><i class="fa-solid fa-star"></i></li>';
+                                        } else {
+                                            ratingStars += '<li><i class="fa-regular fa-star"></i></li>';
+                                        }
+                                    }
+
+                                    let traLoiDanhGia = "";
+                                    item.tra_loi_danh_gia.forEach((TL)=>{
+                                        traLoiDanhGia +=
+                                                `<div class="phan-hoi mt-3">
+                                                    <p>Phản hồi từ shop</p>
+                                                    <div class="noi-dung-phan-hoi mt-2">
+                                                        <span>${TL.noi_dung}</span>
+                                                    </div>
+                                                </div>`;
+                                    });
+
+                                    //ngay binh luan format
+                                    let date = new Date(item.created_at);
+                                    date.setHours(date.getHours() + 7);
+                                    let formattedDate = date.toISOString().replace('T', ' ').slice(0, 19);
+
+                                    // format email neu khong co ho ten
+                                    let email = item.user.email;
+                                    let [localPart, domain] = email.split("@");
+                                    let maskedLocal = localPart.slice(0, 4) + "******" + localPart.slice(-2);
+                                    let maskedEmail = maskedLocal + "@" + domain;
+
+                                    // Tạo HTML cho từng đánh giá
+                                    let reviewHTML = `
+                                        <div class="review-item">
+                                            <div class="avt-user">
+                                                <img src="/assets/images/user/12.jpg" alt="">
+                                            </div>
+                                            <div class="thong-tin">
+                                                <span class="user-name">${item.user.ho_va_ten || maskedEmail}</span>
+                                                <ul class="rating mt-1">${ratingStars}</ul>
+                                                <div class="date">${formattedDate}</div>
+                                                <div class="noi-dung">
+                                                    <p class="noi-dung-text">${item.noi_dung ?? ''}</p>
+                                                    <div class="noi-dung-img">
+                                                        ${item.anh_danh_gias.map(anh => `<img src="/storage/${anh.hinh_anh}" alt="Hình ảnh đánh giá">`).join('')}
+                                                    </div>
+                                                </div>
+                                                ${item.tra_loi_danh_gia.length>0 ? traLoiDanhGia: ''}
+                                            </div>
+                                        </div>
+                                    `;
+                                    reviewContent.insertAdjacentHTML('beforeend', reviewHTML);
+                                });
+
+                                paginationWrap.style.display ="";
+                                updatePagination(response.danh_gias);
+                                paginationEvent();
+                            } else {
+                                reviewContent.innerHTML = "";
+                                paginationWrap.style.display = "none";
+                            }
+
+
+                        }
+                    },
+                    error: function () {
+                        alert('Có lỗi xảy ra!');
+                    }
+                });
+
+
+            });
+        });
+    }
+}
+
+function updatePagination(paginationData) {
+    const paginationWrap = document.querySelector('#Reviews-tab-pane .pagination-wrap');
+    const pagination = paginationWrap.querySelector('.pagination');
+    pagination.innerHTML = '';  // Xóa các phần tử phân trang hiện tại
+
+    // Nút "Trước"
+    const prevButton = document.createElement('li');
+    prevButton.classList.add(paginationData.current_page === 1 ? 'disabled' : '');
+    prevButton.innerHTML = `<a class="prev" href="javascript:void(0);" data-page="${paginationData.current_page - 1}">
+                                <i class="iconsax" data-icon="chevron-left"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.0013 20.6695C14.8113 20.6695 14.6213 20.5995 14.4713 20.4495L7.95125 13.9295C6.89125 12.8695 6.89125 11.1295 7.95125 10.0695L14.4713 3.54953C14.7613 3.25953 15.2413 3.25953 15.5312 3.54953C15.8212 3.83953 15.8212 4.31953 15.5312 4.60953L9.01125 11.1295C8.53125 11.6095 8.53125 12.3895 9.01125 12.8695L15.5312 19.3895C15.8212 19.6795 15.8212 20.1595 15.5312 20.4495C15.3813 20.5895 15.1912 20.6695 15.0013 20.6695Z" fill="#292D32"></path>
+                                    </svg>
+                                </i>
+                            </a>`;
+    pagination.appendChild(prevButton);
+
+    // Số trang
+    for (let i = 1; i <= paginationData.last_page; i++) {
+        const pageButton = document.createElement('li');
+        pageButton.innerHTML = `<a class="${i === paginationData.current_page ? 'active' : ''}" href="javascript:void(0);" data-page="${i}">${i}</a>`;
+        pagination.appendChild(pageButton);
+    }
+
+    // Nút "Tiếp"
+    const nextButton = document.createElement('li');
+    let disabled = paginationData.current_page === paginationData.last_page ? 'disabled' : '';
+    nextButton.setAttribute('class',disabled);
+    nextButton.innerHTML = `<a class="next" href="javascript:void(0);" data-page="${paginationData.current_page + 1}">
+                                <i class="iconsax" data-icon="chevron-right"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8.91156 20.6695C8.72156 20.6695 8.53156 20.5995 8.38156 20.4495C8.09156 20.1595 8.09156 19.6795 8.38156 19.3895L14.9016 12.8695C15.3816 12.3895 15.3816 11.6095 14.9016 11.1295L8.38156 4.60953C8.09156 4.31953 8.09156 3.83953 8.38156 3.54953C8.67156 3.25953 9.15156 3.25953 9.44156 3.54953L15.9616 10.0695C16.4716 10.5795 16.7616 11.2695 16.7616 11.9995C16.7616 12.7295 16.4816 13.4195 15.9616 13.9295L9.44156 20.4495C9.29156 20.5895 9.10156 20.6695 8.91156 20.6695Z" fill="#292D32"></path>
+                                    </svg>
+                                </i>
+                            </a>`;
+    pagination.appendChild(nextButton);
+}
+
+function loadDanhGiaPage(page) {
+    let sanPhamID = document.querySelector('#Reviews-tab-pane').getAttribute('data-spid');
+
+    $.ajax({
+        url: `/san-pham/loc-danh-gia?page=${page}`,
+        method: 'GET',
+        data: {
+            san_pham_id: sanPhamID,
+            dataFilter: document.querySelector('#Reviews-tab-pane .box-button button.active').getAttribute('data-filter') || 'all'
+        },
+        success: function (response) {
+            if (response.success) {
+                const ReviewsTabPane = document.querySelector('#Reviews-tab-pane');
+                const row = ReviewsTabPane.querySelector('.row');
+                const reviewContent = row.querySelector('.review-content');
+                const paginationWrap = ReviewsTabPane.querySelector('.pagination-wrap');
+
+                // Xóa nội dung cũ và cập nhật nội dung mới
+                reviewContent.innerHTML = "";
+                response.danh_gias.data.forEach((item)=>{
+
+                    let ratingStars = '';
+                    for (let i = 1; i <= 5; i++) {
+                        if (i <= item.so_sao) {
+                            ratingStars += '<li><i class="fa-solid fa-star"></i></li>';
+                        } else {
+                            ratingStars += '<li><i class="fa-regular fa-star"></i></li>';
+                        }
+                    }
+
+                    let traLoiDanhGia = "";
+                    item.tra_loi_danh_gia.forEach((TL)=>{
+                        traLoiDanhGia +=
+                                `<div class="phan-hoi mt-3">
+                                    <p>Phản hồi từ shop</p>
+                                    <div class="noi-dung-phan-hoi mt-2">
+                                        <span>${TL.noi_dung}</span>
+                                    </div>
+                                </div>`;
+                    });
+
+                    //ngay binh luan format
+                    let date = new Date(item.created_at);
+                    date.setHours(date.getHours() + 7);
+                    let formattedDate = date.toISOString().replace('T', ' ').slice(0, 19);
+
+                    // format email neu khong co ho ten
+                    let email = item.user.email;
+                    let [localPart, domain] = email.split("@");
+                    let maskedLocal = localPart.slice(0, 4) + "******" + localPart.slice(-2);
+                    let maskedEmail = maskedLocal + "@" + domain;
+
+                    // Tạo HTML cho từng đánh giá
+                    let reviewHTML = `
+                        <div class="review-item">
+                            <div class="avt-user">
+                                <img src="/assets/images/user/12.jpg" alt="">
+                            </div>
+                            <div class="thong-tin">
+                                <span class="user-name">${item.user.ho_va_ten || maskedEmail}</span>
+                                <ul class="rating mt-1">${ratingStars}</ul>
+                                <div class="date">${formattedDate}</div>
+                                <div class="noi-dung">
+                                    <p class="noi-dung-text">${item.noi_dung ?? ''}</p>
+                                    <div class="noi-dung-img">
+                                        ${item.anh_danh_gias.map(anh => `<img src="/storage/${anh.hinh_anh}" alt="Hình ảnh đánh giá">`).join('')}
+                                    </div>
+                                </div>
+                                ${item.tra_loi_danh_gia.length>0 ? traLoiDanhGia: ''}
+                            </div>
+                        </div>
+                    `;
+                    reviewContent.insertAdjacentHTML('beforeend', reviewHTML);
+                });
+
+                // Cập nhật phân trang mới
+                paginationWrap.innerHTML = response.pagination;
+                paginationEvent();
+            }
+        },
+        error: function () {
+            alert('Có lỗi xảy ra!');
+        }
+    });
+}
+
+function paginationEvent(){
+    const a = document.querySelectorAll('#Reviews-tab-pane .pagination-wrap a');
+    if(a){
+        a.forEach((el)=>{
+            el.addEventListener('click', function (event) {
+                event.preventDefault();
+                let page = el.getAttribute('data-page');
+                if (page) {
+                    loadDanhGiaPage(page);
+                }
+            });
+        })
+    }
+}
+
 

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Client\DonHang;
 
+use Carbon\Carbon;
+use App\Models\Coin;
 use App\Models\DiaChi;
+use App\Models\BienThe;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\GioHang;
 use App\Models\PhiShip;
 use App\Models\SanPham;
 use App\Models\AnhDanhGia;
@@ -12,9 +16,6 @@ use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\BienThe;
-use App\Models\Coin;
-use App\Models\GioHang;
 use Illuminate\Support\Facades\Auth;
 
 class DonHangController extends Controller
@@ -37,7 +38,12 @@ class DonHangController extends Controller
                                 ->first();
 
             // Kiểm tra sản phẩm đã được đánh giá chưa
-            $san_pham_ids = $chi_tiet_don_hangs->pluck('san_pham_id');
+            $ngayQuyDinh = Carbon::now()->subDays(3);
+            $checkChiTietDanhGia = ChiTietDonHang::with('sanPham', 'bienThe')
+                                                ->where('don_hang_id', $donHangId)
+                                                ->where('updated_at', '>=', $ngayQuyDinh)
+                                                ->get();
+            $san_pham_ids = $checkChiTietDanhGia->pluck('san_pham_id');
             $danh_gias = DanhGia::whereIn('san_pham_id', $san_pham_ids)
                                 ->where('user_id', Auth::id())
                                 ->where('don_hang_id',$donHangId)
@@ -210,6 +216,12 @@ class DonHangController extends Controller
                     'thanh_toan' => 1,
                     'ngay_cap_nhat'=>now()
                 ]);
+
+                $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham')->where('don_hang_id',$don_hang_id)->get();
+                foreach ($chi_tiet_don_hangs as $item) {
+                    $san_pham = SanPham::find($item->san_pham_id);
+                    $san_pham->update(['da_ban'=> $san_pham->da_ban + $item->so_luong]);
+                }
             }
             DB::commit();
             return response()->json([

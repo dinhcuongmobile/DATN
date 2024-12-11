@@ -474,7 +474,7 @@
             <script src="{{ asset('assets/js/chat.js') }}"></script>
             <script type="module">
                 // Lắng nghe tin nhắn realtime
-                window.Echo.private('chat.{{ auth()->id() }}')
+                window.Echo.private('chat.{{ Auth::id() }}')
                     .listen('MessageSent', (e) => {
 
                         const chatMessages = document.getElementById('chatMessages');

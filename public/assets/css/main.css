@@ -1551,6 +1551,8 @@ td.giaTienLS span{
 }
 #Reviews-tab-pane .review-content .thong-tin .noi-dung .noi-dung-img img{
     width: 80px;
+    height: 80px;
+    border: 1px solid #0000002b;
     margin-right: 10px;
 }
 
