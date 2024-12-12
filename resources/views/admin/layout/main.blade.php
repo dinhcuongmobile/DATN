@@ -305,7 +305,7 @@
                                 </div>
                             </div>
                         </div>
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <li class="nav-item dropdown no-arrow mx-1 liMessagesDropdown">
                             <a class="nav-link dropdown-toggle" id="messagesDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
@@ -315,7 +315,7 @@
                                 @endif
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in divMessagesDropdown"
                                  aria-labelledby="messagesDropdown" style="width: 350px; max-height: 600px; overflow-y: auto;">
                                 <h6 class="dropdown-header">
                                     Tin nhắn
@@ -323,7 +323,7 @@
 
                                 @foreach ($latestMessages as $message)
                                     <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
-                                       onclick="openChat('{{ $message->sender->ho_va_ten }}', '{{ $message->user_id }}','{{Auth::guard('admin')->user()->id}}')">
+                                       onclick="openChat('{{ $message->sender->ho_va_ten }}', '{{ $message->user_id }}')">
                                         <div class="dropdown-list-image mr-3">
                                             <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
                                             <div class="status-indicator bg-success"></div>
@@ -344,30 +344,24 @@
                         </li>
 
                         <!-- Khu vực chat -->
-                        <div id="chatBox" style="display: none;">
-                            <button type="button" class="btn btn-danger btn-sm" id="closeChatBtn">X</button>
-                            <h6 id="chatUserName">Chat với:</h6>
-                            <div id="chatMessages" style="max-height: 400px; overflow-y: auto;">
-                                <!-- Tin nhắn sẽ được load qua JavaScript -->
+                        <div class="chat-popup" id="chatPopup" data-userid="{{Auth::guard('admin')->user()->id}}">
+                            <div class="chat-header">
+                                <span class="chat-title">Chat với: Nguyễn Đình Cường</span>
+                                <span class="close" onclick="closeChat()">&times;</span>
                             </div>
-                            <div class="form-chat">
-                                <input type="text" class="form-control" placeholder="Nhập tin nhắn..." id="messageInput">
-                                <button class="btn btn-info" data-userid="{{Auth::guard('admin')->user()->id}}">Gửi</button>
+                            <div class="chat-body">
                             </div>
-
+                            <div class="chat-footer">
+                                <input type="text" placeholder="Nhập tin nhắn..." id="chatInput" />
+                                <button>Gửi</button>
+                            </div>
                         </div>
                         @vite(['resources/js/app.js'])
                         <script src="{{ asset('admin/js/chat.js') }}"></script>
                         <script type="module">
                             window.Echo.private('chat.{{ Auth::guard("admin")->user()->id }}')
                                 .listen('MessageSent', (e) => {
-
-                                    const chatMessages = document.getElementById('chatMessages');
-                                    let messageDiv = document.createElement('div');
-                                    messageDiv.classList.add('chat-message');
-                                    messageDiv.innerHTML = `<div class="other-message"><strong>:</strong> ${e.message.message}</div>`;
-                                    chatMessages.appendChild(messageDiv);
-                                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                                    
                                 });
                         </script>
 

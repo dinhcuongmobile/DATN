@@ -105,7 +105,7 @@ class DanhGiaController extends Controller
 
         TraLoiDanhGia::create([
             'danh_gia_id' => $request->danh_gia_id,
-            'user_id' => Auth::id(),
+            'user_id' => Auth::guard('admin')->user()->id,
             'noi_dung' => $request->noi_dung,
         ]);
 

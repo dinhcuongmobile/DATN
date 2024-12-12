@@ -16,7 +16,7 @@
             <div class="card-header py-3">
                 <form method="GET" action="{{ route('thong-ke.doanh-thu-nhan-vien') }}">
                     <div class="float-left d-flex">
-                        @if (Auth::user()->vai_tro_id !== 2)
+                        @if (Auth::guard('admin')->user()->vai_tro_id !== 2)
                             <div class="input-group col-md-3">
                                 <p>Tìm kiếm
                                     <input type="text" class="form-control" name="kyw"

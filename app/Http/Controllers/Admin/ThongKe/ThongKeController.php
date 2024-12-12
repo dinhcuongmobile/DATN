@@ -215,26 +215,26 @@ class ThongKeController extends Controller
 
         $donHang = DonHang::with('nguoiBan')->select(
                 'nguoi_ban',
-                DB::raw('COUNT(*) as so_don_hang'),  
+                DB::raw('COUNT(*) as so_don_hang'),
                 DB::raw('SUM(tong_thanh_toan) as tong_doanh_thu'),
-                DB::raw('ngay_ban')  
-            )  
-            ->whereNotNull('nguoi_ban')  
+                DB::raw('ngay_ban')
+            )
+            ->whereNotNull('nguoi_ban')
             ->where('trang_thai', 3) // Trạng thái đơn hàng hoàn thành
-            ->when(Auth::user()->vai_tro_id == 2, function ($query) {
-                return $query->where('nguoi_ban', '=', Auth::user()->id);
+            ->when(Auth::guard('admin')->user()->vai_tro_id == 2, function ($query) {
+                return $query->where('nguoi_ban', '=', Auth::guard('admin')->user()->id);
             })
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('ngay_ban', [$startDate, $endDate]);
             })
             ->groupBy('ngay_ban');
-            
+
 
         // Tính tổng số đơn hàng và doanh thu của từng nhân viên
         $tongDonHang = DonHang::whereNotNull('nguoi_ban')
             ->where('trang_thai', 3)
-            ->when(Auth::user()->vai_tro_id == 2, function ($query) {
-                return $query->where('nguoi_ban', '=', Auth::user()->id);
+            ->when(Auth::guard('admin')->user()->vai_tro_id == 2, function ($query) {
+                return $query->where('nguoi_ban', '=', Auth::guard('admin')->user()->id);
             })
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('ngay_ban', [$startDate, $endDate]);

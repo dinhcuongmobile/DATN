@@ -3,68 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Thông Báo Chuyển Khoản Thành Công</title>
     <style>
-body {
+        body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f8ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
 }
 
-.container {
-    text-align: center;
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 400px; /* Giới hạn chiều cao */
+    border: 1px solid #ccc;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden; /* Ẩn các phần nội dung dài */
 }
 
-.success-message i {
-    color: #4CAF50;
-    font-size: 50px;
+.chat-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
 }
 
-.success-message h2 {
-    color: #333;
-    margin-top: 10px;
+.chat-title {
+    font-weight: bold;
 }
 
-.success-message p {
-    color: #666;
-    margin: 15px 0;
+.close {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
 }
 
-.btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
+.chat-body {
+    max-height: 275px; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Cuộn nếu nội dung dài */
+    padding: 10px;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sender {
+    background-color: #e1ffc7; /* Màu cho tin nhắn gửi */
+    text-align: left;
+}
+
+.receiver {
+    background-color: #f0f0f0; /* Màu cho tin nhắn nhận */
+    text-align: right;
+}
+
+.sender-name, .receiver-name {
+    font-weight: bold;
+    margin-right: 5px;
+    color: gray;
+}
+
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex; /* Để các phần tử sắp xếp tốt */
+    background-color: #f9f9f9; /* Màu nền footer */
+}
+
+.chat-footer input {
+    flex: 1; /* Mở rộng input đến chiều rộng còn lại */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.chat-footer button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff; /* Màu nút gửi */
     color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-.btn:hover {
-    background-color: #45a049;
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff; /* Màu nút chat */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
     </style>
+    <title>Chat Popup</title>
 </head>
 <body>
-    <div class="container">
-        <div class="success-message">
-            <i class="fas fa-check-circle"></i>
-            <h2>Chuyển Khoản Thành Công!</h2>
-            <p>Khoản tiền của bạn đã được chuyển đi thành công. Cảm ơn bạn đã sử dụng dịch vụ.</p>
-            <a href="#" class="btn">Quay lại Trang Chủ</a>
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <span class="chat-title">Chat với: Nguyễn Đình Cường</span>
+            <span class="close" onclick="closeChat()">&times;</span>
+        </div>
+        <div class="chat-body">
+            <div class="message sender">
+                <span class="sender-name">7:</span> oi
+            </div>
+            <div class="message receiver">
+                <span class="receiver-name">Me:</span> okkk
+            </div>
+            <div class="message sender">
+                <span class="sender-name">7:</span> hhh
+            </div>
+            <div class="message receiver">
+                <span class="receiver-name">Me:</span> uk
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" placeholder="Nhập tin nhắn..." id="chatInput" />
+            <button onclick="sendMessage()">Gửi</button>
         </div>
     </div>
+    <button class="chat-button" onclick="toggleChat()">💬</button>
+
+    <script>
+        function toggleChat() {
+    const chatPopup = document.getElementById('chatPopup');
+    chatPopup.style.display = chatPopup.style.display === 'block' ? 'none' : 'block';
+}
+
+function closeChat() {
+    document.getElementById('chatPopup').style.display = 'none';
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const messageBody = document.querySelector('.chat-body');
+    if (input.value.trim()) {
+        const newMessage = document.createElement('div');
+        newMessage.className = 'message receiver';
+        newMessage.innerHTML = `<span class="receiver-name">Me:</span> ${input.value}`;
+        messageBody.appendChild(newMessage);
+        input.value = '';
+
+        // Cuộn tự động xuống cuối tin nhắn
+        messageBody.scrollTop = messageBody.scrollHeight;
+    }
+}
+    </script>
 </body>
 </html>

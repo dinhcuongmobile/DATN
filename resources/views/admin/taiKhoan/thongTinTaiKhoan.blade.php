@@ -22,9 +22,8 @@
                     <div class="card-body text-center">
                         <img class="img-profile rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}"
                             alt="User Avatar" width="100">
-                        <h5 class="mt-3">{{ Auth::user()->ho_va_ten }}</h5>
-                        <h6 class="mt-3">Mã tài khoản: {{ Auth::user()->id }}</h6>
-                        <p>{{ Auth::user()->vaiTro->vai_tro }}</p>
+                        <h5 class="mt-3">{{ Auth::guard('admin')->user()->ho_va_ten }}</h5>
+                        <p>{{ Auth::guard('admin')->user()->vaiTro->vai_tro }}</p>
                     </div>
                 </div>
             </div>
@@ -35,8 +34,8 @@
                         <h6 class="m-0 font-weight-bold text-primary">Thông tin cá nhân</h6>
                     </div>
                     <div class="card-body">
-                        <h5><strong>Họ và tên:</strong> {{ Auth::user()->ho_va_ten }}</h5>
-                        <h5><strong>Số điện thoại:</strong> {{ Auth::user()->so_dien_thoai }}</h5>
+                        <h5><strong>Họ và tên:</strong> {{ Auth::guard('admin')->user()->ho_va_ten }}</h5>
+                        <h5><strong>Số điện thoại:</strong> {{ Auth::guard('admin')->user()->so_dien_thoai }}</h5>
                         <h5>
                             <strong>Địa chỉ:</strong>
                             @if ($dia_chi)
@@ -58,7 +57,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Thông tin đăng nhập</h6>
                     </div>
                     <div class="card-body">
-                        <h5><strong>Email:</strong> {{ Auth::user()->email }}</h5>
+                        <h5><strong>Email:</strong> {{ Auth::guard('admin')->user()->email }}</h5>
                         <h5><strong>Mật khẩu:</strong> ●●●●●●</h5>
                         <p class="btn btn-primary mt-3" data-toggle="modal" data-target="#changePassword">Đổi
                             mật khẩu</p>
@@ -88,7 +87,7 @@
                             <div class="form-group col-6">
                                 <label for="ho_va_ten">Họ và tên</label>
                                 <input type="text" class="form-control" id="ho_va_ten" name="ho_va_ten"
-                                    value="{{ Auth::user()->ho_va_ten }}" placeholder="Nhập họ và tên...">
+                                    value="{{ Auth::guard('admin')->user()->ho_va_ten }}" placeholder="Nhập họ và tên...">
                                 <p class="Err text-danger ho_va_ten-error">
                                     @error('ho_va_ten')
                                         {{ $message }}
@@ -98,7 +97,7 @@
                             <div class="form-group col-6">
                                 <label for="so_dien_thoai">Số điện thoại</label>
                                 <input type="text" class="form-control" id="so_dien_thoai" name="so_dien_thoai"
-                                    value="{{ Auth::user()->so_dien_thoai }}" placeholder="Nhập số điện thoại...">
+                                    value="{{ Auth::guard('admin')->user()->so_dien_thoai }}" placeholder="Nhập số điện thoại...">
                                 <p class="Err text-danger so_dien_thoai-error">
                                     @error('so_dien_thoai')
                                         {{ $message }}
