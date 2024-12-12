@@ -214,6 +214,18 @@
                     </div>
                 </div>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- quan ly doanh thu nhan vien -->
+            <li class="nav-item mb-3">
+                <a class="nav-link" href="{{ route('thong-ke.doanh-thu-nhan-vien') }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu nhân viên</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -388,7 +400,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2024</span>
+                        <span>Copyright &copy; Namad Store</span>
                     </div>
                 </div>
             </footer>

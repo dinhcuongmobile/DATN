@@ -31,7 +31,7 @@
                 <a href="{{route('don-hang.danh-sach-kiem-duyet')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Xác Nhận</button></a>
                 <a href="{{route('don-hang.danh-sach-cho-lay-hang')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button></a>
                 <a href="{{route('don-hang.danh-sach-dang-giao')}}"><button type="button" class="btn btn-secondary btn-sm" >Đang Giao</button></a>
-                <a href="{{route('don-hang.danh-sach-da-giao')}}"><button type="button" class="btn btn-secondary btn-sm" >Đa Giao</button></a>
+                <a href="{{route('don-hang.danh-sach-da-giao')}}"><button type="button" class="btn btn-secondary btn-sm" >Đã Giao</button></a>
                 <a href="{{route('don-hang.danh-sach-da-huy')}}"><button type="button" class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
             </div>
         </div>
@@ -53,7 +53,7 @@
                                 <td>{{ $item->ma_don_hang }}</td>
                                 <td>{{ $item->user->ho_va_ten }}</td>
                                 <td>{{ number_format($item->tong_thanh_toan, 0, ',', '.') }} VND</td>
-                                <td>{{ $item->ngay_tao }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('H:i d/m/Y') }}</td>
                                 <td>
                                     <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-info btn-sm">
                                         Xem Chi Tiết

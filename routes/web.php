@@ -208,6 +208,8 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
         Route::post('/load-30-ngay', [ThongKeController::class, 'load30Ngay'])->name('thong-ke.load-30-ngay');
         Route::post('/thong-ke-doanh-so', [ThongKeController::class, 'thongKeDoanhSo'])->name('thong-ke.thong-ke-doanh-so');
         Route::post('/thong-ke-doanh-so-by', [ThongKeController::class, 'thongKeDoanhSoBy'])->name('thong-ke.thong-ke-doanh-so-by');
+
+        Route::get('/doanh-thu-nhan-vien', [ThongKeController::class, 'doanhThuNhanVien'])->name('thong-ke.doanh-thu-nhan-vien');
     });
 
     //tai khoan

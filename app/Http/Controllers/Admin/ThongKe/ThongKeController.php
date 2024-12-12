@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
 {
@@ -185,5 +187,91 @@ class ThongKeController extends Controller
         ];
 
         echo $data = json_encode($response);
+    }
+
+    public function doanhThuNhanVien(Request $request)
+    {
+        $filterMonth = $request->input('filter_month', 'thangNay'); // Mặc định là tháng này
+
+        // Xác định thời gian lọc
+        $startDate = $request->input('tu_ngay'); // Ngày bắt đầu
+        $endDate = $request->input('den_ngay');   // Ngày kết thúc
+
+        if (!$startDate && !$endDate) {
+            if ($filterMonth === 'thangNay') {
+                // Lọc theo tháng này
+                $startDate = Carbon::now()->startOfMonth()->toDateString(); // Ngày đầu tiên của tháng này
+                $endDate = Carbon::now()->endOfMonth()->toDateString();    // Ngày cuối cùng của tháng này
+            } elseif ($filterMonth === 'thangTruoc') {
+                // Lọc theo tháng trước
+                $startDate = Carbon::now()->subMonth()->startOfMonth()->toDateString(); // Ngày đầu tiên của tháng trước
+                $endDate = Carbon::now()->subMonth()->endOfMonth()->toDateString();    // Ngày cuối cùng của tháng trước
+            } else {
+                // Lọc theo tháng trước
+                $startDate = Carbon::now()->subDays(365)->toDateString();
+                $endDate = Carbon::now()->toDateString();
+            }
+        }
+
+        $donHang = DonHang::with('nguoiBan')->select(
+                'nguoi_ban',
+                DB::raw('COUNT(*) as so_don_hang'),  
+                DB::raw('SUM(tong_thanh_toan) as tong_doanh_thu'),
+                DB::raw('ngay_ban')  
+            )  
+            ->whereNotNull('nguoi_ban')  
+            ->where('trang_thai', 3) // Trạng thái đơn hàng hoàn thành
+            ->when(Auth::user()->vai_tro_id == 2, function ($query) {
+                return $query->where('nguoi_ban', '=', Auth::user()->id);
+            })
+            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('ngay_ban', [$startDate, $endDate]);
+            })
+            ->groupBy('ngay_ban');
+            
+
+        // Tính tổng số đơn hàng và doanh thu của từng nhân viên
+        $tongDonHang = DonHang::whereNotNull('nguoi_ban')
+            ->where('trang_thai', 3)
+            ->when(Auth::user()->vai_tro_id == 2, function ($query) {
+                return $query->where('nguoi_ban', '=', Auth::user()->id);
+            })
+            ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+                $query->whereBetween('ngay_ban', [$startDate, $endDate]);
+            })
+            ->select(
+                'nguoi_ban',
+                DB::raw('COUNT(*) as tong_so_don_hang'),
+                DB::raw('SUM(tong_thanh_toan) as tong_doanh_thu')
+            )
+            ->groupBy('nguoi_ban')
+            ->with('nguoiBan');
+
+        // dd($donHang);
+        $keyword = $request->input('kyw');
+        if ($keyword) {
+            $donHang = $donHang->whereHas('nguoiBan', function ($loc) use ($keyword) {
+                $loc->where('ho_va_ten', 'LIKE', "%$keyword%")
+                    ->orWhere('id', 'LIKE', "%$keyword%");
+            })->orderBy('tong_doanh_thu', 'desc')
+            ->paginate(10);
+
+            $tongDonHang = $tongDonHang->whereHas('nguoiBan', function ($loc) use ($keyword) {
+                $loc->where('ho_va_ten', 'LIKE', "%$keyword%")
+                    ->orWhere('id', 'LIKE', "%$keyword%");
+            })->orderBy('tong_doanh_thu', 'desc')
+            ->paginate(10);
+        }else{
+            $donHang = $donHang->orderBy('tong_doanh_thu', 'desc')
+            ->paginate(10);
+
+            $tongDonHang = $tongDonHang->orderBy('tong_doanh_thu', 'desc')
+            ->paginate(10);
+        }
+
+        $this->views['doanhThuNhanVien'] = $donHang;
+        $this->views['tongDonHang'] = $tongDonHang;
+
+        return view('admin.thongKeNhanVien.doanhThuNhanVien', $this->views);
     }
 }

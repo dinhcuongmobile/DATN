@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\DiaChi;
 use App\Models\PhiShip;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class DonHangAdminController extends Controller
 {
@@ -162,6 +164,8 @@ class DonHangAdminController extends Controller
     public function duyetDonHang(int $id) {
         $donHang = DonHang::findOrFail($id);
         $donHang->trang_thai = 1; // 1 là trạng thái chờ lấy hàng
+        $donHang->nguoi_ban = Auth::user()->id;
+        $donHang->ngay_ban = Carbon::now();
         $donHang->save();
 
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
@@ -177,7 +181,11 @@ class DonHangAdminController extends Controller
      DB::beginTransaction();
       try {
         // Cập nhật trạng thái hàng loạt
-        DonHang::whereIn('id', $ids)->update(['trang_thai' => 1]); // 1: Chờ lấy hàng
+        DonHang::whereIn('id', $ids)->update([
+            'trang_thai' => 1, 
+            'nguoi_ban' => Auth::user()->id,
+            'ngay_ban' => Carbon::now()
+        ]); // 1: Chờ lấy hàng
 
         DB::commit();
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Các đơn hàng đã được duyệt thành công.');
