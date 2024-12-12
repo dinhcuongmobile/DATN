@@ -113,7 +113,7 @@
                                 <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
                             </td>
                             <td>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-info btn-sm"> 
                                     Xem Chi Tiết
                                   </a>
                             </td>
