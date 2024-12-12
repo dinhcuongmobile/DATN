@@ -1,6 +1,18 @@
 //chat Truc Tiep
 document.addEventListener('DOMContentLoaded',()=>{
     chatLS();
+
+    const chatContainer = document.querySelector('#chatContainer .chat-input button');
+    const userId = chatContainer.dataset.userid;
+    window.Echo.private(`chat.${userId}`)
+            .listen('MessageSent', (e) => {
+                const chatMessages = document.getElementById('chatMessages');
+                const adminMessage = document.createElement('div');
+                adminMessage.classList.add('message', 'admin');
+                adminMessage.innerText = e.message.message;
+                chatMessages.appendChild(adminMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
 });
 function chatLS(){
     const chatLS = document.querySelectorAll('.chatLS');

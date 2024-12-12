@@ -1,4 +1,13 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const chatPopup = document.getElementById('chatPopup');
+    const userId = chatPopup.dataset.userid;
 
+    // Lắng nghe sự kiện trên kênh Private
+    window.Echo.private(`chat.${userId}`)
+        .listen('MessageSent', (e) => {
+            console.log('Tin nhắn mới:', e);
+        });
+});
 // Đóng box chat
 function closeChat() {
     document.getElementById('chatPopup').style.display = 'none';
@@ -104,4 +113,5 @@ function sendMessage() {
         });
     }
 }
+
 

@@ -346,7 +346,7 @@
                         <!-- Khu vực chat -->
                         <div class="chat-popup" id="chatPopup" data-userid="{{Auth::guard('admin')->user()->id}}">
                             <div class="chat-header">
-                                <span class="chat-title">Chat với: Nguyễn Đình Cường</span>
+                                <span class="chat-title"></span>
                                 <span class="close" onclick="closeChat()">&times;</span>
                             </div>
                             <div class="chat-body">
@@ -358,13 +358,6 @@
                         </div>
                         @vite(['resources/js/app.js'])
                         <script src="{{ asset('admin/js/chat.js') }}"></script>
-                        <script type="module">
-                            window.Echo.private('chat.{{ Auth::guard("admin")->user()->id }}')
-                                .listen('MessageSent', (e) => {
-                                    
-                                });
-                        </script>
-
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

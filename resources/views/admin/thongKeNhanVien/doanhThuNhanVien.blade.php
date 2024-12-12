@@ -82,9 +82,6 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="phantrang">
-                        {{ $doanhThuNhanVien->links() }}
-                    </div>
                 </div>
                 <div class="table-responsive col-6">
                     <div class="mb-4">
@@ -115,7 +112,7 @@
                         </tbody>
                     </table>
                     <div class="phantrang">
-                        {{ $tongDonHang->links() }}
+                        {{ $doanhThuNhanVien->links() }}
                     </div>
                 </div>
             </div>

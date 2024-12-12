@@ -472,19 +472,6 @@
             </div>
             @vite(['resources/js/app.js'])
             <script src="{{ asset('assets/js/chat.js') }}"></script>
-            <script type="module">
-                // Lắng nghe tin nhắn realtime
-                window.Echo.private('chat.{{ Auth::id() }}')
-                    .listen('MessageSent', (e) => {
-
-                        const chatMessages = document.getElementById('chatMessages');
-                        const adminMessage = document.createElement('div');
-                        adminMessage.classList.add('message', 'admin');
-                        adminMessage.innerText = e.message.message;
-                        chatMessages.appendChild(adminMessage);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-                    });
-            </script>
             {{-- END Chát trực tiếp --}}
         @endif
 
