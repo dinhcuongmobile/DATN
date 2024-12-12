@@ -23,6 +23,7 @@
                         <img class="img-profile rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}"
                             alt="User Avatar" width="100">
                         <h5 class="mt-3">{{ Auth::user()->ho_va_ten }}</h5>
+                        <h6 class="mt-3">Mã tài khoản: {{ Auth::user()->id }}</h6>
                         <p>{{ Auth::user()->vaiTro->vai_tro }}</p>
                     </div>
                 </div>

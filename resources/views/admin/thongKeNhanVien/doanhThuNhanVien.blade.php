@@ -96,7 +96,7 @@
                                 <th>Mã nhân viên</th>
                                 <th>Tên nhân viên</th>
                                 <th>Tổng đơn hàng đã bán</th>
-                                <th>Doanh thu</th>
+                                <th>Tổng doanh thu</th>
                             </tr>
                         </thead>
                         <tbody>
