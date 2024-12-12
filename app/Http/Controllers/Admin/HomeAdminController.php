@@ -18,6 +18,9 @@ class HomeAdminController extends Controller
     }
 
     public function homeAdmin() {
+        if(Auth::guard('admin')->check()){
+            dd(Auth::user());
+        }
         // Gọi các phương thức thống kê
         $thongKeSanPhams = $this->thongKeSanPham();
         $thongKeDanhMucs = $this->thongKeDanhMuc();
