@@ -25,19 +25,12 @@ class HomeAdminController extends Controller
         $tongDonHang = $this->thongKeDonHang();
         $tongLuotXem = $this->thongKeLuotXem();
 
-        $latestMessages = Message::with('sender')
-        ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
-        ->groupBy('user_id')
-        ->latest('created_at') // Sắp xếp theo thời gian mới nhất
-        ->get();
-
         return view('admin.homeAdmin', [
             'thongKeSanPhams' => $thongKeSanPhams,
             'thongKeDanhMucs' => $thongKeDanhMucs,
             'tongTaiKhoan' => $tongTaiKhoan,
             'tongDonHang' => $tongDonHang,
-            'tongLuotXem' => $tongLuotXem,
-            'latestMessages' => $latestMessages
+            'tongLuotXem' => $tongLuotXem
         ]);
     }
 

@@ -476,6 +476,7 @@
                 // Lắng nghe tin nhắn realtime
                 window.Echo.private('chat.{{ auth()->id() }}')
                     .listen('MessageSent', (e) => {
+
                         const chatMessages = document.getElementById('chatMessages');
                         const adminMessage = document.createElement('div');
                         adminMessage.classList.add('message', 'admin');

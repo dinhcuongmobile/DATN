@@ -349,6 +349,7 @@
                         <script type="module">
                             window.Echo.private('chat.{{ Auth::guard("admin")->user()->id }}')
                                 .listen('MessageSent', (e) => {
+
                                     const chatMessages = document.getElementById('chatMessages');
                                     let messageDiv = document.createElement('div');
                                     messageDiv.classList.add('chat-message');

@@ -8,6 +8,7 @@ use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
+use App\Models\Message;
 use App\Models\SanPham;
 use App\Models\YeuThich;
 use App\Models\DanhMucTinTuc;
@@ -54,10 +55,10 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with(compact(
-                'gio_hangs', 
+                'gio_hangs',
                 'count_gio_hang',
                 'count_yeu_thich',
-                'danh_mucs', 
+                'danh_mucs',
                 'userId',
                 'danhMucTinTuc',
                 'sanPhamThich'
@@ -65,10 +66,18 @@ class AppServiceProvider extends ServiceProvider
         });
         //admin
         View::composer('admin.layout.main', function ($view) {
+            $latestMessages = Message::with('sender')
+            ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
+            ->groupBy('user_id')
+            ->latest('created_at') // Sắp xếp theo thời gian mới nhất
+            ->get();
             // Lấy dữ liệu từ model
             $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
-            $view->with('sub', $sub);
+            $view->with(compact(
+                'sub',
+                'latestMessages',
+            ));
         });
     }
 }
