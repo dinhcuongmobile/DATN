@@ -57,7 +57,7 @@ class TinTucAdminController extends Controller
         }
         $dataInsert = [
             'danh_muc_id' => $danh_muc,
-            'nguoi_dang' => Auth::id(),
+            'nguoi_dang' => Auth::guard('admin')->user()->id,
             'hinh_anh' => $fileName,
             'tieu_de' => $request->tieu_de,
             'noi_dung' => $request->noi_dung,
