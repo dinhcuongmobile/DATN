@@ -244,7 +244,7 @@
     border-radius: 20px;
     font-size: 14px;
     line-height: 1.5;
-    background-color: #e8efff;
+    background-color: #e4e6eb;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     word-wrap: break-word; /* Ngắt chữ khi dài */
     white-space: pre-wrap; /* Giữ nguyên dấu cách và ngắt dòng khi cần */
@@ -257,7 +257,7 @@
 }
 
 .chat-message.other-message .bubble {
-    background-color: #d5d9f7;
+    background-color: #e1f7d5;
     color: black;
     border-bottom-right-radius: 20px;
 }
