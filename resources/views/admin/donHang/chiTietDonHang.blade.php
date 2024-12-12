@@ -7,7 +7,7 @@
       <div class="card-body">
           <!-- Thông tin đơn hàng -->
           <div class="row mb-3">
-              <div class="col-lg-6">
+              <div class="col-lg-12">
                 <h5 class="mb-3"><strong>Thông Tin Khách Hàng</strong></h5>
                 <p><strong>Tên Khách Hàng:</strong> {{ $diaChiNhanHang->ho_va_ten_nhan }}</p>
                   <p><strong>Mã Đơn Hàng:</strong> <span style="color: red">{{ $donHang->ma_don_hang }}</span></p>
@@ -33,6 +33,15 @@
                   <p><strong>Tổng Sản Phẩm:</strong> {{ $donHang->chiTietDonHangs->count() }} Sản Phẩm</p>
                   @if ($donHang->ghi_chu)
                     <p><strong>Ghi Chú : </strong>{{$donHang->ghi_chu}} </p>
+                  @endif
+                  @if ($donHang->nguoiBan !== null)
+                    <hr>
+                        <p>
+                            <strong>Tài khoản duyệt đơn: </strong> 
+                            <span style="color: red">{{ $donHang->nguoiBan->ho_va_ten }}</span> - Mã nhân viên: 
+                            <span style="color: red">{{ $donHang->nguoiBan->id }}</span>
+                        </p>
+                    <hr>
                   @endif
               </div>
           </div>

@@ -109,7 +109,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tài khoản phản hồi</th>
-                                            <td>{{ $traLoiDanhGia->user->ho_va_ten }}</td>
+                                            <td>{{ $traLoiDanhGia->user->ho_va_ten }} - Mã nhân viên: {{ $traLoiDanhGia->user->id }}</td>
                                         </tr>
                                     @endif
 
