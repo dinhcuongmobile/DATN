@@ -204,7 +204,7 @@
                         </div>
 
                         {{-- Đánh giá --}}
-                        <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel"
+                        <div class="tab-pane fade" id="Reviews-tab-pane" role="tabpanel" data-spid="{{$san_pham->id}}"
                             aria-labelledby="Reviews-tab" tabindex="0">
                             <div class="row gy-4">
                                 @if ($danh_gias->count()>0)
@@ -293,7 +293,27 @@
                             </div>
                             <div class="pagination-wrap">
                                 <ul class="pagination">
-                                    {{$danh_gias->links()}}
+                                    {{-- Nút "Trước" --}}
+                                    <li class="{{ $danh_gias->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="prev" href="javascript:void(0);" data-page="{{ $danh_gias->currentPage() - 1 }}">
+                                            <i class="iconsax" data-icon="chevron-left"></i>
+                                        </a>
+                                    </li>
+
+                                    {{-- Hiển thị số trang --}}
+                                    @for ($i = 1; $i <= $danh_gias->lastPage(); $i++)
+                                        <li>
+                                            <a class="{{ $i == $danh_gias->currentPage() ? 'active' : '' }}"
+                                            href="javascript:void(0);" data-page="{{ $i }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+
+                                    {{-- Nút "Tiếp" --}}
+                                    <li class="{{ $danh_gias->hasMorePages() ? '' : 'disabled' }}">
+                                        <a class="next" href="javascript:void(0);" data-page="{{ $danh_gias->currentPage() + 1 }}">
+                                            <i class="iconsax" data-icon="chevron-right"></i>
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

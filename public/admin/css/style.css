@@ -187,54 +187,111 @@
 }
 
 
-#chatBox{
+#chatBox {
     display: none;
     position: fixed;
-    bottom: 20px; right:
-    20px; width: 350px;
-    height: 400px;
+    bottom: 110px;
+    right: 27px;
+    width: 350px;
+    height: 450px;
     background-color: #fff;
-    border: 1px solid #ddd;
-    z-index: 1000;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
-#chatBox #chatUserName{
+#chatBox #chatUserName {
     font-weight: bold;
     margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
 }
 
-#chatBox #chatMessages{
-    max-height: 300px;
+#chatBox #chatMessages {
+    flex-grow: 1;
     overflow-y: auto;
     margin-bottom: 10px;
-    background: #fff;
     padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    max-height: 380px; /* Giới hạn chiều cao của khu vực tin nhắn */
 }
 
-#chatBox .chat-message {
-    margin-bottom: 10px;
+.chat-message {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-#chatBox .my-message {
+.chat-message.my-message {
+    align-self: flex-end;
     text-align: right;
-    background-color: #f1f1f1;
-    padding: 8px;
-    border-radius: 8px;
 }
 
-#chatBox .other-message {
+.chat-message.other-message {
+    align-self: flex-start;
     text-align: left;
-    background-color: #e1f7d5;
-    padding: 8px;
-    border-radius: 8px;
 }
 
-#chatBox .form-chat{
+.chat-message .bubble {
+    display: inline-block;
+    max-width: 75%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: #e8efff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word; /* Ngắt chữ khi dài */
+    white-space: pre-wrap; /* Giữ nguyên dấu cách và ngắt dòng khi cần */
+}
+
+.chat-message.my-message .bubble {
+    background-color: #007bff;
+    color: white;
+    border-bottom-left-radius: 20px;
+}
+
+.chat-message.other-message .bubble {
+    background-color: #d5d9f7;
+    color: black;
+    border-bottom-right-radius: 20px;
+}
+
+#chatBox .form-chat {
     display: flex;
     justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+#chatBox .form-chat input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+}
+
+#chatBox .form-chat button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#chatBox .form-chat button:hover {
+    background-color: #0056b3;
 }

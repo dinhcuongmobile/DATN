@@ -37,18 +37,21 @@ class SanPhamController extends Controller
         $luot_xem = $san_pham->luot_xem+1;
         $san_pham->update(['luot_xem'=>$luot_xem]);
 
-        $danh_gias= DanhGia::with('user','sanPham','anhDanhGias')->where('san_pham_id',$san_pham->id)->orderBy('id','desc')->paginate(6);
+        $danh_gias= DanhGia::with('user','sanPham','anhDanhGias')
+                            ->where('san_pham_id',$san_pham->id)
+                            ->where('trang_thai','!=',2)
+                            ->orderBy('id','desc')->paginate(6);
         // Số lượng đánh giá theo sao
-        $saoCounts = DanhGia::where('san_pham_id', $id)
+        $saoCounts = DanhGia::where('san_pham_id', $id)->where('trang_thai','!=',2)
             ->select('so_sao', DB::raw('count(*) as total'))
             ->groupBy('so_sao')
             ->pluck('total', 'so_sao');
         // Số lượng đánh giá có bình luận
         $coBinhLuan = DanhGia::where('san_pham_id', $id)
-            ->where('noi_dung', '!=', '')
+            ->where('noi_dung', '!=', '')->where('trang_thai','!=',2)
             ->count();
         // Số lượng đánh giá có hình ảnh
-        $coHinhAnh = DanhGia::where('san_pham_id', $id)
+        $coHinhAnh = DanhGia::where('san_pham_id', $id)->where('trang_thai','!=',2)
             ->whereHas('anhDanhGias')
             ->count();
 
@@ -283,6 +286,46 @@ class SanPhamController extends Controller
         return response()->json([
             'quantity' => $bienThe ? $bienThe->so_luong : 0,
             'gio_hang' => $gio_hang ? $gio_hang->so_luong : 0
+        ]);
+    }
+
+    public function locDanhGia(Request $request){
+        $danhGia = DanhGia::with('user','sanPham','anhDanhGias','traLoiDanhGia')
+                            ->where('san_pham_id',$request->input('san_pham_id'))
+                            ->where('trang_thai','!=',2);
+
+        switch ($request->dataFilter) {
+            case '5':
+                $danhGia->where('so_sao', 5);
+                break;
+            case '4':
+                $danhGia->where('so_sao', 4);
+                break;
+            case '3':
+                $danhGia->where('so_sao', 3);
+                break;
+            case '2':
+                $danhGia->where('so_sao', 2);
+                break;
+            case '1':
+                $danhGia->where('so_sao', 1);
+                break;
+            case 'comment':
+                $danhGia->where('noi_dung', '!=', '');
+                break;
+            case 'image':
+                $danhGia->whereHas('anhDanhGias');
+                break;
+            default:
+                // Không cần thêm gì nếu là 'all'
+                break;
+        }
+
+        $danh_gias = $danhGia->orderBy('id','desc')->paginate(6);
+        return response()->json([
+            'success' => true,
+            'danh_gias' => $danh_gias,
+            'pagination' => view('client.phanTrang.phanTrangDanhGia', ['danh_gias' => $danh_gias])->render()
         ]);
     }
 }

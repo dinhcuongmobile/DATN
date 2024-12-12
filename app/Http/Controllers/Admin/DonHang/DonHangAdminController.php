@@ -139,7 +139,10 @@ class DonHangAdminController extends Controller
         $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
             ->where('phuong_thuc_thanh_toan', 1) // Chuyển khoản
             ->where('thanh_toan', 1); // Đã thanh toán
-
+        // Lọc theo mã đơn hàng nếu có
+        if ($request->filled('ma_don_hang')) {
+            $query->where('ma_don_hang', $request->input('ma_don_hang'));
+        }
         // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
         if ($request->filled('search')) {
             $search = $request->input('search');

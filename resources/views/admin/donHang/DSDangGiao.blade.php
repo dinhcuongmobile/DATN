@@ -104,7 +104,7 @@
                                 @if($item->phuong_thuc_thanh_toan == 0)
                                 Thanh toán khi nhận hàng
                             @else
-                                <a href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}" style="color: #007bff;">
+                                <a href="{{ route('don-hang.danh-sach-da-chuyen-khoan', ['ma_don_hang' => $item->ma_don_hang]) }}" style="color: #007bff;">
                                     Chuyển khoản
                                 </a>
                             @endif

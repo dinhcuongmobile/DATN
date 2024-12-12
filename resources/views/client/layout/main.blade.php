@@ -433,7 +433,7 @@
                                         @if (Auth::check())
                                             <li> <a class="nav" href="{{ route('tai-khoan.thong-tin-tai-khoan') }}">Tài khoản của tôi</a></li>
                                             <li> <a class="nav" href="{{ route('gio-hang.gio-hang') }}">Giỏ hàng</a></li>
-                                            <li> <a class="nav" href="#">Sản phẩm yêu thích</a></li>
+                                            <li> <a class="nav" href="{{ route('yeu-thich.yeu-thich') }}">Sản phẩm yêu thích</a></li>
                                         @else
                                             <li> <a class="nav" href="{{ route('tai-khoan.dang-nhap') }}">Đăng nhập / Đăng ký</a></li>
                                         @endif
@@ -474,7 +474,7 @@
             <script src="{{ asset('assets/js/chat.js') }}"></script>
             <script type="module">
                 // Lắng nghe tin nhắn realtime
-                window.Echo.private('chat.{{ auth()->id() }}')
+                window.Echo.private('chat.{{ Auth::id() }}')
                     .listen('MessageSent', (e) => {
 
                         const chatMessages = document.getElementById('chatMessages');
