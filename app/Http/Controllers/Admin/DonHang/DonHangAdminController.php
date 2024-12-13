@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin\DonHang;
 
 use Exception;
+use Carbon\Carbon;
+use App\Models\DiaChi;
+use App\Models\BienThe;
 use App\Models\DonHang;
+use App\Models\PhiShip;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\DiaChi;
-use App\Models\PhiShip;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class DonHangAdminController extends Controller
@@ -163,6 +164,18 @@ class DonHangAdminController extends Controller
     // Duyệt đơn hàng - Chuyển trạng thái đơn hàng sang chờ lấy hàng
     public function duyetDonHang(int $id) {
         $donHang = DonHang::findOrFail($id);
+        $chi_tiet_don_hangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+
+        foreach ($chi_tiet_don_hangs as $chi_tiet) {
+            $bien_the = BienThe::find($chi_tiet->bien_the_id);
+
+            if ($bien_the && $bien_the->so_luong_tam_giu >= $chi_tiet->so_luong) {
+                $bien_the->decrement('so_luong', $chi_tiet->so_luong); // Trừ số lượng kho chính thức
+                $bien_the->decrement('so_luong_tam_giu', $chi_tiet->so_luong); // Giảm tạm giữ
+            } else {
+                return redirect()->back()->with('error', 'Sản phẩm không đủ để xác nhận đơn hàng.');
+            }
+        }
         $donHang->trang_thai = 1; // 1 là trạng thái chờ lấy hàng
         $donHang->nguoi_ban = Auth::user()->id;
         $donHang->ngay_ban = Carbon::now();
@@ -180,12 +193,27 @@ class DonHangAdminController extends Controller
 
      DB::beginTransaction();
       try {
-        // Cập nhật trạng thái hàng loạt
-        DonHang::whereIn('id', $ids)->update([
-            'trang_thai' => 1, 
-            'nguoi_ban' => Auth::user()->id,
-            'ngay_ban' => Carbon::now()
-        ]); // 1: Chờ lấy hàng
+        $donHang = DonHang::whereIn('id',$ids)->get();
+        foreach ($donHang as $key => $value) {
+            $chi_tiet_don_hangs = ChiTietDonHang::where('don_hang_id', $value->id)->get();
+
+            foreach ($chi_tiet_don_hangs as $chi_tiet) {
+                $bien_the = BienThe::find($chi_tiet->bien_the_id);
+
+                if ($bien_the && $bien_the->so_luong_tam_giu >= $chi_tiet->so_luong) {
+                    $bien_the->decrement('so_luong', $chi_tiet->so_luong); // Trừ số lượng kho chính thức
+                    $bien_the->decrement('so_luong_tam_giu', $chi_tiet->so_luong); // Giảm tạm giữ
+                } else {
+                    return redirect()->back()->with('error', 'Sản phẩm không đủ để xác nhận đơn hàng.');
+                }
+            }
+            // Cập nhật trạng thái hàng loạt
+            $value->update([
+                'trang_thai' => 1,
+                'nguoi_ban' => Auth::user()->id,
+                'ngay_ban' => Carbon::now()
+            ]);
+        }
 
         DB::commit();
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Các đơn hàng đã được duyệt thành công.');
