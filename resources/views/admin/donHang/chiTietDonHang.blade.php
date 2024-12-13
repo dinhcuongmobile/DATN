@@ -37,7 +37,11 @@
                   @if ($donHang->nguoiBan !== null)
                     <hr>
                         <p>
-                            <strong>Tài khoản duyệt đơn: </strong> 
+                            @if ($donHang->trang_thai == 4)
+                                <strong>Tài khoản hủy đơn: </strong> 
+                            @else
+                                <strong>Tài khoản duyệt đơn: </strong> 
+                            @endif
                             <span style="color: red">{{ $donHang->nguoiBan->ho_va_ten }}</span> - Mã nhân viên: 
                             <span style="color: red">{{ $donHang->nguoiBan->id }}</span>
                         </p>

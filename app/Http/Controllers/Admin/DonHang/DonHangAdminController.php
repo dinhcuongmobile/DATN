@@ -311,6 +311,7 @@ class DonHangAdminController extends Controller
             // Tìm đơn hàng và cập nhật trạng thái
             $donHang = DonHang::findOrFail($id);
             $donHang->trang_thai = 4;
+            $donHang->nguoi_ban = Auth::guard('admin')->user()->id;
             $donHang->save();
             return redirect(url()->previous())->with('success', 'Đơn hàng đã được hủy thành công.');
         } catch (Exception $e) {

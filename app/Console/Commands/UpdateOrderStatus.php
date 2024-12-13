@@ -7,6 +7,7 @@ use App\Models\DonHang;
 use App\Models\SanPham;
 use App\Models\ChiTietDonHang;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateOrderStatus extends Command
 {
@@ -29,6 +30,8 @@ class UpdateOrderStatus extends Command
                 'trang_thai' => 3,
                 'thanh_toan' => 1,
                 'ngay_cap_nhat' => now(),
+                'nguoi_ban' => Auth::guard('admin')->user()->id,
+                'ngay_ban' => Carbon::now()
             ]);
 
             $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham')->where('don_hang_id',$donHang->id)->get();
