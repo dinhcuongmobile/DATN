@@ -29,15 +29,33 @@ function togglePassword(){
 }
 // Lưu trạng thái khi vào trang chi tiết thanh toán
 function checkSession(){
-    let checkUrl = false;
+    //gio hang
+    let checkSessionGioHang  = false;
     if (window.location.pathname === '/gio-hang/chi-tiet-thanh-toan') {
-        checkUrl=true;
+        checkSessionGioHang =true;
     }else{
-        checkUrl=false;
+        checkSessionGioHang =false;
     }
 
-    if (!checkUrl) {
+    if (!checkSessionGioHang ) {
         fetch('/gio-hang/xoa-session-gio-hang', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        });
+    }
+
+    // dat hang chuyen khoan
+    let checkSessionDatHangCK  = false;
+    if (window.location.pathname === '/gio-hang/create-payment/' || window.location.pathname === '/gio-hang/hoan-tat-chuyen-khoan-don-hang/') {
+        checkSessionDatHangCK =true;
+    }else{
+        checkSessionDatHangCK =false;
+    }
+
+    if (!checkSessionDatHangCK ) {
+        fetch('/gio-hang/xoa-session-dat-hang-chuyen-khoan', {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')

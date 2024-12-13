@@ -251,7 +251,7 @@ function datHang(){
                 }
             });
         }else{
-            $.ajax({
+            $.ajax({ 
                 type: 'GET',
                 url: '/gio-hang/dat-hang-chuyen-khoan',
                 data: {

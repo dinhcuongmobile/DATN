@@ -132,7 +132,8 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     Route::prefix('gio-hang')->group(function () {
         Route::get('/', [GioHangController::class, 'gioHang'])->name('gio-hang.gio-hang');
-        Route::post('/xoa-session-gio-hang', [GioHangController::class, 'xoaSessionGioHang'])->name('gio-hang.xoa-session');
+        Route::post('/xoa-session-gio-hang', [GioHangController::class, 'xoaSessionGioHang']);
+        Route::post('/xoa-session-dat-hang-chuyen-khoan', [GioHangController::class, 'xoaSessionDatHangChuyenKhoan']);
         Route::post('them-gio-hang', [GioHangController::class, 'themGioHang'])->name('gio-hang.them-gio-hang');
         Route::get('xoa-tat-ca', [GioHangController::class, 'xoaTatCa']);
         Route::get('xoa-san-pham-gio-hang', [GioHangController::class, 'xoaSanPhamGioHang']);
@@ -428,7 +429,7 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
 
         Route::get('danh-sach-da-chuyen-khoan', [DonHangAdminController::class, 'showDSDaChuyenKhoan'])->name('don-hang.danh-sach-da-chuyen-khoan');
         Route::get('don-hang-da-chuyen-khoan/{ma_don_hang}', [DonHangAdminController::class, 'showDSDaChuyenKhoan'])->name('don-hang.don-hang-da-chuyen-khoan');
-        
+
         Route::get('tim-kiem', [DonHangAdminController::class,'timKiem'])->name('don-hang.tim-kiem');
 
     });

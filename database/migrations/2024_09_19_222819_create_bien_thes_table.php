@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('ten_mau');
             $table->string('ma_mau');
             $table->integer('so_luong')->default(1);
+            $table->integer('so_luong_tam_giu')->default(0);
             $table->timestamps();
         });
     }

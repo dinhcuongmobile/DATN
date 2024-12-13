@@ -5,7 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Lắng nghe sự kiện trên kênh Private
     window.Echo.private(`chat.${userId}`)
         .listen('MessageSent', (e) => {
-            console.log('Tin nhắn mới:', e);
+            const chatBody = document.querySelector('#chatPopup .chat-body');
+            let messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', 'sender');
+            let fullName = document.querySelector('#chatPopup .chat-title').textContent;
+            let nameParts = fullName.split(' ');
+            let firstName = nameParts[nameParts.length - 1];
+            messageDiv.innerHTML = `<span class="sender-name">${firstName}:</span> ${message.message}`;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
         });
 });
 // Đóng box chat

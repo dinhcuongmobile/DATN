@@ -354,7 +354,11 @@ class GioHangController extends Controller
 
 
     public function xoaSessionGioHang(){
-            session()->forget('gio_hangs');
+        session()->forget('gio_hangs');
+    }
+
+    public function xoaSessionDatHangChuyenKhoan(){
+        session()->forget('dat_hang_chuyen_khoan');
     }
 
 
@@ -395,7 +399,8 @@ class GioHangController extends Controller
                                         ->where('ma_mau', $item['ma_mau'])
                                         ->lockForUpdate()
                                         ->first();
-                if($checkSoLuongSp && $checkSoLuongSp->so_luong < $item['so_luong']){
+
+                if (!$checkSoLuongSp || ($checkSoLuongSp->so_luong - $checkSoLuongSp->so_luong_tam_giu) < $item['so_luong']) {
                     return response()->json([
                         'success' => false,
                         'message' => "một trong số sản phẩm bạn mua không đủ số lượng trong kho !"
@@ -446,8 +451,8 @@ class GioHangController extends Controller
                     ];
                     ChiTietDonHang::create($dataInsertChiTiet);
 
-                    // Cập nhật số lượng tồn kho cho biến thể
-                    $bien_the->decrement('so_luong', $item['so_luong']);
+                    // Tăng số lượng tạm giữ
+                    $bien_the->increment('so_luong_tam_giu', $item['so_luong']);
 
                     // Xóa sản phẩm trong giỏ hàng của người dùng
                     GioHang::where('user_id', Auth::user()->id)
@@ -667,8 +672,8 @@ class GioHangController extends Controller
                             ];
                             ChiTietDonHang::create($dataInsertChiTiet);
 
-                            // Cập nhật số lượng tồn kho cho biến thể
-                            $bien_the->decrement('so_luong', $item['so_luong']);
+                            // Tăng số lượng tạm giữ
+                            $bien_the->increment('so_luong_tam_giu', $item['so_luong']);
 
                             // Xóa sản phẩm trong giỏ hàng của người dùng
                             GioHang::where('user_id', Auth::user()->id)
@@ -676,6 +681,7 @@ class GioHangController extends Controller
                                 ->where('bien_the_id', $bien_the->id)
                                 ->delete();
                         }
+
                     }
 
                     $coin = Coin::where('user_id', Auth::user()->id)->first();

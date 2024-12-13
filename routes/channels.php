@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,6 @@ Broadcast::channel('chat.{receiver_id}', function ($user, $receiver_id) {
     if ($webUser = Auth::guard('web')->user()) {
         return (int) $webUser->id === (int) $receiver_id;
     }
-
     // Không xác thực được
     return false;
 });

@@ -1,17 +1,5 @@
 
 document.addEventListener('DOMContentLoaded',()=>{
-    document.querySelectorAll("ul#product nav-link").forEach((el)=>{
-        el.classList.remove('active');
-        el.setAttribute('aria-selected','false');
-        el.setAttribute('tabindex',"-1");
-    });
-    document.querySelector("#Reviews-tab").classList.add('active');
-    document.querySelector("#Reviews-tab").setAttribute('aria-selected','true')
-    document.querySelector("#Reviews-tab").removeAttribute('tabindex');
-    document.querySelectorAll("#ProductContent .tab-pane").forEach((el)=>{
-        el.classList.remove('active','show');
-    });
-    document.querySelector("#Reviews-tab-pane").classList.add('active','show');
     soLuongMua();
     selectSize();
     selectColor();
