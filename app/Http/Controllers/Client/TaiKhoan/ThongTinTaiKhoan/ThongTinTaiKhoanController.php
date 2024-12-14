@@ -66,12 +66,6 @@ class ThongTinTaiKhoanController extends Controller
             $this->views['yeu_thichs'] = $yeu_thichs;
         }
 
-        //thong bao
-        $thong_baos = ThongBao::where('user_id', Auth::id())
-                                ->orderBy('created_at', 'desc')
-                                ->get();
-        $this->views['thong_baos'] = $thong_baos;
-        
         // don hang
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),
@@ -116,6 +110,31 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['chi_tiet_don_hangs'] = $chi_tiet_don_hangs;
         $this->views['chua_danh_gia'] = $chua_danh_gia;
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
+    }
+
+    public function thongBao(Request $request){
+        //thong bao
+        $thong_baos = ThongBao::where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc');
+
+        foreach ($thong_baos as $key => $value) {
+            if($value->trang_thai==0){
+                $value->update(['trang_thai'=>1]);
+            }
+        }
+        $thong_baos = $thong_baos->paginate(8);
+
+        if($thong_baos){
+            return response()->json([
+                'success' => true,
+                'thong_baos' => $thong_baos,
+                'pagination' => view('client.phanTrang.phanTrangThongBao', ['thong_baos' => $thong_baos])->render()
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+            ]);
+        }
     }
 
     public function suaThongTin(Request $request)

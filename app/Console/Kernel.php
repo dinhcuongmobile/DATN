@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('orders:update-status')->everyMinute();
+
+        $schedule->command('thongBao:delete-status')->everyMinute();
     }
 
     /**

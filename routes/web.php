@@ -88,6 +88,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
+        Route::get('/thong-bao', [ThongTinTaiKhoanController::class, 'thongBao']);
 
         Route::put('/sua-thong-tin', [ThongTinTaiKhoanController::class, 'suaThongTin']);
 

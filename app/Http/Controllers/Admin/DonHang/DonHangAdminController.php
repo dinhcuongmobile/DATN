@@ -244,7 +244,7 @@ class DonHangAdminController extends Controller
 
         ThongBao::create([
             'user_id' => $donHang->user_id,
-            'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. "đã được cập nhật",
+            'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. " đã được cập nhật",
             'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
         ]);
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Đơn hàng đã được chuyển sang trạng thái Đang Giao.');
@@ -266,7 +266,7 @@ class DonHangAdminController extends Controller
             $value->update(['trang_thai' => 2]);
             ThongBao::create([
                 'user_id' => $value->user_id,
-                'tieu_de' => "Đơn hàng " .$value->ma_don_hang. "đã được cập nhật",
+                'tieu_de' => "Đơn hàng " .$value->ma_don_hang. " đã được cập nhật",
                 'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
             ]);
         }
@@ -341,7 +341,7 @@ class DonHangAdminController extends Controller
             $donHang->save();
             ThongBao::create([
                 'user_id' => $donHang->user_id,
-                'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. "đã được cập nhật",
+                'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. " đã được cập nhật",
                 'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi shop! Vui lòng liên hệ với shop để biết thêm chi tiết.',
             ]);
             return redirect(url()->previous())->with('success', 'Đơn hàng đã được hủy thành công.');

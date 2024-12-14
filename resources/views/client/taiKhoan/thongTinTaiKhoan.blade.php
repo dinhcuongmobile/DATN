@@ -218,8 +218,7 @@
                             </div>
                         </div>
                         {{-- thông báo --}}
-                        <div class="tab-pane fade" id="notifications" role="tabpanel"
-                            aria-labelledby="notifications-tab">
+                        <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
                             <div class="dashboard-right-box">
                                 <div class="notification-tab">
                                     <div class="sidebar-title">
@@ -227,24 +226,6 @@
                                         <h4>Thông báo</h4>
                                     </div>
                                     <ul class="notification-body">
-                                        @foreach ($thong_baos as $item)
-                                        @php
-                                            $date = new DateTime($item->created_at);
-                                            $formatted = $date->format('Y-m-d h:ia');
-
-                                            $image = $item->hinh_anh ? $item->hinh_anh : '/assets/images/other-img/thongBao.jpg';
-                                        @endphp
-                                            <li>
-                                                <div class="user-img">
-                                                    <img src="{{$image}}" alt="err"></div>
-                                                <div class="user-contant">
-                                                    <h6>Namad Store - {{$item->tieu_de}}
-                                                        <span>{{$formatted}}</span>
-                                                    </h6>
-                                                    <p>{!! $item->noi_dung !!}</p>
-                                                </div>
-                                            </li>
-                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
