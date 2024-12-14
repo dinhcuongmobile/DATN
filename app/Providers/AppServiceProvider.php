@@ -66,17 +66,17 @@ class AppServiceProvider extends ServiceProvider
         });
         //admin
         View::composer('admin.layout.main', function ($view) {
-            $latestMessages = Message::with('sender')
+            $messages = Message::with('sender')
             ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
             ->groupBy('user_id')
-            ->latest('created_at') // Sắp xếp theo thời gian mới nhất
+            ->orderBy('id','desc') // Sắp xếp theo thời gian mới nhất
             ->get();
             // Lấy dữ liệu từ model
             $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
             $view->with(compact(
                 'sub',
-                'latestMessages',
+                'messages',
             ));
         });
     }

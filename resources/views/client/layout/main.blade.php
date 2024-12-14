@@ -255,10 +255,10 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="main-menu"> <a class="brand-logo" href="{{ route('trang-chu.home') }}"> <img
-                                class="img-fluid for-light" src="{{ asset('assets/images/logo/logo_namad.png') }}"
-                                alt="logo"><img class="img-fluid for-dark"
-                                src="{{ asset('assets/images/logo/logo-white-4.png') }}" alt="logo"></a>
+                    <div class="main-menu">
+                        <a class="brand-logo" href="{{ route('trang-chu.home') }}">
+                            <img class="img-fluid for-light" src="{{ asset('assets/images/logo/logo_namad.png') }}" alt="logo">
+                        </a>
                         <nav id="main-nav">
                             <ul class="nav-menu sm-horizontal theme-scrollbar" id="sm-horizontal">
                                 <li class="mobile-back" id="mobile-back">Thoát<i class="fa-solid fa-angle-right ps-2"
@@ -627,7 +627,7 @@
                                     <div class="d-flex">
                                         <a class="imgAddtocartSuccess" href="javascript:void(0)">
                                             <img class="img-fluid blur-up lazyload pro-img"
-                                                src="{{ asset('assets/images/modal/0.jpg') }}" alt="">
+                                                src="" alt="">
                                         </a>
                                         <div class="add-card-content align-self-center text-center"><a href="#">
                                                 <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span

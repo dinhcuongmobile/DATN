@@ -8,6 +8,7 @@ use App\Models\DiaChi;
 use App\Models\BienThe;
 use App\Models\DonHang;
 use App\Models\PhiShip;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
@@ -181,6 +182,12 @@ class DonHangAdminController extends Controller
         $donHang->ngay_ban = Carbon::now();
         $donHang->save();
 
+        ThongBao::create([
+            'user_id' => $donHang->user_id,
+            'tieu_de' => "Xác nhận đơn hàng",
+            'noi_dung' => 'Đơn hàng ' . $donHang->ma_don_hang . ' đã được xác nhận.',
+        ]);
+
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
     }
     // Duyệt nhiều đơn hàng đã chọn
@@ -213,6 +220,12 @@ class DonHangAdminController extends Controller
                 'nguoi_ban' => Auth::user()->id,
                 'ngay_ban' => Carbon::now()
             ]);
+
+            ThongBao::create([
+                'user_id' => $value->user_id,
+                'tieu_de' => "Xác nhận đơn hàng",
+                'noi_dung' => 'Đơn hàng ' . $value->ma_don_hang . ' đã được xác nhận.',
+            ]);
         }
 
         DB::commit();
@@ -229,6 +242,11 @@ class DonHangAdminController extends Controller
         $donHang->trang_thai = 2; // 2 là trạng thái Đang Giao
         $donHang->save();
 
+        ThongBao::create([
+            'user_id' => $donHang->user_id,
+            'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. "đã được cập nhật",
+            'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
+        ]);
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Đơn hàng đã được chuyển sang trạng thái Đang Giao.');
     }
 
@@ -242,8 +260,16 @@ class DonHangAdminController extends Controller
 
     DB::beginTransaction();
     try {
-        // Cập nhật trạng thái hàng loạt
-        DonHang::whereIn('id', $ids)->update(['trang_thai' => 2]); // 2: Đang Giao
+        $donHang = DonHang::whereIn('id',$ids)->get();
+
+        foreach ($donHang as $key => $value) {
+            $value->update(['trang_thai' => 2]);
+            ThongBao::create([
+                'user_id' => $value->user_id,
+                'tieu_de' => "Đơn hàng " .$value->ma_don_hang. "đã được cập nhật",
+                'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
+            ]);
+        }
 
         DB::commit();
         return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
@@ -313,6 +339,11 @@ class DonHangAdminController extends Controller
             $donHang->trang_thai = 4;
             $donHang->nguoi_ban = Auth::guard('admin')->user()->id;
             $donHang->save();
+            ThongBao::create([
+                'user_id' => $donHang->user_id,
+                'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. "đã được cập nhật",
+                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi shop! Vui lòng liên hệ với shop để biết thêm chi tiết.',
+            ]);
             return redirect(url()->previous())->with('success', 'Đơn hàng đã được hủy thành công.');
         } catch (Exception $e) {
             return redirect(url()->previous())->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());

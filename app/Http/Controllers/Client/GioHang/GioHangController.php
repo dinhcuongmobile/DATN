@@ -20,6 +20,7 @@ use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ThongBao;
 use App\Models\ThongTinChuyenKhoan;
 use App\Models\YeuThich;
 use Illuminate\Support\Facades\Auth;
@@ -431,7 +432,11 @@ class GioHangController extends Controller
             $result = DonHang::create($dataInsertDonHang);
 
             if ($result) {
-                $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+                ThongBao::create([
+                    'user_id' => Auth::id(),
+                    'tieu_de' => "Đặt hàng thành công",
+                    'noi_dung' => 'Bạn đã đặt hàng thành công! Chờ xác nhận của người bán.',
+                ]);
 
                 foreach ($gio_hangs as $item) {
                     $bien_the = BienThe::where('san_pham_id', $item['san_pham_id'])
@@ -441,7 +446,7 @@ class GioHangController extends Controller
 
                     // Tạo chi tiết đơn hàng
                     $dataInsertChiTiet = [
-                        'don_hang_id' => $donHang->id,
+                        'don_hang_id' => $result->id,
                         'san_pham_id' => $item['san_pham_id'],
                         'bien_the_id' => $bien_the->id,
                         'so_luong' => $item['so_luong'],
@@ -473,8 +478,8 @@ class GioHangController extends Controller
                                 ->where('trang_thai', 1)
                                 ->first();
 
-                $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
-                $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
+                $don_hang = DonHang::with('user', 'diaChi')->find($result->id);
+                $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $result->id)->get();
                 $user = User::find(Auth::user()->id);
 
                 Mail::to(Auth::user()->email)->queue(new SendHoaDon($user,$dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
@@ -650,8 +655,11 @@ class GioHangController extends Controller
                 $result = DonHang::create($dataInsertDonHang);
 
                 if ($result) {
-                    $donHang = DonHang::with('diaChi')->where('user_id', Auth::user()->id)
-                                ->where('ma_don_hang',$ma_don_hang)->first();
+                    ThongBao::create([
+                        'user_id' => Auth::id(),
+                        'tieu_de' => "Đặt hàng thành công",
+                        'noi_dung' => 'Bạn đã đặt hàng thành công! Đang chuẩn bị hàng.',
+                    ]);
 
                     foreach ($datHangChuyenKhoan as $key => $item) {
                         if($key !== 'thong_tin_them' && is_array($item)){
@@ -662,7 +670,7 @@ class GioHangController extends Controller
 
                             // Tạo chi tiết đơn hàng
                             $dataInsertChiTiet = [
-                                'don_hang_id' => $donHang->id,
+                                'don_hang_id' => $result->id,
                                 'san_pham_id' => $item['san_pham_id'],
                                 'bien_the_id' => $bien_the->id,
                                 'so_luong' => $item['so_luong'],
@@ -696,8 +704,8 @@ class GioHangController extends Controller
                                     ->where('trang_thai', 1)
                                     ->first();
 
-                    $don_hang = DonHang::with('user', 'diaChi')->find($donHang->id);
-                    $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $donHang->id)->get();
+                    $don_hang = DonHang::with('user', 'diaChi')->find($result->id);
+                    $chi_tiet_don_hangs = ChiTietDonHang::with('sanPham', 'bienThe')->where('don_hang_id', $result->id)->get();
                     $user = User::find(Auth::user()->id);
 
                     Mail::to(Auth::user()->email)->queue(new SendHoaDon($user,$dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));

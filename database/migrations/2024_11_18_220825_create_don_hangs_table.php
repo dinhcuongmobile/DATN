@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('ma_don_hang',255);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedBigInteger('nguoi_ban')->nullable();
+            $table->foreign('nguoi_ban')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('dia_chi_id')->constrained('dia_chis')->onDelete('cascade');
             $table->double('giam_gia_van_chuyen', 10, 2)->default(0);
             $table->double('giam_gia_don_hang', 10, 2)->default(0);
@@ -26,6 +28,7 @@ return new class extends Migration
             $table->text('ghi_chu')->nullable();
             $table->datetime('ngay_tao')->nullable();
             $table->datetime('ngay_cap_nhat')->nullable();
+            $table->datetime('ngay_ban')->nullable();
         });
     }
 

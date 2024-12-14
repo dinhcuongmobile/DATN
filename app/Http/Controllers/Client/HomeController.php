@@ -104,7 +104,7 @@ class HomeController extends Controller
 
     public function error404()
     {
-        return view('auth.404');
+        return view('errors.404');
     }
     public function chinhSachBaoMat()
     {

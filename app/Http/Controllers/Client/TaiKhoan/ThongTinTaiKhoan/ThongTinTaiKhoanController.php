@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
+use App\Models\ThongBao;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -54,6 +55,7 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
+        //yeu thich
         $this->views['yeu_thichs'] = [];
 
         if (Auth::check()) {
@@ -64,7 +66,13 @@ class ThongTinTaiKhoanController extends Controller
             $this->views['yeu_thichs'] = $yeu_thichs;
         }
 
-        //
+        //thong bao
+        $thong_baos = ThongBao::where('user_id', Auth::id())
+                                ->orderBy('created_at', 'desc')
+                                ->get();
+        $this->views['thong_baos'] = $thong_baos;
+        
+        // don hang
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //chua duyet
