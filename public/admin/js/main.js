@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded',()=>{
             });
         });
     }
+
+    alertThongBao();
 });
 
 //checkbox select
@@ -222,7 +224,6 @@ function alertThongBao(){
     const alertThongBao = document.querySelector('#alertThongBao');
     if(alertThongBao){
         alertThongBao.addEventListener('click',function(){
-            alert("okkk")
             $.ajax({
                 type: 'GET',
                 url: '/admin/thong-bao',
