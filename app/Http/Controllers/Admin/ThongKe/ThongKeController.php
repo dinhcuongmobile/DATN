@@ -227,7 +227,7 @@ class ThongKeController extends Controller
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('ngay_ban', [$startDate, $endDate]);
             })
-            ->groupBy('nguoi_ban');
+            ->groupBy('ngay_ban', 'nguoi_ban');
 
 
         // Tính tổng số đơn hàng và doanh thu của từng nhân viên
