@@ -18,7 +18,7 @@ class CoinController extends Controller
         $this->views = [];
     }
 
-    public function addDailyCoin()
+    public function addDailyCoin(Request $request)
     {
         $user = Auth::user();
         $ngayNhan = Carbon::now()->toDateString();
@@ -28,11 +28,11 @@ class CoinController extends Controller
             ->latest('ngay_nhan')->first();
 
             if ($check && $check->ngay_nhan == $ngayNhan) {
-                // Người dùng đã nhận xu hôm nay
+                
                 return response()->json([
                     'message' => 'Bạn đã nhận xu hôm nay rồi!',
                     'userId' => $user->id,
-                    'alreadyReceived' => true // Thêm cờ cho frontend kiểm tra
+                    'alreadyReceived' => true 
                 ], 200);
             }
 
@@ -50,7 +50,7 @@ class CoinController extends Controller
             $soNgay = 1;
         }
 
-        //random xu
+        
         $coins = rand(100, 300);
 
         // Ngày 7 nhận 300 xu các ngày còn lại nhận 100 xu
@@ -60,7 +60,7 @@ class CoinController extends Controller
         $updateCoin = $check ? $check->coin + $coins : $coins;
 
         if ($check) {
-            // Cập nhật cộng dồn số xu
+            
             $check->update([
                 'coin' => $updateCoin,
                 'ngay_nhan' => $ngayNhan,
