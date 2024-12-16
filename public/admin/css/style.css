@@ -274,3 +274,8 @@
     border-radius: 20px;
     cursor: pointer;
 }
+
+#notificationContent .mr-3 img{
+    width: 45px;
+    border-radius: 50%;
+}

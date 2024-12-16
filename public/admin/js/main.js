@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    
+
     eyePassword();
     alertThongBao();
 });
@@ -224,7 +224,7 @@ if(elHours && elMinutes && elSeconds){
 }
 
 function alertThongBao(){
-    const alertThongBao = document.querySelector('#alertThongBao');
+    const alertThongBao = document.querySelector('#alertsDropdown');
     if(alertThongBao){
         alertThongBao.addEventListener('click',function(){
             $.ajax({

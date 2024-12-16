@@ -279,7 +279,15 @@
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">Thông Báo</h6>
                                 <div id="notificationContent">
-                                    <p class="text-center text-gray-500">Đang tải thông báo...</p>
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <div class="mr-3">
+                                            <img src="{{asset('assets/images/other-img/thongBao.jpg')}}" alt="">
+                                        </div>
+                                        <div>
+                                            <div class="small text-gray-500">December 12, 2019</div>
+                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        </div>
+                                    </a>
                                 </div>
                                 <a class="dropdown-item text-center small text-gray-500" href="#"
                                     data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị tất cả</a>
