@@ -74,11 +74,7 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Sửa
                                         </a> <i class="fa-solid fa-minus"></i>
-                                        <a href="{{ route('tin-tuc.delete', $item->id) }}"
-                                            class="btn btn-danger btn-sm">
-                                            <i class="fa-solid fa-trash"></i>
-                                            Xóa
-                                        </a>
+                                        
                                     </td>
                                 </tr>
                             @endforeach
