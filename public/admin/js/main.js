@@ -232,6 +232,9 @@ function alertThongBao(){
                 url: '/admin/thong-bao',
                 success: function (response) {
                     console.log(response.thongBao);
+                    response.thongBao.forEach((item)=>{
+
+                    })
 
                 },
                 error: function (error) {
@@ -240,6 +243,10 @@ function alertThongBao(){
             });
         });
     }
+}
+
+function allThongBao(){
+    
 }
 
 
