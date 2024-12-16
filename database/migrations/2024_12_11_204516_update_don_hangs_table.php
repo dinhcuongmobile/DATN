@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('don_hangs', function (Blueprint $table) {
             $table->unsignedBigInteger('nguoi_ban')->nullable()->after('user_id');
             $table->foreign('nguoi_ban')->references('id')->on('users')->onDelete('cascade');
-            $table->datetime('ngay_ban')->nullable();
+            $table->date('ngay_ban')->nullable();
         });
     }
 
