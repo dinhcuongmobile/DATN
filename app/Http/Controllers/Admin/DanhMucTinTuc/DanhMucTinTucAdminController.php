@@ -54,7 +54,19 @@ class DanhMucTinTucAdminController extends Controller
         return view('admin.danhMucTinTuc.add');
     }
 
+    public function add(StoreDanhMucTinTucRequest $request){
 
+       $dataInsert=[
+            'ten_danh_muc' => $request->ten_danh_muc,
+            'created_at' => now()
+       ];
+       $result= DanhMucTinTuc::create($dataInsert);
+       if($result){
+            return redirect()->route('danh-muc-tin-tuc.danh-sach')->with('success', 'Bạn đã thêm thành công !');
+       }else{
+            return redirect()->route('danh-muc-tin-tuc.danh-sach')->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+       }
+    }
     //update
     public function viewUpdate(Request $request, int $id){
         $this->views['danh_muc']=DanhMucTinTuc::findOrFail($id);
