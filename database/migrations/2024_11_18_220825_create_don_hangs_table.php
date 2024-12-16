@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text('ghi_chu')->nullable();
             $table->datetime('ngay_tao')->nullable();
             $table->datetime('ngay_cap_nhat')->nullable();
-            $table->datetime('ngay_ban')->nullable();
+            $table->date('ngay_ban')->nullable();
         });
     }
 
