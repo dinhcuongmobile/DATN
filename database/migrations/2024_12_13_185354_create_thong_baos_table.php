@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tieu_de'); // Tiêu đề thông báo
             $table->text('noi_dung'); // Nội dung thông báo
             $table->boolean('trang_thai')->default(false)->comment("0. chưa đọc 1. Đã đọc"); // Trạng thái đọc
+            $table->boolean('nguoi_nhan')->default(false)->comment("0. thành viên 1. admin"); // Trạng thái đọc
             $table->timestamps(); // created_at và updated_at
         });
     }

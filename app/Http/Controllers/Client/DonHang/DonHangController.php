@@ -11,6 +11,7 @@ use App\Models\DonHang;
 use App\Models\GioHang;
 use App\Models\PhiShip;
 use App\Models\SanPham;
+use App\Models\ThongBao;
 use App\Models\AnhDanhGia;
 use Illuminate\Http\Request;
 use App\Models\ChiTietDonHang;
@@ -78,6 +79,14 @@ class DonHangController extends Controller
                     'trang_thai' => 4,
                     'ngay_cap_nhat'=>now()
                 ]);
+
+                $userHuyDon = $don_hang->user->ho_va_ten ? $don_hang->user->ho_va_ten : $don_hang->user->email;
+                ThongBao::create([
+                    'tieu_de' => "Hủy đơn hàng",
+                    'noi_dung' => "Đơn hàng ". $don_hang->ma_don_hang . " đã bị hủy bởi ". $userHuyDon,
+                    'nguoi_nhan' => true
+                ]);
+
             }
             DB::commit();
             return response()->json([
@@ -159,7 +168,6 @@ class DonHangController extends Controller
                 }
             }
 
-
             DB::commit();
 
             return response()->json(['success' => true]);
@@ -183,28 +191,6 @@ class DonHangController extends Controller
         }
     }
 
-    public function capNhatTrangThaiDaGiao(Request $request){
-        DB::beginTransaction();
-        try {
-            $don_hang_id = $request->input('don_hang_id');
-            $don_hang = DonHang::find($don_hang_id);
-            if($don_hang){
-                $don_hang->update([
-                    'trang_thai' => 3,
-                    'thanh_toan' => 1,
-                    'ngay_cap_nhat'=>now()
-                ]);
-            }
-            DB::commit();
-            return response()->json([
-                'success' => true
-            ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['success' => false, 'error' => $e->getMessage()]);
-        }
-    }
-
     public function daNhanHang(Request $request){
         DB::beginTransaction();
         try {
@@ -222,6 +208,12 @@ class DonHangController extends Controller
                     $san_pham = SanPham::find($item->san_pham_id);
                     $san_pham->update(['da_ban'=> $san_pham->da_ban + $item->so_luong]);
                 }
+
+                ThongBao::create([
+                    'tieu_de' => "Đơn hàng giao thành công",
+                    'noi_dung' => "Đơn hàng ". $don_hang->ma_don_hang ." đã được giao thành công.",
+                    'nguoi_nhan' => true
+                ]);
             }
             DB::commit();
             return response()->json([

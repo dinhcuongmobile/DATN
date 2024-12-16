@@ -894,26 +894,9 @@ function guiDanhGia(){
                                     const hiddenModal = document.querySelectorAll('#reviews .main .row .row-item');
                                     if (hiddenModal.length===0) {
                                         $('#reviews').modal('hide');
-
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: '/don-hang/cap-nhat-trang-thai-da-giao',
-                                            data: {
-                                                _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                                                don_hang_id: donHangId
-                                            },
-                                            success: function (response) {
-                                                if(response){
-                                                    sessionStorage.setItem("activeTab", "order");
-                                                    sessionStorage.setItem("activeTabHoanThanh", "tap5");
-                                                    window.location.href="/tai-khoan/thong-tin-tai-khoan";
-                                                }
-                                            },
-                                            error: function (error) {
-                                                console.error('Lỗi: ', error);
-                                                alert('Vui lòng thử lại sau.');
-                                            }
-                                        });
+                                        sessionStorage.setItem("activeTab", "order");
+                                        sessionStorage.setItem("activeTabHoanThanh", "tap5");
+                                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
                                     }
                                 }, 1300);
                             }

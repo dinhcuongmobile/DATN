@@ -7,6 +7,7 @@ use App\Models\DonHang;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ThongBao;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -100,5 +101,15 @@ class HomeAdminController extends Controller
             $tongLuotXem = Cache::get('tong_luot_xem', 0);
         }
         return $tongLuotXem;
+    }
+
+    public function thongBao(){
+        $thongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->take(5)->get();
+
+        return response()->json(['thongBao'=>$thongBao]);
+    }
+
+    public function tatCaThongBao(){
+
     }
 }

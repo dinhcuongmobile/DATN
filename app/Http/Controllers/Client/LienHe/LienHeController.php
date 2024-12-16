@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Client\LienHe;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\LienHe\StoreLienHeRequest;
-use App\Models\LienHe;
 use App\Models\User;
+use App\Models\LienHe;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\LienHe\StoreLienHeRequest;
 
 class LienHeController extends Controller
 {
@@ -33,6 +34,12 @@ class LienHeController extends Controller
             'noi_dung' => $request->noi_dung,
             'created_at' => now(),
             'updated_at' => now()
+        ]);
+
+        ThongBao::create([
+            'tieu_de' => "Khách hàng gửi liên hệ",
+            'noi_dung' => "Có một liên hệ mới vừa được gửi.",
+            'nguoi_nhan' => true
         ]);
     }
 }

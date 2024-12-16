@@ -17,6 +17,7 @@ class ThongBao extends Model
         'tieu_de',
         'noi_dung',
         'trang_thai',
+        'nguoi_nhan',
     ];
 
     public function user()

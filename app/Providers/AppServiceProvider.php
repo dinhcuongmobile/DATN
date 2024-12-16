@@ -12,6 +12,7 @@ use App\Models\Message;
 use App\Models\SanPham;
 use App\Models\YeuThich;
 use App\Models\DanhMucTinTuc;
+use App\Models\ThongBao;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -66,6 +67,10 @@ class AppServiceProvider extends ServiceProvider
         });
         //admin
         View::composer('admin.layout.main', function ($view) {
+            //thong bao
+            $countThongBao = ThongBao::where('trang_thai',0)->where('nguoi_nhan',1)->get()->count();
+
+            //tin nhắn
             $messages = Message::with('sender')
             ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
             ->groupBy('user_id')
@@ -75,6 +80,7 @@ class AppServiceProvider extends ServiceProvider
             $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
             $view->with(compact(
+                'countThongBao',
                 'sub',
                 'messages',
             ));

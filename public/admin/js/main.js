@@ -218,6 +218,26 @@ if(elHours && elMinutes && elSeconds){
     let countdownInterval = setInterval(updateCountdown, 1000);
 }
 
+function alertThongBao(){
+    const alertThongBao = document.querySelector('#alertThongBao');
+    if(alertThongBao){
+        alertThongBao.addEventListener('click',function(){
+            alert("okkk")
+            $.ajax({
+                type: 'GET',
+                url: '/admin/thong-bao',
+                success: function (response) {
+                    console.log(response.thongBao);
+
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                }
+            });
+        });
+    }
+}
+
 
 
 

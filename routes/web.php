@@ -126,7 +126,6 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
         Route::post('mua-lai',[DonHangController::class,'muaLai']);
         Route::post('danh-gia',[DonHangController::class,'danhGia']);
         Route::post('cong-namad-xu-danh-gia',[DonHangController::class,'congNamadXuDanhGia']);
-        Route::post('cap-nhat-trang-thai-da-giao',[DonHangController::class,'capNhatTrangThaiDaGiao']);
     });
 
     Route::prefix('gio-hang')->group(function () {
@@ -203,6 +202,8 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
     Route::get('thong-ke-tai-khoan', [HomeAdminController::class, 'thongKeTaiKhoan'])->name('admin.thong-ke-tai-khoan');
     Route::get('thong-ke-don-hang', [HomeAdminController::class, 'thongKeDonHang'])->name('admin.thong-ke-don-hang');
     Route::get('thong-ke-luot-xem', [HomeAdminController::class, 'thongKeLuotXem'])->name('admin.thong-ke-luot-xem');
+    Route::get('thong-bao', [HomeAdminController::class, 'thongBao']);
+    Route::get('tat-ca-thong-bao', [HomeAdminController::class, 'tatCaThongBao']);
 
     Route::prefix('/thong-ke')->group(function() {
         Route::post('/load-30-ngay', [ThongKeController::class, 'load30Ngay'])->name('thong-ke.load-30-ngay');

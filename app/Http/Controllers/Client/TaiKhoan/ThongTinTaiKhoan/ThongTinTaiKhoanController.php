@@ -115,6 +115,7 @@ class ThongTinTaiKhoanController extends Controller
     public function thongBao(Request $request){
         //thong bao
         $thong_baos = ThongBao::where('user_id', Auth::id())
+        ->where('nguoi_nhan',0)
         ->orderBy('created_at', 'desc')->paginate(8);
 
         if($thong_baos){

@@ -480,6 +480,12 @@ class GioHangController extends Controller
 
                 Mail::to(Auth::user()->email)->queue(new SendHoaDon($user,$dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
 
+                ThongBao::create([
+                    'tieu_de' => "Đơn hàng mới",
+                    'noi_dung' => "Đơn hàng ". $result->ma_don_hang . " đã được tạo mới.",
+                    'nguoi_nhan' => true
+                ]);
+
                 $check=true;
             }
             if($check){
@@ -705,6 +711,12 @@ class GioHangController extends Controller
                     $user = User::find(Auth::user()->id);
 
                     Mail::to(Auth::user()->email)->queue(new SendHoaDon($user,$dia_chi, $don_hang, $chi_tiet_don_hangs, $phi_ships, $giamGiaVanChuyen, $giamGiaDonHang,$soCoin));
+
+                    ThongBao::create([
+                        'tieu_de' => "Đơn hàng mới",
+                        'noi_dung' => "Đơn hàng ". $result->ma_don_hang . " đã được tạo mới.",
+                        'nguoi_nhan' => true
+                    ]);
 
                     $check=true;
                 }
