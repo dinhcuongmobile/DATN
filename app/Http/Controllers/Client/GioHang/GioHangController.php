@@ -279,13 +279,11 @@ class GioHangController extends Controller
             return response()->json(['success' => false]);
         }
 
-        // Lấy thông tin chi tiết của các sản phẩm được chọn từ cơ sở dữ liệu
         $gio_hang = GioHang::with('sanPham', 'bienThe')
                             ->where('user_id', Auth::user()->id)
                             ->whereIn('id', $gio_hang_ids)
                             ->get();
 
-        // Chuẩn bị dữ liệu giỏ hàng cần lưu vào session
         $gio_hangs = [];
         foreach ($gio_hang as $item) {
             $gio_hangs[] = [
@@ -297,10 +295,8 @@ class GioHangController extends Controller
             ];
         }
 
-        // Lưu dữ liệu vào session
         session()->put('gio_hangs', $gio_hangs);
 
-        // Trả về đường dẫn để chuyển hướng
         return response()->json(['success' => true, 'redirect' => route('gio-hang.chi-tiet-thanh-toan')]);
     }
 

@@ -456,11 +456,10 @@ document.querySelectorAll('.thayDoiBienThe .btnThayDoi .btn-light').forEach(func
 
 // tiep tuc dat hang
 
-// Gửi AJAX request khi người dùng nhấn vào nút "Tiếp tục đặt hàng"
 $('#tiepTucDatHangBtn').on('click', function() {
     let selectedItems = [];
     $('#cart-table input[name="select[]"]:checked').each(function() {
-        selectedItems.push($(this).val());
+        selectedItems.push($(this).val());  // id
     });
 
     $.ajax({
