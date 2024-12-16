@@ -23,13 +23,20 @@ function soLuongMua() {
 
         // Nút tăng số lượng
         addButton.addEventListener('click', function () {
-            if (inputEl.value < parseInt(inputEl.getAttribute('data-max'))) {
+            if (inputEl.value <= parseInt(inputEl.getAttribute('data-max'))) {
                 inputEl.value = Number(inputEl.value) + 1;
                 ipHidden.value = inputEl.value;
                 subButton.disabled = false;
             }
-            if (inputEl.value == parseInt(inputEl.getAttribute('data-max'))) {
+            if (inputEl.value > parseInt(inputEl.getAttribute('data-max'))) {
                 addButton.disabled = true;
+                ipHidden.value = inputEl.getAttribute('data-max');
+                inputEl.value = inputEl.getAttribute('data-max');
+                let errSL = document.querySelector('#errSL');
+                errSL.style.display='block';
+                setTimeout(() => {
+                    errSL.style.display = 'none';
+                }, 5000);
             }
         });
 
@@ -161,13 +168,14 @@ function themGioHang(){
         btnThemGioHang.addEventListener('click', function () {
             if (selectedSize && selectedColor) {
                 let dataMax = document.querySelector('.quantity input[type="number"]').getAttribute('data-max');
-                if(dataMax>0){
-                    let token= document.querySelector(".tokenThemGioHang").value;
-                    let sanPhamID = btnThemGioHang.getAttribute('data-id');
-                    let soLuong = document.getElementById('soLuong').value;
-                    let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
-                    let kichCo = ipSize.value;
-                    let maMau = ipMauSac.value;
+                let token= document.querySelector(".tokenThemGioHang").value;
+                let sanPhamID = btnThemGioHang.getAttribute('data-id');
+                let soLuong = document.getElementById('soLuong').value;
+                let giaKhuyenMai = document.getElementById('giaKhuyenMai').getAttribute('data-giaKM');
+                let kichCo = ipSize.value;
+                let maMau = ipMauSac.value;
+
+                if(Number(dataMax)>0 && Number(dataMax)>=Number(soLuong)){
 
                     $.ajax({
                         type: 'POST',
@@ -190,9 +198,10 @@ function themGioHang(){
                                 document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="style-border img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
                                 document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
 
-                                let dataMaxNew = parseInt(dataMax)-1;
+                                let dataMaxNew = parseInt(dataMax)-soLuong;
                                 document.querySelector('.quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
-
+                                document.querySelector('.quantity input[type="number"]').value = dataMaxNew > 0 ? 1 : 0;
+                                document.querySelector('.quantity #soLuong').value = dataMaxNew > 0 ? 1 : 0;
                                 response.spYeuThich.forEach((item, index)=>{
                                     let giaKM = item.san_pham.gia_san_pham - (item.san_pham.gia_san_pham * item.san_pham.khuyen_mai / 100);
                                     $('#addtocart .row').append(`
