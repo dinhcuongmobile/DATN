@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
-
     eyePassword();
-    alertThongBao();
     allThongBao();
+    fetchNotifications();
 });
 
 function eyePassword(){
@@ -224,27 +223,52 @@ if(elHours && elMinutes && elSeconds){
     let countdownInterval = setInterval(updateCountdown, 1000);
 }
 
-function alertThongBao(){
-    const alertThongBao = document.querySelector('#alertsDropdown');
-    if(alertThongBao){
-        alertThongBao.addEventListener('click',function(){
-            $.ajax({
-                type: 'GET',
-                url: '/admin/thong-bao',
-                success: function (response) {
-                    console.log(response.thongBao);
-                    response.thongBao.forEach((item)=>{
+function fetchNotifications() {
+    fetch("/admin/thong-bao")
+        .then(response => response.json())
+        .then(data => {
+            const notificationCounter = document.querySelector('#notificationCounter');
+            const notificationContent = document.querySelector('#notificationContent');
+            // Cập nhật badge counter
+            notificationCounter.textContent = data.count > 0 ? `${data.count}+` : "0";
 
-                    })
+            // Xóa nội dung cũ
+            notificationContent.innerHTML = "";
 
-                },
-                error: function (error) {
-                    console.error('Lỗi: ', error);
-                }
-            });
-        });
-    }
+            if (data.thongBao.length > 0) {
+                data.thongBao.forEach(item => {
+                    let image = item.hinh_anh ? `/storage/${item.hinh_anh}` : '/assets/images/other-img/thongBao.jpg';
+
+                    let date = new Date(item.created_at);
+
+                    let formattedDate = date.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    }).replace(',', '');
+
+                    let html = `
+                        <a class="dropdown-item d-flex align-items-center">
+                            <div class="mr-3">
+                                <img src="${image}" alt="err">
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">${formattedDate}</div>
+                                <span class="font-weight-bold">${item.noi_dung}</span>
+                            </div>
+                        </a>
+                    `;
+
+                    notificationContent.insertAdjacentHTML('beforeend', html);
+                });
+            }
+        })
+        .catch(error => console.error("Error fetching notifications:", error));
 }
+setInterval(fetchNotifications, 5000);
 
 function allThongBao(){
 

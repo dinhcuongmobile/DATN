@@ -105,8 +105,11 @@ class HomeAdminController extends Controller
 
     public function thongBao(){
         $thongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->take(5)->get();
-
-        return response()->json(['thongBao'=>$thongBao]);
+        $count = ThongBao::where('nguoi_nhan',1)->get()->count();
+        return response()->json([
+            'thongBao'=>$thongBao,
+            'count' => $count
+        ]);
     }
 
     public function tatCaThongBao(){
