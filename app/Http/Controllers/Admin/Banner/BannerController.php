@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
-
     protected $banner;
     protected $views;
     public function __construct()
@@ -79,8 +78,7 @@ class BannerController extends Controller
 
     public function viewUpdate($id)
     {
-        $old_banner = Banner::where('id', $id)->first();
-        return view('admin.banner.UpdateBanner', compact('old_banner'));
+        
     }
 
     public function Update(Request $request, $id)
