@@ -28,7 +28,34 @@ class GoogleController extends Controller
     /**
      * Handle Google callback.
      */
+    public function handleGoogleCallback(Request $request)
+    {
+        try {
+            // Lấy thông tin người dùng từ Google
+            $userGoogle = Socialite::driver('google')->user();
 
+            $finduser = User::where('google_id', $userGoogle->id)
+                ->orWhere('email', $userGoogle->email)
+                ->first();
+
+            if ($finduser) {
+                // Nếu người dùng tồn tại, đăng nhập
+                $this->updateGoogleIdIfNeeded($finduser, $userGoogle->id);
+                $this->loginUser($finduser, $userGoogle->email);
+            } else {
+                // Tạo tài khoản mới nếu người dùng chưa tồn tại
+                $newUser = $this->createNewUser($userGoogle);
+                $this->loginUser($newUser, $userGoogle->email);
+            }
+
+            return redirect()->route('trang-chu.home');
+        } catch (Exception $e) {
+            // Ghi log và chuyển hướng đến trang đăng nhập với thông báo lỗi
+            report($e);
+            return redirect()->route('tai-khoan.dang-nhap')
+                ->with('error', 'Đăng nhập thất bại. Vui lòng thử lại sau!');
+        }
+    }
 
     /**
      * Update Google ID for existing user if needed.
