@@ -21,6 +21,302 @@
     cursor: pointer;
     color: #999;
 }
+/* Hộp quà */
+.gift-box {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    perspective: 1000px;
+    cursor: pointer;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.box-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(135deg, #ff4747, #ff8585);
+    transform-origin: bottom;
+    transform: rotateX(0);
+    transition: transform 0.5s ease;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.box-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: #ffe74c;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 100%;
+    background: red;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Hiệu ứng khi mở hộp */
+.gift-box.opened .ribbon {
+    transform: translate(-50%, -50%) rotate(90deg);
+    opacity: 0;
+}
+
+.gift-box.opened .box-lid {
+    transform: rotateX(-120deg);
+}
+
+/* Text "Chạm để mở quà" */
+.tap-to-open {
+    position: absolute;
+    top: -60px; /* Đẩy chữ lên trên */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px; /* Tăng kích thước chữ */
+    color: #333;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    transition: opacity 0.5s ease;
+    z-index: 2; /* Đảm bảo chữ luôn hiển thị phía trên hộp quà */
+}
+
+.gift-box.opened .tap-to-open {
+    opacity: 0; /* Ẩn chữ khi hộp được mở */
+}
+
+/* Pháo hoa */
+.fireworks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    pointer-events: none;
+}
+
+.firework {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #fff, transparent);
+    border-radius: 50%;
+    animation: firework 1.5s ease-out infinite;
+    opacity: 0;
+}
+
+.firework:nth-child(1) {
+    animation-delay: 0s;
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+.firework:nth-child(2) {
+    animation-delay: 0.2s;
+    transform: translate(-50%, -50%) rotate(120deg);
+}
+.firework:nth-child(3) {
+    animation-delay: 0.4s;
+    transform: translate(-50%, -50%) rotate(240deg);
+}
+
+@keyframes firework {
+    0% {
+        transform: scale(0) translate(-50%, -50%);
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(3) translate(-50%, -50%);
+        opacity: 0;
+    }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 9999;
+    display: none;
+}
+
+.popup-content {
+    position: relative;
+    text-align: center;
+    padding-bottom: 20px; /* Tạo khoảng cách cho nút Đóng */
+}
+
+.popup .btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #ff4747, #ff8585);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.close-btn {
+    margin-top: 10px;
+    background: #ccc;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+/* seach */
+.preemptive-search {
+    display: flex;
+    flex-wrap: wrap; /* Đảm bảo các sản phẩm xếp hàng nếu không đủ không gian */
+    gap: 16px; /* Khoảng cách giữa các ô sản phẩm */
+    justify-content: flex-start; /* Căn lề trái, có thể đổi thành center hoặc space-between */
+}
+
+.product-box-6 {
+    width: 200px; /* Chiều rộng mỗi ô sản phẩm */
+    height: 300px; /* Chiều cao mỗi ô sản phẩm */
+    background-color: #f9f9f9; /* Màu nền */
+    border: 1px solid #ddd; /* Viền ô sản phẩm */
+    border-radius: 8px; /* Bo góc */
+    overflow: hidden; /* Đảm bảo nội dung không tràn ra ngoài */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.product-box-6:hover {
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+}
+
+/* Hình ảnh sản phẩm */
+.product-box-6 .img-wrapper {
+    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều rộng ô */
+    height: 60%; /* Chiếm 60% chiều cao ô */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Màu nền của vùng hình ảnh */
+}
+
+.product-box-6 .img-wrapper img {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá khung */
+    max-height: 100%; /* Đảm bảo ảnh không bị méo */
+    object-fit: contain; /* Duy trì tỷ lệ hình ảnh */
+}
+
+/* Phần thông tin sản phẩm */
+.product-box-6 .product-detail {
+    padding: 8px;
+    flex: 1; /* Đẩy phần thông tin xuống đáy ô */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-box-6 .product-detail h6 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.product-box-6 .product-detail p {
+    font-size: 12px;
+    color: #999;
+    margin: 4px 0 0 0;
+}
+
+/* Đảm bảo bố cục responsive */
+@media (max-width: 768px) {
+    .product-box-6 {
+        width: 50%; /* Kích thước ô sản phẩm trên màn hình nhỏ */
+        height: 200px; /* Chiều cao giảm xuống */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-box-6 {
+        width: 100%; /* Chiều rộng full màn hình trên thiết bị di động */
+        height: 180px; /* Giảm chiều cao thêm */
+    }
+}
+/* Giá sản phẩm gốc */
+.original-price {
+    text-decoration: line-through; /* Gạch ngang giá */
+    color: #999; /* Màu xám */
+    font-size: 14px;
+}
+
+/* Giá khuyến mãi */
+.discounted-price {
+    color: #e60000; /* Màu đỏ */
+    font-weight: bold;
+    font-size: 16px;
+}
+/* end seach */
+
+/* banner */
+.home-section-4 .home-images {
+    width: 100%;
+    height: 100%; /* Đảm bảo chiều cao full */
+    overflow: hidden; /* Loại bỏ bất kỳ phần nào tràn ra ngoài */
+}
+
+.home-section-4 .home-images img {
+    width: 100%; /* Hình ảnh trải rộng toàn bộ chiều ngang */
+    height: auto; /* Giữ tỷ lệ ảnh gốc */
+    position: absolute;
+    left: 0; /* Đưa về mép trái */
+    top: 0%; /* Căn giữa theo chiều dọc */
+    transform: translateY(-50%); /* Căn chỉnh đúng giữa theo chiều dọc */
+}
+/* end banner */
 
 /* div chat */
 .chat-container {
@@ -362,6 +658,14 @@ font-size: 18px;
 font-family: Outfit, sans-serif;
 }
 
+.product-option #errSL{
+    display: none;
+    font-size: 16px;
+}
+#errSL-quick-view{
+    display: none;
+}
+
 /* popup thay doi bien the  */
 .thayDoiBienThe {
     position: absolute;
@@ -640,7 +944,7 @@ font-family: Outfit, sans-serif;
   .donmua nav ul li a{
     display: block;
     color: #000;
-    padding: 10px 0px;
+    padding: 10px 16px;
     position: relative;
     font-size: 19px;
 
@@ -991,11 +1295,27 @@ td.giaTienLS span{
     padding: 10px 0px;
     margin-top: 10px;
 }
-.order-details .action-button button{
-    padding: 10px 70px;
+.order-details .action-button .huyDonHangChiTiet{
+    padding: 10px 48px;
     margin-right: 15px;
 }
 
+.order-details .action-button .muaLaiChiTiet{
+    padding: 10px 72px;
+    margin-right: 15px;
+}
+
+.order-details .action-button .daNhanHangChiTiet{
+    padding: 10px 47px;
+    display: block;
+    margin: 20px 0px 11px 810px;
+}
+
+.order-details .action-button .danhGiaChiTiet{
+    display: block;
+    padding: 10px 64px;
+    margin: 20px 0px 11px 810px;
+}
 /* reviews */
 #reviews .modal-body .row:not(:first-child,:last-child){
     padding: 10px 0px;
@@ -1127,13 +1447,15 @@ td.giaTienLS span{
     height: .1875rem;
     width: 100%;
 }
-
-
+#reviews .guiDanhGia{
+    width: 100%;
+}
 #reviews .popup-content {
     text-align: center;
     width: 100%;
     padding: 20px 0px;
     background: #f6f6f6;
+    display: none;
 }
 
 #reviews .popup-content i {
@@ -1145,5 +1467,116 @@ td.giaTienLS span{
 #reviews .popup-content h2 {
     margin: 10px 0;
 }
+
+/* danh gia chi tiet san pham  */
+#Reviews-tab-pane .review-header .select-button{
+    align-items: center;
+    background-color: #fffbf8;
+    border: 1px solid #f9ede5;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 5rem;
+    padding: 1.875rem;
+}
+
+#Reviews-tab-pane .review-header .review-title{
+    margin-bottom: 30px;
+}
+#Reviews-tab-pane .review-header .box-star{
+    margin-left: 25px;
+}
+#Reviews-tab-pane .review-header .box-star i{
+    color: rgba(var(--star-yellow), 1);
+    font-size: 20px;
+}
+#Reviews-tab-pane .review-header .box-star p{
+    color: #ee4d2d;
+    font-size: 25px;
+}
+#Reviews-tab-pane .review-header .box-star p span{
+    color: #ee4d2d;
+    font-size: 35px;
+}
+#Reviews-tab-pane .review-header .select-button .box-button{
+    margin-left: 70px;
+    width: 50%;
+}
+#Reviews-tab-pane .review-header .select-button .box-button button{
+    margin-right: 15px;
+    border: 1px solid #d6d6d6;
+}
+#Reviews-tab-pane .review-header .select-button .box-button button:hover{
+    background-color: #ececec;
+}
+#Reviews-tab-pane .review-header .select-button .box-button button.active{
+    border: 1px solid #ee4d2d;;
+    color: #ee4d2d;;
+}
+#Reviews-tab-pane .review-content .review-item{
+    width: 100%;
+    display: flex;
+}
+#Reviews-tab-pane .review-content .avt-user img{
+    width: 50px;
+    margin-top: 7px;
+}
+#Reviews-tab-pane .review-content .thong-tin{
+    margin-left: 10px;
+    width: 100%;
+}
+#Reviews-tab-pane .review-content .thong-tin .user-name{
+    font-size: 16px;
+    color: rgba(0, 0, 0, .87);
+}
+#Reviews-tab-pane .review-content .thong-tin .rating i{
+    font-size: 20px;
+}
+#Reviews-tab-pane .review-content .thong-tin .date{
+    color: rgba(0, 0, 0, .54);
+    font-size: 15px;
+    margin-bottom: .9375rem;
+    margin-top: .25rem;
+}
+#Reviews-tab-pane .review-content .thong-tin .noi-dung .noi-dung-text{
+    font-size: 18px;
+    color: rgba(0, 0, 0, .90);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+#Reviews-tab-pane .review-content .thong-tin .rating i{
+    color: rgba(var(--star-yellow), 1);
+    font-size: 16px;
+}
+#Reviews-tab-pane .review-content .thong-tin .noi-dung .noi-dung-img img{
+    width: 80px;
+    height: 80px;
+    border: 1px solid #0000002b;
+    margin-right: 10px;
+}
+
+#Reviews-tab-pane .review-item{
+    padding: 0px 0px 35px 10px;
+    border-bottom: 1px solid #bcb8b8;
+}
+#Reviews-tab-pane .review-item:not(:first-child){
+    padding-top: 20px;
+}
+
+#Reviews-tab-pane .review-item .phan-hoi{
+    background-color: #f5f5f5;
+    padding: 15px;
+}
+#Reviews-tab-pane .review-item .phan-hoi p{
+    color: #000;
+    font-size: 18px;
+}
+#Reviews-tab-pane .review-item .phan-hoi div span{
+    color: #6a6a6a;
+    font-size: 15px;
+}
+
+
 
 

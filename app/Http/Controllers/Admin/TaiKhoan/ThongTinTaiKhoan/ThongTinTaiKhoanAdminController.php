@@ -26,7 +26,7 @@ class ThongTinTaiKhoanAdminController extends Controller
 
     public function showThongTinTaiKhoanAdmin()
     {
-        $tai_khoan = Auth::user();
+        $tai_khoan = Auth::guard('admin')->user();
 
         $this->views['dia_chi'] = DiaChi::with('tinhThanhPho','quanHuyen','phuongXa')
                         ->where('user_id',$tai_khoan->id)
@@ -49,7 +49,7 @@ class ThongTinTaiKhoanAdminController extends Controller
 
     public function updateThongTinTaiKhoanAdmin(UpdateThongTinTaiKhoanRequest $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
         $dia_chi = DiaChi::where('user_id',$user->id)->orderBy('trang_thai','ASC')->first();
         $dataUpdate = [
             'ho_va_ten' => $request->ho_va_ten,
@@ -58,7 +58,7 @@ class ThongTinTaiKhoanAdminController extends Controller
         ];
 
         $dataUpdateDiaChi = [
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::guard('admin')->user()->id,
             'ho_va_ten_nhan' => $request->ho_va_ten,
             'so_dien_thoai_nhan' => $request->so_dien_thoai,
             'ma_tinh_thanh_pho' => $request->tinh_thanh_pho,
@@ -99,7 +99,7 @@ class ThongTinTaiKhoanAdminController extends Controller
 
     public function doiMatKhauAdmin(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('admin')->user();
 
         $validate = Validator::make(
             $request->all(),
@@ -110,7 +110,7 @@ class ThongTinTaiKhoanAdminController extends Controller
                         // $attribute: tên của trường (trong trường hợp này là 'current_password')
                         // $value: giá trị mà người dùng đã nhập (mật khẩu hiện tại)
                         // $fail: closure để thông báo lỗi nếu mật khẩu không đúng
-                        if (!Hash::check($value, Auth::user()->password)) {
+                        if (!Hash::check($value, Auth::guard('admin')->user()->password)) {
                             $fail('Mật khẩu hiện tại không đúng !');
                         }
                     }

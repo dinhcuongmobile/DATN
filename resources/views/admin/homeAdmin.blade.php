@@ -10,87 +10,6 @@
             <h1 class="h3 mb-0 text-gray-800">Trang chủ quản trị</h1>
         </div>
 
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                    Thành viên</div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $tongTaiKhoan }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-users fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Đơn hàng</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tongDonHang }}</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-cart-arrow-down fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Đánh Giá</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">1</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comment-alt fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Lượt Xem</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $tongLuotXem }}
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-eye fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
 
             <!-- Area Chart -->
@@ -114,7 +33,6 @@
                             </div>
                             <div class="col-md-3">
                                 <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                                <br>
                                 <button type="button"
                                     class="btn btn-success form-control align-items-center justify-content-center col-6"
                                     id="btn-dashboard-filter">
@@ -129,8 +47,9 @@
                                 <p>
                                     Lọc theo:
                                     <select class="dashboard-filter-by form-control" id="dashboard-filter-by">
-                                        <option value="thangNay">Tháng này</option>
+                                        <option value="30ngay">--Chọn--</option>
                                         <option value="7ngay">7 ngày qua</option>
+                                        <option value="thangNay">Tháng này</option>
                                         <option value="thangTruoc">Tháng trước</option>
                                         <option value="365NgayQua">365 ngày qua</option>
                                     </select>
@@ -152,83 +71,89 @@
             <!-- Thứ hạng sản phẩm -->
             <div class="col-lg-6">
                 <div class="card shadow mb-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Sản Phẩm</h6>
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-pills mb-3" id="product-ranking-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="by-sales-tab" data-toggle="pill" href="#by-sales"
-                                    role="tab">Theo Doanh Số</a>
+                                <a class="nav-link active" id="by-sales-tab" data-toggle="pill" href="#by-sales" role="tab">Theo Doanh Số</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="product-ranking-tabContent">
                             <div class="tab-pane fade show active" id="by-sales" role="tabpanel">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Thứ Hạng</th>
-                                            <th>Thông Tin Sản Phẩm</th>
-                                            <th>Doanh Thu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($thongKeSanPhams as $index => $item)
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"> {{ $item->ten_san_pham }}</td>
-                                                <td> {{$item->tong_doanh_thu}} VND</td>
+                                                <th>Thứ Hạng</th>
+                                                <th>Thông Tin Sản Phẩm</th>
+                                                <th>Doanh Thu</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($thongKeSanPhams as $index => $item)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>
+                                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px">
+                                                        {{ $item->ten_san_pham }}
+                                                    </td>
+                                                    <td>{{ $item->tong_doanh_thu }} VND</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- Các tab khác có thể thêm vào đây -->
                         </div>
                     </div>
                 </div>
             </div>
-
+        
             <!-- Thứ hạng ngành hàng -->
             <div class="col-lg-6">
                 <div class="card shadow mb-4">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h6 class="m-0 font-weight-bold text-primary">Thứ Hạng Danh Mục</h6>
                     </div>
                     <div class="card-body">
                         <ul class="nav nav-pills mb-3" id="industry-ranking-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="by-sales-industry-tab" data-toggle="pill"
-                                    href="#by-sales-industry" role="tab">Theo Doanh Số</a>
+                                <a class="nav-link active" id="by-sales-industry-tab" data-toggle="pill" href="#by-sales-industry" role="tab">Theo Doanh Số</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="industry-ranking-tabContent">
                             <div class="tab-pane fade show active" id="by-sales-industry" role="tabpanel">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Thứ Hạng</th>
-                                            <th>Danh Mục</th>
-                                            <th>Doanh Thu</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($thongKeDanhMucs as $index => $item)
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"> {{ $item->ten_danh_muc }}</td>
-                                                <td>{{$item->tong_doanh_thu}} VND</td>
+                                                <th>Thứ Hạng</th>
+                                                <th>Danh Mục</th>
+                                                <th>Doanh Thu</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($thongKeDanhMucs as $index => $item)
+                                                <tr>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>
+                                                        <img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px">
+                                                        {{ $item->ten_danh_muc }}
+                                                    </td>
+                                                    <td>{{ $item->tong_doanh_thu }} VND</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /.container-fluid -->
+        </div>                      
     </div>
 @endsection
 
@@ -268,7 +193,7 @@
                 // the chart.
 
                 // The name of the data record attribute that contains x-values.
-                xkey: 'ngay_tao',
+                xkey: 'ngay_ban',
                 // A list of names of data record attributes that contain y-values.
                 ykeys: ['tong_don_hang', 'tong_thanh_toan'],
                 // Labels for the ykeys -- will be displayed when you hover over the
@@ -348,5 +273,9 @@
                 });
             })
         })
+        $(document).on('click', '#btn-xem-them-danh-muc', function () {
+        let offset = $(this).data('offset');
+        let limit = $(this).data('limit');
+    });
     </script>
 @endsection

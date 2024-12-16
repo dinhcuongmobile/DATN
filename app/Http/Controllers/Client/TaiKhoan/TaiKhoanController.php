@@ -38,11 +38,15 @@ class TaiKhoanController extends Controller
 
     public function dangKy(DangKyRequest $request)
     {
+        do {
+            $email_verification_token = Str::random(10);
+        } while (DB::table('users')->where('email_verification_token', $email_verification_token)->exists());
+
         $dataInsert = [
             'ho_va_ten' => $request->ho_va_ten,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'email_verification_token' => Str::random(10),
+            'email_verification_token' => $email_verification_token,
             'vai_tro_id' => 3,
             'trang_thai' => 2,
             'created_at' => now()
@@ -70,20 +74,18 @@ class TaiKhoanController extends Controller
         }
     }
 
-    public function verifyEmail($token)
+    public function verifyEmail(string $token)
     {
         $user = User::where('email_verification_token', $token)
             ->whereNull('email_verified_at')
-            ->firstOrFail();
-
+            ->first();
         if (!$user) {
             return redirect()->route('tai-khoan.dang-nhap')
                 ->with('error', 'Xác thực email không hợp lệ hoặc đã được thực hiện.');
         }
 
-        if (User::where('email_verification_token', $token)
-            ->whereNull('email_verified_at')->update(['email_verified_at' => now(), 'email_verification_token' => null, 'trang_thai' => 0])
-        ) {
+        $result = $user->update(['email_verified_at' => now(), 'email_verification_token' => null, 'trang_thai' => 0]);
+        if ($result) {
             return redirect()->route('tai-khoan.dang-nhap')
                 ->with('success', 'Email đã được xác nhận thành công! Mời bạn đăng nhập.');
         }
@@ -91,10 +93,14 @@ class TaiKhoanController extends Controller
 
     public function guiLaiEmail($email)
     {
-        $user = User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        $user = User::where('email', $email)->whereNull('email_verified_at')->first();
 
         if ($user) {
-            $user->email_verification_token = Str::random(10);
+            do {
+                $email_verification_token = Str::random(10);
+            } while (DB::table('users')->where('email_verification_token', $email_verification_token)->exists());
+
+            $user->email_verification_token = $email_verification_token;
             $user->save();
 
             Mail::to($user->email)->queue(new UserRegistered($user));

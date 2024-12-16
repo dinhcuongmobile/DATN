@@ -9,19 +9,23 @@ class Message extends Model
 {
     use HasFactory;
 
-    protected $table = 'messages';
-
     protected $fillable = [
         'user_id',
         'receiver_id',
         'message',
-        'is_admin',
+        'sender_role',
     ];
 
-    public $timestamps = false;
+    //nguoi gui
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
-    ];
+    // admin
+    public function receiver()
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
 }
+

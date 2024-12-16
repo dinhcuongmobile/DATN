@@ -45,8 +45,14 @@ document.querySelectorAll(".address-option #address-billing-0").forEach(function
                 document.querySelector('.tongPhiVanChuyen').textContent = "0đ";
                 document.querySelector('.giamTienVanChuyen').textContent = "0đ";
                 document.querySelector('.tongThanhToan').textContent = "0đ";
+                const namadXuActive = document.querySelector('.divTongCoin div.active');
+                let namadXu=0;
+                if(namadXuActive){
+                    namadXu = parseInt(document.querySelector('.divTongCoin .tongCoin').textContent);
+                }
+
                 const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
-                document.querySelectorAll('#popup-voucher input[name="ma_giam_gia_van_chuyen"]').forEach((input) => {
+                document.querySelectorAll('#popup-voucher input[type="radio"][name="ma_giam_gia_van_chuyen"]').forEach((input) => {
                     input.checked = false;
                 });
 
@@ -62,11 +68,11 @@ document.querySelectorAll(".address-option #address-billing-0").forEach(function
                     document.querySelector('.tongPhiVanChuyen').textContent = `${tongPhiVanChuyen.toLocaleString('vi-VN')}đ`;
 
                     // Cập nhật tổng tiền thanh toán
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen - namadXu).toLocaleString('vi-VN')}đ`;
 
                 } else {
                     const giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.]/g, '')) || 0;
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + giamTienDonHang).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + giamTienDonHang - namadXu).toLocaleString('vi-VN')}đ`;
                     document.querySelector('#tienPhiShip').textContent = "0đ";
                 }
             },
@@ -151,7 +157,11 @@ function chonMaKhuyenMai() {
                 if (response.success) {
                     const phiShipGoc = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
                     const thanhTienGoc = parseFloat(document.querySelector('.summary-total .thanhTien').textContent.replace(/[đ,.]/g, '')) || 0;
-
+                    const namadXuActive = document.querySelector('.divTongCoin div.active');
+                    let namadXu=0;
+                    if(namadXuActive){
+                        namadXu = parseInt(document.querySelector('.divTongCoin .tongCoin').textContent);
+                    }
                     // Cập nhật giảm giá vận chuyển
                     let tienGiamGiaVanChuyen = 0;
                     if (response.giamGiaVanChuyen) {
@@ -173,7 +183,7 @@ function chonMaKhuyenMai() {
                     // Cập nhật tổng tiền thanh toán
                     const tongTienHang = parseFloat(document.querySelector('.tongTienHang').textContent.replace(/[đ,.]/g, '')) || 0;
                     const tongPhiVanChuyen = parseFloat(document.querySelector('.tongPhiVanChuyen').textContent.replace(/[đ,.]/g, '')) || 0;
-                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen).toLocaleString('vi-VN')}đ`;
+                    document.querySelector('.tongThanhToan').textContent = `${(tongTienHang + tongPhiVanChuyen - namadXu).toLocaleString('vi-VN')}đ`;
 
                     // Đóng popup
                     $('#popup-voucher').modal('hide');
@@ -194,40 +204,77 @@ function datHang(){
             $('#add-address-checkout').modal('show');
             return;
         }
+
+        let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let tongThanhToan = parseFloat(document.querySelector('.tongThanhToan').textContent.replace(/[đ,.]/g, '')) || 0;
         let giamTienVanChuyen = parseFloat(document.querySelector('.giamTienVanChuyen').textContent.replace(/[đ,.-]/g, '')) || 0;
         let giamTienDonHang = parseFloat(document.querySelector('.giamTienDonHang').textContent.replace(/[đ,.-]/g, '')) || 0;
-        let phuongThucThanhToan = parseInt(document.querySelector('.payment-options input[name="phuong_thuc_thanh_toan"]:checked').value);
         let phiShip = parseFloat(document.querySelector('#tienPhiShip').textContent.replace(/[đ,.]/g, '')) || 0;
         let ghiChu = document.querySelector('.ghi-chu input').value || "";
         let soCoin = document.querySelector('.summary-total .divTongCoin .active') ? parseInt(document.querySelector('.summary-total .tongCoin').textContent) || 0 : 0;
 
-        $.ajax({
-            type: 'POST',
-            url: '/gio-hang/dat-hang',
-            data: {
-                _token: document.querySelector('.tokenDatHang').value,
-                dia_chi_id: diaChiId.getAttribute('data-id'),
-                tong_thanh_toan: tongThanhToan,
-                phuong_thuc_thanh_toan: phuongThucThanhToan,
-                ghi_chu: ghiChu,
-                giamTienVanChuyen: giamTienVanChuyen,
-                giamTienDonHang: giamTienDonHang,
-                phiShip: phiShip,
-                soCoin: soCoin
-            },
-            success: function(response) {
-                if(response.success){
-                    sessionStorage.setItem("activeTab", "order");
-                    window.location.href="/tai-khoan/thong-tin-tai-khoan";
-                }
+        if(phuongThucThanhToan==0){
+            $.ajax({
+                type: 'POST',
+                url: '/gio-hang/dat-hang-cod',
+                data: {
+                    _token: document.querySelector('.tokenDatHang').value,
+                    dia_chi_id: diaChiId.getAttribute('data-id'),
+                    tong_thanh_toan: tongThanhToan,
+                    ghi_chu: ghiChu,
+                    giamTienVanChuyen: giamTienVanChuyen,
+                    giamTienDonHang: giamTienDonHang,
+                    phiShip: phiShip,
+                    soCoin: soCoin
+                },
+                success: function(response) {
+                    if(response.success){
+                        sessionStorage.setItem("activeTab", "order");
+                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                    }else{
+                        if(response.message){
+                            document.querySelector('#thongbaothemgiohang').style.display='block';
+                            document.querySelector('#thongbaothemgiohang #cart-message').textContent= `${response.message}`;
+                            setTimeout(() => {
+                                document.querySelector('#thongbaothemgiohang').style.display = 'none';
+                            }, 1400);
+                        }
+                        setTimeout(() => {
+                            window.location.href="/gio-hang/";
+                        }, 1800);
+                    }
 
-            },
-            error: function(error) {
-                console.log(error);
-                alert("Có lỗi xảy ra khi gửi yêu cầu.");
-            }
-        });
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Có lỗi xảy ra khi gửi yêu cầu.");
+                }
+            });
+        }else{
+            $.ajax({ 
+                type: 'GET',
+                url: '/gio-hang/dat-hang-chuyen-khoan',
+                data: {
+                    dia_chi_id: diaChiId.getAttribute('data-id'),
+                    tong_thanh_toan: tongThanhToan,
+                    ghi_chu: ghiChu,
+                    giamTienVanChuyen: giamTienVanChuyen,
+                    giamTienDonHang: giamTienDonHang,
+                    phiShip: phiShip,
+                    soCoin: soCoin
+                },
+                success: function(response) {
+                    if(response.success){
+                        window.location.href='/gio-hang/create-payment/';
+                    }
+
+                },
+                error: function(error) {
+                    console.log(error);
+                    alert("Có lỗi xảy ra khi gửi yêu cầu.");
+                }
+            });
+        }
 
     });
 }

@@ -30,7 +30,6 @@ class AuthAdminController extends Controller
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             if (Auth::guard('admin')->user()->trang_thai == 0) {
                 if (Auth::guard('admin')->user()->vai_tro_id == 1 || Auth::guard('admin')->user()->vai_tro_id == 2) {
-                    // return redirect()->route('admin.index');
                     return response()->json([
                         'success' => true,
                         'redirect_url' => route('admin.index'),
@@ -134,7 +133,7 @@ class AuthAdminController extends Controller
             'success' => true,
             'redirect_url' => url()->previous(),
         ]);
-        
+
     }
 
     public function guiLaiOtp(Request $request)

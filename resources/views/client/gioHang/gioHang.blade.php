@@ -168,20 +168,45 @@
                         <div class="swiper-wrapper">
                             @foreach ($san_pham_moi_nhat as $item)
                                 <div class="swiper-slide">
-                                    <div class="cart-box"> <a href="product.html"> <img
-                                                src="../assets/images/user/4.jpg" alt=""></a>
-                                        <div> <a href="product.html">
-                                                <h5>Polo-neck Body Dress</h5>
+                                    <div class="cart-box">
+                                        <a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
+                                            <img class="style-border" src="{{Storage::url($item->hinh_anh)}}" alt="err">
+                                        </a>
+                                        <div> <a href="{{route('san-pham.chi-tiet-san-pham',$item->id)}}">
+                                                <h5>{{$item->ten_san_pham}}</h5>
                                             </a>
-                                            <h6>Sold By: <span>Brown Shop</span></h6>
-                                            <div class="category-dropdown"><select class="form-select" name="carlist">
-                                                    <option value="">Best color</option>
-                                                    <option value="">White</option>
-                                                    <option value="">Black</option>
-                                                    <option value="">Green</option>
-                                                </select></div>
-                                            <p>$19.90 <span> <del>$14.90 </del></span></p><a class="btn"
-                                                href="#">Add</a>
+                                            <div class="color-box">
+                                                <ul class="color-variant">
+                                                    {{-- bien the mau sac --}}
+                                                    @foreach ($item->bienThes->unique('ma_mau')->take(4) as $mau_sac)
+                                                        <li
+                                                            style="background-color: {{ $mau_sac->ma_mau }}; border: 1px solid #0000003b;
+                                                            width: 15px; height: 15px; border-radius: 50%"
+                                                        >
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                                {{-- danh gia --}}
+                                                @php
+                                                    $avg_rating = $item->danhGias->avg('so_sao');
+                                                @endphp
+
+                                                <span>
+                                                    <i class="fa-solid fa-star text-warning"></i>
+                                                    @if ($avg_rating > 0)
+                                                        {{ $avg_rating ? number_format($avg_rating, 1) : '' }}
+                                                    @else
+                                                        (Chưa có đánh giá)
+                                                    @endif
+                                                </span>
+                                            </div>
+                                            @php
+                                                $gia_khuyen_mai = $item->gia_san_pham - ($item->gia_san_pham * $item->khuyen_mai) / 100;
+                                            @endphp
+                                            <p>
+                                                {{ number_format($gia_khuyen_mai, 0, ',', '.') }}đ
+                                                <del>{{ number_format($item->gia_san_pham, 0, ',', '.') }}đ</del>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

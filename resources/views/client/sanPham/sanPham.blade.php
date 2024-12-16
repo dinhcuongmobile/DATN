@@ -87,23 +87,6 @@
                             <h5>Thoát </h5><i class="back-button fa-solid fa-xmark"></i>
                         </div>
                         <div class="accordion" id="accordionPanelsStayOpenExample">
-                            <div class="search-box"><input type="search" name="text" placeholder="Tìm kiếm..."><i
-                                    class="iconsax" data-icon="search-normal-2"></i></div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Từ
-                                            khóa</span><span>Xem tất cả</span></button></h2>
-                                <div class="accordion-collapse collapse show" id="panelsStayOpen-collapse">
-                                    <div class="accordion-body">
-                                        <ul class="tags">
-                                            <li> <a href="#">T-Shirt <i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Handbags<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Trends<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Minimog<i class="iconsax" data-icon="add"></i></a></li>
-                                            <li> <a href="#">Denim<i class="iconsax" data-icon="add"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapseFour"><span>Lọc theo giá</span></button>
@@ -142,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="accordion-item">
-                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>vận chuyển
+                                <h2 class="accordion-header tags-header"><button class="accordion-button"><span>Vận Chuyển
                                             & Giao hàng</span><span></span></button></h2>
                                 <div class="accordion-collapse collapse show" id="panelsStayOpen-collapseSeven">
                                     <div class="accordion-body">
@@ -198,22 +181,26 @@
                             <div id="productList"
                                 class="row-cols-lg-4 row-cols-md-3 row-cols-2 grid-section view-option row g-3 g-xl-4">
                                 @foreach ($san_phams as $item)
+                                    @php
+                                        $isWishlist = $item->yeuThich->isNotEmpty(); // Kiểm tra trạng thái yêu thích
+                                    @endphp 
                                     <div>
                                         <div class="product-box-3">
                                             <div class="img-wrapper">
                                                 <div class="label-block">
-                                                    <a class="label-2 wishlist-icon" href="#" tabindex="0">
-                                                        <i class="iconsax" data-icon="heart" title="Wishlist">
+                                                    <a class="label-2 wishlist-icon" style="background-color: {{ $isWishlist ? '#e67e22' : 'rgba(255,255,255,1)' }}"
+                                                    tabindex="0" data-wishlistIdSanPham="{{ $item->id }}">
+                                                        <i class="iconsax" data-icon="heart" style="--Iconsax-Color: {{ $isWishlist ? '#fff' : 'rgba(38,40,52,1)' }}">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M12 21.6516C11.69 21.6516 11.39 21.6116 11.14 21.5216C7.32 20.2116 1.25
-                                                                                                                                                                                        15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
-                                                                                                                                                                                        12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
-                                                                                                                                                                                        15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
-                                                                                                                                                                                        6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
-                                                                                                                                                                                        19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
-                                                                                                                                                                                        12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
+                                                                    15.5616 1.25 8.69156C1.25 5.19156 4.08 2.35156 7.56 2.35156C9.25 2.35156 10.83 3.01156
+                                                                    12 4.19156C13.17 3.01156 14.75 2.35156 16.44 2.35156C19.92 2.35156 22.75 5.20156 22.75 8.69156C22.75
+                                                                    15.5716 16.68 20.2116 12.86 21.5216C12.61 21.6116 12.31 21.6516 12 21.6516ZM7.56 3.85156C4.91 3.85156 2.75
+                                                                    6.02156 2.75 8.69156C2.75 15.5216 9.32 19.3216 11.63 20.1116C11.81 20.1716 12.2 20.1716 12.38 20.1116C14.68
+                                                                    19.3216 21.26 15.5316 21.26 8.69156C21.26 6.02156 19.1 3.85156 16.45 3.85156C14.93 3.85156 13.52 4.56156
+                                                                    12.61 5.79156C12.33 6.17156 11.69 6.17156 11.41 5.79156C10.48 4.55156 9.08 3.85156 7.56 3.85156Z"
                                                                     fill="#292D32">
                                                                 </path>
                                                             </svg>
@@ -223,8 +210,7 @@
                                                 <div class="product-image style-border">
                                                     <a class="pro-first bg-size"
                                                         href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}"
-                                                        style="
-                                                        background-image: url({{ Storage::url($item->hinh_anh) }});
+                                                        style="background-image: url({{ Storage::url($item->hinh_anh) }});
                                                         background-size:cover;
                                                         background-position: center;
                                                         background-repeat: no-repeat;
@@ -248,23 +234,23 @@
                                                     </a>
                                                 </div>
                                                 <div class="cart-info-icon">
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#quick-view"
+                                                    <a class="quickViewClick" data-id="{{$item->id}}" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view"
                                                         tabindex="0">
-                                                        <i class="iconsax" data-icon="eye" title="Quick view">
+                                                        <i class="iconsax" data-icon="eye" title="Xem nhanh">
                                                             <svg width="24" height="24" viewBox="0 0 24 24"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.42004 13.98 8.42004
-                                                                                                                                                                                        12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
-                                                                                                                                                                                        15.58 10.02 15.58 12Z"
+                                                                    12C8.42004 10.02 10.02 8.42004 12 8.42004C13.98 8.42004
+                                                                    15.58 10.02 15.58 12Z"
                                                                     stroke="#292D32" stroke-width="1.5"
                                                                     stroke-linecap="round" stroke-linejoin="round">
                                                                 </path>
                                                                 <path
                                                                     d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81
-                                                                                                                                                                                        21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
-                                                                                                                                                                                        5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
-                                                                                                                                                                                        8.46997 20.27 12 20.27Z"
+                                                                    21.11 9.39997C18.82 5.79997 15.53 3.71997 12 3.71997C8.46997 3.71997 5.17997
+                                                                    5.79997 2.88997 9.39997C1.98997 10.81 1.98997 13.18 2.88997 14.59C5.17997 18.19
+                                                                    8.46997 20.27 12 20.27Z"
                                                                     stroke="#292D32" stroke-width="1.5"
                                                                     stroke-linecap="round" stroke-linejoin="round">
                                                                 </path>
@@ -312,7 +298,8 @@
                                                         }
                                                     @endphp
                                                     <li>({{ $danh_gia }})</li>
-                                                </ul><a href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
+                                                </ul>
+                                                <a href="{{ route('san-pham.chi-tiet-san-pham', $item->id) }}">
                                                     <h6>{{ $item->ten_san_pham }}</h6>
                                                 </a>
                                                 @php

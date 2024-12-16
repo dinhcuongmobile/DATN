@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
     <title>Admin</title>
@@ -62,26 +63,28 @@
             </div>
 
             <!-- quan ly tai khoan -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
-                            viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
-                            style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
+            @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
+                                viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
+                                style="background-color: #48dbfb;">
+                                <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                                <span>Thêm mới</span></a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            @endif
 
             <!-- quan ly danh muc -->
             <li class="nav-item">
@@ -170,20 +173,38 @@
                             Giao </a>
                         <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-giao') }}">Danh Sách Đã
                             Giao</a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}">Danh Sách
+                            Chuyển Khoản</a>
                         <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-huy') }}">Danh Sách Đã Hủy</a>
-                        <a class="collapse-item" href="#">Trả Hàng/Hoàn Tiền</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- quan ly danh gia -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="true" aria-controls="collapseSix">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Quản lý đánh giá</span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.chua-phan-hoi') }}">Danh sách chưa phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.da-phan-hoi') }}">Danh sách đã phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach-bi-an') }}">Danh sách bị ẩn</a>
                     </div>
                 </div>
             </li>
 
             <!-- quan ly tin tuc -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="true" aria-controls="collapseSix">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
+                    aria-expanded="true" aria-controls="collapseSevent">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Quản lý tin tức</span>
                 </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                <div id="collapseSevent" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach') }}">Danh mục tin
                             tức</a>
@@ -193,22 +214,33 @@
                     </div>
                 </div>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- quan ly doanh thu nhan vien -->
+            <li class="nav-item mb-3">
+                <a class="nav-link" href="{{ route('thong-ke.doanh-thu-nhan-vien') }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu nhân viên</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <li class="nav-item  mb-3">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
-                    aria-expanded="true" aria-controls="collapseSevent">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
+                    aria-expanded="true" aria-controls="collapseNine">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
+                <div id="collapseNine" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
                         <a class="collapse-item" href="{{ route('lien-he.danh-sach') }}">Quản lý liên hệ</a>
-                        <a class="collapse-item" href="#">Quản lý đánh giá</a>
                     </div>
                 </div>
             </li>
@@ -240,7 +272,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter" id="notificationCounter">0+</span>
+                                <span class="badge badge-danger badge-counter" id="notificationCounter">{{$countThongBao}}+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -250,7 +282,7 @@
                                     <p class="text-center text-gray-500">Đang tải thông báo...</p>
                                 </div>
                                 <a class="dropdown-item text-center small text-gray-500" href="#"
-                                    data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị Thông Báo</a>
+                                    data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị tất cả</a>
                             </div>
                         </li>
                         <!-- Modal -->
@@ -272,127 +304,65 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
-                        <!-- Modal for displaying all notifications -->
-                        {{-- <div class="modal fade" id="showAllAlertsModal" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tất Cả Thông Báo</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                                        <!-- Display all the notifications here -->
-                                        <!-- Thông báo đơn hàng mới -->
-                                        @foreach ($donHangMoiAll as $item)
-                                            <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Bạn có đơn hàng
-                                                    mới!</strong></p>
-                                            <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small>
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Thông báo đơn hàng đã giao -->
-                                        @foreach ($donHangDaGiaoAll as $item)
-                                            <p><strong>Mã đơn hàng: {{ $item->ma_don_hang }} - Đã giao thành
-                                                    công!</strong></p>
-                                            <p><small>{{ \Carbon\Carbon::parse($item->ngay_tao)->format('d-m-Y') }}</small>
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Thông báo liên hệ mới -->
-                                        @foreach ($lienHeMoiAll as $item)
-                                            <p><strong>Liên hệ mới từ: {{ $item->ho_va_ten }}</strong></p>
-                                            <p><small>{{ $item->created_at }}</small></p>
-                                        @endforeach
-
-                                        <!-- Thông báo liên hệ đã phản hồi -->
-                                        @foreach ($lienHeDaPhanHoiAll as $item)
-                                            <p><strong>Liên hệ từ: {{ $item->email }} đã được phản hồi!</strong></p>
-                                            <p><small>{{ $item->created_at }}</small></p>
-                                        @endforeach
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Đóng</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </div>
+                        <li class="nav-item dropdown no-arrow mx-1 liMessagesDropdown">
+                            <a class="nav-link dropdown-toggle" id="messagesDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                @if ($messages->count() > 0)
+                                    <span class="badge badge-danger badge-counter">{{ $messages->count() }}</span>
+                                @endif
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in divMessagesDropdown"
+                                 aria-labelledby="messagesDropdown" style="width: 350px; max-height: 600px; overflow-y: auto;">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Tin nhắn
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
-                                        <div class="status-indicator bg-success"></div>
+
+                                @foreach ($messages as $value)
+                                    <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
+                                       onclick="openChat('{{ $value->sender->ho_va_ten }}', '{{ $value->user_id }}')">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}" alt="...">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">{{ Str::limit($value->message, 30) }}</div>
+                                            <div class="small text-gray-500">{{ $value->sender->ho_va_ten }} · {{ $value->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+
+                                @if ($messages->isEmpty())
+                                    <div class="text-center p-3">
+                                        <span class="text-gray-500">Không có tin nhắn mới</span>
                                     </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_2.svg') }}" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="{{ asset('admin/img/undraw_profile_3.svg') }}" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy
-                                            with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle"
-                                            src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More
-                                    Messages</a>
+                                @endif
                             </div>
                         </li>
+
+                        <!-- Khu vực chat -->
+                        <div class="chat-popup" id="chatPopup" data-userid="{{Auth::guard('admin')->user()->id}}">
+                            <div class="chat-header">
+                                <span class="chat-title"></span>
+                                <span class="close" onclick="closeChat()">&times;</span>
+                            </div>
+                            <div class="chat-body">
+                            </div>
+                            <div class="chat-footer">
+                                <input type="text" placeholder="Nhập tin nhắn..." id="chatInput" />
+                                <button>Gửi</button>
+                            </div>
+                        </div>
+                        @vite(['resources/js/app.js'])
+                        <script src="{{ asset('admin/js/chat.js') }}"></script>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->ho_va_ten }}</span>
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->ho_va_ten }}</span>
                                 <i class="fas fa-fw fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -423,7 +393,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2024</span>
+                        <span>Copyright &copy; Namad Store</span>
                     </div>
                 </div>
             </footer>
@@ -485,231 +455,7 @@
 
     <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
-    <script>
-        $(document).ready(function() {
-            // Hàm định dạng ngày giờ
-            function formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleString('vi-VN', { 
-                    day: '2-digit', 
-                    month: '2-digit', 
-                    year: 'numeric', 
-                    hour: '2-digit', 
-                    minute: '2-digit', 
-                    second: '2-digit' 
-                });
-            }
-    
-            // Hàm cập nhật thông báo
-            function updateNotifications() {
-                $.ajax({
-                    url: '{{ route('thong-bao.thong-bao-admin') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        // Cập nhật số lượng thông báo
-                        $('#notificationCounter').text(response.tongSoLuongTB);
-    
-                        // Render nội dung thông báo (ban đầu chỉ lấy 2 thông báo)
-                        let content = '';
-                        response.donHangMoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="don-hang/chi-tiet-don-hang/${item.id}">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-box text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${item.ngay_tao}</div>
-                                    <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.donHangDaGiao.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="don-hang/chi-tiet-don-hang/${item.id}">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-truck text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.ngay_cap_nhat)}</div>
-                                    <span class="font-weight-bold">Đơn hàng: ${item.ma_don_hang} - Đã giao thành công!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.lienHeMoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-chua-phan-hoi">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-comments text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.created_at)}</div>
-                                    <span class="font-weight-bold">Bạn có liên hệ mới từ ${item.ho_va_ten}!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        response.lienHeDaPhanHoi.forEach(item => {
-                            content += `
-                            <a class="dropdown-item d-flex align-items-center" href="lien-he/danh-sach-da-phan-hoi">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-info">
-                                        <i class="fas fa-check-circle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">${formatDate(item.created_at)}</div>
-                                    <span class="font-weight-bold">Liên hệ từ ${item.email} đã được phản hồi!</span>
-                                </div>
-                            </a>
-                            `;
-                        });
-    
-                        if (content === '') {
-                            content = '<p class="text-center text-gray-500">Không có thông báo mới</p>';
-                        }
-    
-                        $('#notificationContent').html(content);
-                    },
-                    error: function() {
-                        $('#notificationContent').html('<p class="text-center text-danger">Không thể tải thông báo</p>');
-                    }
-                });
-            }
-    
-            // Gọi hàm cập nhật thông báo khi bấm vào "Hiển Thị Thông Báo"
-            $('#alertsDropdown').on('click', function() {
-                $.ajax({
-                    url: '{{ route('thong-bao.thong-bao-admin') }}',
-                    method: 'GET',
-                    success: function(response) {
-                        let modalContent = '';
-                        
-                        // Render tất cả thông báo khi mở modal
-                        response.donHangMoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Đơn hàng: ${item.ma_don_hang} - Bạn có đơn hàng mới!</h5>
-                                    <p>Ngày tạo: ${item.ngay_tao}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.donHangDaGiaoFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Đơn hàng: ${item.ma_don_hang} - Đã giao thành công!</h5>
-                                    <p>Ngày cập nhật: ${formatDate(item.ngay_cap_nhat)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.lienHeMoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Liên hệ từ ${item.ho_va_ten}!</h5>
-                                    <p>Ngày tạo: ${formatDate(item.created_at)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        response.lienHeDaPhanHoiFull.forEach(item => {
-                            modalContent += `
-                            <div class="media">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Liên hệ từ ${item.email} đã được phản hồi!</h5>
-                                    <p>Ngày phản hồi: ${formatDate(item.created_at)}</p>
-                                </div>
-                            </div>
-                            `;
-                        });
-    
-                        $('#modalNotificationContent').html(modalContent); // Thêm nội dung vào modal
-                    },
-                    error: function() {
-                        $('#modalNotificationContent').html('<p class="text-center text-danger">Không thể tải thông báo</p>');
-                    }
-                });
-            });
-            // Gọi hàm cập nhật thông báo mỗi 3 giây (3000ms)
-            setInterval(updateNotifications, 3000);
-            // Gọi ngay khi trang load để hiển thị thông báo ban đầu
-            updateNotifications();
-            Echo.channel('notifications')
-            .listen('NotificationUpdated', (e) => {
-                updateNotifications();
-            });
-        });
-    </script>
     {{-- Css Modal Thông Báo --}}
-        <style>
-        /* Hiệu ứng overlay */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Tiêu đề modal */
-        .modal-title {
-            font-weight: bold;
-            font-size: 1.5rem;
-            color: #4e73df; /* Màu xanh của SB Admin */
-        }
-
-        /* Nền của nội dung thông báo */
-        .notification-item {
-            border-bottom: 1px solid #ddd;
-            padding: 15px 10px;
-            transition: background-color 0.2s;
-        }
-        .notification-item:hover {
-            background-color: #f8f9fc; /* Màu nền khi hover */
-        }
-
-        /* Tiêu đề thông báo */
-        .notification-item h5 {
-            margin: 0;
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        /* Chi tiết thông báo */
-        .notification-item p {
-            margin: 5px 0 0;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        /* Scrollable modal */
-        .modal-body {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        /* Nút đóng */
-        .modal-header .close {
-            color: #aaa;
-        }
-        .modal-header .close:hover {
-            color: #333;
-        }
-        </style>
-
 </body>
 
 </html>

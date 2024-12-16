@@ -8,7 +8,11 @@ use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
+use App\Models\Message;
+use App\Models\SanPham;
+use App\Models\YeuThich;
 use App\Models\DanhMucTinTuc;
+use App\Models\ThongBao;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -37,29 +41,49 @@ class AppServiceProvider extends ServiceProvider
         View::composer('client.layout.main', function ($view) {
             $gio_hangs = [];
             $count_gio_hang = 0;
+            $count_yeu_thich = 0;
             $danh_mucs = DanhMuc::all();
             $userId = Auth::id();
-
+            $danhMucTinTuc = DanhMucTinTuc::all();
+            $sanPhamThich = SanPham::orderBy('luot_xem','desc')->take(6)->get();
             if (Auth::check()) {
-                $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
-                    ->where('user_id', Auth::id())
-                    ->orderBy('id', 'desc')
-                    ->get();
+                $gio_hangs = GioHang::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
+
+                $yeu_thichs = YeuThich::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
+
                 $count_gio_hang = $gio_hangs->count();
+                $count_yeu_thich = $yeu_thichs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
+            $view->with(compact(
+                'gio_hangs',
+                'count_gio_hang',
+                'count_yeu_thich',
+                'danh_mucs',
+                'userId',
+                'danhMucTinTuc',
+                'sanPhamThich'
+            ));
         });
-
-        //danh mục tin tức
-        $danh_muc_tin_tucs = DanhMucTinTuc::all();
-        view()->share('danh_muc_tin_tucs', $danh_muc_tin_tucs);
         //admin
         View::composer('admin.layout.main', function ($view) {
+            //thong bao
+            $countThongBao = ThongBao::where('trang_thai',0)->where('nguoi_nhan',1)->get()->count();
+
+            //tin nhắn
+            $messages = Message::with('sender')
+            ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
+            ->groupBy('user_id')
+            ->orderBy('id','desc') // Sắp xếp theo thời gian mới nhất
+            ->get();
             // Lấy dữ liệu từ model
             $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
-            $view->with('sub', $sub);
+            $view->with(compact(
+                'countThongBao',
+                'sub',
+                'messages',
+            ));
         });
     }
 }

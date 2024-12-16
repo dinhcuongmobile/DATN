@@ -14,6 +14,7 @@ class DonHang extends Model
     protected $fillable = [
         'ma_don_hang',
         'user_id',
+        'nguoi_ban',
         'dia_chi_id',
         'giam_gia_van_chuyen',
         'giam_gia_don_hang',
@@ -24,13 +25,13 @@ class DonHang extends Model
         'thanh_toan',
         'ghi_chu',
         'ngay_tao',
-        'ngay_cap_nhat'
+        'ngay_cap_nhat',
+        'ngay_ban'
     ];
 
     public $timestamps = false;
 
-    protected $dates = ['ngay_tao', 'ngay_cap_nhat'];
-    //Đơn Hàng Mới Nhất Lên Đầu
+    protected $dates = ['ngay_tao', 'ngay_cap_nhat', 'ngay_ban'];
     public function scopeMoiNhat($query)
     {
         return $query->orderBy('id', 'desc');
@@ -39,6 +40,11 @@ class DonHang extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function nguoiBan()
+    {
+        return $this->belongsTo(User::class, 'nguoi_ban');
     }
 
     public function diaChi()
@@ -51,8 +57,9 @@ class DonHang extends Model
         return $this->hasMany(ChiTietDonHang::class, 'don_hang_id');
     }
 
-    public function donHangHoan()
+    public function danhGia()
     {
-        return $this->hasMany(DonHangHoan::class, 'don_hang_id');
+        return $this->hasMany(DanhGia::class, 'don_hang_id');
     }
+
 }

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Models\DonHang;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ThongBao;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 
@@ -28,9 +31,23 @@ class HomeAdminController extends Controller
             'thongKeDanhMucs' => $thongKeDanhMucs,
             'tongTaiKhoan' => $tongTaiKhoan,
             'tongDonHang' => $tongDonHang,
-            'tongLuotXem' => $tongLuotXem,
+            'tongLuotXem' => $tongLuotXem
         ]);
     }
+
+    public function fetchMessages($receiver_id)
+    {
+        // Lấy tin nhắn giữa người dùng hiện tại và receiver_id
+        $messages = Message::with('sender')->where('user_id', $receiver_id)
+                ->orWhere('receiver_id', $receiver_id)->get();
+
+        // Trả về tin nhắn dưới dạng JSON
+        return response()->json([
+
+            'messages' => $messages
+        ]);
+    }
+
 
     public function thongKeSanPham() {
         // Thống kê sản phẩm theo tổng doanh thu
@@ -84,5 +101,15 @@ class HomeAdminController extends Controller
             $tongLuotXem = Cache::get('tong_luot_xem', 0);
         }
         return $tongLuotXem;
+    }
+
+    public function thongBao(){
+        $thongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->take(5)->get();
+
+        return response()->json(['thongBao'=>$thongBao]);
+    }
+
+    public function tatCaThongBao(){
+
     }
 }

@@ -14,10 +14,11 @@ class VaiTro extends Model
     protected $fillable = [
         'vai_tro',
     ];
+    public $timestamps = false;
 
     protected $casts = [
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
     ];
 
     public function users()

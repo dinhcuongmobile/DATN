@@ -4,26 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DanhGia extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'danh_gias';
 
     protected $fillable = [
+        'don_hang_id',
         'san_pham_id',
         'user_id',
         'noi_dung',
         'so_sao',
     ];
 
-    public $timestamp = false;
-
     protected $casts = [
         'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'updated_at' => 'datetime',
     ];
+    
+    public function donHang()
+    {
+        return $this->belongsTo(DonHang::class, 'don_hang_id');
+    }
 
     public function sanPham()
     {
@@ -38,5 +43,10 @@ class DanhGia extends Model
     public function anhDanhGias()
     {
         return $this->hasMany(AnhDanhGia::class, 'danh_gia_id');
+    }
+
+    public function traLoiDanhGia()
+    {
+        return $this->hasMany(TraLoiDanhGia::class, 'danh_gia_id');
     }
 }

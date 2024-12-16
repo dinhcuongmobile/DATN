@@ -93,16 +93,16 @@ tapTopElement.addEventListener('click', function () {
            05.Tost js
    ============================*/
 
-document.querySelectorAll(".wishlist-icon").forEach(function (element) {
-    element.addEventListener("click", function () {
-        Toastify({
-            text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
-            duration: 2500,
-            close: true,
-        }).showToast();
-        i++;
-    });
-});
+// document.querySelectorAll(".wishlist-icon").forEach(function (element) {
+//     element.addEventListener("click", function () {
+//         Toastify({
+//             text: "Thành công! Sản phẩm đã được thêm vào danh sách yêu thích.!!",
+//             duration: 2500,
+//             close: true,
+//         }).showToast();
+//         i++;
+//     });
+// });
 
 
 /*====================
