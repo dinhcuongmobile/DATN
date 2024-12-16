@@ -53,9 +53,19 @@ class User extends Authenticatable
         return $this->hasMany(DanhGia::class, 'user_id');
     }
 
+    public function traLoiDanhGias()
+    {
+        return $this->hasMany(TraLoiDanhGia::class, 'user_id');
+    }
+
     public function donHangs()
     {
         return $this->hasMany(DonHang::class, 'user_id');
+    }
+
+    public function thongBaos()
+    {
+        return $this->hasMany(ThongBao::class, 'user_id');
     }
 
     public function gioHangs()
@@ -66,5 +76,25 @@ class User extends Authenticatable
     public function diaChis()
     {
         return $this->hasMany(DiaChi::class, 'user_id');
+    }
+
+    public function yeuThich()
+    {
+        return $this->hasMany(YeuThich::class, 'user_id');
+    }
+
+    public function tinTuc()
+    {
+        return $this->hasMany(TinTuc::class, 'nguoi_dang');
+    }
+
+    public function messageSender()
+    {
+        return $this->hasMany(Message::class, 'user_id');
+    }
+
+    public function messageReceiver()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
     }
 }

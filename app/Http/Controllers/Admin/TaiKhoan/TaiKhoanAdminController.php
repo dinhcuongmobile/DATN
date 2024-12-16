@@ -25,7 +25,7 @@ class TaiKhoanAdminController extends Controller
     //SHOW
     public function showTaiKhoanQTV(Request $request){
         $query = User::with('vaiTro', 'diaChis')
-                     ->where('id', '!=', Auth::user()->id)
+                     ->where('id', '!=', Auth::guard('admin')->user()->id)
                      ->where('vai_tro_id', 1)
                      ->where('trang_thai', 0);
 
@@ -38,14 +38,18 @@ class TaiKhoanAdminController extends Controller
             });
         }
 
-        $this->views['DSTKQTV'] = $query->orderBy('id', 'desc')->paginate(10);
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['DSTKQTV'] = $query->orderBy('id', 'desc')->paginate(10);
+        } else {
+            return redirect()->route('admin.index');
+        }
 
         return view('admin.taiKhoan.DSTKQTV', $this->views);
     }
 
     public function showTaiKhoanNV(Request $request){
         $query = User::with('vaiTro','diaChis')
-                     ->where('id', '!=', Auth::user()->id)
+                     ->where('id', '!=', Auth::guard('admin')->user()->id)
                      ->where('vai_tro_id', 2)
                      ->where('trang_thai', 0);
 
@@ -58,13 +62,18 @@ class TaiKhoanAdminController extends Controller
             });
         }
 
-        $this->views['DSTKNV'] = $query->orderBy('id', 'desc')->paginate(10);
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['DSTKNV'] = $query->orderBy('id', 'desc')->paginate(10);
+        } else {
+            return redirect()->route('admin.index');
+        }
+
         return view('admin.taiKhoan.DSTKNV', $this->views);
     }
 
     public function showTaiKhoanTV(Request $request){
         $query = User::with('vaiTro', 'diaChis')
-                     ->where('id', '!=', Auth::user()->id)
+                     ->where('id', '!=', Auth::guard('admin')->user()->id)
                      ->where('vai_tro_id', 3)
                      ->where('trang_thai', 0);
 
@@ -77,7 +86,12 @@ class TaiKhoanAdminController extends Controller
             });
         }
 
-        $this->views['DSTKTV'] = $query->orderBy('id', 'desc')->paginate(10);
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['DSTKTV'] = $query->orderBy('id', 'desc')->paginate(10);
+        } else {
+            return redirect()->route('admin.index');
+        }
+
         return view('admin.taiKhoan.DSTKTV', $this->views);
     }
 
@@ -93,14 +107,23 @@ class TaiKhoanAdminController extends Controller
             });
         }
 
-        $this->views['DSTKK'] = $query->orderBy('id', 'desc')->paginate(10);
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['DSTKK'] = $query->orderBy('id', 'desc')->paginate(10);
+        } else {
+            return redirect()->route('admin.index');
+        }
+
         return view('admin.taiKhoan.DSTKK', $this->views);
     }
 
     //add
     public function viewAdd(){
-        $this->views['vai_tro']= VaiTro::orderBy('id', 'desc')->get();
-        $this->views['tinh_thanh_pho']=TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['vai_tro']= VaiTro::orderBy('id', 'desc')->get();
+            $this->views['tinh_thanh_pho']=TinhThanhPho::orderBy('ma_tinh_thanh_pho','ASC')->get();
+        } else {
+            return redirect()->route('admin.index');
+        }
         return view('admin.taiKhoan.add',$this->views);
     }
 
@@ -151,8 +174,12 @@ class TaiKhoanAdminController extends Controller
 
     //update
     public function viewUpdate(int $id){
-        $this->views['tai_khoan']=User::findOrFail($id);
-        $this->views['vai_tro']= VaiTro::all();
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $this->views['tai_khoan']=User::findOrFail($id);
+            $this->views['vai_tro']= VaiTro::all();
+        } else {
+            return redirect()->route('admin.index');
+        }
 
         return view('admin.taiKhoan.update', $this->views);
     }
@@ -177,6 +204,10 @@ class TaiKhoanAdminController extends Controller
     public function khoaTaiKhoan(int $id){
         $user = User::find($id);
         if ($user) {
+            if ($user->id == 1) {
+                return redirect()->back()->with('error', 'Tài khoản Namad không thể bị khóa.');
+            }
+
             $user->update(['trang_thai' => 1]);
             return redirect()->back()->with('success', 'Bạn đã khóa tài khoản thành công !');
         } else {
@@ -199,6 +230,10 @@ class TaiKhoanAdminController extends Controller
             foreach($request->select as $id){
                 $user = User::find($id);
                 if ($user) {
+                    if ($user->id == 1) {
+                        return redirect()->back()->with('error', 'Tài khoản Namad không thể bị khóa.');
+                    }
+
                     $user->update(['trang_thai' => 1]);
                 }
             }

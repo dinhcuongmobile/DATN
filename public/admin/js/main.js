@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
+
+    eyePassword();
+    alertThongBao();
+});
+
+function eyePassword(){
     const togglePassword = document.querySelectorAll('.toggle-password');
     if(togglePassword){
         togglePassword.forEach((el)=>{
@@ -17,8 +23,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             });
         });
     }
-});
-
+}
 //checkbox select
 var checkboxs=document.querySelectorAll('input[type="checkbox"]');
 function chontatca(){
@@ -216,6 +221,25 @@ if(elHours && elMinutes && elSeconds){
 
     // Cập nhật mỗi giây
     let countdownInterval = setInterval(updateCountdown, 1000);
+}
+
+function alertThongBao(){
+    const alertThongBao = document.querySelector('#alertsDropdown');
+    if(alertThongBao){
+        alertThongBao.addEventListener('click',function(){
+            $.ajax({
+                type: 'GET',
+                url: '/admin/thong-bao',
+                success: function (response) {
+                    console.log(response.thongBao);
+
+                },
+                error: function (error) {
+                    console.error('Lỗi: ', error);
+                }
+            });
+        });
+    }
 }
 
 

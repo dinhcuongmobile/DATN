@@ -38,11 +38,15 @@ class TaiKhoanController extends Controller
 
     public function dangKy(DangKyRequest $request)
     {
+        do {
+            $email_verification_token = Str::random(10);
+        } while (DB::table('users')->where('email_verification_token', $email_verification_token)->exists());
+
         $dataInsert = [
             'ho_va_ten' => $request->ho_va_ten,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'email_verification_token' => Str::random(10),
+            'email_verification_token' => $email_verification_token,
             'vai_tro_id' => 3,
             'trang_thai' => 2,
             'created_at' => now()
@@ -51,7 +55,7 @@ class TaiKhoanController extends Controller
         $user = User::create($dataInsert);
 
         if ($user) {
-            Mail::to($user->email)->send(new UserRegistered($user));
+            Mail::to($user->email)->queue(new UserRegistered($user));
 
             Session::flash('success', 'Bạn đã đăng kí tài khoản thành công ! Vui lòng kiểm tra Email để xác nhận !');
 
@@ -70,20 +74,18 @@ class TaiKhoanController extends Controller
         }
     }
 
-    public function verifyEmail($token)
+    public function verifyEmail(string $token)
     {
         $user = User::where('email_verification_token', $token)
             ->whereNull('email_verified_at')
-            ->firstOrFail();
-
+            ->first();
         if (!$user) {
             return redirect()->route('tai-khoan.dang-nhap')
                 ->with('error', 'Xác thực email không hợp lệ hoặc đã được thực hiện.');
         }
 
-        if (User::where('email_verification_token', $token)
-            ->whereNull('email_verified_at')->update(['email_verified_at' => now(), 'email_verification_token' => null, 'trang_thai' => 0])
-        ) {
+        $result = $user->update(['email_verified_at' => now(), 'email_verification_token' => null, 'trang_thai' => 0]);
+        if ($result) {
             return redirect()->route('tai-khoan.dang-nhap')
                 ->with('success', 'Email đã được xác nhận thành công! Mời bạn đăng nhập.');
         }
@@ -91,13 +93,17 @@ class TaiKhoanController extends Controller
 
     public function guiLaiEmail($email)
     {
-        $user = User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        $user = User::where('email', $email)->whereNull('email_verified_at')->first();
 
         if ($user) {
-            $user->email_verification_token = Str::random(10);
+            do {
+                $email_verification_token = Str::random(10);
+            } while (DB::table('users')->where('email_verification_token', $email_verification_token)->exists());
+
+            $user->email_verification_token = $email_verification_token;
             $user->save();
 
-            Mail::to($user->email)->send(new UserRegistered($user));
+            Mail::to($user->email)->queue(new UserRegistered($user));
 
             return redirect()->back()->with('success', 'Email xác thực đã được gửi lại. Vui lòng kiểm tra email của bạn.');
         }
@@ -193,7 +199,7 @@ class TaiKhoanController extends Controller
         );
 
         //Gửi Otp qua mail
-        Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+        Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
         $emailEncrypted = Crypt::encryptString($email);
 
@@ -226,7 +232,7 @@ class TaiKhoanController extends Controller
             );
 
             // Gửi OTP qua email
-            Mail::to($email)->send(new OtpDoiMatKhau($otp, $email));
+            Mail::to($email)->queue(new OtpDoiMatKhau($otp, $email));
 
             return redirect()->back()->with('success', 'OTP đã được gửi lại thành công!');
         } catch (DecryptException $e) {

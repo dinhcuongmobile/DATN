@@ -3,68 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <title>Ô Input Mật Khẩu</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f9f9f9;
-            margin: 0;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
+}
 
-        .input-container {
-            position: relative;
-        }
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-height: 400px; /* Giới hạn chiều cao */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden; /* Ẩn các phần nội dung dài */
+}
 
-        input {
-            width: 300px;
-            padding: 10px 40px; /* Khoảng cách hai bên cho biểu tượng */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            outline: none;
-            font-size: 16px;
-        }
+.chat-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
 
-        input::placeholder {
-            color: #bbb;
-        }
+.chat-title {
+    font-weight: bold;
+}
 
-        .toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            cursor: pointer;
-            color: #999;
-        }
+.close {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+}
+
+.chat-body {
+    max-height: 275px; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Cuộn nếu nội dung dài */
+    padding: 10px;
+}
+
+.message {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sender {
+    background-color: #e1ffc7; /* Màu cho tin nhắn gửi */
+    text-align: left;
+}
+
+.receiver {
+    background-color: #f0f0f0; /* Màu cho tin nhắn nhận */
+    text-align: right;
+}
+
+.sender-name, .receiver-name {
+    font-weight: bold;
+    margin-right: 5px;
+    color: gray;
+}
+
+.chat-footer {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex; /* Để các phần tử sắp xếp tốt */
+    background-color: #f9f9f9; /* Màu nền footer */
+}
+
+.chat-footer input {
+    flex: 1; /* Mở rộng input đến chiều rộng còn lại */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.chat-footer button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff; /* Màu nút gửi */
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff; /* Màu nút chat */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
     </style>
+    <title>Chat Popup</title>
 </head>
 <body>
-    <div class="input-container">
-        <input type="password" id="password" placeholder="Nhập mật khẩu..." required>
-        <span class="toggle-password" onclick="togglePassword()">
-            <i class="fas fa-eye-slash" id="password-icon"></i>
-        </span>
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <span class="chat-title">Chat với: Nguyễn Đình Cường</span>
+            <span class="close" onclick="closeChat()">&times;</span>
+        </div>
+        <div class="chat-body">
+            <div class="message sender">
+                <span class="sender-name">7:</span> oi
+            </div>
+            <div class="message receiver">
+                <span class="receiver-name">Me:</span> okkk
+            </div>
+            <div class="message sender">
+                <span class="sender-name">7:</span> hhh
+            </div>
+            <div class="message receiver">
+                <span class="receiver-name">Me:</span> uk
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" placeholder="Nhập tin nhắn..." id="chatInput" />
+            <button onclick="sendMessage()">Gửi</button>
+        </div>
     </div>
+    <button class="chat-button" onclick="toggleChat()">💬</button>
 
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const passwordIcon = document.getElementById('password-icon');
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                passwordIcon.classList.remove('fa-eye-slash');
-                passwordIcon.classList.add('fa-eye');
-            } else {
-                passwordInput.type = "password";
-                passwordIcon.classList.remove('fa-eye');
-                passwordIcon.classList.add('fa-eye-slash');
-            }
-        }
+        function toggleChat() {
+    const chatPopup = document.getElementById('chatPopup');
+    chatPopup.style.display = chatPopup.style.display === 'block' ? 'none' : 'block';
+}
+
+function closeChat() {
+    document.getElementById('chatPopup').style.display = 'none';
+}
+
+function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const messageBody = document.querySelector('.chat-body');
+    if (input.value.trim()) {
+        const newMessage = document.createElement('div');
+        newMessage.className = 'message receiver';
+        newMessage.innerHTML = `<span class="receiver-name">Me:</span> ${input.value}`;
+        messageBody.appendChild(newMessage);
+        input.value = '';
+
+        // Cuộn tự động xuống cuối tin nhắn
+        messageBody.scrollTop = messageBody.scrollHeight;
+    }
+}
     </script>
 </body>
 </html>

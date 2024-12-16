@@ -56,6 +56,7 @@ class Kernel extends HttpKernel
         'adminAuth' => \App\Http\Middleware\AdminAuth::class,
         'clientAuth' => \App\Http\Middleware\ClientAuth::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
+        'checkAdmin' => \App\Http\Middleware\CheckAmin::class,
         'checkUser' => \App\Http\Middleware\CheckUserAuth::class,
         'checkUserAdmin' => \App\Http\Middleware\CheckUserAdminAuth::class,
         'autoDangNhap' => \App\Http\Middleware\AutoDangNhap::class,

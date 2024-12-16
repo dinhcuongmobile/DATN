@@ -3,14 +3,24 @@
     <div class="container-fluid">
 
         <h1 class="h3 mb-2 text-gray-800">Danh Sách Đơn Hàng ({{ $donHangs->count() }})</h1>
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <!-- Các nút chức năng và thanh tìm kiếm -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="float-right">
-                    <form action="#" method="GET">
+                    <form action="{{ route('don-hang.danh-sach-don-hang') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm...">
+                            <input type="text" name="search" class="form-control" value="{{ request('search') }}" placeholder="Tìm kiếm mã đơn hàng...">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
@@ -27,10 +37,9 @@
                     <a href="{{ route('don-hang.danh-sach-dang-giao') }}"><button type="button"
                             class="btn btn-secondary btn-sm">Đang Giao</button></a>
                     <a href="{{ route('don-hang.danh-sach-da-giao') }}"><button type="button"
-                            class="btn btn-secondary btn-sm">Đa Giao</button></a>
+                            class="btn btn-secondary btn-sm">Đã Giao</button></a>
                     <a href="{{ route('don-hang.danh-sach-da-huy') }}"><button type="button"
                             class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
-                    <button type="button" class="btn btn-secondary btn-sm">Trả Hàng/Hoàn Tiền</button>
                 </div>
             </div>
         </div>
@@ -87,61 +96,53 @@
                                                 @if ($item->trang_thai == 0)
                                                     Chờ Xác Nhận
                                                 @elseif($item->trang_thai == 1)
-                                                    Đơn Hàng Mới
+                                                    Chờ Giao Hàng
                                                 @elseif($item->trang_thai == 2)
-                                                    Đang Chuẩn Bị Hàng
-                                                @elseif($item->trang_thai == 3)
                                                     Đang Giao
-                                                @elseif($item->trang_thai == 4)
+                                                @elseif($item->trang_thai == 3)
                                                     Đã Giao
-                                                @else
+                                                @elseif($item->trang_thai == 4)
                                                     Đã Hủy
                                                 @endif
                                             </span></p>
                                     </td>
                                     <td class="col-2">
-                                        {{ $item->phuong_thuc_thanh_toan == 0 ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản' }}
+                                        @if($item->phuong_thuc_thanh_toan == 0)
+                                        Thanh toán khi nhận hàng
+                                    @else
+                                        <a href="{{ route('don-hang.danh-sach-da-chuyen-khoan', ['ma_don_hang' => $item->ma_don_hang]) }}" style="color: #007bff;">
+                                            Chuyển khoản
+                                        </a>
+                                    @endif
                                     </td>
-                                    <td class="col-1">GHTK</td>
+                                    <td class="col-1">
+                                        <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
+                                    </td>
                                     <td>
-                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 || $item->trang_thai == 2)
+                                        @if ($item->trang_thai == 0 || $item->trang_thai == 1 )
                                             {{-- Các nút tùy thuộc trạng thái --}}
                                             @if ($item->trang_thai == 0)
                                                 {{-- Trạng thái chờ xác nhận --}}
-                                                <form action="{{ route('don-hang.duyet-don-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm">Duyệt</button>
-                                                </form>
-                                                <form action="{{ route('don-hang.huy-don-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">Hủy</button>
-                                                </form>
+                                             <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">
+                                                    Duyệt
+                                                </a>
+                                             <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                                                    Hủy
+                                                </a>
                                             @elseif ($item->trang_thai == 1)
                                                 {{-- Trạng thái chờ lấy hàng --}}
-                                                <form action="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-sm">Yêu cầu đến lấy
-                                                        hàng</button>
-                                                </form>
-                                            @elseif ($item->trang_thai == 2)
-                                                {{-- Trạng thái đang giao --}}
-                                                <form action="{{ route('don-hang.da-giao', $item->id) }}" method="POST"
-                                                    style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-success btn-sm">Đã giao</button>
-                                                </form>
+                                             <a href="{{ route('don-hang.yeu-cau-lay-hang', $item->id) }}" class="btn btn-primary btn-sm">
+                                                    Yêu cầu đến lấy hàng
+                                                </a>
                                             @endif
 
                                             {{-- Thẻ <hr> chỉ xuất hiện khi có nút --}}
                                             <hr>
                                         @endif
 
-                                        <a href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}">
-                                            <button type="submit" class="btn btn-secondary btn-sm">Xem Chi Tiết</button>
+                                        <a href="{{ route('don-hang.chi-tiet-don-hang', $item->id) }}" class="btn btn-secondary btn-sm">
+                                            Xem Chi Tiết
                                         </a>
                                     </td>
                                 </tr>

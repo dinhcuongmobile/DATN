@@ -3,9 +3,16 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\LienHe;
+use App\Models\TinTuc;
 use App\Models\DanhMuc;
 use App\Models\DonHang;
 use App\Models\GioHang;
+use App\Models\Message;
+use App\Models\SanPham;
+use App\Models\YeuThich;
+use App\Models\DanhMucTinTuc;
+use App\Models\ThongBao;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -30,77 +37,53 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
-
+        //client
         View::composer('client.layout.main', function ($view) {
             $gio_hangs = [];
             $count_gio_hang = 0;
+            $count_yeu_thich = 0;
             $danh_mucs = DanhMuc::all();
             $userId = Auth::id();
-
+            $danhMucTinTuc = DanhMucTinTuc::all();
+            $sanPhamThich = SanPham::orderBy('luot_xem','desc')->take(6)->get();
             if (Auth::check()) {
-                $gio_hangs = GioHang::with('user', 'sanPham', 'bienThe')
-                    ->where('user_id', Auth::id())
-                    ->orderBy('id', 'desc')
-                    ->get();
+                $gio_hangs = GioHang::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
+
+                $yeu_thichs = YeuThich::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
+
                 $count_gio_hang = $gio_hangs->count();
+                $count_yeu_thich = $yeu_thichs->count();
             }
 
-            $view->with(compact('gio_hangs', 'count_gio_hang','danh_mucs', 'userId'));
+            $view->with(compact(
+                'gio_hangs',
+                'count_gio_hang',
+                'count_yeu_thich',
+                'danh_mucs',
+                'userId',
+                'danhMucTinTuc',
+                'sanPhamThich'
+            ));
         });
         //admin
         View::composer('admin.layout.main', function ($view) {
+            //thong bao
+            $countThongBao = ThongBao::where('trang_thai',0)->where('nguoi_nhan',1)->get()->count();
+
+            //tin nhắn
+            $messages = Message::with('sender')
+            ->where('sender_role', 'thanhVien') // Chỉ lấy tin nhắn gửi đến người đăng nhập
+            ->groupBy('user_id')
+            ->orderBy('id','desc') // Sắp xếp theo thời gian mới nhất
+            ->get();
             // Lấy dữ liệu từ model
             $sub=DonHang::where('trang_thai',0)->count();
             // Chia sẻ dữ liệu với view
-            $view->with('sub', $sub);
+            $view->with(compact(
+                'countThongBao',
+                'sub',
+                'messages',
+            ));
         });
-        // Tổng doanh thu theo sản phẩm đã giao
-        View::composer('admin.homeAdmin', function ($view) {
-            $thongKeSanPhams = DonHang::where('trang_thai', 3) // Trạng thái đã giao
-                ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
-                ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->selectRaw('san_phams.id, san_phams.ten_san_pham, san_phams.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
-                ->groupBy('san_phams.id', 'san_phams.ten_san_pham', 'san_phams.hinh_anh')
-                ->orderByDesc('tong_doanh_thu')
-                ->take(3)
-                ->get();
-            foreach ($thongKeSanPhams as $item) {
-                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.');
-            }
-            $view->with('thongKeSanPhams', $thongKeSanPhams);
-        });
-        // Tổng doanh thu theo danh mục đã giao
-        View::composer('admin.homeAdmin', function ($view) {
-            $thongKeDanhMucs = DonHang::where('trang_thai', 3) // Trạng thái đã giao
-                ->join('chi_tiet_don_hangs', 'don_hangs.id', '=', 'chi_tiet_don_hangs.don_hang_id')
-                ->join('san_phams', 'chi_tiet_don_hangs.san_pham_id', '=', 'san_phams.id')
-                ->join('danh_mucs', 'san_phams.danh_muc_id', '=', 'danh_mucs.id')
-                ->selectRaw('danh_mucs.id, danh_mucs.ten_danh_muc, danh_mucs.hinh_anh, SUM(chi_tiet_don_hangs.thanh_tien) as tong_doanh_thu')
-                ->groupBy('danh_mucs.id', 'danh_mucs.ten_danh_muc', 'danh_mucs.hinh_anh')
-                ->orderByDesc('tong_doanh_thu')
-                ->take(3)
-                ->get();
-            foreach ($thongKeDanhMucs as $item) {
-                $item->tong_doanh_thu = number_format($item->tong_doanh_thu, 0, ',', '.'); 
-            }
-
-            // Truyền dữ liệu vào view
-            $view->with('thongKeDanhMucs', $thongKeDanhMucs);
-        });
-        //Thống Kê Tài Khoản
-        $tongTaiKhoan = User::count();
-        View::share('tongTaiKhoan', $tongTaiKhoan);
-        //Thống Kê Đơn Hàng
-        $tongDonHang = DonHang::count();
-        View::share('tongDonHang', $tongDonHang);
-        //Thống Kê Lượt Xem 
-        if (!Session::has('luot_xem')) {
-            $tongLuotXem = Cache::get('tong_luot_xem', 0) + 1;
-            Cache::put('tong_luot_xem', $tongLuotXem);
-            Session::put('luot_xem', true);
-        } else {
-            $tongLuotXem = Cache::get('tong_luot_xem', 0);
-        }
-        View::share('tongLuotXem', $tongLuotXem);
     }
 }

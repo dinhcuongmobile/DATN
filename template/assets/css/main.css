@@ -1,0 +1,81 @@
+
+#Reviews-tab-pane .review-header .select-button{
+    align-items: center;
+    background-color: #fffbf8;
+    border: 1px solid #f9ede5;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: flex;
+    margin-bottom: 1rem;
+    min-height: 5rem;
+    padding: 1.875rem;
+}
+
+#Reviews-tab-pane .review-header .review-title{
+    margin-bottom: 30px;
+}
+#Reviews-tab-pane .review-header .box-star{
+    margin-left: 25px;
+    font-size: 30px;
+}
+#Reviews-tab-pane .review-header .box-star p{
+    color: #ee4d2d;
+    font-size: 25px;
+}
+#Reviews-tab-pane .review-header .box-star p span{
+    color: #ee4d2d;
+    font-size: 35px;
+}
+
+#Reviews-tab-pane .review-header .select-button .box-button{
+    margin-left: 70px;
+    width: 60%;
+}
+
+#Reviews-tab-pane .review-header .select-button .box-button button{
+    margin-right: 15px;
+}
+
+#Reviews-tab-pane .review-content .review-item{
+    display: flex;
+}
+#Reviews-tab-pane .review-content .avt-user img{
+    width: 60px;
+    margin-top: 7px;
+}
+#Reviews-tab-pane .review-content .thong-tin{
+    margin-left: 10px;
+}
+#Reviews-tab-pane .review-content .thong-tin .user-name{
+    font-size: 16px;
+    color: rgba(0, 0, 0, .87);
+}
+#Reviews-tab-pane .review-content .thong-tin .rating i{
+    font-size: 20px;
+}
+#Reviews-tab-pane .review-content .thong-tin .date{
+    color: rgba(0, 0, 0, .54);
+    font-size: 15px;
+    margin-bottom: .9375rem;
+    margin-top: .25rem;
+}
+#Reviews-tab-pane .review-content .thong-tin .noi-dung .noi-dung-text{
+    font-size: 18px;
+    color: rgba(0, 0, 0, .90);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+#Reviews-tab-pane .review-content .thong-tin .noi-dung .noi-dung-img img{
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+#Reviews-tab-pane .review-item{
+    padding: 0px 0px 35px 10px;
+    border-bottom: 1px solid #bcb8b8;
+}
+#Reviews-tab-pane .review-item:not(:first-child){
+    padding-top: 20px;
+}
+

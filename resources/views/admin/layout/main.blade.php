@@ -7,14 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
     <title>Admin</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/images/icon_web.png')}} ">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icon_web.png') }} ">
     <!-- Custom fonts for this template-->
-    <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -62,28 +63,30 @@
             </div>
 
             <!-- quan ly tai khoan -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
-                            viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
-                        <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
-                            style="background-color: #48dbfb;">
-                            <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
-                            <span>Thêm mới</span></a>
+            @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-QTV') }}">Danh sách quản trị
+                                viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-NV') }}">Danh sách nhân viên</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TV') }}">Danh sách người dùng</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.danh-sach-TKK') }}">Tài khoản bị khóa</a>
+                            <a class="collapse-item" href="{{ route('tai-khoan.them-tai-khoan') }}"
+                                style="background-color: #48dbfb;">
+                                <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
+                                <span>Thêm mới</span></a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            @endif
 
-           <!-- quan ly danh muc -->
+            <!-- quan ly danh muc -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
@@ -94,7 +97,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('danh-muc.danh-sach') }}">Danh sách danh mục</a>
                         <a class="collapse-item" href="{{ route('danh-muc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
-                        <a class="collapse-item" href="{{route('danh-muc.them-danh-muc')}}" style="background-color: #48dbfb;">
+                        <a class="collapse-item" href="{{ route('danh-muc.them-danh-muc') }}"
+                            style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -108,13 +112,16 @@
                     <i class="fas fa-fw fa-list"></i>
                     <span>Quản lý sản phẩm</span>
                 </a>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionSidebar">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach')}}">Danh sách sản phẩm</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-bien-the-san-pham')}}">Danh sách biến thể</a>
-                        <a class="collapse-item" href="{{route('san-pham.quan-ly-size')}}">Quản lý size</a>
-                        <a class="collapse-item" href="{{route('san-pham.quan-ly-mau-sac')}}">Quản lý màu sắc</a>
-                        <a class="collapse-item" href="{{route('san-pham.danh-sach-san-pham-da-xoa')}}">Thùng rác</a>
+                        <a class="collapse-item" href="{{ route('san-pham.danh-sach') }}">Danh sách sản phẩm</a>
+                        <a class="collapse-item" href="{{ route('san-pham.danh-sach-bien-the-san-pham') }}">Danh sách
+                            biến thể</a>
+                        <a class="collapse-item" href="{{ route('san-pham.quan-ly-size') }}">Quản lý size</a>
+                        <a class="collapse-item" href="{{ route('san-pham.quan-ly-mau-sac') }}">Quản lý màu sắc</a>
+                        <a class="collapse-item" href="{{ route('san-pham.danh-sach-san-pham-da-xoa') }}">Thùng
+                            rác</a>
                     </div>
                 </div>
             </li>
@@ -126,11 +133,16 @@
                     <i class="fas fa-fw fa-tags"></i>
                     <span>Quản lý khuyến mại</span>
                 </a>
-                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionSidebar">
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-don-hang')}}">Khuyến mại đơn hàng</a>
-                        <a class="collapse-item" href="{{route('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen')}}">Khuyến mại vận chuyển</a>
-                        <a class="collapse-item" href="{{route('khuyen-mai.show-them-ma-khuyen-mai')}}" style="background-color: #48dbfb;">
+                        <a class="collapse-item"
+                            href="{{ route('khuyen-mai.danh-sach-ma-khuyen-mai-don-hang') }}">Khuyến mại đơn hàng</a>
+                        <a class="collapse-item"
+                            href="{{ route('khuyen-mai.danh-sach-ma-khuyen-mai-van-chuyen') }}">Khuyến mại vận
+                            chuyển</a>
+                        <a class="collapse-item" href="{{ route('khuyen-mai.show-them-ma-khuyen-mai') }}"
+                            style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
                             <span>Thêm mới</span></a>
                     </div>
@@ -144,54 +156,91 @@
                     <i class="fas fa-fw fa-cart-arrow-down"></i>
                     <span>Quản lý đơn hàng</span>
                 </a>
-                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-don-hang')}}">Danh Sách Đơn Hàng </a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-kiem-duyet')}}">Xác Nhận Đơn Hàng
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-don-hang') }}">Danh Sách Đơn Hàng
+                        </a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-kiem-duyet') }}">Xác Nhận Đơn
+                            Hàng
                             @if ($sub > 0)
                                 <sup style="color: red"><i class="fas fa-fw fa-circle" style="color: red;"></i></sup>
                             @endif
                         </a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-cho-lay-hang')}}">Danh Sách Chờ Lấy Hàng </a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-dang-giao')}}">Danh Sách Đang Giao </a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-da-giao')}}">Danh Sách Đã Giao</a>
-                        <a class="collapse-item" href="{{route('don-hang.danh-sach-da-huy')}}">Danh Sách Đã Hủy</a>
-                        <a class="collapse-item" href="#">Trả Hàng/Hoàn Tiền</a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-cho-lay-hang') }}">Danh Sách Chờ
+                            Lấy Hàng </a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-dang-giao') }}">Danh Sách Đang
+                            Giao </a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-giao') }}">Danh Sách Đã
+                            Giao</a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-chuyen-khoan') }}">Danh Sách
+                            Chuyển Khoản</a>
+                        <a class="collapse-item" href="{{ route('don-hang.danh-sach-da-huy') }}">Danh Sách Đã Hủy</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- quan ly danh gia -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
+                    aria-expanded="true" aria-controls="collapseSix">
+                    <i class="fas fa-fw fa-star"></i>
+                    <span>Quản lý đánh giá</span>
+                </a>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach') }}">Danh sách</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.chua-phan-hoi') }}">Danh sách chưa phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.da-phan-hoi') }}">Danh sách đã phản hồi</a>
+                        <a class="collapse-item" href="{{ route('danh-gia.danh-sach-bi-an') }}">Danh sách bị ẩn</a>
                     </div>
                 </div>
             </li>
 
             <!-- quan ly tin tuc -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix"
-                    aria-expanded="true" aria-controls="collapseSix">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
+                    aria-expanded="true" aria-controls="collapseSevent">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Quản lý tin tức</span>
                 </a>
-                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
+                <div id="collapseSevent" class="collapse" aria-labelledby="headingSix" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.danh-sach')}}">Danh mục tin tức</a>
-                        <a class="collapse-item" href="{{route('tin-tuc.danh-sach')}}">Danh sách tin tức</a>
-                        <a class="collapse-item" href="{{route('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa')}}">Thùng rác</a>
+                        <a class="collapse-item" href="{{ route('danh-muc-tin-tuc.danh-sach') }}">Danh mục tin
+                            tức</a>
+                        <a class="collapse-item" href="{{ route('tin-tuc.danh-sach') }}">Danh sách tin tức</a>
+                        <a class="collapse-item"
+                            href="{{ route('danh-muc-tin-tuc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
                     </div>
                 </div>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- quan ly doanh thu nhan vien -->
+            <li class="nav-item mb-3">
+                <a class="nav-link" href="{{ route('thong-ke.doanh-thu-nhan-vien') }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Doanh thu nhân viên</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <li class="nav-item  mb-3">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSevent"
-                    aria-expanded="true" aria-controls="collapseSevent">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseNine"
+                    aria-expanded="true" aria-controls="collapseNine">
                     <i class="fas fa-fw fa-bars"></i>
                     <span>Chức năng khác</span>
                 </a>
-                <div id="collapseSevent" class="collapse" aria-labelledby="headingSevent"
+                <div id="collapseNine" class="collapse" aria-labelledby="headingSevent"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('phi-ship.danh-sach') }}">Quản lý phí vận chuyển</a>
                         <a class="collapse-item" href="{{ route('banner.dsBanner') }}">Quản lý banner</a>
-                        <a class="collapse-item" href="{{ route('lienhe.dsLienHe') }}">Quản lý liên hệ</a>
-                        <a class="collapse-item" href="#">Quản lý đánh giá</a>
+                        <a class="collapse-item" href="{{ route('lien-he.danh-sach') }}">Quản lý liên hệ</a>
                     </div>
                 </div>
             </li>
@@ -219,114 +268,109 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter" id="notificationCounter">{{$countThongBao}}+</span>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">Thông Báo</h6>
+                                <div id="notificationContent">
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <div class="mr-3">
+                                            <img src="{{asset('assets/images/other-img/thongBao.jpg')}}" alt="">
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
+                                        <div>
+                                            <div class="small text-gray-500">December 12, 2019</div>
+                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                    </a>
+                                </div>
+                                <a class="dropdown-item text-center small text-gray-500" href="#"
+                                    data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị tất cả</a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- Modal -->
+                        <div class="modal fade" id="showAllAlertsModal" tabindex="-1" role="dialog" aria-labelledby="showAllAlertsModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="showAllAlertsModalLabel">Tất cả thông báo</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="modalNotificationContent">
+                                        <!-- Nội dung thông báo sẽ được chèn vào đây -->
+                                        <p class="text-center text-gray-500">Đang tải thông báo...</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <li class="nav-item dropdown no-arrow mx-1 liMessagesDropdown">
+                            <a class="nav-link dropdown-toggle" id="messagesDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                @if ($messages->count() > 0)
+                                    <span class="badge badge-danger badge-counter">{{ $messages->count() }}</span>
+                                @endif
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in divMessagesDropdown"
+                                 aria-labelledby="messagesDropdown" style="width: 350px; max-height: 600px; overflow-y: auto;">
                                 <h6 class="dropdown-header">
-                                    Message Center
+                                    Tin nhắn
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_1.svg')}}" alt="...">
-                                        <div class="status-indicator bg-success"></div>
+
+                                @foreach ($messages as $value)
+                                    <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
+                                       onclick="openChat('{{ $value->sender->ho_va_ten }}', '{{ $value->user_id }}')">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}" alt="...">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">{{ Str::limit($value->message, 30) }}</div>
+                                            <div class="small text-gray-500">{{ $value->sender->ho_va_ten }} · {{ $value->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+
+                                @if ($messages->isEmpty())
+                                    <div class="text-center p-3">
+                                        <span class="text-gray-500">Không có tin nhắn mới</span>
                                     </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_2.svg')}}" alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="{{asset('admin/img/undraw_profile_3.svg')}}" alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                @endif
                             </div>
                         </li>
+
+                        <!-- Khu vực chat -->
+                        <div class="chat-popup" id="chatPopup" data-userid="{{Auth::guard('admin')->user()->id}}">
+                            <div class="chat-header">
+                                <span class="chat-title"></span>
+                                <span class="close" onclick="closeChat()">&times;</span>
+                            </div>
+                            <div class="chat-body">
+                            </div>
+                            <div class="chat-footer">
+                                <input type="text" placeholder="Nhập tin nhắn..." id="chatInput" />
+                                <button>Gửi</button>
+                            </div>
+                        </div>
+                        @vite(['resources/js/app.js'])
+                        <script src="{{ asset('admin/js/chat.js') }}"></script>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->ho_va_ten }}</span>
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::guard('admin')->user()->ho_va_ten }}</span>
                                 <i class="fas fa-fw fa-user"></i>
                             </a>
                             <!-- Dropdown - User Information -->
@@ -357,7 +401,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2024</span>
+                        <span>Copyright &copy; Namad Store</span>
                     </div>
                 </div>
             </footer>
@@ -396,9 +440,9 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-    <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="{{asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
@@ -408,7 +452,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
-    <script src="{{asset('assets/js/ajax.js')}}"></script>
+    <script src="{{ asset('assets/js/ajax.js') }}"></script>
     <script src="{{ asset('admin/js/main.js') }}"></script>
     @yield('scripts')
 
@@ -417,9 +461,9 @@
 
     <!-- Page level custom scripts
 
-    <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script> -->
-
+    <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script> -->
+    {{-- Css Modal Thông Báo --}}
 </body>
 
 </html>

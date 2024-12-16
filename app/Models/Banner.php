@@ -18,4 +18,12 @@ class Banner extends Model
         'start_date',
         'end_date'
     ];
+
+    public $timestamps = false;
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
 }

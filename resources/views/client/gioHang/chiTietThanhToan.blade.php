@@ -119,7 +119,7 @@
                             @endforeach
                         </ul>
                         <div class="summary-total">
-                            <ul> 
+                            <ul>
                                 <li>
                                     <p>Tổng số tiền ({{$count_gio_hang?$count_gio_hang:0}} sản phẩm)</p><span class="thanhTien">{{ number_format($tong_tien, 0, ',', '.') }}đ</span>
                                 </li>

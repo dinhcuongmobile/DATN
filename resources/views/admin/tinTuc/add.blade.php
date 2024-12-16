@@ -21,7 +21,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="" class="form-label">Ảnh bìa:</label>
-                        <input type="file" name="hinh_anh" id="" class="form-control-file border">
+                        <input type="file" name="hinh_anh" accept="image/*" class="form-control-file border">
                         @error('hinh_anh')
                             <p class="Err mt-1 text-danger ">{{ $message }}</p>
                         @enderror
@@ -33,7 +33,7 @@
                             <p class="Err mt-1 text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="mb-5 ">
+                    <div class="mb-3">
                         <label for="">Danh Mục</label>
                         <select class="form-control" name="danh_muc_id" id="">
                             @foreach ($dmTinTuc as $item)
