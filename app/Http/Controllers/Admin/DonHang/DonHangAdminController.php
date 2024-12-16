@@ -122,7 +122,21 @@ class DonHangAdminController extends Controller
         return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
 
-    
+    // Hiển thị danh sách đơn hàng đã hủy
+    public function showDSDaHuy(Request $request) {
+        $query = DonHang::where('trang_thai', 4);
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('ma_don_hang', 'LIKE', "%$search%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('ho_va_ten', 'LIKE', "%$search%");
+                  });
+            });
+        }
+        $donHangs = $query->MoiNhat()->get();
+        return view('admin.donHang.DSDaHuy', compact('donHangs'));
+    }
     // Hiển thị danh sách đơn hàng đã chuyển khoản
     public function showDSDaChuyenKhoan(Request $request)
     {
