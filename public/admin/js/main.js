@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded',()=>{
+    
+    eyePassword();
+    alertThongBao();
+});
+
+function eyePassword(){
     const togglePassword = document.querySelectorAll('.toggle-password');
     if(togglePassword){
         togglePassword.forEach((el)=>{
@@ -17,10 +23,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             });
         });
     }
-
-    alertThongBao();
-});
-
+}
 //checkbox select
 var checkboxs=document.querySelectorAll('input[type="checkbox"]');
 function chontatca(){
