@@ -108,7 +108,19 @@ class TinTucAdminController extends Controller
         }
     }
 
-    
+    public function delete(int $id)
+    {
+        $tin_tuc = TinTuc::find($id);
+        if ($tin_tuc) {
+            $tin_tuc->delete();
+            if ($tin_tuc->hinh_anh) {
+                Storage::disk('public')->delete($tin_tuc->hinh_anh);
+            }
+            return redirect()->route('tin-tuc.danh-sach')->with('success', 'Bạn đã xóa thành công 1 tin tức.');
+        } else {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại');
+        }
+    }
 
     public function xoaNhieuTinTuc(Request $request)
     {
