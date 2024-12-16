@@ -347,7 +347,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -454,7 +454,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -528,7 +528,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -598,7 +598,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -674,7 +674,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -753,7 +753,7 @@
                                                                             <tbody>
                                                                                 <tr>
                                                                                     <td colspan="2">
-                                                                                        <span class="chatLS">💬 Chat</span>
+                                                                                        <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                                                                         <a href="{{ route('san-pham.san-pham') }}"
                                                                                             class="shopLS"><i
                                                                                                 class="fas fa-box"></i> Xem
@@ -881,7 +881,7 @@
                                     <!-- Thêm phần thông tin sản phẩm và thanh toán -->
                                     <div class="product-info">
                                         <div class="product-info-header">
-                                            <span class="chatLS">💬 Chat</span>
+                                            <span class="chatLS" onclick="toggleChat({{Auth::id()}})">💬 Chat</span>
                                             <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i
                                                     class="fas fa-box"></i> Xem cửa hàng</a>
                                         </div>

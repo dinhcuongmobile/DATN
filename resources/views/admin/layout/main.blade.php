@@ -336,7 +336,7 @@
                                 <button>Gửi</button>
                             </div>
                         </div>
-                        @vite(['resources/js/app.js'])
+                        {{-- @vite(['resources/js/app.js']) --}}
                         <script src="{{ asset('admin/js/chat.js') }}"></script>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"

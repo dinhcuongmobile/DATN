@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const chatPopup = document.getElementById('chatPopup');
-    const userId = chatPopup.dataset.userid;
+    // const chatPopup = document.getElementById('chatPopup');
+    // const userId = chatPopup.dataset.userid;
 
-    // Lắng nghe sự kiện trên kênh Private
-    window.Echo.private(`chat.${userId}`)
-        .listen('MessageSent', (e) => {
-            const chatBody = document.querySelector('#chatPopup .chat-body');
-            let messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', 'sender');
-            let fullName = document.querySelector('#chatPopup .chat-title').textContent;
-            let nameParts = fullName.split(' ');
-            let firstName = nameParts[nameParts.length - 1];
-            messageDiv.innerHTML = `<span class="sender-name">${firstName}:</span> ${message.message}`;
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-        });
+    // window.Echo.private(`chat.${userId}`)
+    //     .listen('MessageSent', (e) => {
+    //         const chatBody = document.querySelector('#chatPopup .chat-body');
+    //         let messageDiv = document.createElement('div');
+    //         messageDiv.classList.add('message', 'sender');
+    //         let fullName = document.querySelector('#chatPopup .chat-title').textContent;
+    //         let nameParts = fullName.split(' ');
+    //         let firstName = nameParts[nameParts.length - 1];
+    //         messageDiv.innerHTML = `<span class="sender-name">${firstName}:</span> ${message.message}`;
+    //         chatBody.appendChild(messageDiv);
+    //         chatBody.scrollTop = chatBody.scrollHeight;
+    //     });
 
     sendMessage();
     fetchMessagePopup();
@@ -28,7 +27,6 @@ function fetchMessagePopup() {
     fetch("/admin/message-popup")
         .then(response => response.json())
         .then(data => {
-            // console.log(data);
 
             const messageCount = document.querySelector('#messagesDropdown span');
             const messageContent = document.querySelector(".liMessagesDropdown #messageContent");

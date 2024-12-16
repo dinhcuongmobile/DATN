@@ -467,10 +467,10 @@
 
                 <div class="chat-input">
                     <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." />
-                    <button onclick="sendMessage()" data-userid="{{Auth::id()}}">Gửi</button>
+                    <button data-userid="{{Auth::id()}}">Gửi</button>
                 </div>
             </div>
-            @vite(['resources/js/app.js'])
+            {{-- @vite(['resources/js/app.js']) --}}
             <script src="{{ asset('assets/js/chat.js') }}"></script>
             {{-- END Chát trực tiếp --}}
         @endif
