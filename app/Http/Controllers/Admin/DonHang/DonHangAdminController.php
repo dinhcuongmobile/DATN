@@ -307,29 +307,7 @@ class DonHangAdminController extends Controller
             'phiShip' => $phi_ships ? $phi_ships->phi_ship : 0
         ]);
     }
-    //In Hàng Loạt
-    public function inHoaDonHangLoat()
-    {
-        $donHangs = DonHang::with([
-            'chiTietDonHangs.sanPham',
-            'chiTietDonHangs.bienThe',
-            'diaChi.phuongXa',
-            'diaChi.quanHuyen',
-            'diaChi.tinhThanhPho',
-        ])
-            ->where('trang_thai', 1)
-            ->orderBy('ngay_cap_nhat', 'desc')
-            ->get();
-
-        foreach ($donHangs as $donHang) {
-            $diaChiNhanHang = DiaChi::find($donHang->dia_chi_id);
-            $phiShip = PhiShip::where('ma_quan_huyen', $diaChiNhanHang->ma_quan_huyen)->first();
-            $donHang->phi_ship = $phiShip ? $phiShip->phi_ship : 0;
-        }
-        return view('admin.donHang.inHoaDonHangLoat', [
-            'donHangs' => $donHangs,
-        ]);
-    }
+    
     // Hủy đơn hàng
     public function huyDonHang(int $id)
     {
