@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     eyePassword();
     alertThongBao();
+    allThongBao();
 });
 
 function eyePassword(){
@@ -246,7 +247,7 @@ function alertThongBao(){
 }
 
 function allThongBao(){
-    
+
 }
 
 
