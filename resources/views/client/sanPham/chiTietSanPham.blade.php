@@ -291,6 +291,7 @@
                                     <h5 class="review-title">CHƯA CÓ ĐÁNH GIÁ</h5>
                                 @endif
                             </div>
+                            @if ($danh_gias->count()>0)
                             <div class="pagination-wrap">
                                 <ul class="pagination">
                                     {{-- Nút "Trước" --}}
@@ -316,6 +317,8 @@
                                     </li>
                                 </ul>
                             </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>
