@@ -76,9 +76,10 @@ class BannerController extends Controller
         }
     }
 
-    public function viewUpdate($id)
+    public function viewUpdate(Request $request ,int $id)
     {
-        
+        $old_banner = Banner::where('id', $id)->first();
+        return view('admin.banner.UpdateBanner', compact('old_banner'));
     }
 
     public function Update(Request $request, $id)

@@ -19,7 +19,7 @@ class DanhMucTinTucAdminController extends Controller
 
     //SHOW
     public function showDanhSach(Request $request){
-        
+        $keyword = $request->input('kyw');
         if ($keyword) {
             $this->views['DSDanhmuc'] = DanhMucTinTuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
@@ -68,7 +68,7 @@ class DanhMucTinTucAdminController extends Controller
        }
     }
     //update
-    public function viewUpdate(int $id){
+    public function viewUpdate(Request $request, int $id){
         $this->views['danh_muc']=DanhMucTinTuc::findOrFail($id);
         return view('admin.danhMucTinTuc.update',$this->views);
     }
