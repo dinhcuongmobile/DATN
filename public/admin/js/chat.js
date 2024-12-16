@@ -16,21 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
             chatBody.scrollTop = chatBody.scrollHeight;
         });
 
-
+    sendMessage();
     fetchMessagePopup();
 });
 
+
 let chatInterval = null;
 let isEventAttached = false;
-
-document.addEventListener("DOMContentLoaded", () => {
-    sendMessage(); // Gắn sự kiện gửi tin nhắn khi trang được load
-});
 
 function fetchMessagePopup() {
     fetch("/admin/message-popup")
         .then(response => response.json())
         .then(data => {
+            // console.log(data);
+
             const messageCount = document.querySelector('#messagesDropdown span');
             const messageContent = document.querySelector(".liMessagesDropdown #messageContent");
 
@@ -41,15 +40,6 @@ function fetchMessagePopup() {
 
             if (data.messages.length > 0) {
                 data.messages.forEach(item => {
-                    let date = new Date(item.created_at);
-                    let formattedDate = date.toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
-                    }).replace(',', '');
 
                     let html = `
                         <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
@@ -59,7 +49,7 @@ function fetchMessagePopup() {
                             </div>
                             <div class="font-weight-bold">
                                 <div class="text-truncate">${item.message}</div>
-                                <div class="small text-gray-500">${item.sender.ho_va_ten} · ${formattedDate}</div>
+                                <div class="small text-gray-500">${item.sender.ho_va_ten} · ${item.created_at_diff}</div>
                             </div>
                         </a>
                     `;
@@ -134,15 +124,14 @@ function sendMessage() {
     const btnGui = document.querySelector('#chatPopup .chat-footer button');
     const messageInput = document.querySelector('#chatPopup #chatInput');
 
-    if (!isEventAttached) { // Kiểm tra nếu chưa gắn sự kiện
+    if (!isEventAttached) {
         isEventAttached = true;
 
-        // Sự kiện click nút gửi
+
         if (btnGui) {
             btnGui.addEventListener('click', sendMessageHandler);
         }
 
-        // Sự kiện nhấn Enter trong ô nhập tin nhắn
         if (messageInput) {
             messageInput.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter') {
@@ -159,7 +148,6 @@ function sendMessageHandler() {
     const messageInput = document.querySelector('#chatPopup #chatInput');
     const chatBody = document.querySelector('#chatPopup .chat-body');
 
-    // Lấy dữ liệu cần thiết từ DOM
     let receiverId = btnGui.closest('#chatPopup').getAttribute('data-receiverid');
     let userId = btnGui.closest('#chatPopup').getAttribute('data-userid');
     const messageText = messageInput.value;

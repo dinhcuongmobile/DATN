@@ -39,11 +39,10 @@ class HomeAdminController extends Controller
     {
         // Lấy tin nhắn giữa người dùng hiện tại và receiver_id
         $messages = Message::with('sender')->where('user_id', $receiver_id)
-                ->orWhere('receiver_id', $receiver_id)->get();
+                ->orWhere('receiver_id', $receiver_id)->orderBy('id','asc')->get();
 
         // Trả về tin nhắn dưới dạng JSON
         return response()->json([
-
             'messages' => $messages
         ]);
     }
@@ -115,13 +114,16 @@ class HomeAdminController extends Controller
     }
 
     public function messagePopup(){
-                    //tin nhắn
         $messages = Message::with('sender')
-                    ->where('sender_role', 'thanhVien')
-                    ->groupBy('user_id')
-                    ->orderBy('id','desc')
+                    ->whereIn('id', function ($query) {
+                        $query->selectRaw('max(id)')
+                            ->from('messages')
+                            ->where('sender_role', 'thanhVien')
+                            ->groupBy('user_id');
+                    })
+                    ->orderBy('id', 'desc')
                     ->get();
-
+                    
         $messages->map(function($message) {
             $message->created_at_diff = $message->created_at->diffForHumans();
             return $message;
