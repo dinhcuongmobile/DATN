@@ -29,40 +29,33 @@ function closeChat() {
 function openChat(senderName, receiverId) {
     const chatPopup = document.getElementById('chatPopup');
     chatPopup.style.display = chatPopup.style.display === 'block' ? 'none' : 'block';
-    // Hiển thị popup chat
 
-    // // Cập nhật tên người gửi trong tiêu đề chat
     document.querySelector('#chatPopup .chat-title').textContent = 'Chat với: ' + senderName;
     chatPopup.setAttribute('data-receiverid',receiverId);
 
-    // // Gọi AJAX hoặc phương thức khác để tải tin nhắn từ server với `receiverId`
     fetchMessages(receiverId);
     sendMessage();
 }
 
 function fetchMessages(receiverId) {
-    // Gửi request AJAX để lấy các tin nhắn giữa người dùng hiện tại và receiverId
     fetch(`/admin/chat/${receiverId}`)
         .then(response => response.json())
         .then(data => {
 
-            // Xử lý dữ liệu tin nhắn
             const chatBody = document.querySelector('#chatPopup .chat-body');
-            chatBody.innerHTML = ''; // Xóa các tin nhắn cũ
+            chatBody.innerHTML = '';
 
             data.messages.forEach(message => {
                 let messageDiv = document.createElement('div');
 
                 if (message.sender_role === "nhanVien" || message.sender_role === "quanTriVien") {
                     messageDiv.classList.add('message', 'receiver');
-                    // Tin nhắn của người dùng hiện tại (gửi đi)
                     messageDiv.innerHTML = `<span class="receiver-name">Me:</span> ${message.message}`;
                 } else {
                     messageDiv.classList.add('message', 'sender');
                     let fullName = `${message.sender.ho_va_ten}`;
                     let nameParts = fullName.split(' ');
                     let firstName = nameParts[nameParts.length - 1];
-                    // Tin nhắn của người khác (nhận được)
                     messageDiv.innerHTML = `<span class="sender-name">${firstName}:</span> ${message.message}`;
                 }
                 chatBody.appendChild(messageDiv);
@@ -106,17 +99,15 @@ function sendMessage() {
         }
     }
 
-    // Thêm sự kiện click cho nút "Gửi"
     if (btnGui) {
         btnGui.addEventListener('click', sendMessageHandler);
     }
 
-    // Thêm sự kiện keydown cho ô nhập tin nhắn (nhấn Enter)
     if (messageInput) {
         messageInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter') {
-                e.preventDefault(); // Ngăn form gửi mặc định
-                sendMessageHandler(); // Gọi hàm gửi tin nhắn
+                e.preventDefault();
+                sendMessageHandler();
             }
         });
     }
