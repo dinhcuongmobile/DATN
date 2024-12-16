@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Client\HomeController;
@@ -29,7 +28,6 @@ use App\Http\Controllers\Admin\PhiShip\PhiShipAdminController;
 use App\Http\Controllers\Admin\SanPham\SanPhamAdminController;
 use App\Http\Controllers\Client\GioiThieu\GioiThieuController;
 use App\Http\Controllers\Admin\TaiKhoan\TaiKhoanAdminController;
-use App\Http\Controllers\Admin\ThongBao\ThongBaoAdminController;
 use App\Http\Controllers\Admin\KhuyenMai\KhuyenMaiAdminController;
 use App\Http\Controllers\Admin\DanhMucTinTuc\DanhMucTinTucAdminController;
 use App\Http\Controllers\Client\TaiKhoan\ThongTinTaiKhoan\ThongTinTaiKhoanController;
@@ -90,6 +88,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
         Route::get('/thong-tin-tai-khoan',[ThongTinTaiKhoanController::class,'showThongTinTaiKhoan'])
             ->name('tai-khoan.thong-tin-tai-khoan')->middleware('auth');
+        Route::get('/thong-bao', [ThongTinTaiKhoanController::class, 'thongBao']);
 
         Route::put('/sua-thong-tin', [ThongTinTaiKhoanController::class, 'suaThongTin']);
 
@@ -433,7 +432,6 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
         Route::get('tim-kiem', [DonHangAdminController::class,'timKiem'])->name('don-hang.tim-kiem');
 
     });
-    Route::get('thong-bao', [ThongBaoAdminController::class,'layThongBao'])->name('thong-bao.thong-bao-admin');
 
     //Danh gia
     Route::prefix('/danh-gia')->group(function() {

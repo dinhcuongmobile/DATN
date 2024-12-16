@@ -54,6 +54,12 @@
                                     aria-selected="true"><i class="iconsax" data-icon="home-1"></i> Tổng Quan</button>
                             </li>
                             <li>
+                                <button class="nav-link" id="notifications-tab" data-bs-toggle="pill"
+                                    data-bs-target="#notifications" role="tab" aria-controls="notifications"
+                                    aria-selected="false"><i class="iconsax" data-icon="lamp-2"></i>Thông báo
+                                </button>
+                            </li>
+                            <li>
                                 <button class="nav-link" id="order-tab" data-bs-toggle="pill" data-bs-target="#order"
                                     role="tab" aria-controls="order" aria-selected="false"><i class="iconsax"
                                         data-icon="receipt-square"></i> Đơn Hàng</button>
@@ -208,6 +214,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- thông báo --}}
+                        <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                            <div class="dashboard-right-box">
+                                <div class="notification-tab">
+                                    <div class="sidebar-title">
+                                        <div class="loader-line"></div>
+                                        <h4>Thông báo</h4>
+                                    </div>
+                                    <ul class="notification-body">
+                                    </ul>
                                 </div>
                             </div>
                         </div>

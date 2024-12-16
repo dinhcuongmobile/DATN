@@ -310,8 +310,8 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                @if ($latestMessages->count() > 0)
-                                    <span class="badge badge-danger badge-counter">{{ $latestMessages->count() }}</span>
+                                @if ($messages->count() > 0)
+                                    <span class="badge badge-danger badge-counter">{{ $messages->count() }}</span>
                                 @endif
                             </a>
                             <!-- Dropdown - Messages -->
@@ -321,21 +321,21 @@
                                     Tin nhắn
                                 </h6>
 
-                                @foreach ($latestMessages as $message)
+                                @foreach ($messages as $value)
                                     <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
-                                       onclick="openChat('{{ $message->sender->ho_va_ten }}', '{{ $message->user_id }}')">
+                                       onclick="openChat('{{ $value->sender->ho_va_ten }}', '{{ $value->user_id }}')">
                                         <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="{{ asset('admin/img/undraw_profile_1.svg') }}" alt="...">
+                                            <img class="rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}" alt="...">
                                             <div class="status-indicator bg-success"></div>
                                         </div>
                                         <div class="font-weight-bold">
-                                            <div class="text-truncate">{{ Str::limit($message->message, 30) }}</div>
-                                            <div class="small text-gray-500">{{ $message->sender->ho_va_ten }} · {{ $message->created_at->diffForHumans() }}</div>
+                                            <div class="text-truncate">{{ Str::limit($value->message, 30) }}</div>
+                                            <div class="small text-gray-500">{{ $value->sender->ho_va_ten }} · {{ $value->created_at->diffForHumans() }}</div>
                                         </div>
                                     </a>
                                 @endforeach
 
-                                @if ($latestMessages->isEmpty())
+                                @if ($messages->isEmpty())
                                     <div class="text-center p-3">
                                         <span class="text-gray-500">Không có tin nhắn mới</span>
                                     </div>

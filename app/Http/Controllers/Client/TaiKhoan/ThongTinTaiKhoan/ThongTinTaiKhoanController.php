@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\TaiKhoan\UpdateThongTinTaiKhoanRequest;
+use App\Models\ThongBao;
 
 class ThongTinTaiKhoanController extends Controller
 {
@@ -54,6 +55,7 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['tongCoin'] = Coin::where('user_id', $tai_khoan->id)->sum('coin');
         $this->views['countDonHang'] = DonHang::where('user_id', $tai_khoan->id)->count();
 
+        //yeu thich
         $this->views['yeu_thichs'] = [];
 
         if (Auth::check()) {
@@ -64,7 +66,7 @@ class ThongTinTaiKhoanController extends Controller
             $this->views['yeu_thichs'] = $yeu_thichs;
         }
 
-        //
+        // don hang
         $don_hangs = [
             'trang_thai_all' => DonHang::with('user', 'diaChi')->where('user_id', Auth::user()->id)->orderBy('ngay_cap_nhat', 'desc')->get(),
             //chua duyet
@@ -108,6 +110,31 @@ class ThongTinTaiKhoanController extends Controller
         $this->views['chi_tiet_don_hangs'] = $chi_tiet_don_hangs;
         $this->views['chua_danh_gia'] = $chua_danh_gia;
         return view('client.taiKhoan.thongTinTaiKhoan', $this->views);
+    }
+
+    public function thongBao(Request $request){
+        //thong bao
+        $thong_baos = ThongBao::where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc');
+
+        foreach ($thong_baos as $key => $value) {
+            if($value->trang_thai==0){
+                $value->update(['trang_thai'=>1]);
+            }
+        }
+        $thong_baos = $thong_baos->paginate(8);
+
+        if($thong_baos){
+            return response()->json([
+                'success' => true,
+                'thong_baos' => $thong_baos,
+                'pagination' => view('client.phanTrang.phanTrangThongBao', ['thong_baos' => $thong_baos])->render()
+            ]);
+        }else{
+            return response()->json([
+                'success' => false,
+            ]);
+        }
     }
 
     public function suaThongTin(Request $request)
