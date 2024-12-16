@@ -31,27 +31,27 @@ class LienHeAdminController extends Controller
         }
         return view('admin.lienhe.dSLienHe',$this->view);
     }
-    public function phanHoi($id)
+    public function phanHoi(Request $request, int $id)
     {
-    try {
-        $lienHe = LienHe::findOrFail($id);
-        $lienHe->trang_thai = 1; // Đã phản hồi
-        $lienHe->save();
+        try {
+            $lienHe = LienHe::findOrFail($id);
+            $lienHe->trang_thai = 1; // Đã phản hồi
+            $lienHe->save();
 
-        return redirect()->back()->with('success', 'Đã cập nhật trạng thái phản hồi thành công!');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật trạng thái!');
+            return redirect()->back()->with('success', 'Đã cập nhật trạng thái phản hồi thành công!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật trạng thái!');
+        }
     }
-}
     public function dsLienHeDaPhanHoi()
     {
-    $dSLienHe = LienHe::where('trang_thai', 1)->paginate(10); // Lọc chỉ liên hệ đã phản hồi
-    return view('admin.lienhe.dsLienHeDaPhanHoi', compact('dSLienHe'));
+        $dSLienHe = LienHe::where('trang_thai', 1)->paginate(10); // Lọc chỉ liên hệ đã phản hồi
+        return view('admin.lienhe.dsLienHeDaPhanHoi', compact('dSLienHe'));
     }
 
     public function dsLienHeChuaPhanHoi()
     {
-    $dSLienHe = LienHe::where('trang_thai', 0)->paginate(10); // Lọc chỉ liên hệ chưa phản hồi
-    return view('admin.lienhe.dsLienHeChuaPhanHoi', compact('dSLienHe'));
+        $dSLienHe = LienHe::where('trang_thai', 0)->paginate(10); // Lọc chỉ liên hệ chưa phản hồi
+        return view('admin.lienhe.dsLienHeChuaPhanHoi', compact('dSLienHe'));
     }
 }
