@@ -25,34 +25,7 @@ class FaceBookController extends Controller
     /**
      * Handle FaceBook callback.
      */
-    public function handleFacebookCallback(Request $request)
-    {
-        try {
-            // Lấy thông tin người dùng từ FaceBook
-            $userFaceBook = Socialite::driver('facebook')->user();
-
-            $finduser = User::where('facebook_id', $userFaceBook->id)
-                ->orWhere('email', $userFaceBook->email)
-                ->first();
-
-            if ($finduser) {
-                // Nếu người dùng tồn tại, đăng nhập
-                $this->updateFaceBookIdIfNeeded($finduser, $userFaceBook->id);
-                $this->loginUser($finduser, $userFaceBook->email);
-            } else {
-                // Tạo tài khoản mới nếu người dùng chưa tồn tại
-                $newUser = $this->createNewUser($userFaceBook);
-                $this->loginUser($newUser, $userFaceBook->email);
-            }
-
-            return redirect()->route('trang-chu.home');
-        } catch (Exception $e) {
-            // Ghi log và chuyển hướng đến trang đăng nhập với thông báo lỗi
-            report($e);
-            return redirect()->route('tai-khoan.dang-nhap')
-                ->with('error', 'Đăng nhập thất bại. Vui lòng thử lại sau!');
-        }
-    }
+    
 
     /**
      * Update FaceBook ID for existing user if needed.
