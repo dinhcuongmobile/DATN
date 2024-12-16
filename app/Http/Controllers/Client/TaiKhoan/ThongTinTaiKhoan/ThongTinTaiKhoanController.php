@@ -115,16 +115,14 @@ class ThongTinTaiKhoanController extends Controller
     public function thongBao(Request $request){
         //thong bao
         $thong_baos = ThongBao::where('user_id', Auth::id())
-        ->orderBy('created_at', 'desc');
-
-        foreach ($thong_baos as $key => $value) {
-            if($value->trang_thai==0){
-                $value->update(['trang_thai'=>1]);
-            }
-        }
-        $thong_baos = $thong_baos->paginate(8);
+        ->orderBy('created_at', 'desc')->paginate(8);
 
         if($thong_baos){
+            foreach ($thong_baos as $key => $value) {
+                if($value->trang_thai===0){
+                    $value->update(['trang_thai'=>1]);
+                }
+            }
             return response()->json([
                 'success' => true,
                 'thong_baos' => $thong_baos,
