@@ -103,16 +103,32 @@ class HomeAdminController extends Controller
         return $tongLuotXem;
     }
 
-    public function thongBao(){
-        $thongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->take(5)->get();
+    public function thongBaoPopup(){
+        $thongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->take(4)->get();
+        $allThongBao = ThongBao::where('nguoi_nhan',1)->orderBy('created_at','desc')->get();
         $count = ThongBao::where('nguoi_nhan',1)->get()->count();
         return response()->json([
+            'allThongBao' => $allThongBao,
             'thongBao'=>$thongBao,
             'count' => $count
         ]);
     }
 
-    public function tatCaThongBao(){
+    public function messagePopup(){
+                    //tin nhắn
+        $messages = Message::with('sender')
+                    ->where('sender_role', 'thanhVien')
+                    ->groupBy('user_id')
+                    ->orderBy('id','desc')
+                    ->get();
 
+        $messages->map(function($message) {
+            $message->created_at_diff = $message->created_at->diffForHumans();
+            return $message;
+        });
+        return response()->json([
+            'messages' => $messages,
+            'countMessage' => $messages->count(),
+        ]);
     }
 }

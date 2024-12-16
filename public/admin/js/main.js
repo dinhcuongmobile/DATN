@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
+    formatCurrency();
     eyePassword();
-    allThongBao();
     fetchNotifications();
 });
 
@@ -164,10 +164,6 @@ if(taoMaTuDong){
     })
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-    formatCurrency();
-});
-
 function formatCurrency() {
     const displayInput = document.getElementById('tienJSDisplay');
     const hiddenInput = document.getElementById('tienJSHidden');
@@ -224,16 +220,18 @@ if(elHours && elMinutes && elSeconds){
 }
 
 function fetchNotifications() {
-    fetch("/admin/thong-bao")
+    fetch("/admin/thong-bao-popup")
         .then(response => response.json())
         .then(data => {
             const notificationCounter = document.querySelector('#notificationCounter');
+            const modalNotificationContent = document.querySelector('#modalNotificationContent');
             const notificationContent = document.querySelector('#notificationContent');
             // Cập nhật badge counter
             notificationCounter.textContent = data.count > 0 ? `${data.count}+` : "0";
 
             // Xóa nội dung cũ
             notificationContent.innerHTML = "";
+            modalNotificationContent.innerHTML="";
 
             if (data.thongBao.length > 0) {
                 data.thongBao.forEach(item => {
@@ -251,13 +249,14 @@ function fetchNotifications() {
                     }).replace(',', '');
 
                     let html = `
-                        <a class="dropdown-item d-flex align-items-center">
+                        <a class="dropdown-item d-flex align-items-center" title="Xem chi tiết">
                             <div class="mr-3">
                                 <img src="${image}" alt="err">
                             </div>
                             <div>
                                 <div class="small text-gray-500">${formattedDate}</div>
-                                <span class="font-weight-bold">${item.noi_dung}</span>
+                                <span class="font-weight-bold">${item.tieu_de}</span>
+                                <p>${item.noi_dung}</p>
                             </div>
                         </a>
                     `;
@@ -265,14 +264,43 @@ function fetchNotifications() {
                     notificationContent.insertAdjacentHTML('beforeend', html);
                 });
             }
+
+            if(data.allThongBao.length > 0){
+                data.allThongBao.forEach(item => {
+                    let image = item.hinh_anh ? `/storage/${item.hinh_anh}` : '/assets/images/other-img/thongBao.jpg';
+
+                    let date = new Date(item.created_at);
+
+                    let formattedDate = date.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    }).replace(',', '');
+
+                    let html = `
+                        <a class="dropdown-item d-flex align-items-center" title="Xem chi tiết">
+                            <div class="mr-3">
+                                <img src="${image}" alt="err">
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">${formattedDate}</div>
+                                <span class="font-weight-bold">${item.tieu_de}</span>
+                                <p>${item.noi_dung}</p>
+                            </div>
+                        </a>
+                    `;
+
+                    modalNotificationContent.insertAdjacentHTML('beforeend', html);
+                });
+            }
         })
         .catch(error => console.error("Error fetching notifications:", error));
 }
 setInterval(fetchNotifications, 5000);
 
-function allThongBao(){
-
-}
 
 
 

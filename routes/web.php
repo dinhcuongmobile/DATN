@@ -202,8 +202,9 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
     Route::get('thong-ke-tai-khoan', [HomeAdminController::class, 'thongKeTaiKhoan'])->name('admin.thong-ke-tai-khoan');
     Route::get('thong-ke-don-hang', [HomeAdminController::class, 'thongKeDonHang'])->name('admin.thong-ke-don-hang');
     Route::get('thong-ke-luot-xem', [HomeAdminController::class, 'thongKeLuotXem'])->name('admin.thong-ke-luot-xem');
-    Route::get('thong-bao', [HomeAdminController::class, 'thongBao']);
-    Route::get('tat-ca-thong-bao', [HomeAdminController::class, 'tatCaThongBao']);
+    Route::get('thong-bao-popup', [HomeAdminController::class, 'thongBaoPopup']);
+    Route::get('message-popup', [HomeAdminController::class, 'messagePopup']);
+    Route::get('/chat/{receiver_id}', [HomeAdminController::class, 'fetchMessages']);
 
     Route::prefix('/thong-ke')->group(function() {
         Route::post('/load-30-ngay', [ThongKeController::class, 'load30Ngay'])->name('thong-ke.load-30-ngay');
@@ -450,8 +451,6 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
         Route::get('/khoi-phuc-danh-gia/{id}', [DanhGiaController::class, 'khoiPhucDanhGia'])->name('danh-gia.khoi-phuc');
         Route::post('/khoi-phuc-nhieu-danh-gia', [DanhGiaController::class, 'khoiPhucNhieuDanhGia'])->name('danh-gia.khoi-phuc-nhieu');
     });
-
-    Route::get('/chat/{receiver_id}', [HomeAdminController::class, 'fetchMessages']);
 });
 
 // dia chỉ

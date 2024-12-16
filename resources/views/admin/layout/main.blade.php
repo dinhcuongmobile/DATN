@@ -276,12 +276,12 @@
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
+                                aria-labelledby="alertsDropdown" style="width: 25rem !important">
                                 <h6 class="dropdown-header">Thông Báo</h6>
                                 <div id="notificationContent">
 
                                 </div>
-                                <a class="dropdown-item text-center small text-gray-500" href="#"
+                                <a class="dropdown-item text-center small text-gray-500" style="cursor: pointer"
                                     data-toggle="modal" data-target="#showAllAlertsModal">Hiển Thị tất cả</a>
                             </div>
                         </li>
@@ -296,8 +296,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body" id="modalNotificationContent">
-                                        <!-- Nội dung thông báo sẽ được chèn vào đây -->
-                                        <p class="text-center text-gray-500">Đang tải thông báo...</p>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
@@ -310,9 +309,7 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                @if ($messages->count() > 0)
-                                    <span class="badge badge-danger badge-counter">{{ $messages->count() }}</span>
-                                @endif
+                                <span class="badge badge-danger badge-counter">{{$countMessage}}+</span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in divMessagesDropdown"
@@ -320,26 +317,9 @@
                                 <h6 class="dropdown-header">
                                     Tin nhắn
                                 </h6>
+                                <div id="messageContent">
+                                </div>
 
-                                @foreach ($messages as $value)
-                                    <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
-                                       onclick="openChat('{{ $value->sender->ho_va_ten }}', '{{ $value->user_id }}')">
-                                        <div class="dropdown-list-image mr-3">
-                                            <img class="rounded-circle" src="{{ asset('assets/images/user/12.jpg') }}" alt="...">
-                                            <div class="status-indicator bg-success"></div>
-                                        </div>
-                                        <div class="font-weight-bold">
-                                            <div class="text-truncate">{{ Str::limit($value->message, 30) }}</div>
-                                            <div class="small text-gray-500">{{ $value->sender->ho_va_ten }} · {{ $value->created_at->diffForHumans() }}</div>
-                                        </div>
-                                    </a>
-                                @endforeach
-
-                                @if ($messages->isEmpty())
-                                    <div class="text-center p-3">
-                                        <span class="text-gray-500">Không có tin nhắn mới</span>
-                                    </div>
-                                @endif
                             </div>
                         </li>
 

@@ -142,12 +142,18 @@
 }
 
 /* Tiêu đề modal */
-.modal-title {
+#showAllAlertsModal .modal-header{
+    background-color: #4e73df;
+}
+#showAllAlertsModal .modal-title {
     font-weight: bold;
     font-size: 1.5rem;
-    color: #4e73df; /* Màu xanh của SB Admin */
+    color: #ffffff;
 }
-
+#showAllAlertsModal .close span{
+    color: #fff;
+    font-size: 30px;
+}
 /* Nền của nội dung thông báo */
 .notification-item {
     border-bottom: 1px solid #ddd;
@@ -155,7 +161,7 @@
     transition: background-color 0.2s;
 }
 .notification-item:hover {
-    background-color: #f8f9fc; /* Màu nền khi hover */
+    background-color: #f8f9fc;
 }
 
 /* Tiêu đề thông báo */
@@ -275,7 +281,22 @@
     cursor: pointer;
 }
 
+#notificationContent {
+    cursor: pointer;
+}
+
 #notificationContent .mr-3 img{
     width: 45px;
     border-radius: 50%;
+}
+
+#modalNotificationContent a{
+    padding: 10px 0px;
+    border-bottom: 1px solid #dee2e6;
+    cursor: pointer;
+}
+
+#modalNotificationContent .mr-3 img{
+     width: 50px;
+     border-radius: 50%;
 }

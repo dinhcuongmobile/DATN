@@ -15,13 +15,74 @@ document.addEventListener('DOMContentLoaded', () => {
             chatBody.appendChild(messageDiv);
             chatBody.scrollTop = chatBody.scrollHeight;
         });
+
+
+    fetchMessagePopup();
 });
+
+let chatInterval = null;
+let isEventAttached = false;
+
+document.addEventListener("DOMContentLoaded", () => {
+    sendMessage(); // Gắn sự kiện gửi tin nhắn khi trang được load
+});
+
+function fetchMessagePopup() {
+    fetch("/admin/message-popup")
+        .then(response => response.json())
+        .then(data => {
+            const messageCount = document.querySelector('#messagesDropdown span');
+            const messageContent = document.querySelector(".liMessagesDropdown #messageContent");
+
+            // Cập nhật badge counter
+            messageCount.textContent = data.countMessage > 0 ? `${data.countMessage}+` : "0";
+
+            messageContent.innerHTML = "";
+
+            if (data.messages.length > 0) {
+                data.messages.forEach(item => {
+                    let date = new Date(item.created_at);
+                    let formattedDate = date.toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    }).replace(',', '');
+
+                    let html = `
+                        <a class="dropdown-item d-flex align-items-center" style="cursor: pointer"
+                            onclick="openChat('${item.sender.ho_va_ten}', '${item.user_id}')">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="/assets/images/user/12.jpg" alt="err">
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate">${item.message}</div>
+                                <div class="small text-gray-500">${item.sender.ho_va_ten} · ${formattedDate}</div>
+                            </div>
+                        </a>
+                    `;
+                    messageContent.insertAdjacentHTML('beforeend', html);
+                });
+            }
+        })
+        .catch(error => console.error("Error fetching Messages:", error));
+}
+setInterval(fetchMessagePopup, 5000);
+
 // Đóng box chat
 function closeChat() {
     document.getElementById('chatPopup').style.display = 'none';
+
+    // Dừng interval khi đóng chat
+    if (chatInterval) {
+        clearInterval(chatInterval);
+    }
+
     setTimeout(() => {
         document.querySelector('.liMessagesDropdown').classList.add('show');
-        document.querySelector('.liMessagesDropdown #messagesDropdown').setAttribute('aria-expanded','true');
+        document.querySelector('.liMessagesDropdown #messagesDropdown').setAttribute('aria-expanded', 'true');
         document.querySelector('.divMessagesDropdown').classList.add('show');
     }, 100);
 }
@@ -31,23 +92,28 @@ function openChat(senderName, receiverId) {
     chatPopup.style.display = chatPopup.style.display === 'block' ? 'none' : 'block';
 
     document.querySelector('#chatPopup .chat-title').textContent = 'Chat với: ' + senderName;
-    chatPopup.setAttribute('data-receiverid',receiverId);
+    chatPopup.setAttribute('data-receiverid', receiverId);
 
     fetchMessages(receiverId);
-    sendMessage();
+
+    // Xóa interval cũ nếu có
+    if (chatInterval) {
+        clearInterval(chatInterval);
+    }
+
+    // Tạo interval mới để load tin nhắn
+    chatInterval = setInterval(() => fetchMessages(receiverId), 3000);
 }
 
 function fetchMessages(receiverId) {
     fetch(`/admin/chat/${receiverId}`)
         .then(response => response.json())
         .then(data => {
-
             const chatBody = document.querySelector('#chatPopup .chat-body');
             chatBody.innerHTML = '';
 
             data.messages.forEach(message => {
                 let messageDiv = document.createElement('div');
-
                 if (message.sender_role === "nhanVien" || message.sender_role === "quanTriVien") {
                     messageDiv.classList.add('message', 'receiver');
                     messageDiv.innerHTML = `<span class="receiver-name">Me:</span> ${message.message}`;
@@ -64,53 +130,62 @@ function fetchMessages(receiverId) {
         });
 }
 
-// Hàm gửi tin nhắn
 function sendMessage() {
+    const btnGui = document.querySelector('#chatPopup .chat-footer button');
+    const messageInput = document.querySelector('#chatPopup #chatInput');
+
+    if (!isEventAttached) { // Kiểm tra nếu chưa gắn sự kiện
+        isEventAttached = true;
+
+        // Sự kiện click nút gửi
+        if (btnGui) {
+            btnGui.addEventListener('click', sendMessageHandler);
+        }
+
+        // Sự kiện nhấn Enter trong ô nhập tin nhắn
+        if (messageInput) {
+            messageInput.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    sendMessageHandler();
+                }
+            });
+        }
+    }
+}
+
+function sendMessageHandler() {
     const btnGui = document.querySelector('#chatPopup .chat-footer button');
     const messageInput = document.querySelector('#chatPopup #chatInput');
     const chatBody = document.querySelector('#chatPopup .chat-body');
 
-    function sendMessageHandler() {
-        let receiverId = btnGui.closest('#chatPopup').getAttribute('data-receiverid');
-        let userId = btnGui.closest('#chatPopup').getAttribute('data-userid');
-        const messageText = messageInput.value;
+    // Lấy dữ liệu cần thiết từ DOM
+    let receiverId = btnGui.closest('#chatPopup').getAttribute('data-receiverid');
+    let userId = btnGui.closest('#chatPopup').getAttribute('data-userid');
+    const messageText = messageInput.value;
 
-        if (messageText.trim() !== "") {
-            fetch("/send-message", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({
-                    receiver_id: receiverId,
-                    message: messageText,
-                    user_id: userId
-                })
-            }).then(response => response.json()).then(data => {
-                let messageDiv = document.createElement('div');
-                messageDiv.classList.add('message', 'receiver');
-                messageDiv.innerHTML = `<span class="receiver-name">Me:</span> ${data.data.message}`;
-                chatBody.appendChild(messageDiv);
-            }).then(() => {
-                messageInput.value = '';
-                chatBody.scrollTop = chatBody.scrollHeight;
-            });
-        }
-    }
-
-    if (btnGui) {
-        btnGui.addEventListener('click', sendMessageHandler);
-    }
-
-    if (messageInput) {
-        messageInput.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                sendMessageHandler();
-            }
+    if (messageText.trim() !== "") {
+        fetch("/send-message", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({
+                receiver_id: receiverId,
+                message: messageText,
+                user_id: userId
+            })
+        }).then(response => response.json()).then(data => {
+            let messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', 'receiver');
+            messageDiv.innerHTML = `<span class="receiver-name">Me:</span> ${data.data.message}`;
+            chatBody.appendChild(messageDiv);
+            messageInput.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
         });
     }
 }
+
 
 

@@ -20,7 +20,7 @@ class LienHeController extends Controller
     }
     public function lienHe()
     {
-        
+
         return view('client.lienHe.lienHe', $this->views);
     }
 
@@ -37,8 +37,8 @@ class LienHeController extends Controller
         ]);
 
         ThongBao::create([
-            'tieu_de' => "Khách hàng gửi liên hệ",
-            'noi_dung' => "Có một liên hệ mới vừa được gửi.",
+            'tieu_de' => "Khách hàng ". $request->ho_va_ten ." gửi liên hệ",
+            'noi_dung' => $request->noi_dung,
             'nguoi_nhan' => true,
         ]);
     }
