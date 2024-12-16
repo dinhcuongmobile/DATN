@@ -199,8 +199,8 @@
     bottom: 20px;
     right: 20px;
     width: 380px;
-    max-height: 400px; /* Giới hạn chiều cao */
-    height: 400px;
+    max-height: 4550px; /* Giới hạn chiều cao */
+    height: 450px;
     border: 1px solid #ccc;
     background-color: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -229,8 +229,8 @@
 }
 
 #chatPopup .chat-body {
-    max-height: 290px; /* Giới hạn chiều cao */
-    height: 287px;
+    max-height: 337px; /* Giới hạn chiều cao */
+    height: 337px;
     overflow-y: auto; /* Cuộn nếu nội dung dài */
     padding: 10px;
 }
