@@ -35,5 +35,11 @@ class LienHeController extends Controller
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        ThongBao::create([
+            'tieu_de' => "Khách hàng gửi liên hệ",
+            'noi_dung' => "Có một liên hệ mới vừa được gửi.",
+            'nguoi_nhan' => true,
+        ]);
     }
 }
