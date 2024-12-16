@@ -19,7 +19,7 @@ class DanhMucTinTucAdminController extends Controller
 
     //SHOW
     public function showDanhSach(Request $request){
-        $keyword = $request->input('kyw');
+        
         if ($keyword) {
             $this->views['DSDanhmuc'] = DanhMucTinTuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {

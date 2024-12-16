@@ -21,7 +21,7 @@ class DanhGiaController extends Controller
     {
         $danhGias = DanhGia::with('user');
 
-        $keyword = $request->input('kyw');
+        
         if ($keyword) {
             $danhGias->whereHas('user', function ($loc) use ($keyword) {
                 $loc->where('ho_va_ten', 'LIKE', "%$keyword%");
