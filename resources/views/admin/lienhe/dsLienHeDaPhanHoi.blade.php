@@ -104,7 +104,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Ngày Gửi</th>
+                                            <th>Ngày Phản Hồi</th>
                                             <td>{{ $item->created_at }}</td>
                                         </tr>
                                         @if($item->trang_thai == 0)
