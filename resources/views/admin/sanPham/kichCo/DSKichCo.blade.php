@@ -25,7 +25,9 @@
                             <tr class="text-center">
                                 <th>#</th>
                                 <th>Size</th>
-                                <th>Action</th>
+                                @if (Auth::user()->vai_tro_id == 1)
+                                    <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -34,15 +36,17 @@
                                 <tr>
                                     <td class="col-1 align-middle text-center">{{$index+1}}</td>
                                     <td class="col-8 align-middle text-center">{{$item->kich_co}}</td>
-                                    <td class="text-center col-2 align-middle">
-                                        <a  onclick="return confirm('Bạn chắc chắn muốn xóa size này?')"
-                                            href="{{route('san-pham.xoa-size',$item->id)}}" class="btn btn-danger btn-sm">
-                                            <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">Xóa</span></a>
-                                        </a>
-                                    </td>
+                                    @if (Auth::user()->vai_tro_id == 1)
+                                        <td class="text-center col-2 align-middle">
+                                            <a  onclick="return confirm('Bạn chắc chắn muốn xóa size này?')"
+                                                href="{{route('san-pham.xoa-size',$item->id)}}" class="btn btn-danger btn-sm">
+                                                <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Xóa</span></a>
+                                            </a>
+                                        </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             @else

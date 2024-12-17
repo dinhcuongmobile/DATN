@@ -26,7 +26,9 @@
                                 <th>#</th>
                                 <th>Tên màu</th>
                                 <th>Màu sắc</th>
-                                <th>Action</th>
+                                @if (Auth::user()->vai_tro_id == 1)
+                                    <th>Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -38,15 +40,17 @@
                                     <td class="col-3 align-middle text-center">
                                         <div class="color-circle" style="background-color: {{$item->ma_mau}};"></div>
                                     </td>
-                                    <td class="text-center col-2 align-middle">
-                                        <a  onclick="return confirm('Bạn chắc chắn muốn xóa màu sắc này?')"
-                                            href="{{route('san-pham.xoa-mau-sac',$item->id)}}" class="btn btn-danger btn-icon-split btn-sm">
-                                            <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">Xóa</span>
-                                        </a>
-                                    </td>
+                                    @if (Auth::user()->vai_tro_id == 1)
+                                        <td class="text-center col-2 align-middle">
+                                            <a  onclick="return confirm('Bạn chắc chắn muốn xóa màu sắc này?')"
+                                                href="{{route('san-pham.xoa-mau-sac',$item->id)}}" class="btn btn-danger btn-icon-split btn-sm">
+                                                <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Xóa</span>
+                                            </a>
+                                        </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             @else

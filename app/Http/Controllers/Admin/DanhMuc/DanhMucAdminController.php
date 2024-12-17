@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\DanhMuc\StoreDanhMucRequest;
 use App\Http\Requests\DanhMuc\UpdateDanhMucRequest;
 use App\Models\SanPham;
+use Illuminate\Support\Facades\Auth;
 
 class DanhMucAdminController extends Controller
 {
@@ -103,18 +104,22 @@ class DanhMucAdminController extends Controller
     }
 
     public function delete($id){
-        $danh_muc=DanhMuc::find($id);
-        if($danh_muc){
-            $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
-            if($san_phams->isNotEmpty()){
-                foreach ($san_phams as $item) {
-                    $item->update(['danh_muc_id'=>1]);
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $danh_muc=DanhMuc::find($id);
+            if($danh_muc){
+                $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
+                if($san_phams->isNotEmpty()){
+                    foreach ($san_phams as $item) {
+                        $item->update(['danh_muc_id'=>1]);
+                    }
                 }
+                $danh_muc->delete();
+    
+                return redirect()->route('danh-muc.danh-sach')->with('success', 'Một mục đã được chuyển vào thùng rác !');
             }
-            $danh_muc->delete();
-
-            return redirect()->route('danh-muc.danh-sach')->with('success', 'Một mục đã được chuyển vào thùng rác !');
         }
+
+        return redirect()->route('admin.index');
     }
 
     public function xoaNhieuDanhMuc(Request $request){
