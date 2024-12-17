@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách sản phẩm đã bị xóa</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách sản phẩm đã bị xóa ({{$san_phams->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -54,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($san_phams)>0)
+                            @if ($san_phams->count() > 0)
                                 @foreach ($san_phams as $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>

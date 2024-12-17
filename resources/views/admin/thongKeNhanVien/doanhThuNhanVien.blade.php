@@ -67,7 +67,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($doanhThuNhanVien) > 0)
+                            @if ($doanhThuNhanVien->count() > 0)
                                 @foreach ($doanhThuNhanVien as $item)
                                     <tr>
                                         <td class="col-1 align-middle">{{ $item->nguoi_ban }}</td>
@@ -97,7 +97,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($tongDonHang) > 0)
+                            @if ($tongDonHang->count() > 0)
                                 @foreach ($tongDonHang as $item)
                                     <tr>
                                         <td class="col-1 align-middle">{{ $item->nguoi_ban }}</td>

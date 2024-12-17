@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách phí giao hàng</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách phí giao hàng ({{$phi_ships->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($phi_ships) > 0)
+                            @if ($phi_ships->count() > 0)
                                 @foreach ($phi_ships as $index => $item)
                                     <tr>
                                         <td class="col-1 align-middle text-center"><input type="checkbox" name="select[]"

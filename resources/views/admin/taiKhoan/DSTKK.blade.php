@@ -2,7 +2,7 @@
 @section('containerAdmin')
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản đã bị khóa</h1>
+    <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản đã bị khóa ({{$DSTKK->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -42,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($DSTKK)>0)
+                            @if ($DSTKK->count() > 0)
                                 @foreach($DSTKK as $item)
                                     <tr>
                                         <td class="align-middle col-1">{{ $item->id }}</td>

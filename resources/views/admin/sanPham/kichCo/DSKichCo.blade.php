@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách các loại size</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách các loại size ({{$kich_cos->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($kich_cos)>0)
+                            @if ($kich_cos->count() > 0)
                                 @foreach ($kich_cos as $index => $item)
                                 <tr>
                                     <td class="col-1 align-middle text-center">{{$index+1}}</td>

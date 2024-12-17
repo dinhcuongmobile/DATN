@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản thành viên</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách tài khoản thành viên ({{$DSTKTV->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -54,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($DSTKTV)>0)
+                            @if ($DSTKTV->count() > 0)
                                 @foreach ($DSTKTV as $item)
                                     <tr>
                                         <td class="align-middle text-center col-1"><input type="checkbox" name="select[]"

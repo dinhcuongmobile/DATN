@@ -67,13 +67,14 @@
                 <label for="sel1">Danh mục</label>
                 <select class="form-control" id="sel1" name="danh_muc_id">
                     @foreach ($danh_mucs as $item)
-                        <option {{old('danh_muc_id',$san_pham->danh_muc_id)==$item->id?'selected':''}} value="{{$item->id}}">{{$item->ten_danh_muc}}</option>
+                        @if ($item->id!=1)
+                            <option {{old('danh_muc_id',$san_pham->danh_muc_id)==$item->id?'selected':''}} value="{{$item->id}}">{{$item->ten_danh_muc}}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
             <div>
                 <button type="submit" name="submit" class="btn btn-success">Xác nhận</button>
-                <a href="{{route('san-pham.danh-sach')}}"><button type="button" class="btn btn-secondary">Quay lại</button></a>
             </div>
         </form>
     </div>

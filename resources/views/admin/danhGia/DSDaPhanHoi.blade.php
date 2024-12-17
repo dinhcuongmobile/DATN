@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá đã phản hồi</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách đánh giá đã phản hồi ({{$danhGias->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($danhGias) > 0)
+                            @if ($danhGias->count() > 0)
                                 @foreach ($danhGias as $item)
                                     @if ($item->noi_dung != null)
                                         @php

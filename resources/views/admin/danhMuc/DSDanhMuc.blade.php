@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách danh mục</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách danh mục ({{$DSDanhmuc->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -51,31 +51,50 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($DSDanhmuc)>0)
+                            @if ($DSDanhmuc->count() > 0)
                                 @foreach ($DSDanhmuc as $item)
                                     <tr>
                                         <td class="col-1 text-center"><input type="checkbox" name="select[]"
-                                                value="{{ $item->id }}"></td>
-                                        <td class="col-2 align-middle">NM-{{ $item->id }}</td>
-                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" alt="err" height="60px"></td>
-                                        <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>
-                                        <td class="col-2 align-middle">
-                                            <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
-                                                class="btn btn-warning btn-icon-split btn-sm">
+                                            value="{{ $item->id }}"></td>
+                                        {{-- danh  muc thung rac --}}
+                                        @if ($item->id == 1)
+                                            <td class="col-2 align-middle"></td>
+                                            <td class="col-2 align-middle"></td>
+                                            <td class="align-middle">
+                                                <a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a>
+                                            </td>
+                                            <td class="col-2 align-middle text-center">
+                                                <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
+                                                    class="btn btn-warning btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="text">Sửa</span>
+                                                </a>
+                                            </td>
+                                        {{-- end danh muc thung rac --}}
+                                        @else
+                                            <td class="col-2 align-middle">NM-{{ $item->id }}</td>
+                                            <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh)}}" height="60px"></td>
+                                            <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>
+                                            <td class="col-2 align-middle">
+                                                <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
+                                                    class="btn btn-warning btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="text">Sửa</span>
+                                                </a> |
+                                                <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
+                                                    href="{{ route('danh-muc.delete', $item->id) }}"
+                                                    class="btn btn-danger btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
-                                                    <i class="fas fa-edit"></i>
-                                            </span>
-                                            <span class="text">Sửa</span>
-                                            </a> |
-                                            <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
-                                                href="{{ route('danh-muc.delete', $item->id) }}"
-                                                class="btn btn-danger btn-icon-split btn-sm">
-                                            <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">Xóa</span>
-                                            </a>
-                                        </td>
+                                                        <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Xóa</span>
+                                                </a>
+                                            </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             @else

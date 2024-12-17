@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách biến thể sản phẩm</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách biến thể sản phẩm ({{$bien_thes->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -56,7 +56,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($bien_thes)>0)
+                            @if ($bien_thes->count()>0)
                                 @foreach ($bien_thes as $item)
                                 <tr>
                                     <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
@@ -80,7 +80,7 @@
                                             </span> <span class="text">Sửa</span>
                                         </a> |
                                         <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
-                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">  
+                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">
                                                     <span class="icon text-white-50">
                                                     <i class="fas fa-trash"></i>
                                             </span>

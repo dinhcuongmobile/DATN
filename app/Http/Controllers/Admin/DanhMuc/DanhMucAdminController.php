@@ -21,9 +21,9 @@ class DanhMucAdminController extends Controller
     public function showDanhSach(Request $request){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'asc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
-            $this->views['DSDanhmuc'] = DanhMuc::orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::orderBy('id', 'asc')->paginate(10);
         }
         return view('admin.danhMuc.DSDanhMuc',$this->views);
     }
@@ -31,9 +31,9 @@ class DanhMucAdminController extends Controller
     public function danhSachDanhMucDaXoa(Request $request){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'asc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
-            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::onlyTrashed()->orderBy('id', 'asc')->paginate(10);
         }
         return view('admin.danhMuc.danhSachDaXoa',$this->views);
     }
@@ -41,9 +41,9 @@ class DanhMucAdminController extends Controller
     public function danhMucSanPham(Request $request, int $id){
         $keyword = $request->input('kyw');
         if ($keyword) {
-            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+            $this->views['DSDanhmuc'] = DanhMuc::where('ten_danh_muc', 'LIKE', "%$keyword%")->orderBy('id', 'asc')->paginate(10)->appends(['kyw' => $keyword]);
         } else {
-            $this->views['DSDanhmuc'] = DanhMuc::where('id',$id)->orderBy('id', 'desc')->paginate(10);
+            $this->views['DSDanhmuc'] = DanhMuc::where('id',$id)->orderBy('id', 'asc')->paginate(10);
         }
         return view('admin.danhMuc.DSDanhMuc',$this->views);
     }
@@ -108,10 +108,7 @@ class DanhMucAdminController extends Controller
             $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
             if($san_phams->isNotEmpty()){
                 foreach ($san_phams as $item) {
-                    if($item->hinh_anh){
-                        Storage::disk('public')->delete($item->hinh_anh);
-                    }
-                    $item->forceDelete();
+                    $item->update(['danh_muc_id'=>1]);
                 }
             }
             $danh_muc->delete();
@@ -128,10 +125,7 @@ class DanhMucAdminController extends Controller
                     $san_phams=SanPham::where('danh_muc_id',$danh_muc->id)->get();
                     if($san_phams->isNotEmpty()){
                         foreach ($san_phams as $item) {
-                            if($item->hinh_anh){
-                                Storage::disk('public')->delete($item->hinh_anh);
-                            }
-                            $item->forceDelete();
+                            $item->update(['danh_muc_id'=>1]);
                         }
                     }
                     $danh_muc->delete();

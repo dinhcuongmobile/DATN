@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách danh mục đã bị xóa</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách danh mục đã bị xóa ({{$DSDanhmuc->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -50,14 +50,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($DSDanhmuc)>0)
+                            @if ($DSDanhmuc->count() > 0)
                                 @foreach ($DSDanhmuc as $item)
                                     <tr>
                                         <td class="col-1 text-center"><input type="checkbox" name="select[]"
                                                 value="{{ $item->id }}"></td>
                                         <td class="col-2 align-middle">NM-{{ $item->id }}</td>
-                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}"
-                                            alt="err" height="60px"></td>
+                                        <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh) }}" height="60px"></td>
                                         <td class="align-middle">{{ $item->ten_danh_muc }}</td>
                                         <td class="col-3 align-middle">
                                             <a onclick="return confirm('Bạn chắc chắn muốn khôi phục không?')"

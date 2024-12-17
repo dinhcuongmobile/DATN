@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Quản lý banner</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Quản lý banner ({{$DSBanner->count()}})</h1>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class=" float-right">

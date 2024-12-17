@@ -25,7 +25,7 @@ class SanPhamAdminController extends Controller
 
     //show
     public function danhSachSanPham(Request $request){
-        $query = SanPham::with('danhMuc', 'bienThes');
+        $query = SanPham::with('danhMuc', 'bienThes')->where('danh_muc_id','!=',1);
         $keyword = $request->input('kyw');
 
         if ($keyword) {

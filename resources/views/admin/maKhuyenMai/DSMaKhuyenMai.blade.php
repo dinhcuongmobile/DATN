@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách mã khuyến mại đơn hàng</h1>
+        <h1 class="h3 mb-2 text-gray-800 mb-5">Danh sách mã khuyến mại đơn hàng ({{$ma_khuyen_mais->count()}})</h1>
         @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -55,7 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (count($ma_khuyen_mais)>0)
+                            @if ($ma_khuyen_mais->count() > 0)
                                 @foreach ($ma_khuyen_mais as $index => $item)
                                     <tr>
                                         <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
