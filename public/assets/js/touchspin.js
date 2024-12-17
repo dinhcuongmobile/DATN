@@ -192,6 +192,13 @@ function themGioHang(){
                             if (response.login == false) {
                                 window.location.href = '/tai-khoan/dang-nhap';
                             } else {
+                                document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                                
+                                let dataMaxNew = parseInt(dataMax)-soLuong;
+                                document.querySelector('.quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
+                                document.querySelector('.quantity input[type="number"]').value = dataMaxNew > 0 ? 1 : 0;
+                                document.querySelector('.quantity #soLuong').value = dataMaxNew > 0 ? 1 : 0;
+
                                 $('#addtocart').modal('show');
                                 let sanPham = response.san_pham;
                                 let row = document.querySelector('#addtocart .row');
@@ -225,12 +232,6 @@ function themGioHang(){
                                         </div>
                                     </div>`;
 
-                                document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
-
-                                let dataMaxNew = parseInt(dataMax)-soLuong;
-                                document.querySelector('.quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
-                                document.querySelector('.quantity input[type="number"]').value = dataMaxNew > 0 ? 1 : 0;
-                                document.querySelector('.quantity #soLuong').value = dataMaxNew > 0 ? 1 : 0;
                                 response.spYeuThich.forEach((item, index)=>{
                                     let text = item.san_pham.ten_san_pham;
                                     let truncatedText = text.length > 27 ? text.slice(0, 27) + "..." : text;
