@@ -96,7 +96,9 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ route('danh-muc.danh-sach') }}">Danh sách danh mục</a>
-                        <a class="collapse-item" href="{{ route('danh-muc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
+                        @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                            <a class="collapse-item" href="{{ route('danh-muc.danh-sach-danh-muc-da-xoa') }}">Thùng rác</a>
+                        @endif
                         <a class="collapse-item" href="{{ route('danh-muc.them-danh-muc') }}"
                             style="background-color: #48dbfb;">
                             <i class="fas fa-fw fa-plus" style="color: #576574;"></i>
@@ -120,8 +122,10 @@
                             biến thể</a>
                         <a class="collapse-item" href="{{ route('san-pham.quan-ly-size') }}">Quản lý size</a>
                         <a class="collapse-item" href="{{ route('san-pham.quan-ly-mau-sac') }}">Quản lý màu sắc</a>
-                        <a class="collapse-item" href="{{ route('san-pham.danh-sach-san-pham-da-xoa') }}">Thùng
-                            rác</a>
+                        @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                            <a class="collapse-item" href="{{ route('san-pham.danh-sach-san-pham-da-xoa') }}">Thùng
+                                rác</a>
+                        @endif
                     </div>
                 </div>
             </li>
@@ -222,7 +226,11 @@
             <li class="nav-item mb-3">
                 <a class="nav-link" href="{{ route('thong-ke.doanh-thu-nhan-vien') }}">
                     <i class="fas fa-chart-line"></i>
-                    <span>Doanh thu nhân viên</span>
+                    @if (Auth::guard()->user()->vai_tro_id == 1)
+                        <span>Doanh thu nhân viên</span>
+                    @else
+                        <span>Doanh thu của tôi</span>
+                    @endif
                 </a>
             </li>
 
