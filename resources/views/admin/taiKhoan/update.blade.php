@@ -7,7 +7,7 @@
 <div class="align-items-center mb-4">
     <h1 class="h3 mb-0 text-gray-800">Cập nhật vai trò tài khoản</h1>
 </div>
-@if ($tai_khoan->id == 1)
+@if ($tai_khoan->vai_tro_id == 1 && $tai_khoan->id == 1)
     <span>Tài khoản này không được chỉnh sửa</span>
 @else
     <div class="card shadow mb-4">

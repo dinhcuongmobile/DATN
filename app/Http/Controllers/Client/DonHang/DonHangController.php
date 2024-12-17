@@ -27,6 +27,33 @@ class DonHangController extends Controller
         $this->views = [];
     }
 
+    public function checkTrangThaiDonHang(){
+        $donHangs = DonHang::with(['user', 'diaChi', 'danhGia', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+        ->where('user_id', Auth::id())
+        ->orderBy('ngay_cap_nhat', 'desc')
+        ->get();
+
+        $don_hangs = $donHangs->map(function ($donHang) {
+            $soLuongDaDanhGia = $donHang->danhGia->count();
+
+            $donHang->so_luong_da_danh_gia = $soLuongDaDanhGia;
+            return $donHang;
+        });
+
+        $don_hangs_grouped = [
+            'trang_thai_all' => $don_hangs,
+            'trang_thai_0' => $don_hangs->where('trang_thai', 0)->values(),
+            'trang_thai_1' => $don_hangs->where('trang_thai', 1)->values(),
+            'trang_thai_2' => $don_hangs->where('trang_thai', 2)->values(),
+            'trang_thai_3' => $don_hangs->where('trang_thai', 3)->values(),
+            'trang_thai_4' => $don_hangs->where('trang_thai', 4)->values(),
+        ];
+
+        return response()->json([
+            "donHang" => $don_hangs_grouped
+        ]);
+
+    }
     public function showChiTietDonHang(Request $request){
         $donHangId = $request->input('donHangId');
         $don_hang = DonHang::with('user','diaChi','chiTietDonHangs')->find($donHangId);

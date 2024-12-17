@@ -119,6 +119,7 @@ Route::middleware('autoDangNhap', 'clientAuth')->prefix('/')->group(function(){
 
     // don hang
     Route::prefix('don-hang')->group(function () {
+        Route::get('check-trang-thai-don-hang', [DonHangController::class, 'checkTrangThaiDonHang']);
         Route::get('chi-tiet-don-hang',[DonHangController::class,'showChiTietDonHang']);
         Route::get('show-modal-danh-gia',[DonHangController::class,'showModalDanhGia']);
         Route::post('huy-don-hang',[DonHangController::class,'huyDonHang']);

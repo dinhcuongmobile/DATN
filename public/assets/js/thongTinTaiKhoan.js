@@ -7,11 +7,36 @@ document.addEventListener('DOMContentLoaded',function(){
     activeTabDonMua("activeTabDaHuy", "tap6");
     activeTabDonMua("activeTabHoanThanh", "tap5");
     chiTietDonMua();
-    huyDonHang();
-    reviews();
-    daNhanHang();
-    muaLai();
+    fetchDonHangStatus();
+    setIntervalOrder();
 });
+
+function setIntervalOrder(){
+    let orderInterval = null;
+
+    const activeTabCheck = document.querySelectorAll("#v-pills-tab .nav-link");
+    activeTabCheck.forEach((el)=>{
+
+        if(el.getAttribute("aria-controls")==="order" && el.getAttribute("aria-selected")==="true"){
+            orderInterval = setInterval(() => fetchDonHangStatus(), 5000);
+        }else{
+            if (orderInterval) {
+                clearInterval(orderInterval);
+            }
+        }
+
+        el.addEventListener('click',function(){
+            if(el.getAttribute("aria-controls")==="order"){
+                orderInterval = setInterval(() => fetchDonHangStatus(), 5000);
+            }else{
+                if (orderInterval) {
+                    clearInterval(orderInterval);
+                }
+            }
+
+        });
+    });
+}
 
 //thong bao
 function tabThongBao(){
@@ -498,9 +523,7 @@ function huyDonHang(){
                     },
                     success: function (response) {
                         if(response.success){
-                            sessionStorage.setItem("activeTab", "order");
-                            sessionStorage.setItem("activeTabDaHuy", "tap6");
-                            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                            fetchDonHangStatus();
                         }
                     },
                     error: function (error) {
@@ -894,9 +917,7 @@ function guiDanhGia(){
                                     const hiddenModal = document.querySelectorAll('#reviews .main .row .row-item');
                                     if (hiddenModal.length===0) {
                                         $('#reviews').modal('hide');
-                                        sessionStorage.setItem("activeTab", "order");
-                                        sessionStorage.setItem("activeTabHoanThanh", "tap5");
-                                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                                        fetchDonHangStatus();
                                     }
                                 }, 1300);
                             }
@@ -942,9 +963,7 @@ function daNhanHang(){
                     },
                     success: function (response) {
                         if(response.success){
-                            sessionStorage.setItem("activeTab", "order");
-                            sessionStorage.setItem("activeTabHoanThanh", "tap5");
-                            window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                            fetchDonHangStatus();
                         }
                     },
                     error: function (error) {
@@ -1044,4 +1063,157 @@ function muaLaiChiTiet(id){
 
         });
     }
+}
+
+function fetchDonHangStatus() {
+
+    fetch("/don-hang/check-trang-thai-don-hang")
+        .then(response => response.json())
+        .then(data => {
+
+            //tap1
+            let tap1 = document.querySelector("div#tap1");
+            let tap2 = document.querySelector("div#tap2");
+            let tap3 = document.querySelector("div#tap3");
+            let tap4 = document.querySelector("div#tap4");
+            let tap5 = document.querySelector("div#tap5");
+            let tap6 = document.querySelector("div#tap6");
+
+            tap1.innerHTML="";
+            tap2.innerHTML="";
+            tap3.innerHTML="";
+            tap4.innerHTML="";
+            tap5.innerHTML="";
+            tap6.innerHTML="";
+
+            data.donHang.trang_thai_all.forEach(item => {
+                tap1.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+
+            data.donHang.trang_thai_0.forEach(item => {
+                tap2.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+            data.donHang.trang_thai_1.forEach(item => {
+                tap3.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+            data.donHang.trang_thai_2.forEach(item => {
+                tap4.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+            data.donHang.trang_thai_3.forEach(item => {
+                tap5.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+            data.donHang.trang_thai_4.forEach(item => {
+                tap6.insertAdjacentHTML('beforeend', renderDonHang(item));
+            });
+
+            muaLai();
+            daNhanHang();
+            reviews();
+            chiTietDonMua();
+
+
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function renderDonHang(item){
+    let danhGiaButton = '';
+
+    if (item.trang_thai === 3 && item.so_luong_da_danh_gia < item.chi_tiet_don_hangs.length) {
+        danhGiaButton = `<button class="btn btn-warning btnDanhGia">Đánh giá</button>`;
+    }
+
+    return `<div class="card shadow-0 border mb-4" style="border-radius: 10px;" data-donHangId="${item.id}">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="cart-table-container tableDonMua">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2">
+                                                ${item.user.vai_tro_id == 3
+                                                    ? `<span class="chatLS" onclick="toggleChat(${item.user.id})">💬 Chat</span>`
+                                                    : ""}
+                                                <a href="/san-pham/" class="shopLS">
+                                                    <i class="fas fa-box"></i> Xem cửa hàng
+                                                </a>
+                                            </td>
+                                            <td colspan="2" class="thongBaoLS"
+                                                style="text-align: right">
+                                                <span class="thongBao">
+                                                    ${getTrangThaiHTML(item.trang_thai)}
+                                                </span> |
+                                                ${getThanhToanHTML(item.thanh_toan)}
+                                            </td>
+                                        </tr>
+                                        ${renderChiTietSanPham(item.chi_tiet_don_hangs)}
+                                    </tbody>
+                                </table>
+                                <p class="thanhTien">Thành tiền:
+                                    <span>${(item.tong_thanh_toan).toLocaleString('vi-VN')}đ</span>
+                                </p>
+                                <div class="btnDonMua">
+                                    ${danhGiaButton}
+                                    ${getBtnHTML(item.trang_thai)}
+                                    <a href="/lien-he/"
+                                        class="btn btn-outline-secondary">Liên hệ Shop</a>
+                                </div>
+                            </div><!-- End .cart-table-container -->
+                        </div><!-- End .col-lg-8 -->
+                    </div>
+                </div>
+            </div>`;
+}
+function getTrangThaiHTML(trangThai) {
+    switch (trangThai) {
+        case 0: return '<span class="text-warning">Chờ xác nhận</span>';
+        case 1: return '<span>Đang chuẩn bị hàng</span>';
+        case 2: return '<i class="fas fa-truck icon"></i> <span>Đang giao</span>';
+        case 3: return '<span>Đã giao</span>';
+        case 4: return '<span class="text-danger">Đã hủy</span>';
+        default: return '';
+    }
+}
+function getThanhToanHTML(thanhToan) {
+    return thanhToan == 0
+        ? '<span class="choThanhToan" style="color:red">Chưa thanh toán</span>'
+        : '<span class="choThanhToan" style="color:#26aa99">Đã thanh toán</span>';
+}
+function getBtnHTML(trangThai){
+    switch (trangThai) {
+        case 0: return '<button style="margin-right:15px;" class="btn btn-outline-danger huyDonHang">Hủy đơn hàng</button>';
+        case 2: return '<button class="btn btn-success daNhanHang">Đã nhận hàng</button> <button class="btn btn-primary muaLai">Mua lại</button>';
+        case 3: return '<button class="btn btn-primary muaLai">Mua lại</button>';
+        case 4: return '<button class="btn btn-primary muaLai">Mua lại</button>';
+        default: return '';
+    }
+}
+function renderChiTietSanPham(chiTietDonHang) {
+    let html = '';
+    chiTietDonHang.forEach(item => {
+
+        html += `
+            <tr class="product-row" title="Xem chi tiết">
+                <td class="img">
+                    <img src="/storage/${item.bien_the.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
+                </td>
+                <td class="col-9 tenSanPham">
+                    <a>${item.san_pham.ten_san_pham}</a>
+                    <p>Phân loại hàng:
+                        <span
+                            class="phanLoaiHang">${item.bien_the.kich_co},
+                            ${item.bien_the.ten_mau}</span>.
+                    </p>
+                    <p style="color: #000">
+                        x${item.so_luong}</p>
+                </td>
+                <td class="col-3 giaTienLS"
+                    style="text-align: right">
+                    <span>${(item.thanh_tien).toLocaleString('vi-VN')}đ</span>
+                    <span><del>${(item.san_pham.gia_san_pham*item.so_luong).toLocaleString('vi-VN')}đ</del></span>
+                </td>
+            </tr>`;
+    });
+    return html;
 }

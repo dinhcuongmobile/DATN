@@ -174,11 +174,12 @@ class TaiKhoanAdminController extends Controller
 
     //update
     public function viewUpdate(int $id){
-        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
-            $this->views['tai_khoan']=User::findOrFail($id);
+        $tai_khoan = User::findOrFail($id);
+        if($tai_khoan->vai_tro_id == 1 && Auth::guard('admin')->user()->id != 1){
+            return redirect()->route('tai-khoan.danh-sach-QTV')->with('error', 'Bạn không đủ quyền chỉnh sửa tài khoản admin !');
+        }else{
+            $this->views['tai_khoan']=$tai_khoan;
             $this->views['vai_tro']= VaiTro::all();
-        } else {
-            return redirect()->route('admin.index');
         }
 
         return view('admin.taiKhoan.update', $this->views);
