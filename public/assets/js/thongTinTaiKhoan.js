@@ -321,6 +321,7 @@ function chiTietDonMua(){
                             let tongTienHang = 0 ;
                             let phiShip = response.phi_ships ? response.phi_ships.phi_ship : 0;
 
+                            document.querySelector("#order-details").setAttribute('data-iddonhang',donHang.id);
                             document.querySelector('#order-details .maDH .maDonHang').textContent = donHang.ma_don_hang;
                             document.querySelector('#order-details .van-chuyen .ten-nhan-hang').textContent = diaChi.ho_va_ten_nhan;
                             document.querySelector('#order-details .van-chuyen .sdt-nhan').textContent = `(+84) ${diaChi.so_dien_thoai_nhan.slice(1)}`;
@@ -379,14 +380,15 @@ function chiTietDonMua(){
                             const timeline = document.querySelector('#order-details .timeline');
                             const deliveryStatus = document.querySelector('#order-details .delivery-status .trang-thai');
                             const actionButtons = document.querySelector('#order-details .action-button');
+
                             actionButtons.innerHTML="";
-                            timeline.style.display="flex";
                             timeline.querySelectorAll('i').forEach((el)=>{
                                 el.classList.remove('change','next-change');
                             });
                             deliveryStatus.querySelectorAll('p').forEach((el)=>{
                                 el.classList.remove('active');
                             });
+
                             switch (donHang.trang_thai) {
                                 case 0:
                                     //thong bao
@@ -552,9 +554,7 @@ function huyDonHangChiTiet(id){
                 },
                 success: function (response) {
                     if(response.success){
-                        sessionStorage.setItem("activeTab", "order");
-                        sessionStorage.setItem("activeTabDaHuy", "tap6");
-                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                        fetchDonHangStatus();
                     }
                 },
                 error: function (error) {
@@ -992,9 +992,7 @@ function daNhanHangChiTiet(id){
                 },
                 success: function (response) {
                     if(response.success){
-                        sessionStorage.setItem("activeTab", "order");
-                        sessionStorage.setItem("activeTabHoanThanh", "tap5");
-                        window.location.href="/tai-khoan/thong-tin-tai-khoan";
+                        fetchDonHangStatus();
                     }
                 },
                 error: function (error) {
@@ -1088,22 +1086,28 @@ function fetchDonHangStatus() {
 
             data.donHang.trang_thai_all.forEach(item => {
                 tap1.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
 
             data.donHang.trang_thai_0.forEach(item => {
                 tap2.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
             data.donHang.trang_thai_1.forEach(item => {
                 tap3.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
             data.donHang.trang_thai_2.forEach(item => {
                 tap4.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
             data.donHang.trang_thai_3.forEach(item => {
                 tap5.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
             data.donHang.trang_thai_4.forEach(item => {
                 tap6.insertAdjacentHTML('beforeend', renderDonHang(item));
+                renderChiTietDonHang(item);
             });
 
             muaLai();
@@ -1116,6 +1120,116 @@ function fetchDonHangStatus() {
         .catch(error => console.error('Error:', error));
 }
 
+function renderChiTietDonHang(item){
+    let orderDetails = document.querySelector("#order-details");
+    let dataIdDonHang = orderDetails.getAttribute('data-iddonhang');
+    if(dataIdDonHang && dataIdDonHang == item.id){
+        const timeline = orderDetails.querySelector('.timeline');
+        const deliveryStatus = orderDetails.querySelector('.delivery-status .trang-thai');
+        const actionButtons = orderDetails.querySelector('.action-button');
+
+        actionButtons.innerHTML="";
+        timeline.querySelectorAll('i').forEach((el)=>{
+            el.classList.remove('change','next-change');
+        });
+        deliveryStatus.querySelectorAll('p').forEach((el)=>{
+            el.classList.remove('active');
+        });
+
+        switch (item.trang_thai) {
+            case 0:
+                //thong bao
+                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                "<span class='text-warning'>Chờ xác nhận</span>";
+
+                //trang thai theo doi
+                timeline.querySelector('.zezo i').classList.add('change');
+                timeline.querySelector('.one i').classList.add('next-change');
+                deliveryStatus.innerHTML=`<p class="active"><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>`;
+                actionButtons.innerHTML=
+                `<button class="btn btn-outline-danger huyDonHangChiTiet">Hủy đơn hàng</button>
+                <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
+
+                break;
+            case 1:
+                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                "<span class='text-success'>Đang chuẩn bị hàng</span>";
+
+                //trang thai theo doi
+                timeline.querySelector('.zezo i').classList.add('change');
+                timeline.querySelector('.one i').classList.add('change');
+                timeline.querySelector('.two i').classList.add('next-change');
+                deliveryStatus.innerHTML=`
+                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                `;
+                actionButtons.innerHTML=`<a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
+            break;
+            case 2:
+                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                "<span class='text-success'>Đang giao</span>";
+
+                //trang thai theo doi
+                timeline.querySelector('.zezo i').classList.add('change');
+                timeline.querySelector('.one i').classList.add('change');
+                timeline.querySelector('.two i').classList.add('change');
+                timeline.querySelector('.three i').classList.add('next-change');
+                deliveryStatus.innerHTML=`
+                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                `;
+                actionButtons.innerHTML=
+                `<button class="btn btn-success daNhanHangChiTiet">Đã nhận hàng</button>
+                <button class="btn btn-primary muaLaiChiTiet">Mua lại</button>
+                <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
+            break;
+            case 3:
+                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                "<span class='text-success'>Đã giao</span>";
+
+                //trang thai theo doi
+                timeline.querySelector('.zezo i').classList.add('change');
+                timeline.querySelector('.one i').classList.add('change');
+                timeline.querySelector('.two i').classList.add('change');
+                timeline.querySelector('.three i').classList.add('change');
+                timeline.querySelector('.four i').classList.add('change');
+                timeline.querySelector('.five i').classList.add('next-change');
+                deliveryStatus.innerHTML=`
+                    <p class="active"><i class="fa-solid fa-circle"></i><span>Đơn hàng đã được giao thành công tới ${item.dia_chi.ho_va_ten_nhan}</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được vận chuyển</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đơn hàng đang được chuẩn bị</span></p>
+                    <p><i class="fa-solid fa-circle"></i><span>Đặt hàng thành công</span></p>
+                `;
+
+                let btnDanhGiaChiTiet = '';
+                if (item.trang_thai === 3 && item.so_luong_da_danh_gia < item.chi_tiet_don_hangs.length) {
+                    btnDanhGiaChiTiet = `<button class="btn btn-warning danhGiaChiTiet">Đánh giá</button>`;
+                }
+                actionButtons.innerHTML=
+                `${btnDanhGiaChiTiet}
+                    <button class="btn btn-primary muaLaiChiTiet">Mua lại</button>
+                <a href="/lien-he/" class="btn btn-outline-secondary">Liên Hệ Shop</a>`;
+            break;
+            case 4:
+                document.querySelector('#order-details .maDH .thongBaoDonHang').innerHTML =
+                "<span class='text-danger'>Đã hủy</span>";
+                timeline.style.display="none";
+                deliveryStatus.innerHTML=`
+                    <p class="active">
+                        <i class="fa-solid fa-circle"></i>
+                        <span>Đơn hàng đã được hủy vào lúc: ${item.ngay_cap_nhat}</span>
+                    </p>
+                `;
+            break;
+        }
+
+        huyDonHangChiTiet(item.id);
+        daNhanHangChiTiet(item.id);
+        danhGiaChiTiet(item.id);
+        muaLaiChiTiet(item.id);
+    }
+}
 function renderDonHang(item){
     let danhGiaButton = '';
 

@@ -368,7 +368,7 @@
                                         </a>
                                         <p class="maDH">
                                             <span>MÃ ĐƠN HÀNG:
-                                                <span class="maDonHang">240508SN4RTJ5M</span>
+                                                <span class="maDonHang"></span>
                                             </span> |
                                             <span class="thongBaoDonHang"></span>
                                         </p>
@@ -403,17 +403,14 @@
                                     <div class="van-chuyen">
                                         <div class="address">
                                             <h3>Địa Chỉ Nhận Hàng</h3>
-                                            <p class="ten-nhan-hang">Nguyễn Đình Cường</p>
-                                            <p class="sdt-nhan">(+84) 964426158</p>
-                                            <p class="dia-chi-nhan">Nhà Văn Hóa phú Hữu, Phú Hữu 1, Xã Phú Nghĩa, Huyện
-                                                Chương Mỹ, Hà Nội</p>
+                                            <p class="ten-nhan-hang"></p>
+                                            <p class="sdt-nhan"></p>
+                                            <p class="dia-chi-nhan"></p>
                                         </div>
 
                                         <div class="delivery-status">
                                             <h3>Trạng Thái</h3>
-                                            <div class="trang-thai">
-
-                                            </div>
+                                            <div class="trang-thai"></div>
                                         </div>
                                     </div>
 
@@ -426,45 +423,41 @@
                                             <a href="{{ route('san-pham.san-pham') }}" class="shopLS"><i
                                                     class="fas fa-box"></i> Xem cửa hàng</a>
                                         </div>
-                                        <div class="list-san-pham">
-
-                                        </div>
+                                        <div class="list-san-pham"></div>
 
                                         <table class="table">
                                             <tr class="tongTienHang">
                                                 <th>Tổng tiền hàng</th>
-                                                <td>50.700 VNĐ</td>
+                                                <td></td>
                                             </tr>
                                             <tr class="phiVanChuyen">
                                                 <th>Phí vận chuyển</th>
-                                                <td>16.500 VNĐ</td>
+                                                <td></td>
                                             </tr>
                                             <tr class="giamGiaVanChuyen">
                                                 <th>Giảm giá phí vận chuyển</th>
-                                                <td>-15.000 VNĐ</td>
+                                                <td></td>
                                             </tr>
                                             <tr class="giamGiaDonHang">
                                                 <th>Voucher giảm giá</th>
-                                                <td>-15.210 VNĐ</td>
+                                                <td></td>
                                             </tr>
                                             <tr class="namadXu">
                                                 <th>Namad xu</th>
-                                                <td>-15.210 VNĐ</td>
+                                                <td></td>
                                             </tr>
                                             <tr class="thanhTien">
                                                 <th>Thành tiền</th>
-                                                <td class="price">36.990 VNĐ</td>
+                                                <td class="price"></td>
                                             </tr>
                                             <tr class="phuongThucThanhToan">
                                                 <th>Phương thức thanh toán</th>
-                                                <td>Ship COD</td>
+                                                <td></td>
                                             </tr>
                                         </table>
                                     </div>
 
-                                    <div class="action-button">
-
-                                    </div>
+                                    <div class="action-button"></div>
                                 </div>
                             </div>
                         </div>
