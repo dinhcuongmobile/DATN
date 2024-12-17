@@ -621,34 +621,7 @@
                 <div class="modal-body modal1">
                     <div class="custom-container container">
                         <div class="row">
-                            <div class="col-12 px-0">
-                                <div class="modal-bg addtocart"><button class="btn-close" type="button"
-                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                    <div class="d-flex">
-                                        <a class="imgAddtocartSuccess" href="javascript:void(0)">
-                                            <img class="img-fluid blur-up lazyload pro-img"
-                                                src="" alt="">
-                                        </a>
-                                        <div class="add-card-content align-self-center text-center"><a href="#">
-                                                <h6><i class="fa-solid fa-check"> </i>Sản phẩm <span
-                                                        id="nameProductSuccess">áo tay dài nam</span><span> đã được
-                                                        thêm vào Giỏ hàng của bạn thành công</span></h6>
-                                            </a>
-                                            <div class="buttons">
-                                                <a class="view-cart btn btn-solid"
-                                                    href="{{ route('gio-hang.gio-hang') }}">Giỏ hàng của bạn</a>
-                                                <a class="continue btn btn-solid"
-                                                    href="{{ route('san-pham.san-pham') }}">Tiếp tục mua hàng</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="product-upsell">
-                                    <h5>Sản phẩm được khách hàng yêu thích</h5>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

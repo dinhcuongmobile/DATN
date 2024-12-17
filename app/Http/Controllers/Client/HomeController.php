@@ -26,23 +26,23 @@ class HomeController extends Controller
     public function home()
     {
         $userId = Auth::id();
-        $danh_mucs = DanhMuc::all();
+        $danh_mucs = DanhMuc::where('id','!=',1)->get();
 
         $san_pham_noi_bat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->orderBy('luot_xem', 'desc')->take(8)->get();
+        }])->where('danh_muc_id','!=',1)->orderBy('luot_xem', 'desc')->take(8)->get();
 
         $san_pham_moi_nhat = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->orderBy('id', 'desc')->take(8)->get();
+        }])->where('danh_muc_id','!=',1)->orderBy('id', 'desc')->take(8)->get();
 
         $san_pham_ban_chay = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->orderBy('da_ban', 'desc')->take(8)->get();
+        }])->where('danh_muc_id','!=',1)->orderBy('da_ban', 'desc')->take(8)->get();
 
         $san_pham_khuyen_mai = SanPham::with(['bienThes', 'danhGias', 'yeuThich' => function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        }])->where('khuyen_mai', '>', 0)->orderBy('id', 'desc')->take(8)->get();
+        }])->where('danh_muc_id','!=',1)->where('khuyen_mai', '>', 0)->orderBy('id', 'desc')->take(8)->get();
 
         $banner = Banner::all();
         $this->views['banner'] = $banner;

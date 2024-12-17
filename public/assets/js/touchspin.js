@@ -193,9 +193,38 @@ function themGioHang(){
                                 window.location.href = '/tai-khoan/dang-nhap';
                             } else {
                                 $('#addtocart').modal('show');
-                                var tenSanPham = document.querySelector('#tenSanPhamChiTiet');
-                                document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
-                                document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="style-border img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
+                                let sanPham = response.san_pham;
+                                let row = document.querySelector('#addtocart .row');
+                                row.innerHTML=`
+                                    <div class="col-12 px-0">
+                                        <div class="modal-bg addtocart"><button class="btn-close" type="button"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="d-flex">
+                                                <a class="imgAddtocartSuccess">
+                                                   <img class="style-border img-fluid blur-up lazyload pro-img" src="/storage/${sanPham.hinh_anh}" alt="">
+                                                </a>
+                                                <div class="add-card-content align-self-center text-center">
+                                                    <a>
+                                                        <h6>
+                                                            <i class="fa-solid fa-check"> </i>Sản phẩm
+                                                            <span id="nameProductSuccess">${sanPham.ten_san_pham}</span>
+                                                            <span> đã được thêm vào Giỏ hàng của bạn thành công</span>
+                                                        </h6>
+                                                    </a>
+                                                    <div class="buttons">
+                                                        <a class="view-cart btn btn-solid" href="/gio-hang/">Giỏ hàng của bạn</a>
+                                                        <a class="continue btn btn-solid" href="/san-pham/">Tiếp tục mua hàng</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="product-upsell">
+                                            <h5>Sản phẩm được khách hàng yêu thích</h5>
+                                        </div>
+                                    </div>`;
+
                                 document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
 
                                 let dataMaxNew = parseInt(dataMax)-soLuong;
@@ -203,18 +232,22 @@ function themGioHang(){
                                 document.querySelector('.quantity input[type="number"]').value = dataMaxNew > 0 ? 1 : 0;
                                 document.querySelector('.quantity #soLuong').value = dataMaxNew > 0 ? 1 : 0;
                                 response.spYeuThich.forEach((item, index)=>{
+                                    let text = item.san_pham.ten_san_pham;
+                                    let truncatedText = text.length > 27 ? text.slice(0, 27) + "..." : text;
+
                                     let giaKM = item.san_pham.gia_san_pham - (item.san_pham.gia_san_pham * item.san_pham.khuyen_mai / 100);
-                                    $('#addtocart .row').append(`
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card-img" style="padding-top: 10px;">
-                                                <img class="style-border" src="/storage/${item.san_pham.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
-                                                <a href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
-                                                    <h6>${item.san_pham.ten_san_pham}</h6>
-                                                    <p>${giaKM.toLocaleString('vi-VN')}đ</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    `);
+                                    let html = `
+                                            <div class="col-lg-4 col-md-6 col-12">
+                                                <div class="card-img" style="padding-top: 10px;">
+                                                    <img class="style-border" src="/storage/${item.san_pham.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
+                                                    <a href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
+                                                        <h6>${truncatedText}</h6>
+                                                        <p>${giaKM.toLocaleString('vi-VN')}đ</p>
+                                                    </a>
+                                                </div>
+                                            </div>`;
+
+                                    row.insertAdjacentHTML('beforeend', html);
                                 });
                             }
                         },

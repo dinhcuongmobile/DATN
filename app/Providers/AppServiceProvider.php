@@ -42,10 +42,9 @@ class AppServiceProvider extends ServiceProvider
             $gio_hangs = [];
             $count_gio_hang = 0;
             $count_yeu_thich = 0;
-            $danh_mucs = DanhMuc::all();
+            $danh_mucs = DanhMuc::where('id','!=',1)->get();
             $userId = Auth::id();
             $danhMucTinTuc = DanhMucTinTuc::all();
-            $sanPhamThich = SanPham::orderBy('luot_xem','desc')->take(6)->get();
             if (Auth::check()) {
                 $gio_hangs = GioHang::where('user_id', Auth::id())->orderBy('id', 'desc')->get();
 
@@ -62,7 +61,6 @@ class AppServiceProvider extends ServiceProvider
                 'danh_mucs',
                 'userId',
                 'danhMucTinTuc',
-                'sanPhamThich'
             ));
         });
         //admin
