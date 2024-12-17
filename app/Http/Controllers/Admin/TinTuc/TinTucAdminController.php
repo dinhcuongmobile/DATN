@@ -47,29 +47,7 @@ class TinTucAdminController extends Controller
         return view('admin.tinTuc.add', $this->views);
     }
 
-    public function add(StoreTinTucRequest $request)
-    {
-        $danh_muc = $request->input('danh_muc_id');
-        if ($request->hasFile('hinh_anh')) {
-            $fileName = $request->file('hinh_anh')->store('uploads/tinTuc', 'public');
-        } else {
-            $fileName = null;
-        }
-        $dataInsert = [
-            'danh_muc_id' => $danh_muc,
-            'nguoi_dang' => Auth::guard('admin')->user()->id,
-            'hinh_anh' => $fileName,
-            'tieu_de' => $request->tieu_de,
-            'noi_dung' => $request->noi_dung,
-            'ngay_dang' => now()
-        ];
-        $result = TinTuc::create($dataInsert);
-        if ($result) {
-            return redirect()->route('tin-tuc.danh-sach')->with('success','Bạn đã thêm thành công tin tức!');
-        } else {
-            return redirect()->back()->with('error','Thêm thất bại');
-        }
-    }
+    
 
     //update
     public function viewUpdate(int $id)
