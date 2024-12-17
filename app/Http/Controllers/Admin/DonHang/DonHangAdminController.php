@@ -349,7 +349,7 @@ class DonHangAdminController extends Controller
             $donHang->save();
             ThongBao::create([
                 'user_id' => $donHang->user_id,
-                'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. " đã được cập nhật",
+                'tieu_de' => "Đơn hàng " .$donHang->ma_don_hang. " đã bị hủy",
                 'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi shop! Vui lòng liên hệ với shop để biết thêm chi tiết.',
             ]);
             return redirect(url()->previous())->with('success', 'Đơn hàng đã được hủy thành công.');

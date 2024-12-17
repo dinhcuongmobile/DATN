@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers\Admin\SanPham;
 
+use App\Models\KichCo;
+use App\Models\MauSac;
 use App\Models\BienThe;
 use App\Models\DanhMuc;
+use App\Models\DonHang;
 use App\Models\SanPham;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\SanPham\StoreBienTheRequest;
 use App\Http\Requests\SanPham\StoreSanPhamRequest;
 use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
-use App\Models\KichCo;
-use App\Models\MauSac;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ChiTietDonHang;
 
 class SanPhamAdminController extends Controller
 {
@@ -396,10 +400,28 @@ class SanPhamAdminController extends Controller
     //delete
     public function xoaSanPham(int $id){
         if (Auth::guard('admin')->user()->vai_tro_id == 1) {
-            $san_pham=SanPham::findOrFail($id);
-            $san_pham->delete();
-            BienThe::where('san_pham_id',$san_pham->id)->delete();
-            return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác !');
+                $san_pham = SanPham::findOrFail($id);
+                BienThe::where('san_pham_id', $san_pham->id)->delete();
+                $san_pham->delete();
+
+                $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$id)->get();
+                foreach ($ChiTietDonHangs as $key => $value) {
+                    $donHang = DonHang::where('id',$value->don_hang_id)->first();
+                    if($donHang->trang_thai==0){
+                        $donHang->update([
+                            'nguoi_ban' => Auth::guard('admin')->user()->id,
+                            'trang_thai' => 4,
+                            'ngay_cap_nhat' => now()
+                        ]);
+                            ThongBao::create([
+                                'user_id' => $donHang->user_id,
+                                'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
+                                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                            ]);
+                    }
+                }
+
+                return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác và đơn hàng liên quan đã được cập nhật.');
         }
 
         return redirect()->route('admin.index');

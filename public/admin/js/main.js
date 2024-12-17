@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     eyePassword();
     fetchNotifications();
     ckEditor();
+    checkDonHangInterval();
     fetchDonHangStatus();
 });
 
@@ -300,7 +301,23 @@ function fetchNotifications() {
 setInterval(fetchNotifications, 15000);
 
 //don hang
-let donHangInterval = null;
+
+function checkDonHangInterval(){
+    let donHangInterval = null;
+    if (window.location.pathname === '/admin/don-hang/danh-sach-don-hang' ||
+        window.location.pathname === '/admin/don-hang/danh-sach-kiem-duyet' ||
+        window.location.pathname === '/admin/don-hang/danh-sach-cho-lay-hang' ||
+        window.location.pathname === '/admin/don-hang/danh-sach-dang-giao' ||
+        window.location.pathname === '/admin/don-hang/danh-sach-da-giao' ||
+        window.location.pathname === '/admin/don-hang/danh-sach-da-huy') {
+
+        donHangInterval = setInterval(() => fetchDonHangStatus(), 5000);
+    }else{
+        if(donHangInterval){
+            clearInterval(donHangInterval);
+        }
+    }
+}
 
 function fetchDonHangStatus() {
     fetch("/admin/don-hang/check-trang-thai-don-hang")
@@ -359,7 +376,7 @@ function fetchDonHangStatus() {
         })
         .catch(error => console.error('Error:', error));
 }
-setInterval(fetchDonHangStatus, 5000);
+
 
 function renderDonHang(item){
     let trangThaiText = "";
