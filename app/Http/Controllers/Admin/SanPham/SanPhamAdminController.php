@@ -14,6 +14,7 @@ use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
 use App\Models\KichCo;
 use App\Models\MauSac;
+use Illuminate\Support\Facades\Auth;
 
 class SanPhamAdminController extends Controller
 {
@@ -394,10 +395,14 @@ class SanPhamAdminController extends Controller
 
     //delete
     public function xoaSanPham(int $id){
-        $san_pham=SanPham::findOrFail($id);
-        $san_pham->delete();
-        BienThe::where('san_pham_id',$san_pham->id)->delete();
-        return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác !');
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $san_pham=SanPham::findOrFail($id);
+            $san_pham->delete();
+            BienThe::where('san_pham_id',$san_pham->id)->delete();
+            return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác !');
+        }
+
+        return redirect()->route('admin.index');
     }
 
     public function xoaNhieuSanPham(Request $request){
@@ -414,25 +419,37 @@ class SanPhamAdminController extends Controller
     }
 
     public function xoaBienThe(int $id){
-        $bien_the=BienThe::findOrFail($id);
-        $bien_the->delete();
-        return redirect()->back()->with('success', 'Đã xóa thành công biến thể !');
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $bien_the=BienThe::findOrFail($id);
+            $bien_the->delete();
+            return redirect()->back()->with('success', 'Đã xóa thành công biến thể !');
+        }
+
+        return redirect()->route('admin.index');
     }
 
     public function xoaSize(int $id){
-        $kich_co=KichCo::findOrFail($id);
-        if($kich_co){
-            $kich_co->delete();
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $kich_co=KichCo::findOrFail($id);
+            if($kich_co){
+                $kich_co->delete();
+            }
+            return redirect()->back()->with('success', 'Đã xóa thành công Size !');
         }
-        return redirect()->back()->with('success', 'Đã xóa thành công Size !');
+
+        return redirect()->route('admin.index');
     }
 
     public function xoaMauSac(int $id){
-        $mau_sac=MauSac::findOrFail($id);
-        if($mau_sac){
-            $mau_sac->delete();
+        if (Auth::guard('admin')->user()->vai_tro_id == 1) {
+            $mau_sac=MauSac::findOrFail($id);
+            if($mau_sac){
+                $mau_sac->delete();
+            }
+            return redirect()->back()->with('success', 'Đã xóa thành công màu sắc !');
         }
-        return redirect()->back()->with('success', 'Đã xóa thành công màu sắc !');
+
+        return redirect()->route('admin.index');
     }
 
     public function xoaNhieuBienThe(Request $request){

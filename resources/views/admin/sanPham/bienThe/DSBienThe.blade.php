@@ -30,11 +30,13 @@
                 <form action="{{route('san-pham.xoa-nhieu-bien-the-san-pham')}}" method="post">
                     @csrf
                     <div class="float-left">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
-                            cả</button>
-                        <button onclick="return confirm('Bạn chắc chắn muốn xóa các biến thể đã chọn?')"
-                                type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @if (Auth::user()->vai_tro_id == 1)
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
+                                cả</button>
+                            <button onclick="return confirm('Bạn chắc chắn muốn xóa các biến thể đã chọn?')"
+                                    type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @endif
                         <a href="{{route('san-pham.show-them-bien-the-san-pham')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
@@ -44,7 +46,9 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr class="text-center">
-                                <th></th>
+                                @if (Auth::user()->vai_tro_id == 1)
+                                    <th></th>
+                                @endif
                                 <th>Mã loại</th>
                                 <th>Hình ảnh</th>
                                 <th>Tên sản phẩm</th>
@@ -52,14 +56,16 @@
                                 <th>Kích cỡ</th>
                                 <th>Màu sắc</th>
                                 <th>Trạng thái</th>
-                                <th>Action</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($bien_thes->count()>0)
                                 @foreach ($bien_thes as $item)
                                 <tr>
-                                    <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                    @if (Auth::user()->vai_tro_id == 1)
+                                        <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                    @endif
                                     <td class="col-1 align-middle text-center">BT-{{$item->id}}</td>
                                     <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
                                     <td class="col-4 align-middle text-center"><a href="{{route('san-pham.san-pham-bien-the',$item->san_pham_id)}}">{{$item->sanPham->ten_san_pham}}</a></td>
@@ -78,13 +84,16 @@
                                         <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                             </span> <span class="text">Sửa</span>
-                                        </a> |
-                                        <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
-                                            href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">
-                                                    <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">Xóa</span></a>
+                                        </a> 
+                                        @if (Auth::user()->vai_tro_id == 1)
+                                            |
+                                            <a  onclick="return confirm('Bạn chắc chắn muốn xóa biến thể này?')"
+                                                href="{{route('san-pham.xoa-bien-the-san-pham',$item->id)}}" class="btn btn-danger btn-sm">
+                                                        <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Xóa</span></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

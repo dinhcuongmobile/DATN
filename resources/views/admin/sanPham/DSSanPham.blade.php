@@ -30,11 +30,13 @@
                 <form action="{{route('san-pham.xoa-nhieu-san-pham')}}" method="post">
                     @csrf
                     <div class="float-left">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
-                            cả</button>
-                        <button  onclick="return confirm('Bạn chắc chắn muốn chuyển các mục đã chọn vào thùng rác?')"
-                                type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @if (Auth::user()->vai_tro_id == 1)
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
+                                cả</button>
+                            <button  onclick="return confirm('Bạn chắc chắn muốn chuyển các mục đã chọn vào thùng rác?')"
+                                    type="submit" class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @endif
                         <a href="{{route('san-pham.show-them-san-pham')}}"><button type="button"
                                 class="btn btn-secondary btn-sm">Nhập thêm</button></a>
                     </div>
@@ -44,7 +46,9 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
-                                <th></th>
+                                @if (Auth::user()->vai_tro_id == 1)
+                                    <th></th>
+                                @endif
                                 <th>Mã loại</th>
                                 <th>Ảnh</th>
                                 <th>Tên sản phẩm</th>
@@ -59,7 +63,9 @@
                             @if ($san_phams->count() > 0)
                                 @foreach ($san_phams as $item)
                                     <tr>
-                                        <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                        @if (Auth::user()->vai_tro_id == 1)
+                                            <td class="align-middle text-center"><input type="checkbox" name="select[]" id="" value="{{$item->id}}"></td>
+                                        @endif
                                         <td class="col-1 align-middle">SP-{{$item->id}}</td>
                                         <td class="col-1 align-middle"><img src="{{Storage::url($item->hinh_anh)}}" alt="err" height="60px"></td>
                                         <td class="col-2 align-middle">
@@ -76,14 +82,17 @@
                                             <span class="icon text-white-50">
                                                     <i class="fas fa-edit"></i>
                                             </span> <span class="text">Sửa</span>
-                                            </a> |
-                                            <a   onclick="return confirm('Bạn chắc chắn muốn chuyển vào thùng rác?')"
-                                                href="{{route('san-pham.xoa-san-pham',$item->id)}}" class="btn btn-danger btn-sm">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                            </span>
-                                            <span class="text">Xóa</span>
                                             </a>
+                                            @if (Auth::user()->vai_tro_id == 1)
+                                                |
+                                                <a   onclick="return confirm('Bạn chắc chắn muốn chuyển vào thùng rác?')"
+                                                    href="{{route('san-pham.xoa-san-pham',$item->id)}}" class="btn btn-danger btn-sm">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                </span>
+                                                <span class="text">Xóa</span>
+                                                </a>
+                                            @endif 
                                         </td>
                                     </tr>
                                 @endforeach
