@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded',function(){
     tabThongBao();
     tabDonMua();
     activeDonHang();
-    activeTabDonMua("activeTabDaHuy", "tap6");
-    activeTabDonMua("activeTabHoanThanh", "tap5");
     chiTietDonMua();
     fetchDonHangStatus();
     setIntervalOrder();
@@ -1113,6 +1111,7 @@ function fetchDonHangStatus() {
             muaLai();
             daNhanHang();
             reviews();
+            huyDonHang();
             chiTietDonMua();
 
 

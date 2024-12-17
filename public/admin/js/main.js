@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded',()=>{
     formatCurrency();
     eyePassword();
     fetchNotifications();
+    ckEditor();
+    fetchDonHangStatus();
 });
 
 function eyePassword(){
@@ -132,10 +134,6 @@ if(maMauInput && colorDiv){
     });
 }
 
-//ck editor
-document.addEventListener('DOMContentLoaded',() => {
-    ckEditor();
-});
 function ckEditor(){
     var moTa= document.querySelector('#mo_ta');
     var noiDung= document.querySelector('#noi_dung');
@@ -299,7 +297,181 @@ function fetchNotifications() {
         })
         .catch(error => console.error("Error fetching notifications:", error));
 }
-setInterval(fetchNotifications, 5000);
+setInterval(fetchNotifications, 15000);
+
+//don hang
+let donHangInterval = null;
+
+function fetchDonHangStatus() {
+    fetch("/admin/don-hang/check-trang-thai-don-hang")
+        .then(response => response.json())
+        .then(data => {
+
+            let DSDonHangContent = document.querySelector(".DSDonHangContent");
+            let DSDangGiaoContent = document.querySelector(".DSDangGiaoContent");
+            let DSDaHuyContent = document.querySelector(".DSDaHuyContent");
+            let DSDaGiaoContent = document.querySelector(".DSDaGiaoContent");
+            let DSChoLayHangContent = document.querySelector(".DSChoLayHangContent");
+            let DSKiemDuyetContent = document.querySelector(".DSKiemDuyetContent");
+
+            if(DSDonHangContent){
+                DSDonHangContent.innerHTML="";
+                data.donHang.trang_thai_all.forEach(item=>{
+                    DSDonHangContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+            if(DSKiemDuyetContent){
+                DSKiemDuyetContent.innerHTML="";
+                data.donHang.trang_thai_0.forEach(item=>{
+                    DSKiemDuyetContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+            if(DSChoLayHangContent){
+                DSChoLayHangContent.innerHTML="";
+                data.donHang.trang_thai_1.forEach(item=>{
+                    DSChoLayHangContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+            if(DSDangGiaoContent){
+                DSDangGiaoContent.innerHTML="";
+                data.donHang.trang_thai_2.forEach(item=>{
+                    DSDangGiaoContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+            if(DSDaGiaoContent){
+                DSDaGiaoContent.innerHTML="";
+                data.donHang.trang_thai_3.forEach(item=>{
+                    DSDaGiaoContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+            if(DSDaHuyContent){
+                DSDaHuyContent.innerHTML="";
+                data.donHang.trang_thai_4.forEach(item=>{
+                    DSDaHuyContent.insertAdjacentHTML('beforeend', renderDonHang(item));
+                });
+            }
+
+        })
+        .catch(error => console.error('Error:', error));
+}
+setInterval(fetchDonHangStatus, 5000);
+
+function renderDonHang(item){
+    let trangThaiText = "";
+    let btnTrangThai = "";
+
+    if(item.trang_thai==0) {
+        trangThaiText="Chờ Xác Nhận";
+        btnTrangThai=`<a href="/admin/don-hang/duyet-don-hang/${item.id}" class="btn btn-primary btn-sm">
+                            Duyệt
+                    </a>
+                    <a href="/admin/don-hang/huy-don-hang/${item.id}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này?')">
+                        Hủy
+                    </a><hr>`;
+    }
+    else if(item.trang_thai==1) {
+        trangThaiText="Chờ Giao Hàng";
+        btnTrangThai = `<a href="/admin/don-hang/yeu-cau-lay-hang/${item.id}" class="btn btn-primary btn-sm">
+                            Yêu cầu đến lấy hàng
+                        </a><hr>`;
+    }
+    else if(item.trang_thai==2) {
+        trangThaiText="Đang Giao";
+        btnTrangThai="";
+    }
+    else if(item.trang_thai==3) {
+        trangThaiText="Đã Giao";
+        btnTrangThai="";
+    }
+    else if(item.trang_thai==4) {
+        trangThaiText="Đã Hủy";
+        btnTrangThai="";
+    }
+
+    return `<div class="card shadow mb-4 DSDonHang">
+                <div class="card-header py-3">
+                    <!-- Tên khách hàng và mã đơn hàng -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <div>
+                            <strong>Tên khách hàng: ${item.user.ho_va_ten?item.user.ho_va_ten : item.dia_chi.ho_va_ten_nhan}</strong>
+                        </div>
+                        <div>
+                            <strong>Mã đơn hàng: ${item.ma_don_hang}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng cộng</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thanh Toán</th>
+                                    <th>Đơn vị vận chuyển</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-4">
+                                        ${renderChiDonHang(item.chi_tiet_don_hangs)}
+                                    </td>
+                                    <td>${(item.tong_thanh_toan).toLocaleString('vi-VN')}đ</td>
+                                    <td>
+                                        <p class="trangThai">
+                                            <span style="color:#2ecc71; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
+                                                ${trangThaiText}
+                                            </span>
+                                        </p>
+                                    </td>
+                                    <td class="col-2">
+                                    ${item.phuong_thuc_thanh_toan == 1
+                                        ? `<a href="/admin/don-hang/danh-sach-da-chuyen-khoan/${item.ma_don_hang}" style="color: #007bff;">
+                                                Chuyển khoản
+                                            </a>`
+                                        : "Thanh toán khi nhận hàng"}
+                                    </td>
+                                    <td class="col-1">
+                                        <img src="/assets/images/logos/logo_ghtk.png" width="85px" alt="">
+                                    </td>
+                                    <td class="btnDonHang">
+                                        ${btnTrangThai}
+                                        <a href="/admin/don-hang/chi-tiet-don-hang/${item.id}" class="btn btn-secondary btn-sm">
+                                            Xem Chi Tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>`;
+}
+
+function renderChiDonHang(chiTietDonHang) {
+    let html = '';
+    chiTietDonHang.forEach(item => {
+
+        html += `
+            <img src="/storage/${item.bien_the.hinh_anh}" alt="product" width="15%">
+                ${item.san_pham.ten_san_pham}
+            <span class="badge badge-secondary">x${item.so_luong}</span>
+            <br>
+            <small>Loại: ${item.bien_the.kich_co},
+                ${item.bien_the.ten_mau}</small>
+            <br>`;
+    });
+    return html;
+}
+
 
 
 

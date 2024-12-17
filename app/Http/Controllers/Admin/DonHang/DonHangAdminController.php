@@ -21,7 +21,7 @@ class DonHangAdminController extends Controller
     public function showDSDonHang(Request $request)
     {
         $query = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
-            ->whereIn('trang_thai', [0, 1, 2, 3, 4, 5]);
+            ->whereIn('trang_thai', [0, 1, 2, 3, 4]);
 
         // Tìm kiếm theo mã đơn hàng hoặc tên khách hàng
         if ($request->filled('search')) {
@@ -34,7 +34,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.DSDonHang', compact('donHangs'));
     }
 
@@ -54,7 +54,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.kiemDuyet', compact('donHangs'));
     }
 
@@ -76,7 +76,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.choLayHang', compact('donHangs'));
     }
 
@@ -97,7 +97,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.DSDangGiao', compact('donHangs'));
     }
 
@@ -118,7 +118,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.DSDaGiao', compact('donHangs'));
     }
 
@@ -134,7 +134,7 @@ class DonHangAdminController extends Controller
                   });
             });
         }
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.DSDaHuy', compact('donHangs'));
     }
     // Hiển thị danh sách đơn hàng đã chuyển khoản
@@ -158,7 +158,7 @@ class DonHangAdminController extends Controller
             });
         }
 
-        $donHangs = $query->MoiNhat()->get();
+        $donHangs = $query->orderBy('ngay_cap_nhat', 'desc')->get();
         return view('admin.donHang.DSDaChuyenKhoan', compact('donHangs'));
     }
 
@@ -191,49 +191,48 @@ class DonHangAdminController extends Controller
         return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Đơn hàng đã được duyệt và chuyển sang trạng thái chờ lấy hàng');
     }
     // Duyệt nhiều đơn hàng đã chọn
-    public function duyetNhieuDonHang(Request $request)
-    {
+    public function duyetNhieuDonHang(Request $request){
       $ids = $request->input('select', []);
-    if (empty($ids)) {
-        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Vui lòng chọn ít nhất một đơn hàng.');
-    }
-
-     DB::beginTransaction();
-      try {
-        $donHang = DonHang::whereIn('id',$ids)->get();
-        foreach ($donHang as $key => $value) {
-            $chi_tiet_don_hangs = ChiTietDonHang::where('don_hang_id', $value->id)->get();
-
-            foreach ($chi_tiet_don_hangs as $chi_tiet) {
-                $bien_the = BienThe::find($chi_tiet->bien_the_id);
-
-                if ($bien_the && $bien_the->so_luong_tam_giu >= $chi_tiet->so_luong) {
-                    $bien_the->decrement('so_luong', $chi_tiet->so_luong); // Trừ số lượng kho chính thức
-                    $bien_the->decrement('so_luong_tam_giu', $chi_tiet->so_luong); // Giảm tạm giữ
-                } else {
-                    return redirect()->back()->with('error', 'Sản phẩm không đủ để xác nhận đơn hàng.');
-                }
-            }
-            // Cập nhật trạng thái hàng loạt
-            $value->update([
-                'trang_thai' => 1,
-                'nguoi_ban' => Auth::user()->id,
-                'ngay_ban' => Carbon::now()
-            ]);
-
-            ThongBao::create([
-                'user_id' => $value->user_id,
-                'tieu_de' => "Xác nhận đơn hàng",
-                'noi_dung' => 'Đơn hàng ' . $value->ma_don_hang . ' đã được xác nhận.',
-            ]);
+        if (empty($ids)) {
+            return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Vui lòng chọn ít nhất một đơn hàng.');
         }
 
-        DB::commit();
-        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Các đơn hàng đã được duyệt thành công.');
-      } catch (Exception $e) {
-        DB::rollBack();
-        return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
-     }
+        DB::beginTransaction();
+        try {
+            $donHang = DonHang::whereIn('id',$ids)->get();
+            foreach ($donHang as $key => $value) {
+                $chi_tiet_don_hangs = ChiTietDonHang::where('don_hang_id', $value->id)->get();
+
+                foreach ($chi_tiet_don_hangs as $chi_tiet) {
+                    $bien_the = BienThe::find($chi_tiet->bien_the_id);
+
+                    if ($bien_the && $bien_the->so_luong_tam_giu >= $chi_tiet->so_luong) {
+                        $bien_the->decrement('so_luong', $chi_tiet->so_luong); // Trừ số lượng kho chính thức
+                        $bien_the->decrement('so_luong_tam_giu', $chi_tiet->so_luong); // Giảm tạm giữ
+                    } else {
+                        return redirect()->back()->with('error', 'Sản phẩm không đủ để xác nhận đơn hàng.');
+                    }
+                }
+                // Cập nhật trạng thái hàng loạt
+                $value->update([
+                    'trang_thai' => 1,
+                    'nguoi_ban' => Auth::user()->id,
+                    'ngay_ban' => Carbon::now()
+                ]);
+
+                ThongBao::create([
+                    'user_id' => $value->user_id,
+                    'tieu_de' => "Xác nhận đơn hàng",
+                    'noi_dung' => 'Đơn hàng ' . $value->ma_don_hang . ' đã được xác nhận.',
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('success', 'Các đơn hàng đã được duyệt thành công.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('don-hang.danh-sach-kiem-duyet')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+        }
     }
 
      // Xử lý yêu cầu lấy hàng cho một đơn hàng
@@ -251,33 +250,32 @@ class DonHangAdminController extends Controller
     }
 
     // Xử lý giao hàng cho các đơn hàng đã chọn
-    public function giaoNhieuDonHang(Request $request)
-{
-    $ids = $request->input('select', []);
-    if (empty($ids)) {
-        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('error', 'Vui lòng chọn ít nhất một đơn hàng.');
-    }
-
-    DB::beginTransaction();
-    try {
-        $donHang = DonHang::whereIn('id',$ids)->get();
-
-        foreach ($donHang as $key => $value) {
-            $value->update(['trang_thai' => 2]);
-            ThongBao::create([
-                'user_id' => $value->user_id,
-                'tieu_de' => "Đơn hàng " .$value->ma_don_hang. " đã được cập nhật",
-                'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
-            ]);
+    public function giaoNhieuDonHang(Request $request){
+        $ids = $request->input('select', []);
+        if (empty($ids)) {
+            return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('error', 'Vui lòng chọn ít nhất một đơn hàng.');
         }
 
-        DB::commit();
-        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
-    } catch (Exception $e) {
-        DB::rollBack();
-        return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+        DB::beginTransaction();
+        try {
+            $donHang = DonHang::whereIn('id',$ids)->get();
+
+            foreach ($donHang as $key => $value) {
+                $value->update(['trang_thai' => 2]);
+                ThongBao::create([
+                    'user_id' => $value->user_id,
+                    'tieu_de' => "Đơn hàng " .$value->ma_don_hang. " đã được cập nhật",
+                    'noi_dung' => 'Đơn hàng đang được giao đến bạn.',
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('success', 'Các đơn hàng đã được chuyển sang trạng thái Đang Giao.');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->route('don-hang.danh-sach-cho-lay-hang')->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+        }
     }
-}
 
     // Hiển thị chi tiết đơn hàng
     public function showChiTietDonHang($id)
@@ -336,6 +334,16 @@ class DonHangAdminController extends Controller
         try {
             // Tìm đơn hàng và cập nhật trạng thái
             $donHang = DonHang::findOrFail($id);
+            $chi_tiet_don_hangs = ChiTietDonHang::where('don_hang_id', $id)->get();
+
+            foreach ($chi_tiet_don_hangs as $chi_tiet) {
+                $bien_the = BienThe::find($chi_tiet->bien_the_id);
+
+                if ($bien_the && $bien_the->so_luong_tam_giu >= $chi_tiet->so_luong) {
+                    $bien_the->decrement('so_luong', $chi_tiet->so_luong); // Trừ số lượng kho chính thức
+                    $bien_the->decrement('so_luong_tam_giu', $chi_tiet->so_luong); // Giảm tạm giữ
+                }
+            }
             $donHang->trang_thai = 4;
             $donHang->nguoi_ban = Auth::guard('admin')->user()->id;
             $donHang->save();
@@ -348,5 +356,24 @@ class DonHangAdminController extends Controller
         } catch (Exception $e) {
             return redirect(url()->previous())->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
         }
+    }
+
+    public function checkTrangThaiDonHang(){
+        $don_hangs = DonHang::with(['user', 'diaChi', 'danhGia', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+        ->orderBy('ngay_cap_nhat', 'desc')
+        ->get()->values();
+
+        $don_hangs_grouped = [
+            'trang_thai_all' => $don_hangs,
+            'trang_thai_0' => $don_hangs->where('trang_thai', 0)->values(),
+            'trang_thai_1' => $don_hangs->where('trang_thai', 1)->values(),
+            'trang_thai_2' => $don_hangs->where('trang_thai', 2)->values(),
+            'trang_thai_3' => $don_hangs->where('trang_thai', 3)->values(),
+            'trang_thai_4' => $don_hangs->where('trang_thai', 4)->values(),
+        ];
+
+        return response()->json([
+            "donHang" => $don_hangs_grouped
+        ]);
     }
 }

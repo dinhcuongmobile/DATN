@@ -45,8 +45,9 @@
         </div>
 
         <!-- Hiển thị mỗi đơn hàng trong một bảng riêng -->
-        @foreach ($donHangs as $item)
-            <div class="card shadow mb-4">
+        <div class="DSDonHangContent">
+            @foreach ($donHangs as $item)
+            <div class="card shadow mb-4 DSDonHang" data-iddonhang="{{$item->id}}">
                 <div class="card-header py-3">
                     <!-- Tên khách hàng và mã đơn hàng -->
                     <div class="d-flex justify-content-between mb-3">
@@ -63,7 +64,6 @@
                         <table class="table table-bordered" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Sản phẩm</th>
                                     <th>Tổng cộng</th>
                                     <th>Trạng thái</th>
@@ -74,9 +74,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle">
-                                        <input type="checkbox" name="select[]" value="{{ $item->id }}">
-                                    </td>
                                     <td class="col-4">
                                         @foreach ($item->chiTietDonHangs as $chiTiet)
                                             <img src="{{ Storage::url($chiTiet->bienThe->hinh_anh) }}" alt="product"
@@ -91,8 +88,7 @@
                                     </td>
                                     <td>{{ number_format($item->tong_thanh_toan, 0, ',', '.') }}₫</td>
                                     <td>
-                                        <p><span
-                                                style="color:#2ecc71; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
+                                        <p class="trangThai"><span style="color:#2ecc71; background-color: #f0f0f0; padding: 5px; border-radius: 9px;">
                                                 @if ($item->trang_thai == 0)
                                                     Chờ Xác Nhận
                                                 @elseif($item->trang_thai == 1)
@@ -118,7 +114,7 @@
                                     <td class="col-1">
                                         <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
                                     </td>
-                                    <td>
+                                    <td class="btnDonHang">
                                         @if ($item->trang_thai == 0 || $item->trang_thai == 1 )
                                             {{-- Các nút tùy thuộc trạng thái --}}
                                             @if ($item->trang_thai == 0)
@@ -152,6 +148,7 @@
                 </div>
             </div>
         @endforeach
+        </div>
 
     </div>
 @endsection

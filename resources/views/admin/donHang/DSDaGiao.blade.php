@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
-<div class="container-fluid">  
-    <h1 class="h3 mb-2 text-gray-800">Danh Sách Đã Giao ({{ $donHangs->count() }})</h1>  
+<div class="container-fluid containerDSDonHang">
+    <h1 class="h3 mb-2 text-gray-800">Danh Sách Đã Giao</h1>
     @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -28,7 +28,7 @@
                 </form>
             </div>
             <form action="" method="post">
-    
+
                 <div class="float-left">
                     <a href="{{route('don-hang.danh-sach-kiem-duyet')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Xác Nhận</button></a>
                     <a href="{{route('don-hang.danh-sach-cho-lay-hang')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button></a>
@@ -37,39 +37,40 @@
                     <a href="{{route('don-hang.danh-sach-da-huy')}}"><button type="button" class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
                 </div>
             </form>
-        </div> 
+        </div>
     </div>
 
     <!-- Hiển thị mỗi đơn hàng trong một bảng riêng -->
-    @foreach ($donHangs as $item)
-    <div class="card shadow mb-4">
+    <div class="DSDaGiaoContent">
+        @foreach ($donHangs as $item)
+    <div class="card shadow mb-4 DSDonHang" data-iddonhang="{{$item->id}}">
         <div class="card-header py-3">
             <!-- Tên khách hàng và mã đơn hàng -->
-            <div class="d-flex justify-content-between mb-3">  
-                <div>  
-                    <strong>Tên khách hàng: {{ $item->user->ho_va_ten }}</strong>  
-                </div>  
-                <div>  
-                    <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>  
-                </div>  
-            </div> 
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <strong>Tên khách hàng: {{ $item->user->ho_va_ten }}</strong>
+                </div>
+                <div>
+                    <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>
+                </div>
+            </div>
         </div>
-        <div class="card-body">  
-            <div class="table-responsive"> 
-                <table class="table table-bordered" width="100%" cellspacing="0"> 
-                    <thead>  
-                        <tr>  
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
                             <th></th>
-                            <th>Sản phẩm</th>  
-                            <th>Tổng cộng</th>  
-                            <th>Trạng thái</th>  
-                            <th>Thanh Toán</th>  
-                            <th>Đơn vị vận chuyển</th>  
+                            <th>Sản phẩm</th>
+                            <th>Tổng cộng</th>
+                            <th>Trạng thái</th>
+                            <th>Thanh Toán</th>
+                            <th>Đơn vị vận chuyển</th>
                             <th>Thao Tác</th>
-                        </tr>  
-                    </thead>  
-                    <tbody>  
-                        <tr>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <td class="align-middle">
                                 <input type="checkbox" name="select[]" value="{{ $item->id }}">
                             </td>
@@ -112,17 +113,18 @@
                                 <img src="{{asset('assets/images/logos/logo_ghtk.png')}}" width="85px" alt="">
                             </td>
                             <td>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm"> 
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-secondary btn-sm">
                                     Xem Chi Tiết
                                   </a>
                             </td>
-                        </tr>  
-                    </tbody>  
-                </table>  
-            </div>  
-        </div>  
-    </div>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     @endforeach
-    
-</div>  
+    </div>
+
+</div>
 @endsection

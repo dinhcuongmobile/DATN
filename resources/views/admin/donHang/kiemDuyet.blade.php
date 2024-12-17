@@ -1,7 +1,7 @@
 @extends('admin.layout.main')
 @section('containerAdmin')
-<div class="container-fluid">  
-    <h1 class="h3 mb-2 text-gray-800">Chờ xác nhận ({{ $donHangs->count() }})</h1>  
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Chờ xác nhận</h1>
     @if (session('success'))
             <div class="alert alert-success" id="error-alert">
                 {{ session('success') }}
@@ -32,41 +32,42 @@
                 <div class="float-left">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
                     <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Các Đơn Đã Chọn</button> 
+                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Các Đơn Đã Chọn</button>
                 </div>
-        </div> 
+        </div>
     </div>
 
     <!-- Hiển thị mỗi đơn hàng trong một bảng riêng -->
-    @foreach ($donHangs as $item)
+    <div class="DSKiemDuyetContent">
+        @foreach ($donHangs as $item)
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <!-- Tên khách hàng và mã đơn hàng -->
-            <div class="d-flex justify-content-between mb-3">  
-                <div>  
-                    <strong>Tên khách hàng: {{ $item->user->ho_va_ten }}</strong>  
-                </div>  
-                <div>  
-                    <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>  
-                </div>  
-            </div> 
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <strong>Tên khách hàng: {{ $item->user->ho_va_ten }}</strong>
+                </div>
+                <div>
+                    <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>
+                </div>
+            </div>
         </div>
-        <div class="card-body">  
-            <div class="table-responsive"> 
-                <table class="table table-bordered" width="100%" cellspacing="0"> 
-                    <thead>  
-                        <tr>  
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
                             <th></th>
-                            <th>Sản phẩm</th>  
-                            <th>Tổng cộng</th>  
-                            <th>Trạng thái</th>  
-                            <th>Thanh Toán</th>  
-                            <th>Đơn vị vận chuyển</th>  
+                            <th>Sản phẩm</th>
+                            <th>Tổng cộng</th>
+                            <th>Trạng thái</th>
+                            <th>Thanh Toán</th>
+                            <th>Đơn vị vận chuyển</th>
                             <th>Thao Tác</th>
-                        </tr>  
-                    </thead>  
-                    <tbody>  
-                        <tr>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <td class="align-middle">
                                 <input type="checkbox" name="select[]" value="{{ $item->id }}">
                             </td>
@@ -112,17 +113,18 @@
                                 <a href="{{ route('don-hang.duyet-don-hang', $item->id) }}" class="btn btn-primary btn-sm">Duyệt</a>
                                 <a href="{{ route('don-hang.huy-don-hang', $item->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn hủy đơn này')">Hủy</a>
                                 <hr>
-                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-info btn-sm"> 
+                                  <a href="{{route('don-hang.chi-tiet-don-hang', $item->id)}}" class="btn btn-info btn-sm">
                                     Xem Chi Tiết
-                                  </a> 
+                                  </a>
                             </td>
-                        </tr>  
-                    </tbody>  
-                </table>  
-            </div>  
-        </div>  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     @endforeach
-</form>  
-</div>  
+    </div>
+</form>
+</div>
 @endsection
