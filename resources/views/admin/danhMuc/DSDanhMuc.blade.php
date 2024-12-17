@@ -54,12 +54,11 @@
                             @if ($DSDanhmuc->count() > 0)
                                 @foreach ($DSDanhmuc as $item)
                                     <tr>
-                                        <td class="col-1 text-center"><input type="checkbox" name="select[]"
-                                            value="{{ $item->id }}"></td>
                                         {{-- danh  muc thung rac --}}
                                         @if ($item->id == 1)
-                                            <td class="col-2 align-middle"></td>
-                                            <td class="col-2 align-middle"></td>
+                                            <td class="col-1"></td>
+                                            <td class="col-2"></td>
+                                            <td class="col-2"></td>
                                             <td class="align-middle">
                                                 <a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a>
                                             </td>
@@ -74,6 +73,8 @@
                                             </td>
                                         {{-- end danh muc thung rac --}}
                                         @else
+                                            <td class="col-1 text-center"><input type="checkbox" name="select[]"
+                                                value="{{ $item->id }}"></td>
                                             <td class="col-2 align-middle">NM-{{ $item->id }}</td>
                                             <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh)}}" height="60px"></td>
                                             <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>

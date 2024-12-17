@@ -17,11 +17,6 @@ class TraLoiDanhGia extends Model
         'noi_dung'
     ];
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function danhGia()
     {
         return $this->belongsTo(DanhGia::class, 'danh_gia_id');

@@ -20,11 +20,4 @@ class KhuyenMai extends Model
         'gia_tri_toi_thieu',
         'trang_thai'
     ];
-
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
 }

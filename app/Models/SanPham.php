@@ -24,13 +24,6 @@ class SanPham extends Model
         'da_ban',
     ];
 
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function danhMuc()
     {
         return $this->belongsTo(DanhMuc::class, 'danh_muc_id');

@@ -17,13 +17,6 @@ class PhiShip extends Model
         'phi_ship'
     ];
 
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function quanHuyen()
     {
         return $this->belongsTo(QuanHuyen::class, 'ma_quan_huyen');

@@ -19,11 +19,4 @@ class LienHe extends Model
         'noi_dung',
         'trang_thai',
     ];
-
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
 }

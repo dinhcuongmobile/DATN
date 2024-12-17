@@ -15,12 +15,6 @@ class YeuThich extends Model
         'user_id',
         'san_pham_id'
     ];
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
 
     public function user()
     {

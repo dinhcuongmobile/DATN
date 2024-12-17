@@ -19,13 +19,6 @@ class DanhMuc extends Model
         'ten_danh_muc',
     ];
 
-    public $timestamps = false;
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
-
     public function sanPhams()
     {
         return $this->hasMany(SanPham::class, 'danh_muc_id');
