@@ -32,9 +32,17 @@
                     <div class="col-md-12">
                         <label for="sel1">Vai Trò</label>
                         <select class="form-control" id="sel1" name="vai_tro_id">
-                            @foreach ($vai_tro as $item)
+                            @if (Auth::guard('admin')->user()->id == 1)
+                                @foreach ($vai_tro as $item)
                                 <option {{old('vai_tro_id',$tai_khoan->vai_tro_id)==$item->id?'selected':''}} value="{{$item->id}}">{{$item->vai_tro}}</option>
-                            @endforeach
+                                @endforeach
+                            @else
+                                @foreach ($vai_tro as $item)
+                                    @if ($item->vai_tro !== "Quản trị viên")
+                                    <option {{old('vai_tro_id',$tai_khoan->vai_tro_id)==$item->id?'selected':''}} value="{{$item->id}}">{{$item->vai_tro}}</option>
+                                    @endif
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
