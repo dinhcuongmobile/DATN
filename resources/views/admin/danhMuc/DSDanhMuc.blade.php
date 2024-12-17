@@ -30,11 +30,13 @@
                 <form action="{{ route('danh-muc.xoa-nhieu') }}" method="post">
                     @csrf
                     <div class="float-left">
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
-                            cả</button>
-                        <button onclick="return confirm('Chuyển các danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')" type="submit"
-                            class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
+                            <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất
+                                cả</button>
+                            <button onclick="return confirm('Chuyển các danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')" type="submit"
+                                class="btn btn-secondary btn-sm">Xóa các mục đã chọn</button>
+                        @endif
                         <a href="{{ route('danh-muc.them-danh-muc') }}" class="btn btn-secondary btn-sm">Nhập thêm</a>
                     </div>
             </div>
@@ -43,7 +45,9 @@
                     <table class="table table-bordered" width="100%" cellspacing="0">
                         <thead class="thead-light">
                             <tr>
-                                <th></th>
+                                @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                                    <th></th>
+                                @endif
                                 <th>Mã loại</th>
                                 <th>Hình ảnh</th>
                                 <th>Tên danh mục</th>
@@ -56,13 +60,15 @@
                                     <tr>
                                         {{-- danh  muc thung rac --}}
                                         @if ($item->id == 1)
-                                            <td class="col-1"></td>
+                                            @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                                                <td class="col-1"></td>
+                                            @endif
                                             <td class="col-2"></td>
                                             <td class="col-2"></td>
                                             <td class="align-middle">
                                                 <a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a>
                                             </td>
-                                            <td class="col-2 align-middle text-center">
+                                            <td class="col-2 align-middle">
                                                 <a href="{{ route('danh-muc.sua-danh-muc', $item->id) }}"
                                                     class="btn btn-warning btn-icon-split btn-sm">
                                                     <span class="icon text-white-50">
@@ -73,8 +79,10 @@
                                             </td>
                                         {{-- end danh muc thung rac --}}
                                         @else
-                                            <td class="col-1 text-center"><input type="checkbox" name="select[]"
-                                                value="{{ $item->id }}"></td>
+                                            @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                                                <td class="col-1 text-center"><input type="checkbox" name="select[]"
+                                                    value="{{ $item->id }}"></td>
+                                            @endif
                                             <td class="col-2 align-middle">NM-{{ $item->id }}</td>
                                             <td class="col-2 align-middle"><img src="{{ Storage::url($item->hinh_anh)}}" height="60px"></td>
                                             <td class="align-middle"><a href="{{route('san-pham.danh-sach-san-pham-danh-muc',$item->id)}}">{{ $item->ten_danh_muc }}</a></td>
@@ -85,15 +93,18 @@
                                                         <i class="fas fa-edit"></i>
                                                 </span>
                                                 <span class="text">Sửa</span>
-                                                </a> |
-                                                <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
-                                                    href="{{ route('danh-muc.delete', $item->id) }}"
-                                                    class="btn btn-danger btn-icon-split btn-sm">
-                                                <span class="icon text-white-50">
-                                                        <i class="fas fa-trash"></i>
-                                                </span>
-                                                <span class="text">Xóa</span>
                                                 </a>
+                                                @if (Auth::guard('admin')->user()->vai_tro_id == 1)
+                                                    |
+                                                    <a onclick="return confirm('Chuyển danh mục này vào thùng rác. Các sản phẩm trong danh mục cũng sẽ bị xóa?')"
+                                                        href="{{ route('danh-muc.delete', $item->id) }}"
+                                                        class="btn btn-danger btn-icon-split btn-sm">
+                                                    <span class="icon text-white-50">
+                                                            <i class="fas fa-trash"></i>
+                                                    </span>
+                                                    <span class="text">Xóa</span>
+                                                    </a>
+                                                @endif 
                                             </td>
                                         @endif
                                     </tr>
