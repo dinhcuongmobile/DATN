@@ -111,7 +111,13 @@ function ajaxThemDiaChi(){
                         var btnXoa = "";
                         let disabledd = "";
                         if(response.dia_chi.trang_thai==1) checked = "checked";
+
                         if(response.dia_chi.dia_chi_chi_tiet) diaChiChiTiet = response.dia_chi.dia_chi_chi_tiet + ", " ;
+                        let diaChi = `${diaChiChiTiet}${response.dia_chi.phuong_xa.ten_phuong_xa}, ${response.dia_chi.quan_huyen.ten_quan_huyen}, ${response.dia_chi.tinh_thanh_pho.ten_tinh_thanh_pho}.`;
+                        let text = diaChi;
+                        let truncatedText = text.length > 50 ? text.slice(0, 50) + "..." : text;
+
+
                         if(response.dia_chi.trang_thai==2){
                             btnXoa = '<a class="btn btn_outline sm btnDelete" data-id="'+response.dia_chi.id+'" href="javascript:void(0)" title="delete">Xóa</a>';
                         }
@@ -129,10 +135,7 @@ function ajaxThemDiaChi(){
                                                     <span class="address-home">
                                                         <span class="address-tag">Địa chỉ :</span>
                                                         <p class="dia-chi" style="display: inline">
-                                                            ${diaChiChiTiet}
-                                                            ${response.dia_chi.phuong_xa.ten_phuong_xa},
-                                                            ${response.dia_chi.quan_huyen.ten_quan_huyen},
-                                                            ${response.dia_chi.tinh_thanh_pho.ten_tinh_thanh_pho}.
+                                                            ${truncatedText}
                                                         </p>
                                                     </span>
                                                 </span>
@@ -487,10 +490,12 @@ function updateAddressDisplay(response, divCha) {
     divCha.querySelector('.address-home .so-dien-thoai').textContent = response.dia_chi.so_dien_thoai_nhan;
 
     const diaChiChiTiet = response.dia_chi.dia_chi_chi_tiet ? response.dia_chi.dia_chi_chi_tiet + ", " : "";
-    divCha.querySelector('.address-home .dia-chi').textContent = diaChiChiTiet +
-        response.dia_chi.phuong_xa.ten_phuong_xa + ", " +
-        response.dia_chi.quan_huyen.ten_quan_huyen + ", " +
-        response.dia_chi.tinh_thanh_pho.ten_tinh_thanh_pho + ".";
+
+    let diaChi = `${diaChiChiTiet}${response.dia_chi.phuong_xa.ten_phuong_xa}, ${response.dia_chi.quan_huyen.ten_quan_huyen}, ${response.dia_chi.tinh_thanh_pho.ten_tinh_thanh_pho}.`;
+    let text = diaChi;
+    let truncatedText = text.length > 50 ? text.slice(0, 50) + "..." : text;
+
+    divCha.querySelector('.address-home .dia-chi').textContent = truncatedText;
 }
 
 function thietLapDiaChiMacDinh() {

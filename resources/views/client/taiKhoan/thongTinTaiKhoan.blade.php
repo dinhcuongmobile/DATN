@@ -953,6 +953,10 @@
                                         <input type="hidden" class="tokenThietLap" name="_token"
                                             value="{{ csrf_token() }}" />
                                         @foreach ($dia_chis as $item)
+                                            @php
+                                                $dia_chi_chi_tiet = $item->dia_chi_chi_tiet ? $item->dia_chi_chi_tiet . ", " : "";
+                                                $diaChi = $dia_chi_chi_tiet . $item->phuongXa?->ten_phuong_xa . ", " . $item->quanHuyen?->ten_quan_huyen . ", " . $item->tinhThanhPho?->ten_tinh_thanh_pho;
+                                            @endphp
                                             <div class="col-xxl-4 col-md-6">
                                                 <div class="address-option">
                                                     <label for="address-billing-0">
@@ -966,12 +970,7 @@
                                                                     <span class="address-home">
                                                                         <span class="address-tag">Địa chỉ :</span>
                                                                         <p class="dia-chi" style="display: inline">
-                                                                            @if ($item->dia_chi_chi_tiet)
-                                                                                {{ $item->dia_chi_chi_tiet }},
-                                                                            @endif
-                                                                            {{ $item->phuongXa?->ten_phuong_xa }},
-                                                                            {{ $item->quanHuyen?->ten_quan_huyen }},
-                                                                            {{ $item->tinhThanhPho?->ten_tinh_thanh_pho }}
+                                                                            {{Str::limit($diaChi, 50)}}
                                                                         </p>
                                                                     </span>
                                                                 </span>

@@ -411,28 +411,62 @@ function themGioHang(){
                             } else {
                                 $('#quick-view').modal('hide');
                                 $('#addtocart').modal('show');
-                                let tenSanPham = document.querySelector('#quick-view .product-right h3');
-                                document.querySelector('#addtocart #nameProductSuccess').innerHTML = tenSanPham.innerHTML;
-                                document.querySelector('#addtocart .imgAddtocartSuccess').innerHTML = `<img class="img-fluid blur-up lazyload pro-img" src="/storage/${response.san_pham.hinh_anh}" alt="">`;
-                                document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
 
+                                document.querySelector('.countGioHangMenu span').textContent= response.count_gio_hang;
+                                
                                 let dataMaxNew = parseInt(dataMax)-soLuong;
                                 document.querySelector('#quick-view .quantity input[type="number"]').setAttribute('data-max',dataMaxNew);
 
-                                response.spYeuThich.forEach((item, index)=>{
-                                    let giaKM = item.san_pham.gia_san_pham - (item.san_pham.gia_san_pham * item.san_pham.khuyen_mai / 100);
-                                    $('#addtocart .row').append(`
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card-img" style="padding-top: 10px;">
-                                                <img class="style-border" src="/storage/${item.san_pham.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
-                                                <a href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
-                                                    <h6>${item.san_pham.ten_san_pham}</h6>
-                                                    <p>${giaKM.toLocaleString('vi-VN')}đ</p>
+                                let sanPham = response.san_pham;
+                                let row = document.querySelector('#addtocart .row');
+                                row.innerHTML=`
+                                    <div class="col-12 px-0">
+                                        <div class="modal-bg addtocart"><button class="btn-close" type="button"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="d-flex">
+                                                <a class="imgAddtocartSuccess">
+                                                   <img class="style-border img-fluid blur-up lazyload pro-img" src="/storage/${sanPham.hinh_anh}" alt="">
                                                 </a>
+                                                <div class="add-card-content align-self-center text-center">
+                                                    <a>
+                                                        <h6>
+                                                            <i class="fa-solid fa-check"> </i>Sản phẩm
+                                                            <span id="nameProductSuccess">${sanPham.ten_san_pham}</span>
+                                                            <span> đã được thêm vào Giỏ hàng của bạn thành công</span>
+                                                        </h6>
+                                                    </a>
+                                                    <div class="buttons">
+                                                        <a class="view-cart btn btn-solid" href="/gio-hang/">Giỏ hàng của bạn</a>
+                                                        <a class="continue btn btn-solid" href="/san-pham/">Tiếp tục mua hàng</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    `);
-                                });
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="product-upsell">
+                                            <h5>Sản phẩm được khách hàng yêu thích</h5>
+                                        </div>
+                                    </div>`;
+
+                                    response.spYeuThich.forEach((item, index)=>{
+                                        let text = item.san_pham.ten_san_pham;
+                                        let truncatedText = text.length > 27 ? text.slice(0, 27) + "..." : text;
+
+                                        let giaKM = item.san_pham.gia_san_pham - (item.san_pham.gia_san_pham * item.san_pham.khuyen_mai / 100);
+                                        let html = `
+                                                <div class="col-lg-4 col-md-6 col-12">
+                                                    <div class="card-img" style="padding-top: 10px;">
+                                                        <img class="style-border" src="/storage/${item.san_pham.hinh_anh}" alt="${item.san_pham.ten_san_pham}">
+                                                        <a href="/san-pham/chi-tiet-san-pham/${item.san_pham_id}">
+                                                            <h6>${truncatedText}</h6>
+                                                            <p>${giaKM.toLocaleString('vi-VN')}đ</p>
+                                                        </a>
+                                                    </div>
+                                                </div>`;
+
+                                        row.insertAdjacentHTML('beforeend', html);
+                                    });
                             }
                         },
                         error: function (error) {
