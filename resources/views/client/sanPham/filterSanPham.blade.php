@@ -1,4 +1,5 @@
 @foreach ($san_phams as $item)
+    @if ($item->bienThes->count()>0)
     <div>
         <div class="product-box-3">
             <div class="img-wrapper">
@@ -81,4 +82,5 @@
             </div>
         </div>
     </div>
+    @endif
 @endforeach
