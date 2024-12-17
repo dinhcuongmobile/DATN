@@ -44,7 +44,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>Image</th>
+                                <th>Ảnh</th>
                                 <th>Tiêu đề</th>
                                 <th>Nội dung</th>
                                 <th>Danh mục</th>
