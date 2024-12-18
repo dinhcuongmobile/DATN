@@ -58,6 +58,11 @@
                             <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>
                         </div>
                     </div>
+                    @if ($item->trang_thai==1)
+                    <a href="{{route('don-hang.in-hoa-don', $item->id)}}" class="btn btn-success btn-sm float-right" target="_blank">
+                        Xuất Hóa Đơn
+                      </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

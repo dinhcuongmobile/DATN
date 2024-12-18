@@ -30,10 +30,9 @@
             <form action="{{ route('don-hang.giao-nhieu-don-hang') }}" method="POST">
                 @csrf
                 <div class="float-left">
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Yêu Cầu Lấy Các Đơn Đã Chọn</button>
+                    @if ($donHangs->count()>0)
                     <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm" target="_blank">In Hóa Đơn Hàng Loạt</a>
+                    @endif
                 </div>
         </div>
     </div>
@@ -51,7 +50,6 @@
                 <div>
                     <strong>Mã đơn hàng: {{ $item->ma_don_hang }}</strong>
                 </div>
-
             </div>
             <a href="{{route('don-hang.in-hoa-don', $item->id)}}" class="btn btn-success btn-sm float-right" target="_blank">
                 Xuất Hóa Đơn

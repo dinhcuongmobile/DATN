@@ -381,8 +381,10 @@ function fetchDonHangStatus() {
 function renderDonHang(item){
     let trangThaiText = "";
     let btnTrangThai = "";
+    let btnInHoaDon = "";
 
     if(item.trang_thai==0) {
+        let btnInHoaDon = "";
         trangThaiText="Chờ Xác Nhận";
         btnTrangThai=`<a href="/admin/don-hang/duyet-don-hang/${item.id}" class="btn btn-primary btn-sm">
                             Duyệt
@@ -393,20 +395,26 @@ function renderDonHang(item){
                     </a><hr>`;
     }
     else if(item.trang_thai==1) {
+        btnInHoaDon = `<a href="/admin/don-hang/in-hoa-don/${item.id}" class="btn btn-success btn-sm float-right" target="_blank">
+                        Xuất Hóa Đơn
+                      </a>`;
         trangThaiText="Chờ Giao Hàng";
         btnTrangThai = `<a href="/admin/don-hang/yeu-cau-lay-hang/${item.id}" class="btn btn-primary btn-sm">
                             Yêu cầu đến lấy hàng
                         </a><hr>`;
     }
     else if(item.trang_thai==2) {
+        let btnInHoaDon = "";
         trangThaiText="Đang Giao";
         btnTrangThai="";
     }
     else if(item.trang_thai==3) {
+        let btnInHoaDon = "";
         trangThaiText="Đã Giao";
         btnTrangThai="";
     }
     else if(item.trang_thai==4) {
+        let btnInHoaDon = "";
         trangThaiText="Đã Hủy";
         btnTrangThai="";
     }
@@ -422,6 +430,7 @@ function renderDonHang(item){
                             <strong>Mã đơn hàng: ${item.ma_don_hang}</strong>
                         </div>
                     </div>
+                    ${btnInHoaDon}
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

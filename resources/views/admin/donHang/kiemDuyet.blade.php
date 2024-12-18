@@ -29,11 +29,6 @@
             </div>
 <form action="{{ route('don-hang.duyet-nhieu-don-hang') }}" method="POST">
                 @csrf
-                <div class="float-left">
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="chontatca()">Chọn tất cả</button>
-                    <button type="button" class="btn btn-secondary btn-sm" onclick="bochontatca()">Bỏ chọn tất cả</button>
-                    <button type="submit" class="btn btn-danger btn-sm">Duyệt Các Đơn Đã Chọn</button>
-                </div>
         </div>
     </div>
 
