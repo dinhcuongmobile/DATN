@@ -16,13 +16,13 @@ function setIntervalOrder(){
     activeTabCheck.forEach((el)=>{
 
         if(el.getAttribute("aria-controls")==="order" && el.getAttribute("aria-selected")==="true"){
-            orderInterval = setInterval(() => fetchDonHangStatus(), 5000);
+            orderInterval = setInterval(() => fetchDonHangStatus(), 3000);
         }
 
         el.addEventListener('click',function(){
             if(el.getAttribute("aria-controls")==="order"){
                 console.log("da set inter");
-                orderInterval = setInterval(() => fetchDonHangStatus(), 5000);
+                orderInterval = setInterval(() => fetchDonHangStatus(), 3000);
             }else{
                 if (orderInterval) {
                     console.log("da bo set inter");
