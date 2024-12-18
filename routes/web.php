@@ -311,9 +311,10 @@ Route::middleware('adminAuth:admin', 'checkAdmin:admin')->prefix('/admin')->grou
 
         Route::get('xoa-san-pham-vinh-vien/{id}', [SanPhamAdminController::class, 'xoaSanPhamVinhVien'])->name('san-pham.xoa-san-pham-vinh-vien');
 
-        Route::post('xoa-nhieu-san-pham-vinh-vien', [SanPhamAdminController::class, 'xoaNhieuSanPhamVinhVien'])->name('san-pham.xoa-nhieu-san-pham-vinh-vien');
+        Route::get('xoa-bien-the-vinh-vien/{id}', [SanPhamAdminController::class, 'xoaBienTheVinhVien'])->name('san-pham.xoa-bien-the-vinh-vien');
 
         Route::get('khoi-phuc-san-pham/{id}', [SanPhamAdminController::class, 'khoiPhucSanPham'])->name('san-pham.khoi-phuc-san-pham');
+        Route::get('khoi-phuc-bien-the/{id}', [SanPhamAdminController::class, 'khoiPhucBienThe'])->name('san-pham.khoi-phuc-bien-the');
     });
 
     Route::prefix('khuyen-mai')->group(function () {

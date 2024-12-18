@@ -62,7 +62,6 @@
                 <table class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th></th>
                             <th>Sản phẩm</th>
                             <th>Tổng cộng</th>
                             <th>Trạng thái</th>
@@ -73,9 +72,6 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="align-middle">
-                                <input type="checkbox" name="select[]" value="{{ $item->id }}">
-                            </td>
                             <td class="col-4">
                                 @foreach($item->chiTietDonHangs as $chiTiet)
                                     <img src="{{ Storage::url($chiTiet->bienThe->hinh_anh) }}" alt="product" width="15%">

@@ -107,6 +107,17 @@ class DonHangController extends Controller
                     'ngay_cap_nhat'=>now()
                 ]);
 
+                $chi_tiet_don_hangs = ChiTietDonHang::where("don_hang_id",$don_hang_id)->get();
+                foreach ($chi_tiet_don_hangs as $key => $value) {
+                    $bien_the = BienThe::find($value->bien_the_id);
+
+                    if ($bien_the && $bien_the->so_luong_tam_giu >= $value->so_luong) {
+                        $bien_the->decrement('so_luong', $value->so_luong); // Trừ số lượng kho chính thức
+                        $bien_the->decrement('so_luong_tam_giu', $value->so_luong); // Giảm tạm giữ
+                    }
+                }
+
+
                 $userHuyDon = $don_hang->user->ho_va_ten ? $don_hang->user->ho_va_ten : $don_hang->user->email;
                 ThongBao::create([
                     'tieu_de' => "Hủy đơn hàng",

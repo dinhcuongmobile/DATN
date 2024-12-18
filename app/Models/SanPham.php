@@ -31,7 +31,7 @@ class SanPham extends Model
 
     public function bienThes()
     {
-        return $this->hasMany(BienThe::class, 'san_pham_id');
+        return $this->hasMany(BienThe::class, 'san_pham_id')->withTrashed();
     }
 
     public function danhGias()

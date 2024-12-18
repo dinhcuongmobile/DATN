@@ -19,6 +19,7 @@ use App\Http\Requests\SanPham\StoreSanPhamRequest;
 use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
 use App\Models\ChiTietDonHang;
+use App\Models\YeuThich;
 
 class SanPhamAdminController extends Controller
 {
@@ -64,7 +65,7 @@ class SanPhamAdminController extends Controller
             });
         }
 
-        $this->views['bien_thes'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+        $this->views['bien_thes'] = $query->orderBy('san_pham_id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
 
         return view('admin.sanPham.bienThe.DSBienThe', $this->views);
     }
@@ -137,24 +138,47 @@ class SanPhamAdminController extends Controller
     }
 
     public function danhSachDaXoa(Request $request){
-        $query = SanPham::with('danhMuc', 'bienThes')->onlyTrashed();
-        $keyword = $request->input('kyw');
+        $keywordSP = $request->input('kywSP');
 
-        if ($keyword) {
-            $query->where('ten_san_pham', 'LIKE', "%$keyword%")
-                  ->orWhereHas('danhMuc', function($loc) use ($keyword) {
-                      $loc->where('ten_danh_muc', 'LIKE', "%$keyword%");
-                  });
+        $sanPhams = SanPham::with('danhMuc', 'bienThes')->onlyTrashed();
+
+        if ($keywordSP) {
+            $sanPhams->where(function ($query) use ($keywordSP) {
+                $query->where('ten_san_pham', 'LIKE', "%$keywordSP%")
+                    ->orWhereHas('danhMuc', function ($loc) use ($keywordSP) {
+                        $loc->where('ten_danh_muc', 'LIKE', "%$keywordSP%");
+                    });
+            });
         }
 
-        $this->views['san_phams'] = $query->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keyword]);
+        $sanPhams = $sanPhams->orderBy('id', 'desc')->paginate(10)->appends(['kyw' => $keywordSP]);
 
-        foreach ($this->views['san_phams'] as $san_pham) {
+        foreach ($sanPhams as $san_pham) {
             $san_pham->tong_so_luong = $san_pham->bienThes->sum('so_luong');
         }
 
-        return view('admin.sanPham.DSSanPhamDaXoa',$this->views);
+        $keywordBT = $request->input('kywBT');
+
+        $bienThes = BienThe::with('sanPham')->onlyTrashed();
+
+        if ($keywordBT) {
+            $bienThes->where(function ($query) use ($keywordBT) {
+                $query->where('kich_co', 'LIKE', "%$keywordBT%")
+                    ->orWhere('ten_mau', 'LIKE', "%$keywordBT%")
+                    ->orWhereHas('sanPham', function ($loc) use ($keywordBT) {
+                        $loc->where('ten_san_pham', 'LIKE', "%$keywordBT%");
+                    });
+            });
+        }
+
+        $bienThes = $bienThes->orderBy('san_pham_id', 'desc')->paginate(10)->appends(['kyw' => $keywordBT]);
+
+        $this->views['san_phams'] = $sanPhams;
+        $this->views['bien_thes'] = $bienThes;
+
+        return view('admin.sanPham.DSSanPhamDaXoa', $this->views);
     }
+
 
     //show them
     public function showThemSanPham(){
@@ -401,24 +425,35 @@ class SanPhamAdminController extends Controller
     public function xoaSanPham(int $id){
         if (Auth::guard('admin')->user()->vai_tro_id == 1) {
                 $san_pham = SanPham::findOrFail($id);
-                BienThe::where('san_pham_id', $san_pham->id)->delete();
-                $san_pham->delete();
+                if($san_pham){
+                    $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$san_pham->id)->get();
 
-                $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$id)->get();
-                foreach ($ChiTietDonHangs as $key => $value) {
-                    $donHang = DonHang::where('id',$value->don_hang_id)->first();
-                    if($donHang->trang_thai==0){
-                        $donHang->update([
-                            'nguoi_ban' => Auth::guard('admin')->user()->id,
-                            'trang_thai' => 4,
-                            'ngay_cap_nhat' => now()
-                        ]);
-                            ThongBao::create([
-                                'user_id' => $donHang->user_id,
-                                'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
-                                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                    foreach ($ChiTietDonHangs as $key => $value) {
+                        $bien_the = BienThe::find($value->bien_the_id);
+
+                        if ($bien_the && $bien_the->so_luong_tam_giu >= $value->so_luong) {
+                            $bien_the->decrement('so_luong', $value->so_luong); // Trừ số lượng kho chính thức
+                            $bien_the->decrement('so_luong_tam_giu', $value->so_luong); // Giảm tạm giữ
+                        }
+
+                        $donHang = DonHang::where('id',$value->don_hang_id)->first();
+                        if($donHang->trang_thai==0){
+                            $donHang->update([
+                                'nguoi_ban' => Auth::guard('admin')->user()->id,
+                                'trang_thai' => 4,
+                                'ngay_cap_nhat' => now()
                             ]);
+                                ThongBao::create([
+                                    'user_id' => $donHang->user_id,
+                                    'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
+                                    'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                                ]);
+                        }
                     }
+
+                    BienThe::where('san_pham_id', $san_pham->id)->delete();
+                    YeuThich::where('san_pham_id',$san_pham->id)->delete();
+                    $san_pham->delete();
                 }
 
                 return redirect()->back()->with('success', 'Một mục đã được chuyển vào thùng rác và đơn hàng liên quan đã được cập nhật.');
@@ -430,25 +465,36 @@ class SanPhamAdminController extends Controller
     public function xoaNhieuSanPham(Request $request){
         if($request->select){
             foreach($request->select as $id){
-                $san_pham=SanPham::findOrFail($id);
-                $san_pham->delete();
-                BienThe::where('san_pham_id',$san_pham->id)->delete();
+                $san_pham = SanPham::findOrFail($id);
+                if($san_pham){
+                    $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$san_pham->id)->get();
 
-                $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$san_pham->id)->get();
-                foreach ($ChiTietDonHangs as $key => $value) {
-                    $donHang = DonHang::where('id',$value->don_hang_id)->first();
-                    if($donHang->trang_thai==0){
-                        $donHang->update([
-                            'nguoi_ban' => Auth::guard('admin')->user()->id,
-                            'trang_thai' => 4,
-                            'ngay_cap_nhat' => now()
-                        ]);
-                            ThongBao::create([
-                                'user_id' => $donHang->user_id,
-                                'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
-                                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                    foreach ($ChiTietDonHangs as $key => $value) {
+                        $bien_the = BienThe::find($value->bien_the_id);
+
+                        if ($bien_the && $bien_the->so_luong_tam_giu >= $value->so_luong) {
+                            $bien_the->decrement('so_luong', $value->so_luong); // Trừ số lượng kho chính thức
+                            $bien_the->decrement('so_luong_tam_giu', $value->so_luong); // Giảm tạm giữ
+                        }
+
+                        $donHang = DonHang::where('id',$value->don_hang_id)->first();
+                        if($donHang->trang_thai==0){
+                            $donHang->update([
+                                'nguoi_ban' => Auth::guard('admin')->user()->id,
+                                'trang_thai' => 4,
+                                'ngay_cap_nhat' => now()
                             ]);
+                                ThongBao::create([
+                                    'user_id' => $donHang->user_id,
+                                    'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
+                                    'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                                ]);
+                        }
                     }
+
+                    BienThe::where('san_pham_id', $san_pham->id)->delete();
+                    YeuThich::where('san_pham_id',$san_pham->id)->delete();
+                    $san_pham->delete();
                 }
 
             }
@@ -461,10 +507,17 @@ class SanPhamAdminController extends Controller
     public function xoaBienThe(int $id){
         if (Auth::guard('admin')->user()->vai_tro_id == 1) {
             $bien_the=BienThe::findOrFail($id);
-            $bien_the->delete();
 
-            $ChiTietDonHangs = ChiTietDonHang::where('bien_the_id',$id)->get();
+            $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$bien_the->id)->get();
+
             foreach ($ChiTietDonHangs as $key => $value) {
+                $bien_the = BienThe::find($value->bien_the_id);
+
+                if ($bien_the && $bien_the->so_luong_tam_giu >= $value->so_luong) {
+                    $bien_the->decrement('so_luong', $value->so_luong); // Trừ số lượng kho chính thức
+                    $bien_the->decrement('so_luong_tam_giu', $value->so_luong); // Giảm tạm giữ
+                }
+
                 $donHang = DonHang::where('id',$value->don_hang_id)->first();
                 if($donHang->trang_thai==0){
                     $donHang->update([
@@ -479,11 +532,49 @@ class SanPhamAdminController extends Controller
                         ]);
                 }
             }
+            $bien_the->delete();
 
             return redirect()->back()->with('success', 'Đã xóa thành công biến thể !');
         }
 
         return redirect()->route('admin.index');
+    }
+
+    public function xoaNhieuBienThe(Request $request){
+        if($request->select){
+            foreach($request->select as $id){
+                $bien_the=BienThe::findOrFail($id);
+
+                $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$bien_the->id)->get();
+
+                foreach ($ChiTietDonHangs as $key => $value) {
+                    $bien_the = BienThe::find($value->bien_the_id);
+
+                    if ($bien_the && $bien_the->so_luong_tam_giu >= $value->so_luong) {
+                        $bien_the->decrement('so_luong', $value->so_luong); // Trừ số lượng kho chính thức
+                        $bien_the->decrement('so_luong_tam_giu', $value->so_luong); // Giảm tạm giữ
+                    }
+
+                    $donHang = DonHang::where('id',$value->don_hang_id)->first();
+                    if($donHang->trang_thai==0){
+                        $donHang->update([
+                            'nguoi_ban' => Auth::guard('admin')->user()->id,
+                            'trang_thai' => 4,
+                            'ngay_cap_nhat' => now()
+                        ]);
+                            ThongBao::create([
+                                'user_id' => $donHang->user_id,
+                                'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
+                                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
+                            ]);
+                    }
+                }
+                $bien_the->delete();
+            }
+            return redirect()->back()->with('success', 'Đã xóa các biến thể được chọn !');
+        }else{
+            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
+        }
     }
 
     public function xoaSize(int $id){
@@ -510,58 +601,17 @@ class SanPhamAdminController extends Controller
         return redirect()->route('admin.index');
     }
 
-    public function xoaNhieuBienThe(Request $request){
-        if($request->select){
-            foreach($request->select as $id){
-                $bien_the=BienThe::findOrFail($id);
-                $bien_the->delete();
-
-                $ChiTietDonHangs = ChiTietDonHang::where('bien_the_id',$id)->get();
-                foreach ($ChiTietDonHangs as $key => $value) {
-                    $donHang = DonHang::where('id',$value->don_hang_id)->first();
-                    if($donHang->trang_thai==0){
-                        $donHang->update([
-                            'nguoi_ban' => Auth::guard('admin')->user()->id,
-                            'trang_thai' => 4,
-                            'ngay_cap_nhat' => now()
-                        ]);
-                            ThongBao::create([
-                                'user_id' => $donHang->user_id,
-                                'tieu_de' => "Đơn hàng " . $donHang->ma_don_hang . " đã bị hủy",
-                                'noi_dung' => 'Đơn hàng của bạn đã bị hủy bởi ' . Auth::guard('admin')->user()->ho_va_ten . '. Do trong kho không còn sản phẩm đã mua.',
-                            ]);
-                    }
-                }
-            }
-            return redirect()->back()->with('success', 'Đã xóa các biến thể được chọn !');
-        }else{
-            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
-        }
-    }
-
-    public function xoaNhieuSanPhamVinhVien(Request $request){
-        if($request->select){
-            foreach($request->select as $id){
-                $san_pham=SanPham::onlyTrashed()->find($id);
-                if($san_pham){
-                    $san_pham->forceDelete();
-                    if($san_pham->hinh_anh){
-                        Storage::disk('public')->delete($san_pham->hinh_anh);
-                    }
-                }else{
-                    return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
-                }
-            }
-            return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Đã xóa vĩnh viễn các mục đã chọn !');
-        }else{
-            return redirect()->back()->with('error', 'Vui lòng chọn mục muốn xóa !');
-        }
-
-    }
 
     public function xoaSanPhamVinhVien(int $id){
         $san_pham=SanPham::onlyTrashed()->find($id);
         if($san_pham){
+            $bien_thes = BienThe::onlyTrashed()->where('san_pham_id',$san_pham->id)->get();
+            foreach ($bien_thes as $key => $value) {
+                $value->forceDelete();
+                if($value->hinh_anh){
+                    Storage::disk('public')->delete($value->hinh_anh);
+                }
+            }
             $san_pham->forceDelete();
             if($san_pham->hinh_anh){
                 Storage::disk('public')->delete($san_pham->hinh_anh);
@@ -572,11 +622,40 @@ class SanPhamAdminController extends Controller
         return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
     }
 
+
+    public function xoaBienTheVinhVien(int $id){
+        $bien_the=BienThe::onlyTrashed()->find($id);
+        if($bien_the){
+            $bien_the->forceDelete();
+            if($bien_the->hinh_anh){
+                Storage::disk('public')->delete($bien_the->hinh_anh);
+            }
+        }else{
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+        }
+        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
+    }
+
     public function khoiPhucSanPham(int $id){
         $san_pham=SanPham::onlyTrashed()->find($id);
-
         if($san_pham){
             $san_pham->restore();
+        }else{
+            return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
+        }
+        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã được khôi phục !');
+    }
+
+    public function khoiPhucBienThe(int $id){
+        $bien_the=BienThe::onlyTrashed()->find($id);
+        if($bien_the){
+            $san_pham = SanPham::find($bien_the->san_pham_id);
+            if($san_pham){
+                $bien_the->restore();
+            }else{
+                return redirect()->back()->with('error', 'Vui lòng khôi phục sản phẩm trước khi khôi phục biến thể này !');
+            }
+
         }else{
             return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }

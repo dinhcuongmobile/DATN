@@ -31,11 +31,11 @@ class ChiTietDonHang extends Model
 
     public function sanPham()
     {
-        return $this->belongsTo(SanPham::class, 'san_pham_id');
+        return $this->belongsTo(SanPham::class, 'san_pham_id')->withTrashed();
     }
 
     public function bienThe()
     {
-        return $this->belongsTo(BienThe::class, 'bien_the_id');
+        return $this->belongsTo(BienThe::class, 'bien_the_id')->withTrashed();
     }
 }

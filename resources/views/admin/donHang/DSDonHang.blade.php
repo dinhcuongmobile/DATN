@@ -2,7 +2,7 @@
 @section('containerAdmin')
     <div class="container-fluid">
 
-        <h1 class="h3 mb-2 text-gray-800">Danh Sách Đơn Hàng ({{ $donHangs->count() }})</h1>
+        <h1 class="h3 mb-2 text-gray-800">Danh Sách Đơn Hàng</h1>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

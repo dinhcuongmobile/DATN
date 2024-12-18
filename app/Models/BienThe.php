@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class BienThe extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'bien_thes';
 
@@ -23,7 +24,7 @@ class BienThe extends Model
 
     public function sanPham()
     {
-        return $this->belongsTo(SanPham::class, 'san_pham_id');
+        return $this->belongsTo(SanPham::class, 'san_pham_id')->withTrashed();
     }
 
     public function gioHangs()
