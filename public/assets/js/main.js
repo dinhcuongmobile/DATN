@@ -834,7 +834,15 @@ function guiLienHe() {
 
         check = false;
     } else {
-        $("#so_dien_thoai_err").text("");
+        var regex = /^(?:\+84|0)(?:3[2-9]|5[2-9]|7[0-9]|8[1-9]|9[0-9])\d{7}$/;
+
+        if (!regex.test(soDienThoai)) {
+            $("#so_dien_thoai_err").text("Số điện thoại không hợp lệ");
+
+            check = false;
+        } else {
+            $("#so_dien_thoai_err").text("");
+        }
     }
 
     if (tieuDe == "") {
