@@ -111,9 +111,6 @@
                             @endif
                         </tbody>
                     </table>
-                    <div class="phantrang">
-                        {{ $doanhThuNhanVien->links() }}
-                    </div>
                 </div>
             </div>
         </div>
