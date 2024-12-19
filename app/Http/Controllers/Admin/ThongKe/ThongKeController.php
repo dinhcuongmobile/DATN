@@ -253,20 +253,16 @@ class ThongKeController extends Controller
             $donHang = $donHang->whereHas('nguoiBan', function ($loc) use ($keyword) {
                 $loc->where('ho_va_ten', 'LIKE', "%$keyword%")
                     ->orWhere('id', 'LIKE', "%$keyword%");
-            })->orderBy('tong_doanh_thu', 'desc')
-            ->paginate(10);
+            })->orderBy('tong_doanh_thu', 'desc')->get();
 
             $tongDonHang = $tongDonHang->whereHas('nguoiBan', function ($loc) use ($keyword) {
                 $loc->where('ho_va_ten', 'LIKE', "%$keyword%")
                     ->orWhere('id', 'LIKE', "%$keyword%");
-            })->orderBy('tong_doanh_thu', 'desc')
-            ->paginate(10);
+            })->orderBy('tong_doanh_thu', 'desc')->get();
         }else{
-            $donHang = $donHang->orderBy('tong_doanh_thu', 'desc')
-            ->paginate(10);
+            $donHang = $donHang->orderBy('tong_doanh_thu', 'desc')->get();
 
-            $tongDonHang = $tongDonHang->orderBy('tong_doanh_thu', 'desc')
-            ->paginate(10);
+            $tongDonHang = $tongDonHang->orderBy('tong_doanh_thu', 'desc')->get();
         }
 
         $this->views['doanhThuNhanVien'] = $donHang;
