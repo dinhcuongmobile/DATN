@@ -18,7 +18,10 @@ use App\Http\Requests\SanPham\StoreBienTheRequest;
 use App\Http\Requests\SanPham\StoreSanPhamRequest;
 use App\Http\Requests\SanPham\UpdateBienTheRequest;
 use App\Http\Requests\SanPham\UpdateSanPhamRequest;
+use App\Models\AnhDanhGia;
 use App\Models\ChiTietDonHang;
+use App\Models\DanhGia;
+use App\Models\TraLoiDanhGia;
 use App\Models\YeuThich;
 
 class SanPhamAdminController extends Controller
@@ -508,7 +511,7 @@ class SanPhamAdminController extends Controller
         if (Auth::guard('admin')->user()->vai_tro_id == 1) {
             $bien_the=BienThe::findOrFail($id);
 
-            $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$bien_the->id)->get();
+            $ChiTietDonHangs = ChiTietDonHang::where('bien_the_id',$bien_the->id)->get();
 
             foreach ($ChiTietDonHangs as $key => $value) {
                 $bien_the = BienThe::find($value->bien_the_id);
@@ -545,7 +548,7 @@ class SanPhamAdminController extends Controller
             foreach($request->select as $id){
                 $bien_the=BienThe::findOrFail($id);
 
-                $ChiTietDonHangs = ChiTietDonHang::where('san_pham_id',$bien_the->id)->get();
+                $ChiTietDonHangs = ChiTietDonHang::where('bien_the_id',$bien_the->id)->get();
 
                 foreach ($ChiTietDonHangs as $key => $value) {
                     $bien_the = BienThe::find($value->bien_the_id);
@@ -605,35 +608,160 @@ class SanPhamAdminController extends Controller
     public function xoaSanPhamVinhVien(int $id){
         $san_pham=SanPham::onlyTrashed()->find($id);
         if($san_pham){
+
+            $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+                    ->whereIn('trang_thai', [0,1,2])->get();
+            foreach ($donHangs as $key => $value) {
+                $chiTietDonHangs = ChiTietDonHang::with('sanPham','bienThe')->where("don_hang_id",$value->id)->get();
+
+                foreach ($chiTietDonHangs as $item) {
+                    if($item->san_pham_id === $san_pham->id){
+                        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('error', 'Sản phẩm muốn xóa có đơn hàng chưa hoàn thành !');
+                    }
+                }
+            }
+
+            $donHangHoanThanh = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+                    ->whereIn('trang_thai', [3,4])->get();
+
+            foreach ($donHangHoanThanh as $key => $value) {
+                $chiTietDonHangs = ChiTietDonHang::with('sanPham','bienThe')->where("don_hang_id",$value->id)->get();
+
+                foreach ($chiTietDonHangs as $item) {
+                    if($item->san_pham_id === $san_pham->id){
+                        $xoaDonHang = DonHang::find($item->don_hang_id);
+
+                        if($xoaDonHang){
+
+                            $danhGia = DanhGia::where("don_hang_id",$xoaDonHang->id)->first();
+                            if($danhGia){
+
+                                $traLoiDanhGia = TraLoiDanhGia::where("danh_gia_id",$danhGia->id)->get();
+                                if($traLoiDanhGia){
+                                    foreach ($traLoiDanhGia as $traLoi) {
+                                        $traLoi->delete();
+                                    }
+                                }
+
+                                $anhDanhGia = AnhDanhGia::where("danh_gia_id",$danhGia->id)->get();
+                                if($anhDanhGia){
+                                    foreach ($anhDanhGia as $anh) {
+
+                                        if($anh->hinh_anh){
+                                            Storage::disk('public')->delete($anh->hinh_anh);
+                                        }
+                                        $anh->delete();
+                                    }
+                                }
+
+                                $danhGia->delete();
+
+                            }
+
+                            $item->delete();
+
+                        }else{
+                            return;
+                        }
+
+                        $xoaDonHang->delete();
+                    }
+                }
+            }
+
             $bien_thes = BienThe::onlyTrashed()->where('san_pham_id',$san_pham->id)->get();
             foreach ($bien_thes as $key => $value) {
-                $value->forceDelete();
                 if($value->hinh_anh){
                     Storage::disk('public')->delete($value->hinh_anh);
                 }
+                $value->forceDelete();
             }
-            $san_pham->forceDelete();
+
             if($san_pham->hinh_anh){
                 Storage::disk('public')->delete($san_pham->hinh_anh);
             }
+            $san_pham->forceDelete();
+
+            return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
         }else{
             return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
-        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
     }
 
 
     public function xoaBienTheVinhVien(int $id){
         $bien_the=BienThe::onlyTrashed()->find($id);
+
         if($bien_the){
-            $bien_the->forceDelete();
+
+            $donHangs = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+                    ->whereIn('trang_thai', [0,1,2])->get();
+            foreach ($donHangs as $key => $value) {
+                $chiTietDonHangs = ChiTietDonHang::with('sanPham','bienThe')->where("don_hang_id",$value->id)->get();
+
+                foreach ($chiTietDonHangs as $item) {
+                    if($item->bien_the_id === $bien_the->id){
+                        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('error', 'Biến thể muốn xóa có đơn hàng chưa hoàn thành !');
+                    }
+                }
+            }
+
+            $donHangHoanThanh = DonHang::with(['user', 'chiTietDonHangs.sanPham', 'chiTietDonHangs.bienThe'])
+            ->whereIn('trang_thai', [3,4])->get();
+
+            foreach ($donHangHoanThanh as $key => $value) {
+                $chiTietDonHangs = ChiTietDonHang::with('sanPham','bienThe')->where("don_hang_id",$value->id)->get();
+
+                foreach ($chiTietDonHangs as $item) {
+                    if($item->san_pham_id === $bien_the->san_pham_id){
+                        $xoaDonHang = DonHang::find($item->don_hang_id);
+
+                        if($xoaDonHang){
+
+                            $danhGia = DanhGia::where("don_hang_id",$xoaDonHang->id)->first();
+                            if($danhGia){
+
+                                $traLoiDanhGia = TraLoiDanhGia::where("danh_gia_id",$danhGia->id)->get();
+                                if($traLoiDanhGia){
+                                    foreach ($traLoiDanhGia as $traLoi) {
+                                        $traLoi->delete();
+                                    }
+                                }
+
+                                $anhDanhGia = AnhDanhGia::where("danh_gia_id",$danhGia->id)->get();
+                                if($anhDanhGia){
+                                    foreach ($anhDanhGia as $anh) {
+
+                                        if($anh->hinh_anh){
+                                            Storage::disk('public')->delete($anh->hinh_anh);
+                                        }
+                                        $anh->delete();
+                                    }
+                                }
+
+                                $danhGia->delete();
+
+                            }
+
+                            $item->delete();
+
+                        }else{
+                            return;
+                        }
+
+                        $xoaDonHang->delete();
+                    }
+                }
+            }
             if($bien_the->hinh_anh){
                 Storage::disk('public')->delete($bien_the->hinh_anh);
             }
+            $bien_the->forceDelete();
+
+            return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
         }else{
             return redirect()->back()->with('error', 'Đã xảy ra lỗi. Vui lòng thao tác lại !');
         }
-        return redirect()->route('san-pham.danh-sach-san-pham-da-xoa')->with('success', 'Một mục đã bị xóa vĩnh viễn !');
     }
 
     public function khoiPhucSanPham(int $id){

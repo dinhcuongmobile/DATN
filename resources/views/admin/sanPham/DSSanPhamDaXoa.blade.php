@@ -76,6 +76,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="phantrang">
+                        {{ $san_phams->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,6 +147,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <div class="phantrang">
+                        {{ $bien_thes->links() }}
+                    </div>
                 </div>
             </div>
         </div>

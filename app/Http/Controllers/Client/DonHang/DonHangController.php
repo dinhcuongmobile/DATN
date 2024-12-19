@@ -108,6 +108,7 @@ class DonHangController extends Controller
                 ]);
 
                 $chi_tiet_don_hangs = ChiTietDonHang::where("don_hang_id",$don_hang_id)->get();
+                
                 foreach ($chi_tiet_don_hangs as $key => $value) {
                     $bien_the = BienThe::find($value->bien_the_id);
 
