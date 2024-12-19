@@ -24,7 +24,6 @@
                 <a href="{{route('don-hang.danh-sach-cho-lay-hang')}}"><button type="button" class="btn btn-secondary btn-sm" >Chờ Lấy Hàng</button></a>
                 <a href="{{route('don-hang.danh-sach-dang-giao')}}"><button type="button" class="btn btn-secondary btn-sm" >Đang Giao</button></a>
                 <a href="{{route('don-hang.danh-sach-da-giao')}}"><button type="button" class="btn btn-secondary btn-sm" >Đã Giao</button></a>
-                <a href="{{route('don-hang.danh-sach-da-huy')}}"><button type="button" class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
             </div>
         </div>
     </div>

@@ -27,13 +27,20 @@
                     </div>
                 </form>
             </div>
-            <form action="{{ route('don-hang.giao-nhieu-don-hang') }}" method="POST">
-                @csrf
-                <div class="float-left">
-                    @if ($donHangs->count()>0)
-                    <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm" target="_blank">In Hóa Đơn Hàng Loạt</a>
-                    @endif
-                </div>
+            <div class="float-left">
+                <a href="{{ route('don-hang.danh-sach-kiem-duyet') }}"><button type="button"
+                        class="btn btn-secondary btn-sm">Chờ Xác Nhận</button></a>
+                <a href="{{ route('don-hang.danh-sach-dang-giao') }}"><button type="button"
+                        class="btn btn-secondary btn-sm">Đang Giao</button></a>
+                <a href="{{ route('don-hang.danh-sach-da-giao') }}"><button type="button"
+                        class="btn btn-secondary btn-sm">Đã Giao</button></a>
+                <a href="{{ route('don-hang.danh-sach-da-huy') }}"><button type="button"
+                        class="btn btn-secondary btn-sm">Đơn Hủy</button></a>
+
+                @if ($donHangs->count()>0)
+                <a href="{{ route('don-hang.in-hoa-don-hang-loat') }}" class="btn btn-primary btn-sm" target="_blank">In Hóa Đơn Hàng Loạt</a>
+                @endif
+            </div>
         </div>
     </div>
 
@@ -122,6 +129,5 @@
     </div>
     @endforeach
     </div>
-</form>
 </div>
 @endsection
