@@ -30,7 +30,7 @@ class UpdateOrderStatus extends Command
                 'trang_thai' => 3,
                 'thanh_toan' => 1,
                 'ngay_cap_nhat' => now(),
-                'nguoi_ban' => Auth::guard('admin')->user()->id,
+                'nguoi_ban' => Auth::guard('admin') ? Auth::guard('admin')->user()->id : 1,
                 'ngay_ban' => Carbon::now()
             ]);
 
