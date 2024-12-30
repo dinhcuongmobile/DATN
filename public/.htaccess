@@ -18,4 +18,8 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+    #Điều hướng public
+    RewriteEngine On
+    # Điều hướng toàn bộ truy cập đến thư mục public
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
